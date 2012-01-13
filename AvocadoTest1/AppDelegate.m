@@ -7,14 +7,21 @@
 //
 
 #import "AppDelegate.h"
+#import "OrderPage.h"
+#import "MainPage.h"
 
 @implementation AppDelegate
 
-@synthesize window = _window;
+@synthesize window = _window, navigationController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [self setWindow:[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]]];
+    MainPage* page = [[MainPage alloc] init];
+    navigationController = [[UINavigationController alloc] initWithRootViewController:page];
+    [[self window] addSubview:[navigationController view]];
+    [[self window] makeKeyAndVisible];
     return YES;
 }
 							

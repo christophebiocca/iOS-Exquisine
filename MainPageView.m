@@ -1,0 +1,73 @@
+//
+//  MainPage.m
+//  AvocadoTest1
+//
+//  Created by Jake on 12-01-12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//
+
+#import "MainPageView.h"
+
+@implementation MainPageView
+
+// Important note: This is called createOrderButton
+// as opposed to newOrderButton because it collides 
+// with some dumb shit that xcode does with the 
+// getters and setters
+
+@synthesize createOrderButton;
+@synthesize pendingOrderButton;
+@synthesize favoriteOrderButton;
+@synthesize accountInfoButton;
+@synthesize greetingLabel;
+
+
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        createOrderButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        pendingOrderButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        favoriteOrderButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        accountInfoButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        greetingLabel = [[UILabel alloc] init];
+        
+        [createOrderButton setTitle:@"Place an Order" forState:UIControlStateNormal];
+        [pendingOrderButton setTitle: @"Pending Order(s)" forState:UIControlStateNormal];
+        [favoriteOrderButton setTitle:@"Favorites" forState:UIControlStateNormal];
+        [accountInfoButton setTitle:@"Account Information" forState:UIControlStateNormal];
+        
+        [createOrderButton addTarget:self action:@selector(createOrderPressed) 
+         forControlEvents:UIControlEventTouchUpInside]; 
+        
+        [createOrderButton setHidden:NO];
+        [createOrderButton setEnabled:YES];
+        
+        [greetingLabel setNumberOfLines:10];
+        [greetingLabel setText:\
+         @"Order your pitas ahead of time, and never wait in line again!\n\nHit \"Place an Order\" to get started!"];
+        
+        [self addSubview:createOrderButton];
+        [self addSubview:pendingOrderButton];
+        [self addSubview:favoriteOrderButton];
+        [self addSubview:accountInfoButton];
+        [self addSubview:greetingLabel];
+    }
+    return self;
+}
+
+-(void)layoutSubviews
+{
+    [self setBackgroundColor:[UIColor whiteColor]];
+    [createOrderButton setFrame:CGRectMake(20, 163, 280, 37)];
+    [pendingOrderButton setFrame:CGRectMake(20, 208, 280, 37)];
+    [favoriteOrderButton setFrame:CGRectMake(20, 253, 280, 37)];
+    [accountInfoButton setFrame:CGRectMake(20, 359, 280, 37)];
+    [greetingLabel setFrame:CGRectMake(19, 20, 280, 135)];
+}
+
+-(void)createOrderPressed{
+     
+}
+
+@end

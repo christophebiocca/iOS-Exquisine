@@ -1,0 +1,138 @@
+//
+//  OptionPage.m
+//  AvocadoTest1
+//
+//  Created by Jake on 12-01-12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//
+
+#import "Option.h"
+#import "OptionPage.h"
+#import "OptionPageView.h"
+#import "ConfigurableTableViewDataSource.h"
+#import "ItemPage.h"
+#import "Utilities.h"
+
+@implementation OptionPage
+
+@synthesize currentOption;
+
+//Custom functions
+//***********************************************************
+
+-(void)initializeViewWithOption:(Option *)anOption{
+    
+    currentOption = anOption;
+    NSMutableArray *cellDataList;
+    cellDataList = [[NSMutableArray alloc]initWithCapacity:0];
+    
+    for (Choice *currentChoice in anOption.choiceList) {
+        
+        CellInfo *newCell = [[CellInfo alloc] init];
+        newCell.labelText = currentChoice.name;
+        newCell.descriptionText = [Utilities FormatToPrice:[currentChoice effectivePriceCents]];
+        newCell.hasSwitch = YES;
+        newCell.switchState = currentChoice.selected;
+        [cellDataList addObject:newCell];
+        
+    }
+    
+    CellInfo *newCell = [[CellInfo alloc] init];
+    newCell.labelText = @"Total:";
+    newCell.descriptionText = [Utilities FormatToPrice:[currentOption totalPrice]];
+    [cellDataList addObject:newCell];
+    
+    [[self navigationItem] setTitle:currentOption.name];
+    
+    optionTableDataSource.displayList = cellDataList;
+    
+}
+
+
+//Delegate functions
+//***********************************************************
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row < [currentOption.choiceList count]){
+        
+        //deselect the cell
+        [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
+        
+        if(![currentOption toggleChoiceByIndex:indexPath.row])
+        {
+            UIAlertView *cantSelect = [[UIAlertView alloc] initWithTitle:@"Invalid Option" message:[NSString stringWithFormat:@"You can't select more than %i choices. Please unselect one of your other choices to continue.",[currentOption upperBound]] delegate:self cancelButtonTitle:@"Got it" otherButtonTitles:nil, nil];
+            [cantSelect show];
+            
+        }
+        
+        [self initializeViewWithOption:currentOption];
+        
+        [tableView reloadData];
+        
+    }
+}
+
+
+//View related functions
+//***********************************************************
+
+-(void)viewDidLoad{
+    [super viewDidLoad];
+    
+    optionTableDataSource = [[ConfigurableTableViewDataSource alloc] init]; 
+    
+    [[optionPageView optionTable] setDelegate:self];
+    [[optionPageView optionTable] setDataSource:optionTableDataSource];
+    
+    [self initializeViewWithOption:currentOption];
+    
+}
+
+- (id)init{
+    self = [super initWithNibName:nil bundle:nil];
+    if (self) {
+        [[self navigationItem] setTitle:currentOption.name];
+    }
+    return self;
+}
+
+#pragma mark - View lifecycle
+
+- (void) loadView
+{
+    optionPageView = [[OptionPageView alloc] init];
+    [self setView:optionPageView];
+}
+
+
+
+//Other Junk
+//***********************************************************
+
+
+
+- (void)didReceiveMemoryWarning
+{
+    // Releases the view if it doesn't have a superview.
+    [super didReceiveMemoryWarning];
+    
+    // Release any cached data, images, etc that aren't in use.
+}
+
+#pragma mark - View lifecycle
+
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+@end
