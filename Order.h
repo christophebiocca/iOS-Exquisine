@@ -28,6 +28,8 @@
 
 -(void) addItem:(Item *) anItem;
 
+-(void) removeItem:(Item *) anItem;
+
 -(NSInteger) totalPrice;
 
 @end

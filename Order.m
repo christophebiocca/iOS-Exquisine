@@ -34,6 +34,10 @@
 
 }
 
+-(void)removeItem:(Item *)anItem{
+    [itemList removeObject:anItem];
+}
+
 -(NSInteger)totalPrice{
     
     NSInteger tabulator = 0;

@@ -57,8 +57,13 @@
     
     if ([indexPath row] < [[currentOrder itemList] count]) {
         ItemPage *itemPage = [[ItemPage alloc] init];
-        [itemPage initializeViewWithItem:[[currentOrder itemList] objectAtIndex:[indexPath row]]];
+        [itemPage initializeViewWithItem:[[currentOrder itemList] objectAtIndex:[indexPath row]]AndOrder:currentOrder];
         [[super navigationController] pushViewController:itemPage animated:YES];
+    }
+    
+    //i.e. if the "Add Item" row was selected
+    if([indexPath row] == [[currentOrder itemList] count] + 2){
+        //Push item selection page
     }
     
 }

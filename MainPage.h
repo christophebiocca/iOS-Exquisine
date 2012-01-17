@@ -16,4 +16,6 @@
     
 }
 
+-(void)testFunction;
+
 @end

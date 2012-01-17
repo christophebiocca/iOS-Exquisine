@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class Item;
+@class Order;
 @class ItemPageView;
 @class ConfigurableTableViewDataSource;
 
@@ -17,10 +18,14 @@
     ConfigurableTableViewDataSource *itemTableDataSource;
     ItemPageView *itemPageView;
     Item *currentItem;
+    Order *parentOrder;
+    
 }
 
 @property (retain) Item *currentItem;
 
--(void)initializeViewWithItem:(Item *)anItem;
+-(void)initializeViewWithItem:(Item *)anItem AndOrder:(Order *) anOrder;
 
 @end
+
+

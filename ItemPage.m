@@ -13,6 +13,7 @@
 #import "Option.h"
 #import "OptionPage.h"
 #import "Utilities.h"
+#import "Order.h"
 
 @implementation ItemPage
 
@@ -21,8 +22,8 @@
 //Custom functions
 //***********************************************************
 
--(void)initializeViewWithItem:(Item *)anItem{
-    
+-(void)initializeViewWithItem:(Item *)anItem AndOrder:(Order *)anOrder{
+    parentOrder = anOrder;
     currentItem = anItem;
     NSMutableArray *cellDataList;
     cellDataList = [[NSMutableArray alloc]initWithCapacity:0];
@@ -94,7 +95,10 @@
     [self setView:itemPageView];
 }
 
-
+-(void)deleteButtonPressed{
+    [parentOrder removeItem:currentItem];
+    [[super navigationController] popViewControllerAnimated:YES];
+}
 
 - (void)viewDidLoad
 {
@@ -105,12 +109,15 @@
     [[itemPageView itemTable] setDelegate:self];
     [[itemPageView itemTable] setDataSource:itemTableDataSource];
     
-    [self initializeViewWithItem: currentItem];    
+    [[itemPageView deleteButton] setTarget:self]; 
+    [[itemPageView deleteButton] setAction:@selector(deleteButtonPressed)];
+         
+    [self initializeViewWithItem: currentItem AndOrder:parentOrder];    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self initializeViewWithItem:currentItem];
+    [self initializeViewWithItem:currentItem AndOrder:parentOrder];
     [[itemPageView itemTable] reloadData];
 }
 

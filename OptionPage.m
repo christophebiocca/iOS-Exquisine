@@ -13,14 +13,24 @@
 #import "ItemPage.h"
 #import "Utilities.h"
 
+#import "CellData.h"
+
 @implementation OptionPage
 
 @synthesize currentOption;
+
+-(void)ConfigureUITableViewCell: (UITableViewCell *) newCell
+{
+    NSLog(@"I got Called!");
+}
 
 //Custom functions
 //***********************************************************
 
 -(void)initializeViewWithOption:(Option *)anOption{
+    
+    CellData *newCellData = [[CellData alloc] initWithOwner:self];
+    [newCellData configureUITableViewCell:[[UITableViewCell alloc] init]];
     
     currentOption = anOption;
     NSMutableArray *cellDataList;

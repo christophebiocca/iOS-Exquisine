@@ -35,6 +35,10 @@
 		23C26A0314BFA90A00DD53DF /* OptionPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C26A0214BFA90A00DD53DF /* OptionPageView.m */; };
 		23C26A0714C0EE6200DD53DF /* Submenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C26A0614C0EE6100DD53DF /* Submenu.m */; };
 		23C26A0A14C0F00600DD53DF /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C26A0914C0F00600DD53DF /* Menu.m */; };
+		23C26A0F14C4887E00DD53DF /* TableData.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C26A0E14C4887E00DD53DF /* TableData.m */; };
+		23C26A1614C48F8B00DD53DF /* CellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C26A1514C48F8B00DD53DF /* CellData.m */; };
+		23C26A2014C4D5A700DD53DF /* MenuComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C26A1F14C4D5A600DD53DF /* MenuComponent.m */; };
+		23C26A2314C4D6FA00DD53DF /* VisualizableData.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C26A2214C4D6FA00DD53DF /* VisualizableData.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +102,14 @@
 		23C26A0614C0EE6100DD53DF /* Submenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Submenu.m; sourceTree = "<group>"; };
 		23C26A0814C0F00600DD53DF /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Menu.h; sourceTree = "<group>"; };
 		23C26A0914C0F00600DD53DF /* Menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Menu.m; sourceTree = "<group>"; };
+		23C26A0D14C4887E00DD53DF /* TableData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableData.h; sourceTree = "<group>"; };
+		23C26A0E14C4887E00DD53DF /* TableData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableData.m; sourceTree = "<group>"; };
+		23C26A1414C48F8B00DD53DF /* CellData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellData.h; sourceTree = "<group>"; };
+		23C26A1514C48F8B00DD53DF /* CellData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellData.m; sourceTree = "<group>"; };
+		23C26A1E14C4D5A600DD53DF /* MenuComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuComponent.h; sourceTree = "<group>"; };
+		23C26A1F14C4D5A600DD53DF /* MenuComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuComponent.m; sourceTree = "<group>"; };
+		23C26A2114C4D6FA00DD53DF /* VisualizableData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisualizableData.h; sourceTree = "<group>"; };
+		23C26A2214C4D6FA00DD53DF /* VisualizableData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisualizableData.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -231,6 +243,8 @@
 		237EC00B14BE5842009D9268 /* MenuComposites */ = {
 			isa = PBXGroup;
 			children = (
+				23C26A1E14C4D5A600DD53DF /* MenuComponent.h */,
+				23C26A1F14C4D5A600DD53DF /* MenuComponent.m */,
 				23658D0214BE12F4002C0996 /* Item.h */,
 				23658D0314BE12F4002C0996 /* Item.m */,
 				23658D0514BE16B2002C0996 /* Option.h */,
@@ -259,6 +273,7 @@
 		2391EA7814BE3D44001BDC1B /* Model Structure */ = {
 			isa = PBXGroup;
 			children = (
+				23C26A0C14C4884B00DD53DF /* VisualizableDataTypes */,
 				237EC00B14BE5842009D9268 /* MenuComposites */,
 				237EC00A14BE5824009D9268 /* Order */,
 			);
@@ -289,6 +304,7 @@
 		23AAD99414BF692500F88AA8 /* Pages */ = {
 			isa = PBXGroup;
 			children = (
+				23C26A0B14C4752F00DD53DF /* MenuPage */,
 				23AAD98D14BF685300F88AA8 /* MainPage */,
 				23C269FD14BFA88F00DD53DF /* OptionPage */,
 				23658D1714BE313F002C0996 /* OrderPage */,
@@ -306,6 +322,34 @@
 				23C26A0214BFA90A00DD53DF /* OptionPageView.m */,
 			);
 			name = OptionPage;
+			sourceTree = "<group>";
+		};
+		23C26A0B14C4752F00DD53DF /* MenuPage */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = MenuPage;
+			sourceTree = "<group>";
+		};
+		23C26A0C14C4884B00DD53DF /* VisualizableDataTypes */ = {
+			isa = PBXGroup;
+			children = (
+				23C26A1014C48D9E00DD53DF /* SupportingClasses */,
+				23C26A2114C4D6FA00DD53DF /* VisualizableData.h */,
+				23C26A2214C4D6FA00DD53DF /* VisualizableData.m */,
+				23C26A0D14C4887E00DD53DF /* TableData.h */,
+				23C26A0E14C4887E00DD53DF /* TableData.m */,
+				23C26A1414C48F8B00DD53DF /* CellData.h */,
+				23C26A1514C48F8B00DD53DF /* CellData.m */,
+			);
+			name = VisualizableDataTypes;
+			sourceTree = "<group>";
+		};
+		23C26A1014C48D9E00DD53DF /* SupportingClasses */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = SupportingClasses;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -432,6 +476,10 @@
 				23C26A0314BFA90A00DD53DF /* OptionPageView.m in Sources */,
 				23C26A0714C0EE6200DD53DF /* Submenu.m in Sources */,
 				23C26A0A14C0F00600DD53DF /* Menu.m in Sources */,
+				23C26A0F14C4887E00DD53DF /* TableData.m in Sources */,
+				23C26A1614C48F8B00DD53DF /* CellData.m in Sources */,
+				23C26A2014C4D5A700DD53DF /* MenuComponent.m in Sources */,
+				23C26A2314C4D6FA00DD53DF /* VisualizableData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
