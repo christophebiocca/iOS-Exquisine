@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "Choice.h"
+#import "MenuComponent.h"
 
-@interface Option : NSObject{
+@interface Option : MenuComponent{
     
     NSString *name;
     NSInteger lowerBound;

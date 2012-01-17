@@ -13,9 +13,20 @@
 @interface MenuComponent : NSObject {
     TableData* tableData;
     CellData* cellData;
+    UINavigationController *controller;
 }
 
 @property(readonly)TableData* tableData;
 @property(readonly)CellData* cellData;
+
+- (MenuComponent *) initWithNavigationController: (UINavigationController *) aController;
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+
+- (void)initializeTableData;
+
+- (void)initializeCellData;
+
+
 
 @end

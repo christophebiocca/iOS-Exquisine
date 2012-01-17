@@ -8,6 +8,7 @@
 
 #import "TableData.h"
 #import "CellData.h"
+#import "MenuComponent.h"
 
 @implementation TableData
 
@@ -38,6 +39,12 @@
 
 -(UITableView *)synthesizeUITableView
 {
+    if ([dataOwner respondsToSelector:_cmd])
+    {
+        return [dataOwner synthesizeUITableView];
+    }
+
+    
     UITableView *newTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 44, 320, 460)];
     [newTableView setDelegate:self];
     [newTableView setDataSource:self];
@@ -62,11 +69,14 @@
 -(void) viewDidLoad
 {
     [super viewDidLoad];
-    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if ([dataOwner respondsToSelector:_cmd])
+    {
+        return [dataOwner tableView:tableView cellForRowAtIndexPath:indexPath];
+    }
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -95,13 +105,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // By default, this will load the tableView associated with the cell if it has one,
-    // else do nothing. This can be overridden.
-    
-    if([[cellDataList objectAtIndex:[indexPath row]] isKindOfClass:[TableData class]]){
-        TableData *currentCell = [cellDataList objectAtIndex:[indexPath row]];
-        [controller pushViewController:currentCell animated:YES];
+    if ([dataOwner respondsToSelector:_cmd])
+    {
+        return [dataOwner tableView:tableView didSelectRowAtIndexPath:indexPath];
     }
+    // By default, do nothing. This can be overridden.
+    [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
     
 }
 

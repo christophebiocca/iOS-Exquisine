@@ -8,9 +8,11 @@
 
 #import "MainPage.h"
 #import "MainPageView.h"
-#import "OrderPage.h"
+//#import "OrderPage.h"
 #import "CellData.h"
 #import "TableData.h"
+#import "Item.h"
+#import "Option.h"
 
 @implementation MainPage
 
@@ -64,29 +66,22 @@
 - (void)createOrderPressed{
     
     //This is the original code, I'm switching it out!
-    
+    /*
     OrderPage *orderPage = [[OrderPage alloc] init];
     
     [[self navigationController] pushViewController:orderPage animated:YES];
      
-    
+    */
     //This is for testing purposes only.
-    //[self testFunction];
+    [self testFunction];
 }
 
 -(void)testFunction{
-    TableData *testTable = [[TableData alloc] initWithNavigationController:[self navigationController]];
-    testTable.tableName = @"Testing";
-    
-    for (int i = 0; i < 20; i++) {
-        CellData *newcell = [[CellData alloc] init];
-        newcell.cellTitle = [NSString stringWithFormat:@"Cell %i",i];
-        newcell.cellDesc = [NSString stringWithFormat:@"This is cell number %i",i];
-        [testTable.cellDataList addObject:newcell];
-    }
-    
-    [[self navigationController] pushViewController:testTable animated:true];
-    
+    Item *anItem = [[Item alloc] initWithNavigationController:[self navigationController]];
+    [anItem setName:@"NAME"];
+    Option *anOption = [[Option alloc] initWithNavigationController:[self navigationController]];
+    [anItem addOption:anOption];
+    [[self navigationController] pushViewController:[anItem tableData] animated:YES];
 }
 
 @end

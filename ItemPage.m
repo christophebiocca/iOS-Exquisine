@@ -23,6 +23,7 @@
 //***********************************************************
 
 -(void)initializeViewWithItem:(Item *)anItem AndOrder:(Order *)anOrder{
+    /*
     parentOrder = anOrder;
     currentItem = anItem;
     NSMutableArray *cellDataList;
@@ -39,7 +40,7 @@
     
     CellInfo *newCell = [[CellInfo alloc] init];
     newCell.labelText = @"Base Price:";
-    newCell.descriptionText = [Utilities FormatToPrice:[currentItem basePriceCents]];        
+    //newCell.descriptionText = [Utilities FormatToPrice:[currentItem basePriceCents]];        
     [cellDataList addObject:newCell];
     
     CellInfo *secondNewCell = [[CellInfo alloc] init];
@@ -47,8 +48,8 @@
     secondNewCell.descriptionText = [Utilities FormatToPrice:[currentItem totalPrice]];        
     [cellDataList addObject:secondNewCell];
     
-    [[self navigationItem] setTitle:currentItem.name];    
-    itemTableDataSource.displayList = cellDataList;
+    [[self navigationItem] setTitle:[currentItem name]];    
+    itemTableDataSource.displayList = cellDataList;*/
     
 }
 
@@ -72,7 +73,8 @@
 - (id)init{
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
-        [[self navigationItem] setTitle:currentItem.name];
+        
+        //[[self navigationItem] setTitle:currentItem.name];
     }
     return self;
 }

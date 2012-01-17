@@ -12,7 +12,7 @@
 
 @synthesize dataOwner;
 
--(id)initWithOwner:(MenuComponent*)owner{
+-(id)initWithOwner:(id)owner{
     if((self = [super init])){
         dataOwner = owner;
     }

@@ -14,11 +14,11 @@
 @class MenuComponent;
 
 @interface VisualizableData : UIViewController{
-    MenuComponent* dataOwner;
+    id dataOwner;
 }
 
-@property(readonly)MenuComponent* dataOwner;
+@property(readonly)id dataOwner;
 
--(id)initWithOwner:(MenuComponent*)owner;
+-(id)initWithOwner:(id)owner;
 
 @end

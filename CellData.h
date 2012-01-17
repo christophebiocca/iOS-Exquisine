@@ -24,6 +24,4 @@
 //of the data that is populated in the CellData object
 -(void)configureUITableViewCell: (UITableViewCell *) newCell;
 
--(void)clickBehaviour;
-
 @end

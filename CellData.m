@@ -7,7 +7,6 @@
 //
 
 #import "CellData.h"
-#import "MenuComponent.h"
 
 @implementation CellData
 
@@ -17,6 +16,11 @@
 
 -(void)configureUITableViewCell: (UITableViewCell *) newCell
 {
+    
+    if ([dataOwner respondsToSelector:_cmd])
+    {
+        return [dataOwner configureUITableViewCell:newCell];
+    }
     
     [[newCell textLabel] setText:cellTitle];
     [[newCell detailTextLabel] setText:cellDesc];
@@ -29,10 +33,6 @@
     {
         [newCell setSelectionStyle:UITableViewCellSelectionStyleNone];
     }
-}
-
--(void)clickBehaviour{
-    
 }
 
 @end

@@ -8,36 +8,96 @@
 
 #import "Item.h"
 #import "Option.h"	
+#import "TableData.h"
+#import "CellData.h"
+#import "Utilities.h"
 
 @implementation Item
 
-@synthesize name;
-@synthesize basePriceCents;
-@synthesize options; 
-@synthesize desc;
+/* 
+ **************************************************************************
+ *
+ *      Standard Class Functions
+ *
+ **************************************************************************
+ */
 
--(NSString *)description{
-    
+@synthesize options;
+
+-(NSString *)description
+{
     return [NSString stringWithFormat:@"%@, C%i, with options: %@", name, basePriceCents, options];
 }
 
--(id)init{
-    
-    options = [[NSMutableArray 	alloc] init];
-    
+/* 
+ **************************************************************************
+ *
+ *      View Managing Functions
+ *
+ **************************************************************************
+ */
+
+
+
+-(void) initializeTableData
+{
+    tableData = [[TableData alloc] initWithOwner:self];
+    [tableData setTableName:name];
+    [tableData setCellDataList:options];
+}
+
+-(void) initializeCellData
+{
+    cellData = [[CellData alloc] initWithOwner:self];
+    [cellData setCellTitle:name];
+    [cellData setCellDesc:[Utilities FormatToPrice:basePriceCents]];
+}
+
+/* 
+ **************************************************************************
+ *
+ *      Custom Class Functions
+ *
+ **************************************************************************
+ */
+
+-(id)initWithNavigationController:(UINavigationController *) aController
+{
+    options = [[NSMutableArray 	alloc] initWithCapacity:0];
+    self = [super initWithNavigationController:aController];
     return self;
 }
 
--(void)addOption:(Option *)anOption{
-    
-    [options addObject:anOption];
-    
+-(void) setBasePrice:(NSInteger) anInt
+{
+    basePriceCents = anInt;
+    [cellData setCellDesc:[Utilities FormatToPrice:anInt]];
 }
 
--(NSInteger)totalPrice{
+-(void)addOption:(Option *)anOption
+{
+    [options addObject:anOption];
+}
+
+-(void) setName:(NSString *)aName
+{
+    name = aName;
+    [tableData setTableName:aName];
+    [cellData setCellTitle:aName];
+}
+
+-(void) setDesc:(NSString *)aDesc
+{
+    desc = aDesc;
+    [cellData setCellDesc:aDesc];
+}
+
+-(NSInteger)totalPrice
+{
     NSInteger tabulation = basePriceCents;
     
-    for (Option *currentOption in options) {
+    for (Option *currentOption in options) 
+    {
         tabulation += currentOption.totalPrice;
     }
     

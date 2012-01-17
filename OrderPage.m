@@ -5,7 +5,7 @@
 //  Created by Jake on 12-01-11.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
-
+/*
 #import "Order.h"
 #import "OrderPage.h"
 #import "OrderPageView.h"
@@ -29,7 +29,7 @@
     for (Item *currentItem in anOrder.itemList) {
         
         CellInfo *newCell = [[CellInfo alloc] init];
-        newCell.labelText = currentItem.name;
+        //newCell.labelText = currentItem.name;
         newCell.descriptionText = [Utilities FormatToPrice:[currentItem totalPrice]];
         [cellDataList addObject:newCell];
         
@@ -150,7 +150,7 @@
     Item *chickenCeasar = [[Item alloc] init];
     
     chickenCeasar.name = @"Chicken Ceasar Pita";
-    chickenCeasar.basePriceCents = 800;
+    //chickenCeasar.basePriceCents = 800;
     chickenCeasar.desc = @"Chicken pita";
     
     [chickenCeasar addOption:toppings];
@@ -160,7 +160,7 @@
     Item *chipotle = [[Item alloc] init];
     
     chipotle.name = @"Spicy Chipotle Pita";
-    chipotle.basePriceCents = 800;
+    //chipotle.basePriceCents = 800;
     chipotle.desc = @"Chicken chipotle with fresh veggies";
     
     [chipotle addOption:toppings];
@@ -201,4 +201,4 @@
 }
 
 @end
-     
+     */
