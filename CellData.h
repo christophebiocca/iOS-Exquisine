@@ -22,6 +22,6 @@
 
 //Configures a table view cell to be representative
 //of the data that is populated in the CellData object
--(void)configureUITableViewCell: (UITableViewCell *) newCell;
+-(UITableViewCell *)configureCell: (UITableViewCell *) newCell;
 
 @end

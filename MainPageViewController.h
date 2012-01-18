@@ -7,15 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "APICallDelegate.h"
 
 @class MainPageView;
+@class Menu;
 
-@interface MainPage : UIViewController<UITableViewDelegate>{
+@interface MainPageViewController : UIViewController<UITableViewDelegate, APICallDelegate>{
 
     MainPageView *mainPageView;
+    Menu *theMenu;
+    
+    NSMutableArray *listOfOrders;
+    NSMutableArray *favoriteOrders;
     
 }
-
--(void)testFunction;
 
 @end

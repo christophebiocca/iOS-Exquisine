@@ -6,21 +6,23 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "MainPage.h"
+#import "MainPageViewController.h"
 #import "MainPageView.h"
-//#import "OrderPage.h"
-#import "CellData.h"
-#import "TableData.h"
+#import "OrderViewController.h"
+#import "Order.h"
+#import "Menu.h"
 #import "Item.h"
-#import "Option.h"
+#import "ItemViewController.h"
+#import "GetMenu.h"
 
-@implementation MainPage
+@implementation MainPageViewController
 
 - (id)init
 {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
         [[self navigationItem] setTitle:@"Pita Factory"];
+        [[[GetMenu alloc] init] setDelegate:self];
     }
     return self;
 }
@@ -65,23 +67,25 @@
 
 - (void)createOrderPressed{
     
-    //This is the original code, I'm switching it out!
-    /*
-    OrderPage *orderPage = [[OrderPage alloc] init];
+    if(!theMenu)
+    {
+        NSLog(@"The menu had not been fetched upon clicking new order");
+    }
     
-    [[self navigationController] pushViewController:orderPage animated:YES];
-     
-    */
-    //This is for testing purposes only.
-    [self testFunction];
+    Order *newOrder = [[Order alloc] init];
+    
+    OrderViewController *orderView = [[OrderViewController alloc] initializeWithMenuAndOrder:theMenu:newOrder];
+    
+    [[self navigationController] pushViewController:orderView animated:YES];
 }
 
--(void)testFunction{
-    Item *anItem = [[Item alloc] initWithNavigationController:[self navigationController]];
-    [anItem setName:@"NAME"];
-    Option *anOption = [[Option alloc] initWithNavigationController:[self navigationController]];
-    [anItem addOption:anOption];
-    [[self navigationController] pushViewController:[anItem tableData] animated:YES];
+-(void)apiCall:(APICall *)call completedWithData:(NSData *)data{
+    NSLog(@"SUCCESS call: %@ Data:\n%@", call, data);
+    theMenu = [[Menu alloc] initFromData:data];
+}
+
+-(void)apiCall:(APICall *)call returnedError:(NSError *)error{
+    NSLog(@"call %@ errored with %@", call, error);
 }
 
 @end

@@ -7,30 +7,26 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Option.h"
 #import "MenuComponent.h"
+@class Option;
 
 @interface Item : MenuComponent{
-    NSString *name;
+    
     NSInteger basePriceCents;
     NSMutableArray *options;
-    NSString *desc;
+    
 }
 
 @property (retain, readonly) NSMutableArray *options; 
+@property NSInteger basePriceCents;
 
 -(NSString *)description;
 
+-(Item *)initFromData:(NSData *) inputData;
 
--(id)initWithNavigationController:(UINavigationController *) aController;
-
--(void) setBasePrice:(NSInteger) anInt;
+-(Item *)init;
 
 -(void) addOption:(Option *) anOption;
-
--(void) setName:(NSString *)aName;
-
--(void) setDesc:(NSString *)aDesc;
 
 -(NSInteger)totalPrice;
 

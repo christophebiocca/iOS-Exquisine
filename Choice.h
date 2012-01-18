@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MenuComponent.h"
 
-@interface Choice : NSObject{
-    NSString *name;
+@interface Choice : MenuComponent{
     //This price is the price of the choice assuming no special rules apply
     //(i.e. if this is one of the choices that you get free of charge)
     NSInteger normalPriceCents;
@@ -18,18 +18,18 @@
     //The user is expected to manage this value, as it will relate to
     //Circumstances that only the user will know.
     NSInteger effectivePriceCents;
+    
     BOOL selected;
-    NSString *desc;
 }
 
-@property (retain) NSString *name;
 @property NSInteger normalPriceCents;
 @property NSInteger effectivePriceCents;
-@property (retain) NSString *desc;
 @property BOOL selected;
 
--(void)toggleSelected;
+-(Choice *)initFromData:(NSData *) inputData;
 
 -(NSString *)description;
+
+-(void)toggleSelected;
 
 @end

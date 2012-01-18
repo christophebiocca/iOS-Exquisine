@@ -13,4 +13,8 @@
 //Assumes that the integer is number of cents
 +(NSString *)FormatToPrice:(NSInteger) anInt;
 
++(NSInteger)CompositeListCount:(NSMutableArray *) compositeList;
+
++(id)MemberOfCompositeListAtIndex:(NSMutableArray *)compositeList:(NSInteger) anInt;
+
 @end

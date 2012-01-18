@@ -14,11 +14,11 @@
 @implementation Order
     
 @synthesize itemList;
+@synthesize status,orderIdentifier;
 
 -(id)init{
     
     itemList = [[NSMutableArray alloc] initWithCapacity:0];
-    
     return self;
     
 }
@@ -39,7 +39,6 @@
 }
 
 -(NSInteger)totalPrice{
-    
     NSInteger tabulator = 0;
     
     for (Item *currentItem in itemList) {
@@ -47,7 +46,6 @@
     }
     
     return tabulator;
-    
 }
 
 @end

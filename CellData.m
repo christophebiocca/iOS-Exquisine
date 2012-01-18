@@ -14,14 +14,8 @@
 @synthesize cellDesc;
 @synthesize cellSwitchState;
 
--(void)configureUITableViewCell: (UITableViewCell *) newCell
+-(UITableViewCell *)configureCell: (UITableViewCell *) newCell
 {
-    
-    if ([dataOwner respondsToSelector:_cmd])
-    {
-        return [dataOwner configureUITableViewCell:newCell];
-    }
-    
     [[newCell textLabel] setText:cellTitle];
     [[newCell detailTextLabel] setText:cellDesc];
     
@@ -33,6 +27,8 @@
     {
         [newCell setSelectionStyle:UITableViewCellSelectionStyleNone];
     }
+    
+    return newCell;
 }
 
 @end

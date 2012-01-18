@@ -7,18 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
-@class Submenu;
+#import "MenuComponent.h"
 
-@interface Menu : NSObject{
+@interface Menu : MenuComponent{
     
-    NSString *restarauntName;
     NSMutableArray *submenuList;
     
 }
 
-@property (retain) NSString *resterauntName;
-@property (retain) NSMutableArray *submenuList;
+@property (retain,readonly) NSMutableArray *submenuList;
 
--(void) addSubmenu:(Submenu *) aSubmenu;
+-(Menu *) init;
+
+-(void) addSubmenu:(Menu *) aSubmenu;
+
+-(Menu *) initFromData:(NSData *)inputData;
 
 @end

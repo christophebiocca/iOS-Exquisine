@@ -30,7 +30,7 @@
 -(void)initializeViewWithOption:(Option *)anOption{
     
     CellData *newCellData = [[CellData alloc] initWithOwner:self];
-    [newCellData configureUITableViewCell:[[UITableViewCell alloc] init]];
+    [newCellData configureCell:[[UITableViewCell alloc] init]];
     
     currentOption = anOption;
     NSMutableArray *cellDataList;
@@ -39,10 +39,10 @@
     for (Choice *currentChoice in anOption.choiceList) {
         
         CellInfo *newCell = [[CellInfo alloc] init];
-        newCell.labelText = currentChoice.name;
-        newCell.descriptionText = [Utilities FormatToPrice:[currentChoice effectivePriceCents]];
+        //newCell.labelText = currentChoice.name;
+        //newCell.descriptionText = [Utilities FormatToPrice:[currentChoice effectivePriceCents]];
         newCell.hasSwitch = YES;
-        newCell.switchState = currentChoice.selected;
+        //newCell.switchState = currentChoice.selected;
         [cellDataList addObject:newCell];
         
     }

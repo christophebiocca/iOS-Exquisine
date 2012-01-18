@@ -18,27 +18,43 @@
 		23658CE414BDFB15002C0996 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23658CC214BDFB15002C0996 /* Foundation.framework */; };
 		23658CEC14BDFB15002C0996 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 23658CEA14BDFB15002C0996 /* InfoPlist.strings */; };
 		23658CEF14BDFB16002C0996 /* AvocadoTest1Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 23658CEE14BDFB16002C0996 /* AvocadoTest1Tests.m */; };
-		23658CFD14BDFE5F002C0996 /* OrderPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 23658CFB14BDFE5F002C0996 /* OrderPage.m */; };
 		23658D0114BDFF37002C0996 /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = 23658D0014BDFF37002C0996 /* Order.m */; };
 		23658D0414BE12F4002C0996 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 23658D0314BE12F4002C0996 /* Item.m */; };
 		23658D0714BE16B2002C0996 /* Option.m in Sources */ = {isa = PBXBuildFile; fileRef = 23658D0614BE16B2002C0996 /* Option.m */; };
 		23658D0A14BE1D06002C0996 /* Choice.m in Sources */ = {isa = PBXBuildFile; fileRef = 23658D0914BE1D06002C0996 /* Choice.m */; };
-		237EBFB314BE4381009D9268 /* OrderPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 237EBFB214BE4381009D9268 /* OrderPageView.m */; };
 		237EC00E14BE635C009D9268 /* ItemPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 237EC00D14BE635C009D9268 /* ItemPage.m */; };
 		237EC01314BE64D5009D9268 /* ItemPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 237EC01214BE64D5009D9268 /* ItemPageView.m */; };
 		2391EA7314BE3699001BDC1B /* ConfigurableTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2391EA7114BE3699001BDC1B /* ConfigurableTableViewDataSource.m */; };
 		2391EA7714BE387D001BDC1B /* CellInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2391EA7614BE387D001BDC1B /* CellInfo.m */; };
 		23AAD98B14BF525A00F88AA8 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AAD98A14BF525A00F88AA8 /* Utilities.m */; };
 		23AAD99014BF68DC00F88AA8 /* MainPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AAD98F14BF68DC00F88AA8 /* MainPageView.m */; };
-		23AAD99314BF690F00F88AA8 /* MainPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AAD99214BF690F00F88AA8 /* MainPage.m */; };
+		23AAD99314BF690F00F88AA8 /* MainPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AAD99214BF690F00F88AA8 /* MainPageViewController.m */; };
 		23C26A0014BFA8F100DD53DF /* OptionPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C269FF14BFA8F100DD53DF /* OptionPage.m */; };
 		23C26A0314BFA90A00DD53DF /* OptionPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C26A0214BFA90A00DD53DF /* OptionPageView.m */; };
-		23C26A0714C0EE6200DD53DF /* Submenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C26A0614C0EE6100DD53DF /* Submenu.m */; };
 		23C26A0A14C0F00600DD53DF /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C26A0914C0F00600DD53DF /* Menu.m */; };
 		23C26A0F14C4887E00DD53DF /* TableData.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C26A0E14C4887E00DD53DF /* TableData.m */; };
 		23C26A1614C48F8B00DD53DF /* CellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C26A1514C48F8B00DD53DF /* CellData.m */; };
 		23C26A2014C4D5A700DD53DF /* MenuComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C26A1F14C4D5A600DD53DF /* MenuComponent.m */; };
 		23C26A2314C4D6FA00DD53DF /* VisualizableData.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C26A2214C4D6FA00DD53DF /* VisualizableData.m */; };
+		23DA7A4014C60284008281DD /* Renderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA7A3F14C60284008281DD /* Renderer.m */; };
+		23DA7A4314C603E4008281DD /* MenuComponentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA7A4214C603E4008281DD /* MenuComponentViewController.m */; };
+		23DA7A4714C609FD008281DD /* MenuComponentRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA7A4614C609FD008281DD /* MenuComponentRenderer.m */; };
+		23DA7A4C14C613D4008281DD /* MenuComponentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA7A4B14C613D4008281DD /* MenuComponentView.m */; };
+		23DA7A5114C61926008281DD /* OrderRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA7A5014C61926008281DD /* OrderRenderer.m */; };
+		23DA7A5414C61946008281DD /* OrderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA7A5314C61946008281DD /* OrderView.m */; };
+		23DA7A5914C6283E008281DD /* OrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA7A5814C6283E008281DD /* OrderViewController.m */; };
+		23DA7A5E14C6310E008281DD /* ItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA7A5D14C6310E008281DD /* ItemView.m */; };
+		23DA7A6214C63242008281DD /* ItemRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA7A6114C63242008281DD /* ItemRenderer.m */; };
+		23DA7A6714C63708008281DD /* ChoiceRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA7A6614C63708008281DD /* ChoiceRenderer.m */; };
+		23DA7A6A14C63717008281DD /* OptionRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA7A6914C63717008281DD /* OptionRenderer.m */; };
+		23DA7A6F14C63734008281DD /* MenuRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA7A6E14C63734008281DD /* MenuRenderer.m */; };
+		23DA7A7614C63CA6008281DD /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA7A7514C63CA6008281DD /* MenuViewController.m */; };
+		23DA7A7914C63CBB008281DD /* ItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA7A7814C63CBB008281DD /* ItemViewController.m */; };
+		23DA7A7C14C63CC8008281DD /* OptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA7A7B14C63CC8008281DD /* OptionViewController.m */; };
+		23DA7A8014C6401A008281DD /* OptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA7A7F14C6401A008281DD /* OptionView.m */; };
+		23DA7A8714C72F40008281DD /* MenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA7A8614C72F40008281DD /* MenuView.m */; };
+		23DA7A8C14C73DC1008281DD /* APICall.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA7A8B14C73DC1008281DD /* APICall.m */; };
+		23DA7A9014C7473C008281DD /* GetMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA7A8F14C7473C008281DD /* GetMenu.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,8 +84,6 @@
 		23658CEB14BDFB15002C0996 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		23658CED14BDFB16002C0996 /* AvocadoTest1Tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AvocadoTest1Tests.h; sourceTree = "<group>"; };
 		23658CEE14BDFB16002C0996 /* AvocadoTest1Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AvocadoTest1Tests.m; sourceTree = "<group>"; };
-		23658CFA14BDFE5F002C0996 /* OrderPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderPage.h; sourceTree = "<group>"; };
-		23658CFB14BDFE5F002C0996 /* OrderPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderPage.m; sourceTree = "<group>"; };
 		23658CFF14BDFF37002C0996 /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Order.h; sourceTree = "<group>"; };
 		23658D0014BDFF37002C0996 /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
 		23658D0214BE12F4002C0996 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
@@ -78,8 +92,6 @@
 		23658D0614BE16B2002C0996 /* Option.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Option.m; sourceTree = "<group>"; };
 		23658D0814BE1D06002C0996 /* Choice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Choice.h; sourceTree = "<group>"; };
 		23658D0914BE1D06002C0996 /* Choice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Choice.m; sourceTree = "<group>"; };
-		237EBFB114BE4381009D9268 /* OrderPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderPageView.h; sourceTree = "<group>"; };
-		237EBFB214BE4381009D9268 /* OrderPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderPageView.m; sourceTree = "<group>"; };
 		237EC00C14BE635C009D9268 /* ItemPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemPage.h; sourceTree = "<group>"; };
 		237EC00D14BE635C009D9268 /* ItemPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemPage.m; sourceTree = "<group>"; };
 		237EC01114BE64D5009D9268 /* ItemPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemPageView.h; sourceTree = "<group>"; };
@@ -92,14 +104,12 @@
 		23AAD98A14BF525A00F88AA8 /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
 		23AAD98E14BF68DC00F88AA8 /* MainPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageView.h; sourceTree = "<group>"; };
 		23AAD98F14BF68DC00F88AA8 /* MainPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageView.m; sourceTree = "<group>"; };
-		23AAD99114BF690F00F88AA8 /* MainPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPage.h; sourceTree = "<group>"; };
-		23AAD99214BF690F00F88AA8 /* MainPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPage.m; sourceTree = "<group>"; };
+		23AAD99114BF690F00F88AA8 /* MainPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageViewController.h; sourceTree = "<group>"; };
+		23AAD99214BF690F00F88AA8 /* MainPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageViewController.m; sourceTree = "<group>"; };
 		23C269FE14BFA8F100DD53DF /* OptionPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionPage.h; sourceTree = "<group>"; };
 		23C269FF14BFA8F100DD53DF /* OptionPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionPage.m; sourceTree = "<group>"; };
 		23C26A0114BFA90A00DD53DF /* OptionPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionPageView.h; sourceTree = "<group>"; };
 		23C26A0214BFA90A00DD53DF /* OptionPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionPageView.m; sourceTree = "<group>"; };
-		23C26A0514C0EE6100DD53DF /* Submenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Submenu.h; sourceTree = "<group>"; };
-		23C26A0614C0EE6100DD53DF /* Submenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Submenu.m; sourceTree = "<group>"; };
 		23C26A0814C0F00600DD53DF /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Menu.h; sourceTree = "<group>"; };
 		23C26A0914C0F00600DD53DF /* Menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Menu.m; sourceTree = "<group>"; };
 		23C26A0D14C4887E00DD53DF /* TableData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableData.h; sourceTree = "<group>"; };
@@ -110,6 +120,45 @@
 		23C26A1F14C4D5A600DD53DF /* MenuComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuComponent.m; sourceTree = "<group>"; };
 		23C26A2114C4D6FA00DD53DF /* VisualizableData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisualizableData.h; sourceTree = "<group>"; };
 		23C26A2214C4D6FA00DD53DF /* VisualizableData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisualizableData.m; sourceTree = "<group>"; };
+		23DA7A3E14C60284008281DD /* Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
+		23DA7A3F14C60284008281DD /* Renderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Renderer.m; sourceTree = "<group>"; };
+		23DA7A4114C603E4008281DD /* MenuComponentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuComponentViewController.h; sourceTree = "<group>"; };
+		23DA7A4214C603E4008281DD /* MenuComponentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuComponentViewController.m; sourceTree = "<group>"; };
+		23DA7A4514C609FD008281DD /* MenuComponentRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuComponentRenderer.h; sourceTree = "<group>"; };
+		23DA7A4614C609FD008281DD /* MenuComponentRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuComponentRenderer.m; sourceTree = "<group>"; };
+		23DA7A4A14C613D4008281DD /* MenuComponentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuComponentView.h; sourceTree = "<group>"; };
+		23DA7A4B14C613D4008281DD /* MenuComponentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuComponentView.m; sourceTree = "<group>"; };
+		23DA7A4F14C61926008281DD /* OrderRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderRenderer.h; sourceTree = "<group>"; };
+		23DA7A5014C61926008281DD /* OrderRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderRenderer.m; sourceTree = "<group>"; };
+		23DA7A5214C61946008281DD /* OrderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderView.h; sourceTree = "<group>"; };
+		23DA7A5314C61946008281DD /* OrderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderView.m; sourceTree = "<group>"; };
+		23DA7A5714C6283E008281DD /* OrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderViewController.h; sourceTree = "<group>"; };
+		23DA7A5814C6283E008281DD /* OrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderViewController.m; sourceTree = "<group>"; };
+		23DA7A5C14C6310E008281DD /* ItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemView.h; sourceTree = "<group>"; };
+		23DA7A5D14C6310E008281DD /* ItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemView.m; sourceTree = "<group>"; };
+		23DA7A6014C63242008281DD /* ItemRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemRenderer.h; sourceTree = "<group>"; };
+		23DA7A6114C63242008281DD /* ItemRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemRenderer.m; sourceTree = "<group>"; };
+		23DA7A6514C63708008281DD /* ChoiceRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoiceRenderer.h; sourceTree = "<group>"; };
+		23DA7A6614C63708008281DD /* ChoiceRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoiceRenderer.m; sourceTree = "<group>"; };
+		23DA7A6814C63717008281DD /* OptionRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionRenderer.h; sourceTree = "<group>"; };
+		23DA7A6914C63717008281DD /* OptionRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionRenderer.m; sourceTree = "<group>"; };
+		23DA7A6D14C63734008281DD /* MenuRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuRenderer.h; sourceTree = "<group>"; };
+		23DA7A6E14C63734008281DD /* MenuRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuRenderer.m; sourceTree = "<group>"; };
+		23DA7A7414C63CA6008281DD /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
+		23DA7A7514C63CA6008281DD /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
+		23DA7A7714C63CBB008281DD /* ItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemViewController.h; sourceTree = "<group>"; };
+		23DA7A7814C63CBB008281DD /* ItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemViewController.m; sourceTree = "<group>"; };
+		23DA7A7A14C63CC8008281DD /* OptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionViewController.h; sourceTree = "<group>"; };
+		23DA7A7B14C63CC8008281DD /* OptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionViewController.m; sourceTree = "<group>"; };
+		23DA7A7E14C6401A008281DD /* OptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionView.h; sourceTree = "<group>"; };
+		23DA7A7F14C6401A008281DD /* OptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionView.m; sourceTree = "<group>"; };
+		23DA7A8514C72F40008281DD /* MenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuView.h; sourceTree = "<group>"; };
+		23DA7A8614C72F40008281DD /* MenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuView.m; sourceTree = "<group>"; };
+		23DA7A8A14C73DC1008281DD /* APICall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APICall.h; sourceTree = "<group>"; };
+		23DA7A8B14C73DC1008281DD /* APICall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APICall.m; sourceTree = "<group>"; };
+		23DA7A8D14C740B3008281DD /* APICallDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APICallDelegate.h; sourceTree = "<group>"; };
+		23DA7A8E14C7473C008281DD /* GetMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetMenu.h; sourceTree = "<group>"; };
+		23DA7A8F14C7473C008281DD /* GetMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetMenu.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,13 +188,14 @@
 		23658CB114BDFB15002C0996 = {
 			isa = PBXGroup;
 			children = (
-				23AAD99414BF692500F88AA8 /* Pages */,
+				23DA7A8814C73D52008281DD /* API */,
 				23AAD98714BF516700F88AA8 /* Global Helpers */,
 				2391EA7814BE3D44001BDC1B /* Model Structure */,
-				23658CC614BDFB15002C0996 /* AvocadoTest1 */,
-				23658CE714BDFB15002C0996 /* AvocadoTest1Tests */,
-				23658CBF14BDFB15002C0996 /* Frameworks */,
-				23658CBD14BDFB15002C0996 /* Products */,
+				23DA7A5A14C63071008281DD /* Views */,
+				23DA7A3814C60087008281DD /* Renderers */,
+				23DA7A3914C600B1008281DD /* Controllers */,
+				23DA7A3714C6003F008281DD /* Other Shit */,
+				23DA7A3514C5FFCE008281DD /* Obsolete */,
 			);
 			sourceTree = "<group>";
 		};
@@ -209,17 +259,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		23658D1714BE313F002C0996 /* OrderPage */ = {
-			isa = PBXGroup;
-			children = (
-				23658CFA14BDFE5F002C0996 /* OrderPage.h */,
-				23658CFB14BDFE5F002C0996 /* OrderPage.m */,
-				237EBFB114BE4381009D9268 /* OrderPageView.h */,
-				237EBFB214BE4381009D9268 /* OrderPageView.m */,
-			);
-			name = OrderPage;
-			sourceTree = "<group>";
-		};
 		237EC00614BE55A7009D9268 /* ItemPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -245,16 +284,11 @@
 			children = (
 				23C26A1E14C4D5A600DD53DF /* MenuComponent.h */,
 				23C26A1F14C4D5A600DD53DF /* MenuComponent.m */,
-				23658D0214BE12F4002C0996 /* Item.h */,
-				23658D0314BE12F4002C0996 /* Item.m */,
-				23658D0514BE16B2002C0996 /* Option.h */,
-				23658D0614BE16B2002C0996 /* Option.m */,
-				23658D0814BE1D06002C0996 /* Choice.h */,
-				23658D0914BE1D06002C0996 /* Choice.m */,
-				23C26A0514C0EE6100DD53DF /* Submenu.h */,
-				23C26A0614C0EE6100DD53DF /* Submenu.m */,
-				23C26A0814C0F00600DD53DF /* Menu.h */,
-				23C26A0914C0F00600DD53DF /* Menu.m */,
+				23DA7A3D14C60133008281DD /* Menu */,
+				237EC00A14BE5824009D9268 /* Order */,
+				23DA7A3C14C60129008281DD /* Item */,
+				23DA7A3B14C60117008281DD /* Option */,
+				23DA7A3A14C60106008281DD /* Choice */,
 			);
 			name = MenuComposites;
 			sourceTree = "<group>";
@@ -273,9 +307,7 @@
 		2391EA7814BE3D44001BDC1B /* Model Structure */ = {
 			isa = PBXGroup;
 			children = (
-				23C26A0C14C4884B00DD53DF /* VisualizableDataTypes */,
 				237EC00B14BE5842009D9268 /* MenuComposites */,
-				237EC00A14BE5824009D9268 /* Order */,
 			);
 			name = "Model Structure";
 			sourceTree = "<group>";
@@ -283,7 +315,6 @@
 		23AAD98714BF516700F88AA8 /* Global Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				2391EA6F14BE35D4001BDC1B /* ConfigurableTableViewDataSource */,
 				23AAD98914BF525A00F88AA8 /* Utilities.h */,
 				23AAD98A14BF525A00F88AA8 /* Utilities.m */,
 			);
@@ -293,10 +324,6 @@
 		23AAD98D14BF685300F88AA8 /* MainPage */ = {
 			isa = PBXGroup;
 			children = (
-				23AAD99114BF690F00F88AA8 /* MainPage.h */,
-				23AAD99214BF690F00F88AA8 /* MainPage.m */,
-				23AAD98E14BF68DC00F88AA8 /* MainPageView.h */,
-				23AAD98F14BF68DC00F88AA8 /* MainPageView.m */,
 			);
 			name = MainPage;
 			sourceTree = "<group>";
@@ -307,7 +334,6 @@
 				23C26A0B14C4752F00DD53DF /* MenuPage */,
 				23AAD98D14BF685300F88AA8 /* MainPage */,
 				23C269FD14BFA88F00DD53DF /* OptionPage */,
-				23658D1714BE313F002C0996 /* OrderPage */,
 				237EC00614BE55A7009D9268 /* ItemPage */,
 			);
 			name = Pages;
@@ -334,22 +360,294 @@
 		23C26A0C14C4884B00DD53DF /* VisualizableDataTypes */ = {
 			isa = PBXGroup;
 			children = (
-				23C26A1014C48D9E00DD53DF /* SupportingClasses */,
 				23C26A2114C4D6FA00DD53DF /* VisualizableData.h */,
 				23C26A2214C4D6FA00DD53DF /* VisualizableData.m */,
 				23C26A0D14C4887E00DD53DF /* TableData.h */,
 				23C26A0E14C4887E00DD53DF /* TableData.m */,
-				23C26A1414C48F8B00DD53DF /* CellData.h */,
-				23C26A1514C48F8B00DD53DF /* CellData.m */,
 			);
 			name = VisualizableDataTypes;
 			sourceTree = "<group>";
 		};
-		23C26A1014C48D9E00DD53DF /* SupportingClasses */ = {
+		23DA7A3514C5FFCE008281DD /* Obsolete */ = {
 			isa = PBXGroup;
 			children = (
+				23C26A0C14C4884B00DD53DF /* VisualizableDataTypes */,
+				2391EA6F14BE35D4001BDC1B /* ConfigurableTableViewDataSource */,
+				23AAD99414BF692500F88AA8 /* Pages */,
 			);
-			name = SupportingClasses;
+			name = Obsolete;
+			sourceTree = "<group>";
+		};
+		23DA7A3714C6003F008281DD /* Other Shit */ = {
+			isa = PBXGroup;
+			children = (
+				23658CC614BDFB15002C0996 /* AvocadoTest1 */,
+				23658CE714BDFB15002C0996 /* AvocadoTest1Tests */,
+				23658CBF14BDFB15002C0996 /* Frameworks */,
+				23658CBD14BDFB15002C0996 /* Products */,
+			);
+			name = "Other Shit";
+			sourceTree = "<group>";
+		};
+		23DA7A3814C60087008281DD /* Renderers */ = {
+			isa = PBXGroup;
+			children = (
+				23DA7A3E14C60284008281DD /* Renderer.h */,
+				23DA7A3F14C60284008281DD /* Renderer.m */,
+				23DA7A4414C609C6008281DD /* MenuCompositeRenderers */,
+				23DA7A5514C61FB6008281DD /* RendererHelpers */,
+			);
+			name = Renderers;
+			sourceTree = "<group>";
+		};
+		23DA7A3914C600B1008281DD /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				23DA7A4114C603E4008281DD /* MenuComponentViewController.h */,
+				23DA7A4214C603E4008281DD /* MenuComponentViewController.m */,
+				23DA7A8314C64680008281DD /* MainPageViewController */,
+				23DA7A7314C63C41008281DD /* MenuViewController */,
+				23DA7A5614C627FC008281DD /* OrderViewController */,
+				23DA7A7214C63C3C008281DD /* ItemViewController */,
+				23DA7A7014C63C2A008281DD /* OptionViewController */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		23DA7A3A14C60106008281DD /* Choice */ = {
+			isa = PBXGroup;
+			children = (
+				23658D0814BE1D06002C0996 /* Choice.h */,
+				23658D0914BE1D06002C0996 /* Choice.m */,
+			);
+			name = Choice;
+			sourceTree = "<group>";
+		};
+		23DA7A3B14C60117008281DD /* Option */ = {
+			isa = PBXGroup;
+			children = (
+				23658D0514BE16B2002C0996 /* Option.h */,
+				23658D0614BE16B2002C0996 /* Option.m */,
+			);
+			name = Option;
+			sourceTree = "<group>";
+		};
+		23DA7A3C14C60129008281DD /* Item */ = {
+			isa = PBXGroup;
+			children = (
+				23658D0214BE12F4002C0996 /* Item.h */,
+				23658D0314BE12F4002C0996 /* Item.m */,
+			);
+			name = Item;
+			sourceTree = "<group>";
+		};
+		23DA7A3D14C60133008281DD /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				23C26A0814C0F00600DD53DF /* Menu.h */,
+				23C26A0914C0F00600DD53DF /* Menu.m */,
+			);
+			name = Menu;
+			sourceTree = "<group>";
+		};
+		23DA7A4414C609C6008281DD /* MenuCompositeRenderers */ = {
+			isa = PBXGroup;
+			children = (
+				23DA7A4514C609FD008281DD /* MenuComponentRenderer.h */,
+				23DA7A4614C609FD008281DD /* MenuComponentRenderer.m */,
+				23DA7A6B14C6371D008281DD /* MenuRenderer */,
+				23DA7A4D14C618EE008281DD /* OrderRenderer */,
+				23DA7A5F14C631F1008281DD /* ItemRenderer */,
+				23DA7A6314C636D2008281DD /* OptionRenderer */,
+				23DA7A6414C636E5008281DD /* ChoiceRenderer */,
+			);
+			name = MenuCompositeRenderers;
+			sourceTree = "<group>";
+		};
+		23DA7A4914C61336008281DD /* MenuCompositeViews */ = {
+			isa = PBXGroup;
+			children = (
+				23DA7A8414C72F22008281DD /* MenuView */,
+				23DA7A4E14C618FF008281DD /* OrderView */,
+				23DA7A5B14C630EE008281DD /* ItemView */,
+				23DA7A7D14C63FFD008281DD /* OptionView */,
+				23DA7A4A14C613D4008281DD /* MenuComponentView.h */,
+				23DA7A4B14C613D4008281DD /* MenuComponentView.m */,
+			);
+			name = MenuCompositeViews;
+			sourceTree = "<group>";
+		};
+		23DA7A4D14C618EE008281DD /* OrderRenderer */ = {
+			isa = PBXGroup;
+			children = (
+				23DA7A4F14C61926008281DD /* OrderRenderer.h */,
+				23DA7A5014C61926008281DD /* OrderRenderer.m */,
+			);
+			name = OrderRenderer;
+			sourceTree = "<group>";
+		};
+		23DA7A4E14C618FF008281DD /* OrderView */ = {
+			isa = PBXGroup;
+			children = (
+				23DA7A5214C61946008281DD /* OrderView.h */,
+				23DA7A5314C61946008281DD /* OrderView.m */,
+			);
+			name = OrderView;
+			sourceTree = "<group>";
+		};
+		23DA7A5514C61FB6008281DD /* RendererHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				23C26A1414C48F8B00DD53DF /* CellData.h */,
+				23C26A1514C48F8B00DD53DF /* CellData.m */,
+			);
+			name = RendererHelpers;
+			sourceTree = "<group>";
+		};
+		23DA7A5614C627FC008281DD /* OrderViewController */ = {
+			isa = PBXGroup;
+			children = (
+				23DA7A5714C6283E008281DD /* OrderViewController.h */,
+				23DA7A5814C6283E008281DD /* OrderViewController.m */,
+			);
+			name = OrderViewController;
+			sourceTree = "<group>";
+		};
+		23DA7A5A14C63071008281DD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				23DA7A8114C6462C008281DD /* OtherViews */,
+				23DA7A4914C61336008281DD /* MenuCompositeViews */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		23DA7A5B14C630EE008281DD /* ItemView */ = {
+			isa = PBXGroup;
+			children = (
+				23DA7A5C14C6310E008281DD /* ItemView.h */,
+				23DA7A5D14C6310E008281DD /* ItemView.m */,
+			);
+			name = ItemView;
+			sourceTree = "<group>";
+		};
+		23DA7A5F14C631F1008281DD /* ItemRenderer */ = {
+			isa = PBXGroup;
+			children = (
+				23DA7A6014C63242008281DD /* ItemRenderer.h */,
+				23DA7A6114C63242008281DD /* ItemRenderer.m */,
+			);
+			name = ItemRenderer;
+			sourceTree = "<group>";
+		};
+		23DA7A6314C636D2008281DD /* OptionRenderer */ = {
+			isa = PBXGroup;
+			children = (
+				23DA7A6814C63717008281DD /* OptionRenderer.h */,
+				23DA7A6914C63717008281DD /* OptionRenderer.m */,
+			);
+			name = OptionRenderer;
+			sourceTree = "<group>";
+		};
+		23DA7A6414C636E5008281DD /* ChoiceRenderer */ = {
+			isa = PBXGroup;
+			children = (
+				23DA7A6514C63708008281DD /* ChoiceRenderer.h */,
+				23DA7A6614C63708008281DD /* ChoiceRenderer.m */,
+			);
+			name = ChoiceRenderer;
+			sourceTree = "<group>";
+		};
+		23DA7A6B14C6371D008281DD /* MenuRenderer */ = {
+			isa = PBXGroup;
+			children = (
+				23DA7A6D14C63734008281DD /* MenuRenderer.h */,
+				23DA7A6E14C63734008281DD /* MenuRenderer.m */,
+			);
+			name = MenuRenderer;
+			sourceTree = "<group>";
+		};
+		23DA7A7014C63C2A008281DD /* OptionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				23DA7A7A14C63CC8008281DD /* OptionViewController.h */,
+				23DA7A7B14C63CC8008281DD /* OptionViewController.m */,
+			);
+			name = OptionViewController;
+			sourceTree = "<group>";
+		};
+		23DA7A7214C63C3C008281DD /* ItemViewController */ = {
+			isa = PBXGroup;
+			children = (
+				23DA7A7714C63CBB008281DD /* ItemViewController.h */,
+				23DA7A7814C63CBB008281DD /* ItemViewController.m */,
+			);
+			name = ItemViewController;
+			sourceTree = "<group>";
+		};
+		23DA7A7314C63C41008281DD /* MenuViewController */ = {
+			isa = PBXGroup;
+			children = (
+				23DA7A7414C63CA6008281DD /* MenuViewController.h */,
+				23DA7A7514C63CA6008281DD /* MenuViewController.m */,
+			);
+			name = MenuViewController;
+			sourceTree = "<group>";
+		};
+		23DA7A7D14C63FFD008281DD /* OptionView */ = {
+			isa = PBXGroup;
+			children = (
+				23DA7A7E14C6401A008281DD /* OptionView.h */,
+				23DA7A7F14C6401A008281DD /* OptionView.m */,
+			);
+			name = OptionView;
+			sourceTree = "<group>";
+		};
+		23DA7A8114C6462C008281DD /* OtherViews */ = {
+			isa = PBXGroup;
+			children = (
+				23DA7A8214C64656008281DD /* MainPageView */,
+			);
+			name = OtherViews;
+			sourceTree = "<group>";
+		};
+		23DA7A8214C64656008281DD /* MainPageView */ = {
+			isa = PBXGroup;
+			children = (
+				23AAD98E14BF68DC00F88AA8 /* MainPageView.h */,
+				23AAD98F14BF68DC00F88AA8 /* MainPageView.m */,
+			);
+			name = MainPageView;
+			sourceTree = "<group>";
+		};
+		23DA7A8314C64680008281DD /* MainPageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				23AAD99114BF690F00F88AA8 /* MainPageViewController.h */,
+				23AAD99214BF690F00F88AA8 /* MainPageViewController.m */,
+			);
+			name = MainPageViewController;
+			sourceTree = "<group>";
+		};
+		23DA7A8414C72F22008281DD /* MenuView */ = {
+			isa = PBXGroup;
+			children = (
+				23DA7A8514C72F40008281DD /* MenuView.h */,
+				23DA7A8614C72F40008281DD /* MenuView.m */,
+			);
+			name = MenuView;
+			sourceTree = "<group>";
+		};
+		23DA7A8814C73D52008281DD /* API */ = {
+			isa = PBXGroup;
+			children = (
+				23DA7A8D14C740B3008281DD /* APICallDelegate.h */,
+				23DA7A8A14C73DC1008281DD /* APICall.h */,
+				23DA7A8B14C73DC1008281DD /* APICall.m */,
+				23DA7A8E14C7473C008281DD /* GetMenu.h */,
+				23DA7A8F14C7473C008281DD /* GetMenu.m */,
+			);
+			name = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -459,27 +757,43 @@
 			files = (
 				23658CCD14BDFB15002C0996 /* main.m in Sources */,
 				23658CD114BDFB15002C0996 /* AppDelegate.m in Sources */,
-				23658CFD14BDFE5F002C0996 /* OrderPage.m in Sources */,
 				23658D0114BDFF37002C0996 /* Order.m in Sources */,
 				23658D0414BE12F4002C0996 /* Item.m in Sources */,
 				23658D0714BE16B2002C0996 /* Option.m in Sources */,
 				23658D0A14BE1D06002C0996 /* Choice.m in Sources */,
 				2391EA7314BE3699001BDC1B /* ConfigurableTableViewDataSource.m in Sources */,
 				2391EA7714BE387D001BDC1B /* CellInfo.m in Sources */,
-				237EBFB314BE4381009D9268 /* OrderPageView.m in Sources */,
 				237EC00E14BE635C009D9268 /* ItemPage.m in Sources */,
 				237EC01314BE64D5009D9268 /* ItemPageView.m in Sources */,
 				23AAD98B14BF525A00F88AA8 /* Utilities.m in Sources */,
 				23AAD99014BF68DC00F88AA8 /* MainPageView.m in Sources */,
-				23AAD99314BF690F00F88AA8 /* MainPage.m in Sources */,
+				23AAD99314BF690F00F88AA8 /* MainPageViewController.m in Sources */,
 				23C26A0014BFA8F100DD53DF /* OptionPage.m in Sources */,
 				23C26A0314BFA90A00DD53DF /* OptionPageView.m in Sources */,
-				23C26A0714C0EE6200DD53DF /* Submenu.m in Sources */,
 				23C26A0A14C0F00600DD53DF /* Menu.m in Sources */,
 				23C26A0F14C4887E00DD53DF /* TableData.m in Sources */,
 				23C26A1614C48F8B00DD53DF /* CellData.m in Sources */,
 				23C26A2014C4D5A700DD53DF /* MenuComponent.m in Sources */,
 				23C26A2314C4D6FA00DD53DF /* VisualizableData.m in Sources */,
+				23DA7A4014C60284008281DD /* Renderer.m in Sources */,
+				23DA7A4314C603E4008281DD /* MenuComponentViewController.m in Sources */,
+				23DA7A4714C609FD008281DD /* MenuComponentRenderer.m in Sources */,
+				23DA7A4C14C613D4008281DD /* MenuComponentView.m in Sources */,
+				23DA7A5114C61926008281DD /* OrderRenderer.m in Sources */,
+				23DA7A5414C61946008281DD /* OrderView.m in Sources */,
+				23DA7A5914C6283E008281DD /* OrderViewController.m in Sources */,
+				23DA7A5E14C6310E008281DD /* ItemView.m in Sources */,
+				23DA7A6214C63242008281DD /* ItemRenderer.m in Sources */,
+				23DA7A6714C63708008281DD /* ChoiceRenderer.m in Sources */,
+				23DA7A6A14C63717008281DD /* OptionRenderer.m in Sources */,
+				23DA7A6F14C63734008281DD /* MenuRenderer.m in Sources */,
+				23DA7A7614C63CA6008281DD /* MenuViewController.m in Sources */,
+				23DA7A7914C63CBB008281DD /* ItemViewController.m in Sources */,
+				23DA7A7C14C63CC8008281DD /* OptionViewController.m in Sources */,
+				23DA7A8014C6401A008281DD /* OptionView.m in Sources */,
+				23DA7A8714C72F40008281DD /* MenuView.m in Sources */,
+				23DA7A8C14C73DC1008281DD /* APICall.m in Sources */,
+				23DA7A9014C7473C008281DD /* GetMenu.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -87,7 +87,7 @@
     // Because we can be sure that the members of the cellDataList are, in fact,
     // of type CellData, we can call ConfigureUITableViewCell on them so that they
     // can manage themselves.
-    [[cellDataList objectAtIndex:[indexPath row]] configureUITableViewCell:cell];
+    [[cellDataList objectAtIndex:[indexPath row]] configureCell:cell];
     
     return cell;
 }

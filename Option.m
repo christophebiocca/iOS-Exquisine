@@ -11,14 +11,29 @@
 
 @implementation Option
 
-@synthesize name;
 @synthesize lowerBound;
 @synthesize upperBound;
 @synthesize numberOfFreeChoices;
 @synthesize choiceList;
 @synthesize selectedChoices;
 
--(id)init{
+-(Option *)initFromData:(NSData *)inputData
+{
+    self = [super initFromData:inputData];
+    upperBound = [[inputData valueForKey:@"max_choice"] intValue];
+    lowerBound = [[inputData valueForKey:@"min_choice"] intValue];
+    
+    choiceList = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    for (NSData *choice in [inputData valueForKey:@"options"]) {
+        Choice *newChoice = [[Choice alloc] initFromData:choice];
+        [choiceList addObject:newChoice];
+    }
+    
+    return self;
+}
+
+-(Option *)init{
     
     choiceList = [[NSMutableArray alloc] initWithCapacity:0];
     selectedChoices = [[NSMutableArray alloc] initWithCapacity:0];
@@ -26,21 +41,27 @@
     return self;
 }
 
-
 -(NSString *)description{
     
     return [NSString stringWithFormat:@"%@: %@", name, [self selectedChoices]];
     
 }
 
-
+-(NSInteger)totalPrice{
+    
+    NSInteger tabulation = 0;
+    
+    for (int n = 0; n < [[self selectedChoices] count] ; n++){
+        tabulation += [[[self selectedChoices] objectAtIndex:n] effectivePriceCents];
+    }
+    
+    return tabulation;
+}
 
 -(void) addPossibleChoice:(Choice *) aChoice{
     [choiceList addObject:aChoice];
     [self updatePrices];
 }
-
-
 
 -(BOOL) selectChoice:(Choice *) aChoice{
     
@@ -99,7 +120,6 @@
     }
 }
 
-
 //These three selectors just call the other selectors
 -(BOOL)selectChoiceByIndex:(NSInteger)aChoice{
     
@@ -117,17 +137,6 @@
     
     return [self toggleChoice:[choiceList objectAtIndex:aChoice]];
     
-}
-
--(NSInteger)totalPrice{
-    
-    NSInteger tabulation = 0;
-    
-    for (int n = 0; n < [[self selectedChoices] count] ; n++){
-        tabulation += [[[self selectedChoices] objectAtIndex:n] effectivePriceCents];
-    }
-    
-    return tabulation;
 }
 
 //This subroutine is the meat of the logic behind price management. Any time someone adds a choice,

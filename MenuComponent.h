@@ -6,27 +6,24 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
+//Menu Components are meant to be strictly model classes. They should contain no information
+//about how to display themselves, or how to load themselves.
+
+//They will, however, check to make sure that their state is sane. It is up to the 
+//owner to be looking for failing setters, but it is up to the model to regulate its state.
+
 #import <Foundation/Foundation.h>
-@class TableData;
-@class CellData;
 
 @interface MenuComponent : NSObject {
-    TableData* tableData;
-    CellData* cellData;
-    UINavigationController *controller;
+    NSString *name;
+    NSString *desc;
+    NSInteger primaryKey;
 }
 
-@property(readonly)TableData* tableData;
-@property(readonly)CellData* cellData;
+@property (retain) NSString *name;
+@property (retain) NSString *desc;
+@property NSInteger primaryKey;
 
-- (MenuComponent *) initWithNavigationController: (UINavigationController *) aController;
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
-
-- (void)initializeTableData;
-
-- (void)initializeCellData;
-
-
+-(MenuComponent *) initFromData:(NSData *) inputData;
 
 @end

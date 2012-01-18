@@ -7,89 +7,42 @@
 //
 
 #import "Item.h"
-#import "Option.h"	
-#import "TableData.h"
-#import "CellData.h"
-#import "Utilities.h"
+#import "Option.h"
 
 @implementation Item
 
-/* 
- **************************************************************************
- *
- *      Standard Class Functions
- *
- **************************************************************************
- */
-
 @synthesize options;
+@synthesize basePriceCents;
 
 -(NSString *)description
 {
     return [NSString stringWithFormat:@"%@, C%i, with options: %@", name, basePriceCents, options];
 }
 
-/* 
- **************************************************************************
- *
- *      View Managing Functions
- *
- **************************************************************************
- */
-
-
-
--(void) initializeTableData
+-(Item *)initFromData:(NSData *)inputData
 {
-    tableData = [[TableData alloc] initWithOwner:self];
-    [tableData setTableName:name];
-    [tableData setCellDataList:options];
-}
-
--(void) initializeCellData
-{
-    cellData = [[CellData alloc] initWithOwner:self];
-    [cellData setCellTitle:name];
-    [cellData setCellDesc:[Utilities FormatToPrice:basePriceCents]];
-}
-
-/* 
- **************************************************************************
- *
- *      Custom Class Functions
- *
- **************************************************************************
- */
-
--(id)initWithNavigationController:(UINavigationController *) aController
-{
-    options = [[NSMutableArray 	alloc] initWithCapacity:0];
-    self = [super initWithNavigationController:aController];
+    self = [super initFromData:inputData];
+    basePriceCents = [[inputData valueForKey:@"price_cents"] intValue];
+    
+    options = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    for (NSData *option in [inputData valueForKey:@"options"]) {
+        Option *newOption = [[Option alloc] initFromData:option];
+        [options addObject:newOption];
+    }
+    
     return self;
 }
 
--(void) setBasePrice:(NSInteger) anInt
+-(Item *)init
 {
-    basePriceCents = anInt;
-    [cellData setCellDesc:[Utilities FormatToPrice:anInt]];
+    options = [[NSMutableArray alloc] initWithCapacity:0];
+    return self;
 }
 
 -(void)addOption:(Option *)anOption
 {
     [options addObject:anOption];
-}
-
--(void) setName:(NSString *)aName
-{
-    name = aName;
-    [tableData setTableName:aName];
-    [cellData setCellTitle:aName];
-}
-
--(void) setDesc:(NSString *)aDesc
-{
-    desc = aDesc;
-    [cellData setCellDesc:aDesc];
 }
 
 -(NSInteger)totalPrice
@@ -101,7 +54,6 @@
         tabulation += currentOption.totalPrice;
     }
     
-    NSLog(@"The price found was: %i", tabulation);
     return tabulation;
 }
 

@@ -7,12 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Choice.h"
 #import "MenuComponent.h"
+@class Choice;
 
 @interface Option : MenuComponent{
     
-    NSString *name;
     NSInteger lowerBound;
     NSInteger upperBound;
     
@@ -25,14 +24,15 @@
     
 }
 
-@property (retain) NSString *name;
-@property (retain) NSMutableArray *choiceList;
-@property (retain) NSMutableArray *selectedChoices;
+@property (retain,readonly) NSMutableArray *choiceList;
+@property (retain,readonly) NSMutableArray *selectedChoices;
 @property NSInteger lowerBound;
 @property NSInteger upperBound;
 @property NSInteger numberOfFreeChoices;
 
--(id)init;
+-(Option *)initFromData:(NSData *)inputData;
+
+-(Option *)init;
 
 -(NSString *) description;
 

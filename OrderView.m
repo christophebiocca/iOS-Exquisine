@@ -1,14 +1,14 @@
 //
-//  OrderPageView.m
+//  OrderView.m
 //  AvocadoTest1
 //
-//  Created by Jake on 12-01-11.
+//  Created by Jake on 12-01-17.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "OrderPageView.h"
+#import "OrderView.h"
 
-@implementation OrderPageView
+@implementation OrderView
 
 @synthesize orderTable;
 @synthesize orderToolBar;
@@ -42,9 +42,6 @@
 
 -(void)layoutSubviews
 {
-    /*
-    CGSize size = [self bounds].size;
-     */
     [orderTable setFrame:CGRectMake(0, 0, 320, 372)];
     [orderToolBar setFrame:CGRectMake(0, 372, 320, 44)];
 }

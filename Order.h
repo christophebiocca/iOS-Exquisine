@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Item.h"
+#import "MenuComponent.h"
+@class Item;
 
-@interface Order : NSObject {
+@interface Order : MenuComponent {
 
     //Contains the list of items that the customer wants to order.
     NSMutableArray *itemList; 
@@ -21,6 +22,8 @@
 }
 
 @property (retain, readonly) NSMutableArray* itemList;
+@property (retain) NSString *status;
+@property (retain) NSString *orderIdentifier;
 
 -(id)init;
 

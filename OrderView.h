@@ -1,14 +1,15 @@
 //
-//  OrderPageView.h
+//  OrderView.h
 //  AvocadoTest1
 //
-//  Created by Jake on 12-01-11.
+//  Created by Jake on 12-01-17.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "MenuComponentView.h"
 
-@interface OrderPageView : UIView{
+@interface OrderView : MenuComponentView
+{
     UITableView* orderTable;
     UIToolbar* orderToolBar;
     UILabel* totalLabelHeading;

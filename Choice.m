@@ -10,11 +10,20 @@
 
 @implementation Choice
 
-@synthesize name;
 @synthesize normalPriceCents;
 @synthesize effectivePriceCents;
-@synthesize desc;
 @synthesize selected;
+
+-(Choice *)initFromData:(NSData *)inputData
+{
+    self = [super initFromData:inputData];
+    
+    normalPriceCents = [[inputData valueForKey:@"price_cents"] intValue];
+    effectivePriceCents = 0;
+    selected = NO;
+    
+    return self;
+}
 
 -(NSString *)description{
     

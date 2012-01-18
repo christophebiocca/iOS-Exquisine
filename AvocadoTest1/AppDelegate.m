@@ -7,8 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import "OrderPage.h"
-#import "MainPage.h"
+#import "OrderViewController.h"
+#import "MainPageViewController.h"
 
 @implementation AppDelegate
 
@@ -18,7 +18,7 @@
 {
     // Override point for customization after application launch.
     [self setWindow:[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]]];
-    MainPage* page = [[MainPage alloc] init];
+    MainPageViewController* page = [[MainPageViewController alloc] init];
     navigationController = [[UINavigationController alloc] initWithRootViewController:page];
     [[self window] addSubview:[navigationController view]];
     [[self window] makeKeyAndVisible];
