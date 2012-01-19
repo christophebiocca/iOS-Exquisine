@@ -14,15 +14,15 @@
     UIToolbar* orderToolBar;
     UILabel* totalLabelHeading;
     UILabel* totalLabelValue;
-    UIBarButtonItem* spacerButton;
     UIBarButtonItem* doneButton;
+    UIBarButtonItem* favoriteButton;
 }
 
 @property(readonly)UITableView* orderTable;
 @property(readonly)UIToolbar* orderToolBar;
 @property(readonly)UILabel* totalLabelHeading;
 @property(readonly)UILabel* totalLabelValue;
-@property(readonly)UIBarButtonItem* spacerButton;
 @property(readonly)UIBarButtonItem* doneButton;
+@property(readonly)UIBarButtonItem* favoriteButton;
 
 @end

@@ -13,6 +13,7 @@
 {
     Item *itemInfo;
     
+    BOOL shouldHaveInfoDisclosure;
     //This guy contains stuff that we need
     //to display cells for after the item list.
     NSMutableArray *suffixList;
@@ -23,6 +24,8 @@
     
     NSMutableArray *optionRenderList;
 }
+
+@property BOOL shouldHaveInfoDisclosure;
 
 -(void) redraw;
 

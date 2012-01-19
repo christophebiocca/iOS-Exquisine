@@ -15,6 +15,8 @@
 
 @implementation ItemRenderer
 
+@synthesize shouldHaveInfoDisclosure;
+
 -(void) redraw
 {
     [optionRenderList removeAllObjects];
@@ -23,14 +25,27 @@
     for (Option *currentOption in itemInfo.options) {
         [optionRenderList addObject:[[OptionRenderer alloc] initWithOption:currentOption]];
     }
-    [[suffixList objectAtIndex:0] setCellDesc:[Utilities FormatToPrice:[itemInfo totalPrice]]];
+    [[suffixList objectAtIndex:1] setCellDesc:[Utilities FormatToPrice:[itemInfo totalPrice]]];
 }
 
 -(ItemRenderer *)initWithItem:(Item *)anItem
 {
     itemInfo = anItem;
+    
     displayLists = [[NSMutableArray alloc] initWithCapacity:0];
     suffixList = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    //This is really hax, but I needed to do it. Basically, every item should have a disclosure tab in its cell,
+    //with the exception of ones accesed through the Menu list. I use this to regulate that.
+    shouldHaveInfoDisclosure = YES;
+    
+    if([itemInfo.options count] == 0)
+    {
+        CellData *aCell = [[CellData alloc] init];
+        aCell.cellTitle = @"No Options";
+        aCell.cellDesc = @"";
+        [suffixList addObject:aCell];
+    }
     
     optionRenderList = [[NSMutableArray alloc] initWithCapacity:0];
     
@@ -54,6 +69,14 @@
 {
     [[aCell detailTextLabel] setText:[Utilities FormatToPrice:itemInfo.totalPrice]];
     [[aCell textLabel] setText:itemInfo.name];
+    if(shouldHaveInfoDisclosure)
+    {
+        [aCell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+    }
+    else
+    {
+        [aCell setAccessoryType:UITableViewCellAccessoryNone];
+    }
     return aCell;
 }
 

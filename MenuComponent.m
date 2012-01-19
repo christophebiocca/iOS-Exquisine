@@ -15,6 +15,15 @@
 @synthesize name,desc;
 @synthesize primaryKey;
 
+-(MenuComponent *)initFromMenuComponent:(MenuComponent *)aMenuComponent
+{
+    name = aMenuComponent.name;
+    desc = aMenuComponent.desc;
+    primaryKey = aMenuComponent.primaryKey;
+    
+    return self;
+}
+
 -(MenuComponent *)initFromData:(NSData *)inputData
 {
     name = [inputData valueForKey:@"name"];

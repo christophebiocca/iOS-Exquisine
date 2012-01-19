@@ -40,7 +40,7 @@
     [displayLists addObject:suffixList];
     
     CellData *newCell = [[CellData alloc] init];
-    newCell.cellTitle = @"Total:";
+    newCell.cellTitle = @"Total Choice Price:";
     newCell.cellDesc = [Utilities FormatToPrice:[optionInfo totalPrice]];
     [suffixList addObject:newCell];
     
@@ -51,6 +51,7 @@
 {
     [[aCell detailTextLabel] setText:[Utilities FormatToPrice:optionInfo.totalPrice]];
     [[aCell textLabel] setText:optionInfo.name];
+    [aCell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     return aCell;
 }
 

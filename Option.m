@@ -17,18 +17,69 @@
 @synthesize choiceList;
 @synthesize selectedChoices;
 
+-(Option *)initFromOption:(Option *)anOption
+{
+    self = [super initFromMenuComponent:anOption];
+
+    lowerBound = anOption.lowerBound;
+    upperBound = anOption.upperBound;
+    numberOfFreeChoices = anOption.numberOfFreeChoices;
+    choiceList = [[NSMutableArray alloc] initWithCapacity:0];
+    selectedChoices = [[NSMutableArray alloc] initWithCapacity:0];
+            
+    for (Choice *aChoice in anOption.choiceList) {
+        Choice *aNewChoice = [[Choice alloc] initFromChoice:aChoice];
+        [choiceList addObject:aNewChoice];
+    }
+    
+    //sort the choice list by real price
+    [choiceList sortUsingComparator:^(id firstChoice, id secondChoice){
+        return [firstChoice normalPriceCents] < [secondChoice normalPriceCents];
+    }];
+    
+    for (Choice *choice in choiceList) {
+        if(choice.selected)
+        {
+            [selectedChoices addObject:choice];
+        }
+    }
+    
+    [self updatePrices];
+    
+    return self;
+    
+}
+
 -(Option *)initFromData:(NSData *)inputData
 {
     self = [super initFromData:inputData];
     upperBound = [[inputData valueForKey:@"max_choice"] intValue];
     lowerBound = [[inputData valueForKey:@"min_choice"] intValue];
     
+    selectedChoices = [[NSMutableArray alloc] initWithCapacity:0];
+    
     choiceList = [[NSMutableArray alloc] initWithCapacity:0];
     
-    for (NSData *choice in [inputData valueForKey:@"options"]) {
+    for (NSData *choice in [inputData valueForKey:@"choices"]) {
         Choice *newChoice = [[Choice alloc] initFromData:choice];
         [choiceList addObject:newChoice];
     }
+    
+    //sort the choice list by real price
+    [choiceList sortUsingComparator:^(id firstChoice, id secondChoice){
+        return [firstChoice normalPriceCents] < [secondChoice normalPriceCents];
+    }];
+    
+    for (Choice *choice in choiceList) {
+        if(choice.selected)
+        {
+            [selectedChoices addObject:choice];
+        }
+    }
+    
+
+    
+    [self updatePrices];
     
     return self;
 }
@@ -60,6 +111,10 @@
 
 -(void) addPossibleChoice:(Choice *) aChoice{
     [choiceList addObject:aChoice];
+    //sort the choice list by real price
+    [choiceList sortUsingComparator:^(id firstChoice, id secondChoice){
+        return [firstChoice normalPriceCents] < [secondChoice normalPriceCents];
+    }];
     [self updatePrices];
 }
 
@@ -143,11 +198,6 @@
 //or selects something, this subroutine will be called to make sure the effective prices accurately reflect
 //the situation.
 -(void)updatePrices{
-    
-    //sort the choice list by real price
-    [choiceList sortUsingComparator:^(id firstChoice, id secondChoice){
-        return [firstChoice normalPriceCents] < [secondChoice normalPriceCents];
-    }];
     
     NSInteger numberOfSelections = [[self selectedChoices] count];
     NSInteger numberOfSelectonsMarkedFree = 0;

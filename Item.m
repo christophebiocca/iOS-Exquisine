@@ -19,6 +19,21 @@
     return [NSString stringWithFormat:@"%@, C%i, with options: %@", name, basePriceCents, options];
 }
 
+-(Item *)initFromItem:(Item *)anItem
+{
+    self = [super initFromMenuComponent:anItem];
+    
+    basePriceCents = anItem.basePriceCents;
+    options = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    for (Option *currentOption in anItem.options) {
+        Option *anOption = [[Option alloc] initFromOption:currentOption];
+        [options addObject:anOption];
+    }
+    
+    return self;
+}
+
 -(Item *)initFromData:(NSData *)inputData
 {
     self = [super initFromData:inputData];

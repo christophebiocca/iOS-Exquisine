@@ -14,6 +14,17 @@
 @synthesize effectivePriceCents;
 @synthesize selected;
 
+-(Choice *)initFromChoice:(Choice *)aChoice
+{
+    self = [super initFromMenuComponent:aChoice];
+    
+    normalPriceCents = aChoice.normalPriceCents;
+    effectivePriceCents = aChoice.effectivePriceCents;
+    selected = aChoice.selected;
+    
+    return self;
+}
+
 -(Choice *)initFromData:(NSData *)inputData
 {
     self = [super initFromData:inputData];

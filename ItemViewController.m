@@ -10,6 +10,7 @@
 #import "Item.h"
 #import "Order.h"
 #import "ItemRenderer.h"
+#import "OptionViewController.h"
 #import "ItemView.h"
 
 @implementation ItemViewController
@@ -46,6 +47,10 @@
     [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
     
     if ([indexPath row] < [[itemInfo options] count]) {
+        OptionViewController *newOptionViewController = [[OptionViewController alloc] initializeWithOption:[[itemInfo options] objectAtIndex:[indexPath row]]];
+        
+        [[self navigationController] pushViewController:newOptionViewController animated:YES];
+        
         //Make and push the option view controller
     }
     

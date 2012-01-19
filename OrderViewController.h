@@ -12,18 +12,21 @@
 @class OrderView;
 @class OrderRenderer;
 
-@interface OrderViewController : UITableViewController<UITableViewDelegate>
+@interface OrderViewController : UITableViewController <UITableViewDelegate, UIActionSheetDelegate>
 {
     
     Order *orderInfo;
     Menu *menuInfo;
     OrderView *orderView;
-    OrderRenderer *orderRenderer;    
+    OrderRenderer *orderRenderer;  
+    UIBarButtonItem *optionsButton;
     
 }
 
 @property (retain) Order *orderInfo;
 
 -(OrderViewController *)initializeWithMenuAndOrder:(Menu *) aMenu:(Order *) anOrder;
+
+-(void)displayOptions;
 
 @end

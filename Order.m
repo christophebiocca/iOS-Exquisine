@@ -19,6 +19,7 @@
 -(id)init{
     
     itemList = [[NSMutableArray alloc] initWithCapacity:0];
+    status = @"Not yet submitted";
     return self;
     
 }

@@ -22,6 +22,8 @@
 
 -(NSString *)description;
 
+-(Item *)initFromItem:(Item *)anItem;
+
 -(Item *)initFromData:(NSData *) inputData;
 
 -(Item *)init;

@@ -14,7 +14,6 @@
 @synthesize orderToolBar;
 @synthesize totalLabelValue;
 @synthesize totalLabelHeading;
-@synthesize spacerButton;
 @synthesize doneButton;
 
 - (id)initWithFrame:(CGRect)frame
@@ -24,13 +23,11 @@
         orderTable = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         orderToolBar = [[UIToolbar alloc] init];
         
-        spacerButton = [[UIBarButtonItem alloc] init];
-        doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Send this order!" style:UIBarButtonItemStyleDone target:self action:sel_registerName("doneButton")];
+        doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Submit this order!" style:UIBarButtonItemStyleDone target:self action:sel_registerName("doneButton")];
+
+        [doneButton setWidth:308];
         
-        [spacerButton setWidth:171];
-        [doneButton setWidth:120];
-        
-        NSArray *toolbarItems = [NSArray arrayWithObjects: spacerButton, doneButton, nil];
+        NSArray *toolbarItems = [NSArray arrayWithObjects: doneButton, nil];
         [orderToolBar setItems:toolbarItems animated:NO];
         
         

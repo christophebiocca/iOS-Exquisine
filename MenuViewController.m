@@ -23,8 +23,8 @@
     
     orderInfo = anOrder;
     menuInfo = aMenu;
-    menuRenderer = [[MenuRenderer alloc] initWithMenu:aMenu];
-    [[self navigationItem] setTitle:aMenu.name];
+    menuRenderer = [[MenuRenderer alloc] initWithMenu:menuInfo];
+    [[self navigationItem] setTitle:menuInfo.name];
     
     return self;
 }
@@ -37,7 +37,7 @@
             popTo = (id) viewController;
     }
     
-    [[self navigationController]popToViewController:popTo animated:NO];
+    [[self navigationController]popToViewController:popTo animated:YES];
     
 }
 
@@ -56,7 +56,7 @@
         
         if([submenuThing isKindOfClass:[Item class]])
         {
-            Item *newItem = [submenuThing copy];
+            Item *newItem = [[Item alloc] initFromItem:submenuThing];
             [orderInfo addItem:newItem];
             [self popToOrderViewController];
         }

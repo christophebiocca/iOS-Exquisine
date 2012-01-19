@@ -79,6 +79,15 @@
     [[self navigationController] pushViewController:orderView animated:YES];
 }
 
+-(NSMutableArray *)pendingOrders
+{
+    NSMutableArray *pendingOrderList = [[NSMutableArray alloc] initWithCapacity:0];
+    for (Order *anOrder in ordersHistory) {
+        [pendingOrderList addObject:anOrder];
+    }
+    return pendingOrderList;
+}
+
 -(void)apiCall:(APICall *)call completedWithData:(NSData *)data{
     NSLog(@"SUCCESS call: %@ Data:\n%@", call, data);
     theMenu = [[Menu alloc] initFromData:data];

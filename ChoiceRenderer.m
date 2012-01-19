@@ -29,7 +29,7 @@
     }
     else
     {
-        [aCell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        [aCell setAccessoryType:UITableViewCellAccessoryNone];
     }
     
     return aCell;

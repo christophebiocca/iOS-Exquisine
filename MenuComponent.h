@@ -24,6 +24,8 @@
 @property (retain) NSString *desc;
 @property NSInteger primaryKey;
 
+-(MenuComponent *) initFromMenuComponent:(MenuComponent *) aMenuComponent;
+
 -(MenuComponent *) initFromData:(NSData *) inputData;
 
 @end

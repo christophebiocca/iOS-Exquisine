@@ -23,7 +23,11 @@
     for (id currentThing in menuInfo.submenuList) {
         if( [currentThing isKindOfClass:[Item class]])
         {
-            [itemRenderList addObject:[[ItemRenderer alloc] initWithItem:currentThing]];
+            ItemRenderer *itemRenderer = [[ItemRenderer alloc] initWithItem:currentThing];
+            //I really shouldn't be doing it this way, but it isn't a teeeeerible way of doing it
+            //It would require a lot of work to do otherwise.
+            itemRenderer.shouldHaveInfoDisclosure = NO;
+            [itemRenderList addObject:itemRenderer];
         }
         if( [currentThing isKindOfClass:[Menu class]])
         {
@@ -32,9 +36,18 @@
     }
 }
 
+-(UITableViewCell *)configureCell:(UITableViewCell *)aCell
+{
+    [[aCell detailTextLabel] setText:@""];
+    [[aCell textLabel] setText:menuInfo.name];
+    [aCell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+    return aCell;
+}
+
 -(MenuRenderer *)initWithMenu:(Menu *)aMenu
 {
     menuInfo = aMenu;
+    menuComponent = aMenu;
     displayLists = [[NSMutableArray alloc] initWithCapacity:0];
     suffixList = [[NSMutableArray alloc] initWithCapacity:0];
     

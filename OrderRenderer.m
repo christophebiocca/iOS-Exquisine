@@ -46,6 +46,8 @@
     
     CellData *secondNewCell = [[CellData alloc] init];
     secondNewCell.cellTitle = @"Add Item";
+    secondNewCell.cellDesc = @"";
+    secondNewCell.cellColour = [UIColor blueColor];
     [suffixList addObject:secondNewCell];
     
     [self redraw];
@@ -57,6 +59,7 @@
 {
     [[aCell detailTextLabel] setText:[Utilities FormatToPrice:orderInfo.totalPrice]];
     [[aCell textLabel] setText:orderInfo.name];
+    [aCell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     return aCell;
 }
 

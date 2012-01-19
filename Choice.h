@@ -26,6 +26,8 @@
 @property NSInteger effectivePriceCents;
 @property BOOL selected;
 
+-(Choice *)initFromChoice:(Choice *) aChoice;
+
 -(Choice *)initFromData:(NSData *) inputData;
 
 -(NSString *)description;

@@ -14,10 +14,12 @@
     NSString *cellTitle;
     NSString *cellDesc;
     BOOL cellSwitchState;
+    UIColor *cellColour; //<-- canadian spelling =b
 }
 
 @property (retain) NSString *cellTitle;
 @property (retain) NSString *cellDesc;
+@property (retain) UIColor *cellColour;
 @property BOOL cellSwitchState;
 
 //Configures a table view cell to be representative

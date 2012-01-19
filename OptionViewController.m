@@ -32,8 +32,10 @@
     
     [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
     
-    if ([indexPath row] < [[optionInfo choiceList] count]) {
-        //Make and push the option view controller
+    if ([indexPath row] < ([[optionInfo choiceList] count])) {
+        [optionInfo toggleChoiceByIndex:[indexPath row]];
+        [optionRenderer redraw];
+        [[optionView optionTable] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
     }
     
 }
@@ -67,7 +69,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [optionRenderer redraw];
-    [[optionView optionTable] reloadData];
+    [[optionView optionTable] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 - (void)viewDidUnload

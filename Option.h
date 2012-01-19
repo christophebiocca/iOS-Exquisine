@@ -20,7 +20,8 @@
     NSInteger numberOfFreeChoices;
     
     //Special accessors will have to be used to manage choiceList
-    NSMutableArray *choiceList;   
+    NSMutableArray *choiceList; 
+    NSMutableArray *selectedChoices;
     
 }
 
@@ -29,6 +30,8 @@
 @property NSInteger lowerBound;
 @property NSInteger upperBound;
 @property NSInteger numberOfFreeChoices;
+
+-(Option *)initFromOption:(Option *)anOption;
 
 -(Option *)initFromData:(NSData *)inputData;
 

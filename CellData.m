@@ -13,6 +13,19 @@
 @synthesize cellTitle;
 @synthesize cellDesc;
 @synthesize cellSwitchState;
+@synthesize cellColour;
+
+-(CellData *)init
+{
+    self = [super init];
+    
+    cellTitle = @"DefaultCellTitle";
+    cellDesc = @"DefaultCellDesc";
+    cellSwitchState = NO;
+    cellColour = [UIColor clearColor];
+    
+    return self;
+}
 
 -(UITableViewCell *)configureCell: (UITableViewCell *) newCell
 {
@@ -25,8 +38,11 @@
     }
     else
     {
-        [newCell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        [newCell setAccessoryType:UITableViewCellAccessoryNone];
     }
+    
+    [newCell setBackgroundColor:cellColour];
+    [newCell setOpaque:YES];
     
     return newCell;
 }

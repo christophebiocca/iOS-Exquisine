@@ -17,9 +17,11 @@
     MainPageView *mainPageView;
     Menu *theMenu;
     
-    NSMutableArray *listOfOrders;
+    NSMutableArray *ordersHistory;
     NSMutableArray *favoriteOrders;
     
 }
+
+-(NSMutableArray *) pendingOrders;
 
 @end
