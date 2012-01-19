@@ -109,8 +109,9 @@
 
 -(void)addColorGradients:(UIColor *)color forLayer:(CALayer *)bgLayer{
     //Using dirty white color of backgroud color
-    bgLayer.backgroundColor = [UIColor colorWithWhite:0.95f alpha:1.0f].CGColor;
+    bgLayer.backgroundColor = [UIColor colorWithWhite:0.1f alpha:1.0f].CGColor;
     
+
     //If background color is set, build gradient layers for current color
     CGRect firstFrame = bgLayer.bounds, secondFrame = bgLayer.bounds;
     firstFrame.size.height = bgLayer.bounds.size.height / 2.0f;
@@ -154,7 +155,7 @@
     UIFont *textFont = [self fontForButtonAtIndex:buttonIndex];
     //If font is not customized use standart font of UIActionSheet
     if (textFont == NULL)
-        textLabel.font = [UIFont boldSystemFontOfSize:20.0f];
+        textLabel.font = [UIFont boldSystemFontOfSize:17.0f];
     else
         textLabel.font = textFont;
     
@@ -237,14 +238,27 @@
                 }
             }
         }
+        /*
+        CGRect behindViewFrame = CGRectMake((frame.origin.x + CAS_IMAGE_HORIZONTAL_INSET) - 2,( 
+                                            frame.origin.y + (frame.size.height - imageViewHeight) / 2.0f) - 2,(
+                                            frame.size.width - 2 * CAS_IMAGE_HORIZONTAL_INSET) + 5, 
+                                            (imageViewHeight) + 5);
         
+        UIImageView *behindButtonView = [[UIImageView alloc] initWithFrame:behindViewFrame];
+        behindButtonView.contentMode = UIViewContentModeScaleAspectFit;
+        behindButtonView.image = [UIImage imageNamed:@"behindButton.png"];
+        behindButtonView.tag = 10.0f;
+        [actionSheetButton addSubview:behindButtonView];
+        */
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:imageFrame];
         imageView.contentMode = UIViewContentModeScaleAspectFit;
         imageView.image = buttonImage;
         imageView.tag = 10.0f;
-        [actionSheetButton addSubview:imageView];
+        //[actionSheetButton addSubview:imageView];
     }    
 }
+
+#define BORDERWIDTH 3
 
 -(void)initializeButtonAtIndex:(NSInteger)buttonIndex{
     BOOL titlePresent = (self.title != NULL);
@@ -264,10 +278,51 @@
     UIColor *colors[2] = {[self colorForButtonAtIndex:buttonIndex], 
                           [self pressedColorForButtonAtIndex:buttonIndex]};
     
+    /* //If background color is set, build gradient layers for current color
+     CGRect firstFrame = bgLayer.bounds, secondFrame = bgLayer.bounds;
+     firstFrame.size.height = bgLayer.bounds.size.height / 2.0f;
+     secondFrame.size.height = bgLayer.bounds.size.height / 2.0f;
+     secondFrame.origin.y = bgLayer.bounds.size.height / 2.0f;
+     
+     //Upper linear gradient preparing
+     CAGradientLayer *gradientLayer1 = [[CAGradientLayer alloc] init];
+     [gradientLayer1 setFrame:firstFrame];
+     NSArray *colors1 = [NSArray arrayWithObjects:
+     (id)[color colorWithAlphaComponent:0.4f].CGColor,
+     (id)[color colorWithAlphaComponent:0.7f].CGColor,
+     nil];
+     [gradientLayer1 setColors:colors1];
+     gradientLayer1.startPoint = CGPointMake(0.0f, 0.0f);
+     gradientLayer1.endPoint = CGPointMake(0.0f, 1.0f);
+     
+     //Lower linear gradient prepearing
+     CAGradientLayer *gradientLayer2 = [[CAGradientLayer alloc] init];
+     [gradientLayer2 setFrame:secondFrame];
+     NSArray *colors2 = [NSArray arrayWithObjects:
+     (id)[color colorWithAlphaComponent:1.0f].CGColor,
+     (id)[color colorWithAlphaComponent:0.85f].CGColor,
+     nil];
+     [gradientLayer2 setColors:colors2];
+     gradientLayer2.startPoint = CGPointMake(0.0f, 0.0f);
+     gradientLayer2.endPoint = CGPointMake(0.0f, 1.0f);
+     
+     [bgLayer insertSublayer:gradientLayer1 atIndex:0];
+     [bgLayer insertSublayer:gradientLayer2 atIndex:1];
+    */
+    
     for (int index=0; index<2; index++)
     {
         CALayer *bgLayer = [[CALayer alloc] init];
-        bgLayer.frame = frame;
+        bgLayer.frame = (CGRect){
+            .origin = {
+                .x = frame.origin.x + BORDERWIDTH,
+                .y = frame.origin.y + BORDERWIDTH
+            },
+            .size = {
+                .width = frame.size.width - 2*BORDERWIDTH,
+                .height = frame.size.height - 2*BORDERWIDTH
+            }
+        };
         bgLayer.cornerRadius = isIpad ? 4.0f : 8.5f;
         bgLayer.masksToBounds = YES;
         UIColor *color = colors[index];
@@ -285,8 +340,15 @@
         }
         
         bgLayer.opacity = 1.0f - index;
-        [actionSheetButton.layer insertSublayer:bgLayer atIndex:index];
+        //[actionSheetButton.layer insertSublayer:bgLayer atIndex:index];
     }
+    
+    CALayer* bottommost = [[CALayer alloc] init];
+    //bottommost.backgroundColor = [UIColor colorWithWhite:0.1f alpha:1.0f].CGColor;
+    UIImage* img = [UIImage imageNamed:@"behindButton.png"];
+    [bottommost setContents:(id)img.CGImage];
+    [bottommost setFrame:frame];
+    //[[actionSheetButton layer] insertSublayer:bottommost atIndex:0];
     
     //Add new text color
     UILabel *textLabel = [self textLabelForButton:actionSheetButton atIndex:buttonIndex];
@@ -306,6 +368,10 @@
     [actionSheetButton addTarget:self 
                           action:@selector(leaveButton:) 
                 forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside];
+}
+
+-(void)drawRect:(CGRect)rect{
+    //HAHA
 }
  
 //Show other colors, when button is touched down.
