@@ -38,16 +38,14 @@
 {
     UIActionSheet *test = [[UIActionSheet alloc] initWithTitle:@"whatev" delegate:self cancelButtonTitle:@"Canc" destructiveButtonTitle:@"Dest" otherButtonTitles:@"Blah", nil];
     
-    //[test showInView:orderView];
+    [test showInView:orderView];
     
     UICustomActionSheet *optionPopup = [[UICustomActionSheet alloc] initWithTitle:@"Do Stuff" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Submit this order!" otherButtonTitles:@"Add to favorites", nil];
     
-    [optionPopup setBackgroundColor:[UIColor colorWithRed:72/255.0 green:78/255.0 blue:89/255.0 alpha:1.0]];
+    [optionPopup setColor:[UIColor colorWithRed:36/255.0 green:99/255.0 blue:222/255.0 alpha:230/255.0] forButtonAtIndex:0];
     
-    [optionPopup setColor:[UIColor colorWithRed:36/255.0 green:99/255.0 blue:222/255.0 alpha:240/255.0] forButtonAtIndex:0];
-    
-    [optionPopup setColor:[UIColor colorWithRed:187/255.0 green:189/255.0 blue:192/255.0 alpha:240/255.0] forButtonAtIndex:1];
-    [optionPopup setColor:[UIColor colorWithRed:30/255.0 green:38/255.0 blue:48/255.0 alpha:240/255.0] forButtonAtIndex:2];
+    [optionPopup setColor:[UIColor colorWithRed:187/255.0 green:189/255.0 blue:192/255.0 alpha:230/255.0] forButtonAtIndex:1];
+    [optionPopup setColor:[UIColor colorWithRed:21/255.0 green:29/255.0 blue:39/255.0 alpha:230/255.0] forButtonAtIndex:2];
     
     [optionPopup showInView:orderView];
     

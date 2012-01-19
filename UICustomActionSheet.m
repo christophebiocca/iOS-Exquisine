@@ -109,7 +109,7 @@
 
 -(void)addColorGradients:(UIColor *)color forLayer:(CALayer *)bgLayer{
     //Using dirty white color of backgroud color
-    bgLayer.backgroundColor = [UIColor colorWithWhite:0.1f alpha:1.0f].CGColor;
+    bgLayer.backgroundColor = [UIColor colorWithWhite:0.9f alpha:1.0f].CGColor;
     
 
     //If background color is set, build gradient layers for current color
@@ -254,7 +254,7 @@
         imageView.contentMode = UIViewContentModeScaleAspectFit;
         imageView.image = buttonImage;
         imageView.tag = 10.0f;
-        //[actionSheetButton addSubview:imageView];
+        [actionSheetButton addSubview:imageView];
     }    
 }
 
@@ -340,7 +340,7 @@
         }
         
         bgLayer.opacity = 1.0f - index;
-        //[actionSheetButton.layer insertSublayer:bgLayer atIndex:index];
+        [actionSheetButton.layer insertSublayer:bgLayer atIndex:index];
     }
     
     CALayer* bottommost = [[CALayer alloc] init];
@@ -348,7 +348,7 @@
     UIImage* img = [UIImage imageNamed:@"behindButton.png"];
     [bottommost setContents:(id)img.CGImage];
     [bottommost setFrame:frame];
-    //[[actionSheetButton layer] insertSublayer:bottommost atIndex:0];
+    [[actionSheetButton layer] insertSublayer:bottommost atIndex:0];
     
     //Add new text color
     UILabel *textLabel = [self textLabelForButton:actionSheetButton atIndex:buttonIndex];
@@ -368,10 +368,6 @@
     [actionSheetButton addTarget:self 
                           action:@selector(leaveButton:) 
                 forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside];
-}
-
--(void)drawRect:(CGRect)rect{
-    //HAHA
 }
  
 //Show other colors, when button is touched down.
@@ -530,7 +526,7 @@
     //Add two color border to table
     CGRect frame = CGRectMake(0.0f, DEFAULT_TABLE_VIEW_CELL_HEIGHT-1.0f, tableView.frame.size.width, 1.0f);
     UIView *borderView1 = [[UIView alloc] initWithFrame:frame];
-    borderView1.backgroundColor = [[UIColor grayColor] colorWithAlphaComponent:0.5f];
+    borderView1.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5f];
     [cell.contentView addSubview:borderView1];
     
     frame.origin.y = DEFAULT_TABLE_VIEW_CELL_HEIGHT;
@@ -543,7 +539,7 @@
     {
         frame.origin.y = 0.0f;
         UIView *borderView3 = [[UIView alloc] initWithFrame:frame];
-        borderView3.backgroundColor = [[UIColor grayColor] colorWithAlphaComponent:0.5f];
+        borderView3.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5f];
         [cell.contentView addSubview:borderView3];
         
         frame.origin.y = 1.0f;
