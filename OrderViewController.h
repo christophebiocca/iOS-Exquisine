@@ -27,6 +27,12 @@
 
 -(OrderViewController *)initializeWithMenuAndOrder:(Menu *) aMenu:(Order *) anOrder;
 
--(void)displayOptions;
+-(void) displayOptions;
+
+-(void) submitCurrentOrder;
+ 
+-(void) promptUserForRename;
+
+-(void) addOrderToFavorites;
 
 @end
