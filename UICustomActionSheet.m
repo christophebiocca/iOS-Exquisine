@@ -319,7 +319,7 @@
                 .y = frame.origin.y + BORDERWIDTH
             },
             .size = {
-                .width = frame.size.width - 2*BORDERWIDTH,
+                .width = frame.size.width - 2*BORDERWIDTH + 2,
                 .height = frame.size.height - 2*BORDERWIDTH
             }
         };
@@ -342,6 +342,8 @@
         bgLayer.opacity = 1.0f - index;
         [actionSheetButton.layer insertSublayer:bgLayer atIndex:index];
     }
+    frame.origin.y += 2;
+    frame.origin.x += 1;
     
     CALayer* bottommost = [[CALayer alloc] init];
     //bottommost.backgroundColor = [UIColor colorWithWhite:0.1f alpha:1.0f].CGColor;
@@ -374,6 +376,7 @@
 -(void)highlightButton:(UIView *)sender{
     CALayer *firstLayer = [[sender.layer  sublayers] objectAtIndex:0],
             *secondLayer = [[sender.layer sublayers] objectAtIndex:1];
+    
     
     if ([secondLayer.name isEqualToString:@"hidden"])
         firstLayer.opacity = 0.0f;

@@ -38,7 +38,7 @@
 {
     UIActionSheet *test = [[UIActionSheet alloc] initWithTitle:@"whatev" delegate:self cancelButtonTitle:@"Canc" destructiveButtonTitle:@"Dest" otherButtonTitles:@"Blah", nil];
     
-    [test showInView:orderView];
+    //[test showInView:orderView];
     
     UICustomActionSheet *optionPopup = [[UICustomActionSheet alloc] initWithTitle:@"Do Stuff" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Submit this order!" otherButtonTitles:@"Add to favorites", nil];
     
