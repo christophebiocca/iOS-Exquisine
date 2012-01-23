@@ -48,7 +48,14 @@
         tabulator += [currentItem totalPrice];
     }
     
-    return tabulator;
+    if (tabulator)
+    {
+        return tabulator;
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 @end

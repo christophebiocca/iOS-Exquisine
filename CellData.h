@@ -15,12 +15,14 @@
     NSString *cellDesc;
     BOOL cellSwitchState;
     UIColor *cellColour; //<-- canadian spelling =b
+    NSString *cellAccessory;
 }
 
 @property (retain) NSString *cellTitle;
 @property (retain) NSString *cellDesc;
 @property (retain) UIColor *cellColour;
 @property BOOL cellSwitchState;
+@property (retain) NSString *cellAccessory;
 
 //Configures a table view cell to be representative
 //of the data that is populated in the CellData object

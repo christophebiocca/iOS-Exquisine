@@ -47,6 +47,7 @@
     CellData *secondNewCell = [[CellData alloc] init];
     secondNewCell.cellTitle = @"Add Item";
     secondNewCell.cellDesc = @"";
+    secondNewCell.cellAccessory = @"plus";
     secondNewCell.cellColour = [UIColor blueColor];
     [suffixList addObject:secondNewCell];
     

@@ -27,10 +27,14 @@
 
 -(OrderViewController *)initializeWithMenuAndOrder:(Menu *) aMenu:(Order *) anOrder;
 
+-(void) renameOrder:(NSString *) newName;
+
 -(void) displayOptions;
 
--(void) submitCurrentOrder;
+-(void) displayOrderConfirmation;
  
+-(void) submitOrder;
+
 -(void) promptUserForRename;
 
 -(void) addOrderToFavorites;

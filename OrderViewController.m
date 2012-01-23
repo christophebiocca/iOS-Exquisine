@@ -34,6 +34,11 @@
     return self;
 }
 
+-(void)renameOrder:(NSString *)newName
+{
+    [orderInfo setName:newName];
+}
+
 -(void)displayOptions
 {
     
@@ -48,9 +53,11 @@
     
 }
 
--(void)submitCurrentOrder
+-(void)displayOrderConfirmation
 {
+    UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Are you sure?" message:[NSString stringWithFormat: @"Are you sure you'd like to make this purchase of $%i CAD?", [orderInfo totalPrice]] delegate:self cancelButtonTitle:@"Nope" otherButtonTitles:@"Awww Yeah!", nil];
     
+    [areYouSure show];
 }
 
 -(void)promptUserForRename
@@ -63,14 +70,28 @@
     
 }
 
+-(void)submitOrder
+{
+    NSLog(@"Order submit requested");
+    //Stuff goes here
+}
+
 //Delegate functions
 //***********************************************************
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1)
+    {
+        [self submitOrder];
+    }
+}
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     switch (buttonIndex) {
         case 0:
-            [self submitCurrentOrder];
+            [self displayOrderConfirmation];
             break;
             
         case 1:

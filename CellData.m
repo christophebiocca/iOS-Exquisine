@@ -14,6 +14,7 @@
 @synthesize cellDesc;
 @synthesize cellSwitchState;
 @synthesize cellColour;
+@synthesize cellAccessory;
 
 -(CellData *)init
 {
@@ -23,6 +24,7 @@
     cellDesc = @"DefaultCellDesc";
     cellSwitchState = NO;
     cellColour = [UIColor clearColor];
+    cellAccessory = @"";
     
     return self;
 }
@@ -43,6 +45,16 @@
     
     [newCell setBackgroundColor:cellColour];
     [newCell setOpaque:YES];
+    
+    //This doesn't actually work. It's not mission critical, so I'll come back to it.
+    /*
+    if(cellAccessory == @"plus")
+    {
+        UIBarButtonItem *plusButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:nil];
+        
+        [newCell addSubview:[plusButton customView]];
+    }
+    */
     
     return newCell;
 }
