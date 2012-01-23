@@ -28,6 +28,8 @@
     
 }
 
+@property (retain) id<OrderManagementDelegate> delegate;
+
 @property (retain) Order *orderInfo;
 
 -(OrderViewController *)initializeWithMenuAndOrder:(Menu *) aMenu:(Order *) anOrder;

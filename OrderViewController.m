@@ -25,6 +25,7 @@
 @implementation OrderViewController
 
 @synthesize orderInfo;
+@synthesize delegate;
 
 -(OrderViewController *)initializeWithMenuAndOrder:(Menu *) aMenu:(Order *) anOrder
 {
@@ -115,6 +116,7 @@
             
         case 2:
             [delegate addToFavoritesForController:self];
+            [[self navigationController] reloadInputViews];
             break;
             
         default:

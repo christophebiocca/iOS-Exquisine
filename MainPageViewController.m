@@ -64,6 +64,8 @@
     
     OrderViewController *orderView = [[OrderViewController alloc] initializeWithMenuAndOrder:theMenu:currentOrder];
     
+    [orderView setDelegate:self];
+    
     [[self navigationController] pushViewController:orderView animated:YES];
 }
 
@@ -104,13 +106,13 @@
 }
 -(void)addToFavoritesForController:(id)orderViewController
 {
-    //if it's not already a favorite (not really sure how this would ever happen
-    //I'm still covering my ass though
+    //This check really isn't sufficient. We should be checking for name collisions.
+    //I'll do it eventually.
     if(![favoriteOrders containsObject:[orderViewController orderInfo]])
     {
         [[orderViewController orderInfo] setIsFavorite:YES];
         //Push the current order on the favorites list
-        [favoriteOrders addObject:[orderViewController orderInfo]];
+        [favoriteOrders addObject:[[orderViewController orderInfo] copy]];
         //Allocate a new order if needed
         if ([[orderViewController orderInfo] isEqual:currentOrder])
         {
