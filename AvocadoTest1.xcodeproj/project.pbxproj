@@ -75,6 +75,7 @@
 /* Begin PBXFileReference section */
 		232C795214CDF5F100C3868D /* AlertPrompt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertPrompt.h; sourceTree = "<group>"; };
 		232C795314CDF5F100C3868D /* AlertPrompt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertPrompt.m; sourceTree = "<group>"; };
+		232C795514CE061200C3868D /* OrderManagementDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderManagementDelegate.h; sourceTree = "<group>"; };
 		232D7A0E14C8B23A00DD5911 /* UICustomActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICustomActionSheet.h; sourceTree = "<group>"; };
 		232D7A0F14C8B23A00DD5911 /* UICustomActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICustomActionSheet.m; sourceTree = "<group>"; };
 		232D7A1114C8B4FC00DD5911 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -551,6 +552,7 @@
 		23DA7A5614C627FC008281DD /* OrderViewController */ = {
 			isa = PBXGroup;
 			children = (
+				232C795514CE061200C3868D /* OrderManagementDelegate.h */,
 				23DA7A5714C6283E008281DD /* OrderViewController.h */,
 				23DA7A5814C6283E008281DD /* OrderViewController.m */,
 			);

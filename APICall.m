@@ -18,8 +18,6 @@
 
 @implementation APICall
 
-//@synthesize delegate;
-
 -(id)initGETRequestForLocation:(NSString*)location{
     if((self = [super init])){
         NSURLRequest* req = [NSURLRequest requestWithURL:[APICall urlForLocation:location]];

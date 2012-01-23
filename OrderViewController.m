@@ -16,6 +16,7 @@
 #import "OrderRenderer.h"
 #import "UICustomActionSheet.h"
 #import "AlertPrompt.h"
+#import "OrderManagementDelegate.h"
 
 @interface UIActionSheet(AccessPrivate)
     @property(readonly)NSMutableArray* buttons;
@@ -73,17 +74,6 @@
     [renamePrompt show];
 }
 
--(void)addOrderToFavorites
-{
-    
-}
-
--(void)submitOrder
-{
-    NSLog(@"Order submit requested");
-    //Stuff goes here
-}
-
 //Delegate functions
 //***********************************************************
 
@@ -93,7 +83,7 @@
     {
         if (buttonIndex == 1)
         {
-            [self submitOrder];
+            [delegate submitOrderForController:self];
         }
     }
     
@@ -124,7 +114,7 @@
             break;
             
         case 2:
-            [self addOrderToFavorites];
+            [delegate addToFavoritesForController:self];
             break;
             
         default:

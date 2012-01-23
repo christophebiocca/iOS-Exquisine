@@ -23,16 +23,16 @@
     if (self) {
         [[self navigationItem] setTitle:@"Pita Factory"];
         [[[GetMenu alloc] init] setDelegate:self];
+        ordersHistory = [[NSMutableArray alloc] initWithCapacity:0];
+        favoriteOrders = [[NSMutableArray alloc] initWithCapacity:0];
+        currentOrder = [[Order alloc] init];
     }
     return self;
 }
 
 - (void)didReceiveMemoryWarning
 {
-    // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
 }
 
 - (void) loadView
@@ -44,19 +44,9 @@
     [self setView:mainPageView];
 }
 
-/*
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
-*/
-
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -72,9 +62,7 @@
         NSLog(@"The menu had not been fetched upon clicking new order");
     }
     
-    Order *newOrder = [[Order alloc] init];
-    
-    OrderViewController *orderView = [[OrderViewController alloc] initializeWithMenuAndOrder:theMenu:newOrder];
+    OrderViewController *orderView = [[OrderViewController alloc] initializeWithMenuAndOrder:theMenu:currentOrder];
     
     [[self navigationController] pushViewController:orderView animated:YES];
 }
@@ -83,7 +71,10 @@
 {
     NSMutableArray *pendingOrderList = [[NSMutableArray alloc] initWithCapacity:0];
     for (Order *anOrder in ordersHistory) {
-        [pendingOrderList addObject:anOrder];
+        if([anOrder status] != @"Done")
+        {
+            [pendingOrderList addObject:anOrder];
+        }
     }
     return pendingOrderList;
 }
@@ -95,6 +86,46 @@
 
 -(void)apiCall:(APICall *)call returnedError:(NSError *)error{
     NSLog(@"call %@ errored with %@", call, error);
+}
+
+-(void)submitOrderForController:(id)orderViewController
+{
+    
+    [[orderViewController orderInfo] setStatus:@"Queued"];
+    //A bunch of code to interact with the server
+    
+    //Push the current order on the history list
+    [ordersHistory addObject:[orderViewController orderInfo]];
+    
+    if ([[orderViewController orderInfo] isEqual:currentOrder])
+    {
+        //Allocate a new order
+        currentOrder = [[Order alloc] init];
+    }
+}
+-(void)addToFavoritesForController:(id)orderViewController
+{
+    //if it's not already a favorite (not really sure how this would ever happen
+    //I'm still covering my ass though
+    if(![favoriteOrders containsObject:[orderViewController orderInfo]])
+    {
+        [[orderViewController orderInfo] setIsFavorite:YES];
+        //Push the current order on the favorites list
+        [favoriteOrders addObject:[orderViewController orderInfo]];
+        //Allocate a new order if needed
+        if ([[orderViewController orderInfo] isEqual:currentOrder])
+        {
+            currentOrder = [[Order alloc] init];
+        }
+    }
+    else
+    {
+        UIAlertView *tsktsk = [[UIAlertView alloc] initWithTitle:@"Error" message:@"That order is already in the favorites list!" delegate:self cancelButtonTitle:@"OK, my bad" otherButtonTitles:nil];
+        
+        [tsktsk setTag:3];
+        
+        [tsktsk show];
+    }
 }
 
 @end

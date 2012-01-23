@@ -15,6 +15,7 @@
     
 @synthesize itemList;
 @synthesize status,orderIdentifier;
+@synthesize isFavorite;
 
 -(id)init{
     self = [super init];
@@ -22,6 +23,7 @@
     name = @"New Order";
     itemList = [[NSMutableArray alloc] initWithCapacity:0];
     status = @"Not yet submitted";
+    isFavorite = NO;
     
     return self;
 }

@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol OrderManagementDelegate;
+
+
 @class Order;
 @class Menu;
 @class OrderView;
@@ -21,6 +24,8 @@
     OrderRenderer *orderRenderer;  
     UIBarButtonItem *optionsButton;
     
+    id<OrderManagementDelegate> delegate;
+    
 }
 
 @property (retain) Order *orderInfo;
@@ -32,11 +37,7 @@
 -(void) displayOptions;
 
 -(void) displayOrderConfirmation;
- 
--(void) submitOrder;
 
 -(void) promptUserForRename;
-
--(void) addOrderToFavorites;
 
 @end

@@ -17,8 +17,6 @@
     id<APICallDelegate> delegate;
 }
 
-//@property(readonly, retain)id<APICallDelegate>delegate;
-
 -(void)setDelegate:(id<APICallDelegate>)delegate;
 -(id)initGETRequestForLocation:(NSString*)location;
 -(id)initPOSTRequestForLocation:(NSString*)location andJSONData:(NSDictionary*)jsonData;

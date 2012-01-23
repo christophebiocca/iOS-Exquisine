@@ -19,11 +19,14 @@
     
     NSString *orderIdentifier;
     
+    BOOL isFavorite;
+    
 }
 
 @property (retain, readonly) NSMutableArray* itemList;
 @property (retain) NSString *status;
 @property (retain) NSString *orderIdentifier;
+@property BOOL isFavorite;
 
 -(id)init;
 

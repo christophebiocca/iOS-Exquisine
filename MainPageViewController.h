@@ -8,14 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "APICallDelegate.h"
+#import "OrderManagementDelegate.h"
 
 @class MainPageView;
 @class Menu;
+@class Order;
 
-@interface MainPageViewController : UIViewController<UITableViewDelegate, APICallDelegate>{
+@interface MainPageViewController : UIViewController<UITableViewDelegate, APICallDelegate, OrderManagementDelegate>{
 
     MainPageView *mainPageView;
     Menu *theMenu;
+    
+    Order *currentOrder;
     
     NSMutableArray *ordersHistory;
     NSMutableArray *favoriteOrders;
