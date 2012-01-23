@@ -2,7 +2,6 @@
 //  AlertPrompt.m
 //  Prompt
 //
-//  Created by Jeff LaMarche on 2/26/09.
 
 #import "AlertPrompt.h"
 

@@ -11,7 +11,7 @@
 
 @protocol OrderManagementDelegate <NSObject>
 
--(void) submitOrderForController:(*OrderViewController)orderViewController;
--(void) addToFavoritesForController:(*OrderViewController)orderViewController;
+-(void) submitOrderForController:(OrderViewController *)orderViewController;
+-(void) addToFavoritesForController:(OrderViewController *)orderViewController;
 
 @end
