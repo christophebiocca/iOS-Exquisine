@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		232C795414CDF5F100C3868D /* AlertPrompt.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C795314CDF5F100C3868D /* AlertPrompt.m */; };
 		232D7A1014C8B23A00DD5911 /* UICustomActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 232D7A0F14C8B23A00DD5911 /* UICustomActionSheet.m */; };
 		232D7A1214C8B4FC00DD5911 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 232D7A1114C8B4FC00DD5911 /* QuartzCore.framework */; };
 		23658CC114BDFB15002C0996 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23658CC014BDFB15002C0996 /* UIKit.framework */; };
@@ -72,6 +73,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		232C795214CDF5F100C3868D /* AlertPrompt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertPrompt.h; sourceTree = "<group>"; };
+		232C795314CDF5F100C3868D /* AlertPrompt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertPrompt.m; sourceTree = "<group>"; };
 		232D7A0E14C8B23A00DD5911 /* UICustomActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICustomActionSheet.h; sourceTree = "<group>"; };
 		232D7A0F14C8B23A00DD5911 /* UICustomActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICustomActionSheet.m; sourceTree = "<group>"; };
 		232D7A1114C8B4FC00DD5911 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -195,6 +198,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		232C795114CDF5AB00C3868D /* AlertPrompt */ = {
+			isa = PBXGroup;
+			children = (
+				232C795214CDF5F100C3868D /* AlertPrompt.h */,
+				232C795314CDF5F100C3868D /* AlertPrompt.m */,
+			);
+			name = AlertPrompt;
+			sourceTree = "<group>";
+		};
 		232D7A0B14C8B20200DD5911 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -216,6 +228,7 @@
 		23658CB114BDFB15002C0996 = {
 			isa = PBXGroup;
 			children = (
+				232C795114CDF5AB00C3868D /* AlertPrompt */,
 				23E7D87B14C9BA88006D6C13 /* behindButton.png */,
 				232D7A1114C8B4FC00DD5911 /* QuartzCore.framework */,
 				23DA7A9514C893F1008281DD /* green dot.png */,
@@ -828,6 +841,7 @@
 				23DA7A8C14C73DC1008281DD /* APICall.m in Sources */,
 				23DA7A9014C7473C008281DD /* GetMenu.m in Sources */,
 				232D7A1014C8B23A00DD5911 /* UICustomActionSheet.m in Sources */,
+				232C795414CDF5F100C3868D /* AlertPrompt.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,6 +15,7 @@
 #import "OrderView.h"
 #import "OrderRenderer.h"
 #import "UICustomActionSheet.h"
+#import "AlertPrompt.h"
 
 @interface UIActionSheet(AccessPrivate)
     @property(readonly)NSMutableArray* buttons;
@@ -37,6 +38,7 @@
 -(void)renameOrder:(NSString *)newName
 {
     [orderInfo setName:newName];
+    [[self navigationItem] setTitle:newName];
 }
 
 -(void)displayOptions
@@ -57,12 +59,18 @@
 {
     UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Are you sure?" message:[NSString stringWithFormat: @"Are you sure you'd like to make this purchase of $%i CAD?", [orderInfo totalPrice]] delegate:self cancelButtonTitle:@"Nope" otherButtonTitles:@"Awww Yeah!", nil];
     
+    [areYouSure setTag:1];
+    
     [areYouSure show];
 }
 
 -(void)promptUserForRename
 {
     
+    AlertPrompt *renamePrompt = [[AlertPrompt alloc] initWithPromptTitle:@"New order name:" message:@"name" delegate:self cancelButtonTitle:@"Cancel" okButtonTitle:@"OK"];
+    [renamePrompt setTag:2];
+    
+    [renamePrompt show];
 }
 
 -(void)addOrderToFavorites
@@ -81,11 +89,28 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex == 1)
+    if ([alertView tag] == 1)
     {
-        [self submitOrder];
+        if (buttonIndex == 1)
+        {
+            [self submitOrder];
+        }
+    }
+    
+}
+
+- (void)alertView:(UIAlertView *)alertView willDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if ([alertView tag] == 2)
+    {
+        if (buttonIndex == 1)
+        {
+            NSString *entered = [ (AlertPrompt *)alertView enteredText];
+            [self renameOrder:entered];
+        }
     }
 }
+
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {

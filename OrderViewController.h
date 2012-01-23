@@ -12,7 +12,7 @@
 @class OrderView;
 @class OrderRenderer;
 
-@interface OrderViewController : UITableViewController <UITableViewDelegate, UIActionSheetDelegate>
+@interface OrderViewController : UITableViewController <UITableViewDelegate, UIActionSheetDelegate,UIAlertViewDelegate>
 {
     
     Order *orderInfo;

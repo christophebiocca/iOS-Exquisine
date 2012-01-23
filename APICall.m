@@ -18,7 +18,7 @@
 
 @implementation APICall
 
-@synthesize delegate;
+//@synthesize delegate;
 
 -(id)initGETRequestForLocation:(NSString*)location{
     if((self = [super init])){

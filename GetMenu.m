@@ -9,9 +9,8 @@
 #import "GetMenu.h"
 
 @implementation GetMenu
-
 -(id)init{
-    NSString* location = @"customer/menu/3/";
+    NSString* location = @"customer/menu/1/";
     return self = [super initGETRequestForLocation:location];
 }
 
