@@ -32,7 +32,7 @@
         accountInfoButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         greetingLabel = [[UILabel alloc] init];
         
-        [createOrderButton setTitle:@"Place an Order" forState:UIControlStateNormal];
+        [createOrderButton setTitle:@"New Order" forState:UIControlStateNormal];
         [pendingOrderButton setTitle: @"Pending Order(s)" forState:UIControlStateNormal];
         [favoriteOrderButton setTitle:@"Favorites" forState:UIControlStateNormal];
         [accountInfoButton setTitle:@"Account Information" forState:UIControlStateNormal];
@@ -60,8 +60,8 @@
 {
     [self setBackgroundColor:[UIColor whiteColor]];
     [createOrderButton setFrame:CGRectMake(20, 163, 280, 37)];
-    [pendingOrderButton setFrame:CGRectMake(20, 208, 280, 37)];
-    [favoriteOrderButton setFrame:CGRectMake(20, 253, 280, 37)];
+    [favoriteOrderButton setFrame:CGRectMake(20, 208, 280, 37)];
+    [pendingOrderButton setFrame:CGRectMake(20, 253, 280, 37)];
     [accountInfoButton setFrame:CGRectMake(20, 359, 280, 37)];
     [greetingLabel setFrame:CGRectMake(19, 20, 280, 135)];
 }

@@ -112,7 +112,7 @@
     {
         [[orderViewController orderInfo] setIsFavorite:YES];
         //Push the current order on the favorites list
-        [favoriteOrders addObject:[[orderViewController orderInfo] copy]];
+        [favoriteOrders addObject:[[Order alloc] initFromOrder:[orderViewController orderInfo]]];
         //Allocate a new order if needed
         if ([[orderViewController orderInfo] isEqual:currentOrder])
         {
@@ -126,6 +126,15 @@
         [tsktsk setTag:3];
         
         [tsktsk show];
+    }
+}
+
+-(void)deleteFromFavoritesForController:(id)orderViewController
+{
+    if([favoriteOrders containsObject:[orderViewController orderInfo]])
+    {
+        [[orderViewController orderInfo] setIsFavorite:NO];
+        [favoriteOrders removeObject:[orderViewController orderInfo]];
     }
 }
 

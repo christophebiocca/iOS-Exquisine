@@ -60,7 +60,7 @@
 {
     [[aCell detailTextLabel] setText:[Utilities FormatToPrice:orderInfo.totalPrice]];
     [[aCell textLabel] setText:orderInfo.name];
-    [aCell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+    [aCell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
     return aCell;
 }
 

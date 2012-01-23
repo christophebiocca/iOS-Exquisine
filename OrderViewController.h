@@ -40,6 +40,8 @@
 
 -(void) displayOrderConfirmation;
 
+-(void) displayDeletionConfirmation;
+
 -(void) promptUserForRename;
 
 @end

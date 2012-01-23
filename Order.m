@@ -28,6 +28,23 @@
     return self;
 }
 
+-(id)initFromOrder:(Order *)anOrder
+{
+    self = [super initFromMenuComponent:anOrder];
+    
+    name = anOrder.name;
+    itemList = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    for (Item *anItem in anOrder.itemList) {
+        [itemList addObject:[[Item alloc]initFromItem:anItem]];
+    }
+    
+    status = anOrder.status;
+    isFavorite = anOrder.isFavorite;
+    
+    return self;
+}
+
 -(NSString *)description{
         
     return [NSString stringWithFormat:@"Items: \n%@" , [itemList description]];

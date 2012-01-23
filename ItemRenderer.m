@@ -71,7 +71,7 @@
     [[aCell textLabel] setText:itemInfo.name];
     if(shouldHaveInfoDisclosure)
     {
-        [aCell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+        [aCell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
     }
     else
     {

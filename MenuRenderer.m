@@ -40,7 +40,7 @@
 {
     [[aCell detailTextLabel] setText:@""];
     [[aCell textLabel] setText:menuInfo.name];
-    [aCell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+    [aCell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
     return aCell;
 }
 

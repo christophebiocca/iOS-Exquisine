@@ -46,14 +46,33 @@
 -(void)displayOptions
 {
     
-    UICustomActionSheet *optionPopup = [[UICustomActionSheet alloc] initWithTitle:@"Do Stuff" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Submit this order!" otherButtonTitles:@"Rename this order" , @"Add to favorites", nil];
+    if([orderInfo isFavorite])
+    {
+        UICustomActionSheet *optionPopup = [[UICustomActionSheet alloc] initWithTitle:@"Order options" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Submit this order!" otherButtonTitles:@"Rename this order" , @"Delete from favorites", nil];
+        
+        [optionPopup setColor:[UIColor colorWithRed:36/255.0 green:99/255.0 blue:222/255.0 alpha:230/255.0] forButtonAtIndex:0];
+        [optionPopup setColor:[UIColor colorWithRed:187/255.0 green:189/255.0 blue:192/255.0 alpha:230/255.0] forButtonAtIndex:1];
+        [optionPopup setColor:[UIColor colorWithRed:187/255.0 green:189/255.0 blue:192/255.0 alpha:230/255.0] forButtonAtIndex:2];
+        [optionPopup setColor:[UIColor colorWithRed:21/255.0 green:29/255.0 blue:39/255.0 alpha:230/255.0] forButtonAtIndex:3];
+        
+        [optionPopup setTag:2];
+        
+        [optionPopup showInView:orderView];
+    }
+    else
+    {
+        UICustomActionSheet *optionPopup = [[UICustomActionSheet alloc] initWithTitle:@"Order options" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Submit this order!" otherButtonTitles:@"Rename this order" , @"Add to favorites", nil];
+        
+        [optionPopup setColor:[UIColor colorWithRed:36/255.0 green:99/255.0 blue:222/255.0 alpha:230/255.0] forButtonAtIndex:0];
+        [optionPopup setColor:[UIColor colorWithRed:187/255.0 green:189/255.0 blue:192/255.0 alpha:230/255.0] forButtonAtIndex:1];
+        [optionPopup setColor:[UIColor colorWithRed:187/255.0 green:189/255.0 blue:192/255.0 alpha:230/255.0] forButtonAtIndex:2];
+        [optionPopup setColor:[UIColor colorWithRed:21/255.0 green:29/255.0 blue:39/255.0 alpha:230/255.0] forButtonAtIndex:3];
+        
+        [optionPopup setTag:1];
+        
+        [optionPopup showInView:orderView];
+    }
     
-    [optionPopup setColor:[UIColor colorWithRed:36/255.0 green:99/255.0 blue:222/255.0 alpha:230/255.0] forButtonAtIndex:0];
-    [optionPopup setColor:[UIColor colorWithRed:187/255.0 green:189/255.0 blue:192/255.0 alpha:230/255.0] forButtonAtIndex:1];
-    [optionPopup setColor:[UIColor colorWithRed:187/255.0 green:189/255.0 blue:192/255.0 alpha:230/255.0] forButtonAtIndex:2];
-    [optionPopup setColor:[UIColor colorWithRed:21/255.0 green:29/255.0 blue:39/255.0 alpha:230/255.0] forButtonAtIndex:3];
-    
-    [optionPopup showInView:orderView];
     
 }
 
@@ -62,6 +81,15 @@
     UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Are you sure?" message:[NSString stringWithFormat: @"Are you sure you'd like to make this purchase of $%i CAD?", [orderInfo totalPrice]] delegate:self cancelButtonTitle:@"Nope" otherButtonTitles:@"Awww Yeah!", nil];
     
     [areYouSure setTag:1];
+    
+    [areYouSure show];
+}
+
+-(void)displayDeletionConfirmation
+{
+    UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Are you sure?" message:[NSString stringWithFormat: @"You cannot recover this order after deleting it.", [orderInfo totalPrice]] delegate:self cancelButtonTitle:@"Oh, well then no" otherButtonTitles:@"Yep, delete it", nil];
+    
+    [areYouSure setTag:3];
     
     [areYouSure show];
 }
@@ -78,20 +106,18 @@
 //Delegate functions
 //***********************************************************
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+
+- (void)alertView:(UIAlertView *)alertView willDismissWithButtonIndex:(NSInteger)buttonIndex
 {
     if ([alertView tag] == 1)
     {
         if (buttonIndex == 1)
         {
             [delegate submitOrderForController:self];
+            [[self navigationController] popViewControllerAnimated:YES];
         }
     }
     
-}
-
-- (void)alertView:(UIAlertView *)alertView willDismissWithButtonIndex:(NSInteger)buttonIndex
-{
     if ([alertView tag] == 2)
     {
         if (buttonIndex == 1)
@@ -100,28 +126,60 @@
             [self renameOrder:entered];
         }
     }
+    
+    if ([alertView tag] == 3)
+    {
+        if (buttonIndex == 1)
+        {
+            [delegate deleteFromFavoritesForController:self];
+            [[self navigationController] popViewControllerAnimated:YES];
+        }
+    }
 }
 
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    switch (buttonIndex) {
-        case 0:
-            [self displayOrderConfirmation];
-            break;
-            
-        case 1:
-            [self promptUserForRename];
-            break;
-            
-        case 2:
-            [delegate addToFavoritesForController:self];
-            [[self navigationController] reloadInputViews];
-            break;
-            
-        default:
-            break;
+    if ([actionSheet tag] == 1)
+    {
+        switch (buttonIndex) {
+            case 0:
+                [self displayOrderConfirmation];
+                break;
+                
+            case 1:
+                [self promptUserForRename];
+                break;
+                
+            case 2:
+                [delegate addToFavoritesForController:self];
+                [[self navigationController] popViewControllerAnimated:YES];
+                break;
+                
+            default:
+                break;
+        }
     }
+    if ([actionSheet tag] == 2)
+    {
+        switch (buttonIndex) {
+            case 0:
+                [self displayOrderConfirmation];
+                break;
+                
+            case 1:
+                [self promptUserForRename];
+                break;
+                
+            case 2:
+                [self displayDeletionConfirmation];
+                break;
+                
+            default:
+                break;
+        }
+    }
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

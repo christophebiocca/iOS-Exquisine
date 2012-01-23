@@ -30,6 +30,8 @@
 
 -(id)init;
 
+-(id)initFromOrder:(Order *)anOrder;
+
 -(NSString *)description;
 
 -(void) addItem:(Item *) anItem;

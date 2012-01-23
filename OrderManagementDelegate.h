@@ -13,5 +13,6 @@
 
 -(void) submitOrderForController:(OrderViewController *)orderViewController;
 -(void) addToFavoritesForController:(OrderViewController *)orderViewController;
+-(void) deleteFromFavoritesForController:(OrderViewController *)orderViewController;
 
 @end
