@@ -22,10 +22,6 @@
     
     itemInfo = anItem;
     ownerOrder = anOrder;
-    if(![[anOrder itemList] containsObject:anItem])
-    {
-        NSLog(@"An invalid item, order pair was passed to the ItemViewController constructor");
-    }
     
     itemRenderer = [[ItemRenderer alloc] initWithItem:anItem];
     [[self navigationItem] setTitle:anItem.name];
@@ -59,6 +55,11 @@
         //Push item selection page
     }
     
+}
+
+-(void)tableView:(UITableView *) tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *) indexPath
+{
+    [self tableView:tableView didSelectRowAtIndexPath:indexPath];
 }
 
 //View related functions

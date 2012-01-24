@@ -170,7 +170,6 @@
                 
             case 2:
                 [delegate addToFavoritesForController:self];
-                [[self navigationController] popViewControllerAnimated:YES];
                 break;
             case 3:
                 [self displayOrderClearConfirmation];
@@ -225,6 +224,11 @@
         [[self navigationController] pushViewController:menuViewController animated:YES];
     }
     
+}
+
+-(void)tableView:(UITableView *) tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *) indexPath
+{
+    [self tableView:tableView didSelectRowAtIndexPath:indexPath];
 }
 
 //View related functions

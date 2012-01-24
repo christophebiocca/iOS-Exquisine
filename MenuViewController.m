@@ -142,6 +142,11 @@
     }
 }
 
+-(void)tableView:(UITableView *) tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *) indexPath
+{
+    [self tableView:tableView didSelectRowAtIndexPath:indexPath];
+}
+
 //View related functions
 //***********************************************************
 
