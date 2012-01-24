@@ -12,17 +12,21 @@
 @class OptionRenderer;
 
 
-@interface OptionViewController  :UITableViewController <UITableViewDelegate>
+@interface OptionViewController  :MenuComponentViewController <UITableViewDelegate>
 {
     
+    UIBarButtonItem *forwardButton;
     Option *optionInfo;
     OptionView *optionView;
     OptionRenderer *optionRenderer;
+    BOOL tunnelVersion;
     
 }
 
 @property (retain) Option *optionInfo;
 
 -(OptionViewController *) initializeWithOption:(Option *) anOption;
+
+-(void) forwardButtonClicked;
 
 @end

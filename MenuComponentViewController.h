@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TunnelViewControllerDelegate.h"
+#import "LargeScopeControllerDelegate.h"
 
 @interface MenuComponentViewController : UIViewController
+{
+      id<LargeScopeControllerDelegate> superviewDelegate;
+}
+
+@property (retain) id<LargeScopeControllerDelegate> superviewDelegate;
 
 @end

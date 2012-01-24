@@ -10,6 +10,7 @@
 #import "Option.h"
 #import "OptionView.h"
 #import "OptionRenderer.h"
+#import "LargeScopeControllerDelegate.h"
 
 @implementation OptionViewController
 
@@ -36,8 +37,18 @@
         [optionInfo toggleChoiceByIndex:[indexPath row]];
         [optionRenderer redraw];
         [[optionView optionTable] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+        
+        //if exactly one item must be selected, we'll signal our potential delegate.
+        if (([optionInfo upperBound] == 1)&&([optionInfo lowerBound] == 1))
+        {
+            [superviewDelegate signalForwards:self WithContext:nil];
+        }
     }
-    
+}
+
+-(void) forwardButtonClicked
+{
+    [superviewDelegate signalForwards:self WithContext:nil];
 }
 
 //View related functions
@@ -58,6 +69,11 @@
     optionView = [[OptionView alloc] init];
     [[optionView optionTable] setDelegate:self];
     [[optionView optionTable] setDataSource:optionRenderer];
+    
+    if (tunnelVersion && ([optionInfo upperBound] > 1 ) ) {
+        forwardButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(forwardButtonClicked)];
+        [[self navigationItem] setRightBarButtonItem:forwardButton];
+    }
     [self setView:optionView];
 }
 

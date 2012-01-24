@@ -187,9 +187,14 @@
     [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
     
     if ([indexPath row] < [[orderInfo itemList] count]) {
+        Item *currentItem = [[orderInfo itemList] objectAtIndex:[indexPath row]];
         
-        ItemViewController *itemViewController = [[ItemViewController alloc] initializeWithItemAndOrder:[[orderInfo itemList] objectAtIndex:[indexPath row]]:orderInfo];
-        [[self navigationController] pushViewController:itemViewController animated:YES];
+        //Only push it if there's anything to customize about it.
+        if([[currentItem options]count] > 0)
+        {
+            ItemViewController *itemViewController = [[ItemViewController alloc] initializeWithItemAndOrder:currentItem:orderInfo];
+            [[self navigationController] pushViewController:itemViewController animated:YES];
+        }
     }
     
     //i.e. if the "Add Item" row was selected

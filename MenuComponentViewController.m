@@ -13,4 +13,6 @@
 
 @implementation MenuComponentViewController
 
+@synthesize superviewDelegate;
+
 @end

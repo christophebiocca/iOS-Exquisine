@@ -22,6 +22,8 @@
     
     navController = [[UINavigationController alloc] initWithRootViewController:[controllerList objectAtIndex:0]];
     
+    [navController setDelegate:self];
+    
     controllerTunnelList = controllerList;
     
     currentListIndexCursor = 0;
@@ -34,7 +36,7 @@
 //Delegate functions
 //***********************************************************
 
--(void) goForwards:(UIViewController *)requester WithContext:(NSArray *)contextInformation
+-(void) signalForwards:(UIViewController *)requester WithContext:(NSArray *)contextInformation
 {
     if (currentListIndexCursor == ([controllerTunnelList count] - 1) ) {
         if (tunnelDelegate) {
@@ -54,7 +56,7 @@
     }
 }
 
--(void) goBackwards:(UIViewController *)requester WithContext:(NSArray *)contextInformation
+-(void) signalBackwards:(UIViewController *)requester WithContext:(NSArray *)contextInformation
 {
     if (currentListIndexCursor == 0) {
         if (tunnelDelegate)
@@ -74,6 +76,13 @@
         
     }
 }
+
+//Just to make sure that we stay up-to-date when someone backs out without using signalBackwards.
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    currentListIndexCursor = [controllerTunnelList indexOfObject:viewController];
+}
+
 
 //View related functions
 //***********************************************************
@@ -100,7 +109,6 @@
 
 - (void)loadView
 {
-    
     [self setView:[navController view]];
 }
 

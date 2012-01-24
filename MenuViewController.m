@@ -11,8 +11,12 @@
 #import "MenuRenderer.h"
 #import "Item.h"
 #import "Order.h"
+#import "Option.h"
+#import "OptionViewController.h"
 #import "Menu.h"
 #import "MenuView.h"
+#import "TunnelViewController.h"
+#import "ItemViewController.h"
 
 @implementation MenuViewController
 
@@ -29,20 +33,69 @@
     return self;
 }
 
--(void)popToOrderViewController
+-(void)enterItemTunnel:(Item *) anItem
 {
-    OrderViewController *popTo;
-    for (UIViewController *viewController in [[self navigationController] viewControllers]) {
-        if([viewController isKindOfClass:[OrderViewController class]])
-            popTo = (id) viewController;
+    selectedItem = anItem;
+    
+    NSMutableArray *manditoryOptions = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    for (Option *currentOption in [anItem options]) {
+        //i.e. if the option is manditory
+        if ([currentOption lowerBound] > 0) {
+                
+            //Set up the tunnel version of the option view controllers here.
+            OptionViewController *optionController = [[OptionViewController alloc] initializeWithOption:currentOption];
+            
+            [manditoryOptions addObject:optionController];
+        }
     }
     
-    [[self navigationController]popToViewController:popTo animated:YES];
+    if([manditoryOptions count] > 0)
+    {
+        itemCustomizationTunnel = [[TunnelViewController alloc] initWithTunnelList:manditoryOptions];
     
+        [self presentModalViewController:itemCustomizationTunnel animated:YES]; 
+    }
+    else
+    {
+        [self lastControllerBeingPushedPast:itemCustomizationTunnel];
+    }
 }
 
 //Delegate functions
 //***********************************************************
+
+
+-(void) firstControllerBeingPopped:(TunnelViewController *) tunnelController
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+-(void) lastControllerBeingPushedPast:(TunnelViewController *) tunnelController
+{
+    ItemViewController *itemViewController = [[ItemViewController alloc] initializeWithItemAndOrder:selectedItem :orderInfo];
+    
+    [orderInfo addItem:selectedItem];
+    
+    NSMutableArray *newStack = [[NSMutableArray alloc] initWithCapacity:0];
+    [newStack addObject:[[[self navigationController] viewControllers]objectAtIndex:0]];
+    [newStack addObject:[[[self navigationController] viewControllers]objectAtIndex:1]];
+    
+    NSInteger manditoryCount = 0;
+    for (Option *currentOption in [selectedItem options]) {
+        //i.e. if the option is manditory
+        if ([currentOption lowerBound] > 0) {
+            manditoryCount++;
+        }
+    }
+    if (([[selectedItem options] count] - manditoryCount) > 0) {
+        [newStack addObject:itemViewController];
+    }
+    
+    [self dismissModalViewControllerAnimated:NO];
+    
+    [[self navigationController] setViewControllers:newStack animated:YES];
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -56,9 +109,16 @@
         
         if([submenuThing isKindOfClass:[Item class]])
         {
+            //Now that we know that we need to be customizing an Item, we need to figure
+            //out what tunnel we should be defining such that the end of the tunnel will
+            //lead to a configured item.
+            
+            //i.e. we need to build a tunnel that forces the user to define all of the
+            //manditory options associated with the item.
+            
             Item *newItem = [[Item alloc] initFromItem:submenuThing];
-            [orderInfo addItem:newItem];
-            [self popToOrderViewController];
+            
+            [self enterItemTunnel:newItem];
         }
         else
         {

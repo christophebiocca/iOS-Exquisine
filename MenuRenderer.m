@@ -24,9 +24,7 @@
         if( [currentThing isKindOfClass:[Item class]])
         {
             ItemRenderer *itemRenderer = [[ItemRenderer alloc] initWithItem:currentThing];
-            //I really shouldn't be doing it this way, but it isn't a teeeeerible way of doing it
-            //It would require a lot of work to do otherwise.
-            itemRenderer.shouldHaveInfoDisclosure = NO;
+
             [itemRenderList addObject:itemRenderer];
         }
         if( [currentThing isKindOfClass:[Menu class]])

@@ -11,14 +11,18 @@
 @class Order;
 @class MenuView;
 @class MenuRenderer;
+@class TunnelViewController;
+@class Item;
 
-@interface MenuViewController : MenuComponentViewController<UITableViewDelegate>
+@interface MenuViewController : MenuComponentViewController<UITableViewDelegate,TunnelViewControllerDelegate> 
 {
     
+    Item *selectedItem;
     Order *orderInfo;
     Menu *menuInfo;
     MenuView *menuView;
-    MenuRenderer *menuRenderer;    
+    MenuRenderer *menuRenderer;
+    TunnelViewController *itemCustomizationTunnel;
     
 }
 
@@ -26,6 +30,10 @@
 
 -(MenuViewController *)initializeWithMenuAndOrder:(Menu *) aMenu:(Order *) anOrder;
 
--(void) popToOrderViewController;
+-(void)enterItemTunnel:(Item *) anItem;
+
+-(void) lastControllerBeingPushedPast:(TunnelViewController *) tunnelController;
+
+-(void) firstControllerBeingPopped:(TunnelViewController *) tunnelController;
 
 @end

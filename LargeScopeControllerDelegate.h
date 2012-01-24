@@ -10,4 +10,8 @@
 
 @protocol LargeScopeControllerDelegate <NSObject>
 
+-(void) signalForwards:(UIViewController *) requester WithContext: (NSArray *) contextInformation;
+
+-(void) signalBackwards:(UIViewController *) requester WithContext: (NSArray *) contextInformation;
+
 @end
