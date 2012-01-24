@@ -24,7 +24,7 @@
         cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleDone target:self action:sel_registerName("cancelButton")];
     
         [cancelButton setWidth:308];
-        [cancelButton setTintColor:[UIColor redColor]];
+        [cancelButton setTintColor:[UIColor colorWithRed:235/255.0 green:12/255.0 blue:20/255.0 alpha:230/255.0]];
         
         NSArray *toolbarItems = [NSArray arrayWithObjects: cancelButton, nil];
         [menuToolBar setItems:toolbarItems animated:NO];

@@ -25,7 +25,7 @@
 #import "LargeScopeControllerDelegate.h"
 #import "TunnelViewControllerDelegate.h"
 
-@interface TunnelViewController: UIViewController <LargeScopeControllerDelegate,UINavigationControllerDelegate>
+@interface TunnelViewController: NSObject <LargeScopeControllerDelegate,UINavigationControllerDelegate>
 {
     
     UINavigationController *navController;
@@ -39,6 +39,7 @@
 }
 
 @property (retain) id<TunnelViewControllerDelegate> tunnelDelegate;
+@property (retain, readonly) UINavigationController* navController;
 
 -(TunnelViewController *) initWithTunnelList:(NSArray *) controllerList;
 

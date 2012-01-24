@@ -18,7 +18,7 @@
 
 -(OptionViewController *)initializeWithOption:(Option *) anOption
 {
-    
+    tunnelVersion = NO;
     optionInfo = anOption;
     optionRenderer = [[OptionRenderer alloc] initWithOption:anOption];
     [[self navigationItem] setTitle:anOption.name];
@@ -49,6 +49,12 @@
 -(void) forwardButtonClicked
 {
     [superviewDelegate signalForwards:self WithContext:nil];
+}
+
+-(void)setSuperviewDelegate:(id<LargeScopeControllerDelegate>)superviewDelegateIn
+{
+    superviewDelegate = superviewDelegateIn;
+    tunnelVersion = YES;
 }
 
 //View related functions

@@ -61,19 +61,18 @@
     }
     else
     {
-        UICustomActionSheet *optionPopup = [[UICustomActionSheet alloc] initWithTitle:@"Order options" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Submit this order!" otherButtonTitles:@"Rename this order" , @"Add to favorites", @"", nil];
+        UICustomActionSheet *optionPopup = [[UICustomActionSheet alloc] initWithTitle:@"Order options" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Submit this order!" otherButtonTitles:@"Rename this order" , @"Add to favorites", @"Clear this order", nil];
         
         [optionPopup setColor:[UIColor colorWithRed:36/255.0 green:99/255.0 blue:222/255.0 alpha:230/255.0] forButtonAtIndex:0];
         [optionPopup setColor:[UIColor colorWithRed:187/255.0 green:189/255.0 blue:192/255.0 alpha:230/255.0] forButtonAtIndex:1];
         [optionPopup setColor:[UIColor colorWithRed:187/255.0 green:189/255.0 blue:192/255.0 alpha:230/255.0] forButtonAtIndex:2];
-        [optionPopup setColor:[UIColor colorWithRed:21/255.0 green:29/255.0 blue:39/255.0 alpha:230/255.0] forButtonAtIndex:3];
+        [optionPopup setColor:[UIColor colorWithRed:235/255.0 green:12/255.0 blue:20/255.0 alpha:230/255.0] forButtonAtIndex:3];
+        [optionPopup setColor:[UIColor colorWithRed:21/255.0 green:29/255.0 blue:39/255.0 alpha:230/255.0] forButtonAtIndex:4];
         
         [optionPopup setTag:1];
         
         [optionPopup showInView:orderView];
     }
-    
-    
 }
 
 -(void)displayOrderConfirmation
@@ -81,6 +80,15 @@
     UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Are you sure?" message:[NSString stringWithFormat: @"Are you sure you'd like to make this purchase of $%i CAD?", [orderInfo totalPrice]] delegate:self cancelButtonTitle:@"Nope" otherButtonTitles:@"Awww Yeah!", nil];
     
     [areYouSure setTag:1];
+    
+    [areYouSure show];
+}
+
+-(void)displayOrderClearConfirmation
+{
+    UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Are you sure?" message:[NSString stringWithFormat: @"Are you sure you want to remove all items in this order?", [orderInfo totalPrice]] delegate:self cancelButtonTitle:@"Nope" otherButtonTitles:@"Yep", nil];
+    
+    [areYouSure setTag:4];
     
     [areYouSure show];
 }
@@ -135,6 +143,15 @@
             [[self navigationController] popViewControllerAnimated:YES];
         }
     }
+    if ([alertView tag] == 4)
+    {
+        if (buttonIndex == 1)
+        {
+            [orderInfo setItemList:[[NSMutableArray alloc] initWithCapacity:0]];
+            [orderRenderer redraw];
+            [[orderView orderTable] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+        }
+    }
 }
 
 
@@ -155,7 +172,9 @@
                 [delegate addToFavoritesForController:self];
                 [[self navigationController] popViewControllerAnimated:YES];
                 break;
-                
+            case 3:
+                [self displayOrderClearConfirmation];
+                break;
             default:
                 break;
         }

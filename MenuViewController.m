@@ -54,7 +54,9 @@
     {
         itemCustomizationTunnel = [[TunnelViewController alloc] initWithTunnelList:manditoryOptions];
     
-        [self presentModalViewController:itemCustomizationTunnel animated:YES]; 
+        [itemCustomizationTunnel setTunnelDelegate:self];
+        
+        [self presentModalViewController:[itemCustomizationTunnel navController] animated:YES]; 
     }
     else
     {
@@ -62,6 +64,17 @@
     }
 }
 
+-(void)popToOrderViewController
+{
+    OrderViewController *popTo;
+    for (UIViewController *viewController in [[self navigationController] viewControllers]) {
+        if([viewController isKindOfClass:[OrderViewController class]])
+            popTo = (id) viewController;
+    }
+    
+    [[self navigationController]popToViewController:popTo animated:YES];
+    
+}
 //Delegate functions
 //***********************************************************
 

@@ -30,6 +30,8 @@
 
 -(MenuViewController *)initializeWithMenuAndOrder:(Menu *) aMenu:(Order *) anOrder;
 
+-(void)popToOrderViewController;
+
 -(void)enterItemTunnel:(Item *) anItem;
 
 -(void) lastControllerBeingPushedPast:(TunnelViewController *) tunnelController;

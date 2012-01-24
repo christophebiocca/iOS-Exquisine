@@ -27,7 +27,7 @@
         deleteButton = [[UIBarButtonItem alloc] initWithTitle:@"Remove This Item" style:UIBarButtonItemStyleDone target:self action:sel_registerName("deleteButton")];
         
         [deleteButton setWidth:308];
-        [deleteButton setTintColor:[UIColor redColor]];
+        [deleteButton setTintColor:[UIColor colorWithRed:235/255.0 green:12/255.0 blue:20/255.0 alpha:230/255.0]];
         
         NSArray *toolbarItems = [NSArray arrayWithObjects: deleteButton, nil];
         [itemToolBar setItems:toolbarItems animated:NO];
