@@ -61,7 +61,7 @@
     }
     else
     {
-        UICustomActionSheet *optionPopup = [[UICustomActionSheet alloc] initWithTitle:@"Order options" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Submit this order!" otherButtonTitles:@"Rename this order" , @"Add to favorites", nil];
+        UICustomActionSheet *optionPopup = [[UICustomActionSheet alloc] initWithTitle:@"Order options" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Submit this order!" otherButtonTitles:@"Rename this order" , @"Add to favorites", @"", nil];
         
         [optionPopup setColor:[UIColor colorWithRed:36/255.0 green:99/255.0 blue:222/255.0 alpha:230/255.0] forButtonAtIndex:0];
         [optionPopup setColor:[UIColor colorWithRed:187/255.0 green:189/255.0 blue:192/255.0 alpha:230/255.0] forButtonAtIndex:1];

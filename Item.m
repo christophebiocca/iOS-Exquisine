@@ -41,7 +41,7 @@
     
     options = [[NSMutableArray alloc] initWithCapacity:0];
     
-    for (NSData *option in [inputData valueForKey:@"options"]) {
+    for (NSData *option in [inputData valueForKey:@"all_options"]) {
         Option *newOption = [[Option alloc] initFromData:option];
         [options addObject:newOption];
     }
