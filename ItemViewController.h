@@ -12,7 +12,8 @@
 @class ItemRenderer;
 @class Order;
 
-@interface ItemViewController :UITableViewController<UITableViewDelegate>{
+@interface ItemViewController :UITableViewController<UITableViewDelegate>
+{
     
     Order *ownerOrder;
     Item *itemInfo;

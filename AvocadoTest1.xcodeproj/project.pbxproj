@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		232C795414CDF5F100C3868D /* AlertPrompt.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C795314CDF5F100C3868D /* AlertPrompt.m */; };
 		232C795B14CF1A0900C3868D /* TunnelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C795A14CF1A0900C3868D /* TunnelViewController.m */; };
+		232C796514CF71AA00C3868D /* FavoritesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C796414CF71AA00C3868D /* FavoritesView.m */; };
+		232C796A14CF72A500C3868D /* FavoritesRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C796914CF72A500C3868D /* FavoritesRenderer.m */; };
+		232C796F14CF77EB00C3868D /* FavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C796E14CF77EB00C3868D /* FavoritesViewController.m */; };
 		232D7A1014C8B23A00DD5911 /* UICustomActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 232D7A0F14C8B23A00DD5911 /* UICustomActionSheet.m */; };
 		232D7A1214C8B4FC00DD5911 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 232D7A1114C8B4FC00DD5911 /* QuartzCore.framework */; };
 		23658CC114BDFB15002C0996 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23658CC014BDFB15002C0996 /* UIKit.framework */; };
@@ -81,6 +84,12 @@
 		232C795A14CF1A0900C3868D /* TunnelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TunnelViewController.m; sourceTree = "<group>"; };
 		232C795C14CF1E6A00C3868D /* LargeScopeControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LargeScopeControllerDelegate.h; sourceTree = "<group>"; };
 		232C795E14CF22FF00C3868D /* TunnelViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TunnelViewControllerDelegate.h; sourceTree = "<group>"; };
+		232C796314CF71AA00C3868D /* FavoritesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesView.h; sourceTree = "<group>"; };
+		232C796414CF71AA00C3868D /* FavoritesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritesView.m; sourceTree = "<group>"; };
+		232C796814CF72A500C3868D /* FavoritesRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesRenderer.h; sourceTree = "<group>"; };
+		232C796914CF72A500C3868D /* FavoritesRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritesRenderer.m; sourceTree = "<group>"; };
+		232C796D14CF77EB00C3868D /* FavoritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesViewController.h; sourceTree = "<group>"; };
+		232C796E14CF77EB00C3868D /* FavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritesViewController.m; sourceTree = "<group>"; };
 		232D7A0E14C8B23A00DD5911 /* UICustomActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICustomActionSheet.h; sourceTree = "<group>"; };
 		232D7A0F14C8B23A00DD5911 /* UICustomActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICustomActionSheet.m; sourceTree = "<group>"; };
 		232D7A1114C8B4FC00DD5911 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -244,6 +253,49 @@
 				232C795A14CF1A0900C3868D /* TunnelViewController.m */,
 			);
 			name = TunnelViewController;
+			sourceTree = "<group>";
+		};
+		232C796214CF716800C3868D /* FavoritesView */ = {
+			isa = PBXGroup;
+			children = (
+				232C796314CF71AA00C3868D /* FavoritesView.h */,
+				232C796414CF71AA00C3868D /* FavoritesView.m */,
+			);
+			name = FavoritesView;
+			sourceTree = "<group>";
+		};
+		232C796614CF724900C3868D /* OtherRenderers */ = {
+			isa = PBXGroup;
+			children = (
+				232C796714CF727D00C3868D /* FavoritesRenderer */,
+			);
+			name = OtherRenderers;
+			sourceTree = "<group>";
+		};
+		232C796714CF727D00C3868D /* FavoritesRenderer */ = {
+			isa = PBXGroup;
+			children = (
+				232C796814CF72A500C3868D /* FavoritesRenderer.h */,
+				232C796914CF72A500C3868D /* FavoritesRenderer.m */,
+			);
+			name = FavoritesRenderer;
+			sourceTree = "<group>";
+		};
+		232C796B14CF77A400C3868D /* OtherControllers */ = {
+			isa = PBXGroup;
+			children = (
+				232C796C14CF77CC00C3868D /* FavoritesViewController */,
+			);
+			name = OtherControllers;
+			sourceTree = "<group>";
+		};
+		232C796C14CF77CC00C3868D /* FavoritesViewController */ = {
+			isa = PBXGroup;
+			children = (
+				232C796D14CF77EB00C3868D /* FavoritesViewController.h */,
+				232C796E14CF77EB00C3868D /* FavoritesViewController.m */,
+			);
+			name = FavoritesViewController;
 			sourceTree = "<group>";
 		};
 		232D7A0B14C8B20200DD5911 /* Utilities */ = {
@@ -478,6 +530,7 @@
 				23DA7A3E14C60284008281DD /* Renderer.h */,
 				23DA7A3F14C60284008281DD /* Renderer.m */,
 				23DA7A4414C609C6008281DD /* MenuCompositeRenderers */,
+				232C796614CF724900C3868D /* OtherRenderers */,
 				23DA7A5514C61FB6008281DD /* RendererHelpers */,
 			);
 			name = Renderers;
@@ -488,6 +541,7 @@
 			children = (
 				232C795814CF196A00C3868D /* LargeScopeControllers */,
 				232C795714CF195200C3868D /* MenuComponentControllers */,
+				232C796B14CF77A400C3868D /* OtherControllers */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -685,6 +739,7 @@
 		23DA7A8114C6462C008281DD /* OtherViews */ = {
 			isa = PBXGroup;
 			children = (
+				232C796214CF716800C3868D /* FavoritesView */,
 				23DA7A8214C64656008281DD /* MainPageView */,
 			);
 			name = OtherViews;
@@ -878,6 +933,9 @@
 				232D7A1014C8B23A00DD5911 /* UICustomActionSheet.m in Sources */,
 				232C795414CDF5F100C3868D /* AlertPrompt.m in Sources */,
 				232C795B14CF1A0900C3868D /* TunnelViewController.m in Sources */,
+				232C796514CF71AA00C3868D /* FavoritesView.m in Sources */,
+				232C796A14CF72A500C3868D /* FavoritesRenderer.m in Sources */,
+				232C796F14CF77EB00C3868D /* FavoritesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
