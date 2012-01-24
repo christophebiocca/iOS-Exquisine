@@ -105,7 +105,7 @@
         [newStack addObject:itemViewController];
     }
     
-    [self dismissModalViewControllerAnimated:NO];
+    [self dismissModalViewControllerAnimated:YES];
     
     [[self navigationController] setViewControllers:newStack animated:YES];
 }
