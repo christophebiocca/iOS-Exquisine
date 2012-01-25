@@ -30,6 +30,4 @@
 
 -(void) favoritesButtonPressed;
 
--(void) pendingButtonPressed;
-
 @end

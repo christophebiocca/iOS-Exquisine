@@ -11,16 +11,16 @@
 @interface MainPageView : UIView{
     
     UIButton *createOrderButton;
-    UIButton *pendingOrderButton;
     UIButton *favoriteOrderButton;
     UIButton *accountInfoButton;
     UILabel *greetingLabel;
+    UILabel *orderStatus;
 }
 
 @property (retain) UIButton *createOrderButton;
-@property (retain) UIButton *pendingOrderButton;
 @property (retain) UIButton *favoriteOrderButton;
 @property (retain) UIButton *accountInfoButton;
 @property (retain) UILabel *greetingLabel;
+@property (retain) UILabel *orderStatus;
 
 @end

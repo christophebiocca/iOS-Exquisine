@@ -44,8 +44,6 @@
     
     [mainPageView.favoriteOrderButton addTarget:self action:@selector(favoritesButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     
-    [mainPageView.createOrderButton addTarget:self action:@selector(pendingButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-    
     [self setView:mainPageView];
 }
 
@@ -84,11 +82,6 @@
     
     [[self navigationController] pushViewController:favoritesViewController animated:YES];
     
-}
-
--(void)pendingButtonPressed
-{
-   
 }
 
 -(NSMutableArray *)pendingOrders
@@ -157,6 +150,18 @@
     {
         [[orderViewController orderInfo] setIsFavorite:NO];
         [favoriteOrders removeObject:[orderViewController orderInfo]];
+    }
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if ([[self pendingOrders] count] > 0)
+    {
+        [mainPageView.orderStatus setText:[NSString stringWithFormat:@"Order Status: %@" ,[[[self pendingOrders] lastObject] status]]];
+    }
+    else
+    {
+        [mainPageView.orderStatus setText:@"Order Status: No orders pending"];
     }
 }
 
