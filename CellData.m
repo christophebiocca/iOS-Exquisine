@@ -32,9 +32,7 @@
 }
 
 -(UITableViewCell *)configureCell: (UITableViewCell *) newCell
-{
-    newCell = [newCell initWithStyle:cellStyle reuseIdentifier:@"cell"];
-    
+{  
     [[newCell textLabel] setText:cellTitle];
     [[newCell detailTextLabel] setText:cellDesc];
     
