@@ -27,6 +27,8 @@
 @property (retain) NSString *status;
 @property (retain) NSString *orderIdentifier;
 @property BOOL isFavorite;
+@property(readonly)NSDecimalNumber* subtotalPrice;
+@property(readonly)NSDecimalNumber* taxPrice;
 @property(readonly)NSDecimalNumber* totalPrice;
 
 -(id)init;

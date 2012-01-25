@@ -60,13 +60,29 @@
     [itemList removeObject:anItem];
 }
 
--(NSDecimalNumber*)totalPrice{
-    NSDecimalNumber* taxRate = [NSDecimalNumber decimalNumberWithString:@"1.13"];
+
+//Yes, this is pretty inefficient. No, I don't think it matters.
+
+-(NSDecimalNumber*)subtotalPrice
+{
     NSDecimalNumber* tabulator = [NSDecimalNumber zero];
     for (Item *currentItem in itemList) {
         tabulator = [tabulator decimalNumberByAdding:[currentItem totalPrice]];
     }
-    return [tabulator decimalNumberByMultiplyingBy:taxRate];
+    return tabulator;
+}
+
+-(NSDecimalNumber*)taxPrice
+{
+    NSDecimalNumber* taxRate = [NSDecimalNumber decimalNumberWithString:@"0.13"];
+    
+    return [[self subtotalPrice] decimalNumberByMultiplyingBy:taxRate];
+}
+
+
+-(NSDecimalNumber*)totalPrice
+{
+    return [[self subtotalPrice] decimalNumberByAdding:[self taxPrice]];
 }
 
 @end

@@ -217,7 +217,7 @@
     }
     
     //i.e. if the "Add Item" row was selected
-    if([indexPath row] == ([[orderInfo itemList] count] + 1)){
+    if([indexPath row] == ([[orderInfo itemList] count] + 3)){
         //allocate a new menu renderer passing this order to it     
         MenuViewController *menuViewController = [[MenuViewController alloc] initializeWithMenuAndOrder:menuInfo :orderInfo];
         

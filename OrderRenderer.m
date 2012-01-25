@@ -24,8 +24,10 @@
     for (Item *currentItem in orderInfo.itemList) {
         [itemRenderList addObject:[[ItemRenderer alloc] initWithItem:currentItem]];
     }
-
-    [[suffixList objectAtIndex:0] setCellDesc:[Utilities FormatToPrice:[orderInfo totalPrice]]];
+    
+    [[suffixList objectAtIndex:0] setCellDesc:[Utilities FormatToPrice:[orderInfo subtotalPrice]]];
+    [[suffixList objectAtIndex:1] setCellDesc:[Utilities FormatToPrice:[orderInfo taxPrice]]];
+    [[suffixList objectAtIndex:2] setCellDesc:[Utilities FormatToPrice:[orderInfo totalPrice]]];
 }
 
 -(OrderRenderer *)initWithOrder:(Order *)anOrder
@@ -39,17 +41,29 @@
     [displayLists addObject:itemRenderList];
     [displayLists addObject:suffixList];
     
-    CellData *newCell = [[CellData alloc] init];
+    CellData *newCell = nil;
+    
+    newCell = [[CellData alloc] init];
+    newCell.cellTitle = @"Subtotal:";
+    newCell.cellDesc = [Utilities FormatToPrice:[orderInfo subtotalPrice]];
+    [suffixList addObject:newCell];
+    
+    newCell = [[CellData alloc] init];
+    newCell.cellTitle = @"HST:";
+    newCell.cellDesc = [Utilities FormatToPrice:[orderInfo taxPrice]];
+    [suffixList addObject:newCell];
+    
+    newCell = [[CellData alloc] init];
     newCell.cellTitle = @"Total:";
     newCell.cellDesc = [Utilities FormatToPrice:[orderInfo totalPrice]];
     [suffixList addObject:newCell];
     
-    CellData *secondNewCell = [[CellData alloc] init];
-    secondNewCell.cellTitle = @"Add Item";
-    secondNewCell.cellDesc = @"";
-    secondNewCell.cellAccessory = @"plus";
-    secondNewCell.cellColour = [UIColor blueColor];
-    [suffixList addObject:secondNewCell];
+    newCell = [[CellData alloc] init];
+    newCell.cellTitle = @"Add Item";
+    newCell.cellDesc = @"";
+    newCell.cellAccessory = @"plus";
+    newCell.cellColour = [UIColor blueColor];
+    [suffixList addObject:newCell];
     
     [self redraw];
     
@@ -88,7 +102,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
     [[Utilities MemberOfCompositeListAtIndex:displayLists:[indexPath row]]  configureCell:cell];

@@ -16,6 +16,7 @@
     BOOL cellSwitchState;
     UIColor *cellColour; //<-- canadian spelling =b
     NSString *cellAccessory;
+    UITableViewCellStyle cellStyle;
 }
 
 @property (retain) NSString *cellTitle;
@@ -23,6 +24,7 @@
 @property (retain) UIColor *cellColour;
 @property BOOL cellSwitchState;
 @property (retain) NSString *cellAccessory;
+@property UITableViewCellStyle cellStyle;
 
 //Configures a table view cell to be representative
 //of the data that is populated in the CellData object

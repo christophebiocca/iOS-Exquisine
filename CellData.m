@@ -15,6 +15,7 @@
 @synthesize cellSwitchState;
 @synthesize cellColour;
 @synthesize cellAccessory;
+@synthesize cellStyle;
 
 -(CellData *)init
 {
@@ -25,12 +26,15 @@
     cellSwitchState = NO;
     cellColour = [UIColor clearColor];
     cellAccessory = @"";
+    cellStyle = UITableViewCellStyleValue1;
     
     return self;
 }
 
 -(UITableViewCell *)configureCell: (UITableViewCell *) newCell
 {
+    newCell = [newCell initWithStyle:cellStyle reuseIdentifier:@"cell"];
+    
     [[newCell textLabel] setText:cellTitle];
     [[newCell detailTextLabel] setText:cellDesc];
     
