@@ -190,34 +190,5 @@
     return [self toggleChoice:[choiceList objectAtIndex:aChoice]];
     
 }
-/*
-//This subroutine is the meat of the logic behind price management. Any time someone adds a choice,
-//or selects something, this subroutine will be called to make sure the effective prices accurately reflect
-//the situation.
--(void)updatePrices{
-    
-    NSInteger numberOfSelections = [[self selectedChoices] count];
-    NSInteger numberOfSelectonsMarkedFree = 0;
-     
-    for (Choice *currentChoice in choiceList) {
-        if(currentChoice.selected){
-            if(numberOfFreeChoices > numberOfSelectonsMarkedFree){
-                numberOfSelectonsMarkedFree ++;
-                currentChoice.effectivePriceCents = 0;
-            }
-            else{
-                currentChoice.effectivePriceCents = currentChoice.normalPriceCents;
-            }
-        }
-        else{
-            if(numberOfFreeChoices > numberOfSelections){
-                currentChoice.effectivePriceCents = 0;
-            }
-            else{
-                currentChoice.effectivePriceCents = currentChoice.normalPriceCents;
-            }
-        }
-    }
-}*/
 
 @end
