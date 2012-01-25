@@ -78,4 +78,15 @@
     return tabulation;
 }
 
+-(NSDictionary*)orderRepresentation{
+    NSMutableDictionary* repr = [NSMutableDictionary dictionaryWithCapacity:2];
+    [repr setObject:[NSNumber numberWithInt:primaryKey] forKey:@"item"];
+    NSMutableArray* orderoptions = [NSMutableArray array];
+    for(Option* option in options){
+        [orderoptions addObject:[option orderRepresentation]];
+    }
+    [repr setObject:orderoptions forKey:@"options"];
+    return repr;
+}
+
 @end

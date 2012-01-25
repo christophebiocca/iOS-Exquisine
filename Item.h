@@ -33,5 +33,7 @@
 
 -(void) addOption:(Option *) anOption;
 
+-(NSDictionary*)orderRepresentation;
+
 @end
 

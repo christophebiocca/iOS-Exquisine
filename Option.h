@@ -58,4 +58,7 @@
 -(void) deselectChoiceByIndex:(NSInteger) aChoice;
 
 -(BOOL) toggleChoiceByIndex:(NSInteger) aChoice;
+
+-(NSDictionary*)orderRepresentation;
+
 @end
