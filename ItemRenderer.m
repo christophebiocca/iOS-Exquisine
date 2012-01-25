@@ -48,7 +48,7 @@
     
     CellData *newCell = [[CellData alloc] init];
     newCell.cellTitle = @"Base Price: ";
-    newCell.cellDesc = [Utilities FormatToPrice:[itemInfo basePriceCents]];
+    newCell.cellDesc = [Utilities FormatToPrice:[itemInfo basePrice]];
     [suffixList addObject:newCell];
     
     CellData *secondNewCell = [[CellData alloc] init];

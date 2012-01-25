@@ -10,18 +10,15 @@
 
 @implementation Utilities
 
-+(NSString *)FormatToPrice:(NSInteger)anInt
++(NSString *)FormatToPrice:(NSDecimalNumber*)price
 {
     
-    if(anInt == 0)
+    if([price isEqual:[NSDecimalNumber zero]])
     {
         return @"Free!";
     }
-    
-    NSNumber *helper = [NSNumber numberWithFloat:(float)anInt/100];
-    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-    [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
-    return [formatter stringFromNumber:helper];
+    return [NSNumberFormatter localizedStringFromNumber:price 
+                                            numberStyle:NSNumberFormatterCurrencyStyle];
 }
 
 +(NSInteger)CompositeListCount:(NSMutableArray *) compositeList

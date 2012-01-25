@@ -10,8 +10,7 @@
 
 @interface Utilities : NSObject
 
-//Assumes that the integer is number of cents
-+(NSString *)FormatToPrice:(NSInteger) anInt;
++(NSString *)FormatToPrice:(NSDecimalNumber*) price;
 
 +(NSInteger)CompositeListCount:(NSMutableArray *) compositeList;
 

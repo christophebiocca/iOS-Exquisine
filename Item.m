@@ -12,18 +12,18 @@
 @implementation Item
 
 @synthesize options;
-@synthesize basePriceCents;
+@synthesize basePrice;
 
 -(NSString *)description
 {
-    return [NSString stringWithFormat:@"%@, C%i, with options: %@", name, basePriceCents, options];
+    return [NSString stringWithFormat:@"%@, %@, with options: %@", name, basePrice, options];
 }
 
 -(Item *)initFromItem:(Item *)anItem
 {
     self = [super initFromMenuComponent:anItem];
     
-    basePriceCents = anItem.basePriceCents;
+    basePrice = anItem.basePrice;
     options = [[NSMutableArray alloc] initWithCapacity:0];
     
     for (Option *currentOption in anItem.options) {
@@ -37,7 +37,8 @@
 -(Item *)initFromData:(NSData *)inputData
 {
     self = [super initFromData:inputData];
-    basePriceCents = [[inputData valueForKey:@"price_cents"] intValue];
+    NSInteger cents = [[inputData valueForKey:@"price_cents"] intValue];
+    basePrice = [[[NSDecimalNumber alloc] initWithInteger:cents] decimalNumberByMultiplyingByPowerOf10:-2];
     
     options = [[NSMutableArray alloc] initWithCapacity:0];
     
@@ -60,13 +61,13 @@
     [options addObject:anOption];
 }
 
--(NSInteger)totalPrice
+-(NSDecimalNumber*)totalPrice
 {
-    NSInteger tabulation = basePriceCents;
+    NSDecimalNumber* tabulation = basePrice;
     
     for (Option *currentOption in options) 
     {
-        tabulation += currentOption.totalPrice;
+        tabulation = [tabulation decimalNumberByAdding:[currentOption totalPrice]];
     }
     
     return tabulation;

@@ -12,13 +12,14 @@
 
 @interface Item : MenuComponent{
     
-    NSInteger basePriceCents;
+    NSDecimalNumber* basePrice;
     NSMutableArray *options;
     
 }
 
 @property (retain, readonly) NSMutableArray *options; 
-@property NSInteger basePriceCents;
+@property (retain, readonly) NSDecimalNumber* basePrice;
+@property (retain, readonly) NSDecimalNumber* totalPrice;
 
 -(NSString *)description;
 
@@ -29,8 +30,6 @@
 -(Item *)init;
 
 -(void) addOption:(Option *) anOption;
-
--(NSInteger)totalPrice;
 
 @end
 
