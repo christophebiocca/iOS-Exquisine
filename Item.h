@@ -14,12 +14,14 @@
     
     NSDecimalNumber* basePrice;
     NSMutableArray *options;
+    NSString* propertiesChecksum;
     
 }
 
 @property (retain, readonly) NSMutableArray *options; 
 @property (retain, readonly) NSDecimalNumber* basePrice;
 @property (retain, readonly) NSDecimalNumber* totalPrice;
+@property (retain, readonly) NSString* propertiesChecksum;
 
 -(NSString *)description;
 

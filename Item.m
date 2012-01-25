@@ -13,6 +13,7 @@
 
 @synthesize options;
 @synthesize basePrice;
+@synthesize propertiesChecksum;
 
 -(NSString *)description
 {
@@ -31,6 +32,8 @@
         [options addObject:anOption];
     }
     
+    propertiesChecksum = [anItem propertiesChecksum];
+    
     return self;
 }
 
@@ -39,6 +42,8 @@
     self = [super initFromData:inputData];
     NSInteger cents = [[inputData objectForKey:@"price_cents"] intValue];
     basePrice = [[[NSDecimalNumber alloc] initWithInteger:cents] decimalNumberByMultiplyingByPowerOf10:-2];
+    
+    propertiesChecksum = [inputData valueForKey:@"properties_checksum"];
     
     options = [[NSMutableArray alloc] initWithCapacity:0];
     
