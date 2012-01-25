@@ -12,6 +12,7 @@
 @implementation Choice
 
 @synthesize price;
+@synthesize propertiesChecksum;
 
 -(Choice *)initFromChoice:(Choice *)aChoice option:(Option *)opt
 {
@@ -20,6 +21,7 @@
     price = aChoice.price;
     selected = aChoice.selected;
     option = opt;
+    propertiesChecksum = [aChoice propertiesChecksum];
     
     return self;
 }
@@ -33,6 +35,7 @@
     price = [priceCents decimalNumberByMultiplyingByPowerOf10:-2];
     selected = NO;
     option = opt;
+    propertiesChecksum = [inputData objectForKey:@"properties_checksum"];
     return self;
 }
 

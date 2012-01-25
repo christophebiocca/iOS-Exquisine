@@ -17,11 +17,14 @@
     NSDecimalNumber* price;
     
     BOOL selected;
+    
+    NSString* propertiesChecksum;
 }
 
 @property (retain, readonly) NSDecimalNumber* price;
 @property (readonly) BOOL selected;
 @property (readonly) BOOL isFree;
+@property (retain, readonly) NSString* propertiesChecksum;
 
 -(Choice *)initFromChoice:(Choice *) aChoice option:(Option*)opt;
 
