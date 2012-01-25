@@ -23,6 +23,8 @@
     NSMutableArray *choiceList; 
     NSMutableArray *selectedChoices;
     
+    NSString* propertiesChecksum;
+    
 }
 
 @property (retain,readonly) NSArray *choiceList;
@@ -33,6 +35,7 @@
 @property (readonly) NSInteger numberOfFreeChoices;
 @property (readonly) NSInteger remainingFreeChoices;
 @property(retain,readonly) NSDecimalNumber* totalPrice;
+@property (retain,readonly) NSString* propertiesChecksum;
 
 -(Option *)initFromOption:(Option *)anOption;
 

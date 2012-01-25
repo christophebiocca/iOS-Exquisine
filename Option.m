@@ -16,6 +16,7 @@
 @synthesize numberOfFreeChoices;
 @synthesize choiceList;
 @synthesize selectedChoices;
+@synthesize propertiesChecksum;
 
 -(Option *)initFromOption:(Option *)anOption
 {
@@ -41,6 +42,8 @@
             [selectedChoices addObject:choice];
         }
     }
+    
+    propertiesChecksum = [anOption propertiesChecksum];
     
     return self;
     
@@ -71,6 +74,8 @@
             [selectedChoices addObject:choice];
         }
     }
+    
+    propertiesChecksum = [inputData objectForKey:@"properties_checksum"];
     
     return self;
 }
