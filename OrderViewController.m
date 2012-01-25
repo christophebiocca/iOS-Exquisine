@@ -118,7 +118,7 @@
 
 - (void)alertView:(UIAlertView *)alertView willDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    if ([alertView tag] == 1)
+    if ([alertView tag] == 1) // Order Placement
     {
         if (buttonIndex == 1)
         {
@@ -127,7 +127,7 @@
         }
     }
     
-    if ([alertView tag] == 2)
+    if ([alertView tag] == 2) // Order Clear
     {
         if (buttonIndex == 1)
         {
@@ -136,7 +136,7 @@
         }
     }
     
-    if ([alertView tag] == 3)
+    if ([alertView tag] == 3) // Order Deletion
     {
         if (buttonIndex == 1)
         {
@@ -144,7 +144,7 @@
             [[self navigationController] popViewControllerAnimated:YES];
         }
     }
-    if ([alertView tag] == 4)
+    if ([alertView tag] == 4) // Order Rename
     {
         if (buttonIndex == 1)
         {
