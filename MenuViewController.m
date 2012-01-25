@@ -91,8 +91,13 @@
     [orderInfo addItem:selectedItem];
     
     NSMutableArray *newStack = [[NSMutableArray alloc] initWithCapacity:0];
-    [newStack addObject:[[[self navigationController] viewControllers]objectAtIndex:0]];
-    [newStack addObject:[[[self navigationController] viewControllers]objectAtIndex:1]];
+    
+    for (UIViewController *aController in [[self navigationController] viewControllers]) {
+        [newStack addObject:aController];
+        if ([aController isKindOfClass:[OrderViewController class]]) {
+            break;
+        }
+    }
     
     NSInteger manditoryCount = 0;
     for (Option *currentOption in [selectedItem options]) {

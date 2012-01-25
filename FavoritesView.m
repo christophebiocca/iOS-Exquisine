@@ -16,7 +16,8 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        orderTable = [[UITableView alloc] init];
+        [self addSubview:orderTable];
     }
     return self;
 }

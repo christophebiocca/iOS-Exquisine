@@ -14,6 +14,7 @@
 #import "Item.h"
 #import "ItemViewController.h"
 #import "GetMenu.h"
+#import "FavoritesViewController.h"
 
 @implementation MainPageViewController
 
@@ -39,7 +40,11 @@
 {
     mainPageView = [[MainPageView alloc] init];
     
-    [mainPageView.createOrderButton addTarget:self action:@selector(createOrderPressed) forControlEvents:UIControlEventTouchUpInside];     
+    [mainPageView.createOrderButton addTarget:self action:@selector(createOrderPressed) forControlEvents:UIControlEventTouchUpInside];
+    
+    [mainPageView.favoriteOrderButton addTarget:self action:@selector(favoritesButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    
+    [mainPageView.createOrderButton addTarget:self action:@selector(pendingButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     
     [self setView:mainPageView];
 }
@@ -67,6 +72,23 @@
     [orderView setDelegate:self];
     
     [[self navigationController] pushViewController:orderView animated:YES];
+}
+
+-(void)favoritesButtonPressed
+{
+    if(!theMenu)
+    {
+        NSLog(@"The menu had not been fetched upon clicking favorites");
+    }
+    FavoritesViewController *favoritesViewController = [[FavoritesViewController alloc] initWithFavoritesListAndMenu:favoriteOrders :theMenu];
+    
+    [[self navigationController] pushViewController:favoritesViewController animated:YES];
+    
+}
+
+-(void)pendingButtonPressed
+{
+   
 }
 
 -(NSMutableArray *)pendingOrders

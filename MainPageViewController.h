@@ -28,4 +28,8 @@
 
 -(NSMutableArray *) pendingOrders;
 
+-(void) favoritesButtonPressed;
+
+-(void) pendingButtonPressed;
+
 @end
