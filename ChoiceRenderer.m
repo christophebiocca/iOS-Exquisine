@@ -22,7 +22,11 @@
 {
     
     aCell.textLabel.text = [choiceInfo name];
-    aCell.detailTextLabel.text = [Utilities FormatToPrice:[choiceInfo effectivePriceCents]];
+    if([choiceInfo isFree]){
+        aCell.detailTextLabel.text = @"Free";
+    } else {
+        aCell.detailTextLabel.text = [Utilities FormatToPrice:[choiceInfo price]];
+    }
     
     if (choiceInfo.selected){
         [aCell setAccessoryType:UITableViewCellAccessoryCheckmark];

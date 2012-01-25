@@ -9,29 +9,29 @@
 #import <Foundation/Foundation.h>
 #import "MenuComponent.h"
 
+@class Option;
+
 @interface Choice : MenuComponent{
-    //This price is the price of the choice assuming no special rules apply
-    //(i.e. if this is one of the choices that you get free of charge)
-    NSInteger normalPriceCents;
+    Option* option;
     
-    //This price is the price of the choice with special rules applied.
-    //The user is expected to manage this value, as it will relate to
-    //Circumstances that only the user will know.
-    NSInteger effectivePriceCents;
+    NSDecimalNumber* price;
     
     BOOL selected;
+    
+    NSString* propertiesChecksum;
 }
 
-@property NSInteger normalPriceCents;
-@property NSInteger effectivePriceCents;
-@property BOOL selected;
+@property (retain, readonly) NSDecimalNumber* price;
+@property (readonly) BOOL selected;
+@property (readonly) BOOL isFree;
+@property (retain, readonly) NSString* propertiesChecksum;
 
--(Choice *)initFromChoice:(Choice *) aChoice;
+-(Choice *)initFromChoice:(Choice *) aChoice option:(Option*)opt;
 
--(Choice *)initFromData:(NSData *) inputData;
+-(Choice *)initFromData:(NSDictionary *) inputData option:(Option*)opt;
 
 -(NSString *)description;
 
--(void)toggleSelected;
+-(NSComparisonResult)comparePrice:(Choice*)other;
 
 @end

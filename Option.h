@@ -23,25 +23,27 @@
     NSMutableArray *choiceList; 
     NSMutableArray *selectedChoices;
     
+    NSString* propertiesChecksum;
+    
 }
 
-@property (retain,readonly) NSMutableArray *choiceList;
-@property (retain,readonly) NSMutableArray *selectedChoices;
-@property NSInteger lowerBound;
-@property NSInteger upperBound;
-@property NSInteger numberOfFreeChoices;
+@property (retain,readonly) NSArray *choiceList;
+@property (retain,readonly) NSArray *selectedChoices;
+@property (retain,readonly) NSArray *selectedFreeChoices;
+@property (readonly) NSInteger lowerBound;
+@property (readonly) NSInteger upperBound;
+@property (readonly) NSInteger numberOfFreeChoices;
+@property (readonly) NSInteger remainingFreeChoices;
+@property(retain,readonly) NSDecimalNumber* totalPrice;
+@property (retain,readonly) NSString* propertiesChecksum;
 
 -(Option *)initFromOption:(Option *)anOption;
 
--(Option *)initFromData:(NSData *)inputData;
+-(Option *)initFromData:(NSDictionary *)inputData;
 
 -(Option *)init;
 
 -(NSString *) description;
-
--(NSInteger) totalPrice;
-
--(NSMutableArray *) selectedChoices;
 
 -(void) addPossibleChoice:(Choice *) aChoice;
 
@@ -56,6 +58,4 @@
 -(void) deselectChoiceByIndex:(NSInteger) aChoice;
 
 -(BOOL) toggleChoiceByIndex:(NSInteger) aChoice;
-
--(void) updatePrices;
 @end

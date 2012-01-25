@@ -27,6 +27,7 @@
 @property (retain) NSString *status;
 @property (retain) NSString *orderIdentifier;
 @property BOOL isFavorite;
+@property(readonly)NSDecimalNumber* totalPrice;
 
 -(id)init;
 
@@ -37,7 +38,5 @@
 -(void) addItem:(Item *) anItem;
 
 -(void) removeItem:(Item *) anItem;
-
--(NSInteger) totalPrice;
 
 @end

@@ -17,6 +17,7 @@
 #import "UICustomActionSheet.h"
 #import "AlertPrompt.h"
 #import "OrderManagementDelegate.h"
+#import "Utilities.h"
 
 @interface UIActionSheet(AccessPrivate)
     @property(readonly)NSMutableArray* buttons;
@@ -77,7 +78,7 @@
 
 -(void)displayOrderConfirmation
 {
-    UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Are you sure?" message:[NSString stringWithFormat: @"Are you sure you'd like to make this purchase of $%i CAD?", [orderInfo totalPrice]] delegate:self cancelButtonTitle:@"Nope" otherButtonTitles:@"Awww Yeah!", nil];
+    UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Are you sure?" message:[NSString stringWithFormat: @"Are you sure you'd like to make this purchase of %@?", [Utilities FormatToPrice:[orderInfo totalPrice]]] delegate:self cancelButtonTitle:@"Nope" otherButtonTitles:@"Awww Yeah!", nil];
     
     [areYouSure setTag:1];
     

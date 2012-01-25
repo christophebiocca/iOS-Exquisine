@@ -16,6 +16,7 @@
 @synthesize numberOfFreeChoices;
 @synthesize choiceList;
 @synthesize selectedChoices;
+@synthesize propertiesChecksum;
 
 -(Option *)initFromOption:(Option *)anOption
 {
@@ -28,14 +29,12 @@
     selectedChoices = [[NSMutableArray alloc] initWithCapacity:0];
             
     for (Choice *aChoice in anOption.choiceList) {
-        Choice *aNewChoice = [[Choice alloc] initFromChoice:aChoice];
+        Choice *aNewChoice = [[Choice alloc] initFromChoice:aChoice option:self];
         [choiceList addObject:aNewChoice];
     }
     
     //sort the choice list by real price
-    [choiceList sortUsingComparator:^(id firstChoice, id secondChoice){
-        return [firstChoice normalPriceCents] < [secondChoice normalPriceCents];
-    }];
+    [choiceList sortUsingSelector:@selector(comparePrice:)];
     
     for (Choice *choice in choiceList) {
         if(choice.selected)
@@ -44,31 +43,30 @@
         }
     }
     
-    [self updatePrices];
+    propertiesChecksum = [anOption propertiesChecksum];
     
     return self;
     
 }
 
--(Option *)initFromData:(NSData *)inputData
+-(Option *)initFromData:(NSDictionary *)inputData
 {
     self = [super initFromData:inputData];
-    upperBound = [[inputData valueForKey:@"max_choice"] intValue];
-    lowerBound = [[inputData valueForKey:@"min_choice"] intValue];
+    upperBound = [[inputData objectForKey:@"max_choice"] intValue];
+    lowerBound = [[inputData objectForKey:@"min_choice"] intValue];
+    numberOfFreeChoices = [[inputData objectForKey:@"free_choice"] intValue];
     
     selectedChoices = [[NSMutableArray alloc] initWithCapacity:0];
     
     choiceList = [[NSMutableArray alloc] initWithCapacity:0];
     
-    for (NSData *choice in [inputData valueForKey:@"choices"]) {
-        Choice *newChoice = [[Choice alloc] initFromData:choice];
+    for (NSDictionary *choice in [inputData objectForKey:@"choices"]) {
+        Choice *newChoice = [[Choice alloc] initFromData:choice option:self];
         [choiceList addObject:newChoice];
     }
     
     //sort the choice list by real price
-    [choiceList sortUsingComparator:^(id firstChoice, id secondChoice){
-        return [firstChoice normalPriceCents] < [secondChoice normalPriceCents];
-    }];
+    [choiceList sortUsingSelector:@selector(comparePrice:)];
     
     for (Choice *choice in choiceList) {
         if(choice.selected)
@@ -77,9 +75,7 @@
         }
     }
     
-
-    
-    [self updatePrices];
+    propertiesChecksum = [inputData objectForKey:@"properties_checksum"];
     
     return self;
 }
@@ -98,12 +94,27 @@
     
 }
 
--(NSInteger)totalPrice{
+-(NSArray*)selectedFreeChoices{
+    return [[selectedChoices sortedArrayUsingSelector:@selector(comparePrice:)] 
+            subarrayWithRange:
+            NSMakeRange(MAX((NSInteger)[selectedChoices count] - numberOfFreeChoices, 0), 
+            MIN(numberOfFreeChoices, [selectedChoices count]))];
+}
+
+-(NSInteger)remainingFreeChoices{
+    return MAX(0, numberOfFreeChoices - [selectedChoices count]);
+}
+
+-(NSDecimalNumber*)totalPrice{
     
-    NSInteger tabulation = 0;
+    NSDecimalNumber* tabulation = [NSDecimalNumber zero];
     
-    for (int n = 0; n < [[self selectedChoices] count] ; n++){
-        tabulation += [[[self selectedChoices] objectAtIndex:n] effectivePriceCents];
+    NSArray* sorted = [selectedChoices sortedArrayUsingSelector:@selector(comparePrice:)];
+    NSArray* extra = [sorted subarrayWithRange:
+                      NSMakeRange(0, MAX((NSInteger)([sorted count] - numberOfFreeChoices), 0))];
+    
+    for (Choice* choice in extra){
+        tabulation = [tabulation decimalNumberByAdding:[choice price]];
     }
     
     return tabulation;
@@ -112,10 +123,7 @@
 -(void) addPossibleChoice:(Choice *) aChoice{
     [choiceList addObject:aChoice];
     //sort the choice list by real price
-    [choiceList sortUsingComparator:^(id firstChoice, id secondChoice){
-        return [firstChoice normalPriceCents] < [secondChoice normalPriceCents];
-    }];
-    [self updatePrices];
+    [choiceList sortUsingSelector:@selector(comparePrice:)];
 }
 
 -(BOOL) selectChoice:(Choice *) aChoice{
@@ -123,20 +131,16 @@
     if ([choiceList containsObject:aChoice]){
         if(upperBound <= 1)
         {
-            [aChoice setSelected:YES];
             [selectedChoices addObject:aChoice];
             if([selectedChoices count] > upperBound){
                 [self deselectChoice:[selectedChoices objectAtIndex:0]];
             }
-            [self updatePrices];
             return YES;
         }
         else
         {
             if(upperBound > [selectedChoices count]){
-                [aChoice setSelected:YES];
                 [selectedChoices addObject:aChoice];
-                [self updatePrices];
                 return YES;
             }
             else{
@@ -154,9 +158,7 @@
     
     if ([choiceList containsObject:aChoice]){
         if ([selectedChoices count] > lowerBound){
-            [[choiceList objectAtIndex:[choiceList indexOfObject:aChoice]] setSelected:NO];
             [selectedChoices removeObject:aChoice];
-            [self updatePrices];
         }
     }
     else{
@@ -193,35 +195,5 @@
     return [self toggleChoice:[choiceList objectAtIndex:aChoice]];
     
 }
-
-//This subroutine is the meat of the logic behind price management. Any time someone adds a choice,
-//or selects something, this subroutine will be called to make sure the effective prices accurately reflect
-//the situation.
--(void)updatePrices{
-    
-    NSInteger numberOfSelections = [[self selectedChoices] count];
-    NSInteger numberOfSelectonsMarkedFree = 0;
-     
-    for (Choice *currentChoice in choiceList) {
-        if(currentChoice.selected){
-            if(numberOfFreeChoices > numberOfSelectonsMarkedFree){
-                numberOfSelectonsMarkedFree ++;
-                currentChoice.effectivePriceCents = 0;
-            }
-            else{
-                currentChoice.effectivePriceCents = currentChoice.normalPriceCents;
-            }
-        }
-        else{
-            if(numberOfFreeChoices > numberOfSelections){
-                currentChoice.effectivePriceCents = 0;
-            }
-            else{
-                currentChoice.effectivePriceCents = currentChoice.normalPriceCents;
-            }
-        }
-    }
-}
-
 
 @end

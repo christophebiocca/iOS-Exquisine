@@ -7,43 +7,58 @@
 //
 
 #import "Choice.h"
+#import "Option.h"
 
 @implementation Choice
 
-@synthesize normalPriceCents;
-@synthesize effectivePriceCents;
-@synthesize selected;
+@synthesize price;
+@synthesize propertiesChecksum;
 
--(Choice *)initFromChoice:(Choice *)aChoice
+-(Choice *)initFromChoice:(Choice *)aChoice option:(Option *)opt
 {
     self = [super initFromMenuComponent:aChoice];
     
-    normalPriceCents = aChoice.normalPriceCents;
-    effectivePriceCents = aChoice.effectivePriceCents;
+    price = aChoice.price;
     selected = aChoice.selected;
+    option = opt;
+    propertiesChecksum = [aChoice propertiesChecksum];
     
     return self;
 }
 
--(Choice *)initFromData:(NSData *)inputData
+-(Choice *)initFromData:(NSDictionary *)inputData option:(Option *)opt
 {
     self = [super initFromData:inputData];
-    
-    normalPriceCents = [[inputData valueForKey:@"price_cents"] intValue];
-    effectivePriceCents = 0;
+    NSDecimalNumber* priceCents = [[NSDecimalNumber alloc] 
+                                   initWithInteger:[[inputData 
+                                                     objectForKey:@"price_cents"] intValue]];
+    price = [priceCents decimalNumberByMultiplyingByPowerOf10:-2];
     selected = NO;
-    
+    option = opt;
+    propertiesChecksum = [inputData objectForKey:@"properties_checksum"];
     return self;
 }
 
 -(NSString *)description{
     
-    return [NSString stringWithFormat:@"%@ - C%i", name, normalPriceCents];
+    return [NSString stringWithFormat:@"%@ - %@", name, price];
     
 }
 
--(void)toggleSelected{
-    selected = !selected;
+-(NSComparisonResult)comparePrice:(Choice*)other{
+    return [[self price] compare:[other price]];
+}
+
+-(BOOL)selected{
+    return [[option selectedChoices] containsObject:self];
+}
+
+-(BOOL)isFree{
+    if([self selected]){
+        return [[option selectedFreeChoices] containsObject:self];
+    } else {
+        return [option remainingFreeChoices] > 0;
+    }
 }
 
 @end

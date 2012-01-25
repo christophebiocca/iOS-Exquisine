@@ -103,7 +103,7 @@
     return pendingOrderList;
 }
 
--(void)apiCall:(APICall *)call completedWithData:(NSData *)data{
+-(void)apiCall:(APICall *)call completedWithData:(NSDictionary *)data{
     NSLog(@"SUCCESS call: %@ Data:\n%@", call, data);
     theMenu = [[Menu alloc] initFromData:data];
 }

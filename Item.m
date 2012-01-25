@@ -12,18 +12,19 @@
 @implementation Item
 
 @synthesize options;
-@synthesize basePriceCents;
+@synthesize basePrice;
+@synthesize propertiesChecksum;
 
 -(NSString *)description
 {
-    return [NSString stringWithFormat:@"%@, C%i, with options: %@", name, basePriceCents, options];
+    return [NSString stringWithFormat:@"%@, %@, with options: %@", name, basePrice, options];
 }
 
 -(Item *)initFromItem:(Item *)anItem
 {
     self = [super initFromMenuComponent:anItem];
     
-    basePriceCents = anItem.basePriceCents;
+    basePrice = anItem.basePrice;
     options = [[NSMutableArray alloc] initWithCapacity:0];
     
     for (Option *currentOption in anItem.options) {
@@ -31,17 +32,22 @@
         [options addObject:anOption];
     }
     
+    propertiesChecksum = [anItem propertiesChecksum];
+    
     return self;
 }
 
--(Item *)initFromData:(NSData *)inputData
+-(Item *)initFromData:(NSDictionary *)inputData
 {
     self = [super initFromData:inputData];
-    basePriceCents = [[inputData valueForKey:@"price_cents"] intValue];
+    NSInteger cents = [[inputData objectForKey:@"price_cents"] intValue];
+    basePrice = [[[NSDecimalNumber alloc] initWithInteger:cents] decimalNumberByMultiplyingByPowerOf10:-2];
+    
+    propertiesChecksum = [inputData valueForKey:@"properties_checksum"];
     
     options = [[NSMutableArray alloc] initWithCapacity:0];
     
-    for (NSData *option in [inputData valueForKey:@"all_options"]) {
+    for (NSDictionary *option in [inputData objectForKey:@"all_options"]) {
         Option *newOption = [[Option alloc] initFromData:option];
         [options addObject:newOption];
     }
@@ -60,13 +66,13 @@
     [options addObject:anOption];
 }
 
--(NSInteger)totalPrice
+-(NSDecimalNumber*)totalPrice
 {
-    NSInteger tabulation = basePriceCents;
+    NSDecimalNumber* tabulation = basePrice;
     
     for (Option *currentOption in options) 
     {
-        tabulation += currentOption.totalPrice;
+        tabulation = [tabulation decimalNumberByAdding:[currentOption totalPrice]];
     }
     
     return tabulation;

@@ -21,6 +21,6 @@
 
 -(void) addSubmenu:(Menu *) aSubmenu;
 
--(Menu *) initFromData:(NSData *)inputData;
+-(Menu *) initFromData:(NSDictionary *)inputData;
 
 @end

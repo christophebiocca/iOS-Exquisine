@@ -60,21 +60,13 @@
     [itemList removeObject:anItem];
 }
 
--(NSInteger)totalPrice{
-    NSInteger tabulator = 0;
-    
+-(NSDecimalNumber*)totalPrice{
+    NSDecimalNumber* taxRate = [NSDecimalNumber decimalNumberWithString:@"1.13"];
+    NSDecimalNumber* tabulator = [NSDecimalNumber zero];
     for (Item *currentItem in itemList) {
-        tabulator += [currentItem totalPrice];
+        tabulator = [tabulator decimalNumberByAdding:[currentItem totalPrice]];
     }
-    
-    if (tabulator)
-    {
-        return tabulator;
-    }
-    else
-    {
-        return 0;
-    }
+    return [tabulator decimalNumberByMultiplyingBy:taxRate];
 }
 
 @end

@@ -24,10 +24,11 @@
     return self;
 }
 
--(MenuComponent *)initFromData:(NSData *)inputData
+-(MenuComponent *)initFromData:(NSDictionary *)inputData
 {
-    name = [inputData valueForKey:@"name"];
-    primaryKey = [[inputData valueForKey:@"pk"] intValue];
+    name = [inputData objectForKey:@"name"];
+    primaryKey = [[inputData objectForKey:@"pk"] intValue];
+    desc = [inputData objectForKey:@"description"];
     
     return self;
 }
