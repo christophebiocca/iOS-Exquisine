@@ -26,6 +26,6 @@
 
 -(MenuComponent *) initFromMenuComponent:(MenuComponent *) aMenuComponent;
 
--(MenuComponent *) initFromData:(NSData *) inputData;
+-(MenuComponent *) initFromData:(NSDictionary *) inputData;
 
 @end

@@ -19,17 +19,17 @@
     return self;
 }
 
--(Menu *) initFromData:(NSData *)inputData
+-(Menu *) initFromData:(NSDictionary *)inputData
 {
     self = [super initFromData:inputData];
     
     submenuList = [[NSMutableArray alloc] initWithCapacity:0];
     
-    for (NSData *submenu in [inputData valueForKey:@"submenus"]) {
+    for (NSDictionary *submenu in [inputData objectForKey:@"submenus"]) {
         Menu *newSubmenu = [[Menu alloc] initFromData:submenu];
         [submenuList addObject:newSubmenu];
     }
-    for (NSData *item in [inputData valueForKey:@"items"]) {
+    for (NSDictionary *item in [inputData objectForKey:@"items"]) {
         Item *newItem = [[Item alloc] initFromData:item];
         [submenuList addObject:newItem];
     }

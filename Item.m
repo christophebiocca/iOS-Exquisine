@@ -34,15 +34,15 @@
     return self;
 }
 
--(Item *)initFromData:(NSData *)inputData
+-(Item *)initFromData:(NSDictionary *)inputData
 {
     self = [super initFromData:inputData];
-    NSInteger cents = [[inputData valueForKey:@"price_cents"] intValue];
+    NSInteger cents = [[inputData objectForKey:@"price_cents"] intValue];
     basePrice = [[[NSDecimalNumber alloc] initWithInteger:cents] decimalNumberByMultiplyingByPowerOf10:-2];
     
     options = [[NSMutableArray alloc] initWithCapacity:0];
     
-    for (NSData *option in [inputData valueForKey:@"all_options"]) {
+    for (NSDictionary *option in [inputData objectForKey:@"all_options"]) {
         Option *newOption = [[Option alloc] initFromData:option];
         [options addObject:newOption];
     }

@@ -46,18 +46,18 @@
     
 }
 
--(Option *)initFromData:(NSData *)inputData
+-(Option *)initFromData:(NSDictionary *)inputData
 {
     self = [super initFromData:inputData];
-    upperBound = [[inputData valueForKey:@"max_choice"] intValue];
-    lowerBound = [[inputData valueForKey:@"min_choice"] intValue];
-    numberOfFreeChoices = [[inputData valueForKey:@"free_choice"] intValue];
+    upperBound = [[inputData objectForKey:@"max_choice"] intValue];
+    lowerBound = [[inputData objectForKey:@"min_choice"] intValue];
+    numberOfFreeChoices = [[inputData objectForKey:@"free_choice"] intValue];
     
     selectedChoices = [[NSMutableArray alloc] initWithCapacity:0];
     
     choiceList = [[NSMutableArray alloc] initWithCapacity:0];
     
-    for (NSData *choice in [inputData valueForKey:@"choices"]) {
+    for (NSDictionary *choice in [inputData objectForKey:@"choices"]) {
         Choice *newChoice = [[Choice alloc] initFromData:choice option:self];
         [choiceList addObject:newChoice];
     }

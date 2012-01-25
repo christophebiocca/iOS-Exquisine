@@ -36,7 +36,7 @@
 
 -(Option *)initFromOption:(Option *)anOption;
 
--(Option *)initFromData:(NSData *)inputData;
+-(Option *)initFromData:(NSDictionary *)inputData;
 
 -(Option *)init;
 

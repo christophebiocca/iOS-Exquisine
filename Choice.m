@@ -24,12 +24,12 @@
     return self;
 }
 
--(Choice *)initFromData:(NSData *)inputData option:(Option *)opt
+-(Choice *)initFromData:(NSDictionary *)inputData option:(Option *)opt
 {
     self = [super initFromData:inputData];
     NSDecimalNumber* priceCents = [[NSDecimalNumber alloc] 
                                    initWithInteger:[[inputData 
-                                                     valueForKey:@"price_cents"] intValue]];
+                                                     objectForKey:@"price_cents"] intValue]];
     price = [priceCents decimalNumberByMultiplyingByPowerOf10:-2];
     selected = NO;
     option = opt;

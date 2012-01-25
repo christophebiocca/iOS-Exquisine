@@ -27,7 +27,7 @@
 
 -(Choice *)initFromChoice:(Choice *) aChoice option:(Option*)opt;
 
--(Choice *)initFromData:(NSData *) inputData option:(Option*)opt;
+-(Choice *)initFromData:(NSDictionary *) inputData option:(Option*)opt;
 
 -(NSString *)description;
 

@@ -25,7 +25,7 @@
 
 -(Item *)initFromItem:(Item *)anItem;
 
--(Item *)initFromData:(NSData *) inputData;
+-(Item *)initFromData:(NSDictionary *) inputData;
 
 -(Item *)init;
 
