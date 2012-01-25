@@ -85,4 +85,12 @@
     return [[self subtotalPrice] decimalNumberByAdding:[self taxPrice]];
 }
 
+-(NSDictionary*)orderRepresentation{
+    NSMutableArray* orderitems = [NSMutableArray arrayWithCapacity:[itemList count]];
+    for(Item* item in itemList){
+        [orderitems addObject:[item orderRepresentation]];
+    }
+    return [NSDictionary dictionaryWithObject:orderitems forKey:@"items"];
+}
+
 @end

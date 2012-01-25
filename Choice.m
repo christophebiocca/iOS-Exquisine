@@ -61,4 +61,8 @@
     }
 }
 
+-(NSDictionary*)orderRepresentation{
+    return [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:primaryKey] forKey:@"choice"];
+}
+
 @end

@@ -196,4 +196,15 @@
     
 }
 
+-(NSDictionary*)orderRepresentation{
+    NSMutableDictionary* repr = [NSMutableDictionary dictionaryWithCapacity:2];
+    [repr setObject:[NSNumber numberWithInt:primaryKey] forKey:@"option"];
+    NSMutableArray* orderchoices = [NSMutableArray arrayWithCapacity:[selectedChoices count]];
+    for(Choice* orderchoice in selectedChoices){
+        [orderchoices addObject:[orderchoice orderRepresentation]];
+    }
+    [repr setObject:orderchoices forKey:@"choices"];
+    return repr;
+}
+
 @end

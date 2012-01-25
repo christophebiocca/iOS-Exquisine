@@ -41,4 +41,6 @@
 
 -(void) removeItem:(Item *) anItem;
 
+-(NSDictionary*)orderRepresentation;
+
 @end

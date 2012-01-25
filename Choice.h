@@ -34,4 +34,6 @@
 
 -(NSComparisonResult)comparePrice:(Choice*)other;
 
+-(NSDictionary*)orderRepresentation;
+
 @end
