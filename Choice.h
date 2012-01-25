@@ -14,8 +14,6 @@
 @interface Choice : MenuComponent{
     Option* option;
     
-    //This price is the price of the choice assuming no special rules apply
-    //(i.e. if this is one of the choices that you get free of charge)
     NSDecimalNumber* price;
     
     BOOL selected;
