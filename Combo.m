@@ -8,9 +8,11 @@
 
 #import "Combo.h"
 #import "Item.h"
+#import "Order.h"
 
 @implementation Combo
 
+@synthesize price;
 
 -(Combo *)initFromData:(NSDictionary *)inputData
 {
@@ -34,6 +36,68 @@
     }
     
     return self;
+}
+
+-(BOOL)doesContainCombo:(Order *)anOrder
+{
+    Order *mutableOrder = [[Order alloc] initFromOrder:anOrder];
+    
+    for (NSMutableArray *itemGroup in listOfItemGroups) 
+    {
+        BOOL qualifies = NO;
+        for (Item *comboItem in itemGroup)
+        {
+            for (Item *anItem in mutableOrder.itemList) {
+                if (anItem.name == comboItem.name) {
+                    qualifies = YES;
+                    //To make sure we don't double-count.
+                    [mutableOrder.itemList removeObject:anItem];
+                    break;
+                }
+                
+            }
+        }
+        if (!qualifies)
+        {
+            return NO;
+        }
+    }
+    //If it actually makes it through each item group and qualifies for each, then we're good.
+    return YES;
+}
+
+//If an order qualifies for a combo, we'll want to know what items were the qualifying ones.
+-(NSMutableArray *)comboItemsList:(Order *)anOrder
+{
+    NSMutableArray *returnList = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    Order *mutableOrder = [[Order alloc] initFromOrder:anOrder];
+    
+    for (NSMutableArray *itemGroup in listOfItemGroups) 
+    {
+        BOOL qualifies = NO;
+        for (Item *comboItem in itemGroup)
+        {
+            for (Item *anItem in mutableOrder.itemList) {
+                if (anItem.name == comboItem.name) {
+                    qualifies = YES;
+                    
+                    [returnList addObject:anItem];
+                    
+                    //To make sure we don't double-count.
+                    [mutableOrder.itemList removeObject:anItem];
+                    break;
+                }
+                
+            }
+        }
+        if (!qualifies)
+        {
+            NSLog(@"Somebody just tried to get the comboItems for an invalid order!");
+        }
+    }
+
+    return returnList;
 }
 
 @end

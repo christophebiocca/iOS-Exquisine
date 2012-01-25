@@ -7,15 +7,22 @@
 //
 
 #import "MenuComponent.h"
+@class Order;
 
 @interface Combo : MenuComponent
 {
     
     NSMutableArray *listOfItemGroups;
-    NSDecimalNumber* price;
+    NSDecimalNumber *price;
     
 }
 
+@property (retain) NSDecimalNumber *price;
+
 -(Combo *)initFromData:(NSDictionary *)inputData;
+
+-(BOOL) doesContainCombo:(Order *) anOrder;
+
+-(NSMutableArray *) comboItemsList:(Order *) anOrder;
 
 @end
