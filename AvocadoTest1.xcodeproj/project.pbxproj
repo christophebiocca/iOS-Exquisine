@@ -227,7 +227,6 @@
 			children = (
 				23DA7A4114C603E4008281DD /* MenuComponentViewController.h */,
 				23DA7A4214C603E4008281DD /* MenuComponentViewController.m */,
-				23DA7A8314C64680008281DD /* MainPageViewController */,
 				23DA7A7314C63C41008281DD /* MenuViewController */,
 				23DA7A5614C627FC008281DD /* OrderViewController */,
 				23DA7A7214C63C3C008281DD /* ItemViewController */,
@@ -284,6 +283,7 @@
 		232C796B14CF77A400C3868D /* OtherControllers */ = {
 			isa = PBXGroup;
 			children = (
+				23DA7A8314C64680008281DD /* MainPageViewController */,
 				232C796C14CF77CC00C3868D /* FavoritesViewController */,
 			);
 			name = OtherControllers;

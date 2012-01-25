@@ -148,6 +148,14 @@
         currentOrder = [[Order alloc] init];
     }
     
+    //Move view control to the favorites view.
+    
+    FavoritesViewController *favoritesViewController = [[FavoritesViewController alloc] initWithFavoritesListAndMenu:favoriteOrders :theMenu];
+    
+    [favoritesViewController setDelegate:self];
+    
+    [[self navigationController] setViewControllers:[[NSArray alloc]initWithObjects:self,favoritesViewController, nil] animated:YES]; 
+    
 }
 
 -(void)deleteFromFavoritesForController:(id)orderViewController
