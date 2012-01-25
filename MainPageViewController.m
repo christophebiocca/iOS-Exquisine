@@ -80,6 +80,8 @@
     }
     FavoritesViewController *favoritesViewController = [[FavoritesViewController alloc] initWithFavoritesListAndMenu:favoriteOrders :theMenu];
     
+    [favoritesViewController setDelegate:self];
+    
     [[self navigationController] pushViewController:favoritesViewController animated:YES];
     
 }
@@ -121,35 +123,42 @@
 }
 -(void)addToFavoritesForController:(id)orderViewController
 {
-    //This check really isn't sufficient. We should be checking for name collisions.
-    //I'll do it eventually.
-    if(![favoriteOrders containsObject:[orderViewController orderInfo]])
-    {
-        [[orderViewController orderInfo] setIsFavorite:YES];
-        //Push the current order on the favorites list
-        [favoriteOrders addObject:[[Order alloc] initFromOrder:[orderViewController orderInfo]]];
-        //Allocate a new order if needed
-        if ([[orderViewController orderInfo] isEqual:currentOrder])
+    
+    for (Order *anOrder in favoriteOrders) {
+        if (anOrder.name == [orderViewController orderInfo].name)
         {
-            currentOrder = [[Order alloc] init];
+            UIAlertView *tsktsk = [[UIAlertView alloc] initWithTitle:@"Error" message:@"An order with that name is already in the favorites list!" delegate:self cancelButtonTitle:@"OK, my bad" otherButtonTitles:nil];
+            
+            [tsktsk setTag:3];
+            
+            [tsktsk show];
+            
+            return;
         }
     }
-    else
+    
+    //if it makes it through the for loop, then we can safely add the order.
+    
+    [[orderViewController orderInfo] setIsFavorite:YES];
+    //Push the current order on the favorites list
+    [favoriteOrders addObject:[[Order alloc] initFromOrder:[orderViewController orderInfo]]];
+    //Allocate a new order if needed
+    if ([[orderViewController orderInfo] isEqual:currentOrder])
     {
-        UIAlertView *tsktsk = [[UIAlertView alloc] initWithTitle:@"Error" message:@"That order is already in the favorites list!" delegate:self cancelButtonTitle:@"OK, my bad" otherButtonTitles:nil];
-        
-        [tsktsk setTag:3];
-        
-        [tsktsk show];
+        currentOrder = [[Order alloc] init];
     }
+    
 }
 
 -(void)deleteFromFavoritesForController:(id)orderViewController
 {
-    if([favoriteOrders containsObject:[orderViewController orderInfo]])
+    for (Order *anOrder in favoriteOrders) 
     {
-        [[orderViewController orderInfo] setIsFavorite:NO];
-        [favoriteOrders removeObject:[orderViewController orderInfo]];
+        if(anOrder.name == [orderViewController orderInfo].name)
+        {
+            [[orderViewController orderInfo] setIsFavorite:NO];
+            [favoriteOrders removeObject:anOrder];
+        }
     }
 }
 

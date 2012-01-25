@@ -23,6 +23,16 @@
     for (Order *currentOrder in favoriteOrders) {
         [orderRenderList addObject:[[OrderRenderer alloc] initWithOrder:currentOrder]];
     }
+    
+    [suffixList removeAllObjects];
+
+    if([favoriteOrders count] == 0)
+    {
+        CellData *aCell = [[CellData alloc] init];
+        aCell.cellTitle = @"No Favorites Selected";
+        aCell.cellDesc = @"";
+        [suffixList addObject:aCell];
+    }
 }
 
 -(FavoritesRenderer *)initWithOrderList:(NSMutableArray *)anOrderList
@@ -31,14 +41,6 @@
     
     displayLists = [[NSMutableArray alloc] initWithCapacity:0];
     suffixList = [[NSMutableArray alloc] initWithCapacity:0];
-    
-    if([favoriteOrders count] == 0)
-    {
-        CellData *aCell = [[CellData alloc] init];
-        aCell.cellTitle = @"No Favorites Selected";
-        aCell.cellDesc = @"";
-        [suffixList addObject:aCell];
-    }
     
     orderRenderList = [[NSMutableArray alloc] initWithCapacity:0];
     

@@ -14,6 +14,8 @@
 
 @implementation FavoritesViewController
 
+@synthesize delegate;
+
 -(FavoritesViewController *)initWithFavoritesListAndMenu:(NSMutableArray *)favList:(Menu *)aMenu
 {
     self = [super init];
@@ -42,6 +44,8 @@
     if ([indexPath row] < [favoritesList count]) {
         OrderViewController *newOrderViewController = [[OrderViewController alloc] initializeWithMenuAndOrder:currentMenu :[favoritesList objectAtIndex:[indexPath row]]];
         
+        [newOrderViewController setDelegate:self];
+        
         [[self navigationController] pushViewController:newOrderViewController animated:YES];
         
         //Make and push the order view controller
@@ -52,6 +56,22 @@
 -(void)tableView:(UITableView *) tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *) indexPath
 {
     [self tableView:tableView didSelectRowAtIndexPath:indexPath];
+}
+
+//Just pass up the delegation.
+-(void)addToFavoritesForController:(id)orderViewController
+{
+    [delegate addToFavoritesForController:orderViewController];
+}
+
+-(void)deleteFromFavoritesForController:(id)orderViewController
+{
+    [delegate deleteFromFavoritesForController:orderViewController];
+}
+
+-(void) submitOrderForController:(OrderViewController *)orderViewController
+{
+    [delegate submitOrderForController:orderViewController];
 }
 
 //View related functions
@@ -81,6 +101,7 @@
     [super viewWillAppear:animated];
     [favoritesRenderer redraw];
     [[favoritesView orderTable] reloadData];
+    [favoritesView reloadInputViews];
 }
 
 - (void)viewDidUnload
