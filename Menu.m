@@ -8,6 +8,7 @@
 
 #import "Menu.h"
 #import "Item.h"
+#import "Combo.h"
 
 @implementation Menu
 
@@ -29,9 +30,15 @@
         Menu *newSubmenu = [[Menu alloc] initFromData:submenu];
         [submenuList addObject:newSubmenu];
     }
+    
     for (NSDictionary *item in [inputData objectForKey:@"items"]) {
         Item *newItem = [[Item alloc] initFromData:item];
         [submenuList addObject:newItem];
+    }
+    
+    for (NSDictionary *combo in [inputData objectForKey:@"combos"]) {
+        Combo *newCombo = [[Combo alloc] initFromData:combo];
+        [comboList addObject:newCombo];
     }
     
     return self;

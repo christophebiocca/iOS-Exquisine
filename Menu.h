@@ -12,6 +12,7 @@
 @interface Menu : MenuComponent{
     
     NSMutableArray *submenuList;
+    NSMutableArray *comboList;
     
 }
 
