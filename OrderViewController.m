@@ -18,6 +18,8 @@
 #import "AlertPrompt.h"
 #import "OrderManagementDelegate.h"
 #import "Utilities.h"
+#import "ItemRenderer.h"
+#import "CellData.h"
 
 @interface UIActionSheet(AccessPrivate)
     @property(readonly)NSMutableArray* buttons;
@@ -32,7 +34,7 @@
 {
     menuInfo = aMenu;
     orderInfo = anOrder;
-    orderRenderer = [[OrderRenderer alloc] initWithOrder:anOrder];
+    orderRenderer = [[OrderRenderer alloc] initWithOrderAndMenu:anOrder:menuInfo];
     [[self navigationItem] setTitle:anOrder.name];
     
     return self;
@@ -205,10 +207,12 @@
     
     [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
     
-    if ([indexPath row] < [[orderInfo itemList] count]) {
-        Item *currentItem = [[orderInfo itemList] objectAtIndex:[indexPath row]];
+    id cellRenderer = [orderRenderer objectForCellAtIndex:indexPath];
+    
+    if ([cellRenderer isKindOfClass:[ItemRenderer class]])
+    {
+        Item *currentItem = [(ItemRenderer *)cellRenderer itemInfo];
         
-        //Only push it if there's anything to customize about it.
         if([[currentItem options]count] > 0)
         {
             ItemViewController *itemViewController = [[ItemViewController alloc] initializeWithItemAndOrder:currentItem:orderInfo];
@@ -217,14 +221,16 @@
     }
     
     //i.e. if the "Add Item" row was selected
-    if([indexPath row] == ([[orderInfo itemList] count] + 3)){
-        //allocate a new menu renderer passing this order to it     
-        MenuViewController *menuViewController = [[MenuViewController alloc] initializeWithMenuAndOrder:menuInfo :orderInfo];
+    if([cellRenderer isKindOfClass:[CellData class]]){
+        if ([(CellData *)cellRenderer cellTitle] == @"Add Item")
+        {
+            //allocate a new menu renderer passing this order to it     
+            MenuViewController *menuViewController = [[MenuViewController alloc] initializeWithMenuAndOrder:menuInfo :orderInfo];
         
-        //Push the menu page
-        [[self navigationController] pushViewController:menuViewController animated:YES];
+            //Push the menu page
+            [[self navigationController] pushViewController:menuViewController animated:YES];
+        }
     }
-    
 }
 
 -(void)tableView:(UITableView *) tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *) indexPath

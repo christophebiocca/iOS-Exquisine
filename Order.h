@@ -9,11 +9,18 @@
 #import <Foundation/Foundation.h>
 #import "MenuComponent.h"
 @class Item;
+@class Menu;
 
 @interface Order : MenuComponent {
 
     //Contains the list of items that the customer wants to order.
     NSMutableArray *itemList; 
+    
+    NSMutableArray *nonComboItemCache;
+    
+    NSMutableArray *comboListCache;
+    
+    Menu *parentMenu;
     
     NSString *status;
     
@@ -30,6 +37,7 @@
 @property(readonly)NSDecimalNumber* subtotalPrice;
 @property(readonly)NSDecimalNumber* taxPrice;
 @property(readonly)NSDecimalNumber* totalPrice;
+@property (retain) Menu *parentMenu;
 
 -(id)init;
 
@@ -41,6 +49,14 @@
 
 -(void) removeItem:(Item *) anItem;
 
+-(void)removeListOfItems:(NSMutableArray *)aListOfItems;
+
+-(NSMutableArray *) listOfCombos;
+
+-(NSMutableArray *) listOfNonComboItems;
+
 -(NSDictionary*)orderRepresentation;
+
+-(void) resetCache;
 
 @end

@@ -12,11 +12,14 @@
 
 @implementation Combo
 
-@synthesize price;
+@synthesize price, listOfAssociatedItems;
 
 -(Combo *)initFromData:(NSDictionary *)inputData
 {
     self = [super initFromData:inputData];
+    
+    associatedOrder = nil;
+    listOfAssociatedItems = [[NSMutableArray alloc] initWithCapacity:0];
     
     NSInteger cents = [[inputData objectForKey:@"price_cents"] intValue];
     price = [[[NSDecimalNumber alloc] initWithInteger:cents] decimalNumberByMultiplyingByPowerOf10:-2];
@@ -38,9 +41,12 @@
     return self;
 }
 
--(BOOL)doesContainCombo:(Order *)anOrder
+-(BOOL)evaluateForCombo:(Order *)anOrder
 {
+    associatedOrder = anOrder;
     Order *mutableOrder = [[Order alloc] initFromOrder:anOrder];
+ 
+    [listOfAssociatedItems removeAllObjects];
     
     for (NSMutableArray *itemGroup in listOfItemGroups) 
     {
@@ -51,6 +57,7 @@
                 if (anItem.name == comboItem.name) {
                     qualifies = YES;
                     //To make sure we don't double-count.
+                    [listOfAssociatedItems addObject:anItem];
                     [mutableOrder.itemList removeObject:anItem];
                     break;
                 }
@@ -66,38 +73,27 @@
     return YES;
 }
 
-//If an order qualifies for a combo, we'll want to know what items were the qualifying ones.
--(NSMutableArray *)comboItemsList:(Order *)anOrder
+-(void)setOrder:(Order *)anOrder
 {
-    NSMutableArray *returnList = [[NSMutableArray alloc] initWithCapacity:0];
-    
-    Order *mutableOrder = [[Order alloc] initFromOrder:anOrder];
-    
-    for (NSMutableArray *itemGroup in listOfItemGroups) 
-    {
-        BOOL qualifies = NO;
-        for (Item *comboItem in itemGroup)
-        {
-            for (Item *anItem in mutableOrder.itemList) {
-                if (anItem.name == comboItem.name) {
-                    qualifies = YES;
-                    
-                    [returnList addObject:anItem];
-                    
-                    //To make sure we don't double-count.
-                    [mutableOrder.itemList removeObject:anItem];
-                    break;
-                }
-                
-            }
-        }
-        if (!qualifies)
-        {
-            NSLog(@"Somebody just tried to get the comboItems for an invalid order!");
-        }
-    }
+    associatedOrder = anOrder;
+}
 
-    return returnList;
+//If an order qualifies for a combo, we'll want to know what items were the qualifying ones.
+-(NSMutableArray *)comboItemsList
+{
+    if ([listOfAssociatedItems count] > 0)
+    {
+        return listOfAssociatedItems;
+    }
+    else if([self evaluateForCombo:associatedOrder])
+    {
+        return listOfAssociatedItems;
+    }
+    else
+    {
+        NSLog(@"Someone just requested an itemList for a bad order.");
+    }
+    return nil;
 }
 
 @end

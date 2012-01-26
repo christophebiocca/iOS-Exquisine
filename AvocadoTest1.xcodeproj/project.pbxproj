@@ -13,6 +13,7 @@
 		232C796A14CF72A500C3868D /* FavoritesRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C796914CF72A500C3868D /* FavoritesRenderer.m */; };
 		232C796F14CF77EB00C3868D /* FavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C796E14CF77EB00C3868D /* FavoritesViewController.m */; };
 		232C797A14D0A7E000C3868D /* Combo.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C797914D0A7E000C3868D /* Combo.m */; };
+		232C797E14D0BA3500C3868D /* ComboRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C797D14D0BA3500C3868D /* ComboRenderer.m */; };
 		232D7A1014C8B23A00DD5911 /* UICustomActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 232D7A0F14C8B23A00DD5911 /* UICustomActionSheet.m */; };
 		232D7A1214C8B4FC00DD5911 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 232D7A1114C8B4FC00DD5911 /* QuartzCore.framework */; };
 		23658CC114BDFB15002C0996 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23658CC014BDFB15002C0996 /* UIKit.framework */; };
@@ -93,6 +94,8 @@
 		232C796E14CF77EB00C3868D /* FavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritesViewController.m; sourceTree = "<group>"; };
 		232C797814D0A7E000C3868D /* Combo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Combo.h; sourceTree = "<group>"; };
 		232C797914D0A7E000C3868D /* Combo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Combo.m; sourceTree = "<group>"; };
+		232C797C14D0BA3500C3868D /* ComboRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComboRenderer.h; sourceTree = "<group>"; };
+		232C797D14D0BA3500C3868D /* ComboRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComboRenderer.m; sourceTree = "<group>"; };
 		232D7A0E14C8B23A00DD5911 /* UICustomActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICustomActionSheet.h; sourceTree = "<group>"; };
 		232D7A0F14C8B23A00DD5911 /* UICustomActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICustomActionSheet.m; sourceTree = "<group>"; };
 		232D7A1114C8B4FC00DD5911 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -308,6 +311,15 @@
 				232C797914D0A7E000C3868D /* Combo.m */,
 			);
 			name = Combo;
+			sourceTree = "<group>";
+		};
+		232C797B14D0BA1500C3868D /* ComboRenderer */ = {
+			isa = PBXGroup;
+			children = (
+				232C797C14D0BA3500C3868D /* ComboRenderer.h */,
+				232C797D14D0BA3500C3868D /* ComboRenderer.m */,
+			);
+			name = ComboRenderer;
 			sourceTree = "<group>";
 		};
 		232D7A0B14C8B20200DD5911 /* Utilities */ = {
@@ -598,6 +610,7 @@
 		23DA7A4414C609C6008281DD /* MenuCompositeRenderers */ = {
 			isa = PBXGroup;
 			children = (
+				232C797B14D0BA1500C3868D /* ComboRenderer */,
 				23DA7A4514C609FD008281DD /* MenuComponentRenderer.h */,
 				23DA7A4614C609FD008281DD /* MenuComponentRenderer.m */,
 				23DA7A6B14C6371D008281DD /* MenuRenderer */,
@@ -950,6 +963,7 @@
 				232C796A14CF72A500C3868D /* FavoritesRenderer.m in Sources */,
 				232C796F14CF77EB00C3868D /* FavoritesViewController.m in Sources */,
 				232C797A14D0A7E000C3868D /* Combo.m in Sources */,
+				232C797E14D0BA3500C3868D /* ComboRenderer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

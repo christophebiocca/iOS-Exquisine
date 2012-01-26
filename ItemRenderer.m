@@ -15,6 +15,8 @@
 
 @implementation ItemRenderer
 
+@synthesize itemInfo;
+
 -(void) redraw
 {
     [optionRenderList removeAllObjects];

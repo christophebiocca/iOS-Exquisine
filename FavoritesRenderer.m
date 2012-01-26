@@ -11,6 +11,7 @@
 #import "OrderRenderer.h"
 #import "Utilities.h"
 #import "CellData.h"
+#import "Menu.h"
 
 @implementation FavoritesRenderer
 
@@ -21,7 +22,7 @@
     //This may actually result in two renderers being created for each item.
     //This may be a problem. We'll see.
     for (Order *currentOrder in favoriteOrders) {
-        [orderRenderList addObject:[[OrderRenderer alloc] initWithOrder:currentOrder]];
+        [orderRenderList addObject:[[OrderRenderer alloc] initWithOrderAndMenu:currentOrder :theMenu]];
     }
     
     [suffixList removeAllObjects];
@@ -35,8 +36,9 @@
     }
 }
 
--(FavoritesRenderer *)initWithOrderList:(NSMutableArray *)anOrderList
+-(FavoritesRenderer *)initWithOrderListAndMenu:(NSMutableArray *)anOrderList:(Menu *)aMenu
 {
+    theMenu = aMenu;
     favoriteOrders = anOrderList;
     
     displayLists = [[NSMutableArray alloc] initWithCapacity:0];

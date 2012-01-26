@@ -12,7 +12,7 @@
 
 @implementation Menu
 
-@synthesize submenuList;
+@synthesize submenuList, comboList;
 
 -(Menu *)init
 {
@@ -25,6 +25,7 @@
     self = [super initFromData:inputData];
     
     submenuList = [[NSMutableArray alloc] initWithCapacity:0];
+    comboList = [[NSMutableArray alloc] initWithCapacity:0];
     
     for (NSDictionary *submenu in [inputData objectForKey:@"submenus"]) {
         Menu *newSubmenu = [[Menu alloc] initFromData:submenu];

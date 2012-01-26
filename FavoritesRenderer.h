@@ -7,9 +7,12 @@
 //
 
 #import "Renderer.h"
+@class Menu;
 
 @interface FavoritesRenderer : Renderer <UITableViewDataSource>
 {
+    Menu *theMenu;
+    
     NSMutableArray *favoriteOrders;
     
     //This guy contains stuff that we need
@@ -23,7 +26,7 @@
     NSMutableArray *displayLists;
 }
 
--(FavoritesRenderer *) initWithOrderList:(NSMutableArray *) anOrderList;
+-(FavoritesRenderer *)initWithOrderListAndMenu:(NSMutableArray *)anOrderList:(Menu *)aMenu;
 
 -(void) redraw;
 

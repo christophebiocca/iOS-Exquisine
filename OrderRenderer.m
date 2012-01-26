@@ -7,21 +7,31 @@
 //
 
 #import "OrderRenderer.h"
+#import "ComboRenderer.h"
 #import "Order.h"
 #import "ItemRenderer.h"
 #import "Item.h"
 #import "CellData.h"
+#import "Combo.h"
 #import "Utilities.h"
+#import "Menu.h"
 
 @implementation OrderRenderer
 
 -(void) redraw
 {
+    //Purge the render lists
     [itemRenderList removeAllObjects];
+    [comboRenderList removeAllObjects];
     
-    //This may actually result in two renderers being created for each item.
-    //This may be a problem. We'll see.
-    for (Item *currentItem in orderInfo.itemList) {
+    for (Combo *aCombo in [orderInfo listOfCombos]) 
+    {
+        ComboRenderer *newComboRenderer = [[ComboRenderer alloc] initFromCombo:aCombo];
+        [comboRenderList addObjectsFromArray:[newComboRenderer produceRenderList]];
+    }
+    
+    for (Item *currentItem in [orderInfo listOfNonComboItems] )  
+    {
         [itemRenderList addObject:[[ItemRenderer alloc] initWithItem:currentItem]];
     }
     
@@ -30,15 +40,18 @@
     [[suffixList objectAtIndex:2] setCellDesc:[Utilities FormatToPrice:[orderInfo totalPrice]]];
 }
 
--(OrderRenderer *)initWithOrder:(Order *)anOrder
+-(OrderRenderer *)initWithOrderAndMenu:(Order *)anOrder:(Menu *) aMenu
 {
+    theMenu = aMenu;
     orderInfo = anOrder;
     displayLists = [[NSMutableArray alloc] initWithCapacity:0];
     suffixList = [[NSMutableArray alloc] initWithCapacity:0];
     
     itemRenderList = [[NSMutableArray alloc] initWithCapacity:0];
-    
+    comboRenderList = [[NSMutableArray alloc] initWithCapacity:0];
+
     [displayLists addObject:itemRenderList];
+    [displayLists addObject:comboRenderList];
     [displayLists addObject:suffixList];
     
     CellData *newCell = nil;
@@ -108,6 +121,11 @@
     [[Utilities MemberOfCompositeListAtIndex:displayLists:[indexPath row]]  configureCell:cell];
     
     return cell;
+}
+
+-(id)objectForCellAtIndex:(NSIndexPath *)index
+{
+    return [Utilities MemberOfCompositeListAtIndex:displayLists :[index row]];
 }
 
 @end

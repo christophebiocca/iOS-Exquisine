@@ -17,6 +17,7 @@
 }
 
 @property (retain,readonly) NSMutableArray *submenuList;
+@property (retain,readonly) NSMutableArray *comboList;
 
 -(Menu *) init;
 

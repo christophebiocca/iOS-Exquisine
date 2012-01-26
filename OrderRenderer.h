@@ -8,10 +8,13 @@
 
 #import "MenuComponentRenderer.h"
 @class Order;
+@class Menu;
 
 @interface OrderRenderer : MenuComponentRenderer <UITableViewDataSource>
 {
     Order *orderInfo;
+    
+    Menu *theMenu;
     
     //This guy contains stuff that we need
     //to display cells for after the item list.
@@ -22,12 +25,16 @@
     NSMutableArray *displayLists;
     
     NSMutableArray *itemRenderList;
+    
+    NSMutableArray *comboRenderList;
 }
 
 -(void) redraw;
 
--(OrderRenderer *) initWithOrder:(Order *) anOrder;
+-(OrderRenderer *)initWithOrderAndMenu:(Order *)anOrder:(Menu *) aMenu;
 
 -(UITableViewCell *) configureCell:(UITableViewCell *) aCell;
+
+-(id) objectForCellAtIndex:(NSIndexPath *) index;
 
 @end

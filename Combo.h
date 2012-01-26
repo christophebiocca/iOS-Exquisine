@@ -12,17 +12,22 @@
 @interface Combo : MenuComponent
 {
     
+    Order *associatedOrder;
     NSMutableArray *listOfItemGroups;
+    NSMutableArray *listOfAssociatedItems;
     NSDecimalNumber *price;
     
 }
 
 @property (retain) NSDecimalNumber *price;
+@property (retain) NSMutableArray *listOfAssociatedItems;
 
 -(Combo *)initFromData:(NSDictionary *)inputData;
 
--(BOOL) doesContainCombo:(Order *) anOrder;
+-(BOOL) evaluateForCombo:(Order *) anOrder;
 
--(NSMutableArray *) comboItemsList:(Order *) anOrder;
+-(NSMutableArray *) comboItemsList;
+
+-(void) setOrder:(Order *) anOrder;
 
 @end

@@ -24,6 +24,8 @@
     NSMutableArray *optionRenderList;
 }
 
+@property (retain) Item *itemInfo;
+
 -(void) redraw;
 
 -(ItemRenderer *) initWithItem:(Item *) anItem;
