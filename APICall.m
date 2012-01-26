@@ -63,7 +63,10 @@
 }
 
 +(NSURL*)urlForLocation:(NSString*)location{
-    NSURL* serverURL = [NSURL URLWithString:@"http://croutonlabs.com"];
+    NSString *testingServer = @"http://localhost:8000";
+    NSString *productionServer = @"http://croutonlabs.com";
+    
+    NSURL* serverURL = [NSURL URLWithString:productionServer];
     return [NSURL URLWithString:location relativeToURL:serverURL];
 }
 

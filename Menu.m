@@ -51,4 +51,59 @@
     [submenuList addObject:aSubmenu];
 }
 
+-(Item *)dereferenceItemPK:(NSInteger)itemPK
+{
+    for (id possibleContainers in submenuList) {
+        if([possibleContainers isKindOfClass:[Item class]])
+        {
+            if([possibleContainers primaryKey] == itemPK)
+                return possibleContainers;
+        }
+        if([possibleContainers isKindOfClass:[Menu class]])
+        {
+            Item *maybeTheItem = [possibleContainers dereferenceItemPK:itemPK];
+            if (maybeTheItem != nil)
+                return maybeTheItem;
+        }
+    }
+    return nil;
+}
+
+-(Menu *)dereferenceMenuPK:(NSInteger)menuPK
+{
+    if (primaryKey == menuPK)
+        return self;
+    
+    for (id possibleMenus in submenuList) {
+        if([possibleMenus isKindOfClass:[Menu class]])
+        {
+            id maybeMenu = [possibleMenus dereferenceMenuPK:menuPK];
+            if (maybeMenu != nil)
+            {
+                return maybeMenu;
+            }
+        }
+    }
+    
+    return nil;
+}
+
+-(NSArray *)flatItemList
+{
+    NSMutableArray *returnList = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    for (id possibleContainers in submenuList) {
+        if([possibleContainers isKindOfClass:[Item class]])
+        {
+            [returnList addObject:possibleContainers];
+        }
+        if([possibleContainers isKindOfClass:[Menu class]])
+        {
+            [returnList addObjectsFromArray:[possibleContainers flatItemList]];
+        }
+    }
+    
+    return returnList;
+}
+
 @end

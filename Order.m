@@ -156,4 +156,10 @@
     comboListCache = nil;
 }
 
+-(void)clearOrder
+{
+    [itemList removeAllObjects];
+    [self resetCache];
+}
+
 @end

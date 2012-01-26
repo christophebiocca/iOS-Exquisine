@@ -87,13 +87,13 @@
     [areYouSure show];
 }
 
--(void)displayOrderClearConfirmation
+-(void)promptUserForRename
 {
-    UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Are you sure?" message:[NSString stringWithFormat: @"Are you sure you want to remove all items in this order?", [orderInfo totalPrice]] delegate:self cancelButtonTitle:@"Nope" otherButtonTitles:@"Yep", nil];
     
-    [areYouSure setTag:4];
+    AlertPrompt *renamePrompt = [[AlertPrompt alloc] initWithPromptTitle:@"New order name:" message:@"name" delegate:self cancelButtonTitle:@"Cancel" okButtonTitle:@"OK"];
+    [renamePrompt setTag:2];
     
-    [areYouSure show];
+    [renamePrompt show];
 }
 
 -(void)displayDeletionConfirmation
@@ -105,13 +105,13 @@
     [areYouSure show];
 }
 
--(void)promptUserForRename
+-(void)displayOrderClearConfirmation
 {
+    UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Are you sure?" message:[NSString stringWithFormat: @"Are you sure you want to remove all items in this order?", [orderInfo totalPrice]] delegate:self cancelButtonTitle:@"Nope" otherButtonTitles:@"Yep", nil];
     
-    AlertPrompt *renamePrompt = [[AlertPrompt alloc] initWithPromptTitle:@"New order name:" message:@"name" delegate:self cancelButtonTitle:@"Cancel" okButtonTitle:@"OK"];
-    [renamePrompt setTag:2];
+    [areYouSure setTag:4];
     
-    [renamePrompt show];
+    [areYouSure show];
 }
 
 //Delegate functions
@@ -129,7 +129,7 @@
         }
     }
     
-    if ([alertView tag] == 2) // Order Clear
+    if ([alertView tag] == 2) // Order Rename
     {
         if (buttonIndex == 1)
         {
@@ -146,15 +146,17 @@
             [[self navigationController] popViewControllerAnimated:YES];
         }
     }
-    if ([alertView tag] == 4) // Order Rename
+    
+    if ([alertView tag] == 4) // Order Clear
     {
         if (buttonIndex == 1)
         {
-            [orderInfo setItemList:[[NSMutableArray alloc] initWithCapacity:0]];
+            [orderInfo clearOrder];
             [orderRenderer redraw];
             [[orderView orderTable] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
         }
     }
+    
 }
 
 
@@ -217,6 +219,10 @@
         {
             ItemViewController *itemViewController = [[ItemViewController alloc] initializeWithItemAndOrder:currentItem:orderInfo];
             [[self navigationController] pushViewController:itemViewController animated:YES];
+        }
+        else
+        {
+            //[tableView setEditing:YES animated:YES];
         }
     }
     

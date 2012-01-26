@@ -72,7 +72,9 @@
     else
     {
         [aCell setAccessoryType:UITableViewCellAccessoryNone];
+        [aCell setEditing:YES animated:YES];
     }
+    
     return aCell;
 }
 

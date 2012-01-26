@@ -8,6 +8,7 @@
 
 #import "MenuComponent.h"
 @class Order;
+@class Menu;
 
 @interface Combo : MenuComponent
 {
@@ -22,7 +23,7 @@
 @property (retain) NSDecimalNumber *price;
 @property (retain) NSMutableArray *listOfAssociatedItems;
 
--(Combo *)initFromData:(NSDictionary *)inputData;
+-(Combo *)initFromDataAndMenu:(NSDictionary *)inputData:(Menu *) associatedMenu;
 
 -(BOOL) evaluateForCombo:(Order *) anOrder;
 

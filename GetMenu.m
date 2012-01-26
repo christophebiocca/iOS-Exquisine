@@ -10,7 +10,7 @@
 
 @implementation GetMenu
 -(id)init{
-    NSString* location = @"customer/menu/1/";
+    NSString* location = @"/customer/menu/1/";
     return self = [super initGETRequestForLocation:location];
 }
 

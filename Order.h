@@ -59,4 +59,6 @@
 
 -(void) resetCache;
 
+-(void) clearOrder;
+
 @end

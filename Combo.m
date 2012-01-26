@@ -9,12 +9,13 @@
 #import "Combo.h"
 #import "Item.h"
 #import "Order.h"
+#import "Menu.h"
 
 @implementation Combo
 
 @synthesize price, listOfAssociatedItems;
 
--(Combo *)initFromData:(NSDictionary *)inputData
+-(Combo *)initFromDataAndMenu:(NSDictionary *)inputData:(Menu *) associatedMenu
 {
     self = [super initFromData:inputData];
     
@@ -26,13 +27,24 @@
     
     listOfItemGroups = [[NSMutableArray alloc] initWithCapacity:0];
     
-    for (NSDictionary *itemList in [inputData objectForKey:@"components"]) {
+    for (NSDictionary *componentInfo in [inputData objectForKey:@"components"]) {
         
         NSMutableArray *newItemList = [[NSMutableArray alloc] initWithCapacity:0];
         
-        for (NSDictionary *itemData in [itemList objectForKey:@"items"]) {
-            Item *newItem = [[Item alloc] initFromData:itemData];
-            [newItemList addObject:newItem];
+        NSMutableArray *itemPKs = [componentInfo objectForKey:@"items"];
+        NSMutableArray *menuPKs = [componentInfo objectForKey:@"menu"];
+        
+        for (NSString *itemPK in itemPKs) 
+        {
+            NSInteger intItemPK = [itemPK intValue];
+            Item *itemToAdd = [associatedMenu dereferenceItemPK:intItemPK];
+            [newItemList addObject:itemToAdd];
+        }
+        
+        for (NSString *menuPK in menuPKs)
+        {
+            Menu *menuForPK = [associatedMenu dereferenceMenuPK:[menuPK intValue]];
+            [newItemList addObjectsFromArray:[menuForPK flatItemList]];
         }
         
         [listOfItemGroups addObject:newItemList];

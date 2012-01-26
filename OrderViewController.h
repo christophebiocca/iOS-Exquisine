@@ -40,10 +40,10 @@
 
 -(void) displayOrderConfirmation;
 
--(void) displayOrderClearConfirmation;
+-(void) promptUserForRename;
 
 -(void) displayDeletionConfirmation;
 
--(void) promptUserForRename;
+-(void) displayOrderClearConfirmation;
 
 @end

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "MenuComponent.h"
+@class Item;
 
 @interface Menu : MenuComponent{
     
@@ -24,5 +25,11 @@
 -(void) addSubmenu:(Menu *) aSubmenu;
 
 -(Menu *) initFromData:(NSDictionary *)inputData;
+
+-(Item *) dereferenceItemPK:(NSInteger) itemPK;
+
+-(Menu *) dereferenceMenuPK:(NSInteger) menuPK;
+
+-(NSArray *) flatItemList;
 
 @end
