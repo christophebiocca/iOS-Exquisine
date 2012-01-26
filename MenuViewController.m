@@ -86,9 +86,9 @@
 
 -(void) lastControllerBeingPushedPast:(TunnelViewController *) tunnelController
 {
-    ItemViewController *itemViewController = [[ItemViewController alloc] initializeWithItemAndOrder:selectedItem :orderInfo];
-    
     [orderInfo addItem:selectedItem];
+    
+    ItemViewController *itemViewController = [[ItemViewController alloc] initializeWithItemAndOrder:selectedItem :orderInfo];  
     
     NSMutableArray *newStack = [[NSMutableArray alloc] initWithCapacity:0];
     

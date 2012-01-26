@@ -1,4 +1,4 @@
-//
+ //
 //  Order.m
 //  AvocadoTest1
 //
@@ -20,8 +20,14 @@
 @synthesize isFavorite;
 @synthesize parentMenu;
 
--(id)init{
+-(id)init
+{
+    return self;
+}
+
+-(id)initWithParentMenu:(Menu *) aMenu{
     self = [super init];
+    parentMenu = aMenu;
     
     name = @"My Order";
     itemList = [[NSMutableArray alloc] initWithCapacity:0];
@@ -55,6 +61,28 @@
     return self;
 }
 
+-(id)initFromOrderShallow:(Order *)anOrder
+{
+    nonComboItemCache = nil;
+    comboListCache = nil;
+    
+    self = [super initFromMenuComponent:anOrder];
+    
+    name = anOrder.name;
+    itemList = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    for (Item *anItem in anOrder.itemList) {
+        [itemList addObject:anItem];
+    }
+    
+    parentMenu = anOrder.parentMenu;
+    
+    status = anOrder.status;
+    isFavorite = anOrder.isFavorite;
+    
+    return self;
+}
+
 -(NSString *)description{
         
     return [NSString stringWithFormat:@"Items: \n%@" , [itemList description]];
@@ -64,7 +92,6 @@
     
     [itemList addObject:anItem];
     [self resetCache];
-
 
 }
 
@@ -79,7 +106,6 @@
     for (Item *anItem in aListOfItems) {
         [self removeItem:anItem];
     }
-    [self resetCache];
 }
 
 
@@ -88,7 +114,7 @@
     if(comboListCache == nil)
     {
         NSMutableArray *returnList = [[NSMutableArray alloc] initWithCapacity:0];
-        Order *mutableOrder = [[Order alloc] initFromOrder:self];
+        Order *mutableOrder = [[Order alloc] initFromOrderShallow:self];
         
         for (Combo *aCombo in parentMenu.comboList) {
             if([aCombo evaluateForCombo:mutableOrder])

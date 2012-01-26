@@ -34,8 +34,8 @@
 {
     menuInfo = aMenu;
     orderInfo = anOrder;
-    orderRenderer = [[OrderRenderer alloc] initWithOrderAndMenu:anOrder:menuInfo];
-    [[self navigationItem] setTitle:anOrder.name];
+    orderRenderer = [[OrderRenderer alloc] initWithOrderAndMenu:orderInfo:menuInfo];
+    [[self navigationItem] setTitle:orderInfo.name];
     
     return self;
 }
@@ -220,10 +220,6 @@
             ItemViewController *itemViewController = [[ItemViewController alloc] initializeWithItemAndOrder:currentItem:orderInfo];
             [[self navigationController] pushViewController:itemViewController animated:YES];
         }
-        else
-        {
-            //[tableView setEditing:YES animated:YES];
-        }
     }
     
     //i.e. if the "Add Item" row was selected
@@ -243,6 +239,12 @@
 {
     [self tableView:tableView didSelectRowAtIndexPath:indexPath];
 }
+
+- (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView reloadSections:[[NSIndexSet alloc] initWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
 
 //View related functions
 //***********************************************************

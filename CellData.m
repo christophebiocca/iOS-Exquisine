@@ -39,7 +39,6 @@
     if (cellSwitchState)
     {
         [newCell setAccessoryType:UITableViewCellAccessoryCheckmark];
-        [newCell setEditing:NO];
     }
     else
     {

@@ -39,9 +39,11 @@
 @property(readonly)NSDecimalNumber* totalPrice;
 @property (retain) Menu *parentMenu;
 
--(id)init;
+-(id)initWithParentMenu:(Menu *) aMenu;
 
 -(id)initFromOrder:(Order *)anOrder;
+
+-(id)initFromOrderShallow:(Order *)anOrder;
 
 -(NSString *)description;
 

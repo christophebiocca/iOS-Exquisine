@@ -26,7 +26,6 @@
         [[[GetMenu alloc] init] setDelegate:self];
         ordersHistory = [[NSMutableArray alloc] initWithCapacity:0];
         favoriteOrders = [[NSMutableArray alloc] initWithCapacity:0];
-        currentOrder = [[Order alloc] init];
     }
     return self;
 }
@@ -64,6 +63,8 @@
     {
         NSLog(@"The menu had not been fetched upon clicking new order");
     }
+    
+    currentOrder = [[Order alloc] initWithParentMenu:theMenu];
     
     OrderViewController *orderView = [[OrderViewController alloc] initializeWithMenuAndOrder:theMenu:currentOrder];
     

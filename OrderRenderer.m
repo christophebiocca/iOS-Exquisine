@@ -123,6 +123,45 @@
     return cell;
 }
 
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) 
+    {
+        //first we check if it's an item:
+        id cellRenderer = [self objectForCellAtIndex:indexPath];
+        //Then see if it's an item:
+        if ([cellRenderer isKindOfClass:[ItemRenderer class]])
+        {
+            Item *currentItem = [(ItemRenderer *)cellRenderer itemInfo];
+            //if it is, we delete the item from the order.
+            [orderInfo removeItem:currentItem];
+            [self redraw];
+        }
+    }
+    else if (editingStyle == UITableViewCellEditingStyleInsert)
+    {
+        //do more stuff
+    }
+    else if (editingStyle == UITableViewCellEditingStyleNone)
+    {
+        //do more more stuff
+    }
+    
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //To assess whether we can edit the row, we grab the cell renderer:
+    id cellRenderer = [self objectForCellAtIndex:indexPath];
+    //Then see if it's an item:
+    if ([cellRenderer isKindOfClass:[ItemRenderer class]])
+    {
+        //if so, we can edit it.
+        return YES;
+    }
+    return NO;
+}
+
 -(id)objectForCellAtIndex:(NSIndexPath *)index
 {
     return [Utilities MemberOfCompositeListAtIndex:displayLists :[index row]];
