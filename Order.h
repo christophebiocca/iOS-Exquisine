@@ -10,6 +10,7 @@
 #import "MenuComponent.h"
 @class Item;
 @class Menu;
+@class Location;
 
 @interface Order : MenuComponent {
 
@@ -69,6 +70,6 @@
 
 -(void) clearOrder;
 
--(void) submit;
+-(void) submitToLocation:(Location*)location;
 
 @end

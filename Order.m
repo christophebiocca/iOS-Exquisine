@@ -12,6 +12,7 @@
 #import "Item.h"
 #import "Menu.h"
 #import "Combo.h"
+#import "PlaceOrder.h"
 
 @implementation Order
     
@@ -194,10 +195,11 @@
     [self resetCache];
 }
 
--(void) submit
+-(void) submitToLocation:(Location*)location
 {
     mostRecentSubmitDate = [[NSDate alloc] initWithTimeIntervalSinceNow:0.0];
-    [self setStatus:@"Queued"];
+    [self setStatus:@"Sending"];
+    [PlaceOrder sendOrder:self toLocation:location];
 }
 
 - (MenuComponent *)initWithCoder:(NSCoder *)decoder

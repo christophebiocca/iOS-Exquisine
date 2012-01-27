@@ -16,6 +16,7 @@
 #import "GetMenu.h"
 #import "FavoritesViewController.h"
 #import "OrderSummaryViewController.h"
+#import "GetLocations.h"
 
 @implementation MainPageViewController
 
@@ -25,12 +26,13 @@
     
     if (self) {
         [[self navigationItem] setTitle:@"Pita Factory"];
-        [GetMenu getMenu:^(GetMenu* menuCall){
-            theMenu = [menuCall menu];
-        }
-                 failure:^(GetMenu* menuCall, NSError* error){
-                     NSLog(@"call %@ errored with %@", menuCall, error);
-                 }];
+        [GetMenu getMenuForRestaurant:RESTAURANT_ID
+                              success:^(GetMenu* menuCall){
+                                  theMenu = [menuCall menu];
+                              }
+                              failure:^(GetMenu* menuCall, NSError* error){
+                                  NSLog(@"call %@ errored with %@", menuCall, error);
+                              }];
         [self loadDataFromDisk];
         
         if (ordersHistory == nil | favoriteOrders == nil)
@@ -38,6 +40,8 @@
             ordersHistory = [[NSMutableArray alloc] initWithCapacity:0];
             favoriteOrders = [[NSMutableArray alloc] initWithCapacity:0];
         }
+
+        
     }
     return self;
 }
@@ -126,8 +130,15 @@
 
 -(void)submitOrderForController:(id)orderViewController
 {
-    [[orderViewController orderInfo] submit];
-    //A bunch of code to interact with the server
+    [GetLocations getLocationsForRestaurant:RESTAURANT_ID 
+                                    success:^(GetLocations* call) {
+                                        NSArray* locations = [call locations];
+                                        NSAssert([locations count] != 0, @"Not a single location to order from!");
+                                        NSAssert([locations count] == 1, @"Too many locations, and no way to choose from them!");
+                                        [[orderViewController orderInfo] submitToLocation:[locations lastObject]];
+                                    } failure:^(GetLocations* call, NSError* error) {
+                                        NSLog(@"Can't fetch locations %@, therefore can't send order", error);
+                                    }];
     
     //Push the current order on the history list
     [ordersHistory addObject:[orderViewController orderInfo]];

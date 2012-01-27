@@ -27,8 +27,8 @@
 }
 
 +(void)sendPOSTRequestForLocation:(NSString *)location withJSONData:(NSDictionary *)json 
-                          success:(void (^)(APICall *))success 
-                          failure:(void (^)(APICall *, NSError *))failure{
+                          success:(void (^)(id))success 
+                          failure:(void (^)(id, NSError *))failure{
     [self sendPOSTRequestForLocation:location 
                         withBodyData:[self getJSONData:json]
                              success:success 
@@ -36,6 +36,7 @@
 }
 
 -(void)postCompletionHook{
+    [super postCompletionHook];
     if(!jsonData){
         NSError* parsingError = nil;
         jsonData = [NSJSONSerialization JSONObjectWithData:[self rawData] 
