@@ -150,33 +150,35 @@ static NSURL* serverURL;
 -(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)theResponse{
     response = (NSHTTPURLResponse*) theResponse;
     NSInteger status = [response statusCode];
-    NSLog(@"Got response: %d", status);
+    DebugLog(@"Got response: %d", status);
     if(status == 403){
         // Most likely a csrf token issue, we can fix it by hitting our favorite url.
-        NSLog(@"GOING TO ACQUIRE A CSRF TOKEN/COOKIE");
+        DebugLog(@"GOING TO ACQUIRE A CSRF TOKEN/COOKIE");
         [connection cancel];
         [APICall sendGETRequestForLocation:@"customer/phoneapplogin/" 
                                    success:^(APICall* cookieRequest) {
-                                       NSLog(@"token ACQUIRED! %@", cookieRequest);
+                                       DebugLog(@"token ACQUIRED! %@", cookieRequest);
                                        [self send];
                                    } 
                                    failure:^(APICall* cookieRequest, NSError* cookieError) {
-                                       NSLog(@"OK, at this stage, we are well and truly fucked. %@", cookieError);
+                                       DebugLog(@"OK, at this stage, we are well and truly fucked. %@", cookieError);
                                        // We should do some diagnostics on this, because it shouldn't happen.
                                    }];
     }
 }
 
 -(void)connection:(NSURLConnection*)connection didReceiveData:(NSData*)dataToAdd{
-    NSLog(@"GOT %d bytes of data", [dataToAdd length]);
+    DebugLog(@"GOT %d bytes of data", [dataToAdd length]);
     [data appendData:dataToAdd];
 }
 
 -(void)complete{
+    #ifdef DEBUG
     if([response statusCode] == 500){
-        NSLog(@"OMG SERVER ERROR\n%@", [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
+        DebugLog(@"OMG SERVER ERROR\n%@", [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
     }
-    NSLog(@"Completing");
+    #endif
+    DebugLog(@"Completing");
     completed = YES;
     [self postCompletionHook];
     if(error){
@@ -187,12 +189,12 @@ static NSURL* serverURL;
 }
 
 -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)theError{
-    NSLog(@"HOLY SHIT GUYS WE HAVE AN ERROR!\n%@", theError);
+    DebugLog(@"HOLY SHIT GUYS WE HAVE AN ERROR!\n%@", theError);
     error = theError;
 }
 
 -(void)connectionDidFinishLoading:(NSURLConnection*)connection{
-    NSLog(@"Finished loading.");
+    DebugLog(@"Finished loading.");
     [self complete];
 }
 
@@ -200,12 +202,12 @@ static NSURL* serverURL;
            willSendRequest:(NSURLRequest *)theRequest 
           redirectResponse:(NSURLResponse *)response{
     NSURL* newURL = [theRequest URL];
-    NSLog(@"REDIRECT TO %@ (%@)", newURL, theRequest);
+    DebugLog(@"REDIRECT TO %@ (%@)", newURL, theRequest);
     if([[newURL pathComponents] isEqualToArray:[loginURL pathComponents]]){
-        NSLog(@"HOLY SHIT GUYS WE SHOULD LOGIN!");
+        DebugLog(@"HOLY SHIT GUYS WE SHOULD LOGIN!");
         [connection cancel]; // No point in trying anymore, it's fucked.
         [Login login:^(Login* login){
-            NSLog(@"Following successful login %@, relaunching request %@.", login, self);
+            DebugLog(@"Following successful login %@, relaunching request %@.", login, self);
             [self send];
         }];
     }
@@ -243,7 +245,7 @@ static NSURL* serverURL;
     NSString* csrfToken = nil;
     NSArray* cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[request URL]];
     for(NSHTTPCookie* cookie in cookies){
-        NSLog(@"Cookie : %@", cookie);
+        DebugLog(@"Cookie : %@", cookie);
         if([[cookie name] isEqualToString:@"csrftoken"]){
             csrfToken = [cookie value];
             break;
