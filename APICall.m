@@ -229,6 +229,11 @@ static NSURL* serverURL;
 -(void)setError:(NSError*)theError{
     NSAssert(!error, @"We already have an error!");
     error = theError;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"APIError" 
+                                                        object:self 
+                                                      userInfo:[NSDictionary 
+                                                                dictionaryWithObject:error 
+                                                                forKey:@"error"]];
 }
 
 -(NSData*)rawData{
