@@ -213,6 +213,15 @@
     {
         [mainPageView.pendingOrderButton setEnabled:NO];
     }
+    
+    if ([currentOrder.itemList count] > 0 )
+    {
+        [mainPageView.createOrderButton setTitle:@"Continue Order" forState:UIControlStateNormal];
+    }
+    else
+    {
+        [mainPageView.createOrderButton setTitle:@"New Order" forState:UIControlStateNormal];
+    }
 }
 
 -(NSString *)dataFilePath
