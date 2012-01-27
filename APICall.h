@@ -11,14 +11,37 @@
 @protocol APICallDelegate;
 
 @interface APICall : MenuComponentView{
+    @private
     BOOL completed;
+    
+    NSURLRequest* request;
+    NSURLResponse* response;
+    
     NSError* error;
-    NSDictionary* returnValue;
-    id<APICallDelegate> delegate;
+    NSData* data;
+    
+    void (^successblock)(APICall*);
+    void (^errorblock)(APICall*, NSError*);
 }
 
--(void)setDelegate:(id<APICallDelegate>)delegate;
--(id)initGETRequestForLocation:(NSString*)location;
--(id)initPOSTRequestForLocation:(NSString*)location andJSONData:(NSDictionary*)jsonData;
++(void)sendGETRequestForLocation:(NSString*)location withDelegate:(id<APICallDelegate>)delegate;
++(void)sendPOSTRequestForLocation:(NSString*)location withBodyData:(NSData*)data withDelegate:(id<APICallDelegate>)delegate;
++(void)sendPOSTRequestForLocation:(NSString*)location withFormData:(NSDictionary*)form andDelegate:(id<APICallDelegate>)delegate;
+
++(void)sendGETRequestForLocation:(NSString*)location 
+                         success:(void(^)(id))success 
+                         failure:(void(^)(id, NSError*))failure;
++(void)sendPOSTRequestForLocation:(NSString*)location 
+                     withBodyData:(NSData*)data 
+                          success:(void (^)(id))success
+                          failure:(void(^)(id, NSError*))failure;
++(void)sendPOSTRequestForLocation:(NSString*)location 
+                     withFormData:(NSDictionary*)form 
+                          success:(void (^)(id))success
+                          failure:(void(^)(id, NSError*))failure;
+
+@property(readonly)BOOL completed;
+@property(retain,readonly)NSError* error;
+@property(retain,readonly)NSData* rawData;
 
 @end

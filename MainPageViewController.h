@@ -14,7 +14,7 @@
 @class Menu;
 @class Order;
 
-@interface MainPageViewController : UIViewController<UITableViewDelegate, APICallDelegate, OrderManagementDelegate>{
+@interface MainPageViewController : UIViewController<UITableViewDelegate, OrderManagementDelegate>{
 
     MainPageView *mainPageView;
     Menu *theMenu;

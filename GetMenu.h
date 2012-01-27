@@ -6,10 +6,16 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "APICall.h"
+#import "JSONAPICall.h"
 
-@interface GetMenu : APICall
+@class Menu;
 
--(id)init;
+@interface GetMenu : JSONAPICall {
+    Menu* menu;
+}
+
++(void)getMenu:(void(^)(id))success failure:(void(^)(id,NSError*))failure;
+
+@property(retain,readonly)Menu* menu;
 
 @end

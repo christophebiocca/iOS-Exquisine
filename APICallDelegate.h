@@ -12,7 +12,7 @@
 
 @protocol APICallDelegate <NSObject>
 
--(void)apiCall:(APICall*)call completedWithData:(NSDictionary*)data;
+-(void)apiCallCompleted:(APICall*)call;
 -(void)apiCall:(APICall*)call returnedError:(NSError*)error;
 
 @end

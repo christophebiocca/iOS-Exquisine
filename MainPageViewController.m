@@ -24,7 +24,12 @@
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
         [[self navigationItem] setTitle:@"Pita Factory"];
-        [[[GetMenu alloc] init] setDelegate:self];
+        [GetMenu getMenu:^(GetMenu* menuCall){
+            theMenu = [menuCall menu];
+        }
+                 failure:^(GetMenu* menuCall, NSError* error){
+                     NSLog(@"call %@ errored with %@", menuCall, error);
+                 }];
         ordersHistory = [[NSMutableArray alloc] initWithCapacity:0];
         favoriteOrders = [[NSMutableArray alloc] initWithCapacity:0];
     }
@@ -108,15 +113,6 @@
         }
     }
     return pendingOrderList;
-}
-
--(void)apiCall:(APICall *)call completedWithData:(NSDictionary *)data{
-    NSLog(@"SUCCESS call: %@ Data:\n%@", call, data);
-    theMenu = [[Menu alloc] initFromData:data];
-}
-
--(void)apiCall:(APICall *)call returnedError:(NSError *)error{
-    NSLog(@"call %@ errored with %@", call, error);
 }
 
 -(void)submitOrderForController:(id)orderViewController

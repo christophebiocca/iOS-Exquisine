@@ -7,11 +7,24 @@
 //
 
 #import "GetMenu.h"
+#import "APICallProtectedMethods.h"
+#import "Menu.h"
 
 @implementation GetMenu
--(id)init{
-    NSString* location = @"/customer/menu/1/";
-    return self = [super initGETRequestForLocation:location];
+
+@synthesize menu;
+
++(void)getMenu:(void(^)(id))success failure:(void(^)(id,NSError*))failure{
+    [self sendGETRequestForLocation:@"/customer/menu/1/" 
+                            success:success
+                            failure:failure];
+}
+
+-(void)postCompletionHook{
+    [super postCompletionHook];
+    if(![self error]){
+        menu = [[Menu alloc] initFromData:[self jsonData]];
+    }
 }
 
 @end
