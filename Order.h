@@ -28,8 +28,14 @@
     
     BOOL isFavorite;
     
+    NSDate *creationDate;
+    
+    NSDate *mostRecentSubmitDate;
+    
 }
 
+@property (readonly) NSDate *creationDate;
+@property (readonly) NSDate *mostRecentSubmitDate;
 @property (retain) NSMutableArray* itemList;
 @property (retain) NSString *status;
 @property (retain) NSString *orderIdentifier;
@@ -62,5 +68,7 @@
 -(void) resetCache;
 
 -(void) clearOrder;
+
+-(void) submit;
 
 @end

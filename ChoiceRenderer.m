@@ -9,6 +9,7 @@
 #import "ChoiceRenderer.h"
 #import "Utilities.h"
 #import "Choice.h"
+#import "CellData.h"
 
 @implementation ChoiceRenderer
 
@@ -37,6 +38,20 @@
     }
     
     return aCell;
+}
+
+-(NSArray *)detailedStaticRenderList
+{
+    NSMutableArray *returnList = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    CellData *newCell = [super detailedStaticRenderDefaultCell];
+    [newCell setCellDesc:[Utilities FormatToPrice:[choiceInfo price]]];
+    [newCell setCellTitle:[choiceInfo name]];
+    [newCell setCellSwitchState:[choiceInfo selected]];
+    
+    [returnList addObject:newCell];
+    
+    return returnList;
 }
 
 @end

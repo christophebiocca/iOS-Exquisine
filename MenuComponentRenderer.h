@@ -9,6 +9,7 @@
 #import "Renderer.h"
 @class MenuComponent;
 @class MenuComponentView;
+@class CellData;
 
 @interface MenuComponentRenderer : Renderer
 {
@@ -18,5 +19,7 @@
 -(MenuComponentRenderer *) initWithMenuComponent:(MenuComponent *) aMenuComponent;
 
 -(UITableViewCell *) configureCell:(UITableViewCell *) aCell;
+
+-(CellData *) detailedStaticRenderDefaultCell;
 
 @end

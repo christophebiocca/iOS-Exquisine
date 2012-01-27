@@ -19,14 +19,13 @@
 @synthesize status,orderIdentifier;
 @synthesize isFavorite;
 @synthesize parentMenu;
-
--(id)init
-{
-    return self;
-}
+@synthesize creationDate, mostRecentSubmitDate;
 
 -(id)initWithParentMenu:(Menu *) aMenu{
     self = [super init];
+    
+    creationDate = [[NSDate alloc] initWithTimeIntervalSinceNow:0.0];
+    
     parentMenu = aMenu;
     
     name = @"My Order";
@@ -41,10 +40,13 @@
 
 -(id)initFromOrder:(Order *)anOrder
 {
+    self = [super initFromMenuComponent:anOrder];
+    
     nonComboItemCache = nil;
     comboListCache = nil;
-    
-    self = [super initFromMenuComponent:anOrder];
+ 
+    creationDate = anOrder.creationDate;
+    mostRecentSubmitDate = anOrder.mostRecentSubmitDate;
     
     name = anOrder.name;
     itemList = [[NSMutableArray alloc] initWithCapacity:0];
@@ -63,10 +65,14 @@
 
 -(id)initFromOrderShallow:(Order *)anOrder
 {
+    
+    self = [super initFromMenuComponent:anOrder];
+    
     nonComboItemCache = nil;
     comboListCache = nil;
     
-    self = [super initFromMenuComponent:anOrder];
+    creationDate = anOrder.creationDate;
+    mostRecentSubmitDate = anOrder.mostRecentSubmitDate;
     
     name = anOrder.name;
     itemList = [[NSMutableArray alloc] initWithCapacity:0];
@@ -186,6 +192,11 @@
 {
     [itemList removeAllObjects];
     [self resetCache];
+}
+
+-(void) submit
+{
+    mostRecentSubmitDate = [[NSDate alloc] initWithTimeIntervalSinceNow:0.0];
 }
 
 @end

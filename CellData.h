@@ -17,6 +17,11 @@
     UIColor *cellColour; //<-- canadian spelling =b
     NSString *cellAccessory;
     UITableViewCellStyle cellStyle;
+    NSInteger cellTabbing;
+    NSInteger cellTitleFontSize;
+    NSString *cellTitleFontType;
+    NSInteger cellDescFontSize;
+    NSString *cellDescFontType;
 }
 
 @property (retain) NSString *cellTitle;
@@ -25,9 +30,15 @@
 @property BOOL cellSwitchState;
 @property (retain) NSString *cellAccessory;
 @property UITableViewCellStyle cellStyle;
+@property NSInteger cellTitleFontSize;
+@property NSInteger cellDescFontSize;
+@property (retain) NSString *cellTitleFontType;
+@property (retain) NSString *cellDescFontType;
 
 //Configures a table view cell to be representative
 //of the data that is populated in the CellData object
 -(UITableViewCell *)configureCell: (UITableViewCell *) newCell;
+
+-(void) tab;
 
 @end

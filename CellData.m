@@ -16,6 +16,10 @@
 @synthesize cellColour;
 @synthesize cellAccessory;
 @synthesize cellStyle;
+@synthesize cellTitleFontSize;
+@synthesize cellDescFontSize;
+@synthesize cellDescFontType;
+@synthesize cellTitleFontType;
 
 -(CellData *)init
 {
@@ -27,7 +31,11 @@
     cellColour = [UIColor clearColor];
     cellAccessory = @"";
     cellStyle = UITableViewCellStyleValue1;
-    
+    cellTabbing = 0;
+    cellTitleFontSize = 17;
+    cellTitleFontType = @"Helvetica-Bold";
+    cellDescFontSize = 17;
+    cellDescFontType = @"Helvetica";
     return self;
 }
 
@@ -48,6 +56,15 @@
     [newCell setBackgroundColor:cellColour];
     [newCell setOpaque:YES];
     
+    [newCell setIndentationWidth:30.0f];
+    [newCell setIndentationLevel:cellTabbing];
+    
+    UIFont *titleFont = [UIFont fontWithName:cellTitleFontType size:cellTitleFontSize];
+    UIFont *descFont = [UIFont fontWithName:cellDescFontType size:cellDescFontSize];
+    
+    [[newCell textLabel] setFont:titleFont];
+    [[newCell detailTextLabel] setFont:descFont];
+    
     //This doesn't actually work. It's not mission critical, so I'll come back to it.
     /*
     if(cellAccessory == @"plus")
@@ -59,6 +76,11 @@
     */
     
     return newCell;
+}
+
+-(void)tab
+{
+    cellTabbing++;
 }
 
 @end

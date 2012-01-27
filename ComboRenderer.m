@@ -10,6 +10,7 @@
 #import "Order.h"
 #import "Combo.h"
 #import "CellData.h"
+#import "ItemRenderer.h"
 
 @implementation ComboRenderer
 
@@ -36,6 +37,28 @@
     [returnList addObject:newCell];
     
     [returnList addObjectsFromArray:currentCombo.listOfAssociatedItems];
+    
+    return returnList;
+}
+
+-(NSMutableArray *)detailedStaticRenderList
+{
+    NSMutableArray *returnList = [[NSMutableArray alloc] initWithCapacity:0];
+    CellData *newCell = [super detailedStaticRenderDefaultCell];
+    newCell.cellTitle = currentCombo.name;
+    newCell.cellDesc = [currentCombo.price stringValue];
+    
+    [returnList addObject:newCell];
+    
+    for (Item *anItem in currentCombo.listOfAssociatedItems) {
+        ItemRenderer *itemRenderer = [[ItemRenderer alloc] initWithItem:anItem];
+        
+        for (CellData *aCell in [itemRenderer detailedStaticRenderList]) {
+            [aCell tab];
+            [aCell setCellDesc:@""];
+            [returnList addObject:aCell];
+        }
+    }
     
     return returnList;
 }

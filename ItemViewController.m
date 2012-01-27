@@ -31,7 +31,7 @@
 
 -(void)deleteButtonPressed
 {
-    [[ownerOrder itemList] removeObject:itemInfo];
+    [ownerOrder removeItem:itemInfo];
     [[self navigationController] popViewControllerAnimated:YES];
 }
 

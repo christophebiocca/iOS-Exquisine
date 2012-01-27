@@ -14,6 +14,8 @@
 		232C796F14CF77EB00C3868D /* FavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C796E14CF77EB00C3868D /* FavoritesViewController.m */; };
 		232C797A14D0A7E000C3868D /* Combo.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C797914D0A7E000C3868D /* Combo.m */; };
 		232C797E14D0BA3500C3868D /* ComboRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C797D14D0BA3500C3868D /* ComboRenderer.m */; };
+		232C798414D2059400C3868D /* OrderSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C798314D2059400C3868D /* OrderSummaryViewController.m */; };
+		232C798714D209D600C3868D /* OrderSummaryRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C798614D209D600C3868D /* OrderSummaryRenderer.m */; };
 		232D7A1014C8B23A00DD5911 /* UICustomActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 232D7A0F14C8B23A00DD5911 /* UICustomActionSheet.m */; };
 		232D7A1214C8B4FC00DD5911 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 232D7A1114C8B4FC00DD5911 /* QuartzCore.framework */; };
 		23658CC114BDFB15002C0996 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23658CC014BDFB15002C0996 /* UIKit.framework */; };
@@ -96,6 +98,10 @@
 		232C797914D0A7E000C3868D /* Combo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Combo.m; sourceTree = "<group>"; };
 		232C797C14D0BA3500C3868D /* ComboRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComboRenderer.h; sourceTree = "<group>"; };
 		232C797D14D0BA3500C3868D /* ComboRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComboRenderer.m; sourceTree = "<group>"; };
+		232C798214D2059400C3868D /* OrderSummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderSummaryViewController.h; sourceTree = "<group>"; };
+		232C798314D2059400C3868D /* OrderSummaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderSummaryViewController.m; sourceTree = "<group>"; };
+		232C798514D209D600C3868D /* OrderSummaryRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderSummaryRenderer.h; sourceTree = "<group>"; };
+		232C798614D209D600C3868D /* OrderSummaryRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderSummaryRenderer.m; sourceTree = "<group>"; };
 		232D7A0E14C8B23A00DD5911 /* UICustomActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICustomActionSheet.h; sourceTree = "<group>"; };
 		232D7A0F14C8B23A00DD5911 /* UICustomActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICustomActionSheet.m; sourceTree = "<group>"; };
 		232D7A1114C8B4FC00DD5911 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -640,6 +646,8 @@
 			children = (
 				23DA7A4F14C61926008281DD /* OrderRenderer.h */,
 				23DA7A5014C61926008281DD /* OrderRenderer.m */,
+				232C798514D209D600C3868D /* OrderSummaryRenderer.h */,
+				232C798614D209D600C3868D /* OrderSummaryRenderer.m */,
 			);
 			name = OrderRenderer;
 			sourceTree = "<group>";
@@ -668,6 +676,8 @@
 				232C795514CE061200C3868D /* OrderManagementDelegate.h */,
 				23DA7A5714C6283E008281DD /* OrderViewController.h */,
 				23DA7A5814C6283E008281DD /* OrderViewController.m */,
+				232C798214D2059400C3868D /* OrderSummaryViewController.h */,
+				232C798314D2059400C3868D /* OrderSummaryViewController.m */,
 			);
 			name = OrderViewController;
 			sourceTree = "<group>";
@@ -964,6 +974,8 @@
 				232C796F14CF77EB00C3868D /* FavoritesViewController.m in Sources */,
 				232C797A14D0A7E000C3868D /* Combo.m in Sources */,
 				232C797E14D0BA3500C3868D /* ComboRenderer.m in Sources */,
+				232C798414D2059400C3868D /* OrderSummaryViewController.m in Sources */,
+				232C798714D209D600C3868D /* OrderSummaryRenderer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

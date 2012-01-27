@@ -6,10 +6,10 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "Renderer.h"
+#import "MenuComponentRenderer.h"
 @class Order;
 @class Combo;
-@interface ComboRenderer : Renderer
+@interface ComboRenderer : MenuComponentRenderer
 {
     Combo *currentCombo;
 }
@@ -17,5 +17,7 @@
 -(ComboRenderer *) initFromCombo: (Combo *) aCombo;
 
 -(NSMutableArray *) produceRenderList;
+
+-(NSMutableArray *) detailedStaticRenderList;
 
 @end

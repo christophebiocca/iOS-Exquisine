@@ -13,11 +13,13 @@
     UIButton *createOrderButton;
     UIButton *favoriteOrderButton;
     UIButton *accountInfoButton;
+    UIButton *pendingOrderButton;
     UILabel *greetingLabel;
     UILabel *orderStatus;
 }
 
-@property (retain) UIButton *createOrderButton;
+@property (retain) UIButton *createOrderButton;  	
+@property (retain) UIButton *pendingOrderButton;
 @property (retain) UIButton *favoriteOrderButton;
 @property (retain) UIButton *accountInfoButton;
 @property (retain) UILabel *greetingLabel;

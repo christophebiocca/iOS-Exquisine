@@ -1,50 +1,34 @@
 //
-//  OrderViewController.m
+//  OrderSummaryViewController.m
 //  AvocadoTest1
 //
-//  Created by Jake on 12-01-17.
+//  Created by Jake on 12-01-26.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "OrderViewController.h"
-#import "ItemViewController.h"
-#import "Item.h"
-#import "Menu.h"
-#import "MenuViewController.h"
+#import "OrderSummaryViewController.h"
 #import "Order.h"
+#import "OrderSummaryRenderer.h"
 #import "OrderView.h"
-#import "OrderRenderer.h"
-#import "UICustomActionSheet.h"
-#import "AlertPrompt.h"
-#import "OrderManagementDelegate.h"
 #import "Utilities.h"
-#import "ItemRenderer.h"
-#import "CellData.h"
 
-@implementation OrderViewController
+@implementation OrderSummaryViewController
 
 @synthesize orderInfo;
-@synthesize delegate;
 
--(OrderViewController *)initializeWithMenuAndOrder:(Menu *) aMenu:(Order *) anOrder
-{
-    menuInfo = aMenu;
+-(OrderSummaryViewController *)initializeWithOrder:(Order *) anOrder
+{    
+    
     orderInfo = anOrder;
-    orderRenderer = [[OrderRenderer alloc] initWithOrderAndMenu:orderInfo:menuInfo];
-    [[self navigationItem] setTitle:orderInfo.name];
+    orderSummaryRenderer = [[OrderSummaryRenderer alloc] initWithOrder:orderInfo];
+    [[self navigationItem] setTitle:orderInfo.status];
     
     return self;
 }
 
--(void)renameOrder:(NSString *)newName
-{
-    [orderInfo setName:newName];
-    [[self navigationItem] setTitle:newName];
-}
-
 -(void)displayOptions
 {
-    
+    /*
     if([orderInfo isFavorite])
     {
         UICustomActionSheet *optionPopup = [[UICustomActionSheet alloc] initWithTitle:@"Order options" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Submit this order!" otherButtonTitles:@"Rename this order" , @"Delete from favorites", nil];
@@ -71,93 +55,16 @@
         [optionPopup setTag:1];
         
         [optionPopup showInView:orderView];
-    }
-}
-
--(void)displayOrderConfirmation
-{
-    UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Are you sure?" message:[NSString stringWithFormat: @"Are you sure you'd like to make this purchase of %@?", [Utilities FormatToPrice:[orderInfo totalPrice]]] delegate:self cancelButtonTitle:@"Nope" otherButtonTitles:@"Awww Yeah!", nil];
-    
-    [areYouSure setTag:1];
-    
-    [areYouSure show];
-}
-
--(void)promptUserForRename
-{
-    
-    AlertPrompt *renamePrompt = [[AlertPrompt alloc] initWithPromptTitle:@"New order name:" message:@"name" delegate:self cancelButtonTitle:@"Cancel" okButtonTitle:@"OK"];
-    [renamePrompt setTag:2];
-    
-    [renamePrompt show];
-}
-
--(void)displayDeletionConfirmation
-{
-    UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Are you sure?" message:[NSString stringWithFormat: @"You cannot recover this order after deleting it.", [orderInfo totalPrice]] delegate:self cancelButtonTitle:@"Oh, well then no" otherButtonTitles:@"Yep, delete it", nil];
-    
-    [areYouSure setTag:3];
-    
-    [areYouSure show];
-}
-
--(void)displayOrderClearConfirmation
-{
-    UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Are you sure?" message:[NSString stringWithFormat: @"Are you sure you want to remove all items in this order?", [orderInfo totalPrice]] delegate:self cancelButtonTitle:@"Nope" otherButtonTitles:@"Yep", nil];
-    
-    [areYouSure setTag:4];
-    
-    [areYouSure show];
+    }*/
 }
 
 //Delegate functions
 //***********************************************************
 
 
-- (void)alertView:(UIAlertView *)alertView willDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    if ([alertView tag] == 1) // Order Placement
-    {
-        if (buttonIndex == 1)
-        {
-            [delegate submitOrderForController:self];
-            [[self navigationController] popViewControllerAnimated:YES];
-        }
-    }
-    
-    if ([alertView tag] == 2) // Order Rename
-    {
-        if (buttonIndex == 1)
-        {
-            NSString *entered = [ (AlertPrompt *)alertView enteredText];
-            [self renameOrder:entered];
-        }
-    }
-    
-    if ([alertView tag] == 3) // Order Deletion
-    {
-        if (buttonIndex == 1)
-        {
-            [delegate deleteFromFavoritesForController:self];
-            [[self navigationController] popViewControllerAnimated:YES];
-        }
-    }
-    
-    if ([alertView tag] == 4) // Order Clear
-    {
-        if (buttonIndex == 1)
-        {
-            [orderInfo clearOrder];
-            [orderRenderer redraw];
-            [[orderView orderTable] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
-        }
-    }
-    
-}
-
-
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    /*
     if ([actionSheet tag] == 1)
     {
         switch (buttonIndex) {
@@ -197,15 +104,14 @@
             default:
                 break;
         }
-    }
-    
+    }*/
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    /*
     [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
     
-    id cellRenderer = [orderRenderer objectForCellAtIndex:indexPath];
+    id cellRenderer = [orderSummaryRenderer objectForCellAtIndex:indexPath];
     
     if ([cellRenderer isKindOfClass:[ItemRenderer class]])
     {
@@ -224,21 +130,12 @@
         {
             //allocate a new menu renderer passing this order to it     
             MenuViewController *menuViewController = [[MenuViewController alloc] initializeWithMenuAndOrder:menuInfo :orderInfo];
-        
+            
             //Push the menu page
             [[self navigationController] pushViewController:menuViewController animated:YES];
         }
     }
-}
-
--(void)tableView:(UITableView *) tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *) indexPath
-{
-    [self tableView:tableView didSelectRowAtIndexPath:indexPath];
-}
-
-- (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [tableView reloadSections:[[NSIndexSet alloc] initWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+     */
 }
 
 
@@ -259,7 +156,7 @@
 {
     orderView = [[OrderView alloc] init];
     [[orderView orderTable] setDelegate:self];
-    [[orderView orderTable] setDataSource:orderRenderer];
+    [[orderView orderTable] setDataSource:orderSummaryRenderer];
     
     optionsButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(displayOptions)];
     
@@ -275,7 +172,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [orderRenderer redraw];
+    [orderSummaryRenderer redraw];
     [[orderView orderTable] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
 }
 
@@ -290,6 +187,14 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if ( [indexPath row] < ([Utilities CompositeListCount:[orderSummaryRenderer displayLists]] - 3))
+    {
+        return 28.0f;
+    }
+    return 44.0f;
 }
 
 @end

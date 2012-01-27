@@ -109,5 +109,29 @@
     return cell;
 }
 
+-(NSArray *)detailedStaticRenderList
+{
+    NSMutableArray *returnList = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    CellData *newCell = [super detailedStaticRenderDefaultCell];
+    [newCell setCellDesc:[Utilities FormatToPrice:[itemInfo totalPrice]]];
+    [newCell setCellTitle:[itemInfo name]];
+    
+    [returnList addObject:newCell];
+    
+    for (Option *anOption in [itemInfo options]) {
+        OptionRenderer *optionRenderer = [[OptionRenderer alloc] initWithOption:anOption];
+        
+        for (CellData *aCell in [optionRenderer detailedStaticRenderList]) {
+            [aCell tab];
+            [aCell setCellDesc:@""];
+            [returnList addObject:aCell];
+        }
+        
+    }
+    
+    return returnList;
+}
+
 
 @end

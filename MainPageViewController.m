@@ -15,6 +15,7 @@
 #import "ItemViewController.h"
 #import "GetMenu.h"
 #import "FavoritesViewController.h"
+#import "OrderSummaryViewController.h"
 
 @implementation MainPageViewController
 
@@ -42,6 +43,8 @@
     [mainPageView.createOrderButton addTarget:self action:@selector(createOrderPressed) forControlEvents:UIControlEventTouchUpInside];
     
     [mainPageView.favoriteOrderButton addTarget:self action:@selector(favoritesButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    
+    [mainPageView.pendingOrderButton addTarget:self action:@selector(pendingButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     
     [self setView:mainPageView];
 }
@@ -87,6 +90,14 @@
     
 }
 
+-(void)pendingButtonPressed
+{
+    Order *pendingOrder = [[self pendingOrders] lastObject];
+    OrderSummaryViewController *orderSummaryController = [[OrderSummaryViewController alloc] initializeWithOrder:pendingOrder];
+    
+    [[self navigationController] pushViewController:orderSummaryController animated:YES];
+}
+
 -(NSMutableArray *)pendingOrders
 {
     NSMutableArray *pendingOrderList = [[NSMutableArray alloc] initWithCapacity:0];
@@ -111,6 +122,7 @@
 -(void)submitOrderForController:(id)orderViewController
 {
     [[orderViewController orderInfo] setStatus:@"Queued"];
+    [[orderViewController orderInfo] submit];
     //A bunch of code to interact with the server
     
     //Push the current order on the history list
@@ -119,7 +131,7 @@
     if ([[orderViewController orderInfo] isEqual:currentOrder])
     {
         //Allocate a new order
-        currentOrder = [[Order alloc] init];
+        currentOrder = [[Order alloc] initWithParentMenu:theMenu];
     }
 }
 -(void)addToFavoritesForController:(id)orderViewController
@@ -175,11 +187,13 @@
     [super viewWillAppear:animated];
     if ([[self pendingOrders] count] > 0)
     {
-        [mainPageView.orderStatus setText:[NSString stringWithFormat:@"Order Status: %@" ,[[[self pendingOrders] lastObject] status]]];
+        [mainPageView.pendingOrderButton setTitle:[NSString stringWithFormat:@"Order Status: %@" ,[[[self pendingOrders] lastObject] status]] forState:UIControlStateNormal];
+        
+        [mainPageView.pendingOrderButton setEnabled:YES];
     }
     else
     {
-        [mainPageView.orderStatus setText:@"Order Status: No orders pending"];
+        [mainPageView.pendingOrderButton setEnabled:NO];
     }
 }
 

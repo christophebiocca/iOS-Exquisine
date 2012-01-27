@@ -19,4 +19,6 @@
 
 -(UITableViewCell *) configureCell:(UITableViewCell *) aCell;
 
+-(NSArray *) detailedStaticRenderList;
+
 @end

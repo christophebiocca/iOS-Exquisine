@@ -20,6 +20,7 @@
 @synthesize accountInfoButton;
 @synthesize greetingLabel;
 @synthesize orderStatus;
+@synthesize pendingOrderButton;
 
 
 - (id)initWithFrame:(CGRect)frame
@@ -28,6 +29,7 @@
     if (self) {
         createOrderButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         favoriteOrderButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        pendingOrderButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         accountInfoButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         greetingLabel = [[UILabel alloc] init];
         orderStatus = [[UILabel alloc] init];
@@ -35,6 +37,9 @@
         [createOrderButton setTitle:@"New Order" forState:UIControlStateNormal];
         [favoriteOrderButton setTitle:@"Favorites" forState:UIControlStateNormal];
         [accountInfoButton setTitle:@"Account Information" forState:UIControlStateNormal];
+        [pendingOrderButton setTitle: @"Order status: No pending orders" forState:UIControlStateDisabled];
+        [pendingOrderButton setTitleColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.5] forState:UIControlStateDisabled];
+        [pendingOrderButton setEnabled:NO];
         
         [createOrderButton addTarget:self action:@selector(createOrderPressed) 
          forControlEvents:UIControlEventTouchUpInside]; 
@@ -50,10 +55,11 @@
         
         [self addSubview:createOrderButton];
         [self addSubview:favoriteOrderButton];
+        [self addSubview:pendingOrderButton];
         //For now, there is no account info button. If we decide to never have it, chuck it.
         //[self addSubview:accountInfoButton];
         [self addSubview:greetingLabel];
-        [self addSubview:orderStatus];
+        //[self addSubview:orderStatus];
     }
     return self;
 }
@@ -64,6 +70,7 @@
     [createOrderButton setFrame:CGRectMake(20, 163, 280, 37)];
     [favoriteOrderButton setFrame:CGRectMake(20, 208, 280, 37)];
     [accountInfoButton setFrame:CGRectMake(20, 359, 280, 37)];
+    [pendingOrderButton setFrame:CGRectMake(20, 253, 280, 37)];
     [greetingLabel setFrame:CGRectMake(20, 20, 280, 135)];
     [orderStatus setFrame:CGRectMake(20, 253, 280, 37)];
 }

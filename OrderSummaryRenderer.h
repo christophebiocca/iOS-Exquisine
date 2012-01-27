@@ -1,18 +1,18 @@
 //
-//  ItemRenderer.h
+//  OrderSummaryRenderer.h
 //  AvocadoTest1
 //
-//  Created by Jake on 12-01-17.
+//  Created by Jake on 12-01-26.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "MenuComponentRenderer.h"
-@class Item;
+#import "Renderer.h"
+@class Order;
 
-@interface ItemRenderer : MenuComponentRenderer <UITableViewDataSource>
+@interface OrderSummaryRenderer : Renderer <UITableViewDataSource>
 {
-    Item *itemInfo;
-
+    Order *orderInfo;
+    
     //This guy contains stuff that we need
     //to display cells for after the item list.
     NSMutableArray *suffixList;
@@ -21,17 +21,19 @@
     //respond to configureCell. Do not break this contract!
     NSMutableArray *displayLists;
     
-    NSMutableArray *optionRenderList;
+    NSMutableArray *itemRenderList;
+    
+    NSMutableArray *comboRenderList;
 }
 
-@property (retain) Item *itemInfo;
+@property (retain) NSMutableArray *displayLists;
 
 -(void) redraw;
 
--(ItemRenderer *) initWithItem:(Item *) anItem;
+-(OrderSummaryRenderer *)initWithOrder:(Order *)anOrder;
 
 -(UITableViewCell *) configureCell:(UITableViewCell *) aCell;
 
--(NSArray *) detailedStaticRenderList;
+-(id) objectForCellAtIndex:(NSIndexPath *) index;
 
 @end
