@@ -12,6 +12,7 @@
 #import "Item.h"
 #import "Menu.h"
 #import "Combo.h"
+#import "PlaceOrder.h"
 
 @implementation Order
     
@@ -198,6 +199,7 @@
 {
     mostRecentSubmitDate = [[NSDate alloc] initWithTimeIntervalSinceNow:0.0];
     [self setStatus:@"Queued"];
+    [PlaceOrder sendOrder:self toLocation:location];
 }
 
 @end
