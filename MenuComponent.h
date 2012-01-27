@@ -14,7 +14,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MenuComponent : NSObject {
+@interface MenuComponent : NSObject <NSCoding> {
     NSString *name;
     NSString *desc;
     NSInteger primaryKey;

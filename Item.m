@@ -89,4 +89,25 @@
     return repr;
 }
 
+- (MenuComponent *)initWithCoder:(NSCoder *)decoder
+{
+    if (self = [super initWithCoder:decoder])
+    {
+        basePrice = [decoder decodeObjectForKey:@"base_price"];
+        options = [decoder decodeObjectForKey:@"options"];
+        propertiesChecksum = [decoder decodeObjectForKey:@"preoperties_checksum"];
+        
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+    //Rinse and repeat this:
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:basePrice forKey:@"base_price"];
+    [encoder encodeObject:options forKey:@"options"];
+    [encoder encodeObject:propertiesChecksum forKey:@"preoperties_checksum"];
+}
+
 @end

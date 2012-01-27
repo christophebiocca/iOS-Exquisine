@@ -17,10 +17,9 @@
 @interface MainPageViewController : UIViewController<UITableViewDelegate, OrderManagementDelegate>{
 
     MainPageView *mainPageView;
+    
     Menu *theMenu;
-    
     Order *currentOrder;
-    
     NSMutableArray *ordersHistory;
     NSMutableArray *favoriteOrders;
     
@@ -31,5 +30,11 @@
 -(void) favoritesButtonPressed;
 
 -(void) pendingButtonPressed;
+
+-(void) loadDataFromDisk;
+
+-(void) saveDataToDisk;
+
+-(NSString *) dataFilePath;
 
 @end

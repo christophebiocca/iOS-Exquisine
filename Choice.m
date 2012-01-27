@@ -65,4 +65,27 @@
     return [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:primaryKey] forKey:@"choice"];
 }
 
+- (MenuComponent *)initWithCoder:(NSCoder *)decoder
+{
+    if (self = [super initWithCoder:decoder])
+    {
+        option = [decoder decodeObjectForKey:@"option"];
+        price = [decoder decodeObjectForKey:@"price"];
+        selected = [[decoder decodeObjectForKey:@"selected"] intValue];
+        propertiesChecksum = [decoder decodeObjectForKey:@"properties_checksum"];
+        
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+    //Rinse and repeat this:
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:option forKey:@"option"];
+    [encoder encodeObject:price forKey:@"price"];
+    [encoder encodeObject:[NSString stringWithFormat:@"%i", selected] forKey:@"selected"];
+    [encoder encodeObject:propertiesChecksum forKey:@"properties_checksum"];
+}
+
 @end

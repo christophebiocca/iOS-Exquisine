@@ -108,4 +108,26 @@
     return nil;
 }
 
+- (MenuComponent *)initWithCoder:(NSCoder *)decoder
+{
+    if (self = [super initWithCoder:decoder])
+    {
+        associatedOrder = [decoder decodeObjectForKey:@"associated_order"];
+        listOfItemGroups = [decoder decodeObjectForKey:@"list_of_item_groups"];
+        listOfAssociatedItems = [decoder decodeObjectForKey:@"list_of_associated_items"];
+        price = [decoder decodeObjectForKey:@"price"];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+    //Rinse and repeat this:
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:associatedOrder forKey:@"associated_order"];
+    [encoder encodeObject:listOfItemGroups forKey:@"list_of_item_groups"];
+    [encoder encodeObject:listOfAssociatedItems forKey:@"list_of_associated_items"];
+    [encoder encodeObject:price forKey:@"price"];
+}
+
 @end

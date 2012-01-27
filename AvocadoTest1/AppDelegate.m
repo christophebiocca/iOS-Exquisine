@@ -20,7 +20,7 @@
     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
     // Override point for customization after application launch.
     [self setWindow:[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]]];
-    MainPageViewController* page = [[MainPageViewController alloc] init];
+    page = [[MainPageViewController alloc] init];
     navigationController = [[UINavigationController alloc] initWithRootViewController:page];
     [[self window] addSubview:[navigationController view]];
     [[self window] makeKeyAndVisible];
@@ -37,6 +37,7 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
+    [page saveDataToDisk];
     /*
      Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
      If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.

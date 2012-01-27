@@ -207,4 +207,31 @@
     return repr;
 }
 
+- (MenuComponent *)initWithCoder:(NSCoder *)decoder
+{
+    if (self = [super initWithCoder:decoder])
+    {
+        lowerBound = [[decoder decodeObjectForKey:@"lower_bound"] intValue];
+        upperBound = [[decoder decodeObjectForKey:@"upper_bound"] intValue];
+        numberOfFreeChoices = [[decoder decodeObjectForKey:@"number_of_free_choices"] intValue];
+        choiceList = [decoder decodeObjectForKey:@"choice_list"];
+        selectedChoices = [decoder decodeObjectForKey:@"selected_choices"];
+        propertiesChecksum = [decoder decodeObjectForKey:@"properties_checksum"];
+        
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+    //Rinse and repeat this:
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:[NSString stringWithFormat:@"%i", lowerBound] forKey:@"lower_bound"];
+    [encoder encodeObject:[NSString stringWithFormat:@"%i", upperBound] forKey:@"upper_bound"];
+    [encoder encodeObject:[NSString stringWithFormat:@"%i", numberOfFreeChoices] forKey:@"number_of_free_choices"];
+    [encoder encodeObject:choiceList forKey:@"choice_list"];
+    [encoder encodeObject:selectedChoices forKey:@"selected_choices"];
+    [encoder encodeObject:propertiesChecksum forKey:@"properties_checksum"];
+}
+
 @end

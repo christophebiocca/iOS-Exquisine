@@ -22,6 +22,7 @@
 - (id)init
 {
     self = [super initWithNibName:nil bundle:nil];
+    
     if (self) {
         [[self navigationItem] setTitle:@"Pita Factory"];
         [GetMenu getMenu:^(GetMenu* menuCall){
@@ -30,8 +31,13 @@
                  failure:^(GetMenu* menuCall, NSError* error){
                      NSLog(@"call %@ errored with %@", menuCall, error);
                  }];
-        ordersHistory = [[NSMutableArray alloc] initWithCapacity:0];
-        favoriteOrders = [[NSMutableArray alloc] initWithCapacity:0];
+        [self loadDataFromDisk];
+        
+        if (ordersHistory == nil | favoriteOrders == nil)
+        {
+            ordersHistory = [[NSMutableArray alloc] initWithCapacity:0];
+            favoriteOrders = [[NSMutableArray alloc] initWithCapacity:0];
+        }
     }
     return self;
 }
@@ -72,7 +78,10 @@
         NSLog(@"The menu had not been fetched upon clicking new order");
     }
     
-    currentOrder = [[Order alloc] initWithParentMenu:theMenu];
+    if (!currentOrder)
+    {
+        currentOrder = [[Order alloc] initWithParentMenu:theMenu];
+    }
     
     OrderViewController *orderView = [[OrderViewController alloc] initializeWithMenuAndOrder:theMenu:currentOrder];
     
@@ -153,7 +162,7 @@
     //Allocate a new order if needed
     if ([[orderViewController orderInfo] isEqual:currentOrder])
     {
-        currentOrder = [[Order alloc] init];
+        currentOrder = [[Order alloc] initWithParentMenu:theMenu];
     }
     
     //Move view control to the favorites view.
@@ -190,6 +199,47 @@
     {
         [mainPageView.pendingOrderButton setEnabled:NO];
     }
+}
+
+-(NSString *)dataFilePath
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    NSString *folder = @"~/Library/Application Support/PitaFactoryFiles/";
+    folder = [folder stringByExpandingTildeInPath];
+    
+    if ([fileManager fileExistsAtPath: folder] == NO)
+    {
+        [fileManager createDirectoryAtPath:folder withIntermediateDirectories:NO attributes:nil error:nil];
+    }
+    
+    NSString *fileName = @"MainPageViewControllerInfo";
+    return [folder stringByAppendingPathComponent: fileName];
+}
+
+-(void)loadDataFromDisk
+{
+    NSString *path = [self dataFilePath];
+    NSDictionary* rootObject;
+    rootObject = [NSKeyedUnarchiver unarchiveObjectWithFile:path];    
+    theMenu = [rootObject valueForKey:@"menu"];
+    currentOrder = [rootObject valueForKey:@"current_order"];
+    ordersHistory = [rootObject valueForKey:@"order_history"];
+    favoriteOrders = [rootObject valueForKey:@"favorite_orders"];
+}
+
+-(void)saveDataToDisk
+{
+    
+    NSString * path = [self dataFilePath];
+    
+    NSMutableDictionary * rootObject;
+    rootObject = [NSMutableDictionary dictionary];
+    [rootObject setValue: theMenu forKey:@"menu"];
+    [rootObject setValue: currentOrder forKey:@"current_order"];
+    [rootObject setValue: ordersHistory forKey:@"order_history"];
+    [rootObject setValue: favoriteOrders forKey:@"favorite_orders"];
+    [NSKeyedArchiver archiveRootObject: rootObject toFile: path];
 }
 
 @end
