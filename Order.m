@@ -198,7 +198,7 @@
 -(void) submitToLocation:(Location*)location
 {
     mostRecentSubmitDate = [[NSDate alloc] initWithTimeIntervalSinceNow:0.0];
-    [self setStatus:@"Queued"];
+    [self setStatus:@"Sending"];
     [PlaceOrder sendOrder:self toLocation:location];
 }
 
