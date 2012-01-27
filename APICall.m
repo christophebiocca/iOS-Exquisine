@@ -9,6 +9,7 @@
 #import "APICall.h"
 #import "APICallProtectedMethods.h"
 #import "APICallDelegate.h"
+#import "Login.h"
 
 @interface APICall(PrivateMethods)
 
@@ -17,6 +18,7 @@
 +(NSMutableURLRequest*)baseRequestForLocation:(NSString*)location;
 +(NSMutableURLRequest*)postRequestForLocation:(NSString*)location data:(NSData*)data;
 -(void)send;
+-(void)setCSRFToken;
 -(void)postCompletionHook;
 -(void)setDelegate:(id<APICallDelegate>)delegate;
 -(id)initWithRequest:(NSURLRequest*)request successBlock:(void (^)(APICall*))success errorBlock:(void (^)(APICall*, NSError*))error;
@@ -25,7 +27,17 @@
 
 @implementation APICall
 
-@synthesize completed;
+@synthesize completed, request, response;
+
+static NSURL* loginURL;
+static NSURL* serverURL;
+
++(void)initialize{
+    NSString* testingServer = @"http://10.42.43.1:8000";
+    NSString* productionServer = @"http://croutonlabs.com";
+    serverURL = [NSURL URLWithString:testingServer];
+    loginURL = [self urlForLocation:@"accounts/login/"];
+}
 
 +(void)sendGETRequestForLocation:(NSString*)location withDelegate:(id<APICallDelegate>)delegate{
     __block id<APICallDelegate> theDelegate = delegate;
@@ -111,23 +123,13 @@
 }
 
 +(NSMutableURLRequest*)postRequestForLocation:(NSString*)location data:(NSData*)data{
-    NSURL* requestURL = [self urlForLocation:location];
     NSMutableURLRequest* req = [self baseRequestForLocation:location];
     [req setHTTPMethod:@"POST"];
-    NSString* csrfToken = nil;
-    NSArray* cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:requestURL];
-    for(NSHTTPCookie* cookie in cookies){
-        NSLog(@"Cookie : %@", cookie);
-        if([[cookie name] isEqualToString:@"csrftoken"]){
-            csrfToken = [cookie value];
-            break;
-        }
-    }
-    [req addValue:csrfToken forHTTPHeaderField:@"X-CSRFToken"];
+    [req setHTTPBody:data];
     return req;
 }
 
--(id)initWithRequest:(NSURLRequest*)therequest 
+-(id)initWithRequest:(NSMutableURLRequest*)therequest 
         successBlock:(void (^)(APICall *))theSuccessBlock 
           errorBlock:(void (^)(APICall *, NSError *))theErrorBlock{
     if((self = [super init])){
@@ -139,20 +141,72 @@
 }
 
 -(void)send{
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[NSOperationQueue mainQueue] 
-                           completionHandler:[^(NSURLResponse* theResponse, NSData* theData, NSError* theError){
-        response = theResponse;
-        data = theData;
-        error = theError;
-        completed = YES;
-        [self postCompletionHook];
-        if(error){
-            errorblock(self, error);
-        } else {
-            successblock(self);
-        }
-    } copy]];
+    [self setCSRFToken];
+    NSURLConnection* connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    data = [[NSMutableData alloc] initWithLength:0];
+    [connection start];
+}
+
+-(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)theResponse{
+    response = (NSHTTPURLResponse*) theResponse;
+    NSInteger status = [response statusCode];
+    NSLog(@"Got response: %d", status);
+    if(status == 403){
+        // Most likely a csrf token issue, we can fix it by hitting our favorite url.
+        NSLog(@"GOING TO ACQUIRE A CSRF TOKEN/COOKIE");
+        [connection cancel];
+        [APICall sendGETRequestForLocation:@"customer/phoneapplogin/" 
+                                   success:^(APICall* cookieRequest) {
+                                       NSLog(@"token ACQUIRED! %@", cookieRequest);
+                                       [self send];
+                                   } 
+                                   failure:^(APICall* cookieRequest, NSError* cookieError) {
+                                       NSLog(@"OK, at this stage, we are well and truly fucked. %@", cookieError);
+                                       // We should do some diagnostics on this, because it shouldn't happen.
+                                   }];
+    }
+}
+
+-(void)connection:(NSURLConnection*)connection didReceiveData:(NSData*)dataToAdd{
+    NSLog(@"GOT %d bytes of data", [dataToAdd length]);
+    [data appendData:dataToAdd];
+}
+
+-(void)complete{
+    NSLog(@"Completing");
+    completed = YES;
+    [self postCompletionHook];
+    if(error){
+        errorblock(self, error);
+    } else {
+        successblock(self);
+    }
+}
+
+-(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)theError{
+    NSLog(@"HOLY SHIT GUYS WE HAVE AN ERROR!\n%@", theError);
+    error = theError;
+}
+
+-(void)connectionDidFinishLoading:(NSURLConnection*)connection{
+    NSLog(@"Finished loading.");
+    [self complete];
+}
+
+-(NSURLRequest*)connection:(NSURLConnection *)connection 
+           willSendRequest:(NSURLRequest *)theRequest 
+          redirectResponse:(NSURLResponse *)response{
+    NSURL* newURL = [theRequest URL];
+    NSLog(@"REDIRECT TO %@ (%@)", newURL, theRequest);
+    if([[newURL pathComponents] isEqualToArray:[loginURL pathComponents]]){
+        NSLog(@"HOLY SHIT GUYS WE SHOULD LOGIN!");
+        [connection cancel]; // No point in trying anymore, it's fucked.
+        [Login login:^(Login* login){
+            NSLog(@"Following successful login %@, relaunching request %@.", login, self);
+            [self send];
+        }];
+    }
+    return theRequest;
 }
 
 -(void)postCompletionHook{
@@ -176,11 +230,23 @@
 }
 
 +(NSURL*)urlForLocation:(NSString*)location{
-    NSString *testingServer = @"http://localhost:8000";
-    NSString *productionServer = @"http://croutonlabs.com";
-    
-    NSURL* serverURL = [NSURL URLWithString:productionServer];
     return [NSURL URLWithString:location relativeToURL:serverURL];
+}
+
+-(void)setCSRFToken{
+    if(![[request HTTPMethod] isEqualToString:@"POST"]){
+        return;
+    }
+    NSString* csrfToken = nil;
+    NSArray* cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[request URL]];
+    for(NSHTTPCookie* cookie in cookies){
+        NSLog(@"Cookie : %@", cookie);
+        if([[cookie name] isEqualToString:@"csrftoken"]){
+            csrfToken = [cookie value];
+            break;
+        }
+    }
+    [request addValue:csrfToken forHTTPHeaderField:@"X-CSRFToken"];
 }
 
 @end

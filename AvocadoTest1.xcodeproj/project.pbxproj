@@ -68,6 +68,10 @@
 		23DA7A9014C7473C008281DD /* GetMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA7A8F14C7473C008281DD /* GetMenu.m */; };
 		23DA7A9614C893F3008281DD /* green dot.png in Resources */ = {isa = PBXBuildFile; fileRef = 23DA7A9514C893F1008281DD /* green dot.png */; };
 		23E7D87C14C9BA88006D6C13 /* behindButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 23E7D87B14C9BA88006D6C13 /* behindButton.png */; };
+		D95B786014D2511E00FC0F29 /* Login.m in Sources */ = {isa = PBXBuildFile; fileRef = D95B785F14D2511E00FC0F29 /* Login.m */; };
+		D95B786514D252F400FC0F29 /* CredentialsStore.m in Sources */ = {isa = PBXBuildFile; fileRef = D95B786414D252F400FC0F29 /* CredentialsStore.m */; };
+		D95B786714D2558800FC0F29 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D95B786614D2558800FC0F29 /* Security.framework */; };
+		D95B786814D2693800FC0F29 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D95B786614D2558800FC0F29 /* Security.framework */; };
 		D9AF662614D22C0A00632EA8 /* JSONAPICall.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AF662514D22C0A00632EA8 /* JSONAPICall.m */; };
 /* End PBXBuildFile section */
 
@@ -199,6 +203,11 @@
 		23DA7A8F14C7473C008281DD /* GetMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetMenu.m; sourceTree = "<group>"; };
 		23DA7A9514C893F1008281DD /* green dot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "green dot.png"; sourceTree = "<group>"; };
 		23E7D87B14C9BA88006D6C13 /* behindButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = behindButton.png; sourceTree = "<group>"; };
+		D95B785E14D2511E00FC0F29 /* Login.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Login.h; sourceTree = "<group>"; };
+		D95B785F14D2511E00FC0F29 /* Login.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Login.m; sourceTree = "<group>"; };
+		D95B786314D252F400FC0F29 /* CredentialsStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CredentialsStore.h; sourceTree = "<group>"; };
+		D95B786414D252F400FC0F29 /* CredentialsStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CredentialsStore.m; sourceTree = "<group>"; };
+		D95B786614D2558800FC0F29 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		D9AF662414D22C0A00632EA8 /* JSONAPICall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONAPICall.h; sourceTree = "<group>"; };
 		D9AF662514D22C0A00632EA8 /* JSONAPICall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONAPICall.m; sourceTree = "<group>"; };
 		D9AF662714D2308B00632EA8 /* APICallProtectedMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APICallProtectedMethods.h; sourceTree = "<group>"; };
@@ -209,6 +218,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D95B786814D2693800FC0F29 /* Security.framework in Frameworks */,
 				232D7A1214C8B4FC00DD5911 /* QuartzCore.framework in Frameworks */,
 				23658CC114BDFB15002C0996 /* UIKit.framework in Frameworks */,
 				23658CC314BDFB15002C0996 /* Foundation.framework in Frameworks */,
@@ -220,6 +230,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D95B786714D2558800FC0F29 /* Security.framework in Frameworks */,
 				23658CE214BDFB15002C0996 /* SenTestingKit.framework in Frameworks */,
 				23658CE314BDFB15002C0996 /* UIKit.framework in Frameworks */,
 				23658CE414BDFB15002C0996 /* Foundation.framework in Frameworks */,
@@ -379,6 +390,7 @@
 		23658CBF14BDFB15002C0996 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D95B786614D2558800FC0F29 /* Security.framework */,
 				232D7A1114C8B4FC00DD5911 /* QuartzCore.framework */,
 				23658CC014BDFB15002C0996 /* UIKit.framework */,
 				23658CC214BDFB15002C0996 /* Foundation.framework */,
@@ -815,6 +827,7 @@
 		23DA7A8814C73D52008281DD /* API */ = {
 			isa = PBXGroup;
 			children = (
+				D95B786214D252D600FC0F29 /* Credentials */,
 				23DA7A8D14C740B3008281DD /* APICallDelegate.h */,
 				23DA7A8A14C73DC1008281DD /* APICall.h */,
 				D9AF662714D2308B00632EA8 /* APICallProtectedMethods.h */,
@@ -825,6 +838,17 @@
 				23DA7A8F14C7473C008281DD /* GetMenu.m */,
 			);
 			name = API;
+			sourceTree = "<group>";
+		};
+		D95B786214D252D600FC0F29 /* Credentials */ = {
+			isa = PBXGroup;
+			children = (
+				D95B785E14D2511E00FC0F29 /* Login.h */,
+				D95B785F14D2511E00FC0F29 /* Login.m */,
+				D95B786314D252F400FC0F29 /* CredentialsStore.h */,
+				D95B786414D252F400FC0F29 /* CredentialsStore.m */,
+			);
+			name = Credentials;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -984,6 +1008,8 @@
 				232C798414D2059400C3868D /* OrderSummaryViewController.m in Sources */,
 				232C798714D209D600C3868D /* OrderSummaryRenderer.m in Sources */,
 				D9AF662614D22C0A00632EA8 /* JSONAPICall.m in Sources */,
+				D95B786014D2511E00FC0F29 /* Login.m in Sources */,
+				D95B786514D252F400FC0F29 /* CredentialsStore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

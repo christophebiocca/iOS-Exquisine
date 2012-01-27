@@ -6,19 +6,17 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "MenuComponentView.h"
-
 @protocol APICallDelegate;
 
-@interface APICall : MenuComponentView{
+@interface APICall : NSObject<NSURLConnectionDataDelegate> {
     @private
     BOOL completed;
     
-    NSURLRequest* request;
-    NSURLResponse* response;
+    NSMutableURLRequest* request;
+    NSHTTPURLResponse* response;
     
     NSError* error;
-    NSData* data;
+    NSMutableData* data;
     
     void (^successblock)(APICall*);
     void (^errorblock)(APICall*, NSError*);
@@ -43,5 +41,7 @@
 @property(readonly)BOOL completed;
 @property(retain,readonly)NSError* error;
 @property(retain,readonly)NSData* rawData;
+@property(retain,readonly)NSHTTPURLResponse* response;
+@property(retain,readonly)NSURLRequest* request;
 
 @end
