@@ -16,6 +16,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // WE NEED OUR COOKIES, AT ALL TIMES
+    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
     // Override point for customization after application launch.
     [self setWindow:[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]]];
     MainPageViewController* page = [[MainPageViewController alloc] init];
@@ -50,6 +52,8 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
+    // WE NEED OUR COOKIES, AT ALL TIMES
+    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
