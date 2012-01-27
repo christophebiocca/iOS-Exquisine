@@ -193,7 +193,7 @@ static NSURL* serverURL;
 
 -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)theError{
     DebugLog(@"HOLY SHIT GUYS WE HAVE AN ERROR!\n%@", theError);
-    error = theError;
+    [self setError:theError];
 }
 
 -(void)connectionDidFinishLoading:(NSURLConnection*)connection{
