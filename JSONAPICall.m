@@ -36,6 +36,7 @@
 }
 
 -(void)postCompletionHook{
+    [super postCompletionHook];
     if(!jsonData){
         NSError* parsingError = nil;
         jsonData = [NSJSONSerialization JSONObjectWithData:[self rawData] 
