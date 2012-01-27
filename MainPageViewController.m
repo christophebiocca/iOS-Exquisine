@@ -117,7 +117,6 @@
 
 -(void)submitOrderForController:(id)orderViewController
 {
-    [[orderViewController orderInfo] setStatus:@"Queued"];
     [[orderViewController orderInfo] submit];
     //A bunch of code to interact with the server
     

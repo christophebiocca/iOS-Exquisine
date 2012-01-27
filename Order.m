@@ -197,6 +197,7 @@
 -(void) submit
 {
     mostRecentSubmitDate = [[NSDate alloc] initWithTimeIntervalSinceNow:0.0];
+    [self setStatus:@"Queued"];
 }
 
 @end
