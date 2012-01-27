@@ -143,6 +143,9 @@ static NSURL* serverURL;
 -(void)send{
     [self setCSRFToken];
     NSURLConnection* connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    completed = NO;
+    error = nil;
+    response = nil;
     data = [[NSMutableData alloc] initWithLength:0];
     [connection start];
 }
