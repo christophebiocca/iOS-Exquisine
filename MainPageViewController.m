@@ -33,14 +33,17 @@
                               failure:^(GetMenu* menuCall, NSError* error){
                                   NSLog(@"call %@ errored with %@", menuCall, error);
                               }];
+        
         [self loadDataFromDisk];
         
-        if (ordersHistory == nil | favoriteOrders == nil)
+        if(!ordersHistory)
         {
             ordersHistory = [[NSMutableArray alloc] initWithCapacity:0];
+        }
+        if(!favoriteOrders)
+        {
             favoriteOrders = [[NSMutableArray alloc] initWithCapacity:0];
         }
-
         
     }
     return self;
@@ -221,10 +224,10 @@
     
     if ([fileManager fileExistsAtPath: folder] == NO)
     {
-        [fileManager createDirectoryAtPath:folder withIntermediateDirectories:NO attributes:nil error:nil];
+        [fileManager createDirectoryAtPath:folder withIntermediateDirectories:YES attributes:nil error:nil];
     }
     
-    NSString *fileName = @"MainPageViewControllerInfo";
+    NSString *fileName = @"MainPageViewControllerInfo.plist";
     return [folder stringByAppendingPathComponent: fileName];
 }
 
@@ -242,8 +245,7 @@
 -(void)saveDataToDisk
 {
     
-    NSString * path = [self dataFilePath];
-    
+    NSString *path = [self dataFilePath];
     NSMutableDictionary * rootObject;
     rootObject = [NSMutableDictionary dictionary];
     [rootObject setValue: theMenu forKey:@"menu"];
