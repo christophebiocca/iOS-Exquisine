@@ -173,6 +173,9 @@ static NSURL* serverURL;
 }
 
 -(void)complete{
+    if([response statusCode] == 500){
+        NSLog(@"OMG SERVER ERROR\n%@", [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
+    }
     NSLog(@"Completing");
     completed = YES;
     [self postCompletionHook];
