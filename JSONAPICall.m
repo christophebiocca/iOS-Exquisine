@@ -27,8 +27,8 @@
 }
 
 +(void)sendPOSTRequestForLocation:(NSString *)location withJSONData:(NSDictionary *)json 
-                          success:(void (^)(APICall *))success 
-                          failure:(void (^)(APICall *, NSError *))failure{
+                          success:(void (^)(id))success 
+                          failure:(void (^)(id, NSError *))failure{
     [self sendPOSTRequestForLocation:location 
                         withBodyData:[self getJSONData:json]
                              success:success 

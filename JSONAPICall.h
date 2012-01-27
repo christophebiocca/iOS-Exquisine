@@ -16,8 +16,8 @@
 
 +(void)sendPOSTRequestForLocation:(NSString *)location withJSONData:(NSDictionary *)json andDelegate:(id<APICallDelegate>)delegate;
 +(void)sendPOSTRequestForLocation:(NSString *)location withJSONData:(NSDictionary *)form 
-                          success:(void (^)(APICall *))success 
-                          failure:(void (^)(APICall *, NSError *))failure;
+                          success:(void (^)(id))success 
+                          failure:(void (^)(id, NSError *))failure;
 
 @property(retain, readonly)NSDictionary* jsonData;
 
