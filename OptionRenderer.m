@@ -98,12 +98,16 @@
     [returnList addObject:newCell];
     
     for (Choice *aChoice in [optionInfo choiceList]) {
-        ChoiceRenderer *choiceRenderer = [[ChoiceRenderer alloc] initWithChoice:aChoice];
         
-        for (CellData *aCell in [choiceRenderer detailedStaticRenderList]) {
-            [aCell tab];
-            [aCell setCellDesc:@""];
-            [returnList addObject:aCell];
+        if (aChoice.selected)
+        {
+            ChoiceRenderer *choiceRenderer = [[ChoiceRenderer alloc] initWithChoice:aChoice];
+            
+            for (CellData *aCell in [choiceRenderer detailedStaticRenderList]) {
+                [aCell tab];
+                [aCell setCellDesc:@""];
+                [returnList addObject:aCell];
+            }
         }
         
     }
