@@ -72,6 +72,7 @@
 		D95B786514D252F400FC0F29 /* CredentialsStore.m in Sources */ = {isa = PBXBuildFile; fileRef = D95B786414D252F400FC0F29 /* CredentialsStore.m */; };
 		D95B786714D2558800FC0F29 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D95B786614D2558800FC0F29 /* Security.framework */; };
 		D95B786814D2693800FC0F29 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D95B786614D2558800FC0F29 /* Security.framework */; };
+		D95B786F14D28A6900FC0F29 /* PlaceOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = D95B786E14D28A6900FC0F29 /* PlaceOrder.m */; };
 		D95B787414D2BE4B00FC0F29 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = D95B787314D2BE4B00FC0F29 /* Location.m */; };
 		D95B787714D2C4F800FC0F29 /* GetLocations.m in Sources */ = {isa = PBXBuildFile; fileRef = D95B787614D2C4F800FC0F29 /* GetLocations.m */; };
 		D9AF662614D22C0A00632EA8 /* JSONAPICall.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AF662514D22C0A00632EA8 /* JSONAPICall.m */; };
@@ -210,6 +211,8 @@
 		D95B786314D252F400FC0F29 /* CredentialsStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CredentialsStore.h; sourceTree = "<group>"; };
 		D95B786414D252F400FC0F29 /* CredentialsStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CredentialsStore.m; sourceTree = "<group>"; };
 		D95B786614D2558800FC0F29 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		D95B786D14D28A6900FC0F29 /* PlaceOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceOrder.h; sourceTree = "<group>"; };
+		D95B786E14D28A6900FC0F29 /* PlaceOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceOrder.m; sourceTree = "<group>"; };
 		D95B787214D2BE4B00FC0F29 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
 		D95B787314D2BE4B00FC0F29 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
 		D95B787514D2C4F700FC0F29 /* GetLocations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetLocations.h; sourceTree = "<group>"; };
@@ -834,6 +837,8 @@
 		23DA7A8814C73D52008281DD /* API */ = {
 			isa = PBXGroup;
 			children = (
+				D95B786D14D28A6900FC0F29 /* PlaceOrder.h */,
+				D95B786E14D28A6900FC0F29 /* PlaceOrder.m */,
 				D95B786214D252D600FC0F29 /* Credentials */,
 				23DA7A8D14C740B3008281DD /* APICallDelegate.h */,
 				23DA7A8A14C73DC1008281DD /* APICall.h */,
@@ -1028,6 +1033,7 @@
 				D9AF662614D22C0A00632EA8 /* JSONAPICall.m in Sources */,
 				D95B786014D2511E00FC0F29 /* Login.m in Sources */,
 				D95B786514D252F400FC0F29 /* CredentialsStore.m in Sources */,
+				D95B786F14D28A6900FC0F29 /* PlaceOrder.m in Sources */,
 				D95B787414D2BE4B00FC0F29 /* Location.m in Sources */,
 				D95B787714D2C4F800FC0F29 /* GetLocations.m in Sources */,
 			);
