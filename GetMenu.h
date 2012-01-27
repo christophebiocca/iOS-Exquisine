@@ -14,7 +14,7 @@
     Menu* menu;
 }
 
-+(void)getMenu:(void(^)(id))success failure:(void(^)(id,NSError*))failure;
++(void)getMenuForRestaurant:(NSInteger)restaurant success:(void(^)(id))success failure:(void(^)(id,NSError*))failure;
 
 @property(retain,readonly)Menu* menu;
 

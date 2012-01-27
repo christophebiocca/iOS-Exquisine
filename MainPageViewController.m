@@ -24,12 +24,13 @@
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
         [[self navigationItem] setTitle:@"Pita Factory"];
-        [GetMenu getMenu:^(GetMenu* menuCall){
-            theMenu = [menuCall menu];
-        }
-                 failure:^(GetMenu* menuCall, NSError* error){
-                     NSLog(@"call %@ errored with %@", menuCall, error);
-                 }];
+        [GetMenu getMenuForRestaurant:RESTAURANT_ID
+                              success:^(GetMenu* menuCall){
+                                  theMenu = [menuCall menu];
+                              }
+                              failure:^(GetMenu* menuCall, NSError* error){
+                                  NSLog(@"call %@ errored with %@", menuCall, error);
+                              }];
         ordersHistory = [[NSMutableArray alloc] initWithCapacity:0];
         favoriteOrders = [[NSMutableArray alloc] initWithCapacity:0];
     }
