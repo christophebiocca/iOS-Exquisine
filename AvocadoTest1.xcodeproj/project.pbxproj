@@ -72,6 +72,7 @@
 		D95B786514D252F400FC0F29 /* CredentialsStore.m in Sources */ = {isa = PBXBuildFile; fileRef = D95B786414D252F400FC0F29 /* CredentialsStore.m */; };
 		D95B786714D2558800FC0F29 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D95B786614D2558800FC0F29 /* Security.framework */; };
 		D95B786814D2693800FC0F29 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D95B786614D2558800FC0F29 /* Security.framework */; };
+		D95B787414D2BE4B00FC0F29 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = D95B787314D2BE4B00FC0F29 /* Location.m */; };
 		D9AF662614D22C0A00632EA8 /* JSONAPICall.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AF662514D22C0A00632EA8 /* JSONAPICall.m */; };
 /* End PBXBuildFile section */
 
@@ -208,6 +209,8 @@
 		D95B786314D252F400FC0F29 /* CredentialsStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CredentialsStore.h; sourceTree = "<group>"; };
 		D95B786414D252F400FC0F29 /* CredentialsStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CredentialsStore.m; sourceTree = "<group>"; };
 		D95B786614D2558800FC0F29 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		D95B787214D2BE4B00FC0F29 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
+		D95B787314D2BE4B00FC0F29 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
 		D9AF662414D22C0A00632EA8 /* JSONAPICall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONAPICall.h; sourceTree = "<group>"; };
 		D9AF662514D22C0A00632EA8 /* JSONAPICall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONAPICall.m; sourceTree = "<group>"; };
 		D9AF662714D2308B00632EA8 /* APICallProtectedMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APICallProtectedMethods.h; sourceTree = "<group>"; };
@@ -490,6 +493,7 @@
 			isa = PBXGroup;
 			children = (
 				237EC00B14BE5842009D9268 /* MenuComposites */,
+				D95B787114D2BE3400FC0F29 /* Location */,
 			);
 			name = "Model Structure";
 			sourceTree = "<group>";
@@ -851,6 +855,15 @@
 			name = Credentials;
 			sourceTree = "<group>";
 		};
+		D95B787114D2BE3400FC0F29 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				D95B787214D2BE4B00FC0F29 /* Location.h */,
+				D95B787314D2BE4B00FC0F29 /* Location.m */,
+			);
+			name = Location;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1010,6 +1023,7 @@
 				D9AF662614D22C0A00632EA8 /* JSONAPICall.m in Sources */,
 				D95B786014D2511E00FC0F29 /* Login.m in Sources */,
 				D95B786514D252F400FC0F29 /* CredentialsStore.m in Sources */,
+				D95B787414D2BE4B00FC0F29 /* Location.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
