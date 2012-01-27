@@ -51,7 +51,7 @@ static CredentialsStore* store = nil;
         if(res == errSecSuccess){
             appID = uuidString;
         } else {
-            NSLog(@"WTF GENTLEMEN, we got this %ld", res);   
+            NSAssert(NO, @"WTF GENTLEMEN, we got this %ld", res);   
         }
     } else {
         NSAssert(NO, @"WTF GENTLEMEN, we got this %ld", res);
