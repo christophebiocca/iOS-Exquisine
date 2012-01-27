@@ -21,7 +21,7 @@
                         withJSONData:placement 
                              success:^(PlaceOrder* call) {
                                  NSDictionary* newOrder = [call jsonData];
-                                 NSLog(@"Placed an order successfully %@", newOrder);
+                                 DebugLog(@"Placed an order successfully %@", newOrder);
                                  [order setStatus:@"Placed"];
                              } 
                              failure:^(PlaceOrder* call, NSError* error) {
