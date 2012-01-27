@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+@class MainPageViewController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>{
     UINavigationController* navigationController;
+    MainPageViewController* page;
 }
 
 @property (strong, nonatomic) UIWindow *window;

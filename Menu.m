@@ -106,4 +106,22 @@
     return returnList;
 }
 
+- (MenuComponent *)initWithCoder:(NSCoder *)decoder
+{
+    if (self = [super initWithCoder:decoder])
+    {
+        submenuList = [decoder decodeObjectForKey:@"submenu_list"];
+        comboList = [decoder decodeObjectForKey:@"combo_list"];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+    //Rinse and repeat this:
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:submenuList forKey:@"submenu_list"];
+    [encoder encodeObject:comboList forKey:@"combo_list"];
+}
+
 @end

@@ -202,4 +202,36 @@
     [PlaceOrder sendOrder:self toLocation:location];
 }
 
+- (MenuComponent *)initWithCoder:(NSCoder *)decoder
+{
+    if (self = [super initWithCoder:decoder])
+    {
+        itemList = [decoder decodeObjectForKey:@"item_list"];
+        parentMenu = [decoder decodeObjectForKey:@"parent_menu"];
+        status = [decoder decodeObjectForKey:@"status"];
+        orderIdentifier = [decoder decodeObjectForKey:@"order_identifier"];
+        isFavorite = [[decoder decodeObjectForKey:@"is_favorite"] intValue];
+        creationDate = [decoder decodeObjectForKey:@"creation_date"];
+        mostRecentSubmitDate = [decoder decodeObjectForKey:@"most_recent_submit_date"];
+        
+        nonComboItemCache = nil;
+        comboListCache =nil;
+        
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+    //Rinse and repeat this:
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:itemList forKey:@"item_list"];
+    [encoder encodeObject:parentMenu forKey:@"parent_menu"];
+    [encoder encodeObject:status forKey:@"status"];
+    [encoder encodeObject:orderIdentifier forKey:@"order_identifier"];
+    [encoder encodeObject:[NSString stringWithFormat:@"%i", isFavorite] forKey:@"is_favorite"];
+    [encoder encodeObject:creationDate forKey:@"creation_date"];
+    [encoder encodeObject:mostRecentSubmitDate forKey:@"most_recent_submit_date"];
+}
+
 @end

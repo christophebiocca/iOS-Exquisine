@@ -33,7 +33,7 @@ static NSURL* loginURL;
 static NSURL* serverURL;
 
 +(void)initialize{
-    NSString* testingServer = @"http://10.42.43.1:8000";
+    NSString* testingServer = @"http://localhost:8000";
     NSString* productionServer = @"http://croutonlabs.com";
     serverURL = [NSURL URLWithString:testingServer];
     loginURL = [self urlForLocation:@"accounts/login/"];
