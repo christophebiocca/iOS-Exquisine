@@ -133,7 +133,7 @@ static NSURL* serverURL;
         successBlock:(void (^)(APICall *))theSuccessBlock 
           errorBlock:(void (^)(APICall *, NSError *))theErrorBlock{
     if((self = [super init])){
-        request = therequest;
+        request = [therequest copy];
         successblock = [theSuccessBlock copy];
         errorblock = [theErrorBlock copy];
     }
