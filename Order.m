@@ -194,7 +194,7 @@
     [self resetCache];
 }
 
--(void) submit
+-(void) submitToLocation:(Location*)location
 {
     mostRecentSubmitDate = [[NSDate alloc] initWithTimeIntervalSinceNow:0.0];
     [self setStatus:@"Queued"];
