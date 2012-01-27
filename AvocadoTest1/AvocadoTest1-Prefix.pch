@@ -12,3 +12,9 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 #endif
+
+#ifndef RESTAURANT_ID
+// Ultimately, this is something the automated builder changes 
+// to point at the restaurant we're making the app for.
+#define RESTAURANT_ID 1
+#endif
