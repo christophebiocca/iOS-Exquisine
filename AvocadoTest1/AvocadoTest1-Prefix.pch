@@ -18,3 +18,9 @@
 // to point at the restaurant we're making the app for.
 #define RESTAURANT_ID 1
 #endif
+
+#ifdef DEBUG
+#define DebugLog(...) NSLog(__VA_ARGS__)
+#else
+#define DebugLog(...) /* Not Logging, because we are not in debug */
+#endif
