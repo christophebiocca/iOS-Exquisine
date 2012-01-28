@@ -79,6 +79,8 @@
 		D95B786F14D28A6900FC0F29 /* PlaceOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = D95B786E14D28A6900FC0F29 /* PlaceOrder.m */; };
 		D95B787414D2BE4B00FC0F29 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = D95B787314D2BE4B00FC0F29 /* Location.m */; };
 		D95B787714D2C4F800FC0F29 /* GetLocations.m in Sources */ = {isa = PBXBuildFile; fileRef = D95B787614D2C4F800FC0F29 /* GetLocations.m */; };
+		D95B787A14D3143100FC0F29 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = D95B787914D3143100FC0F29 /* Reachability.m */; };
+		D95B787E14D3148400FC0F29 /* APICallFailureHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = D95B787D14D3148400FC0F29 /* APICallFailureHandler.m */; };
 		D9AF662614D22C0A00632EA8 /* JSONAPICall.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AF662514D22C0A00632EA8 /* JSONAPICall.m */; };
 /* End PBXBuildFile section */
 
@@ -225,6 +227,10 @@
 		D95B787314D2BE4B00FC0F29 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
 		D95B787514D2C4F700FC0F29 /* GetLocations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetLocations.h; sourceTree = "<group>"; };
 		D95B787614D2C4F800FC0F29 /* GetLocations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetLocations.m; sourceTree = "<group>"; };
+		D95B787814D3143100FC0F29 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		D95B787914D3143100FC0F29 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		D95B787C14D3148400FC0F29 /* APICallFailureHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APICallFailureHandler.h; sourceTree = "<group>"; };
+		D95B787D14D3148400FC0F29 /* APICallFailureHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APICallFailureHandler.m; sourceTree = "<group>"; };
 		D9AF662414D22C0A00632EA8 /* JSONAPICall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONAPICall.h; sourceTree = "<group>"; };
 		D9AF662514D22C0A00632EA8 /* JSONAPICall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONAPICall.m; sourceTree = "<group>"; };
 		D9AF662714D2308B00632EA8 /* APICallProtectedMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APICallProtectedMethods.h; sourceTree = "<group>"; };
@@ -382,6 +388,9 @@
 			isa = PBXGroup;
 			children = (
 				232C795114CDF5AB00C3868D /* AlertPrompt */,
+				23E7D87B14C9BA88006D6C13 /* behindButton.png */,
+				23DA7A9514C893F1008281DD /* green dot.png */,
+				D95B787B14D3143500FC0F29 /* Network */,
 				23DA7A8814C73D52008281DD /* API */,
 				23AAD98714BF516700F88AA8 /* Global Helpers */,
 				2391EA7814BE3D44001BDC1B /* Model Structure */,
@@ -894,6 +903,17 @@
 			name = Location;
 			sourceTree = "<group>";
 		};
+		D95B787B14D3143500FC0F29 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				D95B787814D3143100FC0F29 /* Reachability.h */,
+				D95B787914D3143100FC0F29 /* Reachability.m */,
+				D95B787C14D3148400FC0F29 /* APICallFailureHandler.h */,
+				D95B787D14D3148400FC0F29 /* APICallFailureHandler.m */,
+			);
+			name = Network;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1060,6 +1080,8 @@
 				D95B786F14D28A6900FC0F29 /* PlaceOrder.m in Sources */,
 				D95B787414D2BE4B00FC0F29 /* Location.m in Sources */,
 				D95B787714D2C4F800FC0F29 /* GetLocations.m in Sources */,
+				D95B787A14D3143100FC0F29 /* Reachability.m in Sources */,
+				D95B787E14D3148400FC0F29 /* APICallFailureHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
