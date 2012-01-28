@@ -79,6 +79,7 @@
 		D95B786F14D28A6900FC0F29 /* PlaceOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = D95B786E14D28A6900FC0F29 /* PlaceOrder.m */; };
 		D95B787414D2BE4B00FC0F29 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = D95B787314D2BE4B00FC0F29 /* Location.m */; };
 		D95B787714D2C4F800FC0F29 /* GetLocations.m in Sources */ = {isa = PBXBuildFile; fileRef = D95B787614D2C4F800FC0F29 /* GetLocations.m */; };
+		D95B788014D318A300FC0F29 /* checkRelease.rb in Resources */ = {isa = PBXBuildFile; fileRef = D95B787F14D318A300FC0F29 /* checkRelease.rb */; };
 		D9AF662614D22C0A00632EA8 /* JSONAPICall.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AF662514D22C0A00632EA8 /* JSONAPICall.m */; };
 /* End PBXBuildFile section */
 
@@ -225,6 +226,7 @@
 		D95B787314D2BE4B00FC0F29 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
 		D95B787514D2C4F700FC0F29 /* GetLocations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetLocations.h; sourceTree = "<group>"; };
 		D95B787614D2C4F800FC0F29 /* GetLocations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetLocations.m; sourceTree = "<group>"; };
+		D95B787F14D318A300FC0F29 /* checkRelease.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = checkRelease.rb; path = ../checkRelease.rb; sourceTree = "<group>"; };
 		D9AF662414D22C0A00632EA8 /* JSONAPICall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONAPICall.h; sourceTree = "<group>"; };
 		D9AF662514D22C0A00632EA8 /* JSONAPICall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONAPICall.m; sourceTree = "<group>"; };
 		D9AF662714D2308B00632EA8 /* APICallProtectedMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APICallProtectedMethods.h; sourceTree = "<group>"; };
@@ -429,6 +431,7 @@
 		23658CC714BDFB15002C0996 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D95B787F14D318A300FC0F29 /* checkRelease.rb */,
 				23658CC814BDFB15002C0996 /* AvocadoTest1-Info.plist */,
 				23658CC914BDFB15002C0996 /* InfoPlist.strings */,
 				23658CCC14BDFB15002C0996 /* main.m */,
@@ -971,6 +974,7 @@
 				38D4133114D3324200031B60 /* pfLogo_low.png in Resources */,
 				38D4133314D3333500031B60 /* pfLogo_57.png in Resources */,
 				38D4133514D3334C00031B60 /* pfLogo_114.png in Resources */,
+				D95B788014D318A300FC0F29 /* checkRelease.rb in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
