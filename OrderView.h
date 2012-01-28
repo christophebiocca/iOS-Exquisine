@@ -11,12 +11,18 @@
 @interface OrderView : MenuComponentView
 {
     UITableView* orderTable;
-    UILabel* totalLabelHeading;
-    UILabel* totalLabelValue;
+    UIToolbar* orderToolbar;
+    UIBarButtonItem* editButton;
+    UIBarButtonItem* leftSpacer;
+    UIBarButtonItem* priceDisplayButton;
+    UIBarButtonItem* rightSpacer;
+    UIBarButtonItem* favoriteButton;
+    
 }
 
 @property(readonly)UITableView* orderTable;
-@property(readonly)UILabel* totalLabelHeading;
-@property(readonly)UILabel* totalLabelValue;
+
+@property (retain) UIBarButtonItem *priceDisplayButton;
+@property (retain) UIBarButtonItem *editButton;
 
 @end

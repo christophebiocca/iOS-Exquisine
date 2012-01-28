@@ -28,7 +28,7 @@
     cellTitle = @"DefaultCellTitle";
     cellDesc = @"DefaultCellDesc";
     cellSwitchState = NO;
-    cellColour = [UIColor clearColor];
+    cellColour = [UIColor whiteColor];
     cellAccessory = @"";
     cellStyle = UITableViewCellStyleValue1;
     cellTabbing = 0;

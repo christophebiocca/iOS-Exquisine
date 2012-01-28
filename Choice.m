@@ -19,7 +19,6 @@
     self = [super initFromMenuComponent:aChoice];
     
     price = aChoice.price;
-    selected = aChoice.selected;
     option = opt;
     propertiesChecksum = [aChoice propertiesChecksum];
     
@@ -33,7 +32,6 @@
                                    initWithInteger:[[inputData 
                                                      objectForKey:@"price_cents"] intValue]];
     price = [priceCents decimalNumberByMultiplyingByPowerOf10:-2];
-    selected = NO;
     option = opt;
     propertiesChecksum = [inputData objectForKey:@"properties_checksum"];
     return self;
@@ -71,7 +69,6 @@
     {
         option = [decoder decodeObjectForKey:@"option"];
         price = [decoder decodeObjectForKey:@"price"];
-        selected = [[decoder decodeObjectForKey:@"selected"] intValue];
         propertiesChecksum = [decoder decodeObjectForKey:@"properties_checksum"];
         
     }
@@ -84,7 +81,6 @@
     [super encodeWithCoder:encoder];
     [encoder encodeObject:option forKey:@"option"];
     [encoder encodeObject:price forKey:@"price"];
-    [encoder encodeObject:[NSString stringWithFormat:@"%i", selected] forKey:@"selected"];
     [encoder encodeObject:propertiesChecksum forKey:@"properties_checksum"];
 }
 

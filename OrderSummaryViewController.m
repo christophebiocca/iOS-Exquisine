@@ -158,10 +158,6 @@
     [[orderView orderTable] setDelegate:self];
     [[orderView orderTable] setDataSource:orderSummaryRenderer];
     
-    optionsButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(displayOptions)];
-    
-    [[self navigationItem] setRightBarButtonItems:[[NSArray alloc] initWithObjects:optionsButton, nil]];
-    
     [self setView:orderView];
 }
 
@@ -194,7 +190,7 @@
     {
         return 28.0f;
     }
-    return 44.0f;
+    return 34.0f;
 }
 
 @end

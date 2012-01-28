@@ -13,15 +13,9 @@
 {    
     UITableView* itemTable;
     UIToolbar* itemToolBar;
-    UILabel* totalLabelHeading;
-    UILabel* totalLabelValue;
-    UIBarButtonItem* deleteButton;
 }
 
 @property(readonly)UITableView* itemTable;    
 @property(readonly)UIToolbar* itemToolBar;
-@property(readonly)UILabel* totalLabelHeading;
-@property(readonly)UILabel* totalLabelValue;
-@property(readonly)UIBarButtonItem* deleteButton;
 
 @end

@@ -22,9 +22,11 @@
     Menu *menuInfo;
     OrderView *orderView;
     OrderRenderer *orderRenderer;  
-    UIBarButtonItem *optionsButton;
+    UIBarButtonItem *submitButton;
     
     id<OrderManagementDelegate> delegate;
+    
+    BOOL editing;
     
 }
 
@@ -36,14 +38,14 @@
 
 -(void) renameOrder:(NSString *) newName;
 
--(void) displayOptions;
-
 -(void) displayOrderConfirmation;
 
 -(void) promptUserForRename;
 
--(void) displayDeletionConfirmation;
+-(void) enterEditingMode;
 
--(void) displayOrderClearConfirmation;
+-(void) exitEditingMode;
+
+-(void) toggleEditing;
 
 @end

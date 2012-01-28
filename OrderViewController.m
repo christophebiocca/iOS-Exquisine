@@ -14,12 +14,12 @@
 #import "Order.h"
 #import "OrderView.h"
 #import "OrderRenderer.h"
-#import "UICustomActionSheet.h"
 #import "AlertPrompt.h"
 #import "OrderManagementDelegate.h"
 #import "Utilities.h"
 #import "ItemRenderer.h"
 #import "CellData.h"
+#import "MenuRenderer.h"
 
 @implementation OrderViewController
 
@@ -31,8 +31,8 @@
     menuInfo = aMenu;
     orderInfo = anOrder;
     orderRenderer = [[OrderRenderer alloc] initWithOrderAndMenu:orderInfo:menuInfo];
-    [[self navigationItem] setTitle:orderInfo.name];
     
+    [[self navigationItem] setTitle:@"Select Items"];
     return self;
 }
 
@@ -40,38 +40,6 @@
 {
     [orderInfo setName:newName];
     [[self navigationItem] setTitle:newName];
-}
-
--(void)displayOptions
-{
-    
-    if([orderInfo isFavorite])
-    {
-        UICustomActionSheet *optionPopup = [[UICustomActionSheet alloc] initWithTitle:@"Order options" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Submit this order!" otherButtonTitles:@"Rename this order" , @"Delete from favorites", nil];
-        
-        [optionPopup setColor:[UIColor colorWithRed:36/255.0 green:99/255.0 blue:222/255.0 alpha:230/255.0] forButtonAtIndex:0];
-        [optionPopup setColor:[UIColor colorWithRed:187/255.0 green:189/255.0 blue:192/255.0 alpha:230/255.0] forButtonAtIndex:1];
-        [optionPopup setColor:[UIColor colorWithRed:235/255.0 green:12/255.0 blue:20/255.0 alpha:230/255.0] forButtonAtIndex:2];
-        [optionPopup setColor:[UIColor colorWithRed:21/255.0 green:29/255.0 blue:39/255.0 alpha:230/255.0] forButtonAtIndex:3];
-        
-        [optionPopup setTag:2];
-        
-        [optionPopup showInView:orderView];
-    }
-    else
-    {
-        UICustomActionSheet *optionPopup = [[UICustomActionSheet alloc] initWithTitle:@"Order options" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Submit this order!" otherButtonTitles:@"Rename this order" , @"Add to favorites", @"Clear this order", nil];
-        
-        [optionPopup setColor:[UIColor colorWithRed:36/255.0 green:99/255.0 blue:222/255.0 alpha:230/255.0] forButtonAtIndex:0];
-        [optionPopup setColor:[UIColor colorWithRed:187/255.0 green:189/255.0 blue:192/255.0 alpha:230/255.0] forButtonAtIndex:1];
-        [optionPopup setColor:[UIColor colorWithRed:187/255.0 green:189/255.0 blue:192/255.0 alpha:230/255.0] forButtonAtIndex:2];
-        [optionPopup setColor:[UIColor colorWithRed:235/255.0 green:12/255.0 blue:20/255.0 alpha:230/255.0] forButtonAtIndex:3];
-        [optionPopup setColor:[UIColor colorWithRed:21/255.0 green:29/255.0 blue:39/255.0 alpha:230/255.0] forButtonAtIndex:4];
-        
-        [optionPopup setTag:1];
-        
-        [optionPopup showInView:orderView];
-    }
 }
 
 -(void)displayOrderConfirmation
@@ -90,24 +58,6 @@
     [renamePrompt setTag:2];
     
     [renamePrompt show];
-}
-
--(void)displayDeletionConfirmation
-{
-    UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Are you sure?" message:[NSString stringWithFormat: @"You cannot recover this order after deleting it.", [orderInfo totalPrice]] delegate:self cancelButtonTitle:@"Oh, well then no" otherButtonTitles:@"Yep, delete it", nil];
-    
-    [areYouSure setTag:3];
-    
-    [areYouSure show];
-}
-
--(void)displayOrderClearConfirmation
-{
-    UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Are you sure?" message:[NSString stringWithFormat: @"Are you sure you want to remove all items in this order?", [orderInfo totalPrice]] delegate:self cancelButtonTitle:@"Nope" otherButtonTitles:@"Yep", nil];
-    
-    [areYouSure setTag:4];
-    
-    [areYouSure show];
 }
 
 //Delegate functions
@@ -134,100 +84,31 @@
         }
     }
     
-    if ([alertView tag] == 3) // Order Deletion
-    {
-        if (buttonIndex == 1)
-        {
-            [delegate deleteFromFavoritesForController:self];
-            [[self navigationController] popViewControllerAnimated:YES];
-        }
-    }
-    
-    if ([alertView tag] == 4) // Order Clear
-    {
-        if (buttonIndex == 1)
-        {
-            [orderInfo clearOrder];
-            [orderRenderer redraw];
-            [[orderView orderTable] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
-        }
-    }
-    
 }
 
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if ([actionSheet tag] == 1)
-    {
-        switch (buttonIndex) {
-            case 0:
-                [self displayOrderConfirmation];
-                break;
-                
-            case 1:
-                [self promptUserForRename];
-                break;
-                
-            case 2:
-                [delegate addToFavoritesForController:self];
-                break;
-            case 3:
-                [self displayOrderClearConfirmation];
-                break;
-            default:
-                break;
-        }
-    }
-    if ([actionSheet tag] == 2)
-    {
-        switch (buttonIndex) {
-            case 0:
-                [self displayOrderConfirmation];
-                break;
-                
-            case 1:
-                [self promptUserForRename];
-                break;
-                
-            case 2:
-                [self displayDeletionConfirmation];
-                break;
-                
-            default:
-                break;
-        }
-    }
-    
-}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
     
-    id cellRenderer = [orderRenderer objectForCellAtIndex:indexPath];
+    id cellObject = [orderRenderer objectForCellAtIndex:indexPath];
     
-    if ([cellRenderer isKindOfClass:[ItemRenderer class]])
+    if ( [cellObject isKindOfClass:([Menu class])])
     {
-        Item *currentItem = [(ItemRenderer *)cellRenderer itemInfo];
         
-        if([[currentItem options]count] > 0)
-        {
-            ItemViewController *itemViewController = [[ItemViewController alloc] initializeWithItemAndOrder:currentItem:orderInfo];
-            [[self navigationController] pushViewController:itemViewController animated:YES];
-        }
+        MenuViewController *newMenuController = [[MenuViewController alloc] initializeWithMenuAndOrder:cellObject:orderInfo];
+        
+        [[self navigationController] pushViewController:newMenuController animated:YES];
+        
     }
     
-    //i.e. if the "Add Item" row was selected
-    if([cellRenderer isKindOfClass:[CellData class]]){
-        if ([(CellData *)cellRenderer cellTitle] == @"Add Item")
-        {
-            //allocate a new menu renderer passing this order to it     
-            MenuViewController *menuViewController = [[MenuViewController alloc] initializeWithMenuAndOrder:menuInfo :orderInfo];
+    if ( [cellObject isKindOfClass:([Item class])])
+    {
         
-            //Push the menu page
-            [[self navigationController] pushViewController:menuViewController animated:YES];
-        }
+        ItemViewController *newItemController = [[ItemViewController alloc] initializeWithItemAndOrder:cellObject:orderInfo];
+        
+        [[self navigationController] pushViewController:newItemController animated:YES];
+        
     }
 }
 
@@ -238,7 +119,10 @@
 
 - (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView reloadSections:[[NSIndexSet alloc] initWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+    [orderRenderer refreshOrderList];
+    [tableView reloadSections:[[NSIndexSet alloc] initWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [[orderView priceDisplayButton] setTitle:[Utilities FormatToPrice:[orderInfo subtotalPrice]]];
 }
 
 
@@ -257,13 +141,19 @@
 
 - (void) loadView
 {
+    editing = NO;
     orderView = [[OrderView alloc] init];
     [[orderView orderTable] setDelegate:self];
     [[orderView orderTable] setDataSource:orderRenderer];
     
-    optionsButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(displayOptions)];
+    submitButton = [[UIBarButtonItem alloc] initWithTitle:@"Submit" style:UIBarButtonItemStyleDone target:self action:@selector(displayOrderConfirmation)];
     
-    [[self navigationItem] setRightBarButtonItems:[[NSArray alloc] initWithObjects:optionsButton, nil]];
+    [[self navigationItem] setRightBarButtonItems:[[NSArray alloc] initWithObjects:submitButton, nil]];
+    
+    [[orderView priceDisplayButton] setTitle:[Utilities FormatToPrice:[orderInfo subtotalPrice]]];
+    
+    [[orderView editButton] setTarget:self];
+    [[orderView editButton] setAction:@selector(toggleEditing)];
     
     [self setView:orderView];
 }
@@ -275,8 +165,9 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [orderRenderer redraw];
-    [[orderView orderTable] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+    [[orderView priceDisplayButton] setTitle:[NSString stringWithFormat:@"%@%@",@"Subtotal: ",[Utilities FormatToPrice:[orderInfo subtotalPrice]] ]];
+    [orderRenderer refreshOrderList];
+    [[orderView orderTable] reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 - (void)viewDidUnload
@@ -284,6 +175,39 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if ( [indexPath section] == 1)
+    {
+        return 28.0f;
+    }
+    return 44.0f;
+}
+
+-(void)toggleEditing
+{
+    if(editing)
+    {
+        [self exitEditingMode];
+    }
+    else
+    {
+        [self enterEditingMode];
+    }
+    editing = !editing;
+}
+
+-(void)enterEditingMode
+{
+    [[orderView orderTable] setEditing:YES animated:YES];
+    [[orderView editButton] setTitle:@"Done"];
+}
+
+-(void)exitEditingMode
+{
+    [[orderView orderTable] setEditing:NO animated:YES];
+    [[orderView editButton] setTitle:@"Edit"];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

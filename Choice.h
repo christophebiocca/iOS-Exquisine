@@ -16,8 +16,6 @@
     
     NSDecimalNumber* price;
     
-    BOOL selected;
-    
     NSString* propertiesChecksum;
 }
 

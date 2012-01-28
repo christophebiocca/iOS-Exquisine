@@ -11,7 +11,10 @@
 #import "Order.h"
 #import "ItemRenderer.h"
 #import "OptionViewController.h"
+#import "OrderViewController.h"
 #import "ItemView.h"
+#import "Choice.h"
+#import "Option.h"
 
 @implementation ItemViewController
 
@@ -23,16 +26,29 @@
     itemInfo = anItem;
     ownerOrder = anOrder;
     
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Add to order" style:UIBarButtonItemStyleDone target:self action:@selector(addThisItemToOrder)];
+    
+    if (![[anOrder itemList] containsObject:anItem]) {
+        [[self navigationItem] setRightBarButtonItem:doneButton];
+    }
+    
     itemRenderer = [[ItemRenderer alloc] initWithItem:anItem];
     [[self navigationItem] setTitle:anItem.name];
     
     return self;
 }
 
--(void)deleteButtonPressed
+-(void)addThisItemToOrder
 {
-    [ownerOrder removeItem:itemInfo];
-    [[self navigationController] popViewControllerAnimated:YES];
+    [ownerOrder addItem:itemInfo];
+    NSMutableArray *viewStack = [[NSMutableArray alloc] initWithCapacity:0];
+    for (id currentView in [[self navigationController] viewControllers]) {
+        [viewStack addObject:currentView];
+        if ([currentView isKindOfClass:[OrderViewController class]])
+            break;
+    }
+    [[self navigationController] setViewControllers:viewStack animated:YES];
+    
 }
 
 //Delegate functions
@@ -42,24 +58,15 @@
     
     [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
     
-    if ([indexPath row] < [[itemInfo options] count]) {
-        OptionViewController *newOptionViewController = [[OptionViewController alloc] initializeWithOption:[[itemInfo options] objectAtIndex:[indexPath row]]];
+    if (!([indexPath section] == [[itemInfo options] count]))
+    {
         
-        [[self navigationController] pushViewController:newOptionViewController animated:YES];
-        
-        //Make and push the option view controller
+        Option *thisOption = [[itemInfo options] objectAtIndex:[indexPath section]];
+        Choice *thisChoice = [[thisOption choiceList] objectAtIndex:[indexPath row]];
+        [thisOption toggleChoice:thisChoice];
+        [tableView reloadSections:[NSIndexSet indexSetWithIndex:[indexPath section]] withRowAnimation:UITableViewRowAnimationAutomatic];        
     }
     
-    //i.e. if the "Add Item" row was selected
-    if([indexPath row] == [[itemInfo options] count] + 2){
-        //Push item selection page
-    }
-    
-}
-
--(void)tableView:(UITableView *) tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *) indexPath
-{
-    [self tableView:tableView didSelectRowAtIndexPath:indexPath];
 }
 
 //View related functions
@@ -77,12 +84,10 @@
 
 - (void) loadView
 {
+    
     itemView = [[ItemView alloc] init];
     [[itemView itemTable] setDelegate:self];
     [[itemView itemTable] setDataSource:itemRenderer];
-    
-    [[itemView deleteButton] setTarget:self];
-    [[itemView deleteButton] setAction:@selector(deleteButtonPressed)];
     
     [self setView:itemView];
 }
@@ -94,7 +99,6 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [itemRenderer redraw];
     [[itemView itemTable] reloadData];
 }
 

@@ -12,11 +12,9 @@
 {
     UITableView* menuTable;
     UIToolbar* menuToolBar;
-    UIBarButtonItem* cancelButton;
 }
 
 @property(readonly)UITableView* menuTable;
 @property(readonly)UIToolbar* menuToolBar;
-@property(readonly)UIBarButtonItem* cancelButton;
 
 @end

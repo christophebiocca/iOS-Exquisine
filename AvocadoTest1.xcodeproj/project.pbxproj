@@ -35,6 +35,12 @@
 		23658D0A14BE1D06002C0996 /* Choice.m in Sources */ = {isa = PBXBuildFile; fileRef = 23658D0914BE1D06002C0996 /* Choice.m */; };
 		237EC00E14BE635C009D9268 /* ItemPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 237EC00D14BE635C009D9268 /* ItemPage.m */; };
 		237EC01314BE64D5009D9268 /* ItemPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 237EC01214BE64D5009D9268 /* ItemPageView.m */; };
+		238FC77914D35E6D007E175B /* Favorite Star.png in Resources */ = {isa = PBXBuildFile; fileRef = 238FC77814D35E6D007E175B /* Favorite Star.png */; };
+		238FC77D14D3650F007E175B /* ItemMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 238FC77C14D3650F007E175B /* ItemMenuCell.m */; };
+		238FC78014D36702007E175B /* itemOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 238FC77F14D36702007E175B /* itemOrderCell.m */; };
+		238FC78514D36916007E175B /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 238FC78414D36916007E175B /* MenuCell.m */; };
+		238FC78914D372FC007E175B /* ChoiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 238FC78814D372FC007E175B /* ChoiceCell.m */; };
+		238FC78D14D37402007E175B /* ComboCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 238FC78C14D37402007E175B /* ComboCell.m */; };
 		2391EA7314BE3699001BDC1B /* ConfigurableTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2391EA7114BE3699001BDC1B /* ConfigurableTableViewDataSource.m */; };
 		2391EA7714BE387D001BDC1B /* CellInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2391EA7614BE387D001BDC1B /* CellInfo.m */; };
 		23AAD98B14BF525A00F88AA8 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AAD98A14BF525A00F88AA8 /* Utilities.m */; };
@@ -141,6 +147,17 @@
 		237EC00D14BE635C009D9268 /* ItemPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemPage.m; sourceTree = "<group>"; };
 		237EC01114BE64D5009D9268 /* ItemPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemPageView.h; sourceTree = "<group>"; };
 		237EC01214BE64D5009D9268 /* ItemPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemPageView.m; sourceTree = "<group>"; };
+		238FC77814D35E6D007E175B /* Favorite Star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Favorite Star.png"; sourceTree = "<group>"; };
+		238FC77B14D3650F007E175B /* ItemMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemMenuCell.h; sourceTree = "<group>"; };
+		238FC77C14D3650F007E175B /* ItemMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemMenuCell.m; sourceTree = "<group>"; };
+		238FC77E14D36702007E175B /* itemOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = itemOrderCell.h; sourceTree = "<group>"; };
+		238FC77F14D36702007E175B /* itemOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = itemOrderCell.m; sourceTree = "<group>"; };
+		238FC78314D36916007E175B /* MenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCell.h; sourceTree = "<group>"; };
+		238FC78414D36916007E175B /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
+		238FC78714D372FC007E175B /* ChoiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoiceCell.h; sourceTree = "<group>"; };
+		238FC78814D372FC007E175B /* ChoiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoiceCell.m; sourceTree = "<group>"; };
+		238FC78B14D37402007E175B /* ComboCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComboCell.h; sourceTree = "<group>"; };
+		238FC78C14D37402007E175B /* ComboCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComboCell.m; sourceTree = "<group>"; };
 		2391EA7014BE3699001BDC1B /* ConfigurableTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurableTableViewDataSource.h; sourceTree = "<group>"; };
 		2391EA7114BE3699001BDC1B /* ConfigurableTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigurableTableViewDataSource.m; sourceTree = "<group>"; };
 		2391EA7514BE387D001BDC1B /* CellInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellInfo.h; sourceTree = "<group>"; };
@@ -373,14 +390,15 @@
 		23658CB114BDFB15002C0996 = {
 			isa = PBXGroup;
 			children = (
+				238FC77814D35E6D007E175B /* Favorite Star.png */,
 				232C795114CDF5AB00C3868D /* AlertPrompt */,
 				23E7D87B14C9BA88006D6C13 /* behindButton.png */,
 				23DA7A9514C893F1008281DD /* green dot.png */,
 				23DA7A8814C73D52008281DD /* API */,
 				23AAD98714BF516700F88AA8 /* Global Helpers */,
 				2391EA7814BE3D44001BDC1B /* Model Structure */,
+				238FC77A14D364E5007E175B /* Cells */,
 				23DA7A5A14C63071008281DD /* Views */,
-				23DA7A3814C60087008281DD /* Renderers */,
 				23DA7A3914C600B1008281DD /* Controllers */,
 				23DA7A3714C6003F008281DD /* Other Shit */,
 				23DA7A3514C5FFCE008281DD /* Obsolete */,
@@ -484,6 +502,55 @@
 			name = MenuComposites;
 			sourceTree = "<group>";
 		};
+		238FC77A14D364E5007E175B /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				238FC78A14D373EC007E175B /* ComboCell */,
+				238FC78614D372EA007E175B /* ChoiceCells */,
+				238FC78214D368F9007E175B /* MenuCells */,
+				238FC78114D368DF007E175B /* ItemCells */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		238FC78114D368DF007E175B /* ItemCells */ = {
+			isa = PBXGroup;
+			children = (
+				238FC77B14D3650F007E175B /* ItemMenuCell.h */,
+				238FC77C14D3650F007E175B /* ItemMenuCell.m */,
+				238FC77E14D36702007E175B /* itemOrderCell.h */,
+				238FC77F14D36702007E175B /* itemOrderCell.m */,
+			);
+			name = ItemCells;
+			sourceTree = "<group>";
+		};
+		238FC78214D368F9007E175B /* MenuCells */ = {
+			isa = PBXGroup;
+			children = (
+				238FC78314D36916007E175B /* MenuCell.h */,
+				238FC78414D36916007E175B /* MenuCell.m */,
+			);
+			name = MenuCells;
+			sourceTree = "<group>";
+		};
+		238FC78614D372EA007E175B /* ChoiceCells */ = {
+			isa = PBXGroup;
+			children = (
+				238FC78714D372FC007E175B /* ChoiceCell.h */,
+				238FC78814D372FC007E175B /* ChoiceCell.m */,
+			);
+			name = ChoiceCells;
+			sourceTree = "<group>";
+		};
+		238FC78A14D373EC007E175B /* ComboCell */ = {
+			isa = PBXGroup;
+			children = (
+				238FC78B14D37402007E175B /* ComboCell.h */,
+				238FC78C14D37402007E175B /* ComboCell.m */,
+			);
+			name = ComboCell;
+			sourceTree = "<group>";
+		};
 		2391EA6F14BE35D4001BDC1B /* ConfigurableTableViewDataSource */ = {
 			isa = PBXGroup;
 			children = (
@@ -563,6 +630,7 @@
 		23DA7A3514C5FFCE008281DD /* Obsolete */ = {
 			isa = PBXGroup;
 			children = (
+				23DA7A3814C60087008281DD /* Renderers */,
 				23C26A0C14C4884B00DD53DF /* VisualizableDataTypes */,
 				2391EA6F14BE35D4001BDC1B /* ConfigurableTableViewDataSource */,
 				23AAD99414BF692500F88AA8 /* Pages */,
@@ -947,6 +1015,7 @@
 				23658CCB14BDFB15002C0996 /* InfoPlist.strings in Resources */,
 				23DA7A9614C893F3008281DD /* green dot.png in Resources */,
 				23E7D87C14C9BA88006D6C13 /* behindButton.png in Resources */,
+				238FC77914D35E6D007E175B /* Favorite Star.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1036,6 +1105,11 @@
 				D95B786F14D28A6900FC0F29 /* PlaceOrder.m in Sources */,
 				D95B787414D2BE4B00FC0F29 /* Location.m in Sources */,
 				D95B787714D2C4F800FC0F29 /* GetLocations.m in Sources */,
+				238FC77D14D3650F007E175B /* ItemMenuCell.m in Sources */,
+				238FC78014D36702007E175B /* itemOrderCell.m in Sources */,
+				238FC78514D36916007E175B /* MenuCell.m in Sources */,
+				238FC78914D372FC007E175B /* ChoiceCell.m in Sources */,
+				238FC78D14D37402007E175B /* ComboCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

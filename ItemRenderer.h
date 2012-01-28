@@ -11,26 +11,16 @@
 
 @interface ItemRenderer : MenuComponentRenderer <UITableViewDataSource>
 {
+    
     Item *itemInfo;
-
-    //This guy contains stuff that we need
-    //to display cells for after the item list.
+    
     NSMutableArray *suffixList;
     
-    //This actually expects a list of lists such that the members of the internal lists
-    //respond to configureCell. Do not break this contract!
-    NSMutableArray *displayLists;
-    
-    NSMutableArray *optionRenderList;
 }
 
 @property (retain) Item *itemInfo;
 
--(void) redraw;
-
 -(ItemRenderer *) initWithItem:(Item *) anItem;
-
--(UITableViewCell *) configureCell:(UITableViewCell *) aCell;
 
 -(NSArray *) detailedStaticRenderList;
 
