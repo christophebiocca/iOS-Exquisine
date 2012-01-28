@@ -21,6 +21,8 @@
 @synthesize greetingLabel;
 @synthesize orderStatus;
 @synthesize pendingOrderButton;
+@synthesize logo;
+@synthesize logoView;
 
 
 - (id)initWithFrame:(CGRect)frame
@@ -33,6 +35,8 @@
         accountInfoButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         greetingLabel = [[UILabel alloc] init];
         orderStatus = [[UILabel alloc] init];
+        logo = [UIImage imageNamed:@"pfLogo_high"];
+        logoView = [[UIImageView alloc] initWithImage:logo];
         
         [createOrderButton setTitle:@"New Order" forState:UIControlStateNormal];
         [favoriteOrderButton setTitle:@"Favorites" forState:UIControlStateNormal];
@@ -49,16 +53,19 @@
         
         [greetingLabel setNumberOfLines:10];
         [greetingLabel setText:\
-         @"Order your pitas ahead of time, and never wait in line again!"];
+         @"Welcome to the Pita Factory App. Order below and skip the line."];
         
         [orderStatus setText:@"Order status: No pending orders"];
+        
+        
         
         [self addSubview:createOrderButton];
         [self addSubview:favoriteOrderButton];
         [self addSubview:pendingOrderButton];
         //For now, there is no account info button. If we decide to never have it, chuck it.
         //[self addSubview:accountInfoButton];
-        [self addSubview:greetingLabel];
+        //[self addSubview:greetingLabel];
+        [self addSubview:logoView];
         //[self addSubview:orderStatus];
     }
     return self;
@@ -67,12 +74,13 @@
 -(void)layoutSubviews
 {
     [self setBackgroundColor:[UIColor whiteColor]];
-    [createOrderButton setFrame:CGRectMake(20, 163, 280, 37)];
-    [favoriteOrderButton setFrame:CGRectMake(20, 208, 280, 37)];
-    [accountInfoButton setFrame:CGRectMake(20, 359, 280, 37)];
-    [pendingOrderButton setFrame:CGRectMake(20, 253, 280, 37)];
-    [greetingLabel setFrame:CGRectMake(20, 20, 280, 135)];
-    [orderStatus setFrame:CGRectMake(20, 253, 280, 37)];
+    [createOrderButton setFrame:CGRectMake(20, 253, 280, 37)];
+    [favoriteOrderButton setFrame:CGRectMake(20, 298, 280, 37)];
+    [accountInfoButton setFrame:CGRectMake(20, 449, 280, 37)];
+    [pendingOrderButton setFrame:CGRectMake(20, 343, 280, 37)];
+    //[greetingLabel setFrame:CGRectMake(20, 20, 280, 135)];
+    [orderStatus setFrame:CGRectMake(20, 263, 280, 37)];
+    [logoView setFrame:CGRectMake(75, 40,170, 170)];
 }
 
 -(void)createOrderPressed{

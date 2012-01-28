@@ -24,5 +24,7 @@
 @property (retain) UIButton *accountInfoButton;
 @property (retain) UILabel *greetingLabel;
 @property (retain) UILabel *orderStatus;
+@property (retain) UIImage *logo;
+@property (retain) UIImageView *logoView;
 
 @end
