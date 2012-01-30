@@ -15,7 +15,9 @@
 @class Order;
 
 @interface MainPageViewController : UIViewController<UITableViewDelegate, OrderManagementDelegate>{
-
+    
+    BOOL internetActive;
+    
     MainPageView *mainPageView;
     
     Menu *theMenu;

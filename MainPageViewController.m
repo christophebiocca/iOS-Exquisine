@@ -26,13 +26,18 @@
     
     if (self) {
         [[self navigationItem] setTitle:@"Pita Factory"];
+        
+        internetActive = NO;
+
         [GetMenu getMenuForRestaurant:RESTAURANT_ID
                               success:^(GetMenu* menuCall){
                                   theMenu = [menuCall menu];
+                                  internetActive = YES;
                               }
                               failure:^(GetMenu* menuCall, NSError* error){
+                                  internetActive = NO;
                                   NSLog(@"call %@ errored with %@", menuCall, error);
-                              }];
+                              }];        
         
         [self loadDataFromDisk];
         
@@ -199,7 +204,7 @@
 {
     for (Order *anOrder in favoriteOrders) 
     {
-        if(anOrder.name == [orderViewController orderInfo].name)
+        if([anOrder isEffectivelySameAs:[orderViewController orderInfo]])
         {
             [anOrder setIsFavorite:NO];
             [favoriteOrders removeObject:anOrder];
@@ -223,10 +228,12 @@
     [GetMenu getMenuForRestaurant:RESTAURANT_ID
                           success:^(GetMenu* menuCall){
                               theMenu = [menuCall menu];
+                              internetActive = YES;
                           }
                           failure:^(GetMenu* menuCall, NSError* error){
+                              internetActive = NO;
                               NSLog(@"call %@ errored with %@", menuCall, error);
-                          }];
+                          }];    
     
     //We need to do this in case a favorited order was modified, but not removed.
     [self doFavoriteConsistancyCheck];
@@ -317,6 +324,20 @@
         [returnList addObject:currentOrder];
     
     return returnList;
+}
+
+-(BOOL)hasServerConnection
+{
+    [GetMenu getMenuForRestaurant:RESTAURANT_ID
+                          success:^(GetMenu* menuCall){
+                              theMenu = [menuCall menu];
+                              internetActive = YES;
+                          }
+                          failure:^(GetMenu* menuCall, NSError* error){
+                              internetActive = NO;
+                              NSLog(@"call %@ errored with %@", menuCall, error);
+                          }];
+    return internetActive;
 }
 
 @end

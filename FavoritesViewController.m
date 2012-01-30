@@ -74,6 +74,11 @@
     [delegate submitOrderForController:orderViewController];
 }
 
+-(BOOL)hasServerConnection
+{
+    return [delegate hasServerConnection];
+}
+
 //View related functions
 //***********************************************************
 

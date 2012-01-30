@@ -18,6 +18,8 @@
 @interface OrderViewController : UITableViewController <UITableViewDelegate, UIActionSheetDelegate,UIAlertViewDelegate>
 {
     
+    
+    
     Order *orderInfo;
     Menu *menuInfo;
     OrderView *orderView;

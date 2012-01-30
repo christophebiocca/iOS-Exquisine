@@ -36,6 +36,7 @@
 		237EC00E14BE635C009D9268 /* ItemPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 237EC00D14BE635C009D9268 /* ItemPage.m */; };
 		237EC01314BE64D5009D9268 /* ItemPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 237EC01214BE64D5009D9268 /* ItemPageView.m */; };
 		238476F114D607A400DE9270 /* OrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 238476F014D607A400DE9270 /* OrderCell.m */; };
+		238476F314D7577C00DE9270 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 238476F214D7577C00DE9270 /* SystemConfiguration.framework */; };
 		238FC77914D35E6D007E175B /* Favorite Star.png in Resources */ = {isa = PBXBuildFile; fileRef = 238FC77814D35E6D007E175B /* Favorite Star.png */; };
 		238FC77D14D3650F007E175B /* ItemMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 238FC77C14D3650F007E175B /* ItemMenuCell.m */; };
 		238FC78014D36702007E175B /* itemOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 238FC77F14D36702007E175B /* itemOrderCell.m */; };
@@ -155,6 +156,7 @@
 		237EC01214BE64D5009D9268 /* ItemPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemPageView.m; sourceTree = "<group>"; };
 		238476EF14D607A400DE9270 /* OrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderCell.h; sourceTree = "<group>"; };
 		238476F014D607A400DE9270 /* OrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderCell.m; sourceTree = "<group>"; };
+		238476F214D7577C00DE9270 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		238FC77814D35E6D007E175B /* Favorite Star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Favorite Star.png"; sourceTree = "<group>"; };
 		238FC77B14D3650F007E175B /* ItemMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemMenuCell.h; sourceTree = "<group>"; };
 		238FC77C14D3650F007E175B /* ItemMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemMenuCell.m; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				238476F314D7577C00DE9270 /* SystemConfiguration.framework in Frameworks */,
 				D95B786814D2693800FC0F29 /* Security.framework in Frameworks */,
 				232D7A1214C8B4FC00DD5911 /* QuartzCore.framework in Frameworks */,
 				23658CC114BDFB15002C0996 /* UIKit.framework in Frameworks */,
@@ -403,6 +406,7 @@
 		23658CB114BDFB15002C0996 = {
 			isa = PBXGroup;
 			children = (
+				238476F214D7577C00DE9270 /* SystemConfiguration.framework */,
 				238FC77814D35E6D007E175B /* Favorite Star.png */,
 				232C795114CDF5AB00C3868D /* AlertPrompt */,
 				23DA7A8814C73D52008281DD /* API */,
@@ -1032,6 +1036,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				English,
 			);
 			mainGroup = 23658CB114BDFB15002C0996;
 			productRefGroup = 23658CBD14BDFB15002C0996 /* Products */;

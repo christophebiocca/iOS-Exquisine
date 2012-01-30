@@ -45,11 +45,21 @@
 
 -(void)displayOrderConfirmation
 {
-    UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Are you sure?" message:[NSString stringWithFormat: @"Are you sure you'd like to make this purchase of %@?", [Utilities FormatToPrice:[orderInfo totalPrice]]] delegate:self cancelButtonTitle:@"Nope" otherButtonTitles:@"Awww Yeah!", nil];
     
-    [areYouSure setTag:1];
-    
-    [areYouSure show];
+    if([delegate hasServerConnection])
+    {
+        UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Are you sure?" message:[NSString stringWithFormat: @"Are you sure you'd like to make this purchase of %@?", [Utilities FormatToPrice:[orderInfo totalPrice]]] delegate:self cancelButtonTitle:@"Nope" otherButtonTitles:@"Awww Yeah!", nil];
+        
+        [areYouSure setTag:1];
+        
+        [areYouSure show];
+    }
+    else
+    {
+        UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Oops" message:@"You appear to have no connection to the internet." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+
+        [areYouSure show];
+    }
 }
 
 -(void)promptUserForRename
