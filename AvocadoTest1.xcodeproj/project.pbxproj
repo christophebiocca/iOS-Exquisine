@@ -88,6 +88,7 @@
 		D95B787414D2BE4B00FC0F29 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = D95B787314D2BE4B00FC0F29 /* Location.m */; };
 		D95B787714D2C4F800FC0F29 /* GetLocations.m in Sources */ = {isa = PBXBuildFile; fileRef = D95B787614D2C4F800FC0F29 /* GetLocations.m */; };
 		D95B788014D318A300FC0F29 /* checkRelease.rb in Resources */ = {isa = PBXBuildFile; fileRef = D95B787F14D318A300FC0F29 /* checkRelease.rb */; };
+		D9768A6514D73EB300BBA467 /* PaymentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D9768A6214D73EB300BBA467 /* PaymentInfo.m */; };
 		D9AF662614D22C0A00632EA8 /* JSONAPICall.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AF662514D22C0A00632EA8 /* JSONAPICall.m */; };
 /* End PBXBuildFile section */
 
@@ -249,6 +250,8 @@
 		D95B787514D2C4F700FC0F29 /* GetLocations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetLocations.h; sourceTree = "<group>"; };
 		D95B787614D2C4F800FC0F29 /* GetLocations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetLocations.m; sourceTree = "<group>"; };
 		D95B787F14D318A300FC0F29 /* checkRelease.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = checkRelease.rb; path = ../checkRelease.rb; sourceTree = "<group>"; };
+		D9768A6114D73EB300BBA467 /* PaymentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentInfo.h; sourceTree = "<group>"; };
+		D9768A6214D73EB300BBA467 /* PaymentInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentInfo.m; sourceTree = "<group>"; };
 		D9AF662414D22C0A00632EA8 /* JSONAPICall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONAPICall.h; sourceTree = "<group>"; };
 		D9AF662514D22C0A00632EA8 /* JSONAPICall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONAPICall.m; sourceTree = "<group>"; };
 		D9AF662714D2308B00632EA8 /* APICallProtectedMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APICallProtectedMethods.h; sourceTree = "<group>"; };
@@ -595,6 +598,7 @@
 			children = (
 				237EC00B14BE5842009D9268 /* MenuComposites */,
 				D95B787114D2BE3400FC0F29 /* Location */,
+				D9768A6814D73EBC00BBA467 /* Payment */,
 			);
 			name = "Model Structure";
 			sourceTree = "<group>";
@@ -983,6 +987,15 @@
 			name = Location;
 			sourceTree = "<group>";
 		};
+		D9768A6814D73EBC00BBA467 /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				D9768A6114D73EB300BBA467 /* PaymentInfo.h */,
+				D9768A6214D73EB300BBA467 /* PaymentInfo.m */,
+			);
+			name = Payment;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1158,6 +1171,7 @@
 				238FC78914D372FC007E175B /* ChoiceCell.m in Sources */,
 				238FC78D14D37402007E175B /* ComboCell.m in Sources */,
 				238476F114D607A400DE9270 /* OrderCell.m in Sources */,
+				D9768A6514D73EB300BBA467 /* PaymentInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
