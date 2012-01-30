@@ -110,4 +110,22 @@
     [encoder encodeObject:propertiesChecksum forKey:@"preoperties_checksum"];
 }
 
+-(BOOL)isEffectivelySameAs:(Item *)anItem
+{
+    if (![name isEqual:[anItem name]])
+        return NO;
+    if ([options count] != [[anItem options] count])
+        return NO;
+    for (int i = 0; i < [options count] ; i++) {
+        if (![[options objectAtIndex:i] isEffectivelySameAs:[[anItem options] objectAtIndex:i]])
+            return NO;
+    }
+    return YES;
+}
+
+-(NSComparisonResult)nameSort:(Item *)anItem
+{
+    return [name compare:anItem.name];
+}
+
 @end

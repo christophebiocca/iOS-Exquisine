@@ -54,4 +54,6 @@
 
 -(void) toggleWhetherFavorite;
 
+-(void) orderAltered;
+
 @end

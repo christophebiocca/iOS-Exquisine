@@ -20,6 +20,8 @@
 @synthesize cellDescFontSize;
 @synthesize cellDescFontType;
 @synthesize cellTitleFontType;
+@synthesize notSelectable;
+
 
 -(CellData *)init
 {
@@ -36,6 +38,7 @@
     cellTitleFontType = @"Helvetica-Bold";
     cellDescFontSize = 17;
     cellDescFontType = @"Helvetica";
+    notSelectable = YES;
     return self;
 }
 
@@ -64,6 +67,9 @@
     
     [[newCell textLabel] setFont:titleFont];
     [[newCell detailTextLabel] setFont:descFont];
+    
+    if(notSelectable)
+        [newCell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     //This doesn't actually work. It's not mission critical, so I'll come back to it.
     /*

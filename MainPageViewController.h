@@ -37,4 +37,8 @@
 
 -(NSString *) dataFilePath;
 
+-(void) doFavoriteConsistancyCheck;
+
+-(NSArray *) allKnownOrders;
+
 @end

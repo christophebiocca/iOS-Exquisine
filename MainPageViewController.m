@@ -172,13 +172,18 @@
     //if it makes it through the for loop, then we can safely add the order.
     
     [[orderViewController orderInfo] setIsFavorite:YES];
+    
     //Push the current order on the favorites list
+    //It's important that it be a copy. Changing the order in the favorites list shouldnt affect
+    //An already submitted order.
     [favoriteOrders addObject:[[Order alloc] initFromOrder:[orderViewController orderInfo]]];
     //Allocate a new order if needed
     if ([[orderViewController orderInfo] isEqual:currentOrder])
     {
         currentOrder = [[Order alloc] initWithParentMenu:theMenu];
     }
+    
+    [self doFavoriteConsistancyCheck];
     
     //Move view control to the favorites view.
     
@@ -196,14 +201,36 @@
     {
         if(anOrder.name == [orderViewController orderInfo].name)
         {
-            [[orderViewController orderInfo] setIsFavorite:NO];
+            [anOrder setIsFavorite:NO];
             [favoriteOrders removeObject:anOrder];
         }
     }
+    
+    //Now, it's a little strange, but we need to do a consistancy check between all of the orders
+    //that we're aware of (which should be all of them, if that's no longer true, so help us god)
+    
+    //Due to the nature of the desired immutability of submited orders, we deep copy them when putting them
+    //into the favorites list. If they become unfavorited or modified from the favorites list, we need to make sure
+    //we do a consistancy check with historical orders.
+    
+    [self doFavoriteConsistancyCheck];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
+    [GetMenu getMenuForRestaurant:RESTAURANT_ID
+                          success:^(GetMenu* menuCall){
+                              theMenu = [menuCall menu];
+                          }
+                          failure:^(GetMenu* menuCall, NSError* error){
+                              NSLog(@"call %@ errored with %@", menuCall, error);
+                          }];
+    
+    //We need to do this in case a favorited order was modified, but not removed.
+    [self doFavoriteConsistancyCheck];
+    
     if ([[self pendingOrders] count] > 0)
     {
         [mainPageView.pendingOrderButton setTitle:[NSString stringWithFormat:@"Order Status: %@" ,[[[self pendingOrders] lastObject] status]] forState:UIControlStateNormal];
@@ -263,6 +290,33 @@
     [rootObject setValue: ordersHistory forKey:@"order_history"];
     [rootObject setValue: favoriteOrders forKey:@"favorite_orders"];
     [NSKeyedArchiver archiveRootObject: rootObject toFile: path];
+}
+
+-(void)doFavoriteConsistancyCheck
+{
+    for (Order *eachOrder in [self allKnownOrders]) {
+        [eachOrder setIsFavorite:NO];
+        if (eachOrder == [[self pendingOrders] lastObject])
+            NSLog(@"something");
+        for (Order *favOrder in favoriteOrders) {
+            if([eachOrder isEffectivelySameAs:favOrder])
+            {
+                [eachOrder setIsFavorite:YES];
+                break;
+            }
+        }
+    }
+}
+
+-(NSArray *)allKnownOrders 
+{
+    NSMutableArray *returnList = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    [returnList addObjectsFromArray:ordersHistory];
+    if (currentOrder)
+        [returnList addObject:currentOrder];
+    
+    return returnList;
 }
 
 @end

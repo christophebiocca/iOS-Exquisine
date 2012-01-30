@@ -12,6 +12,8 @@
 @class Menu;
 @class Location;
 
+extern NSString* ORDER_ITEMS_MODIFIED;
+
 @interface Order : MenuComponent {
 
     //Contains the list of items that the customer wants to order.
@@ -70,6 +72,10 @@
 
 -(void) clearOrder;
 
+-(BOOL) isEffectivelySameAs:(Order *) anOrder;
+
 -(void) submitToLocation:(Location*)location;
+
+-(void) reSort;
 
 @end

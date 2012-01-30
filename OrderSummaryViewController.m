@@ -68,6 +68,7 @@
     [super viewWillAppear:animated];
     [orderSummaryRenderer redraw];
     [[orderView orderTable] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+
     if([orderInfo isFavorite])
     {
         [[orderView favoriteButton] setTintColor:[UIColor yellowColor]];
@@ -119,13 +120,14 @@
         if (buttonIndex == 1)
         {
             NSString *entered = [ (AlertPrompt *)alertView enteredText];
-            [self renameOrder:entered];
+            [self renameOrder:entered];    
+
             //This is pretty bad form, but I think it'll be ok.. =/
             [delegate addToFavoritesForController:(id)self];
         }
     }
     
-    if ([alertView tag] == 3) // Order Rename
+    if ([alertView tag] == 3) // Order Delete
     {
         if (buttonIndex == 1)
         {

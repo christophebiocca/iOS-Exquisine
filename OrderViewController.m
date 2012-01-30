@@ -31,6 +31,7 @@
     menuInfo = aMenu;
     orderInfo = anOrder;
     orderRenderer = [[OrderRenderer alloc] initWithOrderAndMenu:orderInfo:menuInfo];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orderAltered) name:ORDER_ITEMS_MODIFIED object:orderInfo];
     
     [[self navigationItem] setTitle:@"Select Items"];
     return self;
@@ -141,20 +142,6 @@
     [self tableView:tableView didSelectRowAtIndexPath:indexPath];
 }
 
-- (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UIBarButtonItem *edButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style: UIBarButtonItemStyleBordered target:self action:@selector(toggleEditing)];
-    
-    NSMutableArray *newItemsList = [NSMutableArray arrayWithArray:[[orderView orderToolbar] items]];
-    
-    [newItemsList replaceObjectAtIndex:0 withObject:edButton];
-    
-    [[orderView priceDisplayButton] setTitle:[Utilities FormatToPrice:[orderInfo subtotalPrice]]];
-    
-    [[orderView orderToolbar] setItems:newItemsList animated:YES];
-    
-}
-
 
 //View related functions
 //***********************************************************
@@ -180,7 +167,7 @@
     
     [[self navigationItem] setRightBarButtonItems:[[NSArray alloc] initWithObjects:submitButton, nil]];
     
-    [[orderView priceDisplayButton] setTitle:[Utilities FormatToPrice:[orderInfo subtotalPrice]]];
+    [[orderView priceDisplayButton] setTitle:[NSString stringWithFormat:@"%@%@",@"Subtotal: ",[Utilities FormatToPrice:[orderInfo subtotalPrice]] ]];
     [[orderView favoriteButton] setTarget:self];
     [[orderView favoriteButton] setAction:@selector(toggleWhetherFavorite)];
     
@@ -285,6 +272,16 @@
     else
     {
         [self promptForFavDeletion];
+    }
+}
+
+-(void)orderAltered
+{
+    [[orderView priceDisplayButton] setTitle:[NSString stringWithFormat:@"%@%@",@"Subtotal: ",[Utilities FormatToPrice:[orderInfo subtotalPrice]] ]];
+    
+    if([[orderInfo itemList] count] == 0)
+    {
+        [self exitEditingMode];
     }
 }
 

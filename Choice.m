@@ -84,4 +84,18 @@
     [encoder encodeObject:propertiesChecksum forKey:@"properties_checksum"];
 }
 
+-(BOOL)isEffectivelySameAs:(Choice *)aChoice
+{
+    if(![name isEqual:aChoice.name])
+        return NO;
+    
+    if([self selected] != [aChoice selected])
+        return NO;
+    
+    if (![price isEqual: aChoice.price]) 
+        return NO;
+    
+    return YES;
+}
+
 @end

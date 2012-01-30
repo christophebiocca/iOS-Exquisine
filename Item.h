@@ -35,5 +35,9 @@
 
 -(NSDictionary*)orderRepresentation;
 
+-(BOOL) isEffectivelySameAs:(Item*) anItem;
+
+-(NSComparisonResult) nameSort:(Item *)anItem;
+
 @end
 

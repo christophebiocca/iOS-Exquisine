@@ -34,4 +34,6 @@
 
 -(NSDictionary*)orderRepresentation;
 
+-(BOOL) isEffectivelySameAs:(Choice *) aChoice;
+
 @end
