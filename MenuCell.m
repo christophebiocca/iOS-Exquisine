@@ -31,8 +31,8 @@
 {
     menu = theMenu;
     
-    UIFont *titleFont = [UIFont fontWithName:@"Noteworthy-Bold" size:17];
-    UIFont *descFont = [UIFont fontWithName:@"Noteworthy-Light" size:17];
+    UIFont *titleFont = [UIFont fontWithName:@"HelveticaNeue-Medium" size:17];
+    UIFont *descFont = [UIFont fontWithName:@"HelveticaNeue" size:17];
     
     [[self textLabel] setFont:titleFont];
     [[self detailTextLabel] setFont:descFont];

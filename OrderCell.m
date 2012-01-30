@@ -1,35 +1,36 @@
 //
-//  itemOrderCell.m
+//  OrderCell.m
 //  AvocadoTest1
 //
-//  Created by Jake on 12-01-27.
+//  Created by Jake on 12-01-29.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "ItemOrderCell.h"
-#import "Item.h"
+#import "OrderCell.h"
+#import "Order.h"
 #import "Utilities.h"
 
-@implementation ItemOrderCell
 
-@synthesize item;
+@implementation OrderCell
 
-+(NSString*)cellIdentifier{
-    return @"ItemOrderCell";
+@synthesize order;
+
++(NSString *)cellIdentifier{
+    return @"OrderCell";
 }
 
 - (id)init
 {
-    self = [super initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:[ItemOrderCell cellIdentifier]];
+    self = [super initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:[OrderCell cellIdentifier]];
     if (self) {
         
     }
     return self;
 }
 
--(void)setItem:(Item*)theItem{
-    
-    item = theItem;
+-(void)setOrder:(Order *)theOrder
+{   
+    order = theOrder;
     
     UIFont *titleFont = [UIFont fontWithName:@"HelveticaNeue-Medium" size:13];
     UIFont *descFont = [UIFont fontWithName:@"HelveticaNeue" size:13];
@@ -37,8 +38,8 @@
     [[self textLabel] setFont:titleFont];
     [[self detailTextLabel] setFont:descFont];
     
-    [[self textLabel] setText:[item name]];
-    [[self detailTextLabel] setText:[Utilities FormatToPrice:[item totalPrice]]];
+    [[self textLabel] setText:[order name]];
+    [[self detailTextLabel] setText:[Utilities FormatToPrice:[order subtotalPrice]]];
     
 }
 
@@ -46,7 +47,6 @@
 {
     [super setSelected:selected animated:animated];
     
-    // Configure the view for the selected state
 }
 
 @end

@@ -173,9 +173,9 @@
         [newCell setCellDesc:@""];
         
         [newCell setCellTitleFontSize: 13];
-        [newCell setCellTitleFontType: @"Noteworthy-Bold"];
+        [newCell setCellTitleFontType: @"HelveticaNeue-Medium"];
         [newCell setCellDescFontSize: 13];
-        [newCell setCellDescFontType: @"Noteworthy-Light"];
+        [newCell setCellDescFontType: @"HelveticaNeue"];
         
         [newCell configureCell:cell];
         
@@ -194,6 +194,10 @@
         {
             [orderInfo removeItem:cellObject];
             [self refreshOrderList];
+            [tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
+            
+            if([orderDisplayList count] == 0)
+                [tableView setEditing:NO animated:YES];
         }
     }
     else if (editingStyle == UITableViewCellEditingStyleInsert)

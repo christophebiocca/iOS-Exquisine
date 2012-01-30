@@ -31,8 +31,8 @@
         aCell = [[CellData alloc] init];
         [aCell setCellTitleFontSize:17];
         [aCell setCellDescFontSize:17];
-        [aCell setCellTitleFontType:@"Noteworthy-Bold"];
-        [aCell setCellDescFontType:@"Noteworthy-Light"];
+        [aCell setCellTitleFontType:@"HelveticaNeue-Medium"];
+        [aCell setCellDescFontType:@"HelveticaNeue"];
         aCell.cellTitle = @"No Options";
         aCell.cellDesc = @"";
         [suffixList addObject:aCell];
@@ -41,8 +41,8 @@
     aCell = [[CellData alloc] init];
     [aCell setCellTitleFontSize:17];
     [aCell setCellDescFontSize:17];
-    [aCell setCellTitleFontType:@"Noteworthy-Bold"];
-    [aCell setCellDescFontType:@"Noteworthy-Light"];
+    [aCell setCellTitleFontType:@"HelveticaNeue-Medium"];
+    [aCell setCellDescFontType:@"HelveticaNeue"];
     aCell.cellTitle = @"Base Price: ";
     aCell.cellDesc = [Utilities FormatToPrice:[itemInfo basePrice]];
     [suffixList addObject:aCell];
@@ -50,8 +50,8 @@
     aCell = [[CellData alloc] init];
     [aCell setCellTitleFontSize:17];
     [aCell setCellDescFontSize:17];
-    [aCell setCellTitleFontType:@"Noteworthy-Bold"];
-    [aCell setCellDescFontType:@"Noteworthy-Light"];
+    [aCell setCellTitleFontType:@"HelveticaNeue-Medium"];
+    [aCell setCellDescFontType:@"HelveticaNeue"];
     aCell.cellTitle = @"Total Item Price:";
     aCell.cellDesc = [Utilities FormatToPrice:[itemInfo totalPrice]];
     [suffixList addObject:aCell];

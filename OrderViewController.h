@@ -40,12 +40,18 @@
 
 -(void) displayOrderConfirmation;
 
+-(void) promptForFavDeletion;
+
 -(void) promptUserForRename;
 
 -(void) enterEditingMode;
 
 -(void) exitEditingMode;
 
+-(void) popToMainPage;
+
 -(void) toggleEditing;
+
+-(void) toggleWhetherFavorite;
 
 @end

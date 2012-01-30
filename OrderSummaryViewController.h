@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+
+@protocol OrderManagementDelegate;
+
 @class Order;
 @class OrderView;
 @class OrderSummaryRenderer;
@@ -19,12 +22,26 @@
     OrderSummaryRenderer *orderSummaryRenderer;  
     UIBarButtonItem *optionsButton;
     
+    id<OrderManagementDelegate> delegate;
+    
 }
 
 @property (retain) Order *orderInfo;
 
+@property (retain) id<OrderManagementDelegate> delegate;
+
 -(OrderSummaryViewController *)initializeWithOrder:(Order *) anOrder;
 
 -(void) displayOptions;
+
+-(void) toggleWhetherFavorite;
+
+-(void) promptForFavDeletion;
+
+-(void) promptUserForRename;
+
+-(void) popToMainPage;
+
+-(void)renameOrder:(NSString *)newName;
 
 @end

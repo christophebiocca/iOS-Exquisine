@@ -13,6 +13,9 @@
 @synthesize orderTable;
 @synthesize priceDisplayButton;
 @synthesize editButton;
+@synthesize favoriteButton;
+@synthesize orderToolbar;
+@synthesize leftSpacer;
 
 - (id)initWithFrame:(CGRect)frame
 {

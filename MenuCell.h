@@ -20,8 +20,6 @@
     
 - (id)init;
 
-- (void)setMenu:(Menu*)theMenu;
-
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated;
 
 @end

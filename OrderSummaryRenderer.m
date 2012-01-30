@@ -59,8 +59,8 @@
     newCell = [[CellData alloc] init];
     [newCell setCellTitleFontSize:17];
     [newCell setCellDescFontSize:17];
-    [newCell setCellTitleFontType:@"Noteworthy-Bold"];
-    [newCell setCellDescFontType:@"Noteworthy-Light"];
+    [newCell setCellTitleFontType:@"HelveticaNeue-Medium"];
+    [newCell setCellDescFontType:@"HelveticaNeue"];
     newCell.cellTitle = @"Subtotal:";
     newCell.cellDesc = [Utilities FormatToPrice:[orderInfo subtotalPrice]];
     [suffixList addObject:newCell];
@@ -68,8 +68,8 @@
     newCell = [[CellData alloc] init];
     [newCell setCellTitleFontSize:17];
     [newCell setCellDescFontSize:17];
-    [newCell setCellTitleFontType:@"Noteworthy-Bold"];
-    [newCell setCellDescFontType:@"Noteworthy-Light"];
+    [newCell setCellTitleFontType:@"HelveticaNeue-Medium"];
+    [newCell setCellDescFontType:@"HelveticaNeue"];
     newCell.cellTitle = @"HST:";
     newCell.cellDesc = [Utilities FormatToPrice:[orderInfo taxPrice]];
     [suffixList addObject:newCell];
@@ -77,8 +77,8 @@
     newCell = [[CellData alloc] init];
     [newCell setCellTitleFontSize:17];
     [newCell setCellDescFontSize:17];
-    [newCell setCellTitleFontType:@"Noteworthy-Bold"];
-    [newCell setCellDescFontType:@"Noteworthy-Light"];
+    [newCell setCellTitleFontType:@"HelveticaNeue-Medium"];
+    [newCell setCellDescFontType:@"HelveticaNeue"];
     newCell.cellTitle = @"Total:";
     newCell.cellDesc = [Utilities FormatToPrice:[orderInfo totalPrice]];
     [suffixList addObject:newCell];

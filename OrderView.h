@@ -24,5 +24,8 @@
 
 @property (retain) UIBarButtonItem *priceDisplayButton;
 @property (retain) UIBarButtonItem *editButton;
+@property (retain) UIBarButtonItem *favoriteButton;
+@property (retain) UIToolbar *orderToolbar;
+@property (retain) UIBarButtonItem *leftSpacer;
 
 @end

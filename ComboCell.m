@@ -14,7 +14,7 @@
 
 @synthesize combo;
 
-+(NSString*)cellIdentifier{
++(NSString *)cellIdentifier{
     return @"ComboCell";
 }
 
@@ -31,8 +31,8 @@
     
     combo = theCombo;
     
-    UIFont *titleFont = [UIFont fontWithName:@"Noteworthy-Bold" size:13];
-    UIFont *descFont = [UIFont fontWithName:@"Noteworthy-Light" size:13];
+    UIFont *titleFont = [UIFont fontWithName:@"HelveticaNeue-Medium" size:13];
+    UIFont *descFont = [UIFont fontWithName:@"HelveticaNeue" size:13];
     
     [[self textLabel] setFont:titleFont];
     [[self detailTextLabel] setFont:descFont];

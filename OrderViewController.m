@@ -54,11 +54,22 @@
 -(void)promptUserForRename
 {
     
-    AlertPrompt *renamePrompt = [[AlertPrompt alloc] initWithPromptTitle:@"New order name:" message:@"name" delegate:self cancelButtonTitle:@"Cancel" okButtonTitle:@"OK"];
+    AlertPrompt *renamePrompt = [[AlertPrompt alloc] initWithPromptTitle:@"Choose a name for your order" message:orderInfo.name delegate:self cancelButtonTitle:@"Cancel" okButtonTitle:@"OK"];
     [renamePrompt setTag:2];
     
     [renamePrompt show];
 }
+
+-(void)promptForFavDeletion
+{
+    UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Delete from favorites?" message:[NSString stringWithFormat: @"If you unfavorite this order it will dissapear. Are you sure you want that?", [Utilities FormatToPrice:[orderInfo totalPrice]]] delegate:self cancelButtonTitle:@"Oh... nevermind" otherButtonTitles:@"Yep", nil];
+    
+    [areYouSure setTag:3];
+    
+    [areYouSure show];
+}
+
+
 
 //Delegate functions
 //***********************************************************
@@ -71,7 +82,7 @@
         if (buttonIndex == 1)
         {
             [delegate submitOrderForController:self];
-            [[self navigationController] popViewControllerAnimated:YES];
+            [self popToMainPage];
         }
     }
     
@@ -81,6 +92,16 @@
         {
             NSString *entered = [ (AlertPrompt *)alertView enteredText];
             [self renameOrder:entered];
+            [delegate addToFavoritesForController:self];
+        }
+    }
+    
+    if ([alertView tag] == 3) // Order Rename
+    {
+        if (buttonIndex == 1)
+        {
+            [delegate deleteFromFavoritesForController:self];
+            [self popToMainPage];
         }
     }
     
@@ -97,6 +118,9 @@
     {
         
         MenuViewController *newMenuController = [[MenuViewController alloc] initializeWithMenuAndOrder:cellObject:orderInfo];
+        
+        if(editing)
+            [self exitEditingMode];
         
         [[self navigationController] pushViewController:newMenuController animated:YES];
         
@@ -119,10 +143,16 @@
 
 - (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    UIBarButtonItem *edButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style: UIBarButtonItemStyleBordered target:self action:@selector(toggleEditing)];
     
-    [orderRenderer refreshOrderList];
-    [tableView reloadSections:[[NSIndexSet alloc] initWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
+    NSMutableArray *newItemsList = [NSMutableArray arrayWithArray:[[orderView orderToolbar] items]];
+    
+    [newItemsList replaceObjectAtIndex:0 withObject:edButton];
+    
     [[orderView priceDisplayButton] setTitle:[Utilities FormatToPrice:[orderInfo subtotalPrice]]];
+    
+    [[orderView orderToolbar] setItems:newItemsList animated:YES];
+    
 }
 
 
@@ -151,6 +181,8 @@
     [[self navigationItem] setRightBarButtonItems:[[NSArray alloc] initWithObjects:submitButton, nil]];
     
     [[orderView priceDisplayButton] setTitle:[Utilities FormatToPrice:[orderInfo subtotalPrice]]];
+    [[orderView favoriteButton] setTarget:self];
+    [[orderView favoriteButton] setAction:@selector(toggleWhetherFavorite)];
     
     [[orderView editButton] setTarget:self];
     [[orderView editButton] setAction:@selector(toggleEditing)];
@@ -168,6 +200,14 @@
     [[orderView priceDisplayButton] setTitle:[NSString stringWithFormat:@"%@%@",@"Subtotal: ",[Utilities FormatToPrice:[orderInfo subtotalPrice]] ]];
     [orderRenderer refreshOrderList];
     [[orderView orderTable] reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+    if([orderInfo isFavorite])
+    {
+        [[orderView favoriteButton] setTintColor:[UIColor yellowColor]];
+    }
+    else
+    {
+        [[orderView favoriteButton] setTintColor:[UIColor whiteColor]];
+    }
 }
 
 - (void)viewDidUnload
@@ -183,6 +223,12 @@
         return 28.0f;
     }
     return 44.0f;
+}
+
+-(void)popToMainPage
+{
+    UIViewController *viewToPopTo = [[[self navigationController] viewControllers] objectAtIndex:0];
+    [[self navigationController] popToViewController:viewToPopTo animated:YES];
 }
 
 -(void)toggleEditing
@@ -201,19 +247,45 @@
 -(void)enterEditingMode
 {
     [[orderView orderTable] setEditing:YES animated:YES];
-    [[orderView editButton] setTitle:@"Done"];
+    
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(toggleEditing)];
+
+    NSMutableArray *newItemsList = [NSMutableArray arrayWithArray:[[orderView orderToolbar] items]];
+    
+    [newItemsList replaceObjectAtIndex:0 withObject:doneButton];
+    
+    [[orderView orderToolbar] setItems:newItemsList animated:YES];
 }
 
 -(void)exitEditingMode
 {
     [[orderView orderTable] setEditing:NO animated:YES];
-    [[orderView editButton] setTitle:@"Edit"];
+    
+    UIBarButtonItem *edButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style: UIBarButtonItemStyleBordered target:self action:@selector(toggleEditing)];
+    
+    NSMutableArray *newItemsList = [NSMutableArray arrayWithArray:[[orderView orderToolbar] items]];
+    
+    [newItemsList replaceObjectAtIndex:0 withObject:edButton];
+    
+    [[orderView orderToolbar] setItems:newItemsList animated:YES];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+-(void) toggleWhetherFavorite
+{
+    if (!orderInfo.isFavorite)
+    {
+        [self promptUserForRename];
+    }
+    else
+    {
+        [self promptForFavDeletion];
+    }
 }
 
 @end

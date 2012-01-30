@@ -115,6 +115,7 @@
 {
     Order *pendingOrder = [[self pendingOrders] lastObject];
     OrderSummaryViewController *orderSummaryController = [[OrderSummaryViewController alloc] initializeWithOrder:pendingOrder];
+    [orderSummaryController setDelegate:self];
     
     [[self navigationController] pushViewController:orderSummaryController animated:YES];
 }

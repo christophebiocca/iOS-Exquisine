@@ -99,7 +99,6 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [favoritesRenderer redraw];
     [[favoritesView orderTable] reloadData];
     [favoritesView reloadInputViews];
 }

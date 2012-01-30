@@ -11,10 +11,13 @@
 #import "OrderSummaryRenderer.h"
 #import "OrderView.h"
 #import "Utilities.h"
+#import "OrderManagementDelegate.h"
+#import "AlertPrompt.h"
 
 @implementation OrderSummaryViewController
 
 @synthesize orderInfo;
+@synthesize delegate;
 
 -(OrderSummaryViewController *)initializeWithOrder:(Order *) anOrder
 {    
@@ -24,118 +27,6 @@
     [[self navigationItem] setTitle:orderInfo.status];
     
     return self;
-}
-
--(void)displayOptions
-{
-    /*
-    if([orderInfo isFavorite])
-    {
-        UICustomActionSheet *optionPopup = [[UICustomActionSheet alloc] initWithTitle:@"Order options" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Submit this order!" otherButtonTitles:@"Rename this order" , @"Delete from favorites", nil];
-        
-        [optionPopup setColor:[UIColor colorWithRed:36/255.0 green:99/255.0 blue:222/255.0 alpha:230/255.0] forButtonAtIndex:0];
-        [optionPopup setColor:[UIColor colorWithRed:187/255.0 green:189/255.0 blue:192/255.0 alpha:230/255.0] forButtonAtIndex:1];
-        [optionPopup setColor:[UIColor colorWithRed:235/255.0 green:12/255.0 blue:20/255.0 alpha:230/255.0] forButtonAtIndex:2];
-        [optionPopup setColor:[UIColor colorWithRed:21/255.0 green:29/255.0 blue:39/255.0 alpha:230/255.0] forButtonAtIndex:3];
-        
-        [optionPopup setTag:2];
-        
-        [optionPopup showInView:orderView];
-    }
-    else
-    {
-        UICustomActionSheet *optionPopup = [[UICustomActionSheet alloc] initWithTitle:@"Order options" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Submit this order!" otherButtonTitles:@"Rename this order" , @"Add to favorites", @"Clear this order", nil];
-        
-        [optionPopup setColor:[UIColor colorWithRed:36/255.0 green:99/255.0 blue:222/255.0 alpha:230/255.0] forButtonAtIndex:0];
-        [optionPopup setColor:[UIColor colorWithRed:187/255.0 green:189/255.0 blue:192/255.0 alpha:230/255.0] forButtonAtIndex:1];
-        [optionPopup setColor:[UIColor colorWithRed:187/255.0 green:189/255.0 blue:192/255.0 alpha:230/255.0] forButtonAtIndex:2];
-        [optionPopup setColor:[UIColor colorWithRed:235/255.0 green:12/255.0 blue:20/255.0 alpha:230/255.0] forButtonAtIndex:3];
-        [optionPopup setColor:[UIColor colorWithRed:21/255.0 green:29/255.0 blue:39/255.0 alpha:230/255.0] forButtonAtIndex:4];
-        
-        [optionPopup setTag:1];
-        
-        [optionPopup showInView:orderView];
-    }*/
-}
-
-//Delegate functions
-//***********************************************************
-
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    /*
-    if ([actionSheet tag] == 1)
-    {
-        switch (buttonIndex) {
-            case 0:
-                [self displayOrderConfirmation];
-                break;
-                
-            case 1:
-                [self promptUserForRename];
-                break;
-                
-            case 2:
-                [delegate addToFavoritesForController:self];
-                break;
-            case 3:
-                [self displayOrderClearConfirmation];
-                break;
-            default:
-                break;
-        }
-    }
-    if ([actionSheet tag] == 2)
-    {
-        switch (buttonIndex) {
-            case 0:
-                [self displayOrderConfirmation];
-                break;
-                
-            case 1:
-                [self promptUserForRename];
-                break;
-                
-            case 2:
-                [self displayDeletionConfirmation];
-                break;
-                
-            default:
-                break;
-        }
-    }*/
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    /*
-    [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
-    
-    id cellRenderer = [orderSummaryRenderer objectForCellAtIndex:indexPath];
-    
-    if ([cellRenderer isKindOfClass:[ItemRenderer class]])
-    {
-        Item *currentItem = [(ItemRenderer *)cellRenderer itemInfo];
-        
-        if([[currentItem options]count] > 0)
-        {
-            ItemViewController *itemViewController = [[ItemViewController alloc] initializeWithItemAndOrder:currentItem:orderInfo];
-            [[self navigationController] pushViewController:itemViewController animated:YES];
-        }
-    }
-    
-    //i.e. if the "Add Item" row was selected
-    if([cellRenderer isKindOfClass:[CellData class]]){
-        if ([(CellData *)cellRenderer cellTitle] == @"Add Item")
-        {
-            //allocate a new menu renderer passing this order to it     
-            MenuViewController *menuViewController = [[MenuViewController alloc] initializeWithMenuAndOrder:menuInfo :orderInfo];
-            
-            //Push the menu page
-            [[self navigationController] pushViewController:menuViewController animated:YES];
-        }
-    }
-     */
 }
 
 
@@ -155,8 +46,15 @@
 - (void) loadView
 {
     orderView = [[OrderView alloc] init];
+    
     [[orderView orderTable] setDelegate:self];
     [[orderView orderTable] setDataSource:orderSummaryRenderer];
+    
+    [[orderView favoriteButton] setTarget:self];
+    [[orderView favoriteButton] setAction:@selector(toggleWhetherFavorite)];
+    
+    //pretty hax, but w/e.
+    [[orderView orderToolbar] setItems:[NSArray arrayWithObjects:[orderView leftSpacer],[orderView favoriteButton], nil]];
     
     [self setView:orderView];
 }
@@ -170,6 +68,14 @@
     [super viewWillAppear:animated];
     [orderSummaryRenderer redraw];
     [[orderView orderTable] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+    if([orderInfo isFavorite])
+    {
+        [[orderView favoriteButton] setTintColor:[UIColor yellowColor]];
+    }
+    else
+    {
+        [[orderView favoriteButton] setTintColor:[UIColor whiteColor]];
+    }
 }
 
 - (void)viewDidUnload
@@ -191,6 +97,73 @@
         return 28.0f;
     }
     return 34.0f;
+}
+
+-(void) toggleWhetherFavorite
+{
+    if (!orderInfo.isFavorite)
+    {
+        [self promptUserForRename];
+    }
+    else
+    {
+        [self promptForFavDeletion];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView willDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    
+    if ([alertView tag] == 2) // Order Rename
+    {
+        if (buttonIndex == 1)
+        {
+            NSString *entered = [ (AlertPrompt *)alertView enteredText];
+            [self renameOrder:entered];
+            //This is pretty bad form, but I think it'll be ok.. =/
+            [delegate addToFavoritesForController:(id)self];
+        }
+    }
+    
+    if ([alertView tag] == 3) // Order Rename
+    {
+        if (buttonIndex == 1)
+        {
+            [delegate deleteFromFavoritesForController:(id)self];
+            [self popToMainPage];
+        }
+    }
+    
+}
+
+-(void)popToMainPage
+{
+    UIViewController *viewToPopTo = [[[self navigationController] viewControllers] objectAtIndex:0];
+    [[self navigationController] popToViewController:viewToPopTo animated:YES];
+}
+
+-(void)promptUserForRename
+{
+    
+    AlertPrompt *renamePrompt = [[AlertPrompt alloc] initWithPromptTitle:@"Choose a name for your order" message:orderInfo.name delegate:self cancelButtonTitle:@"Cancel" okButtonTitle:@"OK"];
+    [renamePrompt setTag:2];
+    
+    [renamePrompt show];
+}
+
+-(void)promptForFavDeletion
+{
+    UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Delete from favorites?" message:[NSString stringWithFormat: @"If you unfavorite this order it will dissapear. Are you sure you want that?", [Utilities FormatToPrice:[orderInfo totalPrice]]] delegate:self cancelButtonTitle:@"Oh... nevermind" otherButtonTitles:@"Yep", nil];
+    
+    [areYouSure setTag:3];
+    
+    [areYouSure show];
+}
+
+-(void)renameOrder:(NSString *)newName
+{
+    [orderInfo setName:newName];
+    [[self navigationItem] setTitle:newName];
 }
 
 @end
