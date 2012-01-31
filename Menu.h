@@ -11,6 +11,7 @@
 @class Item;
 
 @interface Menu : MenuComponent{
+    Menu *parentMenu;
     
     NSMutableArray *submenuList;
     NSMutableArray *comboList;
@@ -31,5 +32,7 @@
 -(Menu *) dereferenceMenuPK:(NSInteger) menuPK;
 
 -(NSArray *) flatItemList;
+
+-(Menu *) initFromDataAndMenu:(NSDictionary *)inputData:(Menu *) inputMenu;
 
 @end

@@ -16,6 +16,7 @@
 
 -(Menu *)init
 {
+    parentMenu = nil;
     submenuList = [[NSMutableArray alloc] initWithCapacity:0];
     return self;
 }
@@ -23,12 +24,13 @@
 -(Menu *) initFromData:(NSDictionary *)inputData
 {
     self = [super initFromData:inputData];
+    parentMenu = nil;
     
     submenuList = [[NSMutableArray alloc] initWithCapacity:0];
     comboList = [[NSMutableArray alloc] initWithCapacity:0];
     
     for (NSDictionary *submenu in [inputData objectForKey:@"submenus"]) {
-        Menu *newSubmenu = [[Menu alloc] initFromData:submenu];
+        Menu *newSubmenu = [[Menu alloc] initFromDataAndMenu:submenu:self];
         [submenuList addObject:newSubmenu];
     }
     
@@ -38,7 +40,33 @@
     }
     
     for (NSDictionary *combo in [inputData objectForKey:@"combos"]) {
-        Combo *newCombo = [[Combo alloc] initFromData:combo];
+        Combo *newCombo = [[Combo alloc] initFromDataAndMenu:combo :self];
+        [comboList addObject:newCombo];
+    }
+    
+    return self;
+    
+}
+
+-(Menu *) initFromDataAndMenu:(NSDictionary *)inputData:(Menu *) inputMenu
+{
+    self = [super initFromData:inputData];
+    parentMenu = inputMenu;
+    submenuList = [[NSMutableArray alloc] initWithCapacity:0];
+    comboList = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    for (NSDictionary *submenu in [inputData objectForKey:@"submenus"]) {
+        Menu *newSubmenu = [[Menu alloc] initFromDataAndMenu:submenu :parentMenu];
+        [submenuList addObject:newSubmenu];
+    }
+    
+    for (NSDictionary *item in [inputData objectForKey:@"items"]) {
+        Item *newItem = [[Item alloc] initFromData:item];
+        [submenuList addObject:newItem];
+    }
+    
+    for (NSDictionary *combo in [inputData objectForKey:@"combos"]) {
+        Combo *newCombo = [[Combo alloc] initFromDataAndMenu:combo :parentMenu];
         [comboList addObject:newCombo];
     }
     
