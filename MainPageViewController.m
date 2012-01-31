@@ -30,7 +30,7 @@
         [[self navigationItem] setTitle:@"Pita Factory"];
         //this wont yet check make sure that the prod server is actually up, just that the hostname resolves.
         //=/
-        networkChecker = [Reachability reachabilityWithHostname:(@"http://croutonlabs.com")];
+        networkChecker = [Reachability reachabilityWithHostname:(@"croutonlabs.com")];
 
         [networkChecker startNotifier];
         
