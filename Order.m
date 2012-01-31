@@ -13,6 +13,7 @@
 #import "Menu.h"
 #import "Combo.h"
 #import "PlaceOrder.h"
+#import "PaymentInfo.h"
 
 NSString* ORDER_ITEMS_MODIFIED = @"CroutonLabs/OrderModified";
 
@@ -201,11 +202,11 @@ NSString* ORDER_ITEMS_MODIFIED = @"CroutonLabs/OrderModified";
     [self resetCache];
 }
 
--(void) submitToLocation:(Location*)location
+-(void)submitToLocation:(Location*)location withPaymentInfo:(PaymentInfo*)paymentInfo
 {
     mostRecentSubmitDate = [[NSDate alloc] initWithTimeIntervalSinceNow:0.0];
     [self setStatus:@"Sending"];
-    [PlaceOrder sendOrder:self toLocation:location];
+    [PlaceOrder sendOrder:self toLocation:location withPaymentInfo:paymentInfo];
 }
 
 - (MenuComponent *)initWithCoder:(NSCoder *)decoder
