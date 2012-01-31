@@ -29,9 +29,9 @@
 {
     CellData *newCell = [[CellData alloc] init];
     [newCell setCellTitleFontSize: 13];
-    [newCell setCellTitleFontType: @"Noteworthy-Bold"];
+    [newCell setCellTitleFontType: @"HelveticaNeue-Medium"];
     [newCell setCellDescFontSize: 13];
-    [newCell setCellDescFontType: @"Noteworthy-Light"];
+    [newCell setCellDescFontType: @"HelveticaNeue"];
     return newCell;
 }
 

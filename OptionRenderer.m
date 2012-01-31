@@ -97,6 +97,9 @@
     
     [returnList addObject:newCell];
     
+    if ([[optionInfo selectedChoices] count] == 0)
+        return nil;
+    
     for (Choice *aChoice in [optionInfo choiceList]) {
         
         if (aChoice.selected)

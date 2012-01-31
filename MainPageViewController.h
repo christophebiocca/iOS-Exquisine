@@ -15,7 +15,9 @@
 @class Order;
 
 @interface MainPageViewController : UIViewController<UITableViewDelegate, OrderManagementDelegate>{
-
+    
+    BOOL internetActive;
+    
     MainPageView *mainPageView;
     
     Menu *theMenu;
@@ -36,5 +38,9 @@
 -(void) saveDataToDisk;
 
 -(NSString *) dataFilePath;
+
+-(void) doFavoriteConsistancyCheck;
+
+-(NSArray *) allKnownOrders;
 
 @end

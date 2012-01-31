@@ -39,6 +39,7 @@
     [super postCompletionHook];
     if(!jsonData){
         NSError* parsingError = nil;
+        DebugLog(@"PARSING JSON %@", [[NSString alloc] initWithData:[self rawData] encoding:NSASCIIStringEncoding]);
         jsonData = [NSJSONSerialization JSONObjectWithData:[self rawData] 
                                                     options:0 
                                                      error:&parsingError];

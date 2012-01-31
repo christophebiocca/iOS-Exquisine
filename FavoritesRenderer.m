@@ -12,44 +12,15 @@
 #import "Utilities.h"
 #import "CellData.h"
 #import "Menu.h"
+#import "OrderCell.h"
 
 @implementation FavoritesRenderer
-
-
--(void) redraw
-{
-    [orderRenderList removeAllObjects];
-    //This may actually result in two renderers being created for each item.
-    //This may be a problem. We'll see.
-    for (Order *currentOrder in favoriteOrders) {
-        [orderRenderList addObject:[[OrderRenderer alloc] initWithOrderAndMenu:currentOrder :theMenu]];
-    }
-    
-    [suffixList removeAllObjects];
-
-    if([favoriteOrders count] == 0)
-    {
-        CellData *aCell = [[CellData alloc] init];
-        aCell.cellTitle = @"No Favorites Selected";
-        aCell.cellDesc = @"";
-        [suffixList addObject:aCell];
-    }
-}
 
 -(FavoritesRenderer *)initWithOrderListAndMenu:(NSMutableArray *)anOrderList:(Menu *)aMenu
 {
     theMenu = aMenu;
     favoriteOrders = anOrderList;
     
-    displayLists = [[NSMutableArray alloc] initWithCapacity:0];
-    suffixList = [[NSMutableArray alloc] initWithCapacity:0];
-    
-    orderRenderList = [[NSMutableArray alloc] initWithCapacity:0];
-    
-    [displayLists addObject:orderRenderList];
-    [displayLists addObject:suffixList];
-    
-    [self redraw];
     return self;
 }
 
@@ -61,28 +32,47 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
-    int memberTally = 0;
-    
-    for (NSMutableArray *componentList in displayLists) {
-        memberTally += [componentList count];
-    }
-    
-    return memberTally;
+    if ([favoriteOrders count])
+        return [favoriteOrders count];
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+    if ([favoriteOrders count])
+    {
+        OrderCell *cell = [tableView dequeueReusableCellWithIdentifier:[OrderCell cellIdentifier]];        
+        
+        if (cell == nil) {
+            cell = [[OrderCell alloc] init];
+        }
+        
+        [cell setOrder:[favoriteOrders objectAtIndex:[indexPath row]]];
+        
+        return cell;
     }
-    
-    [[Utilities MemberOfCompositeListAtIndex:displayLists:[indexPath row]] configureCell:cell];
-    
-    return cell;
+    else
+    {
+        CellData *aCell = [[CellData alloc] init];
+        [aCell setCellTitleFontSize:17];
+        [aCell setCellDescFontSize:17];
+        [aCell setCellTitleFontType:@"HelveticaNeue-Medium"];
+        [aCell setCellDescFontType:@"HelveticaNeue"];
+        aCell.cellTitle = @"You have no favourited orders!";
+        aCell.cellDesc = @"";
+        
+        static NSString *CellIdentifier = @"Cell";
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+        }
+        
+        [aCell configureCell:cell];
+        
+        return cell;
+    }
 }
 
 @end

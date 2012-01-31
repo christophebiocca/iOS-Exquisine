@@ -16,8 +16,6 @@
     
     NSDecimalNumber* price;
     
-    BOOL selected;
-    
     NSString* propertiesChecksum;
 }
 
@@ -35,5 +33,7 @@
 -(NSComparisonResult)comparePrice:(Choice*)other;
 
 -(NSDictionary*)orderRepresentation;
+
+-(BOOL) isEffectivelySameAs:(Choice *) aChoice;
 
 @end

@@ -14,6 +14,8 @@
 #import "Combo.h"
 #import "PlaceOrder.h"
 
+NSString* ORDER_ITEMS_MODIFIED = @"CroutonLabs/OrderModified";
+
 @implementation Order
     
 @synthesize itemList;
@@ -99,12 +101,16 @@
     
     [itemList addObject:anItem];
     [self resetCache];
+    [self reSort];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ORDER_ITEMS_MODIFIED object:self];
 
 }
 
 -(void)removeItem:(Item *)anItem{
     [itemList removeObject:anItem];
     [self resetCache];
+    [self reSort];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ORDER_ITEMS_MODIFIED object:self];
 
 }
 
@@ -232,6 +238,26 @@
     [encoder encodeObject:[NSString stringWithFormat:@"%i", isFavorite] forKey:@"is_favorite"];
     [encoder encodeObject:creationDate forKey:@"creation_date"];
     [encoder encodeObject:mostRecentSubmitDate forKey:@"most_recent_submit_date"];
+}
+
+-(BOOL)isEffectivelySameAs:(Order *)anOrder
+{
+    if ([[anOrder itemList] count] != [itemList count])
+        return NO;
+    
+    for (int i = 0; i < [itemList count] ; i++)
+    {
+        if (![[itemList objectAtIndex:i] isEffectivelySameAs:[[anOrder itemList] objectAtIndex:i]]) {
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+
+-(void) reSort
+{
+    [itemList sortUsingSelector:@selector(nameSort:)];
 }
 
 @end

@@ -12,29 +12,25 @@
 
 @interface OrderRenderer : MenuComponentRenderer <UITableViewDataSource>
 {
-    Order *orderInfo;
     
+    Order *orderInfo;
     Menu *theMenu;
     
-    //This guy contains stuff that we need
-    //to display cells for after the item list.
-    NSMutableArray *suffixList;
+    //This list just contains the stuff that
+    //we should be trying to make cells for in
+    //the order section of the table.
+    NSMutableArray *orderDisplayList;
     
-    //This actually expects a list of lists such that the members of the internal lists
-    //respond to configureCell. Do not break this contract!
-    NSMutableArray *displayLists;
-    
-    NSMutableArray *itemRenderList;
-    
-    NSMutableArray *comboRenderList;
 }
 
--(void) redraw;
+-(void) refreshOrderList;
 
 -(OrderRenderer *)initWithOrderAndMenu:(Order *)anOrder:(Menu *) aMenu;
 
--(UITableViewCell *) configureCell:(UITableViewCell *) aCell;
-
 -(id) objectForCellAtIndex:(NSIndexPath *) index;
+
+- (UITableViewCell *)menuCellForIndexPath:(UITableView *) tableView:(NSIndexPath *) indexPath;
+
+- (UITableViewCell *)itemCellForIndexPath:(UITableView *) tableView:(NSIndexPath *) indexPath;
 
 @end

@@ -18,13 +18,17 @@
 @interface OrderViewController : UITableViewController <UITableViewDelegate, UIActionSheetDelegate,UIAlertViewDelegate>
 {
     
+    
+    
     Order *orderInfo;
     Menu *menuInfo;
     OrderView *orderView;
     OrderRenderer *orderRenderer;  
-    UIBarButtonItem *optionsButton;
+    UIBarButtonItem *submitButton;
     
     id<OrderManagementDelegate> delegate;
+    
+    BOOL editing;
     
 }
 
@@ -36,14 +40,22 @@
 
 -(void) renameOrder:(NSString *) newName;
 
--(void) displayOptions;
-
 -(void) displayOrderConfirmation;
+
+-(void) promptForFavDeletion;
 
 -(void) promptUserForRename;
 
--(void) displayDeletionConfirmation;
+-(void) enterEditingMode;
 
--(void) displayOrderClearConfirmation;
+-(void) exitEditingMode;
+
+-(void) popToMainPage;
+
+-(void) toggleEditing;
+
+-(void) toggleWhetherFavorite;
+
+-(void) orderAltered;
 
 @end

@@ -31,17 +31,12 @@
     for (Choice *aChoice in anOption.choiceList) {
         Choice *aNewChoice = [[Choice alloc] initFromChoice:aChoice option:self];
         [choiceList addObject:aNewChoice];
+        if ([aChoice selected])
+            [self selectChoice:aNewChoice];
     }
     
     //sort the choice list by real price
     [choiceList sortUsingSelector:@selector(comparePrice:)];
-    
-    for (Choice *choice in choiceList) {
-        if(choice.selected)
-        {
-            [selectedChoices addObject:choice];
-        }
-    }
     
     propertiesChecksum = [anOption propertiesChecksum];
     
@@ -72,6 +67,14 @@
         if(choice.selected)
         {
             [selectedChoices addObject:choice];
+        }
+    }
+    
+    if (lowerBound > 0)
+    {
+        for (int i = 0; i < lowerBound; i++)
+        {
+            [self selectChoice:[choiceList objectAtIndex:i]];
         }
     }
     
@@ -232,6 +235,22 @@
     [encoder encodeObject:choiceList forKey:@"choice_list"];
     [encoder encodeObject:selectedChoices forKey:@"selected_choices"];
     [encoder encodeObject:propertiesChecksum forKey:@"properties_checksum"];
+}
+
+-(BOOL)isEffectivelySameAs:(Option *)anOption
+{
+    if (![[anOption name] isEqual: name])
+        return NO;
+    
+    if([[anOption choiceList] count] != [choiceList count])
+        return NO;
+    
+    for (int i = 0; i < [choiceList count]; i++) {
+        if (![[[anOption choiceList] objectAtIndex:i] isEffectivelySameAs:[choiceList objectAtIndex:i]]) {
+            return NO;
+        }
+    }
+    return YES;
 }
 
 @end

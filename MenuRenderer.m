@@ -8,53 +8,17 @@
 
 #import "MenuRenderer.h"
 #import "Menu.h"
-#import "ItemRenderer.h"
 #import "Item.h"
-#import "CellData.h"
-#import "Utilities.h"
+#import "MenuCell.h"
+#import "ItemMenuCell.h"
 
 @implementation MenuRenderer
 
--(void) redraw
-{
-    [itemRenderList removeAllObjects];
-    
-    //We don't know whether these objects will be items, or submenus until we look at them.
-    for (id currentThing in menuInfo.submenuList) {
-        if( [currentThing isKindOfClass:[Item class]])
-        {
-            ItemRenderer *itemRenderer = [[ItemRenderer alloc] initWithItem:currentThing];
-
-            [itemRenderList addObject:itemRenderer];
-        }
-        if( [currentThing isKindOfClass:[Menu class]])
-        {
-            [itemRenderList addObject:[[MenuRenderer alloc] initWithMenu:currentThing]];
-        }
-    }
-}
-
--(UITableViewCell *)configureCell:(UITableViewCell *)aCell
-{
-    [[aCell detailTextLabel] setText:@""];
-    [[aCell textLabel] setText:menuInfo.name];
-    [aCell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
-    return aCell;
-}
-
 -(MenuRenderer *)initWithMenu:(Menu *)aMenu
 {
+    self = [super init];
+    
     menuInfo = aMenu;
-    menuComponent = aMenu;
-    displayLists = [[NSMutableArray alloc] initWithCapacity:0];
-    suffixList = [[NSMutableArray alloc] initWithCapacity:0];
-    
-    itemRenderList = [[NSMutableArray alloc] initWithCapacity:0];
-    
-    [displayLists addObject:itemRenderList];
-    [displayLists addObject:suffixList];
-    
-    [self redraw];
     
     return self;
 }
@@ -67,28 +31,44 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
-    int memberTally = 0;
-    
-    for (NSMutableArray *componentList in displayLists) {
-        memberTally += [componentList count];
-    }
-    
-    return memberTally;
+    return [[menuInfo submenuList] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+    id thingToDisplay = [[menuInfo submenuList] objectAtIndex:[indexPath row]];
+    
+    if ([thingToDisplay isKindOfClass:[Item class]]) {
+        
+        ItemMenuCell *cell = [tableView dequeueReusableCellWithIdentifier:[ItemMenuCell cellIdentifier]];
+        
+        if (cell == nil)
+        {
+            cell = [[ItemMenuCell alloc] init];
+        }
+        
+        [cell setItem:thingToDisplay];
+        
+        return cell;
+        
     }
     
-    [[Utilities MemberOfCompositeListAtIndex:displayLists:[indexPath row]] configureCell:cell];
+    if ([thingToDisplay isKindOfClass:[Menu class]]) {
+        
+        MenuCell *cell = [tableView dequeueReusableCellWithIdentifier:[MenuCell cellIdentifier]];
+        
+        if (cell == nil)
+        {
+            cell = [[MenuCell alloc] init];
+        }
+        
+        [cell setMenu:thingToDisplay];
+        
+        return cell;
+    }
     
-    return cell;
+    return nil;
 }
 
 

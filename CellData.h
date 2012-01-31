@@ -22,6 +22,7 @@
     NSString *cellTitleFontType;
     NSInteger cellDescFontSize;
     NSString *cellDescFontType;
+    BOOL notSelectable;
 }
 
 @property (retain) NSString *cellTitle;
@@ -34,6 +35,7 @@
 @property NSInteger cellDescFontSize;
 @property (retain) NSString *cellTitleFontType;
 @property (retain) NSString *cellDescFontType;
+@property BOOL notSelectable;
 
 //Configures a table view cell to be representative
 //of the data that is populated in the CellData object

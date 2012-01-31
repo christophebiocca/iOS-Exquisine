@@ -74,6 +74,11 @@
     [delegate submitOrderForController:orderViewController];
 }
 
+-(BOOL)hasServerConnection
+{
+    return [delegate hasServerConnection];
+}
+
 //View related functions
 //***********************************************************
 
@@ -99,7 +104,6 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [favoritesRenderer redraw];
     [[favoritesView orderTable] reloadData];
     [favoritesView reloadInputViews];
 }

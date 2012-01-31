@@ -26,6 +26,6 @@
 
 -(ItemViewController *)initializeWithItemAndOrder:(Item *) anItem:(Order *)anOrder;
 
--(void)deleteButtonPressed;
+-(void) addThisItemToOrder;
 
 @end

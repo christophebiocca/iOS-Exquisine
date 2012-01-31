@@ -61,4 +61,6 @@
 
 -(NSDictionary*)orderRepresentation;
 
+-(BOOL) isEffectivelySameAs:(Option *) anOption;
+
 @end
