@@ -427,8 +427,6 @@
 		23658CB114BDFB15002C0996 = {
 			isa = PBXGroup;
 			children = (
-				238476F214D7577C00DE9270 /* SystemConfiguration.framework */,
-				238FC77814D35E6D007E175B /* Favorite Star.png */,
 				232C795114CDF5AB00C3868D /* AlertPrompt */,
 				23DA7A8814C73D52008281DD /* API */,
 				23082F4F14D884F1003964CE /* Network */,
@@ -462,6 +460,7 @@
 				23658CC214BDFB15002C0996 /* Foundation.framework */,
 				23658CC414BDFB15002C0996 /* CoreGraphics.framework */,
 				23658CE114BDFB15002C0996 /* SenTestingKit.framework */,
+				238476F214D7577C00DE9270 /* SystemConfiguration.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -980,6 +979,7 @@
 				23082F5714D88B7D003964CE /* pfLogo@2x.png */,
 				38D4132E14D3324200031B60 /* pfLogo.png */,
 				23E7D87B14C9BA88006D6C13 /* behindButton.png */,
+				238FC77814D35E6D007E175B /* Favorite Star.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
