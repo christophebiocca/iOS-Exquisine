@@ -206,13 +206,22 @@ typedef enum PickerSections{
 }
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
-    
-}
-
--(BOOL)respondsToSelector:(SEL)aSelector{
-    BOOL superVal = [super respondsToSelector:aSelector];
-    NSLog(@"Do we respond to %@? %d", NSStringFromSelector(aSelector), superVal);
-    return superVal;
+    NSString* error = nil;
+    switch (component) {
+        case Year:
+            [paymentInfo setExpirationYear:[self yearForRow:row] withValidationMessage:&error];
+            break;
+        case Month:
+            [paymentInfo setExpirationMonth:[self monthForRow:row] withValidationMessage:&error];
+            break;    
+        default:
+            NSAssert(NO, @"Impossible index passed in %d", component);
+    }
+    if(error){
+        [expirationLabel setText:[NSString stringWithFormat:@"Expiry Date (%@)", error]];
+    } else {
+        [expirationLabel setText:@"Expiry Date"];
+    }
 }
 
 @end
