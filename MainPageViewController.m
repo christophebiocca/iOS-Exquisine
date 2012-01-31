@@ -17,6 +17,7 @@
 #import "FavoritesViewController.h"
 #import "OrderSummaryViewController.h"
 #import "GetLocations.h"
+#import "PaymentInfoViewController.h"
 
 @implementation MainPageViewController
 
@@ -139,12 +140,38 @@
 
 -(void)submitOrderForController:(id)orderViewController
 {
+    __block Location* location = nil;
+    __block PaymentInfo* paymentInfo = nil;
+    
+    void (^order)() = ^(){
+        if(location && paymentInfo){
+            [[orderViewController orderInfo] submitToLocation:location withPaymentInfo:paymentInfo];
+        }
+    };
+    
+    __block PaymentInfoViewController* getPaymentInfo = 
+    [[PaymentInfoViewController alloc] 
+     initWithCompletionBlock:^(PaymentInfo* info){
+         [self dismissModalViewControllerAnimated:YES];
+         @synchronized(self){
+             paymentInfo = info;
+             order();
+         }
+     }
+     cancellationBlock:^{
+         [self dismissModalViewControllerAnimated:YES];
+     }];
+    [self presentModalViewController:getPaymentInfo animated:YES];
+    
     [GetLocations getLocationsForRestaurant:RESTAURANT_ID 
                                     success:^(GetLocations* call) {
                                         NSArray* locations = [call locations];
                                         NSAssert([locations count] != 0, @"Not a single location to order from!");
                                         NSAssert([locations count] == 1, @"Too many locations, and no way to choose from them!");
-                                        [[orderViewController orderInfo] submitToLocation:[locations lastObject]];
+                                        @synchronized(self){
+                                            location = [locations lastObject];
+                                            order();
+                                        }
                                     } failure:^(GetLocations* call, NSError* error) {
                                         NSLog(@"Can't fetch locations %@, therefore can't send order", error);
                                     }];
