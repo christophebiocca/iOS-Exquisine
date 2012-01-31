@@ -35,7 +35,7 @@
         accountInfoButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         greetingLabel = [[UILabel alloc] init];
         orderStatus = [[UILabel alloc] init];
-        logo = [UIImage imageNamed:@"pfLogo_high"];
+        logo = [UIImage imageNamed:@"pfLogo"];
         logoView = [[UIImageView alloc] initWithImage:logo];
         
         [createOrderButton setTitle:@"New Order" forState:UIControlStateNormal];
