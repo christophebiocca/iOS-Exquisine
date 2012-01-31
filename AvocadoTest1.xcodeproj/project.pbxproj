@@ -89,6 +89,7 @@
 		D95B787714D2C4F800FC0F29 /* GetLocations.m in Sources */ = {isa = PBXBuildFile; fileRef = D95B787614D2C4F800FC0F29 /* GetLocations.m */; };
 		D95B788014D318A300FC0F29 /* checkRelease.rb in Resources */ = {isa = PBXBuildFile; fileRef = D95B787F14D318A300FC0F29 /* checkRelease.rb */; };
 		D9768A6514D73EB300BBA467 /* PaymentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D9768A6214D73EB300BBA467 /* PaymentInfo.m */; };
+		D9768A6614D73EB300BBA467 /* PaymentInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9768A6414D73EB300BBA467 /* PaymentInfoViewController.m */; };
 		D9768A7E14D74AAD00BBA467 /* PaymentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9768A7D14D74AAD00BBA467 /* PaymentView.m */; };
 		D9AF662614D22C0A00632EA8 /* JSONAPICall.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AF662514D22C0A00632EA8 /* JSONAPICall.m */; };
 /* End PBXBuildFile section */
@@ -253,6 +254,8 @@
 		D95B787F14D318A300FC0F29 /* checkRelease.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = checkRelease.rb; path = ../checkRelease.rb; sourceTree = "<group>"; };
 		D9768A6114D73EB300BBA467 /* PaymentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentInfo.h; sourceTree = "<group>"; };
 		D9768A6214D73EB300BBA467 /* PaymentInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentInfo.m; sourceTree = "<group>"; };
+		D9768A6314D73EB300BBA467 /* PaymentInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentInfoViewController.h; sourceTree = "<group>"; };
+		D9768A6414D73EB300BBA467 /* PaymentInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentInfoViewController.m; sourceTree = "<group>"; };
 		D9768A7C14D74AAD00BBA467 /* PaymentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentView.h; sourceTree = "<group>"; };
 		D9768A7D14D74AAD00BBA467 /* PaymentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentView.m; sourceTree = "<group>"; };
 		D9AF662414D22C0A00632EA8 /* JSONAPICall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONAPICall.h; sourceTree = "<group>"; };
@@ -360,6 +363,7 @@
 			children = (
 				23DA7A8314C64680008281DD /* MainPageViewController */,
 				232C796C14CF77CC00C3868D /* FavoritesViewController */,
+				D9768A6914D73ED800BBA467 /* PaymentViewController */,
 			);
 			name = OtherControllers;
 			sourceTree = "<group>";
@@ -1000,6 +1004,15 @@
 			name = Payment;
 			sourceTree = "<group>";
 		};
+		D9768A6914D73ED800BBA467 /* PaymentViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D9768A6314D73EB300BBA467 /* PaymentInfoViewController.h */,
+				D9768A6414D73EB300BBA467 /* PaymentInfoViewController.m */,
+			);
+			name = PaymentViewController;
+			sourceTree = "<group>";
+		};
 		D9768A7A14D74A8A00BBA467 /* PaymentInfoView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1185,6 +1198,7 @@
 				238FC78D14D37402007E175B /* ComboCell.m in Sources */,
 				238476F114D607A400DE9270 /* OrderCell.m in Sources */,
 				D9768A6514D73EB300BBA467 /* PaymentInfo.m in Sources */,
+				D9768A6614D73EB300BBA467 /* PaymentInfoViewController.m in Sources */,
 				D9768A7E14D74AAD00BBA467 /* PaymentView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
