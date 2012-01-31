@@ -190,7 +190,7 @@ typedef enum PickerSections{
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
     switch (component) {
         case Month:
-            return [NSString stringWithFormat:@"%2d", row+1];
+            return [NSString stringWithFormat:@"%2d", [self monthForRow:row]];
         case Year:
         {
             return [NSString stringWithFormat:@"%4d", [self yearForRow:row]];
