@@ -13,10 +13,11 @@
 @class MainPageView;
 @class Menu;
 @class Order;
+@class Reachability;
 
 @interface MainPageViewController : UIViewController<UITableViewDelegate, OrderManagementDelegate>{
     
-    BOOL internetActive;
+    Reachability *networkChecker;
     
     MainPageView *mainPageView;
     

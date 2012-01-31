@@ -152,4 +152,19 @@
     [encoder encodeObject:comboList forKey:@"combo_list"];
 }
 
+- (NSMutableArray *) comboList
+{
+    NSMutableArray *output = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    [output addObjectsFromArray:comboList];
+    
+    for (id aSubmenu in submenuList) {
+        if ([aSubmenu isKindOfClass:[Menu class]])
+        {
+            [output addObjectsFromArray:[aSubmenu comboList]];
+        }
+    }
+    return output;
+}
+
 @end

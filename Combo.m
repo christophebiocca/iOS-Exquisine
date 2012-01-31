@@ -14,6 +14,8 @@
 @implementation Combo
 
 @synthesize price, listOfAssociatedItems;
+@synthesize associatedOrder;
+@synthesize listOfItemGroups;
 
 -(Combo *)initFromDataAndMenu:(NSDictionary *)inputData:(Menu *) associatedMenu
 {
@@ -32,7 +34,7 @@
         NSMutableArray *newItemList = [[NSMutableArray alloc] initWithCapacity:0];
         
         NSMutableArray *itemPKs = [componentInfo objectForKey:@"items"];
-        NSMutableArray *menuPKs = [componentInfo objectForKey:@"menu"];
+        NSMutableArray *menuPKs = [componentInfo objectForKey:@"menus"];
         
         for (NSString *itemPK in itemPKs) 
         {
@@ -50,13 +52,32 @@
         [listOfItemGroups addObject:newItemList];
     }
     
+#if DEBUG
+    NSLog(@"Combo Created: %@",[self description]);
+#endif
+    
     return self;
+}
+
+-(Combo *)initFromComboShallow:(Combo *)aCombo
+{
+    self = [super initFromMenuComponent:aCombo];
+    
+    associatedOrder = [aCombo associatedOrder];
+    listOfItemGroups = [aCombo listOfItemGroups];
+    listOfAssociatedItems = [[NSMutableArray alloc] initWithCapacity:0];
+    for (Item *anItem in [aCombo listOfAssociatedItems]) {
+        [listOfAssociatedItems addObject:anItem];
+    }
+    price = [[NSDecimalNumber alloc] initWithDecimal:[[aCombo price] decimalValue]];
+    return self;
+    
 }
 
 -(BOOL)evaluateForCombo:(Order *)anOrder
 {
     associatedOrder = anOrder;
-    Order *mutableOrder = [[Order alloc] initFromOrder:anOrder];
+    Order *mutableOrder = [[Order alloc] initFromOrderShallow:anOrder];
  
     [listOfAssociatedItems removeAllObjects];
     
@@ -66,7 +87,7 @@
         for (Item *comboItem in itemGroup)
         {
             for (Item *anItem in mutableOrder.itemList) {
-                if (anItem.name == comboItem.name) {
+                if ([anItem.name isEqual:comboItem.name]) {
                     qualifies = YES;
                     //To make sure we don't double-count.
                     [listOfAssociatedItems addObject:anItem];
@@ -128,6 +149,22 @@
     [encoder encodeObject:listOfItemGroups forKey:@"list_of_item_groups"];
     [encoder encodeObject:listOfAssociatedItems forKey:@"list_of_associated_items"];
     [encoder encodeObject:price forKey:@"price"];
+}
+
+-(NSString *)description
+{
+    NSMutableString *output = [[NSMutableString alloc] initWithCapacity:0];
+    [output appendFormat:@"Combo Name: %@\n", name];
+    int i = 1;
+    for (NSMutableArray *itemList in listOfItemGroups) {
+        [output appendFormat:@"    Item Group %i\n",i];
+        for (Item *anItem in itemList) {
+            [output appendFormat:@"        Name of item: %@\n",[anItem name]];
+        }
+        i++;
+    }
+    
+    return output;
 }
 
 @end

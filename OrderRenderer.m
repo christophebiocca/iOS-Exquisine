@@ -137,6 +137,8 @@
             
             [cell setItem:thingToDisplay];
             
+            [cell setIndentationLevel:0];
+            
             if (![[orderInfo listOfNonComboItems] containsObject:thingToDisplay])
             {
                 [cell setIndentationLevel:1];

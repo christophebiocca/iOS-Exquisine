@@ -132,7 +132,7 @@ NSString* ORDER_ITEMS_MODIFIED = @"CroutonLabs/OrderModified";
         for (Combo *aCombo in parentMenu.comboList) {
             if([aCombo evaluateForCombo:mutableOrder])
             {
-                [returnList addObject:aCombo];
+                [returnList addObject:[[Combo alloc] initFromComboShallow: aCombo]];
                 [mutableOrder removeListOfItems:[aCombo listOfAssociatedItems]];
             }
         }

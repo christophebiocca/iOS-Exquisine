@@ -17,6 +17,7 @@
 #import "FavoritesViewController.h"
 #import "OrderSummaryViewController.h"
 #import "GetLocations.h"
+#import "Reachability.h"
 
 @implementation MainPageViewController
 
@@ -26,16 +27,17 @@
     
     if (self) {
         [[self navigationItem] setTitle:@"Pita Factory"];
-        
-        internetActive = NO;
+        //this wont yet check make sure that the prod server is actually up, just that the hostname resolves.
+        //=/
+        networkChecker = [Reachability reachabilityWithHostname:(@"http://croutonlabs.com")];
 
+        [networkChecker startNotifier];
+        
         [GetMenu getMenuForRestaurant:RESTAURANT_ID
                               success:^(GetMenu* menuCall){
                                   theMenu = [menuCall menu];
-                                  internetActive = YES;
                               }
                               failure:^(GetMenu* menuCall, NSError* error){
-                                  internetActive = NO;
                                   NSLog(@"call %@ errored with %@", menuCall, error);
                               }];        
         
@@ -228,10 +230,8 @@
     [GetMenu getMenuForRestaurant:RESTAURANT_ID
                           success:^(GetMenu* menuCall){
                               theMenu = [menuCall menu];
-                              internetActive = YES;
                           }
                           failure:^(GetMenu* menuCall, NSError* error){
-                              internetActive = NO;
                               NSLog(@"call %@ errored with %@", menuCall, error);
                           }];    
     
@@ -328,18 +328,7 @@
 
 -(BOOL)hasServerConnection
 {
-    NSNetService *test = [[NSNetService alloc] init];
-    
-    [GetMenu getMenuForRestaurant:RESTAURANT_ID
-                          success:^(GetMenu* menuCall){
-                              theMenu = [menuCall menu];
-                              internetActive = YES;
-                          }
-                          failure:^(GetMenu* menuCall, NSError* error){
-                              internetActive = NO;
-                              NSLog(@"call %@ errored with %@", menuCall, error);
-                          }];
-    return internetActive;
+    return [networkChecker isReachable];
 }
 
 @end

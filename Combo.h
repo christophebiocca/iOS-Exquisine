@@ -22,8 +22,12 @@
 
 @property (retain) NSDecimalNumber *price;
 @property (retain) NSMutableArray *listOfAssociatedItems;
+@property (retain) NSMutableArray *listOfItemGroups;
+@property (retain) Order *associatedOrder;
 
 -(Combo *)initFromDataAndMenu:(NSDictionary *)inputData:(Menu *) associatedMenu;
+
+-(Combo *) initFromComboShallow:(Combo *) aCombo;
 
 -(BOOL) evaluateForCombo:(Order *) anOrder;
 
