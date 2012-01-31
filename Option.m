@@ -70,6 +70,14 @@
         }
     }
     
+    if (lowerBound > 0)
+    {
+        for (int i = 0; i < lowerBound; i++)
+        {
+            [self selectChoice:[choiceList objectAtIndex:i]];
+        }
+    }
+    
     propertiesChecksum = [inputData objectForKey:@"properties_checksum"];
     
     return self;

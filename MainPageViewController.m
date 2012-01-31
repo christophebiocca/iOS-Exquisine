@@ -328,6 +328,8 @@
 
 -(BOOL)hasServerConnection
 {
+    NSNetService *test = [[NSNetService alloc] init];
+    
     [GetMenu getMenuForRestaurant:RESTAURANT_ID
                           success:^(GetMenu* menuCall){
                               theMenu = [menuCall menu];

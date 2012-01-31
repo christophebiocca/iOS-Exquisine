@@ -14,7 +14,7 @@
 @class OrderView;
 @class OrderSummaryRenderer;
 
-@interface OrderSummaryViewController : UITableViewController <UITableViewDelegate, UIActionSheetDelegate,UIAlertViewDelegate>
+@interface OrderSummaryViewController : UITableViewController <UITableViewDelegate,UIAlertViewDelegate>
 {
     
     Order *orderInfo;
@@ -31,8 +31,6 @@
 @property (retain) id<OrderManagementDelegate> delegate;
 
 -(OrderSummaryViewController *)initializeWithOrder:(Order *) anOrder;
-
--(void) displayOptions;
 
 -(void) toggleWhetherFavorite;
 
