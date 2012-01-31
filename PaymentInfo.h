@@ -12,12 +12,14 @@
     @private
     NSString* cardnumber;
     NSString* cardholderName;
-    NSDate* expiration;
+    NSInteger expirationMonth;
+    NSInteger expirationYear;
 }
 
--(void)setCardnumber:(NSString*)number;
--(void)setCardholderName:(NSString*)name;
--(void)setExpiration:(NSDate*)expiration;
+-(void)setCardnumber:(NSString*)number withValidationMessage:(NSString**)retErr;
+-(void)setCardholderName:(NSString*)name withValidationMessage:(NSString**)retErr;
+-(void)setExpirationMonth:(NSInteger)month withValidationMessage:(NSString**)retErr;
+-(void)setExpirationYear:(NSInteger)year withValidationMessage:(NSString**)retErr;
 
 -(NSDictionary*)dictionaryRepresentation;
 

@@ -10,27 +10,35 @@
 
 @implementation PaymentInfo
 
--(void)setCardnumber:(NSString *)number{
+-(void)setCardnumber:(NSString *)number withValidationMessage:(NSString**)retErr{
     cardnumber = number;
+    NSCharacterSet* cardDivisers = [NSCharacterSet characterSetWithCharactersInString:@" -"];
+    for(NSString* block in [cardnumber componentsSeparatedByCharactersInSet:cardDivisers]){
+        for(NSString* number in [block componentsSeparatedByString:@""]){
+            NSLog(@"cc#: %@", number);
+        }
+    }
+    //*retErr = @"FAIL";
 }
 
--(void)setCardholderName:(NSString *)name{
+-(void)setCardholderName:(NSString *)name withValidationMessage:(NSString**)retErr{
     cardholderName = name;
 }
 
--(void)setExpiration:(NSDate *)expirationDate{
-    expiration = expirationDate;
+-(void)setExpirationMonth:(NSInteger)month withValidationMessage:(NSString**)retErr{
+    expirationMonth = month;
+}
+
+-(void)setExpirationYear:(NSInteger)year withValidationMessage:(NSString**)retErr{
+    expirationYear = year;
 }
 
 -(NSDictionary*)dictionaryRepresentation{
-    NSDateComponents* components = [[NSCalendar currentCalendar] 
-                                    components:NSMonthCalendarUnit | NSYearCalendarUnit 
-                                    fromDate:expiration];
     return [NSMutableDictionary dictionaryWithObjectsAndKeys:
             cardnumber, @"cardnumber",
             cardholderName, @"cardholder_name",
-            [components month], @"expiry_month",
-            [components year], @"expiry_year",
+            expirationMonth, @"expiry_month",
+            expirationYear, @"expiry_year",
             nil];
 }
 
