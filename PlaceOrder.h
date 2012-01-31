@@ -10,11 +10,12 @@
 
 @class Order;
 @class Location;
+@class PaymentInfo;
 
 @interface PlaceOrder : JSONAPICall {
     Order* order;
 }
 
-+(void)sendOrder:(Order*)order toLocation:(Location*)location;
++(void)sendOrder:(Order*)order toLocation:(Location*)location withPaymentInfo:(PaymentInfo*)paymentInfo;
 
 @end

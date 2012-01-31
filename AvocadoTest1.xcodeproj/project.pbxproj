@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		23082F5514D88513003964CE /* APICallFailureHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 23082F5214D88513003964CE /* APICallFailureHandler.m */; };
+		23082F5614D88513003964CE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 23082F5414D88513003964CE /* Reachability.m */; };
 		232C795414CDF5F100C3868D /* AlertPrompt.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C795314CDF5F100C3868D /* AlertPrompt.m */; };
 		232C795B14CF1A0900C3868D /* TunnelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C795A14CF1A0900C3868D /* TunnelViewController.m */; };
 		232C796514CF71AA00C3868D /* FavoritesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C796414CF71AA00C3868D /* FavoritesView.m */; };
@@ -87,9 +89,10 @@
 		D95B786F14D28A6900FC0F29 /* PlaceOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = D95B786E14D28A6900FC0F29 /* PlaceOrder.m */; };
 		D95B787414D2BE4B00FC0F29 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = D95B787314D2BE4B00FC0F29 /* Location.m */; };
 		D95B787714D2C4F800FC0F29 /* GetLocations.m in Sources */ = {isa = PBXBuildFile; fileRef = D95B787614D2C4F800FC0F29 /* GetLocations.m */; };
-		D95B787A14D3143100FC0F29 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = D95B787914D3143100FC0F29 /* Reachability.m */; };
-		D95B787E14D3148400FC0F29 /* APICallFailureHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = D95B787D14D3148400FC0F29 /* APICallFailureHandler.m */; };
 		D95B788014D318A300FC0F29 /* checkRelease.rb in Resources */ = {isa = PBXBuildFile; fileRef = D95B787F14D318A300FC0F29 /* checkRelease.rb */; };
+		D9768A6514D73EB300BBA467 /* PaymentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D9768A6214D73EB300BBA467 /* PaymentInfo.m */; };
+		D9768A6614D73EB300BBA467 /* PaymentInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9768A6414D73EB300BBA467 /* PaymentInfoViewController.m */; };
+		D9768A7E14D74AAD00BBA467 /* PaymentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9768A7D14D74AAD00BBA467 /* PaymentView.m */; };
 		D9AF662614D22C0A00632EA8 /* JSONAPICall.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AF662514D22C0A00632EA8 /* JSONAPICall.m */; };
 /* End PBXBuildFile section */
 
@@ -104,6 +107,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		23082F5114D88513003964CE /* APICallFailureHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APICallFailureHandler.h; sourceTree = "<group>"; };
+		23082F5214D88513003964CE /* APICallFailureHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APICallFailureHandler.m; sourceTree = "<group>"; };
+		23082F5314D88513003964CE /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		23082F5414D88513003964CE /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		232C795214CDF5F100C3868D /* AlertPrompt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertPrompt.h; sourceTree = "<group>"; };
 		232C795314CDF5F100C3868D /* AlertPrompt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertPrompt.m; sourceTree = "<group>"; };
 		232C795514CE061200C3868D /* OrderManagementDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderManagementDelegate.h; sourceTree = "<group>"; };
@@ -250,11 +257,13 @@
 		D95B787314D2BE4B00FC0F29 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
 		D95B787514D2C4F700FC0F29 /* GetLocations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetLocations.h; sourceTree = "<group>"; };
 		D95B787614D2C4F800FC0F29 /* GetLocations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetLocations.m; sourceTree = "<group>"; };
-		D95B787814D3143100FC0F29 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		D95B787914D3143100FC0F29 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
-		D95B787C14D3148400FC0F29 /* APICallFailureHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APICallFailureHandler.h; sourceTree = "<group>"; };
-		D95B787D14D3148400FC0F29 /* APICallFailureHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APICallFailureHandler.m; sourceTree = "<group>"; };
 		D95B787F14D318A300FC0F29 /* checkRelease.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = checkRelease.rb; path = ../checkRelease.rb; sourceTree = "<group>"; };
+		D9768A6114D73EB300BBA467 /* PaymentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentInfo.h; sourceTree = "<group>"; };
+		D9768A6214D73EB300BBA467 /* PaymentInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentInfo.m; sourceTree = "<group>"; };
+		D9768A6314D73EB300BBA467 /* PaymentInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentInfoViewController.h; sourceTree = "<group>"; };
+		D9768A6414D73EB300BBA467 /* PaymentInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentInfoViewController.m; sourceTree = "<group>"; };
+		D9768A7C14D74AAD00BBA467 /* PaymentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentView.h; sourceTree = "<group>"; };
+		D9768A7D14D74AAD00BBA467 /* PaymentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentView.m; sourceTree = "<group>"; };
 		D9AF662414D22C0A00632EA8 /* JSONAPICall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONAPICall.h; sourceTree = "<group>"; };
 		D9AF662514D22C0A00632EA8 /* JSONAPICall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONAPICall.m; sourceTree = "<group>"; };
 		D9AF662714D2308B00632EA8 /* APICallProtectedMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APICallProtectedMethods.h; sourceTree = "<group>"; };
@@ -288,6 +297,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		23082F4F14D884F1003964CE /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				23082F5114D88513003964CE /* APICallFailureHandler.h */,
+				23082F5214D88513003964CE /* APICallFailureHandler.m */,
+				23082F5314D88513003964CE /* Reachability.h */,
+				23082F5414D88513003964CE /* Reachability.m */,
+			);
+			name = Network;
+			sourceTree = "<group>";
+		};
 		232C795114CDF5AB00C3868D /* AlertPrompt */ = {
 			isa = PBXGroup;
 			children = (
@@ -360,6 +380,7 @@
 			children = (
 				23DA7A8314C64680008281DD /* MainPageViewController */,
 				232C796C14CF77CC00C3868D /* FavoritesViewController */,
+				D9768A6914D73ED800BBA467 /* PaymentViewController */,
 			);
 			name = OtherControllers;
 			sourceTree = "<group>";
@@ -415,10 +436,8 @@
 				238476F214D7577C00DE9270 /* SystemConfiguration.framework */,
 				238FC77814D35E6D007E175B /* Favorite Star.png */,
 				232C795114CDF5AB00C3868D /* AlertPrompt */,
-				23E7D87B14C9BA88006D6C13 /* behindButton.png */,
-				23DA7A9514C893F1008281DD /* green dot.png */,
-				D95B787B14D3143500FC0F29 /* Network */,
 				23DA7A8814C73D52008281DD /* API */,
+				23082F4F14D884F1003964CE /* Network */,
 				23AAD98714BF516700F88AA8 /* Global Helpers */,
 				2391EA7814BE3D44001BDC1B /* Model Structure */,
 				238FC77A14D364E5007E175B /* Cells */,
@@ -604,6 +623,7 @@
 			children = (
 				237EC00B14BE5842009D9268 /* MenuComposites */,
 				D95B787114D2BE3400FC0F29 /* Location */,
+				D9768A6814D73EBC00BBA467 /* Payment */,
 			);
 			name = "Model Structure";
 			sourceTree = "<group>";
@@ -906,6 +926,7 @@
 		23DA7A8114C6462C008281DD /* OtherViews */ = {
 			isa = PBXGroup;
 			children = (
+				D9768A7A14D74A8A00BBA467 /* PaymentInfoView */,
 				232C796214CF716800C3868D /* FavoritesView */,
 				23DA7A8214C64656008281DD /* MainPageView */,
 			);
@@ -992,15 +1013,31 @@
 			name = Location;
 			sourceTree = "<group>";
 		};
-		D95B787B14D3143500FC0F29 /* Network */ = {
+		D9768A6814D73EBC00BBA467 /* Payment */ = {
 			isa = PBXGroup;
 			children = (
-				D95B787814D3143100FC0F29 /* Reachability.h */,
-				D95B787914D3143100FC0F29 /* Reachability.m */,
-				D95B787C14D3148400FC0F29 /* APICallFailureHandler.h */,
-				D95B787D14D3148400FC0F29 /* APICallFailureHandler.m */,
+				D9768A6114D73EB300BBA467 /* PaymentInfo.h */,
+				D9768A6214D73EB300BBA467 /* PaymentInfo.m */,
 			);
-			name = Network;
+			name = Payment;
+			sourceTree = "<group>";
+		};
+		D9768A6914D73ED800BBA467 /* PaymentViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D9768A6314D73EB300BBA467 /* PaymentInfoViewController.h */,
+				D9768A6414D73EB300BBA467 /* PaymentInfoViewController.m */,
+			);
+			name = PaymentViewController;
+			sourceTree = "<group>";
+		};
+		D9768A7A14D74A8A00BBA467 /* PaymentInfoView */ = {
+			isa = PBXGroup;
+			children = (
+				D9768A7C14D74AAD00BBA467 /* PaymentView.h */,
+				D9768A7D14D74AAD00BBA467 /* PaymentView.m */,
+			);
+			name = PaymentInfoView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1172,14 +1209,17 @@
 				D95B786F14D28A6900FC0F29 /* PlaceOrder.m in Sources */,
 				D95B787414D2BE4B00FC0F29 /* Location.m in Sources */,
 				D95B787714D2C4F800FC0F29 /* GetLocations.m in Sources */,
-				D95B787A14D3143100FC0F29 /* Reachability.m in Sources */,
-				D95B787E14D3148400FC0F29 /* APICallFailureHandler.m in Sources */,
 				238FC77D14D3650F007E175B /* ItemMenuCell.m in Sources */,
 				238FC78014D36702007E175B /* itemOrderCell.m in Sources */,
 				238FC78514D36916007E175B /* MenuCell.m in Sources */,
 				238FC78914D372FC007E175B /* ChoiceCell.m in Sources */,
 				238FC78D14D37402007E175B /* ComboCell.m in Sources */,
 				238476F114D607A400DE9270 /* OrderCell.m in Sources */,
+				D9768A6514D73EB300BBA467 /* PaymentInfo.m in Sources */,
+				D9768A6614D73EB300BBA467 /* PaymentInfoViewController.m in Sources */,
+				D9768A7E14D74AAD00BBA467 /* PaymentView.m in Sources */,
+				23082F5514D88513003964CE /* APICallFailureHandler.m in Sources */,
+				23082F5614D88513003964CE /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
