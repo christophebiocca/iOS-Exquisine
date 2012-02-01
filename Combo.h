@@ -35,4 +35,6 @@
 
 -(void) setOrder:(Order *) anOrder;
 
+- (NSString *) descriptionWithIndent:(NSInteger) indentLevel;
+
 @end

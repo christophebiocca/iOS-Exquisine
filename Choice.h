@@ -36,4 +36,6 @@
 
 -(BOOL) isEffectivelySameAs:(Choice *) aChoice;
 
+- (NSString *) descriptionWithIndent:(NSInteger) indentLevel;
+
 @end

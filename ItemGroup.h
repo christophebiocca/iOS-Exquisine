@@ -35,4 +35,6 @@
 
 - (void) addMenu: (Menu *) aMenu;
 
+- (NSString *) descriptionWithIndent:(NSInteger) indentLevel;
+
 @end

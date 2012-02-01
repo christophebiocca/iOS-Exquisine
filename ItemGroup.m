@@ -91,5 +91,29 @@
     [encoder encodeObject:listOfItems forKey:@"list_of_items"];
 }
 
+- (NSString *) descriptionWithIndent:(NSInteger) indentLevel
+{    
+    NSMutableString *output = [NSMutableString stringWithString:[@"" stringByPaddingToLength:(indentLevel*4) withString:@" " startingAtIndex:0]];
+    
+    [output appendFormat:@"ItemGroup: %@:\n",name];
+    
+    for (Item *anItem in listOfItems) {
+        [output appendFormat:@"%@\n",[anItem descriptionWithIndent:(indentLevel + 1)]];
+    }
+    
+    return output;
+}
+
+-(NSString *)description{
+    
+    NSMutableString *output = [[NSMutableString alloc] initWithFormat:@"ItemGroup: %@:\n",name];
+    
+    for (Item *anItem in listOfItems) {
+        [output appendFormat:@"%@\n",[anItem descriptionWithIndent:1]];
+    }
+    
+    return output;
+}
+
 
 @end

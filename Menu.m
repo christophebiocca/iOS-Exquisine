@@ -168,4 +168,39 @@
     return output;
 }
 
+- (NSString *) descriptionWithIndent:(NSInteger) indentLevel
+{    
+    NSMutableString *output = [NSMutableString stringWithString:[@"" stringByPaddingToLength:(indentLevel*4) withString:@" " startingAtIndex:0]];
+    
+    [output appendFormat:@"Menu name: %@ with Submenus:\n",name];
+    
+    for (id thing in submenuList) {
+        if([thing isKindOfClass:[Menu class]])
+            [output appendFormat:@"%@\n",[thing descriptionWithIndent:(indentLevel + 1)]];
+    }
+    
+    //Make this correctly indented:
+    //[output appendString:@"Items:\n"];
+    
+    for (id thing in submenuList) {
+        if([thing isKindOfClass:[Item class]])
+            [output appendFormat:@"%@\n",[thing descriptionWithIndent:(indentLevel + 1)]];
+    }
+    
+    //Make this correctly indented:
+    //[output appendString:@"Combos:\n"];
+    
+    for (id thing in comboList) {
+        [output appendFormat:@"%@\n",[thing descriptionWithIndent:(indentLevel + 1)]];
+    }
+    
+    return output;
+}
+
+-(NSString *)description{
+    
+    return [self descriptionWithIndent:0];
+    
+}
+
 @end

@@ -39,5 +39,7 @@
 
 -(NSComparisonResult) nameSort:(Item *)anItem;
 
+- (NSString *) descriptionWithIndent:(NSInteger) indentLevel;
+
 @end
 

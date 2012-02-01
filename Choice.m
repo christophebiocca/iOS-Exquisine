@@ -8,6 +8,7 @@
 
 #import "Choice.h"
 #import "Option.h"
+#import "Utilities.h"
 
 @implementation Choice
 
@@ -35,12 +36,6 @@
     option = opt;
     propertiesChecksum = [inputData objectForKey:@"properties_checksum"];
     return self;
-}
-
--(NSString *)description{
-    
-    return [NSString stringWithFormat:@"%@ - %@", name, price];
-    
 }
 
 -(NSComparisonResult)comparePrice:(Choice*)other{
@@ -96,6 +91,20 @@
         return NO;
     
     return YES;
+}
+
+- (NSString *) descriptionWithIndent:(NSInteger) indentLevel
+{    
+    NSMutableString *output = [NSMutableString stringWithString:[@"" stringByPaddingToLength:(indentLevel*4) withString:@" " startingAtIndex:0]];
+    
+    [output appendFormat:@"%@ price: %@",name,[Utilities FormatToPrice:price]];
+    
+    return output;
+}
+
+-(NSString *)description
+{
+    return [NSString stringWithFormat:@"%@ price: %@",name,[Utilities FormatToPrice:price]];
 }
 
 @end
