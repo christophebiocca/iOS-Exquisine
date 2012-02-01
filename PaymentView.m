@@ -91,9 +91,13 @@ static UIColor* errorLabelColor;
         [cardnumberField setDelegate:self];
         [cardnumberField setRightViewMode:UITextFieldViewModeAlways];
         [self addSubview:cardnumberField];
-        expirationLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        [expirationLabel setText:@"Expiry Date"];
+        
+        expirationLabel = [PaymentView nameLabel:@"Expiry Date"];
         [self addSubview:expirationLabel];
+        
+        expirationErrorLabel = [PaymentView errorLabel];
+        [self addSubview:expirationErrorLabel];
+        
         expiration = [[UIPickerView alloc] initWithFrame:CGRectZero];
         [expiration setDelegate:self];
         [expiration setDataSource:self];
@@ -105,57 +109,50 @@ static UIColor* errorLabelColor;
 
 -(void)layoutSubviews{
     CGRect frame = [self bounds];
-    NSInteger adjusted = frame.size.width - 2*InterFieldPadding;
+    NSInteger rightLimit = frame.size.width - InterFieldPadding;
+    NSInteger adjustedWidth = frame.size.width - 2*InterFieldPadding;
+    __block NSInteger height = 0;
     
-    [topBar setFrame:(CGRect){
-        .size = {
-            .width = frame.size.width,
-            .height = UIToolbarHeight
-        }
-    }];
+    void (^layoutLabels)(UILabel*, UILabel*) = ^(UILabel* label, UILabel* errorLabel){
+        [label sizeToFit];
+        CGRect leftFrame = [label frame];
+        [errorLabel sizeToFit];
+        CGRect rightFrame = [errorLabel frame];
+        CGFloat maxHeight = MAX(leftFrame.size.height,rightFrame.size.height);
+        height += maxHeight;
+        leftFrame.origin.y = height - leftFrame.size.height;
+        leftFrame.origin.x = InterFieldPadding;
+        rightFrame.origin.y = height - rightFrame.size.height;
+        rightFrame.origin.x = rightLimit - rightFrame.size.width;
+        [label setFrame:leftFrame];
+        [errorLabel setFrame:rightFrame];
+        height += LabelFieldPadding;
+    };
     
-    [cardholderNameField setFrame:(CGRect){
-        .origin = {
-            .x = InterFieldPadding,
-            .y = InterFieldPadding + UIToolbarHeight
-        },
-        .size = {
-            .width = adjusted,
-            .height = TextFieldHeight
-        }
-    }];
-    [cardnumberField setFrame:(CGRect){
-        .origin = {
-            .x = InterFieldPadding,
-            .y = InterFieldPadding*2 + TextFieldHeight + UIToolbarHeight,
-        },
-        .size = {
-            .width = adjusted,
-            .height = TextFieldHeight
-        }
-    }];
-    [expirationLabel sizeToFit];
-    CGRect labelFrame = [expirationLabel frame];
-    [expirationLabel setFrame:(CGRect){
-        .origin = {
-            .x = InterFieldPadding,
-            .y = 3*InterFieldPadding + 2*TextFieldHeight + UIToolbarHeight
-        },
-        .size = {
-            .width = adjusted,
-            .height = labelFrame.size.height
-        }
-    }];
-    [expiration setFrame:(CGRect){
-        .origin = {
-            .x = InterFieldPadding,
-            .y = InterFieldPadding*3 + TextFieldHeight*2 + labelFrame.size.height + LabelFieldPadding + UIToolbarHeight
-        },
-        .size = {
-            .width = adjusted,
-            .height = 162
-        }
-    }];
+    void (^layoutWidget)(UIView*, NSInteger, BOOL)= ^(UIView* widget, NSInteger setHeight, BOOL fullWidth){
+        [widget setFrame:(CGRect){
+            .origin = {
+                .x = fullWidth ? 0 : InterFieldPadding,
+                .y = height
+            },
+            .size = {
+                .width = fullWidth ? frame.size.width : adjustedWidth,
+                .height = setHeight
+            }
+        }];
+        height += setHeight + InterFieldPadding;
+    };
+    
+    layoutWidget(topBar, UIToolbarHeight, YES);
+    
+    layoutLabels(cardholderNameLabel, cardholderNameErrorLabel);
+    layoutWidget(cardholderNameField, TextFieldHeight, NO);
+    
+    layoutLabels(cardnumberLabel, cardnumberErrorLabel);
+    layoutWidget(cardnumberField, TextFieldHeight, NO);
+    
+    layoutLabels(expirationLabel, expirationErrorLabel);
+    layoutWidget(expiration, 162, YES);
 }
 
 /*
@@ -167,9 +164,10 @@ static UIColor* errorLabelColor;
 }
 */
 
-+(void)setErrorMessage:(NSString*)message onErrorLabel:(UILabel*)label{
+-(void)setErrorMessage:(NSString*)message onErrorLabel:(UILabel*)label{
     if(message){
         [label setText:message];
+        [self setNeedsLayout];
     }
     [label setHidden:!message];
 }
@@ -186,28 +184,28 @@ static UIColor* errorLabelColor;
 -(NSString*)flushCardholderName{
     NSString* error = nil;
     [paymentInfo setCardholderName:[cardholderNameField text] withValidationMessage:&error];
-    [PaymentView setErrorMessage:error onErrorLabel:cardholderNameErrorLabel];
+    [self setErrorMessage:error onErrorLabel:cardholderNameErrorLabel];
     return error;
 }
 
 -(NSString*)flushCardnumber{
     NSString* error = nil;
     [paymentInfo setCardnumber:[cardnumberField text] withValidationMessage:&error];
-    [PaymentView setErrorMessage:error onErrorLabel:cardnumberErrorLabel];
+    [self setErrorMessage:error onErrorLabel:cardnumberErrorLabel];
     return error;
 }
 
 -(NSString*)flushExpirationMonth{
     NSString* error = nil;
     [paymentInfo setExpirationMonth:[self monthForRow:[expiration selectedRowInComponent:Month]] withValidationMessage:&error];
-    [PaymentView setErrorMessage:error onErrorLabel:expirationErrorLabel];
+    [self setErrorMessage:error onErrorLabel:expirationErrorLabel];
     return error;
 }
 
 -(NSString*)flushExpirationYear{
     NSString* error = nil;
     [paymentInfo setExpirationYear:[self yearForRow:[expiration selectedRowInComponent:Year]] withValidationMessage:&error];
-    [PaymentView setErrorMessage:error onErrorLabel:expirationErrorLabel];
+    [self setErrorMessage:error onErrorLabel:expirationErrorLabel];
     return error;
 }
 
