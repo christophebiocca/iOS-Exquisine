@@ -37,8 +37,8 @@
     return [NSMutableDictionary dictionaryWithObjectsAndKeys:
             cardnumber, @"cardnumber",
             cardholderName, @"cardholder_name",
-            expirationMonth, @"expiry_month",
-            expirationYear, @"expiry_year",
+            [NSNumber numberWithInt:expirationMonth], @"expiry_month",
+            [NSNumber numberWithInt:expirationYear], @"expiry_year",
             nil];
 }
 
