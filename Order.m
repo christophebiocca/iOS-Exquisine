@@ -14,6 +14,7 @@
 #import "Combo.h"
 #import "PlaceOrder.h"
 #import "PaymentInfo.h"
+#import "Utilities.h"
 
 NSString* ORDER_ITEMS_MODIFIED = @"CroutonLabs/OrderModified";
 
@@ -91,11 +92,6 @@ NSString* ORDER_ITEMS_MODIFIED = @"CroutonLabs/OrderModified";
     isFavorite = anOrder.isFavorite;
     
     return self;
-}
-
--(NSString *)description{
-        
-    return [NSString stringWithFormat:@"Items: \n%@" , [itemList description]];
 }
 
 -(void)addItem:(Item *)anItem{
@@ -259,6 +255,55 @@ NSString* ORDER_ITEMS_MODIFIED = @"CroutonLabs/OrderModified";
 -(void) reSort
 {
     [itemList sortUsingSelector:@selector(nameSort:)];
+}
+
+- (NSString *) descriptionWithIndent:(NSInteger) indentLevel
+{    
+    NSMutableString *output = [NSMutableString stringWithString:[@"" stringByPaddingToLength:(indentLevel*4) withString:@" " startingAtIndex:0]];
+    
+    [output appendFormat:@"Order name: \"%@\" with price: %@ and combos:\n",name,[Utilities FormatToPrice:[self subtotalPrice]]];
+    
+    for (Combo *aCombo in [self listOfCombos]) {
+        [output appendFormat:@"%@\n",[aCombo descriptionWithIndent:(indentLevel + 1)]];
+    }
+    
+    [output appendString:@"Non-combo items:\n"];
+    
+    for (Item *anItem in [self listOfNonComboItems]) {
+        [output appendFormat:@"%@\n",[anItem descriptionWithIndent:(indentLevel + 1)]];
+    }
+    
+    [output appendString:@"Full item list:\n"];
+    
+    for (Item *anItem in [self itemList]) {
+        [output appendFormat:@"%@\n",[anItem descriptionWithIndent:(indentLevel + 1)]];
+    }
+    
+    return output;
+}
+
+-(NSString *)description{
+    
+    NSMutableString *output = [[NSMutableString alloc] initWithFormat:@"Order name: \"%@\" with price: %@ and combos:\n",name,[Utilities FormatToPrice:[self subtotalPrice]]];
+    
+    for (Combo *aCombo in [self listOfCombos]) {
+        [output appendFormat:@"%@\n",[aCombo descriptionWithIndent:1]];
+    }
+    
+    [output appendString:@"Non-combo items:\n"];
+    
+    for (Item *anItem in [self listOfNonComboItems]) {
+        [output appendFormat:@"%@\n",[anItem descriptionWithIndent:1]];
+    }
+    
+    [output appendString:@"Full item list:\n"];
+    
+    for (Item *anItem in [self itemList]) {
+        [output appendFormat:@"%@\n",[anItem descriptionWithIndent:1]];
+    }
+    
+    return output;
+    
 }
 
 @end

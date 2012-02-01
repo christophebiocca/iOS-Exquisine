@@ -128,12 +128,24 @@
     [encoder encodeObject:price forKey:@"price"];
 }
 
+- (NSString *) descriptionWithIndent:(NSInteger) indentLevel
+{
+    NSMutableString *output = [NSMutableString stringWithString:[@"" stringByPaddingToLength:(indentLevel*4) withString:@" " startingAtIndex:0]];
+    
+    [output appendFormat:@"Combo Name: %@\n", name];
+    for (ItemGroup *itemGroup in listOfItemGroups) {
+        [output appendString:[itemGroup descriptionWithIndent:(indentLevel + 1)]];
+    }
+    return output;
+}
+
 -(NSString *)description
 {
     NSMutableString *output = [[NSMutableString alloc] initWithCapacity:0];
+    
     [output appendFormat:@"Combo Name: %@\n", name];
     for (ItemGroup *itemGroup in listOfItemGroups) {
-        [output appendFormat:@"    %@",itemGroup];
+        [output appendString:[itemGroup descriptionWithIndent:1]];
     }
     return output;
 }

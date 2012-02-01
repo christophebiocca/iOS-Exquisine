@@ -45,21 +45,28 @@
 
 -(void)displayOrderConfirmation
 {
+    if([orderInfo.totalPrice doubleValue] <= 0.0)
+    {
+        UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Oops" message:@"You havn't selected anything to purchase" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+        
+        [areYouSure show];
+        
+        return;
+    }
     
     if([delegate hasServerConnection])
     {
-        UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Are you sure?" message:[NSString stringWithFormat: @"Are you sure you'd like to make this purchase of %@?", [Utilities FormatToPrice:[orderInfo totalPrice]]] delegate:self cancelButtonTitle:@"Nope" otherButtonTitles:@"Awww Yeah!", nil];
+        UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Process Purchase?" message:[NSString stringWithFormat: @"Order confirmation:\nSubtotal: %@\nHST: %@\nGrand Total: %@\n\nIs this okay?", [Utilities FormatToPrice:[orderInfo subtotalPrice]],[Utilities FormatToPrice:[orderInfo taxPrice]],[Utilities FormatToPrice:[orderInfo totalPrice]]] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil];
         
         [areYouSure setTag:1];
         
         [areYouSure show];
+        return;
     }
-    else
-    {
-        UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Oops" message:@"You appear to have no connection to the internet." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+    
+    UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Oops" message:@"You appear to have no connection to the internet." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
 
-        [areYouSure show];
-    }
+    [areYouSure show];
 }
 
 -(void)promptUserForRename

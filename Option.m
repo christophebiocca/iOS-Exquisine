@@ -92,11 +92,7 @@
     return self;
 }
 
--(NSString *)description{
-    
-    return [NSString stringWithFormat:@"%@: %@", name, [self selectedChoices]];
-    
-}
+
 
 -(NSArray*)selectedFreeChoices{
     return [[selectedChoices sortedArrayUsingSelector:@selector(comparePrice:)] 
@@ -252,6 +248,31 @@
         }
     }
     return YES;
+}
+
+- (NSString *) descriptionWithIndent:(NSInteger) indentLevel
+{    
+    NSMutableString *output = [NSMutableString stringWithString:[@"" stringByPaddingToLength:(indentLevel*4) withString:@" " startingAtIndex:0]];
+    
+    [output appendFormat:@"option: %@ with choices:\n",name];
+    
+    for (Choice *aChoice in choiceList) {
+        [output appendFormat:@"%@\n",[aChoice descriptionWithIndent:(indentLevel + 1)]];
+    }
+    
+    return output;
+}
+
+-(NSString *)description{
+    
+    NSMutableString *output = [[NSMutableString alloc] initWithFormat:@"option: %@ with choices:\n",name];
+    
+    for (Choice *aChoice in choiceList) {
+        [output appendFormat:@"%@\n",[aChoice descriptionWithIndent:1]];
+    }
+    
+    return output;
+    
 }
 
 @end

@@ -63,4 +63,6 @@
 
 -(BOOL) isEffectivelySameAs:(Option *) anOption;
 
+- (NSString *) descriptionWithIndent:(NSInteger) indentLevel;
+
 @end

@@ -8,17 +8,13 @@
 
 #import "Item.h"
 #import "Option.h"
+#import "Utilities.h"
 
 @implementation Item
 
 @synthesize options;
 @synthesize basePrice;
 @synthesize propertiesChecksum;
-
--(NSString *)description
-{
-    return [NSString stringWithFormat:@"%@, %@, with options: %@", name, basePrice, options];
-}
 
 -(Item *)initFromItem:(Item *)anItem
 {
@@ -127,6 +123,31 @@
 -(NSComparisonResult)nameSort:(Item *)anItem
 {
     return [name compare:anItem.name];
+}
+
+- (NSString *) descriptionWithIndent:(NSInteger) indentLevel
+{    
+    NSMutableString *output = [NSMutableString stringWithString:[@"" stringByPaddingToLength:(indentLevel*4) withString:@" " startingAtIndex:0]];
+    
+    [output appendFormat:@"Item: %@ with price %@ and options:\n",name,[Utilities FormatToPrice:basePrice]];
+    
+    for (Option *anOption in options) {
+        [output appendFormat:@"%@\n",[anOption descriptionWithIndent:(indentLevel + 1)]];
+    }
+    
+    return output;
+}
+
+-(NSString *)description{
+    
+    NSMutableString *output = [[NSMutableString alloc] initWithFormat:@"Item: %@ with price %@ and options:\n",name,[Utilities FormatToPrice:basePrice]];
+    
+    for (Option *anOption in options) {
+        [output appendFormat:@"%@\n",[anOption descriptionWithIndent:1]];
+    }
+    
+    return output;
+    
 }
 
 @end
