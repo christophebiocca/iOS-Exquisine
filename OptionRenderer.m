@@ -30,6 +30,8 @@
 
 -(OptionRenderer *)initWithOption:(Option *)anOption
 {
+    self = [super initWithMenuComponent:anOption];
+    
     optionInfo = anOption;
     displayLists = [[NSMutableArray alloc] initWithCapacity:0];
     suffixList = [[NSMutableArray alloc] initWithCapacity:0];

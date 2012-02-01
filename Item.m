@@ -57,6 +57,7 @@
 
 -(Item *)init
 {
+    self = [super init];
     options = [[NSMutableArray alloc] initWithCapacity:0];
     return self;
 }

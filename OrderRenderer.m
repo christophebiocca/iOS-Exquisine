@@ -24,6 +24,8 @@
 -(OrderRenderer *)initWithOrderAndMenu:(Order *)anOrder:(Menu *) aMenu
 {
     
+    self = [super initWithMenuComponent:anOrder];
+    
     theMenu = aMenu;
     orderInfo = anOrder;
     

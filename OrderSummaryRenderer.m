@@ -43,6 +43,8 @@
 
 -(OrderSummaryRenderer *)initWithOrder:(Order *)anOrder
 {
+    self = [super init];
+    
     orderInfo = anOrder;
     displayLists = [[NSMutableArray alloc] initWithCapacity:0];
     suffixList = [[NSMutableArray alloc] initWithCapacity:0];

@@ -11,6 +11,8 @@
 #import "Item.h"
 #import "MenuCell.h"
 #import "ItemMenuCell.h"
+#import "Combo.h"
+#import "ComboCell.h"
 
 @implementation MenuRenderer
 
@@ -31,13 +33,17 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[menuInfo submenuList] count];
+    return ([[menuInfo submenuList] count] + [[menuInfo comboList] count]);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    id thingToDisplay = [[menuInfo submenuList] objectAtIndex:[indexPath row]];
+    NSMutableArray *displayList = [[NSMutableArray alloc] initWithArray:[menuInfo submenuList]];
+    
+    [displayList addObjectsFromArray:[menuInfo comboList]];
+    
+    id thingToDisplay = [displayList objectAtIndex:[indexPath row]];
     
     if ([thingToDisplay isKindOfClass:[Item class]]) {
         
@@ -64,6 +70,20 @@
         }
         
         [cell setMenu:thingToDisplay];
+        
+        return cell;
+    }
+    
+    if ([thingToDisplay isKindOfClass:[Combo class]]) {
+        
+        ComboCell *cell = [tableView dequeueReusableCellWithIdentifier:[ComboCell cellIdentifier]];
+        
+        if (cell == nil)
+        {
+            cell = [[ComboCell alloc] init];
+        }
+        
+        [cell setCombo:thingToDisplay];
         
         return cell;
     }

@@ -9,10 +9,13 @@
 #import "MenuComponentRenderer.h"
 @class Order;
 @class Combo;
-@interface ComboRenderer : MenuComponentRenderer
+@interface ComboRenderer : MenuComponentRenderer <UITableViewDataSource>
 {
     Combo *currentCombo;
+    Order *currentOrder;
 }
+
+-(ComboRenderer *) initFromComboAndOrder: (Combo *) aCombo:(Order *) anOrder;
 
 -(ComboRenderer *) initFromCombo: (Combo *) aCombo;
 

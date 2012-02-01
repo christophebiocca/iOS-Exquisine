@@ -11,18 +11,63 @@
 #import "Combo.h"
 #import "CellData.h"
 #import "ItemRenderer.h"
+#import "ItemGroup.h"
+#import "ItemGroupCell.h"
 
 @implementation ComboRenderer
 
+
+
+-(ComboRenderer *)initFromComboAndOrder:(Combo *)aCombo :(Order *)anOrder
+{
+    self = [super init];
+    
+    currentCombo = aCombo;
+    currentOrder = anOrder;
+    
+    [currentCombo evaluateForCombo:anOrder];
+    
+    return self;
+}
+
+
+//This initializer is fine for use with produceRenderList, but it is not sufficient for
+//pushing a ComboViewController. 
+
+//I don't like that fact, we can fix it later, but that's how it is for now.
 -(ComboRenderer *)initFromCombo:(Combo *)aCombo
 {
     self = [super init];
     
     currentCombo = aCombo;
+    currentOrder = aCombo.associatedOrder;
     
     return self;
 }
 
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    ItemGroup *thingToDisplay = [[currentCombo listOfItemGroups] objectAtIndex:[indexPath row]];
+    
+    ItemGroupCell *cell = [tableView dequeueReusableCellWithIdentifier:[ItemGroupCell cellIdentifier]];
+    
+    if (cell == nil)
+    {
+        cell = [[ItemGroupCell alloc] init];
+    }
+    
+    [cell setItemGroup:thingToDisplay];
+    
+    return cell;
+    
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [[currentCombo listOfItemGroups] count];
+}
 
 //This puppy needs to return a list of things that respond to configureCell such that the group is representative
 //of this combo and all involved items.

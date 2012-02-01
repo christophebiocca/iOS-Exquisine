@@ -10,6 +10,7 @@
 #import "Item.h"
 #import "Order.h"
 #import "Menu.h"
+#import "ItemGroup.h"
 
 @implementation Combo
 
@@ -30,26 +31,7 @@
     listOfItemGroups = [[NSMutableArray alloc] initWithCapacity:0];
     
     for (NSDictionary *componentInfo in [inputData objectForKey:@"components"]) {
-        
-        NSMutableArray *newItemList = [[NSMutableArray alloc] initWithCapacity:0];
-        
-        NSMutableArray *itemPKs = [componentInfo objectForKey:@"items"];
-        NSMutableArray *menuPKs = [componentInfo objectForKey:@"menus"];
-        
-        for (NSString *itemPK in itemPKs) 
-        {
-            NSInteger intItemPK = [itemPK intValue];
-            Item *itemToAdd = [associatedMenu dereferenceItemPK:intItemPK];
-            [newItemList addObject:itemToAdd];
-        }
-        
-        for (NSString *menuPK in menuPKs)
-        {
-            Menu *menuForPK = [associatedMenu dereferenceMenuPK:[menuPK intValue]];
-            [newItemList addObjectsFromArray:[menuForPK flatItemList]];
-        }
-        
-        [listOfItemGroups addObject:newItemList];
+        [listOfItemGroups addObject:[[ItemGroup alloc] initWithDataAndParentMenu:componentInfo :associatedMenu]];
     }
     
 #if DEBUG
@@ -81,26 +63,21 @@
  
     [listOfAssociatedItems removeAllObjects];
     
-    for (NSMutableArray *itemGroup in listOfItemGroups) 
+    for (ItemGroup *itemGroup in listOfItemGroups) 
     {
         BOOL qualifies = NO;
-        for (Item *comboItem in itemGroup)
-        {
-            for (Item *anItem in mutableOrder.itemList) {
-                if ([anItem.name isEqual:comboItem.name]) {
-                    qualifies = YES;
-                    //To make sure we don't double-count.
-                    [listOfAssociatedItems addObject:anItem];
-                    [mutableOrder.itemList removeObject:anItem];
-                    break;
-                }
-                
+        
+        for (Item *anItem in [mutableOrder itemList]) {
+            if([itemGroup containsItem:anItem])
+            {
+                qualifies = YES;
+                [listOfAssociatedItems addObject:anItem];
+                [mutableOrder removeItem:anItem];
             }
         }
-        if (!qualifies)
-        {
+        
+        if(!qualifies)
             return NO;
-        }
     }
     //If it actually makes it through each item group and qualifies for each, then we're good.
     return YES;
@@ -155,15 +132,9 @@
 {
     NSMutableString *output = [[NSMutableString alloc] initWithCapacity:0];
     [output appendFormat:@"Combo Name: %@\n", name];
-    int i = 1;
-    for (NSMutableArray *itemList in listOfItemGroups) {
-        [output appendFormat:@"    Item Group %i\n",i];
-        for (Item *anItem in itemList) {
-            [output appendFormat:@"        Name of item: %@\n",[anItem name]];
-        }
-        i++;
+    for (ItemGroup *itemGroup in listOfItemGroups) {
+        [output appendFormat:@"    %@",itemGroup];
     }
-    
     return output;
 }
 

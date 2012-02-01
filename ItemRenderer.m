@@ -20,6 +20,8 @@
 
 -(ItemRenderer *)initWithItem:(Item *)anItem
 {
+    self = [super initWithMenuComponent:anItem];
+    
     itemInfo = anItem;
     
     CellData *aCell = nil;

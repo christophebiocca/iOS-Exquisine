@@ -84,6 +84,7 @@
 }
 
 -(Option *)init{
+    self = [super init];
     
     choiceList = [[NSMutableArray alloc] initWithCapacity:0];
     selectedChoices = [[NSMutableArray alloc] initWithCapacity:0];

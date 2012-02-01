@@ -1,33 +1,26 @@
 //
-//  MenuViewController.m
+//  ComboViewController.m
 //  AvocadoTest1
 //
-//  Created by Jake on 12-01-17.
+//  Created by Jake on 12-01-31.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "MenuViewController.h"
-#import "OrderViewController.h"
-#import "MenuRenderer.h"
-#import "Item.h"
-#import "Order.h"
-#import "Menu.h"
-#import "MenuView.h"
-#import "ItemViewController.h"
-#import "Combo.h"
 #import "ComboViewController.h"
+#import "ComboView.h"
+#import "ComboRenderer.h"
+#import "Combo.h"
 
-@implementation MenuViewController
+@implementation ComboViewController
 
-@synthesize menuInfo;
+@synthesize comboInfo;
 
--(MenuViewController *)initializeWithMenuAndOrder:(Menu *) aMenu:(Order *) anOrder
+-(ComboViewController *)initializeWithComboAndOrder:(Combo *)aCombo :(Order *)anOrder
 {
-    
     orderInfo = anOrder;
-    menuInfo = aMenu;
-    menuRenderer = [[MenuRenderer alloc] initWithMenu:menuInfo];
-    [[self navigationItem] setTitle:menuInfo.name];
+    comboInfo = aCombo;
+    comboRenderer = [[ComboRenderer alloc] initFromComboAndOrder:aCombo:anOrder];  
+    [[self navigationItem] setTitle:comboInfo.name];
     
     return self;
 }
@@ -38,6 +31,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    /*
     [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
     
     NSMutableArray *displayList = [[NSMutableArray alloc] initWithArray:[menuInfo submenuList]];
@@ -45,7 +39,7 @@
     [displayList addObjectsFromArray:[menuInfo comboList]];
     
     id submenuThing = [displayList objectAtIndex:[indexPath row]];
-        
+    
     if([submenuThing isKindOfClass:[Item class]])
     {
         
@@ -71,7 +65,7 @@
         
         [[self navigationController] pushViewController:newController animated:YES];
         
-    }
+    }*/
 }
 
 -(void)tableView:(UITableView *) tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *) indexPath
@@ -94,11 +88,11 @@
 
 - (void) loadView
 {
-    menuView = [[MenuView alloc] init];
-    [[menuView menuTable] setDelegate:self];
-    [[menuView menuTable] setDataSource:menuRenderer];
+    comboView = [[ComboView alloc] init];
+    [[comboView comboTable] setDelegate:self];
+    [[comboView comboTable] setDataSource:comboRenderer];
     
-    [self setView:menuView];
+    [self setView:comboView];
 }
 
 - (void)viewDidLoad
@@ -108,7 +102,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [[menuView menuTable] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [[comboView comboTable] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 - (void)viewDidUnload

@@ -16,6 +16,7 @@
 
 -(Menu *)init
 {
+    self = [super init];
     parentMenu = nil;
     submenuList = [[NSMutableArray alloc] initWithCapacity:0];
     return self;
