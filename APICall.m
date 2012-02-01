@@ -33,7 +33,7 @@ static NSURL* loginURL;
 static NSURL* serverURL;
 
 +(void)initialize{
-    NSString* serverString = @"";
+    NSString* serverString;
     
 #if DEBUG
     serverString = @"http://localhost:8000";
