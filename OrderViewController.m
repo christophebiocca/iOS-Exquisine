@@ -100,6 +100,7 @@
         if (buttonIndex == 1)
         {
             [delegate submitOrderForController:self];
+            [orderInfo setStatus:@"Transmitting"];
             [self popToMainPage];
         }
     }
@@ -201,6 +202,8 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
+    [[orderView orderTable] scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
     [[orderView priceDisplayButton] setTitle:[NSString stringWithFormat:@"%@%@",@"Subtotal: ",[Utilities FormatToPrice:[orderInfo subtotalPrice]] ]];
     [orderRenderer refreshOrderList];
     [[orderView orderTable] reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
