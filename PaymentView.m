@@ -270,6 +270,11 @@ static UIColor* errorLabelColor;
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
     NSString* error = nil;
+    for(UITextField* textfield in [NSArray arrayWithObjects:cardholderNameField, cardnumberField, nil]){
+        if([textfield isFirstResponder]){
+            [textfield resignFirstResponder];
+        }
+    }
     switch (component) {
         case Year:
             [paymentInfo setExpirationYear:[self yearForRow:row] withValidationMessage:&error];
