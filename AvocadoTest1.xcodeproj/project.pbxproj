@@ -9,9 +9,9 @@
 /* Begin PBXBuildFile section */
 		23082F5514D88513003964CE /* APICallFailureHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 23082F5214D88513003964CE /* APICallFailureHandler.m */; };
 		23082F5614D88513003964CE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 23082F5414D88513003964CE /* Reachability.m */; };
-		23082F5814D88B7D003964CE /* pfLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 23082F5714D88B7D003964CE /* pfLogo@2x.png */; };
 		23082F5C14D8968F003964CE /* ComboViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23082F5B14D8968F003964CE /* ComboViewController.m */; };
 		23082F6114D897D1003964CE /* ComboView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23082F6014D897D1003964CE /* ComboView.m */; };
+		2329BB2E14D9A8DD008E505F /* pfLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2329BB2D14D9A8DD008E505F /* pfLogo@2x.png */; };
 		232C795414CDF5F100C3868D /* AlertPrompt.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C795314CDF5F100C3868D /* AlertPrompt.m */; };
 		232C795B14CF1A0900C3868D /* TunnelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C795A14CF1A0900C3868D /* TunnelViewController.m */; };
 		232C796514CF71AA00C3868D /* FavoritesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C796414CF71AA00C3868D /* FavoritesView.m */; };
@@ -112,11 +112,11 @@
 		23082F5214D88513003964CE /* APICallFailureHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APICallFailureHandler.m; sourceTree = "<group>"; };
 		23082F5314D88513003964CE /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		23082F5414D88513003964CE /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
-		23082F5714D88B7D003964CE /* pfLogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pfLogo@2x.png"; path = "../../../Downloads/pfLogo@2x.png"; sourceTree = "<group>"; };
 		23082F5A14D8968F003964CE /* ComboViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComboViewController.h; sourceTree = "<group>"; };
 		23082F5B14D8968F003964CE /* ComboViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComboViewController.m; sourceTree = "<group>"; };
 		23082F5F14D897D1003964CE /* ComboView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComboView.h; sourceTree = "<group>"; };
 		23082F6014D897D1003964CE /* ComboView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComboView.m; sourceTree = "<group>"; };
+		2329BB2D14D9A8DD008E505F /* pfLogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pfLogo@2x.png"; sourceTree = "<group>"; };
 		232C795214CDF5F100C3868D /* AlertPrompt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertPrompt.h; sourceTree = "<group>"; };
 		232C795314CDF5F100C3868D /* AlertPrompt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertPrompt.m; sourceTree = "<group>"; };
 		232C795514CE061200C3868D /* OrderManagementDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderManagementDelegate.h; sourceTree = "<group>"; };
@@ -1021,7 +1021,7 @@
 		38D4132C14D3321C00031B60 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				23082F5714D88B7D003964CE /* pfLogo@2x.png */,
+				2329BB2D14D9A8DD008E505F /* pfLogo@2x.png */,
 				38D4132E14D3324200031B60 /* pfLogo.png */,
 				23E7D87B14C9BA88006D6C13 /* behindButton.png */,
 				238FC77814D35E6D007E175B /* Favorite Star.png */,
@@ -1153,7 +1153,7 @@
 				238FC77914D35E6D007E175B /* Favorite Star.png in Resources */,
 				38D4133014D3324200031B60 /* pfLogo.png in Resources */,
 				D95B788014D318A300FC0F29 /* checkRelease.rb in Resources */,
-				23082F5814D88B7D003964CE /* pfLogo@2x.png in Resources */,
+				2329BB2E14D9A8DD008E505F /* pfLogo@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
