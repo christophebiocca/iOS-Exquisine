@@ -7,6 +7,7 @@
 //
 
 #import "PaymentView.h"
+#import "PaymentViewDelegate.h"
 #import "PaymentInfo.h"
 
 #define UIToolbarHeight 44
@@ -16,15 +17,43 @@
 
 @implementation PaymentView
 
-@synthesize done, cancel, paymentInfo;
+@synthesize paymentInfo, delegate;
+
+typedef enum PickerSections{
+    Month,
+    Year,
+    NumberOfPickerSections
+} PickerSections;
+
+static UIColor* errorLabelColor;
+
++(void)initialize{
+    if(!errorLabelColor){
+        errorLabelColor = [UIColor colorWithRed:0.6 green:0.2 blue:0.2 alpha:1];
+    }
+}
+
++(UILabel*)nameLabel:(NSString*)text{
+    UILabel* label = [[UILabel alloc] initWithFrame:CGRectZero];
+    [label setText:text];
+    return label;
+}
+
++(UILabel*)errorLabel{
+    UILabel* errorLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    [errorLabel setFont:[UIFont systemFontOfSize:12]];
+    [errorLabel setTextColor:errorLabelColor];
+    [errorLabel setHidden:YES];
+    return errorLabel;
+}
 
 - (id)init
 {
     self = [super initWithFrame:CGRectZero];
     if (self) {
         [self setBackgroundColor:[UIColor whiteColor]];
-        done = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:nil action:nil];
-        cancel = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:nil action:nil];
+        done = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
+        cancel = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelled)];
         UIBarItem* flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace 
                                                                                  target:nil 
                                                                                  action:nil];
@@ -32,6 +61,13 @@
         topBar = [[UIToolbar alloc] initWithFrame:CGRectZero];
         [topBar setItems:[NSArray arrayWithObjects:cancel, flexibleSpace, done, nil]];
         [self addSubview:topBar];
+        
+        cardholderNameLabel = [PaymentView nameLabel:@"Card Holder Name"];
+        [self addSubview:cardholderNameLabel];
+        
+        cardholderNameErrorLabel = [PaymentView errorLabel];
+        [self addSubview:cardholderNameErrorLabel];
+        
         cardholderNameField = [[UITextField alloc] initWithFrame:CGRectZero];
         [cardholderNameField setBorderStyle:UITextBorderStyleRoundedRect];
         [cardholderNameField setEnablesReturnKeyAutomatically:YES];
@@ -39,6 +75,13 @@
         [cardholderNameField setPlaceholder:@"Card Holder Name"];
         [cardholderNameField setDelegate:self];
         [self addSubview:cardholderNameField];
+        
+        cardnumberLabel = [PaymentView nameLabel:@"Card number"];
+        [self addSubview:cardnumberLabel];
+        
+        cardnumberErrorLabel = [PaymentView errorLabel];
+        [self addSubview:cardnumberErrorLabel];
+        
         cardnumberField = [[UITextField alloc] initWithFrame:CGRectZero];
         [cardnumberField setBorderStyle:UITextBorderStyleRoundedRect];
         [cardnumberField setEnablesReturnKeyAutomatically:YES];
@@ -124,41 +167,70 @@
 }
 */
 
++(void)setErrorMessage:(NSString*)message onErrorLabel:(UILabel*)label{
+    if(message){
+        [label setText:message];
+    }
+    [label setHidden:!message];
+}
+
+-(NSInteger)monthForRow:(NSInteger)row{
+    return row + 1;
+}
+
+-(NSInteger)yearForRow:(NSInteger)row{
+    NSInteger currentYear = [[[NSCalendar currentCalendar] components:NSYearCalendarUnit fromDate:[NSDate new]] year];
+    return currentYear + row;
+}
+
+-(NSString*)flushCardholderName{
+    NSString* error = nil;
+    [paymentInfo setCardholderName:[cardholderNameField text] withValidationMessage:&error];
+    [PaymentView setErrorMessage:error onErrorLabel:cardholderNameErrorLabel];
+    return error;
+}
+
+-(NSString*)flushCardnumber{
+    NSString* error = nil;
+    [paymentInfo setCardnumber:[cardnumberField text] withValidationMessage:&error];
+    [PaymentView setErrorMessage:error onErrorLabel:cardnumberErrorLabel];
+    return error;
+}
+
+-(NSString*)flushExpirationMonth{
+    NSString* error = nil;
+    [paymentInfo setExpirationMonth:[self monthForRow:[expiration selectedRowInComponent:Month]] withValidationMessage:&error];
+    [PaymentView setErrorMessage:error onErrorLabel:expirationErrorLabel];
+    return error;
+}
+
+-(NSString*)flushExpirationYear{
+    NSString* error = nil;
+    [paymentInfo setExpirationYear:[self yearForRow:[expiration selectedRowInComponent:Year]] withValidationMessage:&error];
+    [PaymentView setErrorMessage:error onErrorLabel:expirationErrorLabel];
+    return error;
+}
+
 #pragma mark UITextFieldDelegate    
 
 -(BOOL)textFieldShouldReturn:(UITextField*)textField{
     if(textField == cardholderNameField){
-        [cardnumberField becomeFirstResponder];
-        return YES;
+        if(![self flushCardholderName]){
+            [cardnumberField becomeFirstResponder];
+            return YES;
+        }
     } else if(textField == cardnumberField) {
-        NSString* errorMessage = nil;
-        [paymentInfo setCardnumber:[cardnumberField text] withValidationMessage:&errorMessage];
-        if(errorMessage){
-            UILabel* errorLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-            [errorLabel setText:errorMessage];
-            [errorLabel sizeToFit];
-            [cardnumberField setRightView:errorLabel];
-            return NO;
-        }
-        if([[cardholderNameField text] length]){
+        if(![self flushCardnumber]){
             [cardnumberField resignFirstResponder];
-        } else {
-            [cardholderNameField becomeFirstResponder];
+            return YES;
         }
-        return YES;
     } else {
         NSAssert(NO, @"Got a message from a random text field!");
-        return NO;
     }
+    return NO;
 }
 
 #pragma mark UIPickerDataSource
-
-typedef enum PickerSections{
-    Month,
-    Year,
-    NumberOfPickerSections
-} PickerSections;
 
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
     return NumberOfPickerSections;
@@ -177,15 +249,6 @@ typedef enum PickerSections{
 }
 
 #pragma mark UIPickerViewDelegate
-
--(NSInteger)monthForRow:(NSInteger)row{
-    return row + 1;
-}
-
--(NSInteger)yearForRow:(NSInteger)row{
-    NSInteger currentYear = [[[NSCalendar currentCalendar] components:NSYearCalendarUnit fromDate:[NSDate new]] year];
-    return currentYear + row;
-}
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
     switch (component) {
@@ -222,6 +285,21 @@ typedef enum PickerSections{
     } else {
         [expirationLabel setText:@"Expiry Date"];
     }
+}
+
+#pragma mark buttons
+
+-(void)done{
+    if(![self flushCardholderName] &&
+       ![self flushCardnumber] &&
+       ![self flushExpirationYear] &&
+       ![self flushExpirationMonth]){
+        [delegate paymentDone];
+    }
+}
+
+-(void)cancelled{
+    [delegate paymentCancelled];
 }
 
 @end

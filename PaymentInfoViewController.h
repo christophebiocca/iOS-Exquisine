@@ -6,10 +6,12 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
+#import "PaymentViewDelegate.h"
+
 @class PaymentInfo;
 @class PaymentView;
 
-@interface PaymentInfoViewController : UIViewController{
+@interface PaymentInfoViewController : UIViewController<PaymentViewDelegate>{
     PaymentView* paymentView;
     void(^completionBlock)(PaymentInfo*);
     void(^cancelledBlock)();

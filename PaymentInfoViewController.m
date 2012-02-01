@@ -44,19 +44,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIBarButtonItem* done = [paymentView done];
-    [done setTarget:self];
-    [done setAction:@selector(doneEntering)];
-    UIBarButtonItem* cancel = [paymentView cancel];
-    [cancel setTarget:self];
-    [cancel setAction:@selector(cancelled)];
+    [paymentView setDelegate:self];
 }
 
--(void)doneEntering{
+-(void)paymentDone{
     completionBlock([paymentView paymentInfo]);
 }
 
--(void)cancelled{
+-(void)paymentCancelled{
     cancelledBlock();
 }
 
