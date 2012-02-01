@@ -13,9 +13,11 @@
 @interface ComboCell : UITableViewCell
 {
     Combo *combo;
+    NSString *style;
 }
 
 @property (nonatomic,retain) Combo *combo;
+@property (nonatomic,retain) NSString *style;
 
 -(id)init;
 

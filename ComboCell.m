@@ -13,6 +13,7 @@
 @implementation ComboCell
 
 @synthesize combo;
+@synthesize style;
 
 +(NSString *)cellIdentifier{
     return @"ComboCell";
@@ -25,6 +26,8 @@
         
     }
     return self;
+    style = @"plain";
+    combo = [[Combo alloc] init];
 }
 
 -(void)setCombo:(Combo*)theCombo{
@@ -40,6 +43,48 @@
     [[self textLabel] setText:[combo name]];
     [[self detailTextLabel] setText:[Utilities FormatToPrice:[combo price]]];
     
+    if( [style isEqualToString:@"plain"])
+    {
+        [self setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
+        [self setBackgroundColor:[UIColor whiteColor]];
+    }
+    else if ( [style isEqualToString:@"fancy"])
+    {
+        if([combo satisfied])
+        {
+            [self setAccessoryType:UITableViewCellAccessoryCheckmark];
+            [self setBackgroundColor:[UIColor colorWithRed:0.6f green:0.9f blue:0.6f alpha:1.0f]];
+        }
+        else
+        {
+            [self setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
+            [self setBackgroundColor:[UIColor whiteColor]];
+        }
+    }
+    
+}
+
+-(void)setStyle:(NSString *)aStyle
+{
+    style = aStyle;
+    if( [style isEqualToString:@"plain"])
+    {
+        [self setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
+        [self setBackgroundColor:[UIColor whiteColor]];
+    }
+    else if ( [style isEqualToString:@"fancy"])
+    {
+        if([combo satisfied])
+        {
+            [self setAccessoryType:UITableViewCellAccessoryCheckmark];
+            [self setBackgroundColor:[UIColor colorWithRed:0.6f green:0.9f blue:0.6f alpha:1.0f]];
+        }
+        else
+        {
+            [self setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
+            [self setBackgroundColor:[UIColor whiteColor]];
+        }
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

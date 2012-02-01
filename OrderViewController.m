@@ -33,7 +33,7 @@
     orderRenderer = [[OrderRenderer alloc] initWithOrderAndMenu:orderInfo:menuInfo];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orderAltered) name:ORDER_ITEMS_MODIFIED object:orderInfo];
     
-    [[self navigationItem] setTitle:@"Select Items"];
+    [[self navigationItem] setTitle:@"Add Items"];
     return self;
 }
 
@@ -114,7 +114,7 @@
         }
     }
     
-    if ([alertView tag] == 3) // Order Rename
+    if ([alertView tag] == 3) // Delete from favorites
     {
         if (buttonIndex == 1)
         {
@@ -222,7 +222,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if ( [indexPath section] == 1)
+    if ( [indexPath section] == 0)
     {
         return 28.0f;
     }
@@ -294,8 +294,20 @@
 
 -(void)orderAltered
 {
+    
     [[orderView priceDisplayButton] setTitle:[NSString stringWithFormat:@"%@%@",@"Subtotal: ",[Utilities FormatToPrice:[orderInfo subtotalPrice]] ]];
     
+    [orderRenderer refreshOrderList];
+    [[orderView orderTable] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+    if([orderInfo isFavorite])
+    {
+        [[orderView favoriteButton] setTintColor:[UIColor yellowColor]];
+    }
+    else
+    {
+        [[orderView favoriteButton] setTintColor:[UIColor whiteColor]];
+    }
+
     if([[orderInfo itemList] count] == 0)
     {
         [self exitEditingMode];

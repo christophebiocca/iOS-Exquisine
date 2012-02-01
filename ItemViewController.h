@@ -28,4 +28,6 @@
 
 -(void) addThisItemToOrder;
 
+-(void) itemAltered;
+
 @end

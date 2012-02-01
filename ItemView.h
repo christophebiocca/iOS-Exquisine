@@ -13,9 +13,11 @@
 {    
     UITableView* itemTable;
     UIToolbar* itemToolBar;
+    UIBarButtonItem *priceButton;
 }
 
 @property(readonly)UITableView* itemTable;    
 @property(readonly)UIToolbar* itemToolBar;
+@property (retain) UIBarButtonItem *priceButton;
 
 @end

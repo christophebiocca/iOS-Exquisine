@@ -37,4 +37,6 @@
 
 - (NSString *) descriptionWithIndent:(NSInteger) indentLevel;
 
+-(BOOL) satisfied;
+
 @end

@@ -12,6 +12,8 @@
 
 @implementation Item
 
+NSString* ITEM_MODIFIED = @"CroutonLabs/ItemModified";
+
 @synthesize options;
 @synthesize basePrice;
 @synthesize propertiesChecksum;
@@ -25,6 +27,7 @@
     
     for (Option *currentOption in anItem.options) {
         Option *anOption = [[Option alloc] initFromOption:currentOption];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(optionAltered) name:OPTION_MODIFIED object:anOption];
         [options addObject:anOption];
     }
     
@@ -45,6 +48,9 @@
     
     for (NSDictionary *option in [inputData objectForKey:@"all_options"]) {
         Option *newOption = [[Option alloc] initFromData:option];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(optionAltered) name:OPTION_MODIFIED object:newOption];
+        
         [options addObject:newOption];
     }
     
@@ -61,6 +67,7 @@
 -(void)addOption:(Option *)anOption
 {
     [options addObject:anOption];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(optionAltered) name:OPTION_MODIFIED object:anOption];
 }
 
 -(NSDecimalNumber*)totalPrice
@@ -148,6 +155,11 @@
     
     return output;
     
+}
+
+-(void) optionAltered
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:ITEM_MODIFIED object:self];
 }
 
 @end

@@ -12,6 +12,7 @@
 
 @synthesize itemTable;
 @synthesize itemToolBar;
+@synthesize priceButton;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -19,6 +20,12 @@
     if (self) {
         itemTable = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
         itemToolBar = [[UIToolbar alloc] init];
+        
+        UIBarButtonItem *spacer1 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+        UIBarButtonItem *spacer2 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+        priceButton = [[UIBarButtonItem alloc] initWithTitle:@"Item price:" style:UIBarButtonItemStylePlain target:self action:nil];
+        
+        [itemToolBar setItems:[NSArray arrayWithObjects:spacer1, priceButton,spacer2,nil]];
         
         [self addSubview:itemToolBar];
         [self addSubview:itemTable];

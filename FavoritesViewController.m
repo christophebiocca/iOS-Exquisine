@@ -11,6 +11,7 @@
 #import "FavoritesRenderer.h"
 #import "OrderViewController.h"
 #import "Menu.h"
+#import "Combo.h"
 
 @implementation FavoritesViewController
 
@@ -42,7 +43,17 @@
     [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
     
     if ([indexPath row] < [favoritesList count]) {
-        OrderViewController *newOrderViewController = [[OrderViewController alloc] initializeWithMenuAndOrder:currentMenu :[favoritesList objectAtIndex:[indexPath row]]];
+        Order *orderToPush = [favoritesList objectAtIndex:[indexPath row]];
+        
+        //This ensures that the combos are displayed correctly so that they know whether they should
+        //be enabled or not
+        for (Combo *eachCombo in [currentMenu comboList]) {
+            [eachCombo evaluateForCombo:orderToPush];
+        }
+        
+        OrderViewController *newOrderViewController = [[OrderViewController alloc] initializeWithMenuAndOrder:currentMenu :orderToPush];
+        
+        
         
         [newOrderViewController setDelegate:self];
         

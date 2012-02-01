@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "MenuComponent.h"
+
+extern NSString* OPTION_MODIFIED;
+
 @class Choice;
 
 @interface Option : MenuComponent{

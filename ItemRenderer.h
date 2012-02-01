@@ -14,8 +14,6 @@
     
     Item *itemInfo;
     
-    NSMutableArray *suffixList;
-    
 }
 
 @property (retain) Item *itemInfo;

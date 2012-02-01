@@ -64,14 +64,13 @@
     switch (section) {
             
         case 0:
-            return [[theMenu submenuList] count];
-            break;
-            
-        case 1:
             if([orderDisplayList count] > 0)
                 return ([orderDisplayList count]);
             else
                 return 1;
+        case 1:
+            return [[theMenu submenuList] count];
+            break;
             
         default:
             break;
@@ -85,10 +84,11 @@
     
     switch ([indexPath section]) {
         case 0:
-            return [self menuCellForIndexPath:tableView:indexPath];
+            return [self itemCellForIndexPath:tableView:indexPath];
             break;
         case 1:
-            return [self itemCellForIndexPath:tableView:indexPath];
+            return [self menuCellForIndexPath:tableView:indexPath];
+            break;
         default:
             break;
     }
@@ -233,11 +233,10 @@
 {
     switch (section) {
         case 0:
-            return @"Menu";
-            break;
-            
-        case 1:
             return @"Your Order";
+            break;
+        case 1:
+            return @"Menu";
             break;
         default:
             break;
@@ -247,12 +246,13 @@
 
 -(id)objectForCellAtIndex:(NSIndexPath *)index
 {
-    if ([index section] == 0)
-        return [[theMenu submenuList] objectAtIndex:[index row]];
-    if ([index section] == 1) {
+    if ([index section] == 0) {
         if ( [orderDisplayList count] > 0)
             return [orderDisplayList objectAtIndex:[index row]];
     }
+    if ([index section] == 1)
+        return [[theMenu submenuList] objectAtIndex:[index row]];
+    
     return nil;
 }
 

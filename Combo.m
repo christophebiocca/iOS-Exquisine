@@ -18,6 +18,16 @@
 @synthesize associatedOrder;
 @synthesize listOfItemGroups;
 
+-(Combo *)init
+{
+    self = [super init];
+    associatedOrder = [[Order alloc] init];
+    listOfItemGroups = [[NSMutableArray alloc] initWithCapacity:0];
+    listOfAssociatedItems = [[NSMutableArray alloc] initWithCapacity:0];
+    price = [[NSDecimalNumber alloc] initWithInt:0];
+    return self;
+}
+
 -(Combo *)initFromDataAndMenu:(NSDictionary *)inputData:(Menu *) associatedMenu
 {
     self = [super initFromData:inputData];
@@ -148,6 +158,15 @@
         [output appendString:[itemGroup descriptionWithIndent:1]];
     }
     return output;
+}
+
+-(BOOL)satisfied
+{
+    for (ItemGroup *anItemGroup in listOfItemGroups) {
+        if(![anItemGroup satisfied])
+            return NO;
+    }
+    return YES;
 }
 
 @end

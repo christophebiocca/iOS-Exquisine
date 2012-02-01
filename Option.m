@@ -8,8 +8,11 @@
 
 #import "Option.h"
 #import "Choice.h"
+#import "Item.h"
 
 @implementation Option
+
+NSString* OPTION_MODIFIED = @"CroutonLabs/OptionModified";
 
 @synthesize lowerBound;
 @synthesize upperBound;
@@ -17,6 +20,7 @@
 @synthesize choiceList;
 @synthesize selectedChoices;
 @synthesize propertiesChecksum;
+
 
 -(Option *)initFromOption:(Option *)anOption
 {
@@ -124,6 +128,7 @@
     [choiceList addObject:aChoice];
     //sort the choice list by real price
     [choiceList sortUsingSelector:@selector(comparePrice:)];
+    [[NSNotificationCenter defaultCenter] postNotificationName:OPTION_MODIFIED object:self];
 }
 
 -(BOOL) selectChoice:(Choice *) aChoice{
@@ -135,12 +140,14 @@
             if([selectedChoices count] > upperBound){
                 [self deselectChoice:[selectedChoices objectAtIndex:0]];
             }
+            [[NSNotificationCenter defaultCenter] postNotificationName:OPTION_MODIFIED object:self];
             return YES;
         }
         else
         {
             if(upperBound > [selectedChoices count]){
                 [selectedChoices addObject:aChoice];
+                [[NSNotificationCenter defaultCenter] postNotificationName:OPTION_MODIFIED object:self];
                 return YES;
             }
             else{
@@ -150,6 +157,7 @@
     }
     else{
         NSLog(@"Warning: A selection of a choice that is invalid was attempted%@", nil);
+        [[NSNotificationCenter defaultCenter] postNotificationName:OPTION_MODIFIED object:self];
         return YES;
     }
 }
@@ -160,6 +168,7 @@
         if ([selectedChoices count] > lowerBound){
             [selectedChoices removeObject:aChoice];
         }
+        [[NSNotificationCenter defaultCenter] postNotificationName:OPTION_MODIFIED object:self];
     }
     else{
         NSLog(@"Warning: A deselection of a choice that is invalid was attempted%@", nil);
@@ -190,7 +199,8 @@
     
 }
 
--(BOOL)toggleChoiceByIndex:(NSInteger)aChoice{
+-(BOOL)toggleChoiceByIndex:(NSInteger)aChoice
+{
     
     return [self toggleChoice:[choiceList objectAtIndex:aChoice]];
     

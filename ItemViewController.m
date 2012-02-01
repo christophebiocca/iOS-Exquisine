@@ -15,6 +15,7 @@
 #import "ItemView.h"
 #import "Choice.h"
 #import "Option.h"
+#import "Utilities.h"
 
 @implementation ItemViewController
 
@@ -25,6 +26,8 @@
     
     itemInfo = anItem;
     ownerOrder = anOrder;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(itemAltered) name:ITEM_MODIFIED object:anItem];
     
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Add to order" style:UIBarButtonItemStyleDone target:self action:@selector(addThisItemToOrder)];
     
@@ -64,7 +67,7 @@
         Option *thisOption = [[itemInfo options] objectAtIndex:[indexPath section]];
         Choice *thisChoice = [[thisOption choiceList] objectAtIndex:[indexPath row]];
         [thisOption toggleChoice:thisChoice];
-        [tableView reloadSections:[NSIndexSet indexSetWithIndex:[indexPath section]] withRowAnimation:UITableViewRowAnimationAutomatic];        
+        [tableView reloadSections:[NSIndexSet indexSetWithIndex:[indexPath section]] withRowAnimation:UITableViewRowAnimationNone];        
     }
     
 }
@@ -99,6 +102,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [[itemView priceButton] setTitle:[NSString stringWithFormat:@"Item Price: %@",[Utilities FormatToPrice:[itemInfo totalPrice]] ]];
     [[itemView itemTable] reloadData];
 }
 
@@ -113,5 +117,11 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+-(void) itemAltered
+{
+    [[itemView priceButton] setTitle:[NSString stringWithFormat:@"Item Price: %@",[Utilities FormatToPrice:[itemInfo totalPrice]] ]];
+    [[itemView itemTable] reloadData];
 }
 @end

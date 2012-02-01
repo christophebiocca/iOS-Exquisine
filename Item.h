@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "MenuComponent.h"
+
+extern NSString* ITEM_MODIFIED;
+
 @class Option;
 
 @interface Item : MenuComponent{
@@ -40,6 +43,8 @@
 -(NSComparisonResult) nameSort:(Item *)anItem;
 
 - (NSString *) descriptionWithIndent:(NSInteger) indentLevel;
+
+-(void) optionAltered;
 
 @end
 

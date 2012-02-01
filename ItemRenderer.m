@@ -24,54 +24,17 @@
     
     itemInfo = anItem;
     
-    CellData *aCell = nil;
-    
-    suffixList = [[NSMutableArray alloc] initWithCapacity:0];
-    
-    if([itemInfo.options count] == 0)
-    {
-        aCell = [[CellData alloc] init];
-        [aCell setCellTitleFontSize:17];
-        [aCell setCellDescFontSize:17];
-        [aCell setCellTitleFontType:@"HelveticaNeue-Medium"];
-        [aCell setCellDescFontType:@"HelveticaNeue"];
-        aCell.cellTitle = @"No Options";
-        aCell.cellDesc = @"";
-        [suffixList addObject:aCell];
-    }
-    
-    aCell = [[CellData alloc] init];
-    [aCell setCellTitleFontSize:17];
-    [aCell setCellDescFontSize:17];
-    [aCell setCellTitleFontType:@"HelveticaNeue-Medium"];
-    [aCell setCellDescFontType:@"HelveticaNeue"];
-    aCell.cellTitle = @"Base Price: ";
-    aCell.cellDesc = [Utilities FormatToPrice:[itemInfo basePrice]];
-    [suffixList addObject:aCell];
-    
-    aCell = [[CellData alloc] init];
-    [aCell setCellTitleFontSize:17];
-    [aCell setCellDescFontSize:17];
-    [aCell setCellTitleFontType:@"HelveticaNeue-Medium"];
-    [aCell setCellDescFontType:@"HelveticaNeue"];
-    aCell.cellTitle = @"Total Item Price:";
-    aCell.cellDesc = [Utilities FormatToPrice:[itemInfo totalPrice]];
-    [suffixList addObject:aCell];
-    
     return self;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return (1 + [[itemInfo options] count]);
+    return ([[itemInfo options] count]);
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == [[itemInfo options] count]) {
-        return [suffixList count];
-    }
     return [[[[itemInfo options] objectAtIndex:section] choiceList] count];
 }
 
@@ -85,7 +48,6 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
         }
         
-        [[suffixList objectAtIndex:[indexPath row]] configureCell:cell];
         
         return cell;
     }
@@ -134,6 +96,8 @@
     
     return returnList;
 }
+
+
 
 
 @end

@@ -21,4 +21,6 @@
 
 -(id)init;
 
+-(void)calcFontSizeToFitRect:(CGRect)r;
+
 @end

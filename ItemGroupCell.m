@@ -42,10 +42,12 @@
     if([itemGroup satisfied])
     {
         [self setAccessoryType:UITableViewCellAccessoryCheckmark];
+        [self setBackgroundColor:[UIColor colorWithRed:0.6f green:0.9f blue:0.6f alpha:1.0f]];
     }
     else
     {
         [self setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
+        [self setBackgroundColor:[UIColor colorWithRed:0.9f green:0.6f blue:0.6f alpha:1.0f]];
     }
     
 }
