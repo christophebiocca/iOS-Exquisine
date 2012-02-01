@@ -252,6 +252,7 @@
 		23FDE9D214D8B3D6005AA6D6 /* ItemGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemGroupCell.h; sourceTree = "<group>"; };
 		23FDE9D314D8B3D6005AA6D6 /* ItemGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemGroupCell.m; sourceTree = "<group>"; };
 		38D4132E14D3324200031B60 /* pfLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pfLogo.png; sourceTree = "<group>"; };
+		D945ABC914D8D757007DCC32 /* PaymentViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentViewDelegate.h; sourceTree = "<group>"; };
 		D95B785E14D2511E00FC0F29 /* Login.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Login.h; sourceTree = "<group>"; };
 		D95B785F14D2511E00FC0F29 /* Login.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Login.m; sourceTree = "<group>"; };
 		D95B786314D252F400FC0F29 /* CredentialsStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CredentialsStore.h; sourceTree = "<group>"; };
@@ -1071,6 +1072,7 @@
 			children = (
 				D9768A7C14D74AAD00BBA467 /* PaymentView.h */,
 				D9768A7D14D74AAD00BBA467 /* PaymentView.m */,
+				D945ABC914D8D757007DCC32 /* PaymentViewDelegate.h */,
 			);
 			name = PaymentInfoView;
 			sourceTree = "<group>";
