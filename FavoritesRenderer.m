@@ -59,7 +59,7 @@
         [aCell setCellDescFontSize:17];
         [aCell setCellTitleFontType:@"HelveticaNeue-Medium"];
         [aCell setCellDescFontType:@"HelveticaNeue"];
-        aCell.cellTitle = @"You have no favourited orders!";
+        aCell.cellTitle = @"You have not saved any favorites!";
         aCell.cellDesc = @"";
         
         static NSString *CellIdentifier = @"Cell";

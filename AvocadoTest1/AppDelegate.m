@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "OrderViewController.h"
 #import "MainPageViewController.h"
+#import "LocalyticsSession.h"
 
 @implementation AppDelegate
 
@@ -19,6 +20,9 @@
     // WE NEED OUR COOKIES, AT ALL TIMES
     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
     // Override point for customization after application launch.
+    
+    [[LocalyticsSession sharedLocalyticsSession] startSession:@"a7ab9ad2b1f72cb00e6fc28-657c7da8-4d09-11e1-a7d4-008545fe83d2"];
+    
     [self setWindow:[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]]];
     page = [[MainPageViewController alloc] init];
     navigationController = [[UINavigationController alloc] initWithRootViewController:page];
@@ -37,6 +41,9 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
+    [[LocalyticsSession sharedLocalyticsSession] resume];
+    [[LocalyticsSession sharedLocalyticsSession] upload];
+    
     [page saveDataToDisk];
     /*
      Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
@@ -67,6 +74,8 @@
      Save data if appropriate.
      See also applicationDidEnterBackground:.
      */
+    [[LocalyticsSession sharedLocalyticsSession] close];
+    [[LocalyticsSession sharedLocalyticsSession] upload];
 }
 
 @end
