@@ -102,6 +102,7 @@
 		38CFAEA514D9CAB6000A679D /* UploaderThread.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CFAEA114D9CAB6000A679D /* UploaderThread.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		38D4133014D3324200031B60 /* pfLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 38D4132E14D3324200031B60 /* pfLogo.png */; };
 		D92D24BA14DB138F007B5890 /* OpeningHours.m in Sources */ = {isa = PBXBuildFile; fileRef = D92D24B914DB138F007B5890 /* OpeningHours.m */; };
+		D92D249C14DAFA1F007B5890 /* PaymentStack.m in Sources */ = {isa = PBXBuildFile; fileRef = D92D249B14DAFA1F007B5890 /* PaymentStack.m */; };
 		D95B786014D2511E00FC0F29 /* Login.m in Sources */ = {isa = PBXBuildFile; fileRef = D95B785F14D2511E00FC0F29 /* Login.m */; };
 		D95B786514D252F400FC0F29 /* CredentialsStore.m in Sources */ = {isa = PBXBuildFile; fileRef = D95B786414D252F400FC0F29 /* CredentialsStore.m */; };
 		D95B786714D2558800FC0F29 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D95B786614D2558800FC0F29 /* Security.framework */; };
@@ -299,6 +300,8 @@
 		38D4132E14D3324200031B60 /* pfLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pfLogo.png; sourceTree = "<group>"; };
 		D92D24B814DB138F007B5890 /* OpeningHours.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpeningHours.h; sourceTree = "<group>"; };
 		D92D24B914DB138F007B5890 /* OpeningHours.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpeningHours.m; sourceTree = "<group>"; };
+		D92D249A14DAFA1F007B5890 /* PaymentStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentStack.h; sourceTree = "<group>"; };
+		D92D249B14DAFA1F007B5890 /* PaymentStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentStack.m; sourceTree = "<group>"; };
 		D945ABC914D8D757007DCC32 /* PaymentViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentViewDelegate.h; sourceTree = "<group>"; };
 		D95B785E14D2511E00FC0F29 /* Login.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Login.h; sourceTree = "<group>"; };
 		D95B785F14D2511E00FC0F29 /* Login.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Login.m; sourceTree = "<group>"; };
@@ -465,7 +468,7 @@
 			children = (
 				23DA7A8314C64680008281DD /* MainPageViewController */,
 				232C796C14CF77CC00C3868D /* FavoritesViewController */,
-				D9768A6914D73ED800BBA467 /* PaymentViewController */,
+				D9768A6914D73ED800BBA467 /* PaymentStack */,
 			);
 			name = OtherControllers;
 			sourceTree = "<group>";
@@ -1062,6 +1065,7 @@
 			children = (
 				D9768A7A14D74A8A00BBA467 /* PaymentInfoView */,
 				2352723F14DB13DF00DDC7FA /* IndicatorView */,
+				D9768A7A14D74A8A00BBA467 /* PaymentViews */,
 				232C796214CF716800C3868D /* FavoritesView */,
 				23DA7A8214C64656008281DD /* MainPageView */,
 			);
@@ -1152,6 +1156,15 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
+		D92D249E14DB04EA007B5890 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				D9768A6314D73EB300BBA467 /* PaymentInfoViewController.h */,
+				D9768A6414D73EB300BBA467 /* PaymentInfoViewController.m */,
+			);
+			name = Components;
+			sourceTree = "<group>";
+		};
 		D95B786214D252D600FC0F29 /* Credentials */ = {
 			isa = PBXGroup;
 			children = (
@@ -1183,23 +1196,24 @@
 			name = Payment;
 			sourceTree = "<group>";
 		};
-		D9768A6914D73ED800BBA467 /* PaymentViewController */ = {
+		D9768A6914D73ED800BBA467 /* PaymentStack */ = {
 			isa = PBXGroup;
 			children = (
-				D9768A6314D73EB300BBA467 /* PaymentInfoViewController.h */,
-				D9768A6414D73EB300BBA467 /* PaymentInfoViewController.m */,
+				D92D249E14DB04EA007B5890 /* Components */,
+				D92D249A14DAFA1F007B5890 /* PaymentStack.h */,
+				D92D249B14DAFA1F007B5890 /* PaymentStack.m */,
 			);
-			name = PaymentViewController;
+			name = PaymentStack;
 			sourceTree = "<group>";
 		};
-		D9768A7A14D74A8A00BBA467 /* PaymentInfoView */ = {
+		D9768A7A14D74A8A00BBA467 /* PaymentViews */ = {
 			isa = PBXGroup;
 			children = (
+				D945ABC914D8D757007DCC32 /* PaymentViewDelegate.h */,
 				D9768A7C14D74AAD00BBA467 /* PaymentView.h */,
 				D9768A7D14D74AAD00BBA467 /* PaymentView.m */,
-				D945ABC914D8D757007DCC32 /* PaymentViewDelegate.h */,
 			);
-			name = PaymentInfoView;
+			name = PaymentViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1400,6 +1414,7 @@
 				23D6F4AB14D9F5340043C75E /* ItemGroupViewController.m in Sources */,
 				2352724214DB145600DDC7FA /* IndicatorView.m in Sources */,
 				D92D24BA14DB138F007B5890 /* OpeningHours.m in Sources */,
+				D92D249C14DAFA1F007B5890 /* PaymentStack.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

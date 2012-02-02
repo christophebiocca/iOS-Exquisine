@@ -1,0 +1,71 @@
+//
+//  PaymentStack.m
+//  AvocadoTest1
+//
+//  Created by Christophe Biocca on 12-02-02.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//
+
+#import "PaymentStack.h"
+
+@implementation PaymentStack
+
+#import "GetLocations.h"
+#import "PaymentInfoViewController.h"
+
+@interface PaymentStack(PrivateMethods)
+
+@property(retain, readonly)PaymentInfoViewController* paymentInfoController;
+@property(retain, readonly)PaymentProcessingViewController* processingController;
+@property(retain, readonly)PaymentCompleteViewController* completionController;
+
+@end
+
+@implementation PaymentStack
+
+- (id)initWithOrder:(Order*)orderToPlace
+    completionBlock:(void(^)())completion 
+  cancellationBlock:(void(^)())cancelled
+{
+    if (self = [super init]) {
+        order = orderToPlace;
+        completionBlock = [completion copy];
+        cancelledBlock = [cancelled copy];
+    }
+    return self;
+}
+
+-(UINavigationController*)navigationController{
+    if(!navigationController){
+        navigationController = [[UINavigationController alloc] initWithRootViewController:[self paymentInfoController]];
+    }
+    return navigationController;
+}
+
+-(PaymentInfoViewController*)paymentInfoController{
+    if(!paymentInfoController){
+        paymentInfoController = [[PaymentInfoViewController alloc] initWithCompletionBlock:^(PaymentInfo* info){
+            [[self navigationController] pushViewController:[self processingController] animated:YES];
+        }
+                                                 cancellationBlock:^{
+                                                     cancelledBlock();
+                                                 }];
+    }
+    return paymentInfoController;
+}
+
+-(PaymentProcessingViewController*)processingController{
+    if(!processingController){
+        
+    }
+    return processingController;
+}
+
+-(PaymentCompleteViewController*)completionController{
+    if(!completionController){
+        
+    }
+    return completionController;
+}
+
+@end

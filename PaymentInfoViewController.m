@@ -9,14 +9,14 @@
 #import "PaymentInfoViewController.h"
 #import "PaymentView.h"
 #import "PaymentInfo.h"
+#import "GetLocations.h"
 
 @implementation PaymentInfoViewController
 
 - (id)initWithCompletionBlock:(void(^)(PaymentInfo*))completion 
             cancellationBlock:(void(^)())cancelled
 {
-    self = [super initWithNibName:nil bundle:nil];
-    if (self) {
+    if (self = [super init]) {
         completionBlock = [completion copy];
         cancelledBlock = [cancelled copy];
     }
