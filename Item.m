@@ -132,6 +132,11 @@ NSString* ITEM_MODIFIED = @"CroutonLabs/ItemModified";
     return [name compare:anItem.name];
 }
 
+-(NSComparisonResult)priceSort:(Item *)anItem
+{
+    return [[anItem totalPrice] compare:[self totalPrice]];
+}
+
 - (NSString *) descriptionWithIndent:(NSInteger) indentLevel
 {    
     NSMutableString *output = [NSMutableString stringWithString:[@"" stringByPaddingToLength:(indentLevel*4) withString:@" " startingAtIndex:0]];
