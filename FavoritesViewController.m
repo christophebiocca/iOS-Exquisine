@@ -87,7 +87,7 @@
 
 -(NSInteger)numberOfFavorites
 {
-    [delegate numberOfFavorites];
+    return [delegate numberOfFavorites];
 }
 
 -(BOOL)hasServerConnection

@@ -51,4 +51,6 @@
 
 -(void) createOrderPressed;
 
+-(void) updateStoreHourInfo;
+
 @end
