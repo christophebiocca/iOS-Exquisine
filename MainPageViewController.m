@@ -19,6 +19,9 @@
 #import "GetLocations.h"
 #import "Reachability.h"
 #import "PaymentStack.h"
+#import "PaymentInfoViewController.h"
+#import "IndicatorView.h"
+#import "Location.h"
 
 @implementation MainPageViewController
 
@@ -73,6 +76,7 @@
     [GetLocations getLocationsForRestaurant:RESTAURANT_ID 
                                     success:^(GetLocations* call) {
                                         locations = [call locations];
+                                        [self updateStoreHourInfo];
                                     }
                                     failure:^(GetLocations* call, NSError* error) {
                                         NSLog(@"Can't fetch locations:\n%@", error);
@@ -255,6 +259,7 @@
     }
     
     [self updateCreateButtonState];
+    [self updateStoreHourInfo];
 }
 
 -(void) updateCreateButtonState
@@ -361,6 +366,54 @@
 -(BOOL)hasServerConnection
 {
     return [networkChecker isReachable];
+}
+
+-(void)updateStoreHourInfo
+{
+    if([locations count] == 0)
+    {
+        [[mainPageView openIndicator] setState:IndicatorViewOff];
+        [[mainPageView storeHours] setText:@"Store hours: Fetching from server..."];
+        return;
+    }
+    Location *currentLocation = [locations objectAtIndex:0]; 
+    switch ([currentLocation storeState]) {
+        case Open:
+            [[mainPageView openIndicator] setState:IndicatorViewOn];
+            break;
+        case Closing:
+            [[mainPageView openIndicator] setState:IndicatorViewStale];
+            break;
+        case Closed:
+            [[mainPageView openIndicator] setState:IndicatorViewOff];
+            break;
+            
+        default:
+            break;
+    }
+    
+    NSDateFormatter* formatter = [NSDateFormatter new];
+    [formatter setDateStyle:NSDateFormatterNoStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    
+    if([currentLocation storeState] != Closed)
+    {
+        NSString *openTime = [formatter stringFromDate:[currentLocation opensToday]];
+        NSString *closeTime = [formatter stringFromDate:[currentLocation closesToday]];
+        
+        [[mainPageView storeHours] setText:[NSString stringWithFormat:@"Open from %@ to %@",openTime,closeTime]];
+    }
+    else
+    {
+        NSString *openTime = [formatter stringFromDate:[currentLocation nextOpen]];
+        NSString *closeTime = [formatter stringFromDate:[currentLocation nextClose]];
+        [formatter setDateFormat:@"EEEE"];
+        NSString *dayOfWeek = [formatter stringFromDate:[currentLocation nextClose]];
+        
+        [[mainPageView storeHours] setText:[NSString stringWithFormat:@"Opens %@ from %@ to %@",dayOfWeek,openTime,closeTime]];
+        
+    }
+    
 }
 
 @end

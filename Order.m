@@ -253,7 +253,7 @@ NSString* ORDER_ITEMS_MODIFIED = @"CroutonLabs/OrderModified";
 
 -(void) reSort
 {
-    [itemList sortUsingSelector:@selector(nameSort:)];
+    [itemList sortUsingSelector:@selector(priceSort:)];
 }
 
 - (NSString *) descriptionWithIndent:(NSInteger) indentLevel

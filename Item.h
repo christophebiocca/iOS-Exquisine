@@ -42,6 +42,8 @@ extern NSString* ITEM_MODIFIED;
 
 -(NSComparisonResult) nameSort:(Item *)anItem;
 
+-(NSComparisonResult) priceSort:(Item *)anItem;
+
 - (NSString *) descriptionWithIndent:(NSInteger) indentLevel;
 
 -(void) optionAltered;

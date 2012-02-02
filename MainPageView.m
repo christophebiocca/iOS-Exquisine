@@ -41,7 +41,9 @@
         
         logo = [UIImage imageNamed:@"pfLogo"];
         logoView = [[UIImageView alloc] initWithImage:logo];
+        
         [storeHours setText:@"Store hours:"];
+        [storeHours setFont:[UIFont fontWithName:@"Helvetica" size:12.0]];
         
         [createOrderButton setTitle:@"New Order" forState:UIControlStateNormal];
         [createOrderButton setTitleColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.5] forState:UIControlStateDisabled];
@@ -84,7 +86,7 @@
     [pendingOrderButton setFrame:CGRectMake(20, 343, 280, 37)];
     [orderStatus setFrame:CGRectMake(20, 263, 280, 37)];
     [logoView setFrame:CGRectMake(75, 40,170, 170)];
-    [openIndicator setFrame:CGRectMake(38, 225, 16, 16)];
+    [openIndicator setFrame:CGRectMake(38, 224, 16, 16)];
     [storeHours setFrame:CGRectMake(60, 214, 240, 37)];
 }
 
