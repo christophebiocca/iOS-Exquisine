@@ -9,16 +9,18 @@
 #import "ItemGroup.h"
 #import "Menu.h"
 #import "Item.h"
+#import "Order.h"
+#import "Combo.h"
 
 @implementation ItemGroup
 
-@synthesize satisfied;
+@synthesize listOfItems;
 
--(ItemGroup *)initWithDataAndParentMenu:(NSDictionary *)inputData:(Menu *) inputMenu
+-(ItemGroup *)initWithDataAndParentMenuAndParentCombo:(NSDictionary *)inputData :(Menu *)inputMenu :(Combo *)aCombo
 {
     //self = [super initFromData:inputData];
-
-    satisfied = NO;
+    
+    parentCombo = aCombo;
     
     name = @"Placeholder";
     
@@ -49,12 +51,10 @@
 -(BOOL)containsItem:(Item *)anItem
 {
     for (Item *item in listOfItems) {
-        if ([anItem.name isEqual:item.name]) {
-            satisfied = YES;
+        if ([anItem.name isEqualToString:item.name]) {
             return YES;
         }
     }
-    satisfied = NO;
     return NO;
 }
 
@@ -77,6 +77,7 @@
 {
     if (self = [super initWithCoder:decoder])
     {
+        parentCombo = [decoder decodeObjectForKey:@"parent_combo"];
         parentMenu = [decoder decodeObjectForKey:@"parent_menu"];
         listOfItems = [decoder decodeObjectForKey:@"list_of_items"];
     }
@@ -86,7 +87,8 @@
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
     //Rinse and repeat this:
-    [super encodeWithCoder:encoder];
+    [super encodeWithCoder:encoder];    
+    [encoder encodeObject:parentCombo forKey:@"parent_combo"];
     [encoder encodeObject:parentMenu forKey:@"parent_menu"];
     [encoder encodeObject:listOfItems forKey:@"list_of_items"];
 }
@@ -113,6 +115,16 @@
     }
     
     return output;
+}
+
+-(BOOL) satisfied
+{
+    for (Item *eachItem in [parentCombo listOfAssociatedItems]) {
+        if ([self containsItem:eachItem]) {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 

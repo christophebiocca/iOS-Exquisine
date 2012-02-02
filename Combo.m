@@ -15,7 +15,6 @@
 @implementation Combo
 
 @synthesize price, listOfAssociatedItems;
-@synthesize associatedOrder;
 @synthesize listOfItemGroups;
 
 -(Combo *)init
@@ -41,7 +40,7 @@
     listOfItemGroups = [[NSMutableArray alloc] initWithCapacity:0];
     
     for (NSDictionary *componentInfo in [inputData objectForKey:@"components"]) {
-        [listOfItemGroups addObject:[[ItemGroup alloc] initWithDataAndParentMenu:componentInfo :associatedMenu]];
+        [listOfItemGroups addObject:[[ItemGroup alloc] initWithDataAndParentMenuAndParentCombo:componentInfo :associatedMenu:self]];
     }
     
 #if DEBUG
@@ -56,6 +55,8 @@
     self = [super initFromMenuComponent:aCombo];
     
     associatedOrder = [aCombo associatedOrder];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orderAltered) name:ORDER_ITEMS_MODIFIED object:associatedOrder];
+
     listOfItemGroups = [aCombo listOfItemGroups];
     listOfAssociatedItems = [[NSMutableArray alloc] initWithCapacity:0];
     for (Item *anItem in [aCombo listOfAssociatedItems]) {
@@ -68,34 +69,40 @@
 
 -(BOOL)evaluateForCombo:(Order *)anOrder
 {
-    associatedOrder = anOrder;
     Order *mutableOrder = [[Order alloc] initFromOrderShallow:anOrder];
  
     [listOfAssociatedItems removeAllObjects];
+    
+    //this is really hackish, and it's because we need to populate list of associated items
+    //correctly.
+    //This shit neeeeeds to get refactored asap.
+    BOOL totallyDoesntQualify = NO;
     
     for (ItemGroup *itemGroup in listOfItemGroups) 
     {
         BOOL qualifies = NO;
         
-        for (Item *anItem in [mutableOrder itemList]) {
+        for (Item *anItem in [NSArray arrayWithArray:[mutableOrder itemList]]) {
             if([itemGroup containsItem:anItem])
             {
                 qualifies = YES;
                 [listOfAssociatedItems addObject:anItem];
                 [mutableOrder removeItem:anItem];
+                break;
             }
         }
         
         if(!qualifies)
-            return NO;
+            totallyDoesntQualify = YES;
     }
     //If it actually makes it through each item group and qualifies for each, then we're good.
-    return YES;
+    return !totallyDoesntQualify;
 }
 
--(void)setOrder:(Order *)anOrder
+-(void)setAssociatedOrder:(Order *)anOrder
 {
     associatedOrder = anOrder;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orderAltered) name:ORDER_ITEMS_MODIFIED object:associatedOrder];
 }
 
 //If an order qualifies for a combo, we'll want to know what items were the qualifying ones.
@@ -160,13 +167,30 @@
     return output;
 }
 
+-(Order *)associatedOrder
+{
+    return associatedOrder;
+}
+
+-(BOOL) isEffectivelySameAs:(Combo *) anotherCombo
+{
+    return ([anotherCombo.name isEqualToString:name]);
+}
+
 -(BOOL)satisfied
 {
-    for (ItemGroup *anItemGroup in listOfItemGroups) {
-        if(![anItemGroup satisfied])
-            return NO;
+    [associatedOrder resetCache];
+    for (Combo *aCombo in [associatedOrder listOfCombos]) {
+        if ([aCombo isEffectivelySameAs:self])
+            return YES;
     }
-    return YES;
+    return NO;
+}
+
+-(void) orderAltered
+{
+    //This is also really hackish, it needs to be here so that the item groups know what's up.
+    [associatedOrder listOfCombos];
 }
 
 @end

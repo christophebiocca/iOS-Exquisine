@@ -30,6 +30,8 @@
 {
     menuInfo = aMenu;
     orderInfo = anOrder;
+    
+    [menuInfo setAssociatedOrder:anOrder];
     orderRenderer = [[OrderRenderer alloc] initWithOrderAndMenu:orderInfo:menuInfo];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orderAltered) name:ORDER_ITEMS_MODIFIED object:orderInfo];
     
@@ -136,7 +138,7 @@
     if ( [cellObject isKindOfClass:([Menu class])])
     {
         
-        MenuViewController *newMenuController = [[MenuViewController alloc] initializeWithMenuAndOrder:cellObject:orderInfo];
+        MenuViewController *newMenuController = [[MenuViewController alloc] initializeWithMenuAndOrderAndOrderViewController:cellObject :orderInfo :self];
         
         if(editing)
             [self exitEditingMode];
@@ -148,7 +150,7 @@
     if ( [cellObject isKindOfClass:([Item class])])
     {
         
-        ItemViewController *newItemController = [[ItemViewController alloc] initializeWithItemAndOrder:cellObject:orderInfo];
+        ItemViewController *newItemController = [[ItemViewController alloc] initializeWithItemAndOrderAndReturnController:cellObject :orderInfo :self];
         
         [[self navigationController] pushViewController:newItemController animated:YES];
         
@@ -203,9 +205,12 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    [[orderView orderTable] scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
     [[orderView priceDisplayButton] setTitle:[NSString stringWithFormat:@"%@%@",@"Subtotal: ",[Utilities FormatToPrice:[orderInfo subtotalPrice]] ]];
     [orderRenderer refreshOrderList];
+    
+    [menuInfo setAssociatedOrder:orderInfo];
+    [orderInfo setParentMenu:menuInfo];
+    
     [[orderView orderTable] reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
     if([orderInfo isFavorite])
     {
@@ -301,7 +306,11 @@
     [[orderView priceDisplayButton] setTitle:[NSString stringWithFormat:@"%@%@",@"Subtotal: ",[Utilities FormatToPrice:[orderInfo subtotalPrice]] ]];
     
     [orderRenderer refreshOrderList];
+    
     [[orderView orderTable] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+    
+    [[orderView orderTable] scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    
     if([orderInfo isFavorite])
     {
         [[orderView favoriteButton] setTintColor:[UIColor yellowColor]];

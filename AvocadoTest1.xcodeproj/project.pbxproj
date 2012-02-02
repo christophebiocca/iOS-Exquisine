@@ -60,6 +60,9 @@
 		23C26A1614C48F8B00DD53DF /* CellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C26A1514C48F8B00DD53DF /* CellData.m */; };
 		23C26A2014C4D5A700DD53DF /* MenuComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C26A1F14C4D5A600DD53DF /* MenuComponent.m */; };
 		23C26A2314C4D6FA00DD53DF /* VisualizableData.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C26A2214C4D6FA00DD53DF /* VisualizableData.m */; };
+		23D6F4A214D9DD3A0043C75E /* ItemGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D6F4A114D9DD3A0043C75E /* ItemGroupView.m */; };
+		23D6F4A614D9E0490043C75E /* ItemGroupRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D6F4A514D9E0490043C75E /* ItemGroupRenderer.m */; };
+		23D6F4AB14D9F5340043C75E /* ItemGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D6F4AA14D9F5340043C75E /* ItemGroupViewController.m */; };
 		23DA7A4014C60284008281DD /* Renderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA7A3F14C60284008281DD /* Renderer.m */; };
 		23DA7A4314C603E4008281DD /* MenuComponentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA7A4214C603E4008281DD /* MenuComponentViewController.m */; };
 		23DA7A4714C609FD008281DD /* MenuComponentRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA7A4614C609FD008281DD /* MenuComponentRenderer.m */; };
@@ -212,6 +215,12 @@
 		23C26A1F14C4D5A600DD53DF /* MenuComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuComponent.m; sourceTree = "<group>"; };
 		23C26A2114C4D6FA00DD53DF /* VisualizableData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisualizableData.h; sourceTree = "<group>"; };
 		23C26A2214C4D6FA00DD53DF /* VisualizableData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisualizableData.m; sourceTree = "<group>"; };
+		23D6F4A014D9DD3A0043C75E /* ItemGroupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemGroupView.h; sourceTree = "<group>"; };
+		23D6F4A114D9DD3A0043C75E /* ItemGroupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemGroupView.m; sourceTree = "<group>"; };
+		23D6F4A414D9E0490043C75E /* ItemGroupRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemGroupRenderer.h; sourceTree = "<group>"; };
+		23D6F4A514D9E0490043C75E /* ItemGroupRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemGroupRenderer.m; sourceTree = "<group>"; };
+		23D6F4A914D9F5340043C75E /* ItemGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemGroupViewController.h; sourceTree = "<group>"; };
+		23D6F4AA14D9F5340043C75E /* ItemGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemGroupViewController.m; sourceTree = "<group>"; };
 		23DA7A3E14C60284008281DD /* Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
 		23DA7A3F14C60284008281DD /* Renderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Renderer.m; sourceTree = "<group>"; };
 		23DA7A4114C603E4008281DD /* MenuComponentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuComponentViewController.h; sourceTree = "<group>"; };
@@ -349,11 +358,13 @@
 			name = ComboView;
 			sourceTree = "<group>";
 		};
-		2329BB2F14D9C56D008E505F /* New Group */ = {
+		2329BB2F14D9C56D008E505F /* ItemGroupView */ = {
 			isa = PBXGroup;
 			children = (
+				23D6F4A014D9DD3A0043C75E /* ItemGroupView.h */,
+				23D6F4A114D9DD3A0043C75E /* ItemGroupView.m */,
 			);
-			name = "New Group";
+			name = ItemGroupView;
 			sourceTree = "<group>";
 		};
 		232C795114CDF5AB00C3868D /* AlertPrompt */ = {
@@ -368,6 +379,7 @@
 		232C795714CF195200C3868D /* MenuComponentControllers */ = {
 			isa = PBXGroup;
 			children = (
+				23D6F4A814D9F4E10043C75E /* ItemGroupViewController */,
 				23DA7A4114C603E4008281DD /* MenuComponentViewController.h */,
 				23DA7A4214C603E4008281DD /* MenuComponentViewController.m */,
 				23082F5914D89658003964CE /* ComboViewController */,
@@ -448,8 +460,6 @@
 			children = (
 				232C797814D0A7E000C3868D /* Combo.h */,
 				232C797914D0A7E000C3868D /* Combo.m */,
-				23FDE9CD14D8A9BB005AA6D6 /* ItemGroup.h */,
-				23FDE9CE14D8A9BB005AA6D6 /* ItemGroup.m */,
 			);
 			name = Combo;
 			sourceTree = "<group>";
@@ -597,6 +607,7 @@
 			children = (
 				23C26A1E14C4D5A600DD53DF /* MenuComponent.h */,
 				23C26A1F14C4D5A600DD53DF /* MenuComponent.m */,
+				23D6F4A714D9E1C90043C75E /* ItemGroup */,
 				232C797714D0A77200C3868D /* Combo */,
 				23DA7A3D14C60133008281DD /* Menu */,
 				237EC00A14BE5824009D9268 /* Order */,
@@ -682,7 +693,6 @@
 			isa = PBXGroup;
 			children = (
 				237EC00B14BE5842009D9268 /* MenuComposites */,
-				D95B787114D2BE3400FC0F29 /* Location */,
 				D9768A6814D73EBC00BBA467 /* Payment */,
 			);
 			name = "Model Structure";
@@ -742,6 +752,34 @@
 				23C26A0E14C4887E00DD53DF /* TableData.m */,
 			);
 			name = VisualizableDataTypes;
+			sourceTree = "<group>";
+		};
+		23D6F4A314D9DFBD0043C75E /* ItemGroupRenderer */ = {
+			isa = PBXGroup;
+			children = (
+				23D6F4A414D9E0490043C75E /* ItemGroupRenderer.h */,
+				23D6F4A514D9E0490043C75E /* ItemGroupRenderer.m */,
+			);
+			name = ItemGroupRenderer;
+			sourceTree = "<group>";
+		};
+		23D6F4A714D9E1C90043C75E /* ItemGroup */ = {
+			isa = PBXGroup;
+			children = (
+				23FDE9CD14D8A9BB005AA6D6 /* ItemGroup.h */,
+				23FDE9CE14D8A9BB005AA6D6 /* ItemGroup.m */,
+				D95B787114D2BE3400FC0F29 /* Location */,
+			);
+			name = ItemGroup;
+			sourceTree = "<group>";
+		};
+		23D6F4A814D9F4E10043C75E /* ItemGroupViewController */ = {
+			isa = PBXGroup;
+			children = (
+				23D6F4A914D9F5340043C75E /* ItemGroupViewController.h */,
+				23D6F4AA14D9F5340043C75E /* ItemGroupViewController.m */,
+			);
+			name = ItemGroupViewController;
 			sourceTree = "<group>";
 		};
 		23DA7A3514C5FFCE008281DD /* Obsolete */ = {
@@ -827,6 +865,7 @@
 		23DA7A4414C609C6008281DD /* MenuCompositeRenderers */ = {
 			isa = PBXGroup;
 			children = (
+				23D6F4A314D9DFBD0043C75E /* ItemGroupRenderer */,
 				23DA7A4514C609FD008281DD /* MenuComponentRenderer.h */,
 				23DA7A4614C609FD008281DD /* MenuComponentRenderer.m */,
 				232C797B14D0BA1500C3868D /* ComboRenderer */,
@@ -842,7 +881,7 @@
 		23DA7A4914C61336008281DD /* MenuCompositeViews */ = {
 			isa = PBXGroup;
 			children = (
-				2329BB2F14D9C56D008E505F /* New Group */,
+				2329BB2F14D9C56D008E505F /* ItemGroupView */,
 				23082F5D14D89791003964CE /* ComboView */,
 				23DA7A8414C72F22008281DD /* MenuView */,
 				23DA7A4E14C618FF008281DD /* OrderView */,
@@ -1294,6 +1333,9 @@
 				38CFAEA314D9CAB6000A679D /* LocalyticsDatabase.m in Sources */,
 				38CFAEA414D9CAB6000A679D /* LocalyticsSession.m in Sources */,
 				38CFAEA514D9CAB6000A679D /* UploaderThread.m in Sources */,
+				23D6F4A214D9DD3A0043C75E /* ItemGroupView.m in Sources */,
+				23D6F4A614D9E0490043C75E /* ItemGroupRenderer.m in Sources */,
+				23D6F4AB14D9F5340043C75E /* ItemGroupViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

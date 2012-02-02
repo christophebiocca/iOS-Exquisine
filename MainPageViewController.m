@@ -92,10 +92,12 @@
     {
         NSLog(@"The menu had not been fetched upon clicking new order");
     }
-    
-    if (!currentOrder)
+    else
     {
-        currentOrder = [[Order alloc] initWithParentMenu:theMenu];
+        if (!currentOrder)
+        {
+            currentOrder = [[Order alloc] initWithParentMenu:theMenu];
+        }
     }
     
     OrderViewController *orderView = [[OrderViewController alloc] initializeWithMenuAndOrder:theMenu:currentOrder];
@@ -225,7 +227,7 @@
     
     [favoritesViewController setDelegate:self];
     
-    [[self navigationController] setViewControllers:[[NSArray alloc]initWithObjects:self,favoritesViewController, nil] animated:YES]; 
+    [[self navigationController] setViewControllers:[[NSArray alloc]initWithObjects:self,favoritesViewController,orderViewController, nil] animated:YES]; 
     
 }
 

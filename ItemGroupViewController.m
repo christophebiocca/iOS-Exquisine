@@ -1,29 +1,37 @@
 //
-//  ComboViewController.m
+//  ItemGroupViewController.m
 //  AvocadoTest1
 //
-//  Created by Jake on 12-01-31.
+//  Created by Jake on 12-02-01.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "ComboViewController.h"
-#import "ComboView.h"
-#import "ComboRenderer.h"
-#import "Combo.h"
-#import "Order.h"
-#import "ItemGroup.h"
 #import "ItemGroupViewController.h"
+#import "ItemGroup.h"
+#import "ItemGroupRenderer.h"
+#import "ItemGroupView.h"
+#import "Item.h"
+#import "Order.h"
+#import "ItemViewController.h"
 
-@implementation ComboViewController
 
-@synthesize comboInfo;
+@implementation ItemGroupViewController
 
--(ComboViewController *)initializeWithComboAndOrder:(Combo *)aCombo :(Order *)anOrder
+@synthesize itemGroupInfo;
+
+-(ItemGroupViewController *)initWithItemGroupAndOrderAndReturnViewController:(ItemGroup *)anItemGroup :(Order *)anOrder :(UIViewController *)aViewController
 {
-    orderInfo = anOrder;
-    comboInfo = aCombo;
-    comboRenderer = [[ComboRenderer alloc] initFromComboAndOrder:aCombo:anOrder];  
-    [[self navigationItem] setTitle:comboInfo.name];
+    self = [super init];
+    
+    itemGroupInfo = anItemGroup;
+    
+    returnController = aViewController;
+    
+    currentOrder = anOrder;
+    
+    itemGroupRenderer = [[ItemGroupRenderer alloc] initFromItemGroup:anItemGroup];
+    
+    [[self navigationItem] setTitle:itemGroupInfo.name]; 
     
     return self;
 }
@@ -34,14 +42,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    
     [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
     
-    id itemGroup = [[comboInfo listOfItemGroups] objectAtIndex:[indexPath row]];
+    id thingToPush = [[itemGroupInfo listOfItems] objectAtIndex:[indexPath row]];
+    
+    ItemViewController *newView = [[ItemViewController alloc] initializeWithItemAndOrderAndReturnController:thingToPush :currentOrder:returnController];
         
-    ItemGroupViewController *newController = [[ItemGroupViewController alloc] initWithItemGroupAndOrderAndReturnViewController:itemGroup :orderInfo :self];
-        
-    [[self navigationController] pushViewController:newController animated:YES];
+    [[self navigationController] pushViewController:newView animated:YES];
     
 }
 
@@ -65,11 +72,11 @@
 
 - (void) loadView
 {
-    comboView = [[ComboView alloc] init];
-    [[comboView comboTable] setDelegate:self];
-    [[comboView comboTable] setDataSource:comboRenderer];
+    itemGroupView = [[ItemGroupView alloc] init];
+    [[itemGroupView itemGroupTable] setDelegate:self];
+    [[itemGroupView itemGroupTable] setDataSource:itemGroupRenderer];
     
-    [self setView:comboView];
+    [self setView:itemGroupView];
 }
 
 - (void)viewDidLoad
@@ -79,7 +86,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [[comboView comboTable] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [[itemGroupView itemGroupTable] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 - (void)viewDidUnload

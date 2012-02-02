@@ -21,9 +21,9 @@
 
 @synthesize menuInfo;
 
--(MenuViewController *)initializeWithMenuAndOrder:(Menu *) aMenu:(Order *) anOrder
+-(MenuViewController *)initializeWithMenuAndOrderAndOrderViewController:(Menu *)aMenu :(Order *)anOrder :(OrderViewController *)anOrderViewController
 {
-    
+    orderViewController = anOrderViewController;
     orderInfo = anOrder;
     menuInfo = aMenu;
     menuRenderer = [[MenuRenderer alloc] initWithMenu:menuInfo];
@@ -49,16 +49,16 @@
     if([submenuThing isKindOfClass:[Item class]])
     {
         
-        Item *newItem = [[Item alloc] initFromItem:submenuThing];
+        Item *newItem = submenuThing;
         
-        ItemViewController *newView = [[ItemViewController alloc] initializeWithItemAndOrder:newItem :orderInfo];
+        ItemViewController *newView = [[ItemViewController alloc] initializeWithItemAndOrderAndReturnController:newItem :orderInfo :orderViewController];
         
         [[self navigationController] pushViewController:newView animated:YES];
     }
     if([submenuThing isKindOfClass:[Menu class]])
     {
         
-        MenuViewController *newController = [[MenuViewController alloc] initializeWithMenuAndOrder:submenuThing :orderInfo];
+        MenuViewController *newController = [[MenuViewController alloc] initializeWithMenuAndOrderAndOrderViewController:submenuThing :orderInfo :orderViewController];
         
         [[self navigationController] pushViewController:newController animated:YES];
         

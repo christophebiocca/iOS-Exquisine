@@ -9,10 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "MenuComponent.h"
 @class Item;
+@class Order;
 
 @interface Menu : MenuComponent{
-    Menu *parentMenu;
     
+    Menu *parentMenu;
+    Order *associatedOrder;
     NSMutableArray *submenuList;
     NSMutableArray *comboList;
     
@@ -34,5 +36,7 @@
 -(NSArray *) flatItemList;
 
 -(Menu *) initFromDataAndMenu:(NSDictionary *)inputData:(Menu *) inputMenu;
+
+-(void) setAssociatedOrder:(Order *)anOrder;
 
 @end

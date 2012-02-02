@@ -9,6 +9,7 @@
 #import "MenuComponentViewController.h"
 @class Menu;
 @class Order;
+@class OrderViewController;
 @class MenuView;
 @class MenuRenderer;
 @class Item;
@@ -16,6 +17,7 @@
 @interface MenuViewController : MenuComponentViewController<UITableViewDelegate> 
 {
     
+    OrderViewController *orderViewController;
     Order *orderInfo;
     Menu *menuInfo;
     MenuView *menuView;
@@ -25,6 +27,6 @@
 
 @property (retain) Menu *menuInfo;
 
--(MenuViewController *)initializeWithMenuAndOrder:(Menu *) aMenu:(Order *) anOrder;
+-(MenuViewController *)initializeWithMenuAndOrderAndOrderViewController:(Menu *) aMenu:(Order *) anOrder:(OrderViewController *)anOrderViewController;
 
 @end

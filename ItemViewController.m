@@ -21,9 +21,10 @@
 
 @synthesize itemInfo;
 
--(ItemViewController *)initializeWithItemAndOrder:(Item *) anItem :(Order *) anOrder
+-(ItemViewController *)initializeWithItemAndOrderAndReturnController:(Item *) anItem:(Order *)anOrder:(UIViewController *) aController
 {
     
+    returnController = aController;
     itemInfo = anItem;
     ownerOrder = anOrder;
     
@@ -43,14 +44,10 @@
 
 -(void)addThisItemToOrder
 {
-    [ownerOrder addItem:itemInfo];
-    NSMutableArray *viewStack = [[NSMutableArray alloc] initWithCapacity:0];
-    for (id currentView in [[self navigationController] viewControllers]) {
-        [viewStack addObject:currentView];
-        if ([currentView isKindOfClass:[OrderViewController class]])
-            break;
-    }
-    [[self navigationController] setViewControllers:viewStack animated:YES];
+    
+    [ownerOrder addItem:[[Item alloc] initFromItem:itemInfo]];
+
+    [[self navigationController] popToViewController:returnController animated:YES];
     
 }
 

@@ -25,8 +25,6 @@
     currentCombo = aCombo;
     currentOrder = anOrder;
     
-    [currentCombo evaluateForCombo:anOrder];
-    
     return self;
 }
 
@@ -40,7 +38,7 @@
     self = [super init];
     
     currentCombo = aCombo;
-    currentOrder = aCombo.associatedOrder;
+    currentOrder = [aCombo associatedOrder];
     
     return self;
 }

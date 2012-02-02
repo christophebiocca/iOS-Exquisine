@@ -10,6 +10,8 @@
 
 @class Menu;
 @class Item;
+@class Order;
+@class Combo;
 
 //An item group is simply a collection of items and menus that provides
 //a check to see whether an item is within the group.
@@ -17,15 +19,15 @@
 @interface ItemGroup : MenuComponent
 {
     
-    BOOL satisfied;
     Menu *parentMenu;
+    Combo *parentCombo;
     NSMutableArray *listOfItems;
     
 }
 
-@property BOOL satisfied;
+@property (retain) NSMutableArray *listOfItems;
 
--(ItemGroup *)initWithDataAndParentMenu:(NSDictionary *)inputData:(Menu *) inputMenu;
+-(ItemGroup *)initWithDataAndParentMenuAndParentCombo:(NSDictionary *)inputData:(Menu *) inputMenu:(Combo *)aCombo;
 
 - (BOOL) containsItem: (Item *) anItem;
 
@@ -36,5 +38,7 @@
 - (void) addMenu: (Menu *) aMenu;
 
 - (NSString *) descriptionWithIndent:(NSInteger) indentLevel;
+
+-(BOOL) satisfied;
 
 @end

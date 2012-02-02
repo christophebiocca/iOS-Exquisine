@@ -141,6 +141,8 @@
     {
         submenuList = [decoder decodeObjectForKey:@"submenu_list"];
         comboList = [decoder decodeObjectForKey:@"combo_list"];
+        associatedOrder = [decoder decodeObjectForKey:@"associated_order"];
+        parentMenu = [decoder decodeObjectForKey:@"parent_menu"];
     }
     return self;
 }
@@ -151,6 +153,8 @@
     [super encodeWithCoder:encoder];
     [encoder encodeObject:submenuList forKey:@"submenu_list"];
     [encoder encodeObject:comboList forKey:@"combo_list"];
+    [encoder encodeObject:associatedOrder forKey:@"associated_order"];
+    [encoder encodeObject:parentMenu forKey:@"parent_menu"];
 }
 
 - (NSMutableArray *) comboList
@@ -195,6 +199,18 @@
     }
     
     return output;
+}
+
+-(void)setAssociatedOrder:(Order *)anOrder
+{
+    associatedOrder = anOrder;
+    for (id possibleMenu in submenuList) {
+        if([possibleMenu isKindOfClass:[Menu class]])
+            [possibleMenu setAssociatedOrder:associatedOrder];
+    }
+    for (Combo *eachCombo in comboList) {
+        [eachCombo setAssociatedOrder:anOrder];
+    }
 }
 
 -(NSString *)description{

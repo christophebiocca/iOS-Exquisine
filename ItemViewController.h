@@ -15,6 +15,7 @@
 @interface ItemViewController :UITableViewController<UITableViewDelegate>
 {
     
+    UIViewController *returnController;
     Order *ownerOrder;
     Item *itemInfo;
     ItemView *itemView;
@@ -24,7 +25,7 @@
 
 @property (retain) Item *itemInfo;
 
--(ItemViewController *)initializeWithItemAndOrder:(Item *) anItem:(Order *)anOrder;
+-(ItemViewController *)initializeWithItemAndOrderAndReturnController:(Item *) anItem:(Order *)anOrder:(UIViewController *) aController;
 
 -(void) addThisItemToOrder;
 

@@ -23,7 +23,6 @@
 @property (retain) NSDecimalNumber *price;
 @property (retain) NSMutableArray *listOfAssociatedItems;
 @property (retain) NSMutableArray *listOfItemGroups;
-@property (retain) Order *associatedOrder;
 
 -(Combo *)initFromDataAndMenu:(NSDictionary *)inputData:(Menu *) associatedMenu;
 
@@ -33,10 +32,16 @@
 
 -(NSMutableArray *) comboItemsList;
 
--(void) setOrder:(Order *) anOrder;
+-(void) setAssociatedOrder:(Order *) anOrder;
 
 - (NSString *) descriptionWithIndent:(NSInteger) indentLevel;
 
 -(BOOL) satisfied;
+
+-(Order *) associatedOrder;
+
+-(BOOL) isEffectivelySameAs:(Combo *) anotherCombo;
+
+-(void) orderAltered;
 
 @end
