@@ -26,6 +26,10 @@
 		2352723814DA322900DDC7FA /* pfLogo_57.png in Resources */ = {isa = PBXBuildFile; fileRef = 2352723514DA322900DDC7FA /* pfLogo_57.png */; };
 		2352723914DA322900DDC7FA /* pfLogo_114.png in Resources */ = {isa = PBXBuildFile; fileRef = 2352723614DA322900DDC7FA /* pfLogo_114.png */; };
 		2352723A14DA322900DDC7FA /* pfLogo_low.png in Resources */ = {isa = PBXBuildFile; fileRef = 2352723714DA322900DDC7FA /* pfLogo_low.png */; };
+		2352724214DB145600DDC7FA /* IndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2352724114DB145600DDC7FA /* IndicatorView.m */; };
+		2352724714DB19E200DDC7FA /* IndicatorImageOff.png in Resources */ = {isa = PBXBuildFile; fileRef = 2352724314DB19E200DDC7FA /* IndicatorImageOff.png */; };
+		2352724814DB19E200DDC7FA /* IndicatorImageOn.png in Resources */ = {isa = PBXBuildFile; fileRef = 2352724414DB19E200DDC7FA /* IndicatorImageOn.png */; };
+		2352724A14DB19E200DDC7FA /* IndicatorImageStale.png in Resources */ = {isa = PBXBuildFile; fileRef = 2352724614DB19E200DDC7FA /* IndicatorImageStale.png */; };
 		23658CC114BDFB15002C0996 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23658CC014BDFB15002C0996 /* UIKit.framework */; };
 		23658CC314BDFB15002C0996 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23658CC214BDFB15002C0996 /* Foundation.framework */; };
 		23658CC514BDFB15002C0996 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23658CC414BDFB15002C0996 /* CoreGraphics.framework */; };
@@ -155,6 +159,11 @@
 		2352723514DA322900DDC7FA /* pfLogo_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pfLogo_57.png; sourceTree = "<group>"; };
 		2352723614DA322900DDC7FA /* pfLogo_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pfLogo_114.png; sourceTree = "<group>"; };
 		2352723714DA322900DDC7FA /* pfLogo_low.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pfLogo_low.png; sourceTree = "<group>"; };
+		2352724014DB145600DDC7FA /* IndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndicatorView.h; sourceTree = "<group>"; };
+		2352724114DB145600DDC7FA /* IndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndicatorView.m; sourceTree = "<group>"; };
+		2352724314DB19E200DDC7FA /* IndicatorImageOff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = IndicatorImageOff.png; path = ../../../Downloads/IndicatorImageOff.png; sourceTree = "<group>"; };
+		2352724414DB19E200DDC7FA /* IndicatorImageOn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = IndicatorImageOn.png; path = ../../../Downloads/IndicatorImageOn.png; sourceTree = "<group>"; };
+		2352724614DB19E200DDC7FA /* IndicatorImageStale.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = IndicatorImageStale.png; path = ../../../Downloads/IndicatorImageStale.png; sourceTree = "<group>"; };
 		23658CBC14BDFB15002C0996 /* AvocadoTest1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AvocadoTest1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23658CC014BDFB15002C0996 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		23658CC214BDFB15002C0996 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -495,6 +504,18 @@
 				232D7A0F14C8B23A00DD5911 /* UICustomActionSheet.m */,
 			);
 			name = UICustomActionSheet;
+			sourceTree = "<group>";
+		};
+		2352723F14DB13DF00DDC7FA /* IndicatorView */ = {
+			isa = PBXGroup;
+			children = (
+				2352724314DB19E200DDC7FA /* IndicatorImageOff.png */,
+				2352724414DB19E200DDC7FA /* IndicatorImageOn.png */,
+				2352724614DB19E200DDC7FA /* IndicatorImageStale.png */,
+				2352724014DB145600DDC7FA /* IndicatorView.h */,
+				2352724114DB145600DDC7FA /* IndicatorView.m */,
+			);
+			name = IndicatorView;
 			sourceTree = "<group>";
 		};
 		23658CB114BDFB15002C0996 = {
@@ -1027,6 +1048,7 @@
 		23DA7A8114C6462C008281DD /* OtherViews */ = {
 			isa = PBXGroup;
 			children = (
+				2352723F14DB13DF00DDC7FA /* IndicatorView */,
 				D9768A7A14D74A8A00BBA467 /* PaymentInfoView */,
 				232C796214CF716800C3868D /* FavoritesView */,
 				23DA7A8214C64656008281DD /* MainPageView */,
@@ -1246,6 +1268,9 @@
 				2352723814DA322900DDC7FA /* pfLogo_57.png in Resources */,
 				2352723914DA322900DDC7FA /* pfLogo_114.png in Resources */,
 				2352723A14DA322900DDC7FA /* pfLogo_low.png in Resources */,
+				2352724714DB19E200DDC7FA /* IndicatorImageOff.png in Resources */,
+				2352724814DB19E200DDC7FA /* IndicatorImageOn.png in Resources */,
+				2352724A14DB19E200DDC7FA /* IndicatorImageStale.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1356,6 +1381,7 @@
 				23D6F4A214D9DD3A0043C75E /* ItemGroupView.m in Sources */,
 				23D6F4A614D9E0490043C75E /* ItemGroupRenderer.m in Sources */,
 				23D6F4AB14D9F5340043C75E /* ItemGroupViewController.m in Sources */,
+				2352724214DB145600DDC7FA /* IndicatorView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

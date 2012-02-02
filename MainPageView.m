@@ -7,6 +7,7 @@
 //
 
 #import "MainPageView.h"
+#import "IndicatorView.h"
 
 @implementation MainPageView
 
@@ -18,11 +19,12 @@
 @synthesize createOrderButton;
 @synthesize favoriteOrderButton;
 @synthesize accountInfoButton;
-@synthesize greetingLabel;
 @synthesize orderStatus;
 @synthesize pendingOrderButton;
 @synthesize logo;
 @synthesize logoView;
+@synthesize openIndicator;
+@synthesize storeHours;
 
 
 - (id)initWithFrame:(CGRect)frame
@@ -33,10 +35,13 @@
         favoriteOrderButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         pendingOrderButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         accountInfoButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        greetingLabel = [[UILabel alloc] init];
         orderStatus = [[UILabel alloc] init];
+        openIndicator = [[IndicatorView alloc] init];
+        storeHours = [[UILabel alloc] init];
+        
         logo = [UIImage imageNamed:@"pfLogo"];
         logoView = [[UIImageView alloc] initWithImage:logo];
+        [storeHours setText:@"Store hours:"];
         
         [createOrderButton setTitle:@"New Order" forState:UIControlStateNormal];
         [createOrderButton setTitleColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.5] forState:UIControlStateDisabled];
@@ -56,14 +61,11 @@
         [createOrderButton setHidden:NO];
         [createOrderButton setEnabled:YES];
         
-        [greetingLabel setNumberOfLines:10];
-        [greetingLabel setText:\
-         @"Welcome to the Pita Factory App. Order below and skip the line."];
-        
         [orderStatus setText:@"Order status: No pending orders"];
         
         
-        
+        [self addSubview:storeHours];
+        [self addSubview:openIndicator];
         [self addSubview:createOrderButton];
         [self addSubview:favoriteOrderButton];
         [self addSubview:pendingOrderButton];
@@ -83,13 +85,10 @@
     [favoriteOrderButton setFrame:CGRectMake(20, 298, 280, 37)];
     [accountInfoButton setFrame:CGRectMake(20, 449, 280, 37)];
     [pendingOrderButton setFrame:CGRectMake(20, 343, 280, 37)];
-    //[greetingLabel setFrame:CGRectMake(20, 20, 280, 135)];
     [orderStatus setFrame:CGRectMake(20, 263, 280, 37)];
     [logoView setFrame:CGRectMake(75, 40,170, 170)];
-}
-
--(void)createOrderPressed{
-     
+    [openIndicator setFrame:CGRectMake(38, 225, 16, 16)];
+    [storeHours setFrame:CGRectMake(60, 214, 240, 37)];
 }
 
 @end
