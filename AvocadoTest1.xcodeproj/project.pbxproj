@@ -693,6 +693,7 @@
 			isa = PBXGroup;
 			children = (
 				237EC00B14BE5842009D9268 /* MenuComposites */,
+				D95B787114D2BE3400FC0F29 /* Location */,
 				D9768A6814D73EBC00BBA467 /* Payment */,
 			);
 			name = "Model Structure";
@@ -768,7 +769,6 @@
 			children = (
 				23FDE9CD14D8A9BB005AA6D6 /* ItemGroup.h */,
 				23FDE9CE14D8A9BB005AA6D6 /* ItemGroup.m */,
-				D95B787114D2BE3400FC0F29 /* Location */,
 			);
 			name = ItemGroup;
 			sourceTree = "<group>";
