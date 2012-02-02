@@ -70,8 +70,7 @@ static UIColor* errorLabelColor;
         
         cardholderNameField = [[UITextField alloc] initWithFrame:CGRectZero];
         [cardholderNameField setBorderStyle:UITextBorderStyleRoundedRect];
-        [cardholderNameField setEnablesReturnKeyAutomatically:YES];
-        [cardholderNameField setReturnKeyType:UIReturnKeyNext];
+        [cardholderNameField setClearButtonMode:UITextFieldViewModeWhileEditing];
         [cardholderNameField setPlaceholder:@"Card Holder Name"];
         [cardholderNameField setDelegate:self];
         [self addSubview:cardholderNameField];
@@ -84,9 +83,8 @@ static UIColor* errorLabelColor;
         
         cardnumberField = [[UITextField alloc] initWithFrame:CGRectZero];
         [cardnumberField setBorderStyle:UITextBorderStyleRoundedRect];
-        [cardnumberField setEnablesReturnKeyAutomatically:YES];
         [cardnumberField setKeyboardType:UIKeyboardTypeNumbersAndPunctuation];
-        [cardnumberField setReturnKeyType:UIReturnKeyNext];
+        [cardnumberField setClearButtonMode:UITextFieldViewModeWhileEditing];
         [cardnumberField setPlaceholder:@"Credit Card #"];
         [cardnumberField setDelegate:self];
         [cardnumberField setRightViewMode:UITextFieldViewModeAlways];
@@ -181,51 +179,50 @@ static UIColor* errorLabelColor;
     return currentYear + row;
 }
 
--(NSString*)flushCardholderName{
-    NSString* error = nil;
-    [paymentInfo setCardholderName:[cardholderNameField text] withValidationMessage:&error];
-    [self setErrorMessage:error onErrorLabel:cardholderNameErrorLabel];
-    return error;
+-(void)flushCardholderName{
+    [paymentInfo setCardholderName:[cardholderNameField text]];
+    [self setErrorMessage:[paymentInfo cardholderNameError] onErrorLabel:cardholderNameErrorLabel];
 }
 
--(NSString*)flushCardnumber{
-    NSString* error = nil;
-    [paymentInfo setCardnumber:[cardnumberField text] withValidationMessage:&error];
-    [self setErrorMessage:error onErrorLabel:cardnumberErrorLabel];
-    return error;
+-(void)flushCardnumber{
+    [paymentInfo setCardnumber:[cardnumberField text]];
+    [self setErrorMessage:[paymentInfo cardnumberError] onErrorLabel:cardnumberErrorLabel];
 }
 
--(NSString*)flushExpirationMonth{
-    NSString* error = nil;
-    [paymentInfo setExpirationMonth:[self monthForRow:[expiration selectedRowInComponent:Month]] withValidationMessage:&error];
-    [self setErrorMessage:error onErrorLabel:expirationErrorLabel];
-    return error;
+-(void)flushExpirationMonth{
+    [paymentInfo setExpirationMonth:[self monthForRow:[expiration selectedRowInComponent:Month]]];
+    [self setErrorMessage:[paymentInfo expirationError] onErrorLabel:expirationErrorLabel];
 }
 
--(NSString*)flushExpirationYear{
-    NSString* error = nil;
-    [paymentInfo setExpirationYear:[self yearForRow:[expiration selectedRowInComponent:Year]] withValidationMessage:&error];
-    [self setErrorMessage:error onErrorLabel:expirationErrorLabel];
-    return error;
+-(void)flushExpirationYear{
+    [paymentInfo setExpirationYear:[self yearForRow:[expiration selectedRowInComponent:Year]]];
+    [self setErrorMessage:[paymentInfo expirationError] onErrorLabel:expirationErrorLabel];
 }
 
 #pragma mark UITextFieldDelegate    
 
 -(BOOL)textFieldShouldReturn:(UITextField*)textField{
     if(textField == cardholderNameField){
-        if(![self flushCardholderName]){
-            [cardnumberField becomeFirstResponder];
-            return YES;
-        }
+        [self flushCardholderName];
+        [cardholderNameField resignFirstResponder];
+        return YES;
     } else if(textField == cardnumberField) {
-        if(![self flushCardnumber]){
-            [cardnumberField resignFirstResponder];
-            return YES;
-        }
+        [self flushCardnumber];
+        [cardnumberField resignFirstResponder];
     } else {
         NSAssert(NO, @"Got a message from a random text field!");
     }
     return NO;
+}
+
+-(void)textFieldDidEndEditing:(UITextField*)textField{
+    if(textField == cardholderNameField){
+        [self flushCardholderName];
+    } else if(textField == cardnumberField){
+        [self flushCardnumber];
+    } else {
+        NSAssert(NO, @"Got a message from a random text field (%@) !", textField);
+    }
 }
 
 #pragma mark UIPickerDataSource
@@ -267,7 +264,6 @@ static UIColor* errorLabelColor;
 }
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
-    NSString* error = nil;
     for(UITextField* textfield in [NSArray arrayWithObjects:cardholderNameField, cardnumberField, nil]){
         if([textfield isFirstResponder]){
             [textfield resignFirstResponder];
@@ -275,28 +271,27 @@ static UIColor* errorLabelColor;
     }
     switch (component) {
         case Year:
-            [paymentInfo setExpirationYear:[self yearForRow:row] withValidationMessage:&error];
+            [paymentInfo setExpirationYear:[self yearForRow:row]];
             break;
         case Month:
-            [paymentInfo setExpirationMonth:[self monthForRow:row] withValidationMessage:&error];
+            [paymentInfo setExpirationMonth:[self monthForRow:row]];
             break;    
         default:
             NSAssert(NO, @"Impossible index passed in %d", component);
     }
-    if(error){
-        [expirationLabel setText:[NSString stringWithFormat:@"Expiry Date (%@)", error]];
-    } else {
-        [expirationLabel setText:@"Expiry Date"];
-    }
+    [self setErrorMessage:[paymentInfo expirationError] onErrorLabel:expirationErrorLabel];
 }
 
 #pragma mark buttons
 
 -(void)done{
-    if(![self flushCardholderName] &&
-       ![self flushCardnumber] &&
-       ![self flushExpirationYear] &&
-       ![self flushExpirationMonth]){
+    [cardholderNameField resignFirstResponder];
+    [cardnumberField resignFirstResponder];
+    [self flushCardholderName];
+    [self flushCardnumber];
+    [self flushExpirationYear];
+    [self flushExpirationMonth];
+    if(![paymentInfo anyErrors]){
         [delegate paymentDone];
     }
 }

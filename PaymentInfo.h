@@ -11,15 +11,24 @@
 @interface PaymentInfo : NSObject{
     @private
     NSString* cardnumber;
+    NSString* cardnumberError;
     NSString* cardholderName;
+    NSString* cardholderError;
     NSInteger expirationMonth;
     NSInteger expirationYear;
+    NSString* expirationError;
 }
 
--(void)setCardnumber:(NSString*)number withValidationMessage:(NSString**)retErr;
--(void)setCardholderName:(NSString*)name withValidationMessage:(NSString**)retErr;
--(void)setExpirationMonth:(NSInteger)month withValidationMessage:(NSString**)retErr;
--(void)setExpirationYear:(NSInteger)year withValidationMessage:(NSString**)retErr;
+@property(retain, readonly)NSString* cardnumberError;
+@property(retain, readonly)NSString* cardholderNameError;
+@property(retain, readonly)NSString* expirationError;
+
+-(BOOL)anyErrors;
+
+-(void)setCardnumber:(NSString*)number;
+-(void)setCardholderName:(NSString*)name;
+-(void)setExpirationMonth:(NSInteger)month;
+-(void)setExpirationYear:(NSInteger)year;
 
 -(NSDictionary*)dictionaryRepresentation;
 

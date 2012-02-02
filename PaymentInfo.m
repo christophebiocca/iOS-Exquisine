@@ -11,6 +11,8 @@
 // Form-like object to validate all values in real time.
 @implementation PaymentInfo
 
+@synthesize cardholderNameError, cardnumberError, expirationError;
+
 static NSRegularExpression* creditCard;
 static NSRegularExpression* separator;
 
@@ -35,12 +37,27 @@ static NSRegularExpression* separator;
     }
 }
 
--(void)setCardnumber:(NSString *)number withValidationMessage:(NSString**)retErr{
+-(id)init{
+    if(self = [super init]){
+        [self setCardnumber:nil];
+        [self setCardholderName:nil];
+        [self setExpirationYear:0];
+        [self setExpirationMonth:0];
+    }
+    return self;
+}
+
+-(void)setCardnumber:(NSString *)number{
     cardnumber = number;
+    cardnumberError = nil;
+    if(!cardnumber || ![cardnumber length]){
+        cardnumberError = @"This field is required";
+        return;
+    }
     if(![creditCard firstMatchInString:cardnumber 
                                options:NSMatchingAnchored 
                                  range:NSMakeRange(0, [cardnumber length])]){
-        *retErr = @"Must be a credit card number.";
+        cardnumberError = @"Must be a credit card number";
         return;
     }
     NSString* cleaned = [separator stringByReplacingMatchesInString:cardnumber 
@@ -48,28 +65,56 @@ static NSRegularExpression* separator;
                                                               range:NSMakeRange(0, [cardnumber length]) 
                                                        withTemplate:@""];
     NSInteger sum = 0;
-    for(int i=[cleaned length]-1; i >= 0 ; --i) {
-        unichar c = [cleaned characterAtIndex:i];
+    NSUInteger length = [cleaned length];
+    for(int i=0; i < length ; ++i) {
+        unichar c = [cleaned characterAtIndex:(length - i) - 1];
         DebugLog(@"#cc: %c", c);
         NSInteger value = c - 48;
         if(i%2) value *= 2;
         sum += (value / 10) + (value % 10);
     }
     if(sum %= 10){
-        DebugLog(@"Invalid lunh checksum %d" % sum);
+        DebugLog(@"Invalid lunh checksum %d", sum);
+        cardnumberError = @"This number is invalid";
     }
 }
 
--(void)setCardholderName:(NSString *)name withValidationMessage:(NSString**)retErr{
+-(void)setCardholderName:(NSString *)name{
     cardholderName = name;
+    cardholderNameError = nil;
+    if(!cardholderName || ![cardholderName length]){
+        cardholderNameError = @"This field is required";
+    }
 }
 
--(void)setExpirationMonth:(NSInteger)month withValidationMessage:(NSString**)retErr{
+-(void)checkDate{
+    NSDate* today = [NSDate new];
+    NSDate* actualExpiration;
+    {
+        NSDateComponents* oneMonth = [NSDateComponents new];
+        [oneMonth setMonth:1];
+        NSDateComponents* expirationComponents = [NSDateComponents new];
+        [expirationComponents setDay:1];
+        [expirationComponents setMonth:expirationMonth];
+        [expirationComponents setYear:expirationYear];
+        NSDate* expirationMonthStart = [[NSCalendar currentCalendar] dateFromComponents:expirationComponents];
+        actualExpiration = [[NSCalendar currentCalendar] dateByAddingComponents:oneMonth toDate:expirationMonthStart options:0];
+    }
+    if([today compare:actualExpiration] != NSOrderedAscending){
+        expirationError = @"Already Expired";
+    }
+}
+
+-(void)setExpirationMonth:(NSInteger)month{
     expirationMonth = month;
+    expirationError = nil;
+    [self checkDate];
 }
 
--(void)setExpirationYear:(NSInteger)year withValidationMessage:(NSString**)retErr{
+-(void)setExpirationYear:(NSInteger)year{
     expirationYear = year;
+    expirationError = nil;
+    [self checkDate];
 }
 
 -(NSDictionary*)dictionaryRepresentation{
@@ -79,6 +124,10 @@ static NSRegularExpression* separator;
             [NSNumber numberWithInt:expirationMonth], @"expiry_month",
             [NSNumber numberWithInt:expirationYear], @"expiry_year",
             nil];
+}
+
+-(BOOL)anyErrors{
+    return cardnumberError || cardholderNameError || expirationError;
 }
 
 @end
