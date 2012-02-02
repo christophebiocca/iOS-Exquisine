@@ -25,6 +25,7 @@
     Order *currentOrder;
     NSMutableArray *ordersHistory;
     NSMutableArray *favoriteOrders;
+    NSArray* locations;
     
 }
 
