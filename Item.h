@@ -46,5 +46,7 @@ extern NSString* ITEM_MODIFIED;
 
 -(void) optionAltered;
 
+-(NSString *) reducedName;
+
 @end
 

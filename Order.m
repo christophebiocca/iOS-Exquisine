@@ -306,4 +306,21 @@ NSString* ORDER_ITEMS_MODIFIED = @"CroutonLabs/OrderModified";
     
 }
 
+-(NSString *)defaultFavName
+{
+    NSMutableString *output = [[NSMutableString alloc] init];
+    
+    [output appendString:[[itemList objectAtIndex:0] reducedName]];
+    
+    //lol, what a bad way to do this.
+    int i = 0;
+    for (Item *anItem in itemList) {
+        if (!((i > 2 )||(i == 0)))
+            [output appendFormat:@", %@",[anItem reducedName]];
+        i++;
+    }
+    
+    return output;
+}
+
 @end

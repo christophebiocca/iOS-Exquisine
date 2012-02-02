@@ -55,9 +55,6 @@
         [pendingOrderButton setTitleColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.5] forState:UIControlStateDisabled];
         [pendingOrderButton setEnabled:NO];
         
-        [createOrderButton addTarget:self action:@selector(createOrderPressed) 
-         forControlEvents:UIControlEventTouchUpInside]; 
-        
         [createOrderButton setHidden:NO];
         [createOrderButton setEnabled:YES];
         

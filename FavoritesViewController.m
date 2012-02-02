@@ -85,6 +85,11 @@
     [delegate submitOrderForController:orderViewController];
 }
 
+-(NSInteger)numberOfFavorites
+{
+    [delegate numberOfFavorites];
+}
+
 -(BOOL)hasServerConnection
 {
     return [delegate hasServerConnection];

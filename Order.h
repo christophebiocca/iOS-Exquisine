@@ -79,4 +79,6 @@ extern NSString* ORDER_ITEMS_MODIFIED;
 
 -(void) reSort;
 
+-(NSString *) defaultFavName;
+
 @end

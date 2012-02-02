@@ -173,11 +173,11 @@
     
     [GetLocations getLocationsForRestaurant:RESTAURANT_ID 
                                     success:^(GetLocations* call) {
-                                        NSArray* locations = [call locations];
-                                        NSAssert([locations count] != 0, @"Not a single location to order from!");
-                                        NSAssert([locations count] == 1, @"Too many locations, and no way to choose from them!");
+                                        NSArray* restaurantLocations = [call locations];
+                                        NSAssert([restaurantLocations count] != 0, @"Not a single location to order from!");
+                                        NSAssert([restaurantLocations count] == 1, @"Too many locations, and no way to choose from them!");
                                         @synchronized(self){
-                                            location = [locations lastObject];
+                                            location = [restaurantLocations lastObject];
                                             order();
                                         }
                                     } failure:^(GetLocations* call, NSError* error) {
@@ -193,6 +193,12 @@
         currentOrder = [[Order alloc] initWithParentMenu:theMenu];
     }
 }
+
+-(NSInteger)numberOfFavorites
+{
+    return [favoriteOrders count];
+}
+
 -(void)addToFavoritesForController:(id)orderViewController
 {
     

@@ -14,6 +14,7 @@
 -(void) submitOrderForController:(OrderViewController *)orderViewController;
 -(void) addToFavoritesForController:(OrderViewController *)orderViewController;
 -(void) deleteFromFavoritesForController:(OrderViewController *)orderViewController;
+-(NSInteger) numberOfFavorites;
 -(BOOL) hasServerConnection;
 
 @end

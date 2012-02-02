@@ -43,7 +43,6 @@
 -(void)renameOrder:(NSString *)newName
 {
     [orderInfo setName:newName];
-    [[self navigationItem] setTitle:newName];
 }
 
 -(void)displayOrderConfirmation
@@ -84,10 +83,35 @@
     }
     
     
-    AlertPrompt *renamePrompt = [[AlertPrompt alloc] initWithPromptTitle:@"Choose a name for your order" message:orderInfo.name delegate:self cancelButtonTitle:@"Cancel" okButtonTitle:@"OK"];
+    AlertPrompt *renamePrompt = [[AlertPrompt alloc] initWithPromptTitle:@"Choose a name for your order" message:@"a" delegate:self cancelButtonTitle:@"Cancel" okButtonTitle:@"OK"];
+    
+    
     [renamePrompt setTag:2];
     
     [renamePrompt show];
+    
+    
+}
+
+-(void)didPresentAlertView:(UIAlertView *)alertView
+{
+    if ([alertView tag] == 2) {
+        //All this hackery is just to highlight the text by default.
+        
+        AlertPrompt *renamePrompt = (id)alertView;
+        
+        NSString *defaultName = [NSString stringWithString:[orderInfo defaultFavName]];
+        
+        [[renamePrompt textField] setText:defaultName];
+        
+        UITextField* field = [renamePrompt textField];
+        
+        UITextRange *textRange = [field 
+                                  textRangeFromPosition:[field beginningOfDocument] 
+                                  toPosition:[field endOfDocument]];
+        
+        [field setSelectedTextRange:textRange];
+    }
 }
 
 -(void)promptForFavDeletion

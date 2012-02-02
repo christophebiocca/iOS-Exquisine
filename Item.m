@@ -162,4 +162,17 @@ NSString* ITEM_MODIFIED = @"CroutonLabs/ItemModified";
     [[NSNotificationCenter defaultCenter] postNotificationName:ITEM_MODIFIED object:self];
 }
 
+-(NSString *)reducedName
+{
+    
+    NSRegularExpression* firstPart = [NSRegularExpression 
+                                      regularExpressionWithPattern:@"\\A\\S+" 
+                                      options:0 
+                                      error:nil];
+    
+    NSTextCheckingResult* match = [firstPart firstMatchInString:name options:0 range:NSMakeRange(0, [name length])];
+    
+    return [name substringWithRange:[match range]];
+}
+
 @end
