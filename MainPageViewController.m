@@ -69,6 +69,16 @@
     [self setView:mainPageView];
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    [GetLocations getLocationsForRestaurant:RESTAURANT_ID 
+                                    success:^(GetLocations* call) {
+                                        locations = [call locations];
+                                    }
+                                    failure:^(GetLocations* call, NSError* error) {
+                                        NSLog(@"Can't fetch locations:\n%@", error);
+                                    }];
+}
+
 - (void)viewDidUnload
 {
     [super viewDidUnload];
