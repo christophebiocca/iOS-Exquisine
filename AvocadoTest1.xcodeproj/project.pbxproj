@@ -484,13 +484,7 @@
 		23658CB114BDFB15002C0996 = {
 			isa = PBXGroup;
 			children = (
-				38CFAE9C14D9CAB5000A679D /* LocalyticsDatabase.h */,
-				38CFAE9D14D9CAB5000A679D /* LocalyticsDatabase.m */,
-				38CFAE9E14D9CAB5000A679D /* LocalyticsSession.h */,
-				38CFAE9F14D9CAB5000A679D /* LocalyticsSession.m */,
-				38CFAEA014D9CAB6000A679D /* UploaderThread.h */,
-				38CFAEA114D9CAB6000A679D /* UploaderThread.m */,
-				38CFAEA214D9CAB6000A679D /* WebserviceConstants.h */,
+				38CFAEA614D9D7A8000A679D /* Localytics */,
 				38CFAE9A14D9C70B000A679D /* libsqlite3.dylib */,
 				38CFAE9814D9C6F2000A679D /* libz.dylib */,
 				232C795114CDF5AB00C3868D /* AlertPrompt */,
@@ -1049,6 +1043,20 @@
 				23FDE9D314D8B3D6005AA6D6 /* ItemGroupCell.m */,
 			);
 			name = ItemGroupCell;
+			sourceTree = "<group>";
+		};
+		38CFAEA614D9D7A8000A679D /* Localytics */ = {
+			isa = PBXGroup;
+			children = (
+				38CFAE9C14D9CAB5000A679D /* LocalyticsDatabase.h */,
+				38CFAE9D14D9CAB5000A679D /* LocalyticsDatabase.m */,
+				38CFAE9E14D9CAB5000A679D /* LocalyticsSession.h */,
+				38CFAE9F14D9CAB5000A679D /* LocalyticsSession.m */,
+				38CFAEA014D9CAB6000A679D /* UploaderThread.h */,
+				38CFAEA214D9CAB6000A679D /* WebserviceConstants.h */,
+				38CFAEA114D9CAB6000A679D /* UploaderThread.m */,
+			);
+			name = Localytics;
 			sourceTree = "<group>";
 		};
 		38D4132C14D3321C00031B60 /* Images */ = {
