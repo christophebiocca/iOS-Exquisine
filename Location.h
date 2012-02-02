@@ -27,5 +27,7 @@ typedef enum StoreState {
 -(NSDate*)closesOnDay:(NSDate*)date;
 -(NSDate*)opensToday;
 -(NSDate*)closesToday;
+-(NSDate*)nextOpen;
+-(NSDate*)nextClose;
 
 @end
