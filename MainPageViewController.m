@@ -221,6 +221,8 @@
     
     [self doFavoriteConsistancyCheck];
     
+    [orderViewController viewWillAppear:YES];
+    
     //Move view control to the favorites view.
     
     FavoritesViewController *favoritesViewController = [[FavoritesViewController alloc] initWithFavoritesListAndMenu:favoriteOrders :theMenu];

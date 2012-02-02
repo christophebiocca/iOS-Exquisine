@@ -74,6 +74,15 @@
 
 -(void)promptUserForRename
 {
+    if([[orderInfo itemList] count] == 0)
+    {
+        UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Oops" message:@"You havn't selected any items." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+        
+        [areYouSure show];
+        
+        return;
+    }
+    
     
     AlertPrompt *renamePrompt = [[AlertPrompt alloc] initWithPromptTitle:@"Choose a name for your order" message:orderInfo.name delegate:self cancelButtonTitle:@"Cancel" okButtonTitle:@"OK"];
     [renamePrompt setTag:2];
@@ -212,6 +221,8 @@
     [menuInfo setAssociatedOrder:orderInfo];
     [orderInfo setParentMenu:menuInfo];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orderAltered) name:ORDER_ITEMS_MODIFIED object:orderInfo];
+    
     [[orderView orderTable] reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
     if([orderInfo isFavorite])
     {
@@ -301,6 +312,8 @@
         [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Favourite Deletion Prompt"];
         [self promptForFavDeletion];
     }
+    
+    
 }
 
 -(void)orderAltered
