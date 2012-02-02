@@ -20,6 +20,7 @@
 #import "ItemRenderer.h"
 #import "CellData.h"
 #import "MenuRenderer.h"
+#import "LocalyticsSession.h"
 
 @implementation OrderViewController
 
@@ -287,10 +288,12 @@
 {
     if (!orderInfo.isFavorite)
     {
+        [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Favourite Rename Prompt"];
         [self promptUserForRename];
     }
     else
     {
+        [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Favourite Deletion Prompt"];
         [self promptForFavDeletion];
     }
 }
