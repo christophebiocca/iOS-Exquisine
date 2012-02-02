@@ -1,25 +1,18 @@
 //
-//  PaymentInfoViewController.m
+//  PaymentProcessingViewController.m
 //  AvocadoTest1
 //
-//  Created by Christophe Biocca on 12-01-30.
+//  Created by Christophe Biocca on 12-02-02.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "PaymentInfoViewController.h"
-#import "PaymentView.h"
-#import "PaymentInfo.h"
-#import "PaymentError.h"
-#import "GetLocations.h"
+#import "PaymentProcessingViewController.h"
+#import "PaymentProcessingView.h"
 
-@implementation PaymentInfoViewController
+@implementation PaymentProcessingViewController
 
-- (id)initWithCompletionBlock:(void(^)(PaymentInfo*))completion 
-            cancellationBlock:(void(^)())cancelled
-{
-    if (self = [super init]) {
-        completionBlock = [completion copy];
-        cancelledBlock = [cancelled copy];
+-(id)init{
+    if(self = [super initWithNibName:nil bundle:nil]){
     }
     return self;
 }
@@ -37,24 +30,16 @@
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView
 {
-    paymentView = [[PaymentView alloc] init];
-    [self setView:paymentView];
+    [self setView:[[PaymentProcessingView alloc] init]];
 }
 
+/*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [paymentView setDelegate:self];
 }
-
--(void)paymentDone{
-    completionBlock([paymentView paymentInfo]);
-}
-
--(void)paymentCancelled{
-    cancelledBlock();
-}
+*/
 
 - (void)viewDidUnload
 {
@@ -67,10 +52,6 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
--(void)setError:(PaymentError*)error{
-    NSLog(@"%@", error);
 }
 
 @end

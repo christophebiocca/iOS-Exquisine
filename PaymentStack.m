@@ -7,11 +7,11 @@
 //
 
 #import "PaymentStack.h"
-
-@implementation PaymentStack
-
 #import "GetLocations.h"
 #import "PaymentInfoViewController.h"
+#import "PaymentProcessingViewController.h"
+#import "PlaceOrder.h"
+#import "PaymentCompleteViewController.h"
 
 @interface PaymentStack(PrivateMethods)
 
@@ -19,11 +19,14 @@
 @property(retain, readonly)PaymentProcessingViewController* processingController;
 @property(retain, readonly)PaymentCompleteViewController* completionController;
 
+-(void)sendOrder:(PaymentInfo*)payment;
+
 @end
 
 @implementation PaymentStack
 
 - (id)initWithOrder:(Order*)orderToPlace
+           location:(Location*)locationToUse 
     completionBlock:(void(^)())completion 
   cancellationBlock:(void(^)())cancelled
 {
@@ -46,12 +49,24 @@
     if(!paymentInfoController){
         paymentInfoController = [[PaymentInfoViewController alloc] initWithCompletionBlock:^(PaymentInfo* info){
             [[self navigationController] pushViewController:[self processingController] animated:YES];
-        }
-                                                 cancellationBlock:^{
-                                                     cancelledBlock();
-                                                 }];
+            [self sendOrder:info];
+        } cancellationBlock:^{
+            cancelledBlock();
+        }];
     }
     return paymentInfoController;
+}
+
+-(void)sendOrder:(PaymentInfo*)info{
+    [PlaceOrder sendOrder:order toLocation:location withPaymentInfo:info 
+           paymentSuccess:^(PaymentSuccessInfo* success){
+               PaymentCompleteViewController* complete = [self completionController];
+               [complete setSuccessInfo:success];
+               [[self navigationController] pushViewController:complete animated:YES];
+           } 
+           paymentFailure:^(PaymentError* error){
+               [[self paymentInfoController] setError:error];
+           }];
 }
 
 -(PaymentProcessingViewController*)processingController{

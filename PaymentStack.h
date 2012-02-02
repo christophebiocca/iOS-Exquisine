@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface PaymentStack : NSObject
 @class Order;
 @class Location;
 @class PaymentInfoViewController;
@@ -17,14 +16,12 @@
 
 @interface PaymentStack : NSObject<UINavigationControllerDelegate>{
     Order* order;
+    Location* location;
     
     UINavigationController* navigationController;
     PaymentInfoViewController* paymentInfoController;
     PaymentProcessingViewController* processingController;
     PaymentCompleteViewController* completionController;
-    
-    Location* location;
-    NSError* locationError;
     
     void(^completionBlock)();
     void(^cancelledBlock)();
@@ -32,6 +29,6 @@
 
 @property(retain, readonly)UINavigationController* navigationController;
 
--(id)initWithOrder:(Order*)order completionBlock:(void(^)())completion cancellationBlock:(void(^)())cancelled;
+-(id)initWithOrder:(Order*)order location:(Location*)locationToUse completionBlock:(void(^)())completion cancellationBlock:(void(^)())cancelled;
 
 @end

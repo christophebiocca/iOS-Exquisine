@@ -101,8 +101,14 @@
 		38CFAEA414D9CAB6000A679D /* LocalyticsSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CFAE9F14D9CAB5000A679D /* LocalyticsSession.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		38CFAEA514D9CAB6000A679D /* UploaderThread.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CFAEA114D9CAB6000A679D /* UploaderThread.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		38D4133014D3324200031B60 /* pfLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 38D4132E14D3324200031B60 /* pfLogo.png */; };
-		D92D24BA14DB138F007B5890 /* OpeningHours.m in Sources */ = {isa = PBXBuildFile; fileRef = D92D24B914DB138F007B5890 /* OpeningHours.m */; };
 		D92D249C14DAFA1F007B5890 /* PaymentStack.m in Sources */ = {isa = PBXBuildFile; fileRef = D92D249B14DAFA1F007B5890 /* PaymentStack.m */; };
+		D92D24BA14DB138F007B5890 /* OpeningHours.m in Sources */ = {isa = PBXBuildFile; fileRef = D92D24B914DB138F007B5890 /* OpeningHours.m */; };
+		D92D24C914DB363E007B5890 /* PaymentProcessingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D92D24C814DB363E007B5890 /* PaymentProcessingViewController.m */; };
+		D92D24CD14DB368E007B5890 /* PaymentCompleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D92D24CC14DB368E007B5890 /* PaymentCompleteViewController.m */; };
+		D92D24D014DB3744007B5890 /* PaymentSuccessInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D92D24CF14DB3744007B5890 /* PaymentSuccessInfo.m */; };
+		D92D24D414DB375B007B5890 /* PaymentError.m in Sources */ = {isa = PBXBuildFile; fileRef = D92D24D314DB375B007B5890 /* PaymentError.m */; };
+		D933EF1614DB566D00B0BDC7 /* PaymentProcessingView.m in Sources */ = {isa = PBXBuildFile; fileRef = D933EF1514DB566D00B0BDC7 /* PaymentProcessingView.m */; };
+		D933EF1A14DB568400B0BDC7 /* PaymentCompletedView.m in Sources */ = {isa = PBXBuildFile; fileRef = D933EF1914DB568400B0BDC7 /* PaymentCompletedView.m */; };
 		D95B786014D2511E00FC0F29 /* Login.m in Sources */ = {isa = PBXBuildFile; fileRef = D95B785F14D2511E00FC0F29 /* Login.m */; };
 		D95B786514D252F400FC0F29 /* CredentialsStore.m in Sources */ = {isa = PBXBuildFile; fileRef = D95B786414D252F400FC0F29 /* CredentialsStore.m */; };
 		D95B786714D2558800FC0F29 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D95B786614D2558800FC0F29 /* Security.framework */; };
@@ -298,10 +304,22 @@
 		38CFAEA114D9CAB6000A679D /* UploaderThread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UploaderThread.m; path = localytics/UploaderThread.m; sourceTree = "<group>"; };
 		38CFAEA214D9CAB6000A679D /* WebserviceConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebserviceConstants.h; path = localytics/WebserviceConstants.h; sourceTree = "<group>"; };
 		38D4132E14D3324200031B60 /* pfLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pfLogo.png; sourceTree = "<group>"; };
-		D92D24B814DB138F007B5890 /* OpeningHours.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpeningHours.h; sourceTree = "<group>"; };
-		D92D24B914DB138F007B5890 /* OpeningHours.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpeningHours.m; sourceTree = "<group>"; };
 		D92D249A14DAFA1F007B5890 /* PaymentStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentStack.h; sourceTree = "<group>"; };
 		D92D249B14DAFA1F007B5890 /* PaymentStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentStack.m; sourceTree = "<group>"; };
+		D92D24B814DB138F007B5890 /* OpeningHours.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpeningHours.h; sourceTree = "<group>"; };
+		D92D24B914DB138F007B5890 /* OpeningHours.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpeningHours.m; sourceTree = "<group>"; };
+		D92D24C714DB363E007B5890 /* PaymentProcessingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentProcessingViewController.h; sourceTree = "<group>"; };
+		D92D24C814DB363E007B5890 /* PaymentProcessingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentProcessingViewController.m; sourceTree = "<group>"; };
+		D92D24CB14DB368E007B5890 /* PaymentCompleteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentCompleteViewController.h; sourceTree = "<group>"; };
+		D92D24CC14DB368E007B5890 /* PaymentCompleteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentCompleteViewController.m; sourceTree = "<group>"; };
+		D92D24CE14DB3744007B5890 /* PaymentSuccessInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentSuccessInfo.h; sourceTree = "<group>"; };
+		D92D24CF14DB3744007B5890 /* PaymentSuccessInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentSuccessInfo.m; sourceTree = "<group>"; };
+		D92D24D214DB375B007B5890 /* PaymentError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentError.h; sourceTree = "<group>"; };
+		D92D24D314DB375B007B5890 /* PaymentError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentError.m; sourceTree = "<group>"; };
+		D933EF1414DB566D00B0BDC7 /* PaymentProcessingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentProcessingView.h; sourceTree = "<group>"; };
+		D933EF1514DB566D00B0BDC7 /* PaymentProcessingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentProcessingView.m; sourceTree = "<group>"; };
+		D933EF1814DB568400B0BDC7 /* PaymentCompletedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentCompletedView.h; sourceTree = "<group>"; };
+		D933EF1914DB568400B0BDC7 /* PaymentCompletedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentCompletedView.m; sourceTree = "<group>"; };
 		D945ABC914D8D757007DCC32 /* PaymentViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentViewDelegate.h; sourceTree = "<group>"; };
 		D95B785E14D2511E00FC0F29 /* Login.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Login.h; sourceTree = "<group>"; };
 		D95B785F14D2511E00FC0F29 /* Login.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Login.m; sourceTree = "<group>"; };
@@ -1063,8 +1081,10 @@
 		23DA7A8114C6462C008281DD /* OtherViews */ = {
 			isa = PBXGroup;
 			children = (
-				D9768A7A14D74A8A00BBA467 /* PaymentInfoView */,
+				D9768A7A14D74A8A00BBA467 /* PaymentViews */,
 				2352723F14DB13DF00DDC7FA /* IndicatorView */,
+				2352723F14DB13DF00DDC7FA /* IndicatorView */,
+				D9768A7A14D74A8A00BBA467 /* PaymentViews */,
 				D9768A7A14D74A8A00BBA467 /* PaymentViews */,
 				232C796214CF716800C3868D /* FavoritesView */,
 				23DA7A8214C64656008281DD /* MainPageView */,
@@ -1161,6 +1181,10 @@
 			children = (
 				D9768A6314D73EB300BBA467 /* PaymentInfoViewController.h */,
 				D9768A6414D73EB300BBA467 /* PaymentInfoViewController.m */,
+				D92D24C714DB363E007B5890 /* PaymentProcessingViewController.h */,
+				D92D24C814DB363E007B5890 /* PaymentProcessingViewController.m */,
+				D92D24CB14DB368E007B5890 /* PaymentCompleteViewController.h */,
+				D92D24CC14DB368E007B5890 /* PaymentCompleteViewController.m */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -1192,6 +1216,10 @@
 			children = (
 				D9768A6114D73EB300BBA467 /* PaymentInfo.h */,
 				D9768A6214D73EB300BBA467 /* PaymentInfo.m */,
+				D92D24CE14DB3744007B5890 /* PaymentSuccessInfo.h */,
+				D92D24CF14DB3744007B5890 /* PaymentSuccessInfo.m */,
+				D92D24D214DB375B007B5890 /* PaymentError.h */,
+				D92D24D314DB375B007B5890 /* PaymentError.m */,
 			);
 			name = Payment;
 			sourceTree = "<group>";
@@ -1212,6 +1240,10 @@
 				D945ABC914D8D757007DCC32 /* PaymentViewDelegate.h */,
 				D9768A7C14D74AAD00BBA467 /* PaymentView.h */,
 				D9768A7D14D74AAD00BBA467 /* PaymentView.m */,
+				D933EF1414DB566D00B0BDC7 /* PaymentProcessingView.h */,
+				D933EF1514DB566D00B0BDC7 /* PaymentProcessingView.m */,
+				D933EF1814DB568400B0BDC7 /* PaymentCompletedView.h */,
+				D933EF1914DB568400B0BDC7 /* PaymentCompletedView.m */,
 			);
 			name = PaymentViews;
 			sourceTree = "<group>";
@@ -1415,6 +1447,12 @@
 				2352724214DB145600DDC7FA /* IndicatorView.m in Sources */,
 				D92D24BA14DB138F007B5890 /* OpeningHours.m in Sources */,
 				D92D249C14DAFA1F007B5890 /* PaymentStack.m in Sources */,
+				D92D24C914DB363E007B5890 /* PaymentProcessingViewController.m in Sources */,
+				D92D24CD14DB368E007B5890 /* PaymentCompleteViewController.m in Sources */,
+				D92D24D014DB3744007B5890 /* PaymentSuccessInfo.m in Sources */,
+				D92D24D414DB375B007B5890 /* PaymentError.m in Sources */,
+				D933EF1614DB566D00B0BDC7 /* PaymentProcessingView.m in Sources */,
+				D933EF1A14DB568400B0BDC7 /* PaymentCompletedView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

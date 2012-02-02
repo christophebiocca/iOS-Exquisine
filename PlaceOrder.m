@@ -11,10 +11,15 @@
 #import "Order.h"
 #import "Location.h"
 #import "PaymentInfo.h"
+#import "PaymentSuccessInfo.h"
+#import "PaymentError.h"
 
 @implementation PlaceOrder
 
-+(void)sendOrder:(Order*)order toLocation:(Location*)location withPaymentInfo:(PaymentInfo*)paymentInfo{
++(void)sendOrder:(Order*)order toLocation:(Location*)location 
+ withPaymentInfo:(PaymentInfo*)paymentInfo
+  paymentSuccess:(void(^)(PaymentSuccessInfo*))success
+  paymentFailure:(void(^)(PaymentError*))error{
     NSMutableDictionary* placement = [NSMutableDictionary dictionaryWithCapacity:3];
     [placement setObject:[order orderRepresentation] forKey:@"order"];
     [placement setObject:[location primaryKey] forKey:@"location"];

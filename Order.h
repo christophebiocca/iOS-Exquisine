@@ -75,7 +75,7 @@ extern NSString* ORDER_ITEMS_MODIFIED;
 
 -(BOOL) isEffectivelySameAs:(Order *) anOrder;
 
--(void)submitToLocation:(Location*)location withPaymentInfo:(PaymentInfo*)paymentInfo;
+-(void)submit;
 
 -(void) reSort;
 
