@@ -34,13 +34,7 @@
 
         [networkChecker startNotifier];
         
-        [GetMenu getMenuForRestaurant:RESTAURANT_ID
-                              success:^(GetMenu* menuCall){
-                                  theMenu = [menuCall menu];
-                              }
-                              failure:^(GetMenu* menuCall, NSError* error){
-                                  NSLog(@"call %@ errored with %@", menuCall, error);
-                              }];        
+        [self initiateMenuRefresh];      
         
         [self loadDataFromDisk];
         
@@ -256,15 +250,7 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    
-    [GetMenu getMenuForRestaurant:RESTAURANT_ID
-                          success:^(GetMenu* menuCall){
-                              theMenu = [menuCall menu];
-                          }
-                          failure:^(GetMenu* menuCall, NSError* error){
-                              NSLog(@"call %@ errored with %@", menuCall, error);
-                          }];    
+    [super viewWillAppear:animated];  
     
     //We need to do this in case a favorited order was modified, but not removed.
     [self doFavoriteConsistancyCheck];
@@ -280,13 +266,26 @@
         [mainPageView.pendingOrderButton setEnabled:NO];
     }
     
-    if ([currentOrder.itemList count] > 0 )
+    [self updateCreateButtonState];
+}
+
+-(void) updateCreateButtonState
+{
+    if (theMenu)
     {
-        [mainPageView.createOrderButton setTitle:@"Continue Order" forState:UIControlStateNormal];
+        if ([currentOrder.itemList count] > 0 )
+        {
+            [mainPageView.createOrderButton setTitle:@"Continue Order" forState:UIControlStateNormal];
+        }
+        else
+        {
+            [mainPageView.createOrderButton setTitle:@"New Order" forState:UIControlStateNormal];
+        }        
+        [mainPageView.createOrderButton setEnabled:YES];
     }
     else
     {
-        [mainPageView.createOrderButton setTitle:@"New Order" forState:UIControlStateNormal];
+        [mainPageView.createOrderButton setEnabled:NO];
     }
 }
 
@@ -315,6 +314,8 @@
     currentOrder = [rootObject valueForKey:@"current_order"];
     ordersHistory = [rootObject valueForKey:@"order_history"];
     favoriteOrders = [rootObject valueForKey:@"favorite_orders"];
+    
+    [self updateCreateButtonState];
 }
 
 -(void)saveDataToDisk
@@ -355,6 +356,18 @@
         [returnList addObject:currentOrder];
     
     return returnList;
+}
+
+-(void)initiateMenuRefresh
+{
+    [GetMenu getMenuForRestaurant:RESTAURANT_ID
+            success:^(GetMenu* menuCall){
+                theMenu = [menuCall menu];
+                [self updateCreateButtonState];
+            }
+            failure:^(GetMenu* menuCall, NSError* error){
+                NSLog(@"call %@ errored with %@", menuCall, error);
+            }];  
 }
 
 -(BOOL)hasServerConnection

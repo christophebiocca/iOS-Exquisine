@@ -39,8 +39,13 @@
         logoView = [[UIImageView alloc] initWithImage:logo];
         
         [createOrderButton setTitle:@"New Order" forState:UIControlStateNormal];
+        [createOrderButton setTitleColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.5] forState:UIControlStateDisabled];
+        [createOrderButton setTitle:@"Fetching Menu..." forState:UIControlStateDisabled];
+        
         [favoriteOrderButton setTitle:@"Favorites" forState:UIControlStateNormal];
+        
         [accountInfoButton setTitle:@"Account Information" forState:UIControlStateNormal];
+        
         [pendingOrderButton setTitle: @"Order status: No pending orders" forState:UIControlStateDisabled];
         [pendingOrderButton setTitleColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.5] forState:UIControlStateDisabled];
         [pendingOrderButton setEnabled:NO];

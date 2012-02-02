@@ -44,4 +44,8 @@
 
 -(NSArray *) allKnownOrders;
 
+-(void) updateCreateButtonState;
+
+-(void) initiateMenuRefresh;
+
 @end
