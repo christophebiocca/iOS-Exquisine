@@ -26,7 +26,7 @@
 @implementation PaymentStack
 
 - (id)initWithOrder:(Order*)orderToPlace
-           location:(Location*)locationToUse 
+          locations:(NSArray*)locations 
     completionBlock:(void(^)())completion 
   cancellationBlock:(void(^)())cancelled
 {
@@ -34,6 +34,9 @@
         order = orderToPlace;
         completionBlock = [completion copy];
         cancelledBlock = [cancelled copy];
+        NSAssert([locations count] == 1, @"Expected exactly one location. (Got %@)", locations);
+        location = [locations lastObject];
+        postAnimation = [NSMutableArray new];
     }
     return self;
 }
@@ -41,6 +44,8 @@
 -(UINavigationController*)navigationController{
     if(!navigationController){
         navigationController = [[UINavigationController alloc] initWithRootViewController:[self paymentInfoController]];
+        [navigationController setNavigationBarHidden:YES];
+        [navigationController setDelegate:self];
     }
     return navigationController;
 }
@@ -48,7 +53,9 @@
 -(PaymentInfoViewController*)paymentInfoController{
     if(!paymentInfoController){
         paymentInfoController = [[PaymentInfoViewController alloc] initWithCompletionBlock:^(PaymentInfo* info){
-            [[self navigationController] pushViewController:[self processingController] animated:YES];
+            [self afterAnimating:^{
+                [[self navigationController] pushViewController:[self processingController] animated:YES];
+            }];
             [self sendOrder:info];
         } cancellationBlock:^{
             cancelledBlock();
@@ -62,25 +69,68 @@
            paymentSuccess:^(PaymentSuccessInfo* success){
                PaymentCompleteViewController* complete = [self completionController];
                [complete setSuccessInfo:success];
-               [[self navigationController] pushViewController:complete animated:YES];
+               [self afterAnimating:^{
+                   [[self navigationController] pushViewController:complete animated:YES];
+               }];
            } 
            paymentFailure:^(PaymentError* error){
-               [[self paymentInfoController] setError:error];
+               PaymentInfoViewController* info = [self paymentInfoController];
+               [info setError:error];
+               [self performSelector:@selector(afterAnimating:) withObject:[^{
+                   [[self navigationController] popToViewController:info animated:YES];
+               } copy] afterDelay:2];
            }];
 }
 
 -(PaymentProcessingViewController*)processingController{
     if(!processingController){
-        
+        processingController = [[PaymentProcessingViewController alloc] init];
     }
     return processingController;
 }
 
 -(PaymentCompleteViewController*)completionController{
     if(!completionController){
-        
+        completionController = [[PaymentCompleteViewController alloc] initWithDoneCallback:^{
+            completionBlock();
+        }];
     }
     return completionController;
+}
+
+/* Animation Control */
+
+-(void)navigationController:(UINavigationController *)navigationController 
+     willShowViewController:(UIViewController *)viewController 
+                   animated:(BOOL)animated{
+    if(animated){
+        @synchronized(self){
+            animating = YES;
+        }
+    }
+}
+-(void)navigationController:(UINavigationController *)navigationController 
+      didShowViewController:(UIViewController *)viewController 
+                   animated:(BOOL)animated{
+    if(animated){
+        @synchronized(self){
+            animating = NO;
+            for(void(^postAnimationBlock)() in postAnimation){
+                postAnimationBlock();
+            }
+            [postAnimation removeAllObjects];
+        }
+    }
+}
+
+-(void)afterAnimating:(void (^)())after{
+    @synchronized(self){
+        if(animating){
+            [postAnimation addObject:[after copy]];
+        } else {
+            after();
+        }
+    }
 }
 
 @end

@@ -70,7 +70,7 @@
 }
 
 -(void)setError:(PaymentError*)error{
-    NSLog(@"%@", error);
+    [paymentView setErrorMessage:[error userMessage]];
 }
 
 @end

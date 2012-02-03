@@ -6,6 +6,10 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-@interface PaymentSuccessInfo : NSObject
+@interface PaymentSuccessInfo : NSObject{
+    
+}
+
+-(id)initWithData:(NSDictionary*)data;
 
 @end

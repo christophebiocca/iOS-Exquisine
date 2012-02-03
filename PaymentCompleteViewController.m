@@ -11,11 +11,11 @@
 
 @implementation PaymentCompleteViewController
 
-- (id)init;
+-(id)initWithDoneCallback:(void(^)())doneCallback;
 {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
-        // Custom initialization
+        done = doneCallback;
     }
     return self;
 }

@@ -25,10 +25,16 @@
     
     void(^completionBlock)();
     void(^cancelledBlock)();
+    
+    /* Animation Management */
+    BOOL animating;
+    NSMutableArray* postAnimation;
 }
 
 @property(retain, readonly)UINavigationController* navigationController;
 
--(id)initWithOrder:(Order*)order location:(Location*)locationToUse completionBlock:(void(^)())completion cancellationBlock:(void(^)())cancelled;
+-(id)initWithOrder:(Order*)order locations:(NSArray*)locations completionBlock:(void(^)())completion cancellationBlock:(void(^)())cancelled;
+
+-(void)afterAnimating:(void(^)())after;
 
 @end

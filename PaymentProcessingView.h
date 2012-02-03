@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PaymentProcessingView : UIView
+@interface PaymentProcessingView : UIView{
+    UIActivityIndicatorView* indicator;
+    UILabel* processingText;
+}
 
 @end

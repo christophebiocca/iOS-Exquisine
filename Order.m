@@ -204,6 +204,11 @@ NSString* ORDER_ITEMS_MODIFIED = @"CroutonLabs/OrderModified";
     [self setStatus:@"Sending"];
 }
 
+-(void)placedWithTransactionInfo:(PaymentSuccessInfo*)info{
+    // We'll also need to save up the payment info somewhere.
+    [self setStatus:@"Placed"];
+}
+
 - (MenuComponent *)initWithCoder:(NSCoder *)decoder
 {
     if (self = [super initWithCoder:decoder])

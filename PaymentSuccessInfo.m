@@ -10,4 +10,11 @@
 
 @implementation PaymentSuccessInfo
 
+-(id)initWithData:(NSDictionary*)data{
+    if(self = [super init]){
+        
+    }
+    return self;
+}
+
 @end
