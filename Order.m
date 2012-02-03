@@ -202,11 +202,15 @@ NSString* ORDER_ITEMS_MODIFIED = @"CroutonLabs/OrderModified";
     [self resetCache];
 }
 
--(void)submitToLocation:(Location*)location withPaymentInfo:(PaymentInfo*)paymentInfo
+-(void)submit
 {
     mostRecentSubmitDate = [[NSDate alloc] initWithTimeIntervalSinceNow:0.0];
     [self setStatus:@"Sending"];
-    [PlaceOrder sendOrder:self toLocation:location withPaymentInfo:paymentInfo];
+}
+
+-(void)placedWithTransactionInfo:(PaymentSuccessInfo*)info{
+    // We'll also need to save up the payment info somewhere.
+    [self setStatus:@"Placed"];
 }
 
 - (MenuComponent *)initWithCoder:(NSCoder *)decoder

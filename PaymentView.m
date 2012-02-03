@@ -62,6 +62,13 @@ static UIColor* errorLabelColor;
         [topBar setItems:[NSArray arrayWithObjects:cancel, flexibleSpace, done, nil]];
         [self addSubview:topBar];
         
+        serverErrorMessageLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        [serverErrorMessageLabel setFont:[UIFont systemFontOfSize:20]];
+        [serverErrorMessageLabel setLineBreakMode:UILineBreakModeWordWrap];
+        [serverErrorMessageLabel setNumberOfLines:0];
+        [serverErrorMessageLabel setTextColor:errorLabelColor];
+        [self addSubview:serverErrorMessageLabel];
+        
         cardholderNameLabel = [PaymentView nameLabel:@"Card Holder Name"];
         [self addSubview:cardholderNameLabel];
         
@@ -142,6 +149,20 @@ static UIColor* errorLabelColor;
     };
     
     layoutWidget(topBar, UIToolbarHeight, YES);
+    
+    CGSize labelSize = [[serverErrorMessageLabel text] 
+                        sizeWithFont:[serverErrorMessageLabel font] 
+                        constrainedToSize:CGSizeMake(adjustedWidth, 9999) 
+                        lineBreakMode:UILineBreakModeWordWrap];
+    [serverErrorMessageLabel setFrame:(CGRect){
+        .origin = {
+            .x = InterFieldPadding,
+            .y = height
+        },
+        .size = labelSize
+    }];
+    
+    height += labelSize.height + InterFieldPadding;
     
     layoutLabels(cardholderNameLabel, cardholderNameErrorLabel);
     layoutWidget(cardholderNameField, TextFieldHeight, NO);
@@ -298,6 +319,12 @@ static UIColor* errorLabelColor;
 
 -(void)cancelled{
     [delegate paymentCancelled];
+}
+
+-(void)setErrorMessage:(NSString*)message{
+    [serverErrorMessageLabel setText:message];
+    [serverErrorMessageLabel setHidden:NO];
+    [self setNeedsLayout];
 }
 
 @end

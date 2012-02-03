@@ -9,6 +9,8 @@
 #import "APICall.h"
 #import "APICallProtectedMethods.h"
 
+extern NSString* JSON_API_ERROR;
+
 @interface JSONAPICall : APICall{
     @private
     NSDictionary* jsonData;

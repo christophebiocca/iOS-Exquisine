@@ -10,13 +10,19 @@
 
 @class PaymentInfo;
 @class PaymentView;
+@class PaymentError;
+@class Order;
 
 @interface PaymentInfoViewController : UIViewController<PaymentViewDelegate>{
     PaymentView* paymentView;
+    PaymentInfo* info;
+    
     void(^completionBlock)(PaymentInfo*);
     void(^cancelledBlock)();
 }
 
-- (id)initWithCompletionBlock:(void(^)(PaymentInfo*))completion cancellationBlock:(void(^)())cancelled;
+-(id)initWithCompletionBlock:(void(^)(PaymentInfo*))completion cancellationBlock:(void(^)())cancelled;
+
+-(void)setError:(PaymentError*)error;
 
 @end

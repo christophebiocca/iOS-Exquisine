@@ -7,7 +7,10 @@
 //
 
 #import "Login.h"
+#import "APICallProtectedMethods.h"
 #import "CredentialsStore.h"
+
+static NSString* redirectSuccessString = @"/ArbitraryValidStaticUrlPath";
 
 @implementation Login
 
@@ -19,7 +22,7 @@
                               [store signature], @"signature",
                               nil];
     success = [success copy];
-    [self sendPOSTRequestForLocation:@"customer/phoneapplogin/" 
+    [self sendPOSTRequestForLocation:[NSString stringWithFormat:@"customer/phoneapplogin/?next=%@", redirectSuccessString]
                         withFormData:formData 
                              success:^(Login* login){
                                  success(login);
@@ -27,6 +30,22 @@
                              failure:^(Login* login, NSError* error) {
                                  NSLog(@"Serious issues here, can't login apparently.\n%@", error);
                              }];
+}
+
+// Check if we have a redirect for success.
+-(NSURLRequest*)connection:(NSURLConnection *)connection 
+           willSendRequest:(NSURLRequest *)request 
+          redirectResponse:(NSURLResponse *)response{
+    if([(NSHTTPURLResponse*)response statusCode] == 302){
+        NSString* path = [[request URL] path];
+        NSLog(@"Redirection %@", path);
+        if([path isEqualToString:redirectSuccessString]){
+            [connection cancel];
+            [self complete];
+            return nil;
+        }
+    }
+    return [super connection:connection willSendRequest:request redirectResponse:response];
 }
 
 @end

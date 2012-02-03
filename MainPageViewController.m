@@ -18,6 +18,7 @@
 #import "OrderSummaryViewController.h"
 #import "GetLocations.h"
 #import "Reachability.h"
+#import "PaymentStack.h"
 #import "PaymentInfoViewController.h"
 #import "IndicatorView.h"
 #import "Location.h"
@@ -151,50 +152,22 @@
 
 -(void)submitOrderForController:(id)orderViewController
 {
-    __block Location* location = nil;
-    __block PaymentInfo* paymentInfo = nil;
-    
-    void (^order)() = ^(){
-        if(location && paymentInfo){
-            [[orderViewController orderInfo] submitToLocation:location withPaymentInfo:paymentInfo];
-        }
-    };
-    
-    __block PaymentInfoViewController* getPaymentInfo = 
-    [[PaymentInfoViewController alloc] 
-     initWithCompletionBlock:^(PaymentInfo* info){
-         [self dismissModalViewControllerAnimated:YES];
-         @synchronized(self){
-             paymentInfo = info;
-             order();
-         }
-     }
-     cancellationBlock:^{
-         [self dismissModalViewControllerAnimated:YES];
-     }];
-    [self presentModalViewController:getPaymentInfo animated:YES];
-    
-    [GetLocations getLocationsForRestaurant:RESTAURANT_ID 
-                                    success:^(GetLocations* call) {
-                                        NSArray* restaurantLocations = [call locations];
-                                        NSAssert([restaurantLocations count] != 0, @"Not a single location to order from!");
-                                        NSAssert([restaurantLocations count] == 1, @"Too many locations, and no way to choose from them!");
-                                        @synchronized(self){
-                                            location = [restaurantLocations lastObject];
-                                            order();
-                                        }
-                                    } failure:^(GetLocations* call, NSError* error) {
-                                        NSLog(@"Can't fetch locations %@, therefore can't send order", error);
-                                    }];
-    
-    //Push the current order on the history list
-    [ordersHistory addObject:[orderViewController orderInfo]];
-    
     if ([[orderViewController orderInfo] isEqual:currentOrder])
     {
         //Allocate a new order
         currentOrder = [[Order alloc] initWithParentMenu:theMenu];
     }
+    PaymentStack* paymentStack = 
+    [[PaymentStack alloc] initWithOrder:currentOrder locations:locations
+                            completionBlock:^() {
+                                //Push the current order on the history list
+                                [ordersHistory addObject:[orderViewController orderInfo]];
+                                [self dismissModalViewControllerAnimated:YES];
+                            } 
+                          cancellationBlock:^{
+                              [self dismissModalViewControllerAnimated:YES];
+                          }];
+    [self presentModalViewController:[paymentStack navigationController] animated:YES];
 }
 
 -(NSInteger)numberOfFavorites

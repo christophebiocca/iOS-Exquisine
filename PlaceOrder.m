@@ -11,10 +11,15 @@
 #import "Order.h"
 #import "Location.h"
 #import "PaymentInfo.h"
+#import "PaymentSuccessInfo.h"
+#import "PaymentError.h"
 
 @implementation PlaceOrder
 
-+(void)sendOrder:(Order*)order toLocation:(Location*)location withPaymentInfo:(PaymentInfo*)paymentInfo{
++(void)sendOrder:(Order*)order toLocation:(Location*)location 
+ withPaymentInfo:(PaymentInfo*)paymentInfo
+  paymentSuccess:(void(^)(PaymentSuccessInfo*))successBlock
+  paymentFailure:(void(^)(PaymentError*))errorBlock{
     NSMutableDictionary* placement = [NSMutableDictionary dictionaryWithCapacity:3];
     [placement setObject:[order orderRepresentation] forKey:@"order"];
     [placement setObject:[location primaryKey] forKey:@"location"];
@@ -23,13 +28,17 @@
     [self sendPOSTRequestForLocation:@"customer/orders/" 
                         withJSONData:placement 
                              success:^(PlaceOrder* call) {
-                                 NSDictionary* newOrder = [call jsonData];
-                                 DebugLog(@"Placed an order successfully %@", newOrder);
-                                 [order setStatus:@"Placed"];
+                                 PaymentSuccessInfo* successInfo = 
+                                 [[PaymentSuccessInfo alloc] initWithData:[call jsonData]];
+                                 DebugLog(@"Placed an order successfully %@", successInfo);
+                                 [order placedWithTransactionInfo:successInfo];
+                                 successBlock(successInfo);
                              } 
                              failure:^(PlaceOrder* call, NSError* error) {
                                  NSLog(@"Couldn't place order %@! %@", call, error);
+                                 errorBlock([[PaymentError alloc] initWithCause:error]);
                              }];
+    [order submit];
 }
 
 @end

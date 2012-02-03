@@ -11,6 +11,8 @@
 #import "APICallDelegate.h"
 #import "Login.h"
 
+NSString* SERVER_HTTP_ERROR_DOMAIN = @"com.croutonlabs.server.http";
+
 @interface APICall(PrivateMethods)
 
 -(void)invokeCallbacks;
@@ -182,15 +184,21 @@ static NSURL* serverURL;
 }
 
 -(void)complete{
-    #ifdef DEBUG
-    if([response statusCode] == 500){
-        DebugLog(@"OMG SERVER ERROR\n%@", [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
-    }
-    #endif
     DebugLog(@"Completing");
+    NSInteger status = [response statusCode];
+    if((status / 100) == 4 || (status / 100) == 5){
+        error = [NSError errorWithDomain:SERVER_HTTP_ERROR_DOMAIN
+                                    code:status 
+                                userInfo:nil];
+    }
     completed = YES;
     [self postCompletionHook];
     if(error){
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"APIError" 
+                                                            object:self 
+                                                          userInfo:[NSDictionary 
+                                                                    dictionaryWithObject:error 
+                                                                    forKey:@"error"]];
         errorblock(self, error);
     } else {
         successblock(self);
@@ -200,6 +208,7 @@ static NSURL* serverURL;
 -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)theError{
     DebugLog(@"HOLY SHIT GUYS WE HAVE AN ERROR!\n%@", theError);
     [self setError:theError];
+    [self complete];
 }
 
 -(void)connectionDidFinishLoading:(NSURLConnection*)connection{
@@ -235,16 +244,15 @@ static NSURL* serverURL;
 -(void)setError:(NSError*)theError{
     NSAssert(!error, @"We already have an error!");
     error = theError;
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"APIError" 
-                                                        object:self 
-                                                      userInfo:[NSDictionary 
-                                                                dictionaryWithObject:error 
-                                                                forKey:@"error"]];
+}
+
+-(void)replaceError:(NSError*)replacementError{
+    NSAssert(error, @"No existing error!");
+    error = replacementError;
 }
 
 -(NSData*)rawData{
     NSAssert(completed, @"Can't access raw data before the request completes!");
-    NSAssert(!error, @"Can't access raw data, we have an error!");
     return data;
 }
 

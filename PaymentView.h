@@ -19,6 +19,8 @@
     UIBarButtonItem* done;
     UIBarButtonItem* cancel;
     
+    UILabel* serverErrorMessageLabel;
+    
     UILabel* cardholderNameLabel;
     UILabel* cardholderNameErrorLabel;
     UITextField* cardholderNameField;
@@ -34,5 +36,7 @@
 
 @property(retain, readonly)PaymentInfo* paymentInfo;
 @property(retain, nonatomic)id<PaymentViewDelegate> delegate;
+
+-(void)setErrorMessage:(NSString*)message;
 
 @end

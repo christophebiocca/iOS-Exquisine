@@ -12,6 +12,7 @@
 @class Menu;
 @class Location;
 @class PaymentInfo;
+@class PaymentSuccessInfo;
 
 extern NSString* ORDER_ITEMS_MODIFIED;
 
@@ -75,7 +76,8 @@ extern NSString* ORDER_ITEMS_MODIFIED;
 
 -(BOOL) isEffectivelySameAs:(Order *) anOrder;
 
--(void)submitToLocation:(Location*)location withPaymentInfo:(PaymentInfo*)paymentInfo;
+-(void)submit;
+-(void)placedWithTransactionInfo:(PaymentSuccessInfo*)info;
 
 -(void) reSort;
 

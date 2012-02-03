@@ -8,6 +8,8 @@
 
 @protocol APICallDelegate;
 
+extern NSString* SERVER_HTTP_ERROR_DOMAIN;
+
 @interface APICall : NSObject<NSURLConnectionDataDelegate> {
     @private
     BOOL completed;
