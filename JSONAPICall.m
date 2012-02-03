@@ -8,6 +8,8 @@
 
 #import "JSONAPICall.h"
 
+NSString* JSON_API_ERROR = @"com.croutonlabs.server.json";
+
 @implementation JSONAPICall
 
 +(NSData*)getJSONData:(id)object{
@@ -37,15 +39,25 @@
 
 -(void)postCompletionHook{
     [super postCompletionHook];
-    if(!jsonData){
-        NSError* parsingError = nil;
-        DebugLog(@"PARSING JSON %@", [[NSString alloc] initWithData:[self rawData] encoding:NSASCIIStringEncoding]);
-        jsonData = [NSJSONSerialization JSONObjectWithData:[self rawData] 
-                                                    options:0 
-                                                     error:&parsingError];
-        if(parsingError){
+    NSError* parsingError = nil;
+    DebugLog(@"PARSING JSON %@", [[NSString alloc] initWithData:[self rawData] encoding:NSASCIIStringEncoding]);
+    NSDictionary* parsed = [NSJSONSerialization JSONObjectWithData:[self rawData] 
+                                                           options:0 
+                                                             error:&parsingError];
+    NSError* originalError = [self error];
+    if(parsingError){
+        if(!originalError){
             [self setError:parsingError];
         }
+    } else if(originalError && // Bad requests usually have a parsable json explanation attached to them.
+              [originalError domain] == SERVER_HTTP_ERROR_DOMAIN &&
+              [originalError code] == 400){
+        NSDictionary* errorObject = [parsed objectForKey:@"error"];
+        if(errorObject){
+            [self replaceError:[NSError errorWithDomain:JSON_API_ERROR code:0 userInfo:errorObject]];
+        }
+    } else {
+        jsonData = parsed;
     }
 }
 
