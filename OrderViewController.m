@@ -56,6 +56,15 @@
         return;
     }
     
+    if(![delegate locationIsOpen])
+    {
+        UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Oops" message:@"The restaurant isn't open right now. You'll have to wait until it is." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+        
+        [areYouSure show];
+        
+        return;
+    }
+    
     if([delegate hasServerConnection])
     {
         UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Process Purchase?" message:[NSString stringWithFormat: @"Order confirmation:\nSubtotal: %@\nHST: %@\nGrand Total: %@\n\nIs this okay?", [Utilities FormatToPrice:[orderInfo subtotalPrice]],[Utilities FormatToPrice:[orderInfo taxPrice]],[Utilities FormatToPrice:[orderInfo totalPrice]]] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil];
@@ -337,10 +346,9 @@
         [self promptForFavDeletion];
     }
     
-    
 }
 
--(void)orderAltered
+-(void)orderAltered:(NSNotification *)aNotification
 {
     
     [[orderView priceDisplayButton] setTitle:[NSString stringWithFormat:@"%@%@",@"Subtotal: ",[Utilities FormatToPrice:[orderInfo subtotalPrice]] ]];

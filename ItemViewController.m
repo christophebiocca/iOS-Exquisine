@@ -63,7 +63,7 @@
         
         Option *thisOption = [[itemInfo options] objectAtIndex:[indexPath section]];
         Choice *thisChoice = [[thisOption choiceList] objectAtIndex:[indexPath row]];
-        [thisOption toggleChoice:thisChoice];
+        [thisChoice toggleSelected];
         [tableView reloadSections:[NSIndexSet indexSetWithIndex:[indexPath section]] withRowAnimation:UITableViewRowAnimationNone];        
     }
     

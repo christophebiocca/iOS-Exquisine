@@ -45,7 +45,9 @@ NSString* ORDER_ITEMS_MODIFIED = @"CroutonLabs/OrderModified";
 
 -(id)initFromOrder:(Order *)anOrder
 {
-    self = [super initFromMenuComponent:anOrder];
+    name = anOrder->name;
+    desc = anOrder->desc;
+    primaryKey = anOrder->primaryKey; 
     
     nonComboItemCache = nil;
     comboListCache = nil;
@@ -71,7 +73,9 @@ NSString* ORDER_ITEMS_MODIFIED = @"CroutonLabs/OrderModified";
 -(id)initFromOrderShallow:(Order *)anOrder
 {
     
-    self = [super initFromMenuComponent:anOrder];
+    name = anOrder->name;
+    desc = anOrder->desc;
+    primaryKey = anOrder->primaryKey; 
     
     nonComboItemCache = nil;
     comboListCache = nil;
@@ -244,7 +248,7 @@ NSString* ORDER_ITEMS_MODIFIED = @"CroutonLabs/OrderModified";
     
     for (int i = 0; i < [itemList count] ; i++)
     {
-        if (![[itemList objectAtIndex:i] isEffectivelySameAs:[[anOrder itemList] objectAtIndex:i]]) {
+        if (![[itemList objectAtIndex:i] isEqual:[[anOrder itemList] objectAtIndex:i]]) {
             return NO;
         }
     }

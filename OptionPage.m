@@ -49,7 +49,7 @@
     
     CellInfo *newCell = [[CellInfo alloc] init];
     newCell.labelText = @"Total:";
-    newCell.descriptionText = [Utilities FormatToPrice:[currentOption totalPrice]];
+    newCell.descriptionText = [Utilities FormatToPrice:[currentOption price]];
     [cellDataList addObject:newCell];
     
     [[self navigationItem] setTitle:currentOption.name];
@@ -68,12 +68,7 @@
         //deselect the cell
         [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
         
-        if(![currentOption toggleChoiceByIndex:indexPath.row])
-        {
-            UIAlertView *cantSelect = [[UIAlertView alloc] initWithTitle:@"Invalid Option" message:[NSString stringWithFormat:@"You can't select more than %i choices. Please unselect one of your other choices to continue.",[currentOption upperBound]] delegate:self cancelButtonTitle:@"Got it" otherButtonTitles:nil, nil];
-            [cantSelect show];
-            
-        }
+        [currentOption toggleChoiceByIndex:indexPath.row];
         
         [self initializeViewWithOption:currentOption];
         

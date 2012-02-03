@@ -13,208 +13,44 @@
 @implementation Option
 
 NSString* OPTION_MODIFIED = @"CroutonLabs/OptionModified";
+NSString* OPTION_CHOICE_ADDED = @"CroutonLabs/OptionChoiceAdded";
+NSString* OPTION_CHOICE_REMOVED = @"CroutonLabs/OptionChoiceRemoved";
+NSString* OPTION_INVALID_SELECTION = @"CroutonLabs/OptionInvalidSelection";
+NSString* OPTION_INVALID_DESELECTION = @"CroutonLabs/OptionInvalidDeselection";
 
 @synthesize lowerBound;
 @synthesize upperBound;
 @synthesize numberOfFreeChoices;
 @synthesize choiceList;
-@synthesize selectedChoices;
-@synthesize propertiesChecksum;
 
-
--(Option *)initFromOption:(Option *)anOption
+-(Option *)init
 {
-    self = [super initFromMenuComponent:anOption];
-
-    lowerBound = anOption.lowerBound;
-    upperBound = anOption.upperBound;
-    numberOfFreeChoices = anOption.numberOfFreeChoices;
+    self = [super init];
+    
     choiceList = [[NSMutableArray alloc] initWithCapacity:0];
-    selectedChoices = [[NSMutableArray alloc] initWithCapacity:0];
-            
-    for (Choice *aChoice in anOption.choiceList) {
-        Choice *aNewChoice = [[Choice alloc] initFromChoice:aChoice option:self];
-        [choiceList addObject:aNewChoice];
-        if ([aChoice selected])
-            [self selectChoice:aNewChoice];
-    }
-    
-    //sort the choice list by real price
-    [choiceList sortUsingSelector:@selector(comparePrice:)];
-    
-    propertiesChecksum = [anOption propertiesChecksum];
     
     return self;
-    
 }
 
 -(Option *)initFromData:(NSDictionary *)inputData
 {
     self = [super initFromData:inputData];
-    upperBound = [[inputData objectForKey:@"max_choice"] intValue];
-    lowerBound = [[inputData objectForKey:@"min_choice"] intValue];
-    numberOfFreeChoices = [[inputData objectForKey:@"free_choice"] intValue];
     
-    selectedChoices = [[NSMutableArray alloc] initWithCapacity:0];
+    lowerBound = [[inputData objectForKey:@"min_choice"] intValue];
+    upperBound = [[inputData objectForKey:@"max_choice"] intValue];
+    numberOfFreeChoices = [[inputData objectForKey:@"free_choices"] intValue];
     
     choiceList = [[NSMutableArray alloc] initWithCapacity:0];
     
     for (NSDictionary *choice in [inputData objectForKey:@"choices"]) {
         Choice *newChoice = [[Choice alloc] initFromData:choice option:self];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recalculate:) name:CHOICE_SELECTED_CHANGED object:newChoice];        
         [choiceList addObject:newChoice];
     }
     
-    //sort the choice list by real price
-    [choiceList sortUsingSelector:@selector(comparePrice:)];
-    
-    for (Choice *choice in choiceList) {
-        if(choice.selected)
-        {
-            [selectedChoices addObject:choice];
-        }
-    }
-    
-    if (lowerBound > 0)
-    {
-        for (int i = 0; i < lowerBound; i++)
-        {
-            [self selectChoice:[choiceList objectAtIndex:i]];
-        }
-    }
-    
-    propertiesChecksum = [inputData objectForKey:@"properties_checksum"];
+    [self recalculate:nil];
     
     return self;
-}
-
--(Option *)init{
-    self = [super init];
-    
-    choiceList = [[NSMutableArray alloc] initWithCapacity:0];
-    selectedChoices = [[NSMutableArray alloc] initWithCapacity:0];
-    
-    return self;
-}
-
-
-
--(NSArray*)selectedFreeChoices{
-    return [[selectedChoices sortedArrayUsingSelector:@selector(comparePrice:)] 
-            subarrayWithRange:
-            NSMakeRange(MAX((NSInteger)[selectedChoices count] - numberOfFreeChoices, 0), 
-            MIN(numberOfFreeChoices, [selectedChoices count]))];
-}
-
--(NSInteger)remainingFreeChoices{
-    return MAX(0, numberOfFreeChoices - [selectedChoices count]);
-}
-
--(NSDecimalNumber*)totalPrice{
-    
-    NSDecimalNumber* tabulation = [NSDecimalNumber zero];
-    
-    NSArray* sorted = [selectedChoices sortedArrayUsingSelector:@selector(comparePrice:)];
-    NSArray* extra = [sorted subarrayWithRange:
-                      NSMakeRange(0, MAX((NSInteger)([sorted count] - numberOfFreeChoices), 0))];
-    
-    for (Choice* choice in extra){
-        tabulation = [tabulation decimalNumberByAdding:[choice price]];
-    }
-    
-    return tabulation;
-}
-
--(void) addPossibleChoice:(Choice *) aChoice{
-    [choiceList addObject:aChoice];
-    //sort the choice list by real price
-    [choiceList sortUsingSelector:@selector(comparePrice:)];
-    [[NSNotificationCenter defaultCenter] postNotificationName:OPTION_MODIFIED object:self];
-}
-
--(BOOL) selectChoice:(Choice *) aChoice{
-    
-    if ([choiceList containsObject:aChoice]){
-        if(upperBound <= 1)
-        {
-            [selectedChoices addObject:aChoice];
-            if([selectedChoices count] > upperBound){
-                [self deselectChoice:[selectedChoices objectAtIndex:0]];
-            }
-            [[NSNotificationCenter defaultCenter] postNotificationName:OPTION_MODIFIED object:self];
-            return YES;
-        }
-        else
-        {
-            if(upperBound > [selectedChoices count]){
-                [selectedChoices addObject:aChoice];
-                [[NSNotificationCenter defaultCenter] postNotificationName:OPTION_MODIFIED object:self];
-                return YES;
-            }
-            else{
-                return NO;
-            }
-        }
-    }
-    else{
-        NSLog(@"Warning: A selection of a choice that is invalid was attempted%@", nil);
-        [[NSNotificationCenter defaultCenter] postNotificationName:OPTION_MODIFIED object:self];
-        return YES;
-    }
-}
-
--(void) deselectChoice:(Choice *) aChoice{
-    
-    if ([choiceList containsObject:aChoice]){
-        if ([selectedChoices count] > lowerBound){
-            [selectedChoices removeObject:aChoice];
-        }
-        [[NSNotificationCenter defaultCenter] postNotificationName:OPTION_MODIFIED object:self];
-    }
-    else{
-        NSLog(@"Warning: A deselection of a choice that is invalid was attempted%@", nil);
-    }
-    
-}
-
--(BOOL) toggleChoice:(Choice *) aChoice{
-    if(aChoice.selected){
-        [self deselectChoice:aChoice];
-        return YES;
-    }
-    else{
-        return [self selectChoice:aChoice];
-    }
-}
-
-//These three selectors just call the other selectors
--(BOOL)selectChoiceByIndex:(NSInteger)aChoice{
-    
-    return [self selectChoice:[choiceList objectAtIndex:aChoice]];
-    
-}
-
--(void)deselectChoiceByIndex:(NSInteger)aChoice{
-    
-    [self deselectChoice:[choiceList objectAtIndex:aChoice]];
-    
-}
-
--(BOOL)toggleChoiceByIndex:(NSInteger)aChoice
-{
-    
-    return [self toggleChoice:[choiceList objectAtIndex:aChoice]];
-    
-}
-
--(NSDictionary*)orderRepresentation{
-    NSMutableDictionary* repr = [NSMutableDictionary dictionaryWithCapacity:2];
-    [repr setObject:[NSNumber numberWithInt:primaryKey] forKey:@"option"];
-    NSMutableArray* orderchoices = [NSMutableArray arrayWithCapacity:[selectedChoices count]];
-    for(Choice* orderchoice in selectedChoices){
-        [orderchoices addObject:[orderchoice orderRepresentation]];
-    }
-    [repr setObject:orderchoices forKey:@"choices"];
-    return repr;
 }
 
 - (MenuComponent *)initWithCoder:(NSCoder *)decoder
@@ -225,8 +61,13 @@ NSString* OPTION_MODIFIED = @"CroutonLabs/OptionModified";
         upperBound = [[decoder decodeObjectForKey:@"upper_bound"] intValue];
         numberOfFreeChoices = [[decoder decodeObjectForKey:@"number_of_free_choices"] intValue];
         choiceList = [decoder decodeObjectForKey:@"choice_list"];
-        selectedChoices = [decoder decodeObjectForKey:@"selected_choices"];
-        propertiesChecksum = [decoder decodeObjectForKey:@"properties_checksum"];
+        
+        if(choiceList)
+        {
+            for (Choice *newChoice in choiceList) {
+                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recalculate:) name:CHOICE_SELECTED_CHANGED object:newChoice];
+            }
+        }
         
     }
     return self;
@@ -240,11 +81,185 @@ NSString* OPTION_MODIFIED = @"CroutonLabs/OptionModified";
     [encoder encodeObject:[NSString stringWithFormat:@"%i", upperBound] forKey:@"upper_bound"];
     [encoder encodeObject:[NSString stringWithFormat:@"%i", numberOfFreeChoices] forKey:@"number_of_free_choices"];
     [encoder encodeObject:choiceList forKey:@"choice_list"];
-    [encoder encodeObject:selectedChoices forKey:@"selected_choices"];
-    [encoder encodeObject:propertiesChecksum forKey:@"properties_checksum"];
 }
 
--(BOOL)isEffectivelySameAs:(Option *)anOption
+-(Option *)copy
+{
+    
+    Option *anOption = [[Option alloc] init];
+    
+    anOption->name = name;
+    anOption->desc = desc;
+    anOption->primaryKey = primaryKey;
+    
+    anOption->lowerBound = lowerBound;
+    anOption->upperBound = upperBound;
+    anOption->numberOfFreeChoices = numberOfFreeChoices;
+    
+    for (Choice *aChoice in choiceList) {
+        [anOption addChoice:[aChoice copy]];
+    }
+    
+    return anOption;
+    
+}
+
+-(NSDecimalNumber*)price
+{
+    NSDecimalNumber* tabulation = [NSDecimalNumber zero];
+
+    for (Choice* choice in [self selectedChoices]){
+        tabulation = [tabulation decimalNumberByAdding:[choice price]];
+    }
+    
+    return tabulation;
+}
+
+-(NSArray *)selectedChoices
+{
+    NSMutableArray *output = [[NSMutableArray alloc] initWithCapacity:0];
+    for (Choice *aChoice in choiceList) {
+        if([aChoice selected])
+            [output addObject:aChoice];
+    }
+    return output;
+}
+
+-(NSInteger) numberOfSelectedChoices;
+{
+    return [[self selectedChoices] count];
+}
+
+-(void) addChoice:(Choice *) aChoice{
+    [choiceList addObject:aChoice];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recalculate:) name:CHOICE_SELECTED_CHANGED object:aChoice]; 
+    [self recalculate:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:OPTION_CHOICE_ADDED object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:OPTION_MODIFIED object:self];
+}
+
+- (void) removeChoice:(Choice *) aChoice
+{
+    [choiceList removeObject:aChoice];
+    [self recalculate:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:OPTION_CHOICE_REMOVED object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:OPTION_MODIFIED object:self];
+}
+
+//These three selectors just call the other selectors
+-(void)selectChoiceByIndex:(NSInteger)aChoice{
+    
+    [[choiceList objectAtIndex:aChoice] setSelected:YES];
+    
+}
+
+-(void)deselectChoiceByIndex:(NSInteger)aChoice{
+    
+    [[choiceList objectAtIndex:aChoice] setSelected:NO];
+    
+}
+
+-(void)toggleChoiceByIndex:(NSInteger)aChoice
+{
+    
+    [[choiceList objectAtIndex:aChoice] toggleSelected];
+    
+}
+
+//Whenever a choice gets modified, this guy makes sure it's handled correctly.
+-(void)recalculate:(NSNotification *)aNotification
+{
+    [choiceList sortUsingSelector:@selector(comparePrice:)];
+    
+    Choice *theChoice = nil;
+    
+    if(aNotification)
+    {
+        theChoice = [aNotification object];
+    }
+    
+    if (theChoice) 
+    {
+        if ([choiceList containsObject:theChoice])
+        {
+            if ([theChoice selected])
+            {
+                if(upperBound <= 1)
+                {
+                    if([self numberOfSelectedChoices] > upperBound)
+                    {
+                        [theChoice setSelected:NO];
+                    }
+                    [[NSNotificationCenter defaultCenter] postNotificationName:OPTION_MODIFIED object:self];
+                }
+                else
+                {
+                    if(upperBound > [self numberOfSelectedChoices])
+                    {
+                        [[NSNotificationCenter defaultCenter] postNotificationName:OPTION_MODIFIED object:self];
+                    }
+                    else
+                    {
+                        [theChoice setSelected:NO];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:OPTION_INVALID_SELECTION object:self];
+                    }
+                }
+            }
+            else
+            {
+                if ([self numberOfSelectedChoices] < lowerBound)
+                {
+                    [theChoice setSelected:YES];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:OPTION_INVALID_DESELECTION object:self];
+                }
+                else
+                {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:OPTION_MODIFIED object:self];
+                }
+            }
+        }
+        else
+        {
+            NSLog(@"ERROR: A notification from a choice to which there is no pointer was recieved.\nMe:\n%@\nThe choice:\n%@", self, theChoice);
+            [[NSNotificationCenter defaultCenter] postNotificationName:OPTION_MODIFIED object:self];
+        }
+    }
+    
+    [self validateState];
+}
+
+-(void)validateState
+{
+    if (([self numberOfSelectedChoices] < lowerBound)||([self numberOfSelectedChoices] > upperBound))
+    {
+        //If this is the case, we need to know, but also we don't want the app to cack.
+        //I'll log an error and try to recover.
+        NSLog(@"ERROR, Option is in a bad state. \
+              \n Here's a readout of the Option in a bad state before attempting to recover:\n%@",self);
+        
+        //Recovery routine:
+        int i = 0;
+        while (([self numberOfSelectedChoices] > upperBound)) {
+            [self deselectChoiceByIndex:i];
+            i++;
+        }
+        while (([self numberOfSelectedChoices] < lowerBound)) {
+            [self selectChoiceByIndex:i];
+            i++;
+        }
+    }
+    
+    int i = 0;
+    for (Choice *aChoice in [self selectedChoices]) {
+        if (i >= numberOfFreeChoices) 
+            [aChoice setIsFree:NO];
+        else
+            [aChoice setIsFree:YES];
+        i++;
+    }
+}
+
+-(BOOL)isEqual:(Option *)anOption
 {
     if (![[anOption name] isEqual: name])
         return NO;
@@ -253,36 +268,42 @@ NSString* OPTION_MODIFIED = @"CroutonLabs/OptionModified";
         return NO;
     
     for (int i = 0; i < [choiceList count]; i++) {
-        if (![[[anOption choiceList] objectAtIndex:i] isEffectivelySameAs:[choiceList objectAtIndex:i]]) {
+        if (![[[anOption choiceList] objectAtIndex:i] isEqual:[choiceList objectAtIndex:i]]) {
             return NO;
         }
     }
     return YES;
 }
 
+-(NSDictionary*)orderRepresentation{
+    NSMutableDictionary* repr = [NSMutableDictionary dictionaryWithCapacity:2];
+    [repr setObject:[NSNumber numberWithInt:primaryKey] forKey:@"option"];
+    NSMutableArray* orderchoices = [NSMutableArray arrayWithCapacity:[self numberOfSelectedChoices]];
+    for(Choice* orderchoice in [self selectedChoices]){
+        [orderchoices addObject:[orderchoice orderRepresentation]];
+    }
+    [repr setObject:orderchoices forKey:@"choices"];
+    return repr;
+}
+
 - (NSString *) descriptionWithIndent:(NSInteger) indentLevel
-{    
-    NSMutableString *output = [NSMutableString stringWithString:[@"" stringByPaddingToLength:(indentLevel*4) withString:@" " startingAtIndex:0]];
-    
-    [output appendFormat:@"option: %@ with choices:\n",name];
+{
+    NSString *padString = [@"" stringByPaddingToLength:(indentLevel*4) withString:@" " startingAtIndex:0];
+
+    NSMutableString *output = [[NSMutableString alloc] initWithCapacity:0];
+
+    [output appendFormat:@"%@Option:%\n",padString];
+    [output appendString:[super descriptionWithIndent:indentLevel]];
+    [output appendFormat:@"%@lower bound for choices:%i \n",padString,lowerBound];
+    [output appendFormat:@"%@upper bound for choices:%i \n",padString,upperBound];
+    [output appendFormat:@"%@number of free choices:%i \n",padString,numberOfFreeChoices];
+    [output appendFormat:@"%@choices:\n",padString];
     
     for (Choice *aChoice in choiceList) {
         [output appendFormat:@"%@\n",[aChoice descriptionWithIndent:(indentLevel + 1)]];
     }
     
     return output;
-}
-
--(NSString *)description{
-    
-    NSMutableString *output = [[NSMutableString alloc] initWithFormat:@"option: %@ with choices:\n",name];
-    
-    for (Choice *aChoice in choiceList) {
-        [output appendFormat:@"%@\n",[aChoice descriptionWithIndent:1]];
-    }
-    
-    return output;
-    
 }
 
 @end

@@ -52,7 +52,9 @@
 
 -(Combo *)initFromComboShallow:(Combo *)aCombo
 {
-    self = [super initFromMenuComponent:aCombo];
+    name = aCombo->name;
+    desc = aCombo->desc;
+    primaryKey = aCombo->primaryKey; 
     
     associatedOrder = [aCombo associatedOrder];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orderAltered) name:ORDER_ITEMS_MODIFIED object:associatedOrder];

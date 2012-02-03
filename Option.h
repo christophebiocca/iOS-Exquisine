@@ -10,6 +10,10 @@
 #import "MenuComponent.h"
 
 extern NSString* OPTION_MODIFIED;
+extern NSString* OPTION_CHOICE_ADDED;
+extern NSString* OPTION_CHOICE_REMOVED;
+extern NSString* OPTION_INVALID_SELECTION;
+extern NSString* OPTION_INVALID_DESELECTION;
 
 @class Choice;
 
@@ -24,47 +28,48 @@ extern NSString* OPTION_MODIFIED;
     
     //Special accessors will have to be used to manage choiceList
     NSMutableArray *choiceList; 
-    NSMutableArray *selectedChoices;
-    
-    NSString* propertiesChecksum;
     
 }
 
 @property (retain,readonly) NSArray *choiceList;
-@property (retain,readonly) NSArray *selectedChoices;
-@property (retain,readonly) NSArray *selectedFreeChoices;
 @property (readonly) NSInteger lowerBound;
 @property (readonly) NSInteger upperBound;
 @property (readonly) NSInteger numberOfFreeChoices;
-@property (readonly) NSInteger remainingFreeChoices;
-@property(retain,readonly) NSDecimalNumber* totalPrice;
-@property (retain,readonly) NSString* propertiesChecksum;
 
--(Option *)initFromOption:(Option *)anOption;
 
--(Option *)initFromData:(NSDictionary *)inputData;
+- (Option *)init;
 
--(Option *)init;
+- (Option *)initFromData:(NSDictionary *)inputData;
 
--(NSString *) description;
+- (MenuComponent *)initWithCoder:(NSCoder *)decoder;
 
--(void) addPossibleChoice:(Choice *) aChoice;
+- (void)encodeWithCoder:(NSCoder *)encoder;
 
--(BOOL) selectChoice:(Choice *) aChoice;
+- (Option *) copy;
 
--(void) deselectChoice:(Choice *) aChoice;
+- (NSDecimalNumber*)price;
 
--(BOOL) toggleChoice:(Choice *) aChoice;
+- (NSArray *) selectedChoices;
 
--(BOOL) selectChoiceByIndex:(NSInteger) aChoice;
+- (NSInteger) numberOfSelectedChoices;
 
--(void) deselectChoiceByIndex:(NSInteger) aChoice;
+- (void) addChoice:(Choice *) aChoice;
 
--(BOOL) toggleChoiceByIndex:(NSInteger) aChoice;
+- (void) removeChoice:(Choice *) aChoice;
 
--(NSDictionary*)orderRepresentation;
+- (void) selectChoiceByIndex:(NSInteger) aChoice;
 
--(BOOL) isEffectivelySameAs:(Option *) anOption;
+- (void) deselectChoiceByIndex:(NSInteger) aChoice;
+
+- (void) toggleChoiceByIndex:(NSInteger) aChoice;
+
+- (void) recalculate:(NSNotification *)aNotification;
+
+- (void) validateState;
+
+- (BOOL) isEqual:(id) anOption;
+
+- (NSDictionary*)orderRepresentation;
 
 - (NSString *) descriptionWithIndent:(NSInteger) indentLevel;
 

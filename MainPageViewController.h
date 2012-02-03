@@ -10,6 +10,7 @@
 #import "APICallDelegate.h"
 #import "OrderManagementDelegate.h"
 
+@class Location;
 @class MainPageView;
 @class Menu;
 @class Order;
@@ -52,5 +53,7 @@
 -(void) createOrderPressed;
 
 -(void) updateStoreHourInfo;
+
+-(Location *) currentLocation;
 
 @end

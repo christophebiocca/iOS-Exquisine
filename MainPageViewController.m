@@ -395,16 +395,21 @@
     return [networkChecker isReachable];
 }
 
+-(BOOL)locationIsOpen
+{
+    return ([[self currentLocation] storeState] == Open);
+}
+
 -(void)updateStoreHourInfo
 {
-    if([locations count] == 0)
+    if(![self currentLocation])
     {
         [[mainPageView openIndicator] setState:IndicatorViewOff];
         [[mainPageView storeHours] setText:@"Store hours: Fetching from server..."];
         return;
     }
-    Location *currentLocation = [locations objectAtIndex:0]; 
-    switch ([currentLocation storeState]) {
+    
+    switch ([[self currentLocation] storeState]) {
         case Open:
             [[mainPageView openIndicator] setState:IndicatorViewOn];
             break;
@@ -423,24 +428,32 @@
     [formatter setDateStyle:NSDateFormatterNoStyle];
     [formatter setTimeStyle:NSDateFormatterShortStyle];
     
-    if([currentLocation storeState] != Closed)
+    if([[self currentLocation] storeState] != Closed)
     {
-        NSString *openTime = [formatter stringFromDate:[currentLocation opensToday]];
-        NSString *closeTime = [formatter stringFromDate:[currentLocation closesToday]];
+        NSString *openTime = [formatter stringFromDate:[[self currentLocation] opensToday]];
+        NSString *closeTime = [formatter stringFromDate:[[self currentLocation] closesToday]];
         
         [[mainPageView storeHours] setText:[NSString stringWithFormat:@"Open from %@ to %@",openTime,closeTime]];
     }
     else
     {
-        NSString *openTime = [formatter stringFromDate:[currentLocation nextOpen]];
-        NSString *closeTime = [formatter stringFromDate:[currentLocation nextClose]];
+        NSString *openTime = [formatter stringFromDate:[[self currentLocation] nextOpen]];
+        NSString *closeTime = [formatter stringFromDate:[[self currentLocation] nextClose]];
         [formatter setDateFormat:@"EEEE"];
-        NSString *dayOfWeek = [formatter stringFromDate:[currentLocation nextClose]];
+        NSString *dayOfWeek = [formatter stringFromDate:[[self currentLocation] nextClose]];
         
         [[mainPageView storeHours] setText:[NSString stringWithFormat:@"Opens %@ from %@ to %@",dayOfWeek,openTime,closeTime]];
         
     }
     
+}
+
+//This will obviously have to change.
+-(Location *)currentLocation
+{
+    if([locations count] > 0)
+        return [locations objectAtIndex:0];
+    return nil;
 }
 
 @end

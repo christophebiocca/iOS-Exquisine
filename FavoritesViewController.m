@@ -85,6 +85,11 @@
     [delegate submitOrderForController:orderViewController];
 }
 
+-(BOOL)locationIsOpen
+{
+    return [delegate locationIsOpen];
+}
+
 -(NSInteger)numberOfFavorites
 {
     return [delegate numberOfFavorites];

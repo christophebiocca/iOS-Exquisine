@@ -20,13 +20,15 @@ NSString* ITEM_MODIFIED = @"CroutonLabs/ItemModified";
 
 -(Item *)initFromItem:(Item *)anItem
 {
-    self = [super initFromMenuComponent:anItem];
+    name = anItem->name;
+    desc = anItem->desc;
+    primaryKey = anItem->primaryKey; 
     
     basePrice = anItem.basePrice;
     options = [[NSMutableArray alloc] initWithCapacity:0];
     
     for (Option *currentOption in anItem.options) {
-        Option *anOption = [[Option alloc] initFromOption:currentOption];
+        Option *anOption = [currentOption copy];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(optionAltered) name:OPTION_MODIFIED object:anOption];
         [options addObject:anOption];
     }
@@ -76,7 +78,7 @@ NSString* ITEM_MODIFIED = @"CroutonLabs/ItemModified";
     
     for (Option *currentOption in options) 
     {
-        tabulation = [tabulation decimalNumberByAdding:[currentOption totalPrice]];
+        tabulation = [tabulation decimalNumberByAdding:[currentOption price]];
     }
     
     return tabulation;
@@ -101,6 +103,10 @@ NSString* ITEM_MODIFIED = @"CroutonLabs/ItemModified";
         options = [decoder decodeObjectForKey:@"options"];
         propertiesChecksum = [decoder decodeObjectForKey:@"preoperties_checksum"];
         
+        for (Option *option in options) {
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(optionAltered) name:OPTION_MODIFIED object:option];
+        }
+        
     }
     return self;
 }
@@ -121,7 +127,7 @@ NSString* ITEM_MODIFIED = @"CroutonLabs/ItemModified";
     if ([options count] != [[anItem options] count])
         return NO;
     for (int i = 0; i < [options count] ; i++) {
-        if (![[options objectAtIndex:i] isEffectivelySameAs:[[anItem options] objectAtIndex:i]])
+        if (![[options objectAtIndex:i] isEqual:[[anItem options] objectAtIndex:i]])
             return NO;
     }
     return YES;

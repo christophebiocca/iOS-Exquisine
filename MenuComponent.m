@@ -10,18 +10,32 @@
 #import "TableData.h"
 #import "CellData.h"
 
+NSString* MENU_COMPONENT_NAME_CHANGED = @"CroutonLabs/MenuComponentNameChanged";
+NSString* MENU_COMPONENT_DESC_CHANGED = @"CroutonLabs/MenuComponentDescChanged";
+NSString* MENU_COMPONENT_PK_CHANGED = @"CroutonLabs/MenuComponentPrimaryKeyChanged";
+
 @implementation MenuComponent
 
-@synthesize name,desc;
+@synthesize name;
+@synthesize desc;
 @synthesize primaryKey;
 
--(MenuComponent *)initFromMenuComponent:(MenuComponent *)aMenuComponent
+-(void)setName:(NSString *)aName
 {
-    name = aMenuComponent.name;
-    desc = aMenuComponent.desc;
-    primaryKey = aMenuComponent.primaryKey;
-    
-    return self;
+    name = aName;
+    [[NSNotificationCenter defaultCenter] postNotificationName:MENU_COMPONENT_NAME_CHANGED object:self];
+}
+
+-(void)setDesc:(NSString *)aDesc
+{
+    desc = aDesc;
+    [[NSNotificationCenter defaultCenter] postNotificationName:MENU_COMPONENT_DESC_CHANGED object:self];
+}
+
+-(void)setPrimaryKey:(NSInteger)aPrimaryKey
+{
+    primaryKey = aPrimaryKey;
+    [[NSNotificationCenter defaultCenter] postNotificationName:MENU_COMPONENT_PK_CHANGED object:self];
 }
 
 -(MenuComponent *)initFromData:(NSDictionary *)inputData
@@ -50,6 +64,35 @@
     [encoder encodeObject:name forKey:@"name"];
     [encoder encodeObject:desc forKey:@"desc"];
     [encoder encodeObject:[NSString stringWithFormat:@"%i", primaryKey] forKey:@"primary_key"];
+}
+
+-(MenuComponent *)copy
+{
+    MenuComponent *returnMenuComponent = [[MenuComponent alloc] init];
+    
+    [returnMenuComponent setName:name];
+    [returnMenuComponent setDesc:desc];
+    [returnMenuComponent setPrimaryKey:primaryKey];
+    
+    return returnMenuComponent;
+}
+
+-(NSString *)descriptionWithIndent:(NSInteger)indentLevel
+{
+    NSString *padString = [@"" stringByPaddingToLength:(indentLevel*4) withString:@" " startingAtIndex:0];
+    
+    NSMutableString *output = [[NSMutableString alloc] initWithCapacity:0];
+    
+    [output appendFormat:@"%@name:%@ \n",padString,name];
+    [output appendFormat:@"%@desc:%@ \n",padString,desc];
+    [output appendFormat:@"%@primary key:%i \n",padString,primaryKey];
+    
+    return output;
+}
+
+-(NSString *)description
+{
+    return [self descriptionWithIndent:0];
 }
 
 @end

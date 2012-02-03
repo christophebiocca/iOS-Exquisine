@@ -14,18 +14,26 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString* MENU_COMPONENT_NAME_CHANGED;
+extern NSString* MENU_COMPONENT_DESC_CHANGED;
+extern NSString* MENU_COMPONENT_PK_CHANGED;
+
 @interface MenuComponent : NSObject <NSCoding> {
     NSString *name;
     NSString *desc;
     NSInteger primaryKey;
 }
 
-@property (retain) NSString *name;
-@property (retain) NSString *desc;
-@property NSInteger primaryKey;
-
--(MenuComponent *) initFromMenuComponent:(MenuComponent *) aMenuComponent;
+@property (retain, nonatomic) NSString *name;
+@property (retain, nonatomic) NSString *desc;
+@property (readonly) NSInteger primaryKey;
 
 -(MenuComponent *) initFromData:(NSDictionary *) inputData;
+
+-(MenuComponent *) copy;
+
+-(NSString *) descriptionWithIndent:(NSInteger) indent;
+
+-(NSString *) description;
 
 @end

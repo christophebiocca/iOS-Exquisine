@@ -9,102 +9,143 @@
 #import "Choice.h"
 #import "Option.h"
 #import "Utilities.h"
+#import "MenuComponent.h"
+
+NSString* CHOICE_PRICE_CHANGED = @"CroutonLabs/ChoicePriceChanged";
+NSString* CHOICE_SELECTED_CHANGED = @"CroutonLabs/ChoiceSelectedChanged";
+NSString* CHOICE_FREE_CHANGED = @"CroutonLabs/ChoiceFreeChanged";
+NSString* CHOICE_CHANGED = @"CroutonLabs/ChoiceChanged";
 
 @implementation Choice
 
-@synthesize price;
-@synthesize propertiesChecksum;
+@synthesize selected;
+@synthesize isFree;
 
--(Choice *)initFromChoice:(Choice *)aChoice option:(Option *)opt
-{
-    self = [super initFromMenuComponent:aChoice];
-    
-    price = aChoice.price;
-    option = opt;
-    propertiesChecksum = [aChoice propertiesChecksum];
-    
-    return self;
-}
-
--(Choice *)initFromData:(NSDictionary *)inputData option:(Option *)opt
+-(Choice *)initFromData:(NSDictionary *)inputData option:(Option *)anOption
 {
     self = [super initFromData:inputData];
-    NSDecimalNumber* priceCents = [[NSDecimalNumber alloc] 
-                                   initWithInteger:[[inputData 
-                                                     objectForKey:@"price_cents"] intValue]];
-    price = [priceCents decimalNumberByMultiplyingByPowerOf10:-2];
-    option = opt;
-    propertiesChecksum = [inputData objectForKey:@"properties_checksum"];
+    
+    NSDecimalNumber* priceCents = [[NSDecimalNumber alloc] initWithInteger:[[inputData objectForKey:@"price_cents"] intValue]];
+    basePrice = [priceCents decimalNumberByMultiplyingByPowerOf10:-2];
+    
+    selected = [[inputData objectForKey:@"selected"] intValue];
+    
+    isFree = NO;
+
     return self;
-}
-
--(NSComparisonResult)comparePrice:(Choice*)other{
-    return [[self price] compare:[other price]];
-}
-
--(BOOL)selected{
-    return [[option selectedChoices] containsObject:self];
-}
-
--(BOOL)isFree{
-    if([self selected]){
-        return [[option selectedFreeChoices] containsObject:self];
-    } else {
-        return [option remainingFreeChoices] > 0;
-    }
-}
-
--(NSDictionary*)orderRepresentation{
-    return [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:primaryKey] forKey:@"choice"];
 }
 
 - (MenuComponent *)initWithCoder:(NSCoder *)decoder
 {
     if (self = [super initWithCoder:decoder])
     {
-        option = [decoder decodeObjectForKey:@"option"];
-        price = [decoder decodeObjectForKey:@"price"];
-        propertiesChecksum = [decoder decodeObjectForKey:@"properties_checksum"];
-        
+        basePrice = [decoder decodeObjectForKey:@"price"];
+        selected = [[decoder decodeObjectForKey:@"selected"] intValue];
+        isFree = [[decoder decodeObjectForKey:@"free"] boolValue];
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
-    //Rinse and repeat this:
     [super encodeWithCoder:encoder];
-    [encoder encodeObject:option forKey:@"option"];
-    [encoder encodeObject:price forKey:@"price"];
-    [encoder encodeObject:propertiesChecksum forKey:@"properties_checksum"];
+    [encoder encodeObject:basePrice forKey:@"price"];
+    [encoder encodeObject:[NSString stringWithFormat:@"%i", selected] forKey:@"selected"];
+    [encoder encodeObject:[NSString stringWithFormat:@"%i", isFree] forKey:@"free"];
 }
 
--(BOOL)isEffectivelySameAs:(Choice *)aChoice
+- (Choice *)copy
 {
-    if(![name isEqual:aChoice.name])
+    Choice *aChoice = [[Choice alloc] init];
+    
+    aChoice->name = name;
+    aChoice->desc = desc;
+    aChoice->primaryKey = primaryKey;
+    
+    aChoice->basePrice = basePrice;
+    aChoice->selected = selected;
+    aChoice->isFree = isFree;
+        
+    return aChoice;
+}
+
+- (void)setBasePrice:(NSDecimalNumber *)aPrice
+{
+    basePrice = aPrice;
+    [[NSNotificationCenter defaultCenter] postNotificationName:CHOICE_PRICE_CHANGED object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:CHOICE_CHANGED object:self];
+}
+
+-(void)setSelected:(BOOL)isSelected
+{
+    selected = isSelected;
+    [[NSNotificationCenter defaultCenter] postNotificationName:CHOICE_SELECTED_CHANGED object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:CHOICE_CHANGED object:self];
+}
+
+-(void)toggleSelected
+{
+    if(selected)
+        [self setSelected:NO];
+    else
+        [self setSelected:YES];
+}
+
+-(void)setIsFree:(BOOL)free
+{
+    isFree = free;
+    [[NSNotificationCenter defaultCenter] postNotificationName:CHOICE_FREE_CHANGED object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:CHOICE_CHANGED object:self];
+    
+}
+
+-(NSDecimalNumber *)price
+{
+    if(isFree)
+        return [NSDecimalNumber decimalNumberWithString:@"0"];
+    return basePrice;
+}
+
+-(NSComparisonResult)comparePrice:(Choice*)other
+{
+    return [basePrice compare:other->basePrice];
+}
+
+-(BOOL)isEqual:(id)aChoice
+{
+    if (![aChoice isKindOfClass:[Choice class]])
+        return NO;
+    
+    if(![name isEqual:[aChoice name]])
         return NO;
     
     if([self selected] != [aChoice selected])
         return NO;
     
-    if (![price isEqual: aChoice.price]) 
+    if (![basePrice isEqual:((Choice *)aChoice)->basePrice]) 
         return NO;
     
     return YES;
 }
 
-- (NSString *) descriptionWithIndent:(NSInteger) indentLevel
-{    
-    NSMutableString *output = [NSMutableString stringWithString:[@"" stringByPaddingToLength:(indentLevel*4) withString:@" " startingAtIndex:0]];
-    
-    [output appendFormat:@"%@ price: %@",name,[Utilities FormatToPrice:price]];
-    
-    return output;
+-(NSDictionary*)orderRepresentation
+{
+    return [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:primaryKey] forKey:@"choice"];
 }
 
--(NSString *)description
-{
-    return [NSString stringWithFormat:@"%@ price: %@",name,[Utilities FormatToPrice:price]];
+- (NSString *) descriptionWithIndent:(NSInteger) indentLevel
+{    
+    NSString *padString = [@"" stringByPaddingToLength:(indentLevel*4) withString:@" " startingAtIndex:0];
+    
+    NSMutableString *output = [[NSMutableString alloc] initWithCapacity:0];
+    
+    [output appendFormat:@"%@choice:\n",padString];
+    [output appendString:[super descriptionWithIndent:indentLevel]];
+    [output appendFormat:@"%@base price:%@ \n",padString,basePrice];
+    [output appendFormat:@"%@selected:%i \n",padString,selected];
+    [output appendFormat:@"%@is free:%i \n",padString,isFree];
+
+    return output;
 }
 
 @end

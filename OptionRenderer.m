@@ -25,7 +25,7 @@
         [choiceRenderList addObject:[[ChoiceRenderer alloc] initWithChoice:currentChoice]];
     }
     
-    [[suffixList objectAtIndex:0] setCellDesc:[Utilities FormatToPrice:[optionInfo totalPrice]]];
+    [[suffixList objectAtIndex:0] setCellDesc:[Utilities FormatToPrice:[optionInfo price]]];
 }
 
 -(OptionRenderer *)initWithOption:(Option *)anOption
@@ -43,7 +43,7 @@
     
     CellData *newCell = [[CellData alloc] init];
     newCell.cellTitle = @"Total Choice Price:";
-    newCell.cellDesc = [Utilities FormatToPrice:[optionInfo totalPrice]];
+    newCell.cellDesc = [Utilities FormatToPrice:[optionInfo price]];
     [suffixList addObject:newCell];
     
     return self;
@@ -51,7 +51,7 @@
 
 -(UITableViewCell *)configureCell:(UITableViewCell *)aCell
 {
-    [[aCell detailTextLabel] setText:[Utilities FormatToPrice:optionInfo.totalPrice]];
+    [[aCell detailTextLabel] setText:[Utilities FormatToPrice:[optionInfo price]]];
     [[aCell textLabel] setText:optionInfo.name];
     [aCell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
     return aCell;
@@ -94,7 +94,7 @@
     NSMutableArray *returnList = [[NSMutableArray alloc] initWithCapacity:0];
     
     CellData *newCell = [super detailedStaticRenderDefaultCell];
-    [newCell setCellDesc:[Utilities FormatToPrice:[optionInfo totalPrice]]];
+    [newCell setCellDesc:[Utilities FormatToPrice:[optionInfo price]]];
     [newCell setCellTitle:[optionInfo name]];
     
     [returnList addObject:newCell];

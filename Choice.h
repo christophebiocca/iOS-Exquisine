@@ -11,31 +11,48 @@
 
 @class Option;
 
-@interface Choice : MenuComponent{
-    Option* option;
+extern NSString* CHOICE_PRICE_CHANGED;
+extern NSString* CHOICE_SELECTED_CHANGED;
+extern NSString* CHOICE_FREE_CHANGED;
+extern NSString* CHOICE_CHANGED;
+
+@interface Choice : MenuComponent
+{
     
-    NSDecimalNumber* price;
+    @protected
+    NSDecimalNumber* basePrice;
+    BOOL selected;
+    BOOL isFree;
     
-    NSString* propertiesChecksum;
 }
 
-@property (retain, readonly) NSDecimalNumber* price;
 @property (readonly) BOOL selected;
 @property (readonly) BOOL isFree;
-@property (retain, readonly) NSString* propertiesChecksum;
 
--(Choice *)initFromChoice:(Choice *) aChoice option:(Option*)opt;
+- (Choice *)initFromData:(NSDictionary *) inputData option:(Option*)anOption;
 
--(Choice *)initFromData:(NSDictionary *) inputData option:(Option*)opt;
+- (MenuComponent *)initWithCoder:(NSCoder *)decoder;
 
--(NSString *)description;
+- (void)encodeWithCoder:(NSCoder *)encoder;
 
--(NSComparisonResult)comparePrice:(Choice*)other;
+- (Choice *)copy;
 
--(NSDictionary*)orderRepresentation;
+- (void)setBasePrice:(NSDecimalNumber *)aPrice;
 
--(BOOL) isEffectivelySameAs:(Choice *) aChoice;
+- (void)setSelected:(BOOL)isSelected;
 
-- (NSString *) descriptionWithIndent:(NSInteger) indentLevel;
+- (void)toggleSelected;
+
+- (void)setIsFree:(BOOL)free;
+
+- (NSDecimalNumber *)price;
+
+- (NSComparisonResult)comparePrice:(Choice*)other;
+
+- (BOOL)isEqual:(id)aChoice;
+
+- (NSDictionary*)orderRepresentation;
+
+- (NSString *)descriptionWithIndent:(NSInteger) indentLevel;
 
 @end

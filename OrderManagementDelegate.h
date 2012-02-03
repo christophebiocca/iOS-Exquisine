@@ -16,5 +16,6 @@
 -(void) deleteFromFavoritesForController:(OrderViewController *)orderViewController;
 -(NSInteger) numberOfFavorites;
 -(BOOL) hasServerConnection;
+-(BOOL) locationIsOpen;
 
 @end
