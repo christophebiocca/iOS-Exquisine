@@ -1081,10 +1081,7 @@
 		23DA7A8114C6462C008281DD /* OtherViews */ = {
 			isa = PBXGroup;
 			children = (
-				D9768A7A14D74A8A00BBA467 /* PaymentViews */,
 				2352723F14DB13DF00DDC7FA /* IndicatorView */,
-				2352723F14DB13DF00DDC7FA /* IndicatorView */,
-				D9768A7A14D74A8A00BBA467 /* PaymentViews */,
 				D9768A7A14D74A8A00BBA467 /* PaymentViews */,
 				232C796214CF716800C3868D /* FavoritesView */,
 				23DA7A8214C64656008281DD /* MainPageView */,
