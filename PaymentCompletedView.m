@@ -10,12 +10,24 @@
 
 @implementation PaymentCompletedView
 
+@synthesize done;
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        [self setBackgroundColor:[UIColor blueColor]];
+        [self setBackgroundColor:[UIColor whiteColor]];
+        
+        UIToolbar* toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, 44)];
+        done = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:nil action:nil];
+        UIBarButtonItem* space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+        [toolbar setItems:[NSArray arrayWithObjects:space, done, nil]];
+        
+        UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(0, 50, 0, 0)];
+        [self addSubview:label];
+        [label setText:@"Success"];
+        [label sizeToFit];
     }
     return self;
 }

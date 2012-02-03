@@ -8,8 +8,12 @@
 
 @class PaymentSuccessInfo;
 
-@interface PaymentCompletedView : UIView
+@interface PaymentCompletedView : UIView{
+    UIBarButtonItem* done;
+}
 
 -(void)setSuccessInfo:(PaymentSuccessInfo*)info;
+
+@property(retain, readonly)UIBarButtonItem* done;
 
 @end

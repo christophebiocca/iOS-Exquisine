@@ -41,13 +41,13 @@
     [paymentView setSuccessInfo:successInfo];
 }
 
-/*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[paymentView done] setTarget:self];
+    [[paymentView done] setAction:@selector(done)];
 }
-*/
 
 - (void)viewDidUnload
 {
@@ -60,6 +60,10 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+-(void)done{
+    done();
 }
 
 @end
