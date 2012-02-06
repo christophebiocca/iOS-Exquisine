@@ -34,7 +34,7 @@
     
     [menuInfo setAssociatedOrder:anOrder];
     orderRenderer = [[OrderRenderer alloc] initWithOrderAndMenu:orderInfo:menuInfo];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orderAltered) name:ORDER_ITEMS_MODIFIED object:orderInfo];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orderAltered:) name:ORDER_ITEMS_MODIFIED object:orderInfo];
     
     [[self navigationItem] setTitle:@"Add Items"];
     return self;
@@ -254,7 +254,7 @@
     [menuInfo setAssociatedOrder:orderInfo];
     [orderInfo setParentMenu:menuInfo];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orderAltered) name:ORDER_ITEMS_MODIFIED object:orderInfo];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orderAltered:) name:ORDER_ITEMS_MODIFIED object:orderInfo];
     
     [[orderView orderTable] reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
     if([orderInfo isFavorite])
