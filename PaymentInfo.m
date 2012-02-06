@@ -41,7 +41,12 @@ static NSRegularExpression* separator;
     if(self = [super init]){
         [self setCardnumber:nil];
         [self setCardholderName:nil];
-        [self setExpirationYear:0];
+        
+        NSDateComponents* components = [[NSCalendar currentCalendar]
+                                        components:NSYearCalendarUnit 
+                                        fromDate:[NSDate date]];
+        
+        [self setExpirationYear:[components year]];
         [self setExpirationMonth:0];
     }
     return self;
