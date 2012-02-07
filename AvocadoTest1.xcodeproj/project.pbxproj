@@ -11,6 +11,10 @@
 		23082F5614D88513003964CE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 23082F5414D88513003964CE /* Reachability.m */; };
 		23082F5C14D8968F003964CE /* ComboViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23082F5B14D8968F003964CE /* ComboViewController.m */; };
 		23082F6114D897D1003964CE /* ComboView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23082F6014D897D1003964CE /* ComboView.m */; };
+		231C510E14E1B7F1004F2CCC /* ComboTypeTrivial.m in Sources */ = {isa = PBXBuildFile; fileRef = 231C510D14E1B7F1004F2CCC /* ComboTypeTrivial.m */; };
+		231C511214E1BC8B004F2CCC /* ItemGroupMultiplicativePricing.m in Sources */ = {isa = PBXBuildFile; fileRef = 231C511114E1BC8B004F2CCC /* ItemGroupMultiplicativePricing.m */; };
+		231C511614E1C1A5004F2CCC /* ItemGroupAbsolutePricing.m in Sources */ = {isa = PBXBuildFile; fileRef = 231C511514E1C1A5004F2CCC /* ItemGroupAbsolutePricing.m */; };
+		231C511A14E1C1C6004F2CCC /* ItemGroupDiscountPricing.m in Sources */ = {isa = PBXBuildFile; fileRef = 231C511914E1C1C6004F2CCC /* ItemGroupDiscountPricing.m */; };
 		2329BB2E14D9A8DD008E505F /* pfLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2329BB2D14D9A8DD008E505F /* pfLogo@2x.png */; };
 		232C795414CDF5F100C3868D /* AlertPrompt.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C795314CDF5F100C3868D /* AlertPrompt.m */; };
 		232C795B14CF1A0900C3868D /* TunnelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C795A14CF1A0900C3868D /* TunnelViewController.m */; };
@@ -143,6 +147,14 @@
 		23082F5B14D8968F003964CE /* ComboViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComboViewController.m; sourceTree = "<group>"; };
 		23082F5F14D897D1003964CE /* ComboView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComboView.h; sourceTree = "<group>"; };
 		23082F6014D897D1003964CE /* ComboView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComboView.m; sourceTree = "<group>"; };
+		231C510C14E1B7F1004F2CCC /* ComboTypeTrivial.h */ = {isa = PBXFileReference; fileEncoding = 4; path = ComboTypeTrivial.h; sourceTree = "<group>"; };
+		231C510D14E1B7F1004F2CCC /* ComboTypeTrivial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComboTypeTrivial.m; sourceTree = "<group>"; };
+		231C511014E1BC8B004F2CCC /* ItemGroupMultiplicativePricing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemGroupMultiplicativePricing.h; sourceTree = "<group>"; };
+		231C511114E1BC8B004F2CCC /* ItemGroupMultiplicativePricing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemGroupMultiplicativePricing.m; sourceTree = "<group>"; };
+		231C511414E1C1A5004F2CCC /* ItemGroupAbsolutePricing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemGroupAbsolutePricing.h; sourceTree = "<group>"; };
+		231C511514E1C1A5004F2CCC /* ItemGroupAbsolutePricing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemGroupAbsolutePricing.m; sourceTree = "<group>"; };
+		231C511814E1C1C6004F2CCC /* ItemGroupDiscountPricing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemGroupDiscountPricing.h; sourceTree = "<group>"; };
+		231C511914E1C1C6004F2CCC /* ItemGroupDiscountPricing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemGroupDiscountPricing.m; sourceTree = "<group>"; };
 		2329BB2D14D9A8DD008E505F /* pfLogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pfLogo@2x.png"; sourceTree = "<group>"; };
 		232C795214CDF5F100C3868D /* AlertPrompt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertPrompt.h; sourceTree = "<group>"; };
 		232C795314CDF5F100C3868D /* AlertPrompt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertPrompt.m; sourceTree = "<group>"; };
@@ -406,6 +418,33 @@
 			name = ComboView;
 			sourceTree = "<group>";
 		};
+		231C510F14E1BC4D004F2CCC /* ItemGroupMultiplicativePricing */ = {
+			isa = PBXGroup;
+			children = (
+				231C511014E1BC8B004F2CCC /* ItemGroupMultiplicativePricing.h */,
+				231C511114E1BC8B004F2CCC /* ItemGroupMultiplicativePricing.m */,
+			);
+			name = ItemGroupMultiplicativePricing;
+			sourceTree = "<group>";
+		};
+		231C511314E1C172004F2CCC /* ItemGroupAbsolutePricing */ = {
+			isa = PBXGroup;
+			children = (
+				231C511414E1C1A5004F2CCC /* ItemGroupAbsolutePricing.h */,
+				231C511514E1C1A5004F2CCC /* ItemGroupAbsolutePricing.m */,
+			);
+			name = ItemGroupAbsolutePricing;
+			sourceTree = "<group>";
+		};
+		231C511714E1C1AC004F2CCC /* ItemGroupDiscountPricing */ = {
+			isa = PBXGroup;
+			children = (
+				231C511814E1C1C6004F2CCC /* ItemGroupDiscountPricing.h */,
+				231C511914E1C1C6004F2CCC /* ItemGroupDiscountPricing.m */,
+			);
+			name = ItemGroupDiscountPricing;
+			sourceTree = "<group>";
+		};
 		2329BB2F14D9C56D008E505F /* ItemGroupView */ = {
 			isa = PBXGroup;
 			children = (
@@ -508,6 +547,7 @@
 			children = (
 				232C797814D0A7E000C3868D /* Combo.h */,
 				232C797914D0A7E000C3868D /* Combo.m */,
+				233C4CCE14E1ABF9005C8CC9 /* ComboTypeTrivial */,
 			);
 			name = Combo;
 			sourceTree = "<group>";
@@ -537,6 +577,15 @@
 				232D7A0F14C8B23A00DD5911 /* UICustomActionSheet.m */,
 			);
 			name = UICustomActionSheet;
+			sourceTree = "<group>";
+		};
+		233C4CCE14E1ABF9005C8CC9 /* ComboTypeTrivial */ = {
+			isa = PBXGroup;
+			children = (
+				231C510C14E1B7F1004F2CCC /* ComboTypeTrivial.h */,
+				231C510D14E1B7F1004F2CCC /* ComboTypeTrivial.m */,
+			);
+			name = ComboTypeTrivial;
 			sourceTree = "<group>";
 		};
 		2345980714DE0AD900910F3B /* OrderManager */ = {
@@ -671,9 +720,9 @@
 		237EC00B14BE5842009D9268 /* MenuComposites */ = {
 			isa = PBXGroup;
 			children = (
-				2345980714DE0AD900910F3B /* OrderManager */,
 				23C26A1E14C4D5A600DD53DF /* MenuComponent.h */,
 				23C26A1F14C4D5A600DD53DF /* MenuComponent.m */,
+				2345980714DE0AD900910F3B /* OrderManager */,
 				23D6F4A714D9E1C90043C75E /* ItemGroup */,
 				232C797714D0A77200C3868D /* Combo */,
 				23DA7A3D14C60133008281DD /* Menu */,
@@ -836,6 +885,9 @@
 			children = (
 				23FDE9CD14D8A9BB005AA6D6 /* ItemGroup.h */,
 				23FDE9CE14D8A9BB005AA6D6 /* ItemGroup.m */,
+				231C511714E1C1AC004F2CCC /* ItemGroupDiscountPricing */,
+				231C511314E1C172004F2CCC /* ItemGroupAbsolutePricing */,
+				231C510F14E1BC4D004F2CCC /* ItemGroupMultiplicativePricing */,
 			);
 			name = ItemGroup;
 			sourceTree = "<group>";
@@ -1464,6 +1516,10 @@
 				D933EF1614DB566D00B0BDC7 /* PaymentProcessingView.m in Sources */,
 				D933EF1A14DB568400B0BDC7 /* PaymentCompletedView.m in Sources */,
 				2345980B14DE0B2000910F3B /* OrderManager.m in Sources */,
+				231C510E14E1B7F1004F2CCC /* ComboTypeTrivial.m in Sources */,
+				231C511214E1BC8B004F2CCC /* ItemGroupMultiplicativePricing.m in Sources */,
+				231C511614E1C1A5004F2CCC /* ItemGroupAbsolutePricing.m in Sources */,
+				231C511A14E1C1C6004F2CCC /* ItemGroupDiscountPricing.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,18 +11,45 @@
 #import "Item.h"
 #import "Order.h"
 #import "Combo.h"
+#import "ItemGroupMultiplicativePricing.h"
+
+NSString* ITEM_GROUP_MODIFIED = @"CroutonLabs/ItemGroupModified";
 
 @implementation ItemGroup
 
+//See [self initialize]
+static NSDictionary* itemGroupClassDictionary = nil;
+
 @synthesize listOfItems;
-@synthesize satisfied;
+@synthesize satisfyingItem;
+
++(void)initialize
+{
+    if(!itemGroupClassDictionary){
+        itemGroupClassDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [ItemGroupMultiplicativePricing class], @"Test",
+                                nil];
+    }
+}
+
++(Combo *)itemGroupWithDataAndParentMenu:(NSDictionary *)inputData :(Menu *)associatedMenu
+{
+    //Grab the name of the pricing strategy
+    NSString *itemGroupType = [inputData objectForKey:@"pricing_strategy"];
+    
+    //Determine the appropriate class to instantiate as per the dictionary
+    Class itemGroupSubclass = [itemGroupClassDictionary objectForKey:itemGroupType];
+    
+    //Allocate it and call the initWithDataAndParentMenu initializer
+    return [[itemGroupSubclass alloc] initWithDataAndParentMenu:inputData:associatedMenu];
+}
 
 -(ItemGroup *)init
 {
     self = [super init];
     
     listOfItems = [[NSMutableArray alloc] initWithCapacity:0];
-    satisfied = NO;
+    satisfyingItem = [[Item alloc] init];
     
     return self;
 }
@@ -62,6 +89,8 @@
         }
     }
     
+    satisfyingItem = [[Item alloc] init];
+    
     return self;
     
 }
@@ -71,6 +100,7 @@
     if (self = [super initWithCoder:decoder])
     {
         listOfItems = [decoder decodeObjectForKey:@"list_of_items"];
+        satisfyingItem = [decoder decodeObjectForKey:@"satisfying_item"];
     }
     return self;
 }
@@ -80,6 +110,7 @@
     //Rinse and repeat this:
     [super encodeWithCoder:encoder];    
     [encoder encodeObject:listOfItems forKey:@"list_of_items"];
+    [encoder encodeObject:listOfItems forKey:@"satisfying_item"];
 }
 
 -(ItemGroup *)copy
@@ -88,7 +119,7 @@
     
     anItemGroup->listOfItems = [[NSMutableArray alloc] initWithArray:listOfItems];
     
-    anItemGroup->satisfied = satisfied;
+    anItemGroup->satisfyingItem = [satisfyingItem copy];
     
     return anItemGroup;
     
@@ -102,6 +133,24 @@
         }
     }
     return NO;
+}
+
+-(BOOL)satisfied
+{
+    return [self containsItem:satisfyingItem];
+}
+
+-(NSDecimalNumber *)price
+{
+    //This should always be overridden by subclasses. Hopefully this
+    //will catch people's eyes if they forget to do that.
+    return [NSDecimalNumber decimalNumberWithString:@"12345"];
+}
+
+-(void)setSatisfyingItem:(Item *)anItem
+{
+    satisfyingItem = anItem;
+    [[NSNotificationCenter defaultCenter] postNotificationName:ITEM_GROUP_MODIFIED object:self];
 }
 
 -(void)addItem:(Item *)anItem
@@ -127,7 +176,8 @@
     
     [output appendFormat:@"%@ItemGroup:%\n",padString];
     [output appendString:[super descriptionWithIndent:indentLevel]];
-    [output appendFormat:@"%@Satisfied: %i\n",padString,satisfied];
+    [output appendFormat:@"%@Satisfied: %i\n",padString,[self satisfied]];
+    [output appendFormat:@"%@Satisfying item: %@\n",padString,satisfyingItem];
     [output appendFormat:@"%@Items:\n",padString];
     
     for (Item *anItem in listOfItems) {

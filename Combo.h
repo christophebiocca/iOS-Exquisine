@@ -18,16 +18,13 @@ extern NSString* COMBO_MODIFIED;
 {
     
     NSMutableArray *listOfItemGroups;
-    NSMutableArray *listOfAssociatedItems;
-    NSDecimalNumber *price;
     
 }
 
 @property (retain) NSMutableArray *listOfItemGroups;
-@property (retain) NSMutableArray *listOfAssociatedItems;
-@property (retain) NSDecimalNumber *price;
 
 //Initializers
++ (Combo *)comboWithDataAndMenu:(NSDictionary *)inputData:(Menu *) associatedMenu;
 
 - (Combo *)initFromDataAndMenu:(NSDictionary *)inputData:(Menu *) associatedMenu;
 
@@ -41,6 +38,10 @@ extern NSString* COMBO_MODIFIED;
 
 //This returns an array of arrays of Items within anOrder that satisfy each itemGroup.
 - (NSArray *)satisfactionListsForItemList:(NSArray *)anItemList;
+
+- (NSArray *)listOfAssociatedItems;
+
+- (NSDecimalNumber *) price;
 
 - (BOOL)satisfiedWithItemList:(NSArray *)anItemList;
 

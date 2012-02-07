@@ -16,18 +16,25 @@
 //An item group is simply a collection of items and menus that provides
 //a check to see whether an item is within the group.
 
+extern NSString* ITEM_GROUP_MODIFIED;
+
 @interface ItemGroup : MenuComponent
 {
     
     NSMutableArray *listOfItems;
-    BOOL satisfied;
+    Item *satisfyingItem;
     
 }
 
 @property (retain,readonly) NSMutableArray *listOfItems;
-@property BOOL satisfied;
+@property (retain,nonatomic) Item *satisfyingItem;
+@property (readonly) BOOL satisfied;
 
 //Initializers
++(void)initialize;
+
++(Combo *)itemGroupWithDataAndParentMenu:(NSDictionary *)inputData :(Menu *)associatedMenu;
+
 -(ItemGroup *)initWithDataAndParentMenu:(NSDictionary *)inputData:(Menu *) parentMenu;
 
 - (MenuComponent *)initWithCoder:(NSCoder *)decoder;
@@ -39,6 +46,7 @@
 //Access Methods
 - (BOOL) containsItem: (Item *) anItem;
 
+- (NSDecimalNumber *) price;
 
 //Mutation Methods
 - (void) addItem: (Item *) anItem;
@@ -49,7 +57,7 @@
 
 //Housekeeping Methods
 
-//Comparitor and Descriptor Methods
+//; and Descriptor Methods
 - (NSString *) descriptionWithIndent:(NSInteger) indentLevel;
 
 @end
