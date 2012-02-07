@@ -80,14 +80,14 @@
 -(void)layoutSubviews
 {
     [self setBackgroundColor:[UIColor whiteColor]];
-    [createOrderButton setFrame:CGRectMake(20, 253, 280, 37)];
-    [favoriteOrderButton setFrame:CGRectMake(20, 298, 280, 37)];
+    [createOrderButton setFrame:CGRectMake(20, 233, 280, 37)];
+    [favoriteOrderButton setFrame:CGRectMake(20, 278, 280, 37)];
     [accountInfoButton setFrame:CGRectMake(20, 449, 280, 37)];
-    [pendingOrderButton setFrame:CGRectMake(20, 343, 280, 37)];
+    [pendingOrderButton setFrame:CGRectMake(20, 323, 280, 37)];
     [orderStatus setFrame:CGRectMake(20, 263, 280, 37)];
-    [logoView setFrame:CGRectMake(75, 40,170, 170)];
-    [openIndicator setFrame:CGRectMake(38, 224, 16, 16)];
-    [storeHours setFrame:CGRectMake(60, 214, 240, 37)];
+    [logoView setFrame:CGRectMake(75, 30,170, 170)];
+    //[openIndicator setFrame:CGRectMake(38, 224, 16, 16)];
+    [storeHours setFrame:CGRectMake(70, 374, 240, 37)];
 }
 
 @end

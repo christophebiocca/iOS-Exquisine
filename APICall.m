@@ -38,7 +38,7 @@ static NSURL* serverURL;
     NSString* serverString;
     
 #if DEBUG
-    serverString = @"http://localhost:8000";
+    serverString = @"10.172.70.1";
 #else
     serverString = @"http://croutonlabs.com";
 #endif
