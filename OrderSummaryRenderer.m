@@ -25,13 +25,13 @@
     [itemRenderList removeAllObjects];
     [comboRenderList removeAllObjects];
     
-    for (Combo *aCombo in [orderInfo listOfCombos]) 
+    for (Combo *aCombo in [orderInfo comboList]) 
     {
         ComboRenderer *newComboRenderer = [[ComboRenderer alloc] initFromCombo:aCombo];
         [comboRenderList addObjectsFromArray:[newComboRenderer detailedStaticRenderList]];
     }
     
-    for (Item *currentItem in [orderInfo listOfNonComboItems] )  
+    for (Item *currentItem in [orderInfo itemList] )  
     {
         [itemRenderList addObjectsFromArray:[[[ItemRenderer alloc] initWithItem:currentItem] detailedStaticRenderList]];
     }

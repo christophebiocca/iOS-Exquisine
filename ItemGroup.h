@@ -19,26 +19,37 @@
 @interface ItemGroup : MenuComponent
 {
     
-    Menu *parentMenu;
-    Combo *parentCombo;
     NSMutableArray *listOfItems;
+    BOOL satisfied;
     
 }
 
-@property (retain) NSMutableArray *listOfItems;
+@property (retain,readonly) NSMutableArray *listOfItems;
+@property BOOL satisfied;
 
--(ItemGroup *)initWithDataAndParentMenuAndParentCombo:(NSDictionary *)inputData:(Menu *) inputMenu:(Combo *)aCombo;
+//Initializers
+-(ItemGroup *)initWithDataAndParentMenu:(NSDictionary *)inputData:(Menu *) parentMenu;
 
+- (MenuComponent *)initWithCoder:(NSCoder *)decoder;
+
+- (void)encodeWithCoder:(NSCoder *)encoder;
+
+-(ItemGroup *) copy;
+
+//Access Methods
 - (BOOL) containsItem: (Item *) anItem;
 
+
+//Mutation Methods
 - (void) addItem: (Item *) anItem;
 
 - (void) addListOfItems: (NSArray *) items;
 
 - (void) addMenu: (Menu *) aMenu;
 
-- (NSString *) descriptionWithIndent:(NSInteger) indentLevel;
+//Housekeeping Methods
 
--(BOOL) satisfied;
+//Comparitor and Descriptor Methods
+- (NSString *) descriptionWithIndent:(NSInteger) indentLevel;
 
 @end

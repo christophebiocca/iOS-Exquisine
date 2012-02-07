@@ -41,7 +41,7 @@
     [self calcFontSizeToFitRect:CGRectMake(0, 0, 240, 40)];
     
     [[self textLabel] setText:[item name]];
-    [[self detailTextLabel] setText:[Utilities FormatToPrice:[item totalPrice]]];
+    [[self detailTextLabel] setText:[Utilities FormatToPrice:[item price]]];
     
 }
 

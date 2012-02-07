@@ -32,7 +32,7 @@
     
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Add to order" style:UIBarButtonItemStyleDone target:self action:@selector(addThisItemToOrder)];
     
-    if (![[anOrder itemList] containsObject:anItem]) {
+    if (![anOrder containsExactItem:anItem]) {
         [[self navigationItem] setRightBarButtonItem:doneButton];
     }
     
@@ -45,7 +45,7 @@
 -(void)addThisItemToOrder
 {
     
-    [ownerOrder addItem:[[Item alloc] initFromItem:itemInfo]];
+    [ownerOrder addItem:[itemInfo copy]];
 
     [[self navigationController] popToViewController:returnController animated:YES];
     
@@ -99,7 +99,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [[itemView priceButton] setTitle:[NSString stringWithFormat:@"Item Price: %@",[Utilities FormatToPrice:[itemInfo totalPrice]] ]];
+    [[itemView priceButton] setTitle:[NSString stringWithFormat:@"Item Price: %@",[Utilities FormatToPrice:[itemInfo price]] ]];
     [[itemView itemTable] reloadData];
 }
 
@@ -118,7 +118,12 @@
 
 -(void) itemAltered
 {
-    [[itemView priceButton] setTitle:[NSString stringWithFormat:@"Item Price: %@",[Utilities FormatToPrice:[itemInfo totalPrice]] ]];
+    [[itemView priceButton] setTitle:[NSString stringWithFormat:@"Item Price: %@",[Utilities FormatToPrice:[itemInfo price]] ]];
     [[itemView itemTable] reloadData];
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:ITEM_MODIFIED object:itemInfo];
 }
 @end

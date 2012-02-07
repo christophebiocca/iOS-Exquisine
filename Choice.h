@@ -49,7 +49,7 @@ extern NSString* CHOICE_CHANGED;
 
 - (NSComparisonResult)comparePrice:(Choice*)other;
 
-- (BOOL)isEqual:(id)aChoice;
+- (BOOL)isEffectivelyEqual:(id)aChoice;
 
 - (NSDictionary*)orderRepresentation;
 

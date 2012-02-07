@@ -10,11 +10,10 @@
 #import "MenuComponent.h"
 @class Item;
 @class Order;
+@class Combo;
 
 @interface Menu : MenuComponent{
-    
-    Menu *parentMenu;
-    Order *associatedOrder;
+
     NSMutableArray *submenuList;
     NSMutableArray *comboList;
     
@@ -23,20 +22,39 @@
 @property (retain,readonly) NSMutableArray *submenuList;
 @property (retain,readonly) NSMutableArray *comboList;
 
+//Initializers
 -(Menu *) init;
-
--(void) addSubmenu:(Menu *) aSubmenu;
 
 -(Menu *) initFromData:(NSDictionary *)inputData;
 
+-(Menu *) initFromDataAndRootMenu:(NSDictionary *)inputData:(Menu *)theRootMenu;
+
+- (MenuComponent *)initWithCoder:(NSCoder *)decoder;
+
+- (void)encodeWithCoder:(NSCoder *)encoder;
+
+-(Menu *) copy;
+
+//Access Methods
 -(Item *) dereferenceItemPK:(NSInteger) itemPK;
 
 -(Menu *) dereferenceMenuPK:(NSInteger) menuPK;
 
 -(NSArray *) flatItemList;
 
--(Menu *) initFromDataAndMenu:(NSDictionary *)inputData:(Menu *) inputMenu;
+-(NSArray *) recursiveComboList;
 
--(void) setAssociatedOrder:(Order *)anOrder;
+//Mutation Methods
+-(void) addSubmenu:(Menu *) aSubmenu;
+
+-(void) addCombo: (Combo *) aCombo;
+
+//Housekeeping Methods
+
+//Comparitor and Descriptor Methods
+-(BOOL) isEffectivelyEqual:(id) aMenu;
+
+-(NSString *) descriptionWithIndent:(NSInteger) indentLevel;
+
 
 @end

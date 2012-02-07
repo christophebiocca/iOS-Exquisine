@@ -16,152 +16,161 @@
 #import "PaymentInfo.h"
 #import "Utilities.h"
 
-NSString* ORDER_ITEMS_MODIFIED = @"CroutonLabs/OrderModified";
+NSString* ORDER_ITEMS_MODIFIED = @"CroutonLabs/OrderItemsModified";
+NSString* ORDER_COMBOS_MODIFIED = @"CroutonLabs/OrderCombosModified";
+NSString* ORDER_FAVORITE_MODIFIED = @"CroutonLabs/OrderCombosModified";
+NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
 
 @implementation Order
-    
-@synthesize itemList;
-@synthesize status,orderIdentifier;
-@synthesize isFavorite;
-@synthesize parentMenu;
-@synthesize creationDate, mostRecentSubmitDate;
 
--(id)initWithParentMenu:(Menu *) aMenu{
+@synthesize isFavorite;
+@synthesize itemList;
+@synthesize comboList;
+@synthesize status;
+@synthesize orderIdentifier;
+@synthesize creationDate;
+@synthesize mostRecentSubmitDate;
+
+-(id)init
+{
     self = [super init];
+    
+    name = @"My Order";
+    
+    isFavorite = NO;
+    
+    itemList = [[NSMutableArray alloc] initWithCapacity:0];
+    comboList = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    status = @"Not yet submitted";
     
     creationDate = [[NSDate alloc] initWithTimeIntervalSinceNow:0.0];
     
-    parentMenu = aMenu;
-    
-    name = @"My Order";
-    itemList = [[NSMutableArray alloc] initWithCapacity:0];
-    nonComboItemCache = nil;
-    comboListCache = nil;
-    status = @"Not yet submitted";
-    isFavorite = NO;
-    
     return self;
 }
 
--(id)initFromOrder:(Order *)anOrder
+- (MenuComponent *)initWithCoder:(NSCoder *)decoder
 {
-    name = anOrder->name;
-    desc = anOrder->desc;
-    primaryKey = anOrder->primaryKey; 
-    
-    nonComboItemCache = nil;
-    comboListCache = nil;
- 
-    creationDate = anOrder.creationDate;
-    mostRecentSubmitDate = anOrder.mostRecentSubmitDate;
-    
-    name = anOrder.name;
-    itemList = [[NSMutableArray alloc] initWithCapacity:0];
-    
-    for (Item *anItem in anOrder.itemList) {
-        [itemList addObject:[[Item alloc]initFromItem:anItem]];
-    }
-    
-    parentMenu = anOrder.parentMenu;
-    
-    status = anOrder.status;
-    isFavorite = anOrder.isFavorite;
-    
-    return self;
-}
-
--(id)initFromOrderShallow:(Order *)anOrder
-{
-    
-    name = anOrder->name;
-    desc = anOrder->desc;
-    primaryKey = anOrder->primaryKey; 
-    
-    nonComboItemCache = nil;
-    comboListCache = nil;
-    
-    creationDate = anOrder.creationDate;
-    mostRecentSubmitDate = anOrder.mostRecentSubmitDate;
-    
-    name = anOrder.name;
-    itemList = [[NSMutableArray alloc] initWithCapacity:0];
-    
-    for (Item *anItem in anOrder.itemList) {
-        [itemList addObject:anItem];
-    }
-    
-    parentMenu = anOrder.parentMenu;
-    
-    status = anOrder.status;
-    isFavorite = anOrder.isFavorite;
-    
-    return self;
-}
-
--(void)addItem:(Item *)anItem{
-    
-    [itemList addObject:anItem];
-    [self resetCache];
-    [self reSort];
-    [[NSNotificationCenter defaultCenter] postNotificationName:ORDER_ITEMS_MODIFIED object:self];
-
-}
-
--(void)removeItem:(Item *)anItem{
-    [itemList removeObject:anItem];
-    [self resetCache];
-    [self reSort];
-    [[NSNotificationCenter defaultCenter] postNotificationName:ORDER_ITEMS_MODIFIED object:self];
-
-}
-
--(void)removeListOfItems:(NSMutableArray *)aListOfItems
-{
-    for (Item *anItem in aListOfItems) {
-        [self removeItem:anItem];
-    }
-}
-
-
--(NSMutableArray *)listOfCombos
-{
-    if(comboListCache == nil)
+    if (self = [super initWithCoder:decoder])
     {
-        NSMutableArray *returnList = [[NSMutableArray alloc] initWithCapacity:0];
-        Order *mutableOrder = [[Order alloc] initFromOrderShallow:self];
+        isFavorite = [[decoder decodeObjectForKey:@"is_favorite"] intValue];
         
-        for (Combo *aCombo in parentMenu.comboList) {
-            if([aCombo evaluateForCombo:mutableOrder])
-            {
-                [returnList addObject:aCombo];
-                [mutableOrder removeListOfItems:[aCombo listOfAssociatedItems]];
-            }
+        itemList = [decoder decodeObjectForKey:@"item_list"];
+        for (Item *anItem in itemList) {
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recalculate:) name:ITEM_MODIFIED object:anItem];
         }
-        nonComboItemCache = mutableOrder.itemList;
-        comboListCache = returnList;
-        return returnList;
+        
+        comboList = [decoder decodeObjectForKey:@"combo_list"];
+        for (Combo *aCombo in comboList) {
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recalculate:) name:COMBO_MODIFIED object:aCombo];
+        }
+        
+        status = [decoder decodeObjectForKey:@"status"];
+        orderIdentifier = [decoder decodeObjectForKey:@"order_identifier"];
+        creationDate = [decoder decodeObjectForKey:@"creation_date"];
+        mostRecentSubmitDate = [decoder decodeObjectForKey:@"most_recent_submit_date"];
+        
     }
-    return comboListCache;
+    return self;
 }
 
--(NSMutableArray *)listOfNonComboItems
+- (void)encodeWithCoder:(NSCoder *)encoder
 {
-    if (nonComboItemCache == nil)
-    {
-        [self listOfCombos];
+    //Rinse and repeat this:
+    [super encodeWithCoder:encoder];
+    
+    [encoder encodeObject:[NSString stringWithFormat:@"%i", isFavorite] forKey:@"is_favorite"];
+    
+    [encoder encodeObject:itemList forKey:@"item_list"];
+    [encoder encodeObject:comboList forKey:@"combo_list"];
+    [encoder encodeObject:status forKey:@"status"];
+    [encoder encodeObject:orderIdentifier forKey:@"order_identifier"];\
+    [encoder encodeObject:creationDate forKey:@"creation_date"];
+    [encoder encodeObject:mostRecentSubmitDate forKey:@"most_recent_submit_date"];
+}
+
+
+-(id)copy
+{
+    Order *anOrder = [[Order alloc] init];
+    
+    anOrder->name = name;
+    anOrder->desc = desc;
+    anOrder->primaryKey = primaryKey; 
+    
+    anOrder->isFavorite = isFavorite;
+ 
+    for (Item *anItem in itemList) {
+        Item *newItem = [anItem copy];
+        [anOrder addItem:newItem];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recalculate:) name:ITEM_MODIFIED object:newItem];
+
     }
-    return nonComboItemCache;
+    
+    for (Combo *aCombo in itemList) {
+        Combo *newCombo = [aCombo copy];
+        [anOrder addCombo:newCombo];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recalculate:) name:COMBO_MODIFIED object:newCombo];
+    }
+    
+    anOrder->status = status;
+    anOrder->orderIdentifier = orderIdentifier;
+    
+    creationDate = [anOrder.creationDate copy];
+    mostRecentSubmitDate = [anOrder.mostRecentSubmitDate copy];
+
+    return anOrder;
+}
+
+-(NSString *)defaultFavName
+{
+    NSMutableString *output = [[NSMutableString alloc] init];
+    
+    if ([comboList count] > 0) 
+    {
+        return [[comboList objectAtIndex:0] name];
+    }
+    
+    if ([itemList count] > 0) 
+    {
+        [output appendString:[[itemList objectAtIndex:0] reducedName]];
+        
+        //lol, what a bad way to do this.
+        int i = 0;
+        for (Item *anItem in itemList) {
+            if (!((i > 2 )||(i == 0)))
+                [output appendFormat:@", %@",[anItem reducedName]];
+            i++;
+        }
+    
+    }
+    return output;
+}
+
+-(BOOL)containsExactItem:(Item *)anItem
+{
+    for (Item *eachItem in itemList) {
+        if (anItem == eachItem)
+            return YES;
+    }
+    
+    for (Combo *eachCombo in comboList) {
+        if ([eachCombo containsExactItem:anItem]) {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 -(NSDecimalNumber*)subtotalPrice
 {
     NSDecimalNumber* tabulator = [NSDecimalNumber zero];
-    for (Item *currentItem in [self listOfNonComboItems]) 
+    for (Item *currentItem in itemList) 
     {
-        tabulator = [tabulator decimalNumberByAdding:[currentItem totalPrice]];
+        tabulator = [tabulator decimalNumberByAdding:[currentItem price]];
     }
     
-    for (Combo *currentCombo in [self listOfCombos]) 
+    for (Combo *currentCombo in comboList) 
     {
         tabulator = [tabulator decimalNumberByAdding:[currentCombo price]];
     }
@@ -176,10 +185,118 @@ NSString* ORDER_ITEMS_MODIFIED = @"CroutonLabs/OrderModified";
     return [[self subtotalPrice] decimalNumberByMultiplyingBy:taxRate];
 }
 
-
 -(NSDecimalNumber*)totalPrice
 {
     return [[self subtotalPrice] decimalNumberByAdding:[self taxPrice]];
+}
+
+-(void)addItem:(Item *)anItem{
+    [itemList addObject:anItem];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recalculate:) name:ITEM_MODIFIED object:anItem];
+    [self recalculate:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ORDER_ITEMS_MODIFIED object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ORDER_MODIFIED object:self];
+
+
+}
+
+-(void)removeItem:(Item *)anItem{
+    
+    for (Item *eachItem in itemList) {
+        if ([anItem isEqual:eachItem]) {
+            [itemList removeObject:anItem];
+            [[NSNotificationCenter defaultCenter] removeObserver:self name:ITEM_MODIFIED object:anItem];
+            [self recalculate:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:ORDER_ITEMS_MODIFIED object:self];
+            [[NSNotificationCenter defaultCenter] postNotificationName:ORDER_MODIFIED object:self];
+            return;
+        }
+    }
+    
+    //Since the item list isn't redundant with respect to the combos, the combos need to be checked as well.
+    
+    for (Combo *aCombo in comboList) {
+        if ([aCombo containsItem:anItem]) {
+            [aCombo removeItem:anItem];
+            [[NSNotificationCenter defaultCenter] removeObserver:self name:ITEM_MODIFIED object:anItem];
+            [self recalculate:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:ORDER_ITEMS_MODIFIED object:self];
+            [[NSNotificationCenter defaultCenter] postNotificationName:ORDER_MODIFIED object:self];
+            return;
+        }
+    }
+    
+    //If we've made it here, somebody did something wrong.
+    
+    NSLog(@"ERROR: Somebody tried to remove this item from this order, and that item isn't in this order!:\n%@\n%@",anItem,self);
+
+}
+
+-(void)removeListOfItems:(NSMutableArray *)aListOfItems
+{
+    for (Item *anItem in aListOfItems) {
+        [self removeItem:anItem];
+    }
+}
+
+-(void)addCombo:(Combo *)aCombo
+{
+    [comboList addObject:aCombo];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recalculate:) name:COMBO_MODIFIED object:aCombo];
+    [self recalculate:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ORDER_COMBOS_MODIFIED object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ORDER_MODIFIED object:self];
+
+}
+
+-(void)removeCombo:(Combo *)aCombo
+{
+    [comboList removeObject:aCombo];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:COMBO_MODIFIED object:aCombo];
+    [self recalculate:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ORDER_COMBOS_MODIFIED object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ORDER_MODIFIED object:self];
+
+}
+
+-(void)setFavorite:(BOOL)isfav
+{
+    isFavorite = isfav;
+    [[NSNotificationCenter defaultCenter] postNotificationName:ORDER_FAVORITE_MODIFIED object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ORDER_MODIFIED object:self];
+}
+
+-(void)placedWithTransactionInfo:(PaymentSuccessInfo*)info{
+    // We'll also need to save up the payment info somewhere.
+    [self setStatus:@"Placed"];
+}
+
+-(void)submit
+{
+    mostRecentSubmitDate = [[NSDate alloc] initWithTimeIntervalSinceNow:0.0];
+    [self setStatus:@"Sending"];
+}
+
+-(void)recalculate:(NSNotification *)aNotification
+{
+    [itemList sortUsingSelector:@selector(priceSort:)];
+    [comboList sortUsingSelector:@selector(savingsSort:)];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ORDER_MODIFIED object:self];
+}
+
+-(BOOL)isEffectivelyEqual:(Order *)anOrder
+{
+    if ([[anOrder itemList] count] != [itemList count])
+        return NO;
+    
+    for (int i = 0; i < [itemList count] ; i++)
+    {
+        if (![[itemList objectAtIndex:i] isEffectivelyEqual:[[anOrder itemList] objectAtIndex:i]]) {
+            return NO;
+        }
+    }
+    
+    return YES;
 }
 
 -(NSDictionary*)orderRepresentation{
@@ -190,145 +307,43 @@ NSString* ORDER_ITEMS_MODIFIED = @"CroutonLabs/OrderModified";
     return [NSDictionary dictionaryWithObject:orderitems forKey:@"items"];
 }
 
--(void)resetCache
-{
-    nonComboItemCache = nil;
-    comboListCache = nil;
-}
-
--(void)clearOrder
-{
-    [itemList removeAllObjects];
-    [self resetCache];
-}
-
--(void)submit
-{
-    mostRecentSubmitDate = [[NSDate alloc] initWithTimeIntervalSinceNow:0.0];
-    [self setStatus:@"Sending"];
-}
-
--(void)placedWithTransactionInfo:(PaymentSuccessInfo*)info{
-    // We'll also need to save up the payment info somewhere.
-    [self setStatus:@"Placed"];
-}
-
-- (MenuComponent *)initWithCoder:(NSCoder *)decoder
-{
-    if (self = [super initWithCoder:decoder])
-    {
-        itemList = [decoder decodeObjectForKey:@"item_list"];
-        parentMenu = [decoder decodeObjectForKey:@"parent_menu"];
-        status = [decoder decodeObjectForKey:@"status"];
-        orderIdentifier = [decoder decodeObjectForKey:@"order_identifier"];
-        isFavorite = [[decoder decodeObjectForKey:@"is_favorite"] intValue];
-        creationDate = [decoder decodeObjectForKey:@"creation_date"];
-        mostRecentSubmitDate = [decoder decodeObjectForKey:@"most_recent_submit_date"];
-        
-        nonComboItemCache = nil;
-        comboListCache =nil;
-        
-    }
-    return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)encoder
-{
-    //Rinse and repeat this:
-    [super encodeWithCoder:encoder];
-    [encoder encodeObject:itemList forKey:@"item_list"];
-    [encoder encodeObject:parentMenu forKey:@"parent_menu"];
-    [encoder encodeObject:status forKey:@"status"];
-    [encoder encodeObject:orderIdentifier forKey:@"order_identifier"];
-    [encoder encodeObject:[NSString stringWithFormat:@"%i", isFavorite] forKey:@"is_favorite"];
-    [encoder encodeObject:creationDate forKey:@"creation_date"];
-    [encoder encodeObject:mostRecentSubmitDate forKey:@"most_recent_submit_date"];
-}
-
--(BOOL)isEffectivelySameAs:(Order *)anOrder
-{
-    if ([[anOrder itemList] count] != [itemList count])
-        return NO;
-    
-    for (int i = 0; i < [itemList count] ; i++)
-    {
-        if (![[itemList objectAtIndex:i] isEqual:[[anOrder itemList] objectAtIndex:i]]) {
-            return NO;
-        }
-    }
-    
-    return YES;
-}
-
--(void) reSort
-{
-    [itemList sortUsingSelector:@selector(priceSort:)];
-}
-
 - (NSString *) descriptionWithIndent:(NSInteger) indentLevel
 {    
-    NSMutableString *output = [NSMutableString stringWithString:[@"" stringByPaddingToLength:(indentLevel*4) withString:@" " startingAtIndex:0]];
+    NSString *padString = [@"" stringByPaddingToLength:(indentLevel*4) withString:@" " startingAtIndex:0];
     
-    [output appendFormat:@"Order name: \"%@\" with price: %@ and combos:\n",name,[Utilities FormatToPrice:[self subtotalPrice]]];
+    NSMutableString *output = [[NSMutableString alloc] initWithCapacity:0];
     
-    for (Combo *aCombo in [self listOfCombos]) {
+    [output appendFormat:@"%@Order:\n",padString];
+    [output appendString:[super descriptionWithIndent:indentLevel]];
+    [output appendFormat:@"%@IsFavorite: %i\n",padString,isFavorite];
+    [output appendFormat:@"%@Subtotal: %@\n",padString,[self subtotalPrice]];
+    [output appendFormat:@"%@Tax: %@\n",padString,[self taxPrice]];
+    [output appendFormat:@"%@GrandTotal: %@\n",padString,[self totalPrice]];
+    [output appendFormat:@"%@Combos:\n",padString];
+    
+    for (Combo *aCombo in comboList) {
         [output appendFormat:@"%@\n",[aCombo descriptionWithIndent:(indentLevel + 1)]];
     }
     
-    [output appendString:@"Non-combo items:\n"];
+    [output appendFormat:@"%@Items:\n",padString];
     
-    for (Item *anItem in [self listOfNonComboItems]) {
-        [output appendFormat:@"%@\n",[anItem descriptionWithIndent:(indentLevel + 1)]];
-    }
-    
-    [output appendString:@"Full item list:\n"];
-    
-    for (Item *anItem in [self itemList]) {
-        [output appendFormat:@"%@\n",[anItem descriptionWithIndent:(indentLevel + 1)]];
-    }
-    
-    return output;
-}
-
--(NSString *)description{
-    
-    NSMutableString *output = [[NSMutableString alloc] initWithFormat:@"Order name: \"%@\" with price: %@ and combos:\n",name,[Utilities FormatToPrice:[self subtotalPrice]]];
-    
-    for (Combo *aCombo in [self listOfCombos]) {
-        [output appendFormat:@"%@\n",[aCombo descriptionWithIndent:1]];
-    }
-    
-    [output appendString:@"Non-combo items:\n"];
-    
-    for (Item *anItem in [self listOfNonComboItems]) {
-        [output appendFormat:@"%@\n",[anItem descriptionWithIndent:1]];
-    }
-    
-    [output appendString:@"Full item list:\n"];
-    
-    for (Item *anItem in [self itemList]) {
-        [output appendFormat:@"%@\n",[anItem descriptionWithIndent:1]];
-    }
-    
-    return output;
-    
-}
-
--(NSString *)defaultFavName
-{
-    NSMutableString *output = [[NSMutableString alloc] init];
-    
-    [output appendString:[[itemList objectAtIndex:0] reducedName]];
-    
-    //lol, what a bad way to do this.
-    int i = 0;
     for (Item *anItem in itemList) {
-        if (!((i > 2 )||(i == 0)))
-            [output appendFormat:@", %@",[anItem reducedName]];
-        i++;
+        [output appendFormat:@"%@\n",[anItem descriptionWithIndent:(indentLevel + 1)]];
     }
     
     return output;
+}
+
+-(void)dealloc
+{
+    for (Item *eachItem in itemList) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:ITEM_MODIFIED object:eachItem];
+    }
+    
+    for (Combo *eachCombo in comboList) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:COMBO_MODIFIED object:eachCombo];
+    }
+    
 }
 
 @end

@@ -12,6 +12,7 @@
 #import "OrderViewController.h"
 #import "Menu.h"
 #import "Combo.h"
+#import "OrderManager.h"
 
 @implementation FavoritesViewController
 
@@ -47,13 +48,13 @@
         
         //This ensures that the combos are displayed correctly so that they know whether they should
         //be enabled or not
-        for (Combo *eachCombo in [currentMenu comboList]) {
-            [eachCombo evaluateForCombo:orderToPush];
-        }
         
-        OrderViewController *newOrderViewController = [[OrderViewController alloc] initializeWithMenuAndOrder:currentMenu :orderToPush];
+        OrderManager *newOrderManager = [[OrderManager alloc] init];
         
+        [newOrderManager setMenu:currentMenu];
+        [newOrderManager setOrder:orderToPush];
         
+        OrderViewController *newOrderViewController = [[OrderViewController alloc] initializeWithOrderManager:newOrderManager];
         
         [newOrderViewController setDelegate:self];
         

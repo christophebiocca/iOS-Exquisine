@@ -78,7 +78,7 @@
     NSMutableArray *returnList = [[NSMutableArray alloc] initWithCapacity:0];
     
     CellData *newCell = [super detailedStaticRenderDefaultCell];
-    [newCell setCellDesc:[Utilities FormatToPrice:[itemInfo totalPrice]]];
+    [newCell setCellDesc:[Utilities FormatToPrice:[itemInfo price]]];
     [newCell setCellTitle:[itemInfo name]];
     
     [returnList addObject:newCell];

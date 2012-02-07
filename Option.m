@@ -184,11 +184,15 @@ NSString* OPTION_INVALID_DESELECTION = @"CroutonLabs/OptionInvalidDeselection";
         {
             if ([theChoice selected])
             {
-                if(upperBound <= 1)
+                if(upperBound == 1)
                 {
                     if([self numberOfSelectedChoices] > upperBound)
                     {
-                        [theChoice setSelected:NO];
+                        NSMutableArray *helper = [[NSMutableArray alloc] initWithArray:choiceList];
+                        [helper removeObject:theChoice];
+                        for (Choice *aChoice in helper) {
+                            [aChoice setSelected:NO];
+                        }
                     }
                     [[NSNotificationCenter defaultCenter] postNotificationName:OPTION_MODIFIED object:self];
                 }
@@ -249,17 +253,17 @@ NSString* OPTION_INVALID_DESELECTION = @"CroutonLabs/OptionInvalidDeselection";
         }
     }
     
-    int i = 0;
+    int j = 0;
     for (Choice *aChoice in [self selectedChoices]) {
-        if (i >= numberOfFreeChoices) 
+        if (j >= numberOfFreeChoices) 
             [aChoice setIsFree:NO];
         else
             [aChoice setIsFree:YES];
-        i++;
+        j++;
     }
 }
 
--(BOOL)isEqual:(Option *)anOption
+-(BOOL)isEffectivelyEqual:(Option *)anOption
 {
     if (![[anOption name] isEqual: name])
         return NO;
@@ -268,7 +272,7 @@ NSString* OPTION_INVALID_DESELECTION = @"CroutonLabs/OptionInvalidDeselection";
         return NO;
     
     for (int i = 0; i < [choiceList count]; i++) {
-        if (![[[anOption choiceList] objectAtIndex:i] isEqual:[choiceList objectAtIndex:i]]) {
+        if (![[[anOption choiceList] objectAtIndex:i] isEffectivelyEqual:[choiceList objectAtIndex:i]]) {
             return NO;
         }
     }
@@ -304,6 +308,13 @@ NSString* OPTION_INVALID_DESELECTION = @"CroutonLabs/OptionInvalidDeselection";
     }
     
     return output;
+}
+
+-(void)dealloc
+{
+    for (Choice *eachChoice in choiceList) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:CHOICE_SELECTED_CHANGED object:eachChoice];
+    }
 }
 
 @end

@@ -17,67 +17,100 @@
 -(Menu *)init
 {
     self = [super init];
-    parentMenu = nil;
+    
     submenuList = [[NSMutableArray alloc] initWithCapacity:0];
+    comboList = [[NSMutableArray alloc] initWithCapacity:0];    
+    
     return self;
 }
 
 -(Menu *) initFromData:(NSDictionary *)inputData
 {
     self = [super initFromData:inputData];
-    parentMenu = nil;
     
     submenuList = [[NSMutableArray alloc] initWithCapacity:0];
     comboList = [[NSMutableArray alloc] initWithCapacity:0];
     
-    for (NSDictionary *submenu in [inputData objectForKey:@"submenus"]) {
-        Menu *newSubmenu = [[Menu alloc] initFromDataAndMenu:submenu:self];
+    for (NSDictionary *submenu in [inputData objectForKey:@"submenus"]) 
+    {
+        Menu *newSubmenu = [[Menu alloc] initFromDataAndRootMenu:submenu:self];
         [submenuList addObject:newSubmenu];
     }
     
-    for (NSDictionary *item in [inputData objectForKey:@"items"]) {
+    for (NSDictionary *item in [inputData objectForKey:@"items"]) 
+    {
         Item *newItem = [[Item alloc] initFromData:item];
         [submenuList addObject:newItem];
     }
     
-    for (NSDictionary *combo in [inputData objectForKey:@"combos"]) {
+    for (NSDictionary *combo in [inputData objectForKey:@"combos"]) 
+    {
         Combo *newCombo = [[Combo alloc] initFromDataAndMenu:combo :self];
         [comboList addObject:newCombo];
     }
     
     return self;
-    
 }
 
--(Menu *) initFromDataAndMenu:(NSDictionary *)inputData:(Menu *) inputMenu
+-(Menu *) initFromDataAndRootMenu:(NSDictionary *)inputData :(Menu *)theRootMenu
 {
     self = [super initFromData:inputData];
-    parentMenu = inputMenu;
+    
     submenuList = [[NSMutableArray alloc] initWithCapacity:0];
     comboList = [[NSMutableArray alloc] initWithCapacity:0];
     
-    for (NSDictionary *submenu in [inputData objectForKey:@"submenus"]) {
-        Menu *newSubmenu = [[Menu alloc] initFromDataAndMenu:submenu :parentMenu];
+    for (NSDictionary *submenu in [inputData objectForKey:@"submenus"]) 
+    {
+        Menu *newSubmenu = [[Menu alloc] initFromDataAndRootMenu:submenu:theRootMenu];
         [submenuList addObject:newSubmenu];
     }
     
-    for (NSDictionary *item in [inputData objectForKey:@"items"]) {
+    for (NSDictionary *item in [inputData objectForKey:@"items"]) 
+    {
         Item *newItem = [[Item alloc] initFromData:item];
         [submenuList addObject:newItem];
     }
     
-    for (NSDictionary *combo in [inputData objectForKey:@"combos"]) {
-        Combo *newCombo = [[Combo alloc] initFromDataAndMenu:combo :parentMenu];
+    for (NSDictionary *combo in [inputData objectForKey:@"combos"]) 
+    {
+        Combo *newCombo = [[Combo alloc] initFromDataAndMenu:combo :theRootMenu];
         [comboList addObject:newCombo];
     }
     
     return self;
-    
 }
 
--(void)addSubmenu:(Menu *)aSubmenu
+- (MenuComponent *)initWithCoder:(NSCoder *)decoder
 {
-    [submenuList addObject:aSubmenu];
+    if (self = [super initWithCoder:decoder])
+    {
+        submenuList = [decoder decodeObjectForKey:@"submenu_list"];
+        comboList = [decoder decodeObjectForKey:@"combo_list"];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+    //Rinse and repeat this:
+    [super encodeWithCoder:encoder];
+    [encoder encodeObject:submenuList forKey:@"submenu_list"];
+    [encoder encodeObject:comboList forKey:@"combo_list"];
+}
+
+-(Menu *)copy
+{
+    Menu *newMenu = [[Menu alloc] init];
+    
+    for (id aMenu in submenuList) {
+        [newMenu addSubmenu:[aMenu copy]];
+    }
+    
+    for (Combo * aCombo in comboList) {
+        [newMenu addCombo:[aCombo copy]];
+    }
+    
+    return newMenu;
 }
 
 -(Item *)dereferenceItemPK:(NSInteger)itemPK
@@ -135,88 +168,85 @@
     return returnList;
 }
 
-- (MenuComponent *)initWithCoder:(NSCoder *)decoder
+-(NSArray *)recursiveComboList
 {
-    if (self = [super initWithCoder:decoder])
-    {
-        submenuList = [decoder decodeObjectForKey:@"submenu_list"];
-        comboList = [decoder decodeObjectForKey:@"combo_list"];
-        associatedOrder = [decoder decodeObjectForKey:@"associated_order"];
-        parentMenu = [decoder decodeObjectForKey:@"parent_menu"];
+    NSMutableArray *outputList = [[NSMutableArray alloc] initWithArray:comboList];
+    
+    for (id aMenu in submenuList) {
+        if ([aMenu isKindOfClass:[Menu class]])
+            [outputList addObjectsFromArray:[(Menu *)aMenu recursiveComboList]];
     }
-    return self;
+    
+    return outputList;
 }
 
-- (void)encodeWithCoder:(NSCoder *)encoder
+-(void)addSubmenu:(Menu *)aSubmenu
 {
-    //Rinse and repeat this:
-    [super encodeWithCoder:encoder];
-    [encoder encodeObject:submenuList forKey:@"submenu_list"];
-    [encoder encodeObject:comboList forKey:@"combo_list"];
-    [encoder encodeObject:associatedOrder forKey:@"associated_order"];
-    [encoder encodeObject:parentMenu forKey:@"parent_menu"];
+    [submenuList addObject:aSubmenu];
 }
 
-- (NSMutableArray *) comboList
+-(void)addCombo:(Combo *)aCombo
 {
-    NSMutableArray *output = [[NSMutableArray alloc] initWithCapacity:0];
+    [comboList addObject:aCombo];
+}
+
+-(BOOL)isEffectivelyEqual:(id)aMenu
+{
+    if(![aMenu isKindOfClass:[Menu class]])
+        return NO;
     
-    [output addObjectsFromArray:comboList];
+    if([[aMenu submenuList] count] != [[self submenuList] count])
+        return NO;
     
-    for (id aSubmenu in submenuList) {
-        if ([aSubmenu isKindOfClass:[Menu class]])
-        {
-            [output addObjectsFromArray:[aSubmenu comboList]];
+    for (int i = 0; i < [[aMenu submenuList] count]; i++) {
+        if (![[[aMenu submenuList] objectAtIndex:i] isEffectivelyEqual:[submenuList objectAtIndex:i]]) {
+            return NO;
         }
     }
-    return output;
+    
+    if([[aMenu comboList] count] != [[self comboList] count])
+        return NO;
+    
+    for (int i = 0; i < [[aMenu comboList] count]; i++) {
+        if (![[[aMenu comboList] objectAtIndex:i] isEffectivelyEqual:[comboList objectAtIndex:i]]) {
+            return NO;
+        }
+    }
+    
+    return YES;
 }
 
 - (NSString *) descriptionWithIndent:(NSInteger) indentLevel
 {    
-    NSMutableString *output = [NSMutableString stringWithString:[@"" stringByPaddingToLength:(indentLevel*4) withString:@" " startingAtIndex:0]];
+    NSString *padString = [@"" stringByPaddingToLength:(indentLevel*4) withString:@" " startingAtIndex:0];
     
-    [output appendFormat:@"Menu name: %@ with Submenus:\n",name];
+    NSMutableString *output = [[NSMutableString alloc] initWithCapacity:0];
     
-    for (id thing in submenuList) {
-        if([thing isKindOfClass:[Menu class]])
-            [output appendFormat:@"%@\n",[thing descriptionWithIndent:(indentLevel + 1)]];
+    [output appendFormat:@"%@Menu:%\n",padString];
+    [output appendString:[super descriptionWithIndent:indentLevel]];
+    [output appendFormat:@"%@Combos:\n",padString];
+    
+    for (Combo *aCombo in comboList) {
+        [output appendFormat:@"%@\n",[aCombo descriptionWithIndent:(indentLevel + 1)]];
     }
     
-    //Make this correctly indented:
-    //[output appendString:@"Items:\n"];
+    [output appendFormat:@"%@Submenus:\n",padString];
     
-    for (id thing in submenuList) {
-        if([thing isKindOfClass:[Item class]])
-            [output appendFormat:@"%@\n",[thing descriptionWithIndent:(indentLevel + 1)]];
+    for (id aMenu in submenuList) {
+        if ([aMenu isKindOfClass:[Menu class]]) {
+            [output appendFormat:@"%@\n",[aMenu descriptionWithIndent:(indentLevel + 1)]];
+        }
     }
     
-    //Make this correctly indented:
-    //[output appendString:@"Combos:\n"];
+    [output appendFormat:@"%@Items:\n",padString];
     
-    for (id thing in comboList) {
-        [output appendFormat:@"%@\n",[thing descriptionWithIndent:(indentLevel + 1)]];
+    for (id anItem in submenuList) {
+        if ([anItem isKindOfClass:[Item class]]) {
+            [output appendFormat:@"%@\n",[anItem descriptionWithIndent:(indentLevel + 1)]];
+        }
     }
     
     return output;
-}
-
--(void)setAssociatedOrder:(Order *)anOrder
-{
-    associatedOrder = anOrder;
-    for (id possibleMenu in submenuList) {
-        if([possibleMenu isKindOfClass:[Menu class]])
-            [possibleMenu setAssociatedOrder:associatedOrder];
-    }
-    for (Combo *eachCombo in comboList) {
-        [eachCombo setAssociatedOrder:anOrder];
-    }
-}
-
--(NSString *)description{
-    
-    return [self descriptionWithIndent:0];
-    
 }
 
 @end

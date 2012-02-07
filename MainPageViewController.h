@@ -15,6 +15,7 @@
 @class Menu;
 @class Order;
 @class Reachability;
+@class OrderManager;
 
 @interface MainPageViewController : UIViewController<UITableViewDelegate, OrderManagementDelegate>{
     
@@ -24,6 +25,8 @@
     
     Menu *theMenu;
     Order *currentOrder;
+    OrderManager *theOrderManager;
+    
     NSMutableArray *ordersHistory;
     NSMutableArray *favoriteOrders;
     NSArray* locations;

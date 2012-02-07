@@ -23,6 +23,7 @@
 		232C798714D209D600C3868D /* OrderSummaryRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C798614D209D600C3868D /* OrderSummaryRenderer.m */; };
 		232D7A1014C8B23A00DD5911 /* UICustomActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 232D7A0F14C8B23A00DD5911 /* UICustomActionSheet.m */; };
 		232D7A1214C8B4FC00DD5911 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 232D7A1114C8B4FC00DD5911 /* QuartzCore.framework */; };
+		2345980B14DE0B2000910F3B /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2345980A14DE0B2000910F3B /* OrderManager.m */; };
 		2352723814DA322900DDC7FA /* pfLogo_57.png in Resources */ = {isa = PBXBuildFile; fileRef = 2352723514DA322900DDC7FA /* pfLogo_57.png */; };
 		2352723914DA322900DDC7FA /* pfLogo_114.png in Resources */ = {isa = PBXBuildFile; fileRef = 2352723614DA322900DDC7FA /* pfLogo_114.png */; };
 		2352723A14DA322900DDC7FA /* pfLogo_low.png in Resources */ = {isa = PBXBuildFile; fileRef = 2352723714DA322900DDC7FA /* pfLogo_low.png */; };
@@ -167,6 +168,8 @@
 		232D7A0E14C8B23A00DD5911 /* UICustomActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICustomActionSheet.h; sourceTree = "<group>"; };
 		232D7A0F14C8B23A00DD5911 /* UICustomActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICustomActionSheet.m; sourceTree = "<group>"; };
 		232D7A1114C8B4FC00DD5911 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		2345980914DE0B2000910F3B /* OrderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderManager.h; sourceTree = "<group>"; };
+		2345980A14DE0B2000910F3B /* OrderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderManager.m; sourceTree = "<group>"; };
 		2352723514DA322900DDC7FA /* pfLogo_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pfLogo_57.png; sourceTree = "<group>"; };
 		2352723614DA322900DDC7FA /* pfLogo_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pfLogo_114.png; sourceTree = "<group>"; };
 		2352723714DA322900DDC7FA /* pfLogo_low.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pfLogo_low.png; sourceTree = "<group>"; };
@@ -536,6 +539,15 @@
 			name = UICustomActionSheet;
 			sourceTree = "<group>";
 		};
+		2345980714DE0AD900910F3B /* OrderManager */ = {
+			isa = PBXGroup;
+			children = (
+				2345980914DE0B2000910F3B /* OrderManager.h */,
+				2345980A14DE0B2000910F3B /* OrderManager.m */,
+			);
+			name = OrderManager;
+			sourceTree = "<group>";
+		};
 		2352723F14DB13DF00DDC7FA /* IndicatorView */ = {
 			isa = PBXGroup;
 			children = (
@@ -659,6 +671,7 @@
 		237EC00B14BE5842009D9268 /* MenuComposites */ = {
 			isa = PBXGroup;
 			children = (
+				2345980714DE0AD900910F3B /* OrderManager */,
 				23C26A1E14C4D5A600DD53DF /* MenuComponent.h */,
 				23C26A1F14C4D5A600DD53DF /* MenuComponent.m */,
 				23D6F4A714D9E1C90043C75E /* ItemGroup */,
@@ -1450,6 +1463,7 @@
 				D92D24D414DB375B007B5890 /* PaymentError.m in Sources */,
 				D933EF1614DB566D00B0BDC7 /* PaymentProcessingView.m in Sources */,
 				D933EF1A14DB568400B0BDC7 /* PaymentCompletedView.m in Sources */,
+				2345980B14DE0B2000910F3B /* OrderManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

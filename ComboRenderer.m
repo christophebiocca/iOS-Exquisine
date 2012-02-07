@@ -23,7 +23,6 @@
     self = [super init];
     
     currentCombo = aCombo;
-    currentOrder = anOrder;
     
     return self;
 }
@@ -38,7 +37,6 @@
     self = [super init];
     
     currentCombo = aCombo;
-    currentOrder = [aCombo associatedOrder];
     
     return self;
 }

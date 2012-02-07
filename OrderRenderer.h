@@ -9,12 +9,12 @@
 #import "MenuComponentRenderer.h"
 @class Order;
 @class Menu;
+@class OrderManager;
 
 @interface OrderRenderer : MenuComponentRenderer <UITableViewDataSource>
 {
     
-    Order *orderInfo;
-    Menu *theMenu;
+    OrderManager *orderManager;
     
     //This list just contains the stuff that
     //we should be trying to make cells for in
@@ -23,9 +23,9 @@
     
 }
 
--(void) refreshOrderList;
+-(void) refreshOrderList:(NSNotification *)aNotification;
 
--(OrderRenderer *)initWithOrderAndMenu:(Order *)anOrder:(Menu *) aMenu;
+-(OrderRenderer *)initWithOrderManager:(OrderManager *) anOrderManager;
 
 -(id) objectForCellAtIndex:(NSIndexPath *) index;
 

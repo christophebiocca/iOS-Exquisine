@@ -67,7 +67,7 @@ extern NSString* OPTION_INVALID_DESELECTION;
 
 - (void) validateState;
 
-- (BOOL) isEqual:(id) anOption;
+- (BOOL) isEffectivelyEqual:(id) anOption;
 
 - (NSDictionary*)orderRepresentation;
 

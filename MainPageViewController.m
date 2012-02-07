@@ -22,6 +22,7 @@
 #import "PaymentInfoViewController.h"
 #import "IndicatorView.h"
 #import "Location.h"
+#import "OrderManager.h"
 
 @implementation MainPageViewController
 
@@ -48,6 +49,12 @@
         if(!favoriteOrders)
         {
             favoriteOrders = [[NSMutableArray alloc] initWithCapacity:0];
+        }
+        
+        if (!theOrderManager)
+        {
+            theOrderManager = [[OrderManager alloc] init];
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCreateButtonState) name:ORDER_MANAGER_NEEDS_REDRAW object:theOrderManager];        
         }
         
     }
@@ -102,17 +109,18 @@
     }
     else
     {
+        [theOrderManager setMenu:theMenu];
         if (!currentOrder)
         {
-            currentOrder = [[Order alloc] initWithParentMenu:theMenu];
+            currentOrder = [[Order alloc] init];
         }
+        [theOrderManager setOrder:currentOrder];
+        OrderViewController *orderView = [[OrderViewController alloc] initializeWithOrderManager:theOrderManager];
+        
+        [orderView setDelegate:self];
+        
+        [[self navigationController] pushViewController:orderView animated:YES];
     }
-    
-    OrderViewController *orderView = [[OrderViewController alloc] initializeWithMenuAndOrder:theMenu:currentOrder];
-    
-    [orderView setDelegate:self];
-    
-    [[self navigationController] pushViewController:orderView animated:YES];
 }
 
 -(void)favoritesButtonPressed
@@ -152,10 +160,11 @@
 
 -(void)submitOrderForController:(id)orderViewController
 {
-    if ([[orderViewController orderInfo] isEqual:currentOrder])
+    if ([[orderViewController orderInfo] isEffectivelyEqual:currentOrder])
     {
         //Allocate a new order
-        currentOrder = [[Order alloc] initWithParentMenu:theMenu];
+        currentOrder = [[Order alloc] init];
+        [theOrderManager setOrder:currentOrder];
     }
     PaymentStack* paymentStack = 
     [[PaymentStack alloc] initWithOrder:currentOrder locations:locations
@@ -179,7 +188,7 @@
 {
     
     for (Order *anOrder in favoriteOrders) {
-        if (anOrder.name == [orderViewController orderInfo].name)
+        if (anOrder.name == [[orderViewController theOrderManager] thisOrder].name)
         {
             UIAlertView *tsktsk = [[UIAlertView alloc] initWithTitle:@"Error" message:@"An order with that name is already in the favorites list!" delegate:self cancelButtonTitle:@"OK, my bad" otherButtonTitles:nil];
             
@@ -193,21 +202,19 @@
     
     //if it makes it through the for loop, then we can safely add the order.
     
-    [[orderViewController orderInfo] setIsFavorite:YES];
+    [ [[orderViewController theOrderManager] thisOrder] setFavorite:YES];
     
     //Push the current order on the favorites list
     //It's important that it be a copy. Changing the order in the favorites list shouldnt affect
     //An already submitted order.
-    [favoriteOrders addObject:[[Order alloc] initFromOrder:[orderViewController orderInfo]]];
+    [favoriteOrders addObject: [[orderViewController theOrderManager] thisOrder]];
     //Allocate a new order if needed
-    if ([[orderViewController orderInfo] isEqual:currentOrder])
+    if ([ [[orderViewController theOrderManager] thisOrder] isEffectivelyEqual:currentOrder])
     {
-        currentOrder = [[Order alloc] initWithParentMenu:theMenu];
+        currentOrder = [[Order alloc] init];
     }
     
     [self doFavoriteConsistancyCheck];
-    
-    [orderViewController viewWillAppear:YES];
     
     //Move view control to the favorites view.
     
@@ -223,9 +230,9 @@
 {
     for (Order *anOrder in favoriteOrders) 
     {
-        if([anOrder isEffectivelySameAs:[orderViewController orderInfo]])
+        if([anOrder isEffectivelyEqual: [[orderViewController theOrderManager] thisOrder]])
         {
-            [anOrder setIsFavorite:NO];
+            [anOrder setFavorite:NO];
             [favoriteOrders removeObject:anOrder];
         }
     }
@@ -307,6 +314,10 @@
     currentOrder = [rootObject valueForKey:@"current_order"];
     ordersHistory = [rootObject valueForKey:@"order_history"];
     favoriteOrders = [rootObject valueForKey:@"favorite_orders"];
+    theOrderManager = [[OrderManager alloc] init];
+    [theOrderManager setMenu:theMenu];
+    [theOrderManager setOrder:currentOrder];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCreateButtonState) name:ORDER_MANAGER_NEEDS_REDRAW object:theOrderManager];
     
     [self updateCreateButtonState];
 }
@@ -327,13 +338,13 @@
 -(void)doFavoriteConsistancyCheck
 {
     for (Order *eachOrder in [self allKnownOrders]) {
-        [eachOrder setIsFavorite:NO];
+        [eachOrder setFavorite:NO];
         if (eachOrder == [[self pendingOrders] lastObject])
             NSLog(@"something");
         for (Order *favOrder in favoriteOrders) {
-            if([eachOrder isEffectivelySameAs:favOrder])
+            if([eachOrder isEffectivelyEqual:favOrder])
             {
-                [eachOrder setIsFavorite:YES];
+                [eachOrder setFavorite:YES];
                 break;
             }
         }
@@ -427,6 +438,11 @@
     if([locations count] > 0)
         return [locations objectAtIndex:0];
     return nil;
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:ORDER_MANAGER_NEEDS_REDRAW object:theOrderManager];
 }
 
 @end

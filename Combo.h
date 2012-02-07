@@ -9,39 +9,71 @@
 #import "MenuComponent.h"
 @class Order;
 @class Menu;
+@class Item;
+
+extern NSString* COMBO_MODIFIED;
+
 
 @interface Combo : MenuComponent
 {
     
-    Order *associatedOrder;
     NSMutableArray *listOfItemGroups;
     NSMutableArray *listOfAssociatedItems;
     NSDecimalNumber *price;
     
 }
 
-@property (retain) NSDecimalNumber *price;
-@property (retain) NSMutableArray *listOfAssociatedItems;
 @property (retain) NSMutableArray *listOfItemGroups;
+@property (retain) NSMutableArray *listOfAssociatedItems;
+@property (retain) NSDecimalNumber *price;
 
--(Combo *)initFromDataAndMenu:(NSDictionary *)inputData:(Menu *) associatedMenu;
+//Initializers
 
--(Combo *) initFromComboShallow:(Combo *) aCombo;
+- (Combo *)initFromDataAndMenu:(NSDictionary *)inputData:(Menu *) associatedMenu;
 
--(BOOL) evaluateForCombo:(Order *) anOrder;
+- (MenuComponent *)initWithCoder:(NSCoder *)decoder;
 
--(NSMutableArray *) comboItemsList;
+- (void)encodeWithCoder:(NSCoder *)encoder;
 
--(void) setAssociatedOrder:(Order *) anOrder;
+- (Combo *)copy;
+
+//Access Methods
+
+//This returns an array of arrays of Items within anOrder that satisfy each itemGroup.
+- (NSArray *)satisfactionListsForItemList:(NSArray *)anItemList;
+
+- (BOOL)satisfiedWithItemList:(NSArray *)anItemList;
+
+- (BOOL)containsItem:(Item *) anItem;
+
+- (BOOL)containsExactItem:(Item *) anItem;
+
+- (BOOL)satisfied;
+
+// the savings magnitude is the difference between the price
+// someone would pay if the combo didn't exist, vs if it did.
+- (NSDecimalNumber *) savingsMagnitude;
+
+//Mutation Methods
+
+- (void) addItem:(Item *)anItem;
+
+- (void) removeItem:(Item *)anItem;
+
+- (void) removeAllItems;
+
+//Housekeeping Methods
+
+- (void) recalculate:(NSNotification *) aNotification;
+
+//Comparitor and Descriptor Methods
+
+- (BOOL) isEffectivelyEqual:(id) anotherCombo;
+
+- (NSComparisonResult)savingsSort:(Combo *) aCombo;
 
 - (NSString *) descriptionWithIndent:(NSInteger) indentLevel;
 
--(BOOL) satisfied;
 
--(Order *) associatedOrder;
-
--(BOOL) isEffectivelySameAs:(Combo *) anotherCombo;
-
--(void) orderAltered;
 
 @end

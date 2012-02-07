@@ -13,42 +13,45 @@ extern NSString* ITEM_MODIFIED;
 
 @class Option;
 
-@interface Item : MenuComponent{
+@interface Item : MenuComponent
+{
     
     NSDecimalNumber* basePrice;
     NSMutableArray *options;
-    NSString* propertiesChecksum;
     
 }
 
 @property (retain, readonly) NSMutableArray *options; 
 @property (retain, readonly) NSDecimalNumber* basePrice;
-@property (retain, readonly) NSDecimalNumber* totalPrice;
-@property (retain, readonly) NSString* propertiesChecksum;
+@property (retain, readonly) NSDecimalNumber* price;
 
--(NSString *)description;
-
--(Item *)initFromItem:(Item *)anItem;
-
--(Item *)initFromData:(NSDictionary *) inputData;
 
 -(Item *)init;
 
+-(Item *)initFromData:(NSDictionary *) inputData;
+
+- (MenuComponent *)initWithCoder:(NSCoder *)decoder;
+
+- (void)encodeWithCoder:(NSCoder *)encoder;
+
+-(Item *)copy;
+
 -(void) addOption:(Option *) anOption;
 
--(NSDictionary*)orderRepresentation;
+-(void) optionAltered;
 
--(BOOL) isEffectivelySameAs:(Item*) anItem;
+-(BOOL) isEffectivelyEqual:(id) anItem;
 
 -(NSComparisonResult) nameSort:(Item *)anItem;
 
 -(NSComparisonResult) priceSort:(Item *)anItem;
 
+- (NSDictionary*)orderRepresentation;
+
+- (NSString *) reducedName;
+
 - (NSString *) descriptionWithIndent:(NSInteger) indentLevel;
 
--(void) optionAltered;
-
--(NSString *) reducedName;
 
 @end
 

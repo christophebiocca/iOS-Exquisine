@@ -10,28 +10,28 @@
 #import "MenuComponent.h"
 @class Item;
 @class Menu;
+@class Combo;
 @class Location;
 @class PaymentInfo;
 @class PaymentSuccessInfo;
 
 extern NSString* ORDER_ITEMS_MODIFIED;
+extern NSString* ORDER_COMBOS_MODIFIED;
+extern NSString* ORDER_FAVORITE_MODIFIED;
+extern NSString* ORDER_MODIFIED;
 
 @interface Order : MenuComponent {
+    @protected
 
-    //Contains the list of items that the customer wants to order.
+    BOOL isFavorite;
+    
     NSMutableArray *itemList; 
     
-    NSMutableArray *nonComboItemCache;
-    
-    NSMutableArray *comboListCache;
-    
-    Menu *parentMenu;
+    NSMutableArray *comboList;
     
     NSString *status;
     
     NSString *orderIdentifier;
-    
-    BOOL isFavorite;
     
     NSDate *creationDate;
     
@@ -39,48 +39,57 @@ extern NSString* ORDER_ITEMS_MODIFIED;
     
 }
 
-@property (readonly) NSDate *creationDate;
-@property (readonly) NSDate *mostRecentSubmitDate;
+@property (nonatomic,readonly) BOOL isFavorite;
 @property (retain) NSMutableArray* itemList;
+@property (retain) NSMutableArray* comboList;
 @property (retain) NSString *status;
 @property (retain) NSString *orderIdentifier;
-@property BOOL isFavorite;
+@property (readonly) NSDate *creationDate;
+@property (readonly) NSDate *mostRecentSubmitDate;
 @property(readonly)NSDecimalNumber* subtotalPrice;
 @property(readonly)NSDecimalNumber* taxPrice;
 @property(readonly)NSDecimalNumber* totalPrice;
-@property (retain) Menu *parentMenu;
 
--(id)initWithParentMenu:(Menu *) aMenu;
+//Initializers
+-(Order *)init;
 
--(id)initFromOrder:(Order *)anOrder;
+- (Order *)initWithCoder:(NSCoder *)decoder;
 
--(id)initFromOrderShallow:(Order *)anOrder;
+- (void)encodeWithCoder:(NSCoder *)encoder;
 
--(NSString *)description;
+-(Order *)copy;
 
+//Access Methods
+-(NSString *) defaultFavName;
+
+-(BOOL) containsExactItem:(Item *) anItem;
+
+//Mutation Methods
 -(void) addItem:(Item *) anItem;
 
 -(void) removeItem:(Item *) anItem;
 
 -(void)removeListOfItems:(NSMutableArray *)aListOfItems;
 
--(NSMutableArray *) listOfCombos;
+-(void) addCombo:(Combo *) aCombo;
 
--(NSMutableArray *) listOfNonComboItems;
+-(void) removeCombo:(Combo *) aCombo;
+
+-(void) setFavorite:(BOOL)isfav;
+
+-(void)placedWithTransactionInfo:(PaymentSuccessInfo*)info;
+
+-(void)submit;
+
+//Housekeeping Methods
+-(void) recalculate:(NSNotification *) aNotification;
+
+//Comparitor and Descriptor Methods
+
+-(BOOL) isEffectivelyEqual:(id) anOrder;
 
 -(NSDictionary*)orderRepresentation;
 
--(void) resetCache;
-
--(void) clearOrder;
-
--(BOOL) isEffectivelySameAs:(Order *) anOrder;
-
--(void)submit;
--(void)placedWithTransactionInfo:(PaymentSuccessInfo*)info;
-
--(void) reSort;
-
--(NSString *) defaultFavName;
+-(NSString *) descriptionWithIndent:(NSInteger) indentLevel;
 
 @end

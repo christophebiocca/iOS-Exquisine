@@ -17,38 +17,40 @@
 #import "Item.h"
 #import "Combo.h"
 #import "CellData.h"
+#import "OrderManager.h"
 
 @implementation OrderRenderer
 
 
--(OrderRenderer *)initWithOrderAndMenu:(Order *)anOrder:(Menu *) aMenu
+-(OrderRenderer *)initWithOrderManager:(OrderManager *)anOrderManager
 {
     
-    self = [super initWithMenuComponent:anOrder];
+    self = [super initWithMenuComponent:[anOrderManager thisOrder]];
     
-    theMenu = aMenu;
-    orderInfo = anOrder;
+    orderManager = anOrderManager;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshOrderList:) name:ORDER_MANAGER_NEEDS_REDRAW object:orderManager];
     
     orderDisplayList = [[NSMutableArray alloc] initWithCapacity:0];
     
-    [self refreshOrderList];
+    [self refreshOrderList:nil];
     
     return self;
 }
 
 
 //Eventually we can call this intelligently.
--(void) refreshOrderList
+-(void) refreshOrderList:(NSNotification *)aNotification
 {
     [orderDisplayList removeAllObjects];
     
-    for (Combo *combo in [orderInfo listOfCombos]) 
+    for (Combo *combo in  [[orderManager thisOrder] comboList]) 
     {
         [orderDisplayList addObject:combo];
         [orderDisplayList addObjectsFromArray:[combo listOfAssociatedItems]];
     }
     
-    [orderDisplayList addObjectsFromArray:[orderInfo listOfNonComboItems]];
+    [orderDisplayList addObjectsFromArray:[[orderManager thisOrder] itemList]];
     
 }
 
@@ -69,7 +71,7 @@
             else
                 return 1;
         case 1:
-            return [[theMenu submenuList] count];
+            return [[[orderManager thisMenu] submenuList] count];
             break;
             
         default:
@@ -99,7 +101,7 @@
 - (UITableViewCell *)menuCellForIndexPath:(UITableView *) tableView:(NSIndexPath *) indexPath
 {
     
-    id thingToDisplay = [[theMenu submenuList] objectAtIndex:[indexPath row]];
+    id thingToDisplay = [[[orderManager thisMenu] submenuList] objectAtIndex:[indexPath row]];
     
     if([thingToDisplay isKindOfClass:([Item class])])
     {
@@ -141,7 +143,7 @@
             
             [cell setIndentationLevel:0];
             
-            if (![[orderInfo listOfNonComboItems] containsObject:thingToDisplay])
+            if (![[[orderManager thisOrder] itemList] containsObject:thingToDisplay])
             {
                 [cell setIndentationLevel:1];
                 [[cell detailTextLabel] setText:@""];
@@ -196,8 +198,7 @@
         //Then see if it's an item:
         if ([cellObject isKindOfClass:[Item class]])
         {
-            [orderInfo removeItem:cellObject];
-            [self refreshOrderList];
+            [[orderManager thisOrder] removeItem:cellObject];
             [tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
             
             if([orderDisplayList count] == 0)
@@ -251,9 +252,15 @@
             return [orderDisplayList objectAtIndex:[index row]];
     }
     if ([index section] == 1)
-        return [[theMenu submenuList] objectAtIndex:[index row]];
+        return [[[orderManager thisMenu] submenuList] objectAtIndex:[index row]];
     
     return nil;
+}
+
+-(void)dealloc
+{
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:ORDER_MANAGER_NEEDS_REDRAW object:orderManager];
 }
 
 @end

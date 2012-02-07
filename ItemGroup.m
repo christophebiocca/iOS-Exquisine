@@ -15,16 +15,21 @@
 @implementation ItemGroup
 
 @synthesize listOfItems;
+@synthesize satisfied;
 
--(ItemGroup *)initWithDataAndParentMenuAndParentCombo:(NSDictionary *)inputData :(Menu *)inputMenu :(Combo *)aCombo
+-(ItemGroup *)init
 {
-    //self = [super initFromData:inputData];
+    self = [super init];
     
-    parentCombo = aCombo;
+    listOfItems = [[NSMutableArray alloc] initWithCapacity:0];
+    satisfied = NO;
     
-    name = @"Placeholder";
-    
-    parentMenu = inputMenu;
+    return self;
+}
+
+-(ItemGroup *)initWithDataAndParentMenu:(NSDictionary *)inputData :(Menu *)parentMenu
+{
+    self = [super initFromData:inputData];
     
     listOfItems = [[NSMutableArray alloc] initWithCapacity:0];
         
@@ -35,16 +40,57 @@
     {
         NSInteger intItemPK = [itemPK intValue];
         Item *itemToAdd = [parentMenu dereferenceItemPK:intItemPK];
-        [listOfItems addObject:itemToAdd];
+        if (itemToAdd) {
+            [listOfItems addObject:itemToAdd];
+        }
+        else
+        {
+            NSLog(@"ERROR: A dereference was attempted on an invalid item PK %i\n%@",intItemPK,parentMenu);
+        }
+        
     }
     
     for (NSString *menuPK in menuPKs)
     {
         Menu *menuForPK = [parentMenu dereferenceMenuPK:[menuPK intValue]];
-        [listOfItems addObjectsFromArray:[menuForPK flatItemList]];
+        if (menuForPK) {
+            [listOfItems addObjectsFromArray:[menuForPK flatItemList]];
+        }
+        else
+        {
+            NSLog(@"ERROR: A dereference was attempted on an invalid menu PK %@\n%@",menuPK,parentMenu);
+        }
     }
     
     return self;
+    
+}
+
+- (MenuComponent *)initWithCoder:(NSCoder *)decoder
+{
+    if (self = [super initWithCoder:decoder])
+    {
+        listOfItems = [decoder decodeObjectForKey:@"list_of_items"];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+    //Rinse and repeat this:
+    [super encodeWithCoder:encoder];    
+    [encoder encodeObject:listOfItems forKey:@"list_of_items"];
+}
+
+-(ItemGroup *)copy
+{
+    ItemGroup *anItemGroup = [[ItemGroup alloc] init];
+    
+    anItemGroup->listOfItems = [[NSMutableArray alloc] initWithArray:listOfItems];
+    
+    anItemGroup->satisfied = satisfied;
+    
+    return anItemGroup;
     
 }
 
@@ -73,31 +119,16 @@
     [listOfItems addObjectsFromArray:[aMenu flatItemList]];
 }
 
-- (MenuComponent *)initWithCoder:(NSCoder *)decoder
-{
-    if (self = [super initWithCoder:decoder])
-    {
-        parentCombo = [decoder decodeObjectForKey:@"parent_combo"];
-        parentMenu = [decoder decodeObjectForKey:@"parent_menu"];
-        listOfItems = [decoder decodeObjectForKey:@"list_of_items"];
-    }
-    return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)encoder
-{
-    //Rinse and repeat this:
-    [super encodeWithCoder:encoder];    
-    [encoder encodeObject:parentCombo forKey:@"parent_combo"];
-    [encoder encodeObject:parentMenu forKey:@"parent_menu"];
-    [encoder encodeObject:listOfItems forKey:@"list_of_items"];
-}
-
 - (NSString *) descriptionWithIndent:(NSInteger) indentLevel
 {    
-    NSMutableString *output = [NSMutableString stringWithString:[@"" stringByPaddingToLength:(indentLevel*4) withString:@" " startingAtIndex:0]];
+    NSString *padString = [@"" stringByPaddingToLength:(indentLevel*4) withString:@" " startingAtIndex:0];
     
-    [output appendFormat:@"ItemGroup: %@:\n",name];
+    NSMutableString *output = [[NSMutableString alloc] initWithCapacity:0];
+    
+    [output appendFormat:@"%@ItemGroup:%\n",padString];
+    [output appendString:[super descriptionWithIndent:indentLevel]];
+    [output appendFormat:@"%@Satisfied: %i\n",padString,satisfied];
+    [output appendFormat:@"%@Items:\n",padString];
     
     for (Item *anItem in listOfItems) {
         [output appendFormat:@"%@\n",[anItem descriptionWithIndent:(indentLevel + 1)]];
@@ -106,26 +137,7 @@
     return output;
 }
 
--(NSString *)description{
-    
-    NSMutableString *output = [[NSMutableString alloc] initWithFormat:@"ItemGroup: %@:\n",name];
-    
-    for (Item *anItem in listOfItems) {
-        [output appendFormat:@"%@\n",[anItem descriptionWithIndent:1]];
-    }
-    
-    return output;
-}
 
--(BOOL) satisfied
-{
-    for (Item *eachItem in [parentCombo listOfAssociatedItems]) {
-        if ([self containsItem:eachItem]) {
-            return YES;
-        }
-    }
-    return NO;
-}
 
 
 @end

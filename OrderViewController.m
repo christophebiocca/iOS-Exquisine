@@ -21,20 +21,20 @@
 #import "CellData.h"
 #import "MenuRenderer.h"
 #import "LocalyticsSession.h"
+#import "OrderManager.h"
 
 @implementation OrderViewController
 
-@synthesize orderInfo;
+@synthesize theOrderManager;
 @synthesize delegate;
 
--(OrderViewController *)initializeWithMenuAndOrder:(Menu *) aMenu:(Order *) anOrder
+-(OrderViewController *)initializeWithOrderManager:(OrderManager *)anOrderManager
 {
-    menuInfo = aMenu;
-    orderInfo = anOrder;
+    theOrderManager = anOrderManager;
     
-    [menuInfo setAssociatedOrder:anOrder];
-    orderRenderer = [[OrderRenderer alloc] initWithOrderAndMenu:orderInfo:menuInfo];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orderAltered) name:ORDER_ITEMS_MODIFIED object:orderInfo];
+    orderRenderer = [[OrderRenderer alloc] initWithOrderManager:theOrderManager];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orderAltered:) name:ORDER_MANAGER_NEEDS_REDRAW object:theOrderManager];
     
     [[self navigationItem] setTitle:@"Add Items"];
     return self;
@@ -42,12 +42,12 @@
 
 -(void)renameOrder:(NSString *)newName
 {
-    [orderInfo setName:newName];
+    [[theOrderManager thisOrder] setName:newName];
 }
 
 -(void)displayOrderConfirmation
 {
-    if([orderInfo.totalPrice doubleValue] <= 0.0)
+    if([[theOrderManager thisOrder].totalPrice doubleValue] <= 0.0)
     {
         UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Oops" message:@"You havn't selected anything to purchase" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
         
@@ -67,7 +67,7 @@
     
     if([delegate hasServerConnection])
     {
-        UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Process Purchase?" message:[NSString stringWithFormat: @"Order confirmation:\nSubtotal: %@\nHST: %@\nGrand Total: %@\n\nIs this okay?", [Utilities FormatToPrice:[orderInfo subtotalPrice]],[Utilities FormatToPrice:[orderInfo taxPrice]],[Utilities FormatToPrice:[orderInfo totalPrice]]] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil];
+        UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Process Purchase?" message:[NSString stringWithFormat: @"Order confirmation:\nSubtotal: %@\nHST: %@\nGrand Total: %@\n\nIs this okay?", [Utilities FormatToPrice:[[theOrderManager thisOrder] subtotalPrice]],[Utilities FormatToPrice:[[theOrderManager thisOrder] taxPrice]],[Utilities FormatToPrice:[[theOrderManager thisOrder] totalPrice]]] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil];
         
         [areYouSure setTag:1];
         
@@ -82,7 +82,7 @@
 
 -(void)promptUserForRename
 {
-    if([[orderInfo itemList] count] == 0)
+    if([[theOrderManager thisOrder].totalPrice doubleValue] <= 0.0)
     {
         UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Oops" message:@"You havn't selected any items." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
         
@@ -109,7 +109,7 @@
         
         AlertPrompt *renamePrompt = (id)alertView;
         
-        NSString *defaultName = [NSString stringWithString:[orderInfo defaultFavName]];
+        NSString *defaultName = [NSString stringWithString:[[theOrderManager thisOrder] defaultFavName]];
         
         [[renamePrompt textField] setText:defaultName];
         
@@ -125,7 +125,7 @@
 
 -(void)promptForFavDeletion
 {
-    UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Delete from favorites?" message:[NSString stringWithFormat: @"If you unfavorite this order it will dissapear. Are you sure you want that?", [Utilities FormatToPrice:[orderInfo totalPrice]]] delegate:self cancelButtonTitle:@"Oh... nevermind" otherButtonTitles:@"Yep", nil];
+    UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Delete from favorites?" message:[NSString stringWithFormat: @"If you unfavorite this order it will dissapear. Are you sure you want that?", [Utilities FormatToPrice:[[theOrderManager thisOrder] totalPrice]]] delegate:self cancelButtonTitle:@"Oh... nevermind" otherButtonTitles:@"Yep", nil];
     
     [areYouSure setTag:3];
     
@@ -145,7 +145,7 @@
         if (buttonIndex == 1)
         {
             [delegate submitOrderForController:self];
-            [orderInfo setStatus:@"Transmitting"];
+            [[theOrderManager thisOrder] setStatus:@"Transmitting"];
             [self popToMainPage];
         }
     }
@@ -181,7 +181,7 @@
     if ( [cellObject isKindOfClass:([Menu class])])
     {
         
-        MenuViewController *newMenuController = [[MenuViewController alloc] initializeWithMenuAndOrderAndOrderViewController:cellObject :orderInfo :self];
+        MenuViewController *newMenuController = [[MenuViewController alloc] initializeWithMenuAndOrderAndOrderViewController:cellObject :[theOrderManager thisOrder] :self];
         
         if(editing)
             [self exitEditingMode];
@@ -193,7 +193,7 @@
     if ( [cellObject isKindOfClass:([Item class])])
     {
         
-        ItemViewController *newItemController = [[ItemViewController alloc] initializeWithItemAndOrderAndReturnController:cellObject :orderInfo :self];
+        ItemViewController *newItemController = [[ItemViewController alloc] initializeWithItemAndOrderAndReturnController:cellObject :[theOrderManager thisOrder] :self];
         
         [[self navigationController] pushViewController:newItemController animated:YES];
         
@@ -230,7 +230,7 @@
     
     [[self navigationItem] setRightBarButtonItems:[[NSArray alloc] initWithObjects:submitButton, nil]];
     
-    [[orderView priceDisplayButton] setTitle:[NSString stringWithFormat:@"%@%@",@"Subtotal: ",[Utilities FormatToPrice:[orderInfo subtotalPrice]] ]];
+    [[orderView priceDisplayButton] setTitle:[NSString stringWithFormat:@"%@%@",@"Subtotal: ",[Utilities FormatToPrice:[[theOrderManager thisOrder] subtotalPrice]] ]];
     [[orderView favoriteButton] setTarget:self];
     [[orderView favoriteButton] setAction:@selector(toggleWhetherFavorite)];
     
@@ -247,24 +247,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
-    [[orderView priceDisplayButton] setTitle:[NSString stringWithFormat:@"%@%@",@"Subtotal: ",[Utilities FormatToPrice:[orderInfo subtotalPrice]] ]];
-    [orderRenderer refreshOrderList];
-    
-    [menuInfo setAssociatedOrder:orderInfo];
-    [orderInfo setParentMenu:menuInfo];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orderAltered) name:ORDER_ITEMS_MODIFIED object:orderInfo];
-    
-    [[orderView orderTable] reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
-    if([orderInfo isFavorite])
-    {
-        [[orderView favoriteButton] setTintColor:[UIColor yellowColor]];
-    }
-    else
-    {
-        [[orderView favoriteButton] setTintColor:[UIColor whiteColor]];
-    }
+    [self orderAltered:nil];
 }
 
 - (void)viewDidUnload
@@ -305,6 +288,8 @@
 {
     [[orderView orderTable] setEditing:YES animated:YES];
     
+    [[orderView orderTable] scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(toggleEditing)];
 
     NSMutableArray *newItemsList = [NSMutableArray arrayWithArray:[[orderView orderToolbar] items]];
@@ -335,7 +320,7 @@
 
 -(void) toggleWhetherFavorite
 {
-    if (!orderInfo.isFavorite)
+    if (![theOrderManager thisOrder].isFavorite)
     {
         [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Favourite Rename Prompt"];
         [self promptUserForRename];
@@ -351,15 +336,13 @@
 -(void)orderAltered:(NSNotification *)aNotification
 {
     
-    [[orderView priceDisplayButton] setTitle:[NSString stringWithFormat:@"%@%@",@"Subtotal: ",[Utilities FormatToPrice:[orderInfo subtotalPrice]] ]];
+    [[orderView priceDisplayButton] setTitle:[NSString stringWithFormat:@"%@%@",@"Subtotal: ",[Utilities FormatToPrice:[[theOrderManager thisOrder] subtotalPrice]] ]];
     
-    [orderRenderer refreshOrderList];
-    
-    [[orderView orderTable] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+    [[orderView orderTable] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
     
     [[orderView orderTable] scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
     
-    if([orderInfo isFavorite])
+    if([[theOrderManager thisOrder] isFavorite])
     {
         [[orderView favoriteButton] setTintColor:[UIColor yellowColor]];
     }
@@ -368,10 +351,15 @@
         [[orderView favoriteButton] setTintColor:[UIColor whiteColor]];
     }
 
-    if([[orderInfo itemList] count] == 0)
+    if([[[theOrderManager thisOrder] itemList] count] == 0)
     {
         [self exitEditingMode];
     }
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:ORDER_MANAGER_NEEDS_REDRAW object:theOrderManager];
 }
 
 @end

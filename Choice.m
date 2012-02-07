@@ -111,7 +111,7 @@ NSString* CHOICE_CHANGED = @"CroutonLabs/ChoiceChanged";
     return [basePrice compare:other->basePrice];
 }
 
--(BOOL)isEqual:(id)aChoice
+-(BOOL)isEffectivelyEqual:(id)aChoice
 {
     if (![aChoice isKindOfClass:[Choice class]])
         return NO;

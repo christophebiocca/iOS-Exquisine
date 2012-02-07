@@ -12,6 +12,9 @@
 #import "Menu.h"
 #import "ItemGroup.h"
 
+NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
+
+
 @implementation Combo
 
 @synthesize price, listOfAssociatedItems;
@@ -20,18 +23,18 @@
 -(Combo *)init
 {
     self = [super init];
-    associatedOrder = [[Order alloc] init];
+    
     listOfItemGroups = [[NSMutableArray alloc] initWithCapacity:0];
     listOfAssociatedItems = [[NSMutableArray alloc] initWithCapacity:0];
     price = [[NSDecimalNumber alloc] initWithInt:0];
+    
     return self;
 }
 
 -(Combo *)initFromDataAndMenu:(NSDictionary *)inputData:(Menu *) associatedMenu
 {
     self = [super initFromData:inputData];
-    
-    associatedOrder = nil;
+   
     listOfAssociatedItems = [[NSMutableArray alloc] initWithCapacity:0];
     
     NSInteger cents = [[inputData objectForKey:@"price_cents"] intValue];
@@ -40,99 +43,21 @@
     listOfItemGroups = [[NSMutableArray alloc] initWithCapacity:0];
     
     for (NSDictionary *componentInfo in [inputData objectForKey:@"components"]) {
-        [listOfItemGroups addObject:[[ItemGroup alloc] initWithDataAndParentMenuAndParentCombo:componentInfo :associatedMenu:self]];
+        [listOfItemGroups addObject:[[ItemGroup alloc] initWithDataAndParentMenu:componentInfo :associatedMenu]];
     }
-    
-#if DEBUG
-    NSLog(@"Combo Created: %@",[self description]);
-#endif
     
     return self;
-}
-
--(Combo *)initFromComboShallow:(Combo *)aCombo
-{
-    name = aCombo->name;
-    desc = aCombo->desc;
-    primaryKey = aCombo->primaryKey; 
-    
-    associatedOrder = [aCombo associatedOrder];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orderAltered) name:ORDER_ITEMS_MODIFIED object:associatedOrder];
-
-    listOfItemGroups = [aCombo listOfItemGroups];
-    listOfAssociatedItems = [[NSMutableArray alloc] initWithCapacity:0];
-    for (Item *anItem in [aCombo listOfAssociatedItems]) {
-        [listOfAssociatedItems addObject:anItem];
-    }
-    price = [[NSDecimalNumber alloc] initWithDecimal:[[aCombo price] decimalValue]];
-    return self;
-    
-}
-
--(BOOL)evaluateForCombo:(Order *)anOrder
-{
-    Order *mutableOrder = [[Order alloc] initFromOrderShallow:anOrder];
- 
-    [listOfAssociatedItems removeAllObjects];
-    
-    //this is really hackish, and it's because we need to populate list of associated items
-    //correctly.
-    //This shit neeeeeds to get refactored asap.
-    BOOL totallyDoesntQualify = NO;
-    
-    for (ItemGroup *itemGroup in listOfItemGroups) 
-    {
-        BOOL qualifies = NO;
-        
-        for (Item *anItem in [NSArray arrayWithArray:[mutableOrder itemList]]) {
-            if([itemGroup containsItem:anItem])
-            {
-                qualifies = YES;
-                [listOfAssociatedItems addObject:anItem];
-                [mutableOrder removeItem:anItem];
-                break;
-            }
-        }
-        
-        if(!qualifies)
-            totallyDoesntQualify = YES;
-    }
-    //If it actually makes it through each item group and qualifies for each, then we're good.
-    return !totallyDoesntQualify;
-}
-
--(void)setAssociatedOrder:(Order *)anOrder
-{
-    associatedOrder = anOrder;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orderAltered) name:ORDER_ITEMS_MODIFIED object:associatedOrder];
-}
-
-//If an order qualifies for a combo, we'll want to know what items were the qualifying ones.
--(NSMutableArray *)comboItemsList
-{
-    if ([listOfAssociatedItems count] > 0)
-    {
-        return listOfAssociatedItems;
-    }
-    else if([self evaluateForCombo:associatedOrder])
-    {
-        return listOfAssociatedItems;
-    }
-    else
-    {
-        NSLog(@"Someone just requested an itemList for a bad order.");
-    }
-    return nil;
 }
 
 - (MenuComponent *)initWithCoder:(NSCoder *)decoder
 {
     if (self = [super initWithCoder:decoder])
     {
-        associatedOrder = [decoder decodeObjectForKey:@"associated_order"];
+        
         listOfItemGroups = [decoder decodeObjectForKey:@"list_of_item_groups"];
         listOfAssociatedItems = [decoder decodeObjectForKey:@"list_of_associated_items"];
         price = [decoder decodeObjectForKey:@"price"];
+        
     }
     return self;
 }
@@ -141,58 +66,193 @@
 {
     //Rinse and repeat this:
     [super encodeWithCoder:encoder];
-    [encoder encodeObject:associatedOrder forKey:@"associated_order"];
     [encoder encodeObject:listOfItemGroups forKey:@"list_of_item_groups"];
     [encoder encodeObject:listOfAssociatedItems forKey:@"list_of_associated_items"];
     [encoder encodeObject:price forKey:@"price"];
 }
 
-- (NSString *) descriptionWithIndent:(NSInteger) indentLevel
+- (Combo *)copy
 {
-    NSMutableString *output = [NSMutableString stringWithString:[@"" stringByPaddingToLength:(indentLevel*4) withString:@" " startingAtIndex:0]];
+    Combo *aCombo = [[Combo alloc] init];
     
-    [output appendFormat:@"Combo Name: %@\n", name];
-    for (ItemGroup *itemGroup in listOfItemGroups) {
-        [output appendString:[itemGroup descriptionWithIndent:(indentLevel + 1)]];
-    }
-    return output;
-}
-
--(NSString *)description
-{
-    NSMutableString *output = [[NSMutableString alloc] initWithCapacity:0];
+    aCombo->name = name;
+    aCombo->desc = desc;
+    aCombo->primaryKey = primaryKey;
     
-    [output appendFormat:@"Combo Name: %@\n", name];
-    for (ItemGroup *itemGroup in listOfItemGroups) {
-        [output appendString:[itemGroup descriptionWithIndent:1]];
+    for (ItemGroup *anItemGroup in listOfItemGroups) {
+        [[aCombo listOfItemGroups] addObject:[anItemGroup copy]];
     }
-    return output;
+    
+    for (Item *anItem in listOfAssociatedItems) {
+        [[aCombo listOfAssociatedItems] addObject:[anItem copy]];
+    }
+    
+    aCombo->price = price;
+    
+    return aCombo;
 }
 
--(Order *)associatedOrder
+//Just placeholders****************V
+
+-(NSArray *)satisfactionListsForItemList:(NSArray *)anItemList
 {
-    return associatedOrder;
+    NSMutableArray *returnList = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    for (ItemGroup *anItemGroup in listOfItemGroups) {
+        NSMutableArray *newSublist = [[NSMutableArray alloc] initWithCapacity:0];
+        
+        for (Item *eachItem in anItemList) {
+            if ([anItemGroup containsItem:eachItem]) {
+                [newSublist addObject:eachItem];
+            }
+        }
+        
+        [returnList addObject:newSublist];
+    }
+    
+    return returnList;
 }
 
--(BOOL) isEffectivelySameAs:(Combo *) anotherCombo
+-(BOOL)satisfiedWithItemList:(NSArray *)anItemList
 {
-    return ([anotherCombo.name isEqualToString:name]);
+    //This is pretty inefficient, but let's see if it will work. It might.
+    
+    NSMutableArray *helperList = [[NSMutableArray alloc] initWithArray:anItemList];
+    
+    for (ItemGroup *anItemGroup in listOfItemGroups) {
+        [anItemGroup setSatisfied:NO];
+        for (Item *anItem in [NSArray arrayWithArray: helperList]) {
+            if (![anItemGroup satisfied]) {
+                if ([anItemGroup containsItem:anItem]) {
+                    [anItemGroup setSatisfied:YES];
+                    [helperList removeObject:anItem];
+                }
+            }
+        }
+    }
+    
+    BOOL result = [self satisfied];
+    
+    [self recalculate:nil];
+    
+    return result;
+    
 }
 
--(BOOL)satisfied
+-(BOOL)containsItem:(Item *)anItem
 {
-    [associatedOrder resetCache];
-    for (Combo *aCombo in [associatedOrder listOfCombos]) {
-        if ([aCombo isEffectivelySameAs:self])
+    for (Item *eachItem in listOfAssociatedItems) {
+        if ([anItem isEffectivelyEqual:eachItem]) {
             return YES;
+        }
     }
     return NO;
 }
 
--(void) orderAltered
+-(BOOL)containsExactItem:(Item *)anItem
 {
-    //This is also really hackish, it needs to be here so that the item groups know what's up.
-    [associatedOrder listOfCombos];
+    for (Item *eachItem in listOfAssociatedItems) {
+        if (anItem == eachItem) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+-(BOOL)satisfied
+{
+    for (ItemGroup *anItemGroup in listOfItemGroups) {
+        if (![anItemGroup satisfied]) {
+            return NO;
+        }
+    }
+    return YES;
+}
+
+-(NSDecimalNumber *)savingsMagnitude
+{
+    NSDecimalNumber *tally = [[NSDecimalNumber alloc] initWithInt:0];
+    
+    //This actually makes the assumption that each item in the item group costs the same price. This
+    //may not be true in all cases, but I think it is for pita factory.
+    for (ItemGroup *anItemGroup in listOfItemGroups) {
+        [tally decimalNumberByAdding:[[[anItemGroup listOfItems] objectAtIndex:0] price]];
+    }
+    
+    [tally decimalNumberBySubtracting:price];
+    
+    return tally;
+}
+
+-(void)addItem:(Item *)anItem
+{
+    [listOfAssociatedItems addObject:anItem];
+    [self recalculate:nil];
+}
+
+-(void)removeItem:(Item *)anItem
+{
+    [listOfAssociatedItems removeObject:anItem];
+    [self recalculate:nil];
+}
+
+-(void)removeAllItems
+{
+    [listOfAssociatedItems removeAllObjects];
+    [self recalculate:nil];
+}
+
+-(void)recalculate:(NSNotification *)aNotification
+{
+    NSMutableArray *helperList = [[NSMutableArray alloc] initWithArray:listOfAssociatedItems];
+    
+    for (ItemGroup *anItemGroup in listOfItemGroups) {
+        [anItemGroup setSatisfied:NO];
+        for (Item *anItem in [NSArray arrayWithArray: helperList]) {
+            if (![anItemGroup satisfied]) {
+                if ([anItemGroup containsItem:anItem]) {
+                    [anItemGroup setSatisfied:YES];
+                    [helperList removeObject:anItem];
+                }
+            }
+        }
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:COMBO_MODIFIED object:self];
+}
+
+-(BOOL) isEffectivelyEqual:(Combo *) anotherCombo
+{
+    return ([anotherCombo.name isEqualToString:name]);
+}
+
+-(NSComparisonResult)savingsSort:(Combo *)aCombo
+{
+    return [[aCombo savingsMagnitude] compare:[self savingsMagnitude]];
+}
+
+-(NSString *) descriptionWithIndent:(NSInteger) indentLevel
+{
+    NSString *padString = [@"" stringByPaddingToLength:(indentLevel*4) withString:@" " startingAtIndex:0];
+    
+    NSMutableString *output = [[NSMutableString alloc] initWithCapacity:0];
+    
+    [output appendFormat:@"%@Combo:%\n",padString];
+    [output appendString:[super descriptionWithIndent:indentLevel]];
+    [output appendFormat:@"%@Price: %@\n",padString,price];
+    [output appendFormat:@"%@ItemGroups:\n",padString];
+    
+    for (ItemGroup *anItemGroup in listOfItemGroups) {
+        [output appendFormat:@"%@\n",[anItemGroup descriptionWithIndent:(indentLevel + 1)]];
+    }
+    
+    [output appendFormat:@"%@Items:\n",padString];
+    
+    for (Item *anItem in listOfAssociatedItems) {
+        [output appendFormat:@"%@\n",[anItem descriptionWithIndent:(indentLevel + 1)]];
+    }
+    
+    return output;
 }
 
 @end

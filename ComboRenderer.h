@@ -12,7 +12,6 @@
 @interface ComboRenderer : MenuComponentRenderer <UITableViewDataSource>
 {
     Combo *currentCombo;
-    Order *currentOrder;
 }
 
 -(ComboRenderer *) initFromComboAndOrder: (Combo *) aCombo:(Order *) anOrder;

@@ -14,14 +14,14 @@
 @class Menu;
 @class OrderView;
 @class OrderRenderer;
+@class OrderManager;
 
 @interface OrderViewController : UITableViewController <UITableViewDelegate, UIActionSheetDelegate,UIAlertViewDelegate>
 {
     
     
     
-    Order *orderInfo;
-    Menu *menuInfo;
+    OrderManager *theOrderManager;
     OrderView *orderView;
     OrderRenderer *orderRenderer;  
     UIBarButtonItem *submitButton;
@@ -34,9 +34,9 @@
 
 @property (retain) id<OrderManagementDelegate> delegate;
 
-@property (retain) Order *orderInfo;
+@property (retain) OrderManager *theOrderManager;
 
--(OrderViewController *)initializeWithMenuAndOrder:(Menu *) aMenu:(Order *) anOrder;
+-(OrderViewController *)initializeWithOrderManager:(OrderManager *) anOrderManager;
 
 -(void) renameOrder:(NSString *) newName;
 
