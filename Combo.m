@@ -11,22 +11,43 @@
 #import "Order.h"
 #import "Menu.h"
 #import "ItemGroup.h"
+#import "ComboTypeTrivial.h"
 
 NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
 
 
 @implementation Combo
 
-@synthesize price, listOfAssociatedItems;
+//See [self initialize]
+static NSDictionary* comboClassDictionary = nil;
+
 @synthesize listOfItemGroups;
+
++(void)initialize{
+    if(!comboClassDictionary){
+        comboClassDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                [ComboTypeTrivial class], @"Test",
+                                nil];
+    }
+}
+
++(Combo *)comboWithDataAndMenu:(NSDictionary *)inputData :(Menu *)associatedMenu
+{
+    //Grab the name of the pricing strategy
+    NSString *comboType = [inputData objectForKey:@"pricing_strategy"];
+    
+    //Determine the appropriate class to instantiate as per the dictionary
+    Class comboSubclass = [comboClassDictionary objectForKey:comboType];
+    
+    //Allocate it and call the initFromDataAndMenu initializer
+    return [[comboSubclass alloc] initFromDataAndMenu:inputData:associatedMenu];
+}
 
 -(Combo *)init
 {
     self = [super init];
     
     listOfItemGroups = [[NSMutableArray alloc] initWithCapacity:0];
-    listOfAssociatedItems = [[NSMutableArray alloc] initWithCapacity:0];
-    price = [[NSDecimalNumber alloc] initWithInt:0];
     
     return self;
 }
@@ -34,11 +55,6 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
 -(Combo *)initFromDataAndMenu:(NSDictionary *)inputData:(Menu *) associatedMenu
 {
     self = [super initFromData:inputData];
-   
-    listOfAssociatedItems = [[NSMutableArray alloc] initWithCapacity:0];
-    
-    NSInteger cents = [[inputData objectForKey:@"price_cents"] intValue];
-    price = [[[NSDecimalNumber alloc] initWithInteger:cents] decimalNumberByMultiplyingByPowerOf10:-2];
     
     listOfItemGroups = [[NSMutableArray alloc] initWithCapacity:0];
     
@@ -55,8 +71,6 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
     {
         
         listOfItemGroups = [decoder decodeObjectForKey:@"list_of_item_groups"];
-        listOfAssociatedItems = [decoder decodeObjectForKey:@"list_of_associated_items"];
-        price = [decoder decodeObjectForKey:@"price"];
         
     }
     return self;
@@ -67,8 +81,6 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
     //Rinse and repeat this:
     [super encodeWithCoder:encoder];
     [encoder encodeObject:listOfItemGroups forKey:@"list_of_item_groups"];
-    [encoder encodeObject:listOfAssociatedItems forKey:@"list_of_associated_items"];
-    [encoder encodeObject:price forKey:@"price"];
 }
 
 - (Combo *)copy
@@ -82,12 +94,6 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
     for (ItemGroup *anItemGroup in listOfItemGroups) {
         [[aCombo listOfItemGroups] addObject:[anItemGroup copy]];
     }
-    
-    for (Item *anItem in listOfAssociatedItems) {
-        [[aCombo listOfAssociatedItems] addObject:[anItem copy]];
-    }
-    
-    aCombo->price = price;
     
     return aCombo;
 }
@@ -113,6 +119,24 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
     return returnList;
 }
 
+-(NSArray *)listOfAssociatedItems
+{
+    NSMutableArray *output = [[NSMutableArray alloc] initWithCapacity:0];
+    for (ItemGroup *eachItemGroup in listOfItemGroups) {
+        if ([eachItemGroup satisfied]) {
+            [output addObject:[eachItemGroup satisfyingItem]];
+        }
+    }
+    return output;
+}
+
+-(NSDecimalNumber *)price
+{
+    //This should always be overridden by subclasses. Hopefully this
+    //will catch people's eyes if they forget to do that.
+    return [NSDecimalNumber decimalNumberWithString:@"12345"];
+}
+
 -(BOOL)satisfiedWithItemList:(NSArray *)anItemList
 {
     //This is pretty inefficient, but let's see if it will work. It might.
@@ -120,29 +144,27 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
     NSMutableArray *helperList = [[NSMutableArray alloc] initWithArray:anItemList];
     
     for (ItemGroup *anItemGroup in listOfItemGroups) {
-        [anItemGroup setSatisfied:NO];
+        BOOL satisfiedYet = NO;
         for (Item *anItem in [NSArray arrayWithArray: helperList]) {
             if (![anItemGroup satisfied]) {
                 if ([anItemGroup containsItem:anItem]) {
-                    [anItemGroup setSatisfied:YES];
+                    satisfiedYet = YES;
                     [helperList removeObject:anItem];
                 }
             }
         }
+        if (!satisfiedYet)
+            return NO;
     }
     
-    BOOL result = [self satisfied];
-    
-    [self recalculate:nil];
-    
-    return result;
+    return YES;
     
 }
 
 -(BOOL)containsItem:(Item *)anItem
 {
-    for (Item *eachItem in listOfAssociatedItems) {
-        if ([anItem isEffectivelyEqual:eachItem]) {
+    for (ItemGroup *eachItemGroup in listOfItemGroups) {
+        if ([[eachItemGroup satisfyingItem] isEffectivelyEqual:anItem]) {
             return YES;
         }
     }
@@ -151,8 +173,8 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
 
 -(BOOL)containsExactItem:(Item *)anItem
 {
-    for (Item *eachItem in listOfAssociatedItems) {
-        if (anItem == eachItem) {
+    for (ItemGroup *eachItemGroup in listOfItemGroups) {
+        if ([[eachItemGroup satisfyingItem] isEqual:anItem]) {
             return YES;
         }
     }
@@ -179,45 +201,45 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
         [tally decimalNumberByAdding:[[[anItemGroup listOfItems] objectAtIndex:0] price]];
     }
     
-    [tally decimalNumberBySubtracting:price];
+    [tally decimalNumberBySubtracting:[self price]];
     
     return tally;
 }
 
 -(void)addItem:(Item *)anItem
 {
-    [listOfAssociatedItems addObject:anItem];
-    [self recalculate:nil];
+    for (ItemGroup *eachItemGroup in listOfItemGroups) {
+        if((![eachItemGroup satisfied])&&([eachItemGroup containsItem:anItem]))
+        {
+            [eachItemGroup setSatisfyingItem:anItem];
+            [self recalculate:nil];
+            return;
+        }
+    }
 }
 
 -(void)removeItem:(Item *)anItem
 {
-    [listOfAssociatedItems removeObject:anItem];
-    [self recalculate:nil];
+    for (ItemGroup *eachItemGroup in listOfItemGroups) {
+        if(([eachItemGroup satisfied])&&([eachItemGroup containsItem:anItem]))
+        {
+            [eachItemGroup setSatisfyingItem:[[Item alloc] init]];
+            [self recalculate:nil];
+            return;
+        }
+    }
 }
 
 -(void)removeAllItems
 {
-    [listOfAssociatedItems removeAllObjects];
+    for (ItemGroup *eachItemGroup in listOfItemGroups) {
+        [eachItemGroup setSatisfyingItem:[[Item alloc] init]];
+    }
     [self recalculate:nil];
 }
 
 -(void)recalculate:(NSNotification *)aNotification
 {
-    NSMutableArray *helperList = [[NSMutableArray alloc] initWithArray:listOfAssociatedItems];
-    
-    for (ItemGroup *anItemGroup in listOfItemGroups) {
-        [anItemGroup setSatisfied:NO];
-        for (Item *anItem in [NSArray arrayWithArray: helperList]) {
-            if (![anItemGroup satisfied]) {
-                if ([anItemGroup containsItem:anItem]) {
-                    [anItemGroup setSatisfied:YES];
-                    [helperList removeObject:anItem];
-                }
-            }
-        }
-    }
-    
     [[NSNotificationCenter defaultCenter] postNotificationName:COMBO_MODIFIED object:self];
 }
 
@@ -239,17 +261,10 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
     
     [output appendFormat:@"%@Combo:%\n",padString];
     [output appendString:[super descriptionWithIndent:indentLevel]];
-    [output appendFormat:@"%@Price: %@\n",padString,price];
     [output appendFormat:@"%@ItemGroups:\n",padString];
     
     for (ItemGroup *anItemGroup in listOfItemGroups) {
         [output appendFormat:@"%@\n",[anItemGroup descriptionWithIndent:(indentLevel + 1)]];
-    }
-    
-    [output appendFormat:@"%@Items:\n",padString];
-    
-    for (Item *anItem in listOfAssociatedItems) {
-        [output appendFormat:@"%@\n",[anItem descriptionWithIndent:(indentLevel + 1)]];
     }
     
     return output;
