@@ -167,7 +167,7 @@
         [theOrderManager setOrder:currentOrder];
     }
     PaymentStack* paymentStack = 
-    [[PaymentStack alloc] initWithOrder:currentOrder locations:locations
+    [[PaymentStack alloc] initWithOrder:[orderViewController orderInfo] locations:locations
                             completionBlock:^() {
                                 //Push the current order on the history list
                                 [ordersHistory addObject:[orderViewController orderInfo]];

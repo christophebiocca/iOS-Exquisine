@@ -293,9 +293,11 @@ static UIColor* errorLabelColor;
     switch (component) {
         case Year:
             [paymentInfo setExpirationYear:[self yearForRow:row]];
+            [paymentInfo setExpirationMonth:[self monthForRow:[pickerView selectedRowInComponent:Month]]];
             break;
         case Month:
             [paymentInfo setExpirationMonth:[self monthForRow:row]];
+            [paymentInfo setExpirationYear:[self yearForRow:[pickerView selectedRowInComponent:Year]]];
             break;    
         default:
             NSAssert(NO, @"Impossible index passed in %d", component);
