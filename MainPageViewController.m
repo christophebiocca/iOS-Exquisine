@@ -390,13 +390,14 @@
     if(![self currentLocation])
     {
         [[mainPageView openIndicator] setState:IndicatorViewOff];
-        [[mainPageView storeHours] setText:@"Store hours: Fetching from server..."];
+        [[mainPageView storeHours] setText:@"Fetching store hours from server..."];
         return;
     }
     
-    switch ([[self currentLocation] storeState]) {
+    switch ([[self currentLocation] storeState]) {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
         case Open:
             [[mainPageView openIndicator] setState:IndicatorViewOn];
+            //[[mainPageView storeHours] setText:@""];
             break;
         case Closing:
             [[mainPageView openIndicator] setState:IndicatorViewStale];
@@ -415,19 +416,19 @@
     
     if([[self currentLocation] storeState] != Closed)
     {
-        NSString *openTime = [formatter stringFromDate:[[self currentLocation] opensToday]];
-        NSString *closeTime = [formatter stringFromDate:[[self currentLocation] closesToday]];
+        //NSString *openTime = [formatter stringFromDate:[[self currentLocation] opensToday]];
+        //NSString *closeTime = [formatter stringFromDate:[[self currentLocation] closesToday]];
         
-        [[mainPageView storeHours] setText:[NSString stringWithFormat:@"Open from %@ to %@",openTime,closeTime]];
+        [[mainPageView storeHours] setText:@""];//[NSString stringWithFormat:@"Open from %@ to %@",openTime,closeTime]];
     }
     else
     {
         NSString *openTime = [formatter stringFromDate:[[self currentLocation] nextOpen]];
-        NSString *closeTime = [formatter stringFromDate:[[self currentLocation] nextClose]];
+        //NSString *closeTime = [formatter stringFromDate:[[self currentLocation] nextClose]];
         [formatter setDateFormat:@"EEEE"];
         NSString *dayOfWeek = [formatter stringFromDate:[[self currentLocation] nextClose]];
         
-        [[mainPageView storeHours] setText:[NSString stringWithFormat:@"Opens %@ from %@ to %@",dayOfWeek,openTime,closeTime]];
+        [[mainPageView storeHours] setText:[NSString stringWithFormat:@"Pita Factory is closed until %@ at %@.",dayOfWeek,openTime]];
         
     }
     
