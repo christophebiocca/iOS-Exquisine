@@ -6,15 +6,11 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "ItemGroup.h"
+#import "ItemGroupPricingStrategy.h"
 
-@interface ItemGroupAbsolutePricing : ItemGroup
+@interface ItemGroupAbsolutePricing : NSObject<ItemGroupPricingStrategy>
 {
     NSDecimalNumber *absoluteValue;
 }
-
--(ItemGroup *)initWithDataAndParentMenu:(NSDictionary *)inputData:(Menu *) parentMenu;
-
--(NSDecimalNumber *)price;
 
 @end

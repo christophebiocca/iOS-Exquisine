@@ -11,19 +11,17 @@
 
 @implementation ItemGroupAbsolutePricing
 
--(ItemGroup *)initWithDataAndParentMenu:(NSDictionary *)inputData :(Menu *)parentMenu
+-(id)initWithData:(NSDictionary*)inputData
 {
-    
-    if(self = [super initWithDataAndParentMenu:inputData :parentMenu])
+    if(self = [super init])
     {
-        NSInteger cents = [[inputData objectForKey:@"absolute_value"] intValue];
+        NSInteger cents = [[inputData objectForKey:@"price_cents"] intValue];
         absoluteValue = [[[NSDecimalNumber alloc] initWithInteger:cents] decimalNumberByMultiplyingByPowerOf10:-2];
     }
-    
     return self;
 }
 
--(NSDecimalNumber *)price
+-(NSDecimalNumber*)priceForItem:(Item*)item
 {
     return absoluteValue;
 }

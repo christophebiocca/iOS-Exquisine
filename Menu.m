@@ -73,7 +73,7 @@
     
     for (NSDictionary *combo in [inputData objectForKey:@"combos"]) 
     {
-        Combo *newCombo = [Combo comboWithDataAndMenu:combo:theRootMenu];
+        Combo *newCombo = [[Combo alloc] initFromDataAndMenu:combo:theRootMenu];
         [comboList addObject:newCombo];
     }
     

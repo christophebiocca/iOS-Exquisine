@@ -12,6 +12,7 @@
 @class Item;
 @class Order;
 @class Combo;
+@protocol ItemGroupPricingStrategy;
 
 //An item group is simply a collection of items and menus that provides
 //a check to see whether an item is within the group.
@@ -23,6 +24,7 @@ extern NSString* ITEM_GROUP_MODIFIED;
     
     NSMutableArray *listOfItems;
     Item *satisfyingItem;
+    id<ItemGroupPricingStrategy> strategy;
     
 }
 
@@ -31,9 +33,6 @@ extern NSString* ITEM_GROUP_MODIFIED;
 @property (readonly) BOOL satisfied;
 
 //Initializers
-+(void)initialize;
-
-+(Combo *)itemGroupWithDataAndParentMenu:(NSDictionary *)inputData :(Menu *)associatedMenu;
 
 -(ItemGroup *)initWithDataAndParentMenu:(NSDictionary *)inputData:(Menu *) parentMenu;
 

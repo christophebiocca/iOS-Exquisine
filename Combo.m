@@ -11,37 +11,14 @@
 #import "Order.h"
 #import "Menu.h"
 #import "ItemGroup.h"
-#import "ComboTypeTrivial.h"
+#import "ComboPricingStrategy.h"
 
 NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
 
 
 @implementation Combo
 
-//See [self initialize]
-static NSDictionary* comboClassDictionary = nil;
-
 @synthesize listOfItemGroups;
-
-+(void)initialize{
-    if(!comboClassDictionary){
-        comboClassDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-                                [ComboTypeTrivial class], @"Test",
-                                nil];
-    }
-}
-
-+(Combo *)comboWithDataAndMenu:(NSDictionary *)inputData :(Menu *)associatedMenu
-{
-    //Grab the name of the pricing strategy
-    NSString *comboType = [inputData objectForKey:@"pricing_strategy"];
-    
-    //Determine the appropriate class to instantiate as per the dictionary
-    Class comboSubclass = [comboClassDictionary objectForKey:comboType];
-    
-    //Allocate it and call the initFromDataAndMenu initializer
-    return [[comboSubclass alloc] initFromDataAndMenu:inputData:associatedMenu];
-}
 
 -(Combo *)init
 {
@@ -57,6 +34,8 @@ static NSDictionary* comboClassDictionary = nil;
     self = [super initFromData:inputData];
     
     listOfItemGroups = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    strategy = [ComboPricingStrategy pricingStrategyFromData:[inputData objectForKey:@"pricing_strategy"]];
     
     for (NSDictionary *componentInfo in [inputData objectForKey:@"components"]) {
         [listOfItemGroups addObject:[[ItemGroup alloc] initWithDataAndParentMenu:componentInfo :associatedMenu]];
@@ -132,9 +111,7 @@ static NSDictionary* comboClassDictionary = nil;
 
 -(NSDecimalNumber *)price
 {
-    @throw [NSException exceptionWithName:NSInternalInconsistencyException 
-                                   reason:[NSString stringWithFormat:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)] 
-                                 userInfo:nil];
+    return [strategy priceForItemGroups:listOfItemGroups];
 }
 
 -(BOOL)satisfiedWithItemList:(NSArray *)anItemList

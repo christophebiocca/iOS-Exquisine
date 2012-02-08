@@ -11,7 +11,7 @@
 		23082F5614D88513003964CE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 23082F5414D88513003964CE /* Reachability.m */; };
 		23082F5C14D8968F003964CE /* ComboViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23082F5B14D8968F003964CE /* ComboViewController.m */; };
 		23082F6114D897D1003964CE /* ComboView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23082F6014D897D1003964CE /* ComboView.m */; };
-		231C510E14E1B7F1004F2CCC /* ComboTypeTrivial.m in Sources */ = {isa = PBXBuildFile; fileRef = 231C510D14E1B7F1004F2CCC /* ComboTypeTrivial.m */; };
+		231C510E14E1B7F1004F2CCC /* ComboTrivialPricingStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 231C510D14E1B7F1004F2CCC /* ComboTrivialPricingStrategy.m */; };
 		231C511214E1BC8B004F2CCC /* ItemGroupMultiplicativePricing.m in Sources */ = {isa = PBXBuildFile; fileRef = 231C511114E1BC8B004F2CCC /* ItemGroupMultiplicativePricing.m */; };
 		231C511614E1C1A5004F2CCC /* ItemGroupAbsolutePricing.m in Sources */ = {isa = PBXBuildFile; fileRef = 231C511514E1C1A5004F2CCC /* ItemGroupAbsolutePricing.m */; };
 		231C511A14E1C1C6004F2CCC /* ItemGroupDiscountPricing.m in Sources */ = {isa = PBXBuildFile; fileRef = 231C511914E1C1C6004F2CCC /* ItemGroupDiscountPricing.m */; };
@@ -114,6 +114,9 @@
 		D92D24D414DB375B007B5890 /* PaymentError.m in Sources */ = {isa = PBXBuildFile; fileRef = D92D24D314DB375B007B5890 /* PaymentError.m */; };
 		D933EF1614DB566D00B0BDC7 /* PaymentProcessingView.m in Sources */ = {isa = PBXBuildFile; fileRef = D933EF1514DB566D00B0BDC7 /* PaymentProcessingView.m */; };
 		D933EF1A14DB568400B0BDC7 /* PaymentCompletedView.m in Sources */ = {isa = PBXBuildFile; fileRef = D933EF1914DB568400B0BDC7 /* PaymentCompletedView.m */; };
+		D947368714E20042005D4409 /* ItemGroupPricingStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = D947368614E20042005D4409 /* ItemGroupPricingStrategy.m */; };
+		D947368B14E20337005D4409 /* ItemGroupTrivialPricing.m in Sources */ = {isa = PBXBuildFile; fileRef = D947368A14E20337005D4409 /* ItemGroupTrivialPricing.m */; };
+		D947368F14E20E15005D4409 /* ComboPricingStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = D947368E14E20E15005D4409 /* ComboPricingStrategy.m */; };
 		D95B786014D2511E00FC0F29 /* Login.m in Sources */ = {isa = PBXBuildFile; fileRef = D95B785F14D2511E00FC0F29 /* Login.m */; };
 		D95B786514D252F400FC0F29 /* CredentialsStore.m in Sources */ = {isa = PBXBuildFile; fileRef = D95B786414D252F400FC0F29 /* CredentialsStore.m */; };
 		D95B786714D2558800FC0F29 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D95B786614D2558800FC0F29 /* Security.framework */; };
@@ -147,8 +150,8 @@
 		23082F5B14D8968F003964CE /* ComboViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComboViewController.m; sourceTree = "<group>"; };
 		23082F5F14D897D1003964CE /* ComboView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComboView.h; sourceTree = "<group>"; };
 		23082F6014D897D1003964CE /* ComboView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComboView.m; sourceTree = "<group>"; };
-		231C510C14E1B7F1004F2CCC /* ComboTypeTrivial.h */ = {isa = PBXFileReference; fileEncoding = 4; path = ComboTypeTrivial.h; sourceTree = "<group>"; };
-		231C510D14E1B7F1004F2CCC /* ComboTypeTrivial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComboTypeTrivial.m; sourceTree = "<group>"; };
+		231C510C14E1B7F1004F2CCC /* ComboTrivialPricingStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; path = ComboTrivialPricingStrategy.h; sourceTree = "<group>"; };
+		231C510D14E1B7F1004F2CCC /* ComboTrivialPricingStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComboTrivialPricingStrategy.m; sourceTree = "<group>"; };
 		231C511014E1BC8B004F2CCC /* ItemGroupMultiplicativePricing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemGroupMultiplicativePricing.h; sourceTree = "<group>"; };
 		231C511114E1BC8B004F2CCC /* ItemGroupMultiplicativePricing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemGroupMultiplicativePricing.m; sourceTree = "<group>"; };
 		231C511414E1C1A5004F2CCC /* ItemGroupAbsolutePricing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemGroupAbsolutePricing.h; sourceTree = "<group>"; };
@@ -336,6 +339,12 @@
 		D933EF1814DB568400B0BDC7 /* PaymentCompletedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentCompletedView.h; sourceTree = "<group>"; };
 		D933EF1914DB568400B0BDC7 /* PaymentCompletedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentCompletedView.m; sourceTree = "<group>"; };
 		D945ABC914D8D757007DCC32 /* PaymentViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentViewDelegate.h; sourceTree = "<group>"; };
+		D947368514E20042005D4409 /* ItemGroupPricingStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemGroupPricingStrategy.h; sourceTree = "<group>"; };
+		D947368614E20042005D4409 /* ItemGroupPricingStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemGroupPricingStrategy.m; sourceTree = "<group>"; };
+		D947368914E20337005D4409 /* ItemGroupTrivialPricing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemGroupTrivialPricing.h; sourceTree = "<group>"; };
+		D947368A14E20337005D4409 /* ItemGroupTrivialPricing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemGroupTrivialPricing.m; sourceTree = "<group>"; };
+		D947368D14E20E15005D4409 /* ComboPricingStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComboPricingStrategy.h; sourceTree = "<group>"; };
+		D947368E14E20E15005D4409 /* ComboPricingStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComboPricingStrategy.m; sourceTree = "<group>"; };
 		D95B785E14D2511E00FC0F29 /* Login.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Login.h; sourceTree = "<group>"; };
 		D95B785F14D2511E00FC0F29 /* Login.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Login.m; sourceTree = "<group>"; };
 		D95B786314D252F400FC0F29 /* CredentialsStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CredentialsStore.h; sourceTree = "<group>"; };
@@ -545,9 +554,9 @@
 		232C797714D0A77200C3868D /* Combo */ = {
 			isa = PBXGroup;
 			children = (
+				D947368C14E20DE8005D4409 /* PricingStrategy */,
 				232C797814D0A7E000C3868D /* Combo.h */,
 				232C797914D0A7E000C3868D /* Combo.m */,
-				233C4CCE14E1ABF9005C8CC9 /* ComboTypeTrivial */,
 			);
 			name = Combo;
 			sourceTree = "<group>";
@@ -579,13 +588,13 @@
 			name = UICustomActionSheet;
 			sourceTree = "<group>";
 		};
-		233C4CCE14E1ABF9005C8CC9 /* ComboTypeTrivial */ = {
+		233C4CCE14E1ABF9005C8CC9 /* ComboTrivialPricing */ = {
 			isa = PBXGroup;
 			children = (
-				231C510C14E1B7F1004F2CCC /* ComboTypeTrivial.h */,
-				231C510D14E1B7F1004F2CCC /* ComboTypeTrivial.m */,
+				231C510C14E1B7F1004F2CCC /* ComboTrivialPricingStrategy.h */,
+				231C510D14E1B7F1004F2CCC /* ComboTrivialPricingStrategy.m */,
 			);
-			name = ComboTypeTrivial;
+			name = ComboTrivialPricing;
 			sourceTree = "<group>";
 		};
 		2345980714DE0AD900910F3B /* OrderManager */ = {
@@ -883,11 +892,9 @@
 		23D6F4A714D9E1C90043C75E /* ItemGroup */ = {
 			isa = PBXGroup;
 			children = (
+				D947368314E2001F005D4409 /* PricingStrategy */,
 				23FDE9CD14D8A9BB005AA6D6 /* ItemGroup.h */,
 				23FDE9CE14D8A9BB005AA6D6 /* ItemGroup.m */,
-				231C511714E1C1AC004F2CCC /* ItemGroupDiscountPricing */,
-				231C511314E1C172004F2CCC /* ItemGroupAbsolutePricing */,
-				231C510F14E1BC4D004F2CCC /* ItemGroupMultiplicativePricing */,
 			);
 			name = ItemGroup;
 			sourceTree = "<group>";
@@ -1251,6 +1258,38 @@
 			name = Components;
 			sourceTree = "<group>";
 		};
+		D947368314E2001F005D4409 /* PricingStrategy */ = {
+			isa = PBXGroup;
+			children = (
+				D947368514E20042005D4409 /* ItemGroupPricingStrategy.h */,
+				D947368614E20042005D4409 /* ItemGroupPricingStrategy.m */,
+				D947368814E20318005D4409 /* ItemGroupTrivialPricing */,
+				231C511714E1C1AC004F2CCC /* ItemGroupDiscountPricing */,
+				231C511314E1C172004F2CCC /* ItemGroupAbsolutePricing */,
+				231C510F14E1BC4D004F2CCC /* ItemGroupMultiplicativePricing */,
+			);
+			name = PricingStrategy;
+			sourceTree = "<group>";
+		};
+		D947368814E20318005D4409 /* ItemGroupTrivialPricing */ = {
+			isa = PBXGroup;
+			children = (
+				D947368914E20337005D4409 /* ItemGroupTrivialPricing.h */,
+				D947368A14E20337005D4409 /* ItemGroupTrivialPricing.m */,
+			);
+			name = ItemGroupTrivialPricing;
+			sourceTree = "<group>";
+		};
+		D947368C14E20DE8005D4409 /* PricingStrategy */ = {
+			isa = PBXGroup;
+			children = (
+				D947368D14E20E15005D4409 /* ComboPricingStrategy.h */,
+				D947368E14E20E15005D4409 /* ComboPricingStrategy.m */,
+				233C4CCE14E1ABF9005C8CC9 /* ComboTrivialPricing */,
+			);
+			name = PricingStrategy;
+			sourceTree = "<group>";
+		};
 		D95B786214D252D600FC0F29 /* Credentials */ = {
 			isa = PBXGroup;
 			children = (
@@ -1516,10 +1555,13 @@
 				D933EF1614DB566D00B0BDC7 /* PaymentProcessingView.m in Sources */,
 				D933EF1A14DB568400B0BDC7 /* PaymentCompletedView.m in Sources */,
 				2345980B14DE0B2000910F3B /* OrderManager.m in Sources */,
-				231C510E14E1B7F1004F2CCC /* ComboTypeTrivial.m in Sources */,
+				231C510E14E1B7F1004F2CCC /* ComboTrivialPricingStrategy.m in Sources */,
 				231C511214E1BC8B004F2CCC /* ItemGroupMultiplicativePricing.m in Sources */,
 				231C511614E1C1A5004F2CCC /* ItemGroupAbsolutePricing.m in Sources */,
 				231C511A14E1C1C6004F2CCC /* ItemGroupDiscountPricing.m in Sources */,
+				D947368714E20042005D4409 /* ItemGroupPricingStrategy.m in Sources */,
+				D947368B14E20337005D4409 /* ItemGroupTrivialPricing.m in Sources */,
+				D947368F14E20E15005D4409 /* ComboPricingStrategy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
