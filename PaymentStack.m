@@ -12,13 +12,16 @@
 #import "PaymentProcessingViewController.h"
 #import "PlaceOrder.h"
 #import "PaymentCompleteViewController.h"
+#import "GetPaymentProfileInfo.h"
 
 @interface PaymentStack(PrivateMethods)
 
+@property(retain, readonly)PaymentProcessingViewController* preProcessingController;
 @property(retain, readonly)PaymentInfoViewController* paymentInfoController;
 @property(retain, readonly)PaymentProcessingViewController* processingController;
 @property(retain, readonly)PaymentCompleteViewController* completionController;
 
+-(void)queryPaymentInfo;
 -(void)sendOrder:(PaymentInfo*)payment;
 
 @end
@@ -32,22 +35,54 @@
 {
     if (self = [super init]) {
         order = orderToPlace;
-        completionBlock = [completion copy];
-        cancelledBlock = [cancelled copy];
+        void (^complete)() = [completion copy];
+        completionBlock = [^{
+            complete();
+            [navigationController setDelegate:nil];
+        } copy];
+        void (^cancel)() = [cancelled copy];
+        cancelledBlock = [^{
+            cancel();
+            [navigationController setDelegate:nil];
+        } copy];
         NSAssert([locations count] == 1, @"Expected exactly one location. (Got %@)", locations);
         location = [locations lastObject];
         postAnimation = [NSMutableArray new];
+        [self performSelectorOnMainThread:@selector(queryPaymentInfo) withObject:nil waitUntilDone:NO];
     }
     return self;
 }
 
+-(void)queryPaymentInfo{
+    [GetPaymentProfileInfo fetchInfo:^(GetPaymentProfileInfo* info){
+        NSLog(@"Success %@", self);
+        // We need to do other stuff.
+    } failure:^(GetPaymentProfileInfo* info, NSError* error){
+        if([[error domain] isEqualToString:JSON_API_ERROR] && 
+           [[[error userInfo] objectForKey:@"class"] isEqualToString:@"NoPaymentInfoError"]){
+            [self afterAnimating:^{
+                [[self navigationController] pushViewController:[self paymentInfoController] animated:YES];
+            }];
+        } else {
+            cancelledBlock();
+        }
+    }];
+}
+
 -(UINavigationController*)navigationController{
     if(!navigationController){
-        navigationController = [[UINavigationController alloc] initWithRootViewController:[self paymentInfoController]];
+        navigationController = [[UINavigationController alloc] initWithRootViewController:[self preProcessingController]];
         [navigationController setNavigationBarHidden:YES];
         [navigationController setDelegate:self];
     }
     return navigationController;
+}
+
+-(PaymentProcessingViewController*)preProcessingController{
+    if(!preProcessingController){
+        preProcessingController = [[PaymentProcessingViewController alloc] init];
+    }
+    return preProcessingController;
 }
 
 -(PaymentInfoViewController*)paymentInfoController{

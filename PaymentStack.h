@@ -19,6 +19,7 @@
     Location* location;
     
     UINavigationController* navigationController;
+    PaymentProcessingViewController* preProcessingController;
     PaymentInfoViewController* paymentInfoController;
     PaymentProcessingViewController* processingController;
     PaymentCompleteViewController* completionController;
