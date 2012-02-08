@@ -19,11 +19,14 @@
     Combo *comboInfo;
     ComboView *comboView;
     ComboRenderer *comboRenderer;
+    UIViewController *returnController;
     
 }
 
 @property (retain) Combo *comboInfo;
 
--(ComboViewController *)initializeWithComboAndOrder:(Combo *) aCombo:(Order *) anOrder;
+-(ComboViewController *)initializeWithComboAndOrderAndReturnController:(Combo *) aCombo:(Order *) anOrder:(UIViewController *) aController;
+
+-(void) addThisComboToOrder;
 
 @end

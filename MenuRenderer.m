@@ -84,7 +84,7 @@
         }
         
         [cell setCombo:thingToDisplay];
-        [cell setStyle:@"fancy"];
+        [cell setStyle:@"plain"];
         
         return cell;
     }

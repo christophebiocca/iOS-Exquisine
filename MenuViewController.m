@@ -53,6 +53,8 @@
         
         ItemViewController *newView = [[ItemViewController alloc] initializeWithItemAndOrderAndReturnController:newItem :orderInfo :orderViewController];
         
+        [newView setDelegate:self];
+        
         [[self navigationController] pushViewController:newView animated:YES];
     }
     if([submenuThing isKindOfClass:[Menu class]])
@@ -67,7 +69,7 @@
     if([submenuThing isKindOfClass:[Combo class]])
     {
         
-        ComboViewController *newController = [[ComboViewController alloc] initializeWithComboAndOrder:submenuThing:orderInfo];
+        ComboViewController *newController = [[ComboViewController alloc] initializeWithComboAndOrderAndReturnController:submenuThing:orderInfo:orderViewController];
         
         [[self navigationController] pushViewController:newController animated:YES];
         
@@ -77,6 +79,11 @@
 -(void)tableView:(UITableView *) tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *) indexPath
 {
     [self tableView:tableView didSelectRowAtIndexPath:indexPath];
+}
+
+-(void)addItemForController:(ItemViewController *)itemViewcontroller
+{
+    [orderInfo addItem:[[itemViewcontroller itemInfo] copy]];
 }
 
 //View related functions

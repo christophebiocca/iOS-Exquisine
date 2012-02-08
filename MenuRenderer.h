@@ -18,5 +18,4 @@
 
 -(MenuRenderer *) initWithMenu:(Menu *) aMenu;
 
-
 @end

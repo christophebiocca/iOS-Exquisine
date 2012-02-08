@@ -7,6 +7,8 @@
 //
 
 #import "MenuComponentViewController.h"
+#import "ItemManagementDelegate.h"
+
 @class Menu;
 @class Order;
 @class OrderViewController;
@@ -14,7 +16,7 @@
 @class MenuRenderer;
 @class Item;
 
-@interface MenuViewController : MenuComponentViewController<UITableViewDelegate> 
+@interface MenuViewController : MenuComponentViewController <UITableViewDelegate, ItemManagementDelegate> 
 {
     
     OrderViewController *orderViewController;

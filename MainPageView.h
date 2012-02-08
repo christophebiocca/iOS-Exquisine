@@ -18,6 +18,7 @@
     UIButton *pendingOrderButton;
     UILabel *orderStatus;
     UILabel *storeHours;
+    UILabel *storeLocationLabel;
     IndicatorView *openIndicator;
 }
 
@@ -26,6 +27,7 @@
 @property (retain) UIButton *favoriteOrderButton;
 @property (retain) UIButton *accountInfoButton;
 @property (retain) UILabel *orderStatus;
+@property (retain) UILabel *storeLocationLabel;
 @property (retain) UIImage *logo;
 @property (retain) UIImageView *logoView;
 @property (retain) IndicatorView *openIndicator;

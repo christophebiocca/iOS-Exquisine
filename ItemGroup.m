@@ -38,6 +38,11 @@ NSString* ITEM_GROUP_MODIFIED = @"CroutonLabs/ItemGroupModified";
     
     strategy = [ItemGroupPricingStrategy pricingStrategyFromData:[inputData objectForKey:@"pricing_strategy"]];
         
+    if(!strategy)
+    {
+        NSLog(@"ERROR: An invalid ItemStrategy string was parsed from JSON data");
+    }
+    
     NSMutableArray *itemPKs = [inputData objectForKey:@"items"];
     NSMutableArray *menuPKs = [inputData objectForKey:@"menus"] ;
     
@@ -79,6 +84,7 @@ NSString* ITEM_GROUP_MODIFIED = @"CroutonLabs/ItemGroupModified";
     {
         listOfItems = [decoder decodeObjectForKey:@"list_of_items"];
         satisfyingItem = [decoder decodeObjectForKey:@"satisfying_item"];
+        strategy = [decoder decodeObjectForKey:@"strategy"];
     }
     return self;
 }
@@ -88,7 +94,8 @@ NSString* ITEM_GROUP_MODIFIED = @"CroutonLabs/ItemGroupModified";
     //Rinse and repeat this:
     [super encodeWithCoder:encoder];    
     [encoder encodeObject:listOfItems forKey:@"list_of_items"];
-    [encoder encodeObject:listOfItems forKey:@"satisfying_item"];
+    [encoder encodeObject:satisfyingItem forKey:@"satisfying_item"];
+    [encoder encodeObject:strategy forKey:@"strategy"];
 }
 
 -(ItemGroup *)copy
@@ -98,6 +105,8 @@ NSString* ITEM_GROUP_MODIFIED = @"CroutonLabs/ItemGroupModified";
     anItemGroup->listOfItems = [[NSMutableArray alloc] initWithArray:listOfItems];
     
     anItemGroup->satisfyingItem = [satisfyingItem copy];
+    
+    anItemGroup->strategy = strategy;
     
     return anItemGroup;
     
@@ -153,7 +162,7 @@ NSString* ITEM_GROUP_MODIFIED = @"CroutonLabs/ItemGroupModified";
     [output appendFormat:@"%@ItemGroup:%\n",padString];
     [output appendString:[super descriptionWithIndent:indentLevel]];
     [output appendFormat:@"%@Satisfied: %i\n",padString,[self satisfied]];
-    [output appendFormat:@"%@Satisfying item: %@\n",padString,satisfyingItem];
+    [output appendFormat:@"%@Satisfying item: %@\n",padString,[satisfyingItem descriptionWithIndent:(indentLevel + 1)]];
     [output appendFormat:@"%@Items:\n",padString];
     
     for (Item *anItem in listOfItems) {

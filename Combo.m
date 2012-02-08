@@ -12,6 +12,7 @@
 #import "Menu.h"
 #import "ItemGroup.h"
 #import "ComboPricingStrategy.h"
+#import "ComboTrivialPricingStrategy.h"
 
 NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
 
@@ -25,6 +26,7 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
     self = [super init];
     
     listOfItemGroups = [[NSMutableArray alloc] initWithCapacity:0];
+    strategy = [[ComboTrivialPricingStrategy alloc] init];
     
     return self;
 }
@@ -36,6 +38,11 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
     listOfItemGroups = [[NSMutableArray alloc] initWithCapacity:0];
     
     strategy = [ComboPricingStrategy pricingStrategyFromData:[inputData objectForKey:@"pricing_strategy"]];
+    
+    if(!strategy)
+    {
+        NSLog(@"ERROR: an invalid stratagy string was parsed from JSON data");
+    }
     
     for (NSDictionary *componentInfo in [inputData objectForKey:@"components"]) {
         [listOfItemGroups addObject:[[ItemGroup alloc] initWithDataAndParentMenu:componentInfo :associatedMenu]];
@@ -50,6 +57,7 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
     {
         
         listOfItemGroups = [decoder decodeObjectForKey:@"list_of_item_groups"];
+        strategy = [decoder decodeObjectForKey:@"strategy"];
         
     }
     return self;
@@ -60,6 +68,7 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
     //Rinse and repeat this:
     [super encodeWithCoder:encoder];
     [encoder encodeObject:listOfItemGroups forKey:@"list_of_item_groups"];
+    [encoder encodeObject:strategy forKey:@"strategy"];
 }
 
 - (Combo *)copy
@@ -73,6 +82,9 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
     for (ItemGroup *anItemGroup in listOfItemGroups) {
         [[aCombo listOfItemGroups] addObject:[anItemGroup copy]];
     }
+    
+    //doesnt need to be copied
+    aCombo->strategy = strategy;
     
     return aCombo;
 }

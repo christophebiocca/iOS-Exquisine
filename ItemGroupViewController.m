@@ -48,6 +48,8 @@
     
     ItemViewController *newView = [[ItemViewController alloc] initializeWithItemAndOrderAndReturnController:thingToPush :currentOrder:returnController];
         
+    [newView setDelegate:self];
+    
     [[self navigationController] pushViewController:newView animated:YES];
     
 }
@@ -55,6 +57,11 @@
 -(void)tableView:(UITableView *) tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *) indexPath
 {
     [self tableView:tableView didSelectRowAtIndexPath:indexPath];
+}
+
+-(void)addItemForController:(ItemViewController *)itemViewcontroller
+{
+    [itemGroupInfo setSatisfyingItem:[[itemViewcontroller itemInfo] copy]];
 }
 
 //View related functions

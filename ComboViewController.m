@@ -12,17 +12,19 @@
 #import "Combo.h"
 #import "Order.h"
 #import "ItemGroup.h"
+#import "Item.h"
 #import "ItemGroupViewController.h"
 
 @implementation ComboViewController
 
 @synthesize comboInfo;
 
--(ComboViewController *)initializeWithComboAndOrder:(Combo *)aCombo :(Order *)anOrder
+-(ComboViewController *)initializeWithComboAndOrderAndReturnController:(Combo *)aCombo :(Order *)anOrder:(UIViewController *) aController
 {
     orderInfo = anOrder;
     comboInfo = aCombo;
-    comboRenderer = [[ComboRenderer alloc] initFromComboAndOrder:aCombo:anOrder];  
+    comboRenderer = [[ComboRenderer alloc] initFromComboAndOrder:aCombo:anOrder]; 
+    returnController = aController;
     [[self navigationItem] setTitle:comboInfo.name];
     
     return self;
@@ -80,6 +82,24 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [[comboView comboTable] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Add This Combo" style:UIBarButtonItemStyleDone target:self action:@selector(addThisComboToOrder)];
+    
+    if ([comboInfo satisfied])
+        [doneButton setEnabled:YES];
+    else
+        [doneButton setEnabled:NO];
+
+    [[self navigationItem] setRightBarButtonItem:doneButton];
+}
+
+-(void)addThisComboToOrder
+{
+    for (ItemGroup *anItemGroup in [comboInfo listOfItemGroups]) {
+        [orderInfo addItem:[[anItemGroup satisfyingItem] copy]];
+    }
+    [comboInfo removeAllItems];
+    [[self navigationController]popToViewController:returnController animated:YES];
+    
 }
 
 - (void)viewDidUnload

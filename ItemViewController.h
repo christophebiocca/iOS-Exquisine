@@ -7,6 +7,9 @@
 //
 
 #import "MenuComponentViewController.h"
+
+@protocol ItemManagementDelegate;
+
 @class Item;
 @class ItemView;
 @class ItemRenderer;
@@ -20,8 +23,11 @@
     Item *itemInfo;
     ItemView *itemView;
     ItemRenderer *itemRenderer;
+    id<ItemManagementDelegate> delegate;
     
 }
+
+@property (retain) id<ItemManagementDelegate> delegate;
 
 @property (retain) Item *itemInfo;
 

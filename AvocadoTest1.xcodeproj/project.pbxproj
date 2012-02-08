@@ -150,7 +150,7 @@
 		23082F5B14D8968F003964CE /* ComboViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComboViewController.m; sourceTree = "<group>"; };
 		23082F5F14D897D1003964CE /* ComboView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComboView.h; sourceTree = "<group>"; };
 		23082F6014D897D1003964CE /* ComboView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComboView.m; sourceTree = "<group>"; };
-		231C510C14E1B7F1004F2CCC /* ComboTrivialPricingStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; path = ComboTrivialPricingStrategy.h; sourceTree = "<group>"; };
+		231C510C14E1B7F1004F2CCC /* ComboTrivialPricingStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComboTrivialPricingStrategy.h; sourceTree = "<group>"; };
 		231C510D14E1B7F1004F2CCC /* ComboTrivialPricingStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComboTrivialPricingStrategy.m; sourceTree = "<group>"; };
 		231C511014E1BC8B004F2CCC /* ItemGroupMultiplicativePricing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemGroupMultiplicativePricing.h; sourceTree = "<group>"; };
 		231C511114E1BC8B004F2CCC /* ItemGroupMultiplicativePricing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemGroupMultiplicativePricing.m; sourceTree = "<group>"; };
@@ -256,6 +256,7 @@
 		23C26A1F14C4D5A600DD53DF /* MenuComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuComponent.m; sourceTree = "<group>"; };
 		23C26A2114C4D6FA00DD53DF /* VisualizableData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisualizableData.h; sourceTree = "<group>"; };
 		23C26A2214C4D6FA00DD53DF /* VisualizableData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisualizableData.m; sourceTree = "<group>"; };
+		23C9EFE714E2F9C4000E8C2A /* ItemManagementDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemManagementDelegate.h; sourceTree = "<group>"; };
 		23D6F4A014D9DD3A0043C75E /* ItemGroupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemGroupView.h; sourceTree = "<group>"; };
 		23D6F4A114D9DD3A0043C75E /* ItemGroupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemGroupView.m; sourceTree = "<group>"; };
 		23D6F4A414D9E0490043C75E /* ItemGroupRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemGroupRenderer.h; sourceTree = "<group>"; };
@@ -554,7 +555,7 @@
 		232C797714D0A77200C3868D /* Combo */ = {
 			isa = PBXGroup;
 			children = (
-				D947368C14E20DE8005D4409 /* PricingStrategy */,
+				D947368C14E20DE8005D4409 /* ComboPricingStrategy */,
 				232C797814D0A7E000C3868D /* Combo.h */,
 				232C797914D0A7E000C3868D /* Combo.m */,
 			);
@@ -1126,6 +1127,7 @@
 		23DA7A7214C63C3C008281DD /* ItemViewController */ = {
 			isa = PBXGroup;
 			children = (
+				23C9EFE714E2F9C4000E8C2A /* ItemManagementDelegate.h */,
 				23DA7A7714C63CBB008281DD /* ItemViewController.h */,
 				23DA7A7814C63CBB008281DD /* ItemViewController.m */,
 			);
@@ -1280,14 +1282,14 @@
 			name = ItemGroupTrivialPricing;
 			sourceTree = "<group>";
 		};
-		D947368C14E20DE8005D4409 /* PricingStrategy */ = {
+		D947368C14E20DE8005D4409 /* ComboPricingStrategy */ = {
 			isa = PBXGroup;
 			children = (
 				D947368D14E20E15005D4409 /* ComboPricingStrategy.h */,
 				D947368E14E20E15005D4409 /* ComboPricingStrategy.m */,
 				233C4CCE14E1ABF9005C8CC9 /* ComboTrivialPricing */,
 			);
-			name = PricingStrategy;
+			name = ComboPricingStrategy;
 			sourceTree = "<group>";
 		};
 		D95B786214D252D600FC0F29 /* Credentials */ = {

@@ -7,13 +7,14 @@
 //
 
 #import "MenuComponentViewController.h"
+#import "ItemManagementDelegate.h"
 
 @class ItemGroup;
 @class ItemGroupView;
 @class ItemGroupRenderer;
 @class Order;
 
-@interface ItemGroupViewController : MenuComponentViewController<UITableViewDelegate>
+@interface ItemGroupViewController : MenuComponentViewController<UITableViewDelegate, ItemManagementDelegate>
 {
     
     UIViewController *returnController;
@@ -21,6 +22,7 @@
     ItemGroup *itemGroupInfo;
     ItemGroupView *itemGroupView;
     ItemGroupRenderer *itemGroupRenderer;
+    
     
 }
 

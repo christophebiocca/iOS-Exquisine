@@ -16,10 +16,12 @@
 #import "Choice.h"
 #import "Option.h"
 #import "Utilities.h"
+#import "ItemManagementDelegate.h"
 
 @implementation ItemViewController
 
 @synthesize itemInfo;
+@synthesize delegate;
 
 -(ItemViewController *)initializeWithItemAndOrderAndReturnController:(Item *) anItem:(Order *)anOrder:(UIViewController *) aController
 {
@@ -30,7 +32,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(itemAltered) name:ITEM_MODIFIED object:anItem];
     
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Add to order" style:UIBarButtonItemStyleDone target:self action:@selector(addThisItemToOrder)];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Add This Item" style:UIBarButtonItemStyleDone target:self action:@selector(addThisItemToOrder)];
     
     if (![anOrder containsExactItem:anItem]) {
         [[self navigationItem] setRightBarButtonItem:doneButton];
@@ -44,8 +46,7 @@
 
 -(void)addThisItemToOrder
 {
-    
-    [ownerOrder addItem:[itemInfo copy]];
+    [delegate addItemForController:self];
 
     [[self navigationController] popToViewController:returnController animated:YES];
     
