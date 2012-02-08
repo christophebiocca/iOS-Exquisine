@@ -134,6 +134,8 @@ NSString* ITEM_GROUP_MODIFIED = @"CroutonLabs/ItemGroupModified";
 
 -(void)setSatisfyingItem:(Item *)anItem
 {
+    if(satisfyingItem)
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:ITEM_MODIFIED object:satisfyingItem];
     satisfyingItem = anItem;
     [[NSNotificationCenter defaultCenter] postNotificationName:ITEM_GROUP_MODIFIED object:self];
 }
@@ -172,7 +174,10 @@ NSString* ITEM_GROUP_MODIFIED = @"CroutonLabs/ItemGroupModified";
     return output;
 }
 
-
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:ITEM_MODIFIED object:satisfyingItem];
+}
 
 
 @end

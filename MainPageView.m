@@ -92,7 +92,7 @@
     [orderStatus setFrame:CGRectMake(20, 263, 280, 37)];
     [logoView setFrame:CGRectMake(75, 30,170, 170)];
     //[openIndicator setFrame:CGRectMake(38, 224, 16, 16)];
-    [storeHours setFrame:CGRectMake(70, 374, 240, 37)];
+    [storeHours setFrame:CGRectMake(20, 374, 280, 37)];
     [storeLocationLabel setFrame:CGRectMake(66, 200, 200, 30)];
 }
 

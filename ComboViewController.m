@@ -23,6 +23,7 @@
 {
     orderInfo = anOrder;
     comboInfo = aCombo;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(comboChanged:) name:COMBO_MODIFIED object:aCombo];
     comboRenderer = [[ComboRenderer alloc] initFromComboAndOrder:aCombo:anOrder]; 
     returnController = aController;
     [[self navigationItem] setTitle:comboInfo.name];
@@ -41,15 +42,31 @@
     
     id itemGroup = [[comboInfo listOfItemGroups] objectAtIndex:[indexPath row]];
         
-    ItemGroupViewController *newController = [[ItemGroupViewController alloc] initWithItemGroupAndOrderAndReturnViewController:itemGroup :orderInfo :self];
+    if (!(([[itemGroup listOfItems] count] == 1)&&([[(Item *)[[itemGroup listOfItems] objectAtIndex:0] options] count] == 0)))
+    {
+        ItemGroupViewController *newController = [[ItemGroupViewController alloc] initWithItemGroupAndOrderAndReturnViewController:itemGroup :orderInfo :self];
         
-    [[self navigationController] pushViewController:newController animated:YES];
+        [[self navigationController] pushViewController:newController animated:YES];
+    }
     
 }
 
 -(void)tableView:(UITableView *) tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *) indexPath
 {
     [self tableView:tableView didSelectRowAtIndexPath:indexPath];
+}
+
+-(void)comboChanged:(NSNotification *)aNotification
+{
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Add This Combo" style:UIBarButtonItemStyleDone target:self action:@selector(addThisComboToOrder)];
+    
+    if ([comboInfo satisfied])
+        [doneButton setEnabled:YES];
+    else
+        [doneButton setEnabled:NO];
+    
+    [[self navigationItem] setRightBarButtonItem:doneButton];
+    [[comboView comboTable] reloadData];
 }
 
 //View related functions
@@ -81,6 +98,15 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
+    for (ItemGroup *itemGroup in [comboInfo listOfItemGroups]) {
+        if (([[itemGroup listOfItems] count] == 1)&&([[(Item *)[[itemGroup listOfItems] objectAtIndex:0] options] count] == 0))
+        {
+            [comboInfo addItem:[[itemGroup listOfItems] objectAtIndex:0]];
+            return;
+        }
+    }
+    
     [[comboView comboTable] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Add This Combo" style:UIBarButtonItemStyleDone target:self action:@selector(addThisComboToOrder)];
     
@@ -115,5 +141,9 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:COMBO_MODIFIED object:comboInfo];
+}
 
 @end

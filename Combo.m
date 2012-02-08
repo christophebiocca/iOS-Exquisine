@@ -45,7 +45,11 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
     }
     
     for (NSDictionary *componentInfo in [inputData objectForKey:@"components"]) {
-        [listOfItemGroups addObject:[[ItemGroup alloc] initWithDataAndParentMenu:componentInfo :associatedMenu]];
+        ItemGroup *newItemGroup = [[ItemGroup alloc] initWithDataAndParentMenu:componentInfo :associatedMenu];
+        [listOfItemGroups addObject:newItemGroup];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recalculate:) name:ITEM_GROUP_MODIFIED object:newItemGroup];
+        
     }
     
     return self;
@@ -57,6 +61,11 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
     {
         
         listOfItemGroups = [decoder decodeObjectForKey:@"list_of_item_groups"];
+        
+        for (ItemGroup *newItemGroup in listOfItemGroups) {
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recalculate:) name:ITEM_GROUP_MODIFIED object:newItemGroup];
+        }
+        
         strategy = [decoder decodeObjectForKey:@"strategy"];
         
     }
@@ -80,7 +89,9 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
     aCombo->primaryKey = primaryKey;
     
     for (ItemGroup *anItemGroup in listOfItemGroups) {
-        [[aCombo listOfItemGroups] addObject:[anItemGroup copy]];
+        ItemGroup *newItemGroup = [anItemGroup copy];
+        [[aCombo listOfItemGroups] addObject:newItemGroup];
+        [[NSNotificationCenter defaultCenter] addObserver:aCombo selector:@selector(recalculate:) name:ITEM_GROUP_MODIFIED object:newItemGroup];
     }
     
     //doesnt need to be copied
@@ -257,6 +268,13 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
     }
     
     return output;
+}
+
+-(void)dealloc
+{
+    for (ItemGroup *anItemGroup in listOfItemGroups) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:ITEM_GROUP_MODIFIED object:anItemGroup];
+    }
 }
 
 @end

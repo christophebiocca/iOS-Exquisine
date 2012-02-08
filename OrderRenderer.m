@@ -157,6 +157,7 @@
             if (cell == nil) {
                 cell = [[ComboCell alloc] init];
             }
+            [cell setStyle:@"with_price"];
             [cell setCombo:thingToDisplay];
             return cell;
         }

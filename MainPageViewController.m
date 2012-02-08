@@ -428,7 +428,7 @@
         [formatter setDateFormat:@"EEEE"];
         NSString *dayOfWeek = [formatter stringFromDate:[[self currentLocation] nextClose]];
         
-        [[mainPageView storeHours] setText:[NSString stringWithFormat:@"Pita Factory is closed until %@ at %@.",dayOfWeek,openTime]];
+        [[mainPageView storeHours] setText:[NSString stringWithFormat:@"Pita Factory opens on %@ at %@.",dayOfWeek,openTime]];
         
     }
     

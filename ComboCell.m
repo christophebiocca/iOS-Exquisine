@@ -41,7 +41,7 @@
     [[self detailTextLabel] setFont:descFont];
     
     [[self textLabel] setText:[combo name]];
-    [[self detailTextLabel] setText:[Utilities FormatToPrice:[combo price]]];
+    [[self detailTextLabel] setText:@""];
     
     if( [style isEqualToString:@"plain"])
     {
@@ -60,6 +60,10 @@
             [self setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
             [self setBackgroundColor:[UIColor whiteColor]];
         }
+    }
+    else if ( [style isEqualToString:@"with_price"])
+    {
+        [[self detailTextLabel] setText:[Utilities FormatToPrice:[combo price]]];
     }
     
 }

@@ -29,4 +29,6 @@
 
 -(void) addThisComboToOrder;
 
+-(void) comboChanged:(NSNotification *)aNotification;
+
 @end
