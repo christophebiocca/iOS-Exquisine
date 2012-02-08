@@ -11,38 +11,14 @@
 #import "Item.h"
 #import "Order.h"
 #import "Combo.h"
-#import "ItemGroupMultiplicativePricing.h"
+#import "ItemGroupPricingStrategy.h"
 
 NSString* ITEM_GROUP_MODIFIED = @"CroutonLabs/ItemGroupModified";
 
 @implementation ItemGroup
 
-//See [self initialize]
-static NSDictionary* itemGroupClassDictionary = nil;
-
 @synthesize listOfItems;
 @synthesize satisfyingItem;
-
-+(void)initialize
-{
-    if(!itemGroupClassDictionary){
-        itemGroupClassDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-                                [ItemGroupMultiplicativePricing class], @"Test",
-                                nil];
-    }
-}
-
-+(Combo *)itemGroupWithDataAndParentMenu:(NSDictionary *)inputData :(Menu *)associatedMenu
-{
-    //Grab the name of the pricing strategy
-    NSString *itemGroupType = [inputData objectForKey:@"pricing_strategy"];
-    
-    //Determine the appropriate class to instantiate as per the dictionary
-    Class itemGroupSubclass = [itemGroupClassDictionary objectForKey:itemGroupType];
-    
-    //Allocate it and call the initWithDataAndParentMenu initializer
-    return [[itemGroupSubclass alloc] initWithDataAndParentMenu:inputData:associatedMenu];
-}
 
 -(ItemGroup *)init
 {
@@ -59,6 +35,8 @@ static NSDictionary* itemGroupClassDictionary = nil;
     self = [super initFromData:inputData];
     
     listOfItems = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    strategy = [ItemGroupPricingStrategy pricingStrategyFromData:[inputData objectForKey:@"pricing_strategy"]];
         
     NSMutableArray *itemPKs = [inputData objectForKey:@"items"];
     NSMutableArray *menuPKs = [inputData objectForKey:@"menus"] ;
@@ -142,9 +120,7 @@ static NSDictionary* itemGroupClassDictionary = nil;
 
 -(NSDecimalNumber *)price
 {
-    @throw [NSException exceptionWithName:NSInternalInconsistencyException 
-                                   reason:[NSString stringWithFormat:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)] 
-                                 userInfo:nil];
+    return [strategy priceForItem:satisfyingItem];
 }
 
 -(void)setSatisfyingItem:(Item *)anItem

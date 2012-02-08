@@ -10,6 +10,7 @@
 @class Order;
 @class Menu;
 @class Item;
+@protocol ComboPricingStrategy;
 
 extern NSString* COMBO_MODIFIED;
 
@@ -17,6 +18,7 @@ extern NSString* COMBO_MODIFIED;
 @interface Combo : MenuComponent
 {
     
+    id<ComboPricingStrategy> strategy;
     NSMutableArray *listOfItemGroups;
     
 }
@@ -24,8 +26,6 @@ extern NSString* COMBO_MODIFIED;
 @property (retain) NSMutableArray *listOfItemGroups;
 
 //Initializers
-+ (Combo *)comboWithDataAndMenu:(NSDictionary *)inputData:(Menu *) associatedMenu;
-
 - (Combo *)initFromDataAndMenu:(NSDictionary *)inputData:(Menu *) associatedMenu;
 
 - (MenuComponent *)initWithCoder:(NSCoder *)decoder;

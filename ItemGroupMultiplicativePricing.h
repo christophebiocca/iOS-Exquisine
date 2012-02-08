@@ -6,15 +6,12 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "ItemGroup.h"
+#import "ItemGroupPricingStrategy.h"
+#import "Item.h"
 
-@interface ItemGroupMultiplicativePricing : ItemGroup
+@interface ItemGroupMultiplicativePricing : NSObject<ItemGroupPricingStrategy>
 {
     NSDecimalNumber *multiplicativeValue;
 }
-
--(ItemGroup *)initWithDataAndParentMenu:(NSDictionary *)inputData:(Menu *) parentMenu;
-
--(NSDecimalNumber *)price;
 
 @end

@@ -10,20 +10,18 @@
 #import "Item.h"
 
 @implementation ItemGroupMultiplicativePricing
--(ItemGroup *)initWithDataAndParentMenu:(NSDictionary *)inputData :(Menu *)parentMenu
+-(id)initWithData:(NSDictionary *)inputData
 {
-    
-    if(self = [super initWithDataAndParentMenu:inputData :parentMenu])
+    if(self = [super init])
     {
         NSInteger cents = [[inputData objectForKey:@"multiplicative_value"] intValue];
         multiplicativeValue = [[[NSDecimalNumber alloc] initWithInteger:cents] decimalNumberByMultiplyingByPowerOf10:-2];
     }
-    
     return self;
 }
 
--(NSDecimalNumber *)price
+-(NSDecimalNumber *)priceForItem:(Item *)item
 {
-    return [[satisfyingItem price] decimalNumberByMultiplyingBy:multiplicativeValue];
+    return [[item price] decimalNumberByMultiplyingBy:multiplicativeValue];
 }
 @end
