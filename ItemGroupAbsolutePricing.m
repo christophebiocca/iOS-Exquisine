@@ -15,7 +15,7 @@
 {
     if(self = [super init])
     {
-        NSInteger cents = [[inputData objectForKey:@"absolute_value"] intValue];
+        NSInteger cents = [[inputData objectForKey:@"price_cents"] intValue];
         absoluteValue = [[[NSDecimalNumber alloc] initWithInteger:cents] decimalNumberByMultiplyingByPowerOf10:-2];
     }
     return self;

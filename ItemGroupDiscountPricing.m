@@ -15,7 +15,7 @@
 {
     if(self = [super init])
     {
-        NSInteger cents = [[inputData objectForKey:@"discount_value"] intValue];
+        NSInteger cents = [[inputData objectForKey:@"discount_cents"] intValue];
         discountValue = [[[NSDecimalNumber alloc] initWithInteger:cents] decimalNumberByMultiplyingByPowerOf10:-2];
     }
     return self;

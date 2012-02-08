@@ -14,8 +14,8 @@
 {
     if(self = [super init])
     {
-        NSInteger cents = [[inputData objectForKey:@"multiplicative_value"] intValue];
-        multiplicativeValue = [[[NSDecimalNumber alloc] initWithInteger:cents] decimalNumberByMultiplyingByPowerOf10:-2];
+        NSInteger percent = [[inputData objectForKey:@"factor_percent"] intValue];
+        multiplicativeValue = [[[NSDecimalNumber alloc] initWithInteger:percent] decimalNumberByMultiplyingByPowerOf10:-2];
     }
     return self;
 }
