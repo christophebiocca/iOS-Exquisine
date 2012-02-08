@@ -142,9 +142,9 @@ static NSDictionary* itemGroupClassDictionary = nil;
 
 -(NSDecimalNumber *)price
 {
-    //This should always be overridden by subclasses. Hopefully this
-    //will catch people's eyes if they forget to do that.
-    return [NSDecimalNumber decimalNumberWithString:@"12345"];
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException 
+                                   reason:[NSString stringWithFormat:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)] 
+                                 userInfo:nil];
 }
 
 -(void)setSatisfyingItem:(Item *)anItem
