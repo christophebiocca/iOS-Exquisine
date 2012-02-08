@@ -129,6 +129,8 @@
 		D9768A6614D73EB300BBA467 /* PaymentInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9768A6414D73EB300BBA467 /* PaymentInfoViewController.m */; };
 		D9768A7E14D74AAD00BBA467 /* PaymentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9768A7D14D74AAD00BBA467 /* PaymentView.m */; };
 		D9AF662614D22C0A00632EA8 /* JSONAPICall.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AF662514D22C0A00632EA8 /* JSONAPICall.m */; };
+		D9B0F6BD14E075A000CA3B13 /* GetPaymentProfileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B0F6BC14E075A000CA3B13 /* GetPaymentProfileInfo.m */; };
+		D9B0F6C214E075E400CA3B13 /* PaymentProfileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B0F6C114E075E400CA3B13 /* PaymentProfileInfo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -367,6 +369,10 @@
 		D9AF662414D22C0A00632EA8 /* JSONAPICall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONAPICall.h; sourceTree = "<group>"; };
 		D9AF662514D22C0A00632EA8 /* JSONAPICall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONAPICall.m; sourceTree = "<group>"; };
 		D9AF662714D2308B00632EA8 /* APICallProtectedMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APICallProtectedMethods.h; sourceTree = "<group>"; };
+		D9B0F6BB14E075A000CA3B13 /* GetPaymentProfileInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetPaymentProfileInfo.h; sourceTree = "<group>"; };
+		D9B0F6BC14E075A000CA3B13 /* GetPaymentProfileInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetPaymentProfileInfo.m; sourceTree = "<group>"; };
+		D9B0F6C014E075E400CA3B13 /* PaymentProfileInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentProfileInfo.h; sourceTree = "<group>"; };
+		D9B0F6C114E075E400CA3B13 /* PaymentProfileInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentProfileInfo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1193,8 +1199,7 @@
 		23DA7A8814C73D52008281DD /* API */ = {
 			isa = PBXGroup;
 			children = (
-				D95B786D14D28A6900FC0F29 /* PlaceOrder.h */,
-				D95B786E14D28A6900FC0F29 /* PlaceOrder.m */,
+				D9B0F6BF14E075A900CA3B13 /* Payment */,
 				D95B786214D252D600FC0F29 /* Credentials */,
 				23DA7A8D14C740B3008281DD /* APICallDelegate.h */,
 				23DA7A8A14C73DC1008281DD /* APICall.h */,
@@ -1323,6 +1328,8 @@
 				D92D24CF14DB3744007B5890 /* PaymentSuccessInfo.m */,
 				D92D24D214DB375B007B5890 /* PaymentError.h */,
 				D92D24D314DB375B007B5890 /* PaymentError.m */,
+				D9B0F6C014E075E400CA3B13 /* PaymentProfileInfo.h */,
+				D9B0F6C114E075E400CA3B13 /* PaymentProfileInfo.m */,
 			);
 			name = Payment;
 			sourceTree = "<group>";
@@ -1349,6 +1356,17 @@
 				D933EF1914DB568400B0BDC7 /* PaymentCompletedView.m */,
 			);
 			name = PaymentViews;
+			sourceTree = "<group>";
+		};
+		D9B0F6BF14E075A900CA3B13 /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				D9B0F6BB14E075A000CA3B13 /* GetPaymentProfileInfo.h */,
+				D9B0F6BC14E075A000CA3B13 /* GetPaymentProfileInfo.m */,
+				D95B786D14D28A6900FC0F29 /* PlaceOrder.h */,
+				D95B786E14D28A6900FC0F29 /* PlaceOrder.m */,
+			);
+			name = Payment;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1561,6 +1579,8 @@
 				231C511214E1BC8B004F2CCC /* ItemGroupMultiplicativePricing.m in Sources */,
 				231C511614E1C1A5004F2CCC /* ItemGroupAbsolutePricing.m in Sources */,
 				231C511A14E1C1C6004F2CCC /* ItemGroupDiscountPricing.m in Sources */,
+				D9B0F6BD14E075A000CA3B13 /* GetPaymentProfileInfo.m in Sources */,
+				D9B0F6C214E075E400CA3B13 /* PaymentProfileInfo.m in Sources */,
 				D947368714E20042005D4409 /* ItemGroupPricingStrategy.m in Sources */,
 				D947368B14E20337005D4409 /* ItemGroupTrivialPricing.m in Sources */,
 				D947368F14E20E15005D4409 /* ComboPricingStrategy.m in Sources */,

@@ -58,7 +58,7 @@ static NSDateComponents* minusOneDay;
 
 -(OpeningHours*)hoursForDay:(NSDate*)day{
     NSDateComponents* components = [[NSCalendar currentCalendar] components:NSWeekdayCalendarUnit fromDate:day];
-    return [storeHours objectAtIndex:[components weekday] - 1];
+    return [storeHours objectAtIndex:[components weekday] - [[NSCalendar currentCalendar] firstWeekday]];
 }
 
 -(NSDate*)opensOnDay:(NSDate*)date{
