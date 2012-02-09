@@ -34,6 +34,8 @@ extern NSString* COMBO_MODIFIED;
 
 - (Combo *)copy;
 
+- (Combo *)optimalPickFromItems:(NSArray*)items;
+
 //Access Methods
 
 //This returns an array of arrays of Items within anOrder that satisfy each itemGroup.
@@ -42,6 +44,7 @@ extern NSString* COMBO_MODIFIED;
 - (NSArray *)listOfAssociatedItems;
 
 - (NSDecimalNumber *) price;
+- (NSDecimalNumber *) savings;
 
 - (BOOL)satisfiedWithItemList:(NSArray *)anItemList;
 

@@ -137,6 +137,14 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
     return [strategy priceForItemGroups:listOfItemGroups];
 }
 
+-(NSDecimalNumber *)savings{
+    NSDecimalNumber* oldTotal = [NSDecimalNumber zero];
+    for(Item* item in [self listOfAssociatedItems]){
+        oldTotal = [oldTotal decimalNumberByAdding:[item price]];
+    }
+    return [oldTotal decimalNumberBySubtracting:[self price]];
+}
+
 -(BOOL)satisfiedWithItemList:(NSArray *)anItemList
 {
     //This is pretty inefficient, but let's see if it will work. It might.
@@ -251,6 +259,18 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
 -(NSComparisonResult)savingsSort:(Combo *)aCombo
 {
     return [[aCombo savingsMagnitude] compare:[self savingsMagnitude]];
+}
+
+-(Combo*)optimalPickFromItems:(NSArray *)items{
+    NSArray* satisfyingItems = [strategy optimalPickFromItems:items usingItemGroups:listOfItemGroups];
+    if(!satisfyingItems){
+        return nil;
+    }
+    Combo* new = [self copy];
+    [new removeAllItems];
+    [new setListOfItemGroups:[NSMutableArray arrayWithArray:satisfyingItems]];
+    [new recalculate:nil];
+    return new;
 }
 
 -(NSString *) descriptionWithIndent:(NSInteger) indentLevel
