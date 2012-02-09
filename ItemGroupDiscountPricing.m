@@ -38,4 +38,8 @@
     return [[item price] decimalNumberBySubtracting:discountValue];
 }
 
+-(Item*)optimalItem:(NSArray*)items{
+    return [items lastObject];
+}
+
 @end

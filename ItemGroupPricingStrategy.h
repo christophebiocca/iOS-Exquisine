@@ -12,6 +12,7 @@
 
 -(id)initWithData:(NSDictionary*)data;
 -(NSDecimalNumber*)priceForItem:(Item*)item;
+-(Item*)optimalItem:(NSArray*)items;
 
 @end
 

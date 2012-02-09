@@ -30,8 +30,8 @@
     return [item price];
 }
 
-
-
-
+-(Item*)optimalItem:(NSArray*)items{
+    return [items lastObject];
+}
 
 @end
