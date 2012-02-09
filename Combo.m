@@ -123,7 +123,7 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
 
 -(NSArray *)listOfAssociatedItems
 {
-    NSMutableArray *output = [[NSMutableArray alloc] initWithCapacity:0];
+    NSMutableArray *output = [[NSMutableArray alloc] initWithCapacity:[listOfItemGroups count]];
     for (ItemGroup *eachItemGroup in listOfItemGroups) {
         if ([eachItemGroup satisfied]) {
             [output addObject:[eachItemGroup satisfyingItem]];
