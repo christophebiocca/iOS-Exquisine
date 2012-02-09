@@ -49,7 +49,7 @@
     if([submenuThing isKindOfClass:[Item class]])
     {
         
-        Item *newItem = submenuThing;
+        Item *newItem = [submenuThing copy];
         
         ItemViewController *newView = [[ItemViewController alloc] initializeWithItemAndOrderAndReturnController:newItem :orderInfo :orderViewController];
         

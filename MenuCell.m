@@ -30,6 +30,8 @@
 -(void)setMenu:(Menu *)theMenu
 {
     menu = theMenu;
+
+    [self setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     UIFont *titleFont = [UIFont fontWithName:@"HelveticaNeue-Medium" size:17];
     UIFont *descFont = [UIFont fontWithName:@"HelveticaNeue" size:17];

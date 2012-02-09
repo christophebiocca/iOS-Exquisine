@@ -46,7 +46,7 @@
     
     id thingToPush = [[itemGroupInfo listOfItems] objectAtIndex:[indexPath row]];
     
-    ItemViewController *newView = [[ItemViewController alloc] initializeWithItemAndOrderAndReturnController:thingToPush :currentOrder:returnController];
+    ItemViewController *newView = [[ItemViewController alloc] initializeWithItemAndOrderAndReturnController:[thingToPush copy] :currentOrder:returnController];
         
     [newView setDelegate:self];
     

@@ -20,6 +20,18 @@
     return self;
 }
 
+-(id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super init];
+    multiplicativeValue = [aDecoder decodeObjectForKey:@"multiplicative_value"];
+    return self;
+}
+
+-(void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:multiplicativeValue forKey:@"multiplicative_value"];
+}
+
 -(NSDecimalNumber *)priceForItem:(Item *)item
 {
     return [[item price] decimalNumberByMultiplyingBy:multiplicativeValue];

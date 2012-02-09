@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-@protocol ComboPricingStrategy<NSObject>
+@protocol ComboPricingStrategy<NSObject, NSCoding>
 
 -(id)initWithData:(NSDictionary*)data;
 -(NSDecimalNumber*)priceForItemGroups:(NSArray*)itemGroups;

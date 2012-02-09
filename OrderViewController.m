@@ -193,7 +193,7 @@
     if ( [cellObject isKindOfClass:([Item class])])
     {
         
-        ItemViewController *newItemController = [[ItemViewController alloc] initializeWithItemAndOrderAndReturnController:cellObject :[theOrderManager thisOrder] :self];
+        ItemViewController *newItemController = [[ItemViewController alloc] initializeWithItemAndOrderAndReturnController:cellObject:[theOrderManager thisOrder] :self];
         
         [[self navigationController] pushViewController:newItemController animated:YES];
         

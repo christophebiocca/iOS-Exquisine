@@ -31,6 +31,8 @@
     
     item = theItem;
     
+    [self setSelectionStyle:UITableViewCellSelectionStyleNone];
+    
     UIFont *titleFont = [UIFont fontWithName:@"HelveticaNeue-Medium" size:13];
     UIFont *descFont = [UIFont fontWithName:@"HelveticaNeue" size:13];
     

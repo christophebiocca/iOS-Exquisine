@@ -45,10 +45,12 @@
     if ([choice selected])
     {
         [self setAccessoryType:UITableViewCellAccessoryCheckmark];
+        [self setBackgroundColor:[UIColor colorWithRed:0.83f green:1.0f blue:0.83f alpha:1.0f]];
     }
     else
     {
         [self setAccessoryType:UITableViewCellAccessoryNone];
+        [self setBackgroundColor:[UIColor whiteColor]];
     }
     
 }

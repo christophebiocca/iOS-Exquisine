@@ -8,7 +8,7 @@
 
 @class Item;
 
-@protocol ItemGroupPricingStrategy<NSObject>
+@protocol ItemGroupPricingStrategy<NSObject, NSCoding>
 
 -(id)initWithData:(NSDictionary*)data;
 -(NSDecimalNumber*)priceForItem:(Item*)item;

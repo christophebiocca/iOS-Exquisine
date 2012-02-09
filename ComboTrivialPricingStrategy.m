@@ -15,6 +15,17 @@
     return [super init];
 }
 
+-(id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super init];
+    return self;
+}
+
+-(void)encodeWithCoder:(NSCoder *)aCoder
+{
+   
+}
+
 -(NSDecimalNumber*)priceForItemGroups:(NSArray*)itemGroups{
     NSDecimalNumber *tally = [NSDecimalNumber zero];
     for (ItemGroup *eachItemGroup in itemGroups) {
