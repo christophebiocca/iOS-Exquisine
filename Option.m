@@ -198,7 +198,7 @@ NSString* OPTION_INVALID_DESELECTION = @"CroutonLabs/OptionInvalidDeselection";
                 }
                 else
                 {
-                    if(upperBound > [self numberOfSelectedChoices])
+                    if([self numberOfSelectedChoices] <= upperBound)
                     {
                         [[NSNotificationCenter defaultCenter] postNotificationName:OPTION_MODIFIED object:self];
                     }
