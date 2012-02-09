@@ -336,14 +336,7 @@ NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
 
 -(void)dealloc
 {
-    for (Item *eachItem in itemList) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:ITEM_MODIFIED object:eachItem];
-    }
-    
-    for (Combo *eachCombo in comboList) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:COMBO_MODIFIED object:eachCombo];
-    }
-    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

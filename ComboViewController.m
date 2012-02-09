@@ -143,7 +143,7 @@
 
 -(void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:COMBO_MODIFIED object:comboInfo];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

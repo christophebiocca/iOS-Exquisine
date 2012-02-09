@@ -176,7 +176,7 @@ NSString* ITEM_GROUP_MODIFIED = @"CroutonLabs/ItemGroupModified";
 
 -(void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:ITEM_MODIFIED object:satisfyingItem];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 

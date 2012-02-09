@@ -170,8 +170,7 @@ NSString* ORDER_MANAGER_NEEDS_REDRAW = @"CroutonLabs/OrderManagerNeedsRedraw";
 
 -(void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:ORDER_MODIFIED object:thisOrder];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:ORDER_FAVORITE_MODIFIED object:thisOrder];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

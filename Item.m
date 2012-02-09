@@ -186,7 +186,7 @@ NSString* ITEM_MODIFIED = @"CroutonLabs/ItemModified";
 -(void)dealloc
 {
     for (Option *eachOption in options) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:OPTION_MODIFIED object:eachOption];
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
     }
 }
 

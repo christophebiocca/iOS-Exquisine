@@ -444,7 +444,7 @@
 
 -(void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:ORDER_MANAGER_NEEDS_REDRAW object:theOrderManager];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

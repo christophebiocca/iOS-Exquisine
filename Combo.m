@@ -272,9 +272,7 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
 
 -(void)dealloc
 {
-    for (ItemGroup *anItemGroup in listOfItemGroups) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:ITEM_GROUP_MODIFIED object:anItemGroup];
-    }
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end
