@@ -9,7 +9,9 @@
 @class PaymentSuccessInfo;
 
 @interface PaymentCompletedView : UIView{
+    UIToolbar* bar;
     UIBarButtonItem* done;
+    UILabel* message;
 }
 
 -(void)setSuccessInfo:(PaymentSuccessInfo*)info;

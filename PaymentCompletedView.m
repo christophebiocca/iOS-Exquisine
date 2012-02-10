@@ -19,17 +19,42 @@
         // Initialization code
         [self setBackgroundColor:[UIColor whiteColor]];
         
-        UIToolbar* toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, 44)];
+        bar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, 44)];
         done = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:nil action:nil];
         UIBarButtonItem* space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-        [toolbar setItems:[NSArray arrayWithObjects:space, done, nil]];
+        [bar setItems:[NSArray arrayWithObjects:space, done, nil]];
+        [self addSubview:bar];
         
-        UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(0, 50, 0, 0)];
-        [self addSubview:label];
-        [label setText:@"Success"];
-        [label sizeToFit];
+        message = [[UILabel alloc] initWithFrame:CGRectMake(0, 50, 0, 0)];
+        [message setLineBreakMode:UILineBreakModeWordWrap];
+        [message setNumberOfLines:0];
+        [message setText:@"Success"];
+        [self addSubview:message];
     }
     return self;
+}
+
+#define TOOLBAR_HEIGHT 44
+#define PADDING 10
+
+-(void)layoutSubviews{
+    CGSize lims = [self frame].size;
+    [bar setFrame:(CGRect){
+        .size = {
+            .width = lims.width,
+            .height = TOOLBAR_HEIGHT
+        }
+    }];
+    [message setFrame:(CGRect){
+        .origin = {
+            .x = PADDING,
+            .y = TOOLBAR_HEIGHT + PADDING
+        },
+        .size = {
+            .width = lims.width - 2*PADDING,
+            .height = lims.height - 2*PADDING - TOOLBAR_HEIGHT
+        }
+    }];
 }
 
 /*

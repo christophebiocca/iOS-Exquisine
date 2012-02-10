@@ -34,7 +34,8 @@
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView
 {
-    [self setView:[[PaymentCompletedView alloc] init]];
+    paymentView = [[PaymentCompletedView alloc] init];
+    [self setView:paymentView];
 }
 
 -(void)setSuccessInfo:(PaymentSuccessInfo *)info{
