@@ -30,6 +30,8 @@
     NSMutableArray *ordersHistory;
     NSMutableArray *favoriteOrders;
     NSArray* locations;
+    NSString* harddiskFileName;
+    NSString* harddiskFileFolder;
     
 }
 
@@ -52,6 +54,8 @@
 -(void) updateCreateButtonState;
 
 -(void) initiateMenuRefresh;
+
+-(void) getLocation;
 
 -(void) createOrderPressed;
 

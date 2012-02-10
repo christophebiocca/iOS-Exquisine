@@ -34,11 +34,19 @@
         [[self navigationItem] setTitle:@"Pita Factory"];
         //this wont yet check make sure that the prod server is actually up, just that the hostname resolves.
         //=/
+        
+        harddiskFileName = @"MainPageViewControllerInfo.plist";
+        
+        harddiskFileFolder = @"~/Library/Application Support/PitaFactoryFiles/";
+        harddiskFileFolder = [harddiskFileFolder stringByExpandingTildeInPath];
+        
         networkChecker = [Reachability reachabilityWithHostname:(@"croutonlabs.com")];
 
         [networkChecker startNotifier];
         
-        [self initiateMenuRefresh];      
+        [self initiateMenuRefresh];   
+        
+        [self getLocation];
         
         [self loadDataFromDisk];
         
@@ -80,14 +88,7 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated{
-    [GetLocations getLocationsForRestaurant:RESTAURANT_ID 
-                                    success:^(GetLocations* call) {
-                                        locations = [call locations];
-                                        [self updateStoreHourInfo];
-                                    }
-                                    failure:^(GetLocations* call, NSError* error) {
-                                        CLLog(LOG_LEVEL_WARNING ,[NSString stringWithFormat: @"Can't fetch locations:\n%@", error]);
-                                    }];
+    
 }
 
 - (void)viewDidUnload
@@ -312,24 +313,35 @@
 
 -(void)loadDataFromDisk
 {
-    NSString *path = [self dataFilePath];
-    NSDictionary* rootObject;
-    rootObject = [NSKeyedUnarchiver unarchiveObjectWithFile:path];    
-    theMenu = [rootObject valueForKey:@"menu"];
-    currentOrder = [rootObject valueForKey:@"current_order"];
-    ordersHistory = [rootObject valueForKey:@"order_history"];
-    favoriteOrders = [rootObject valueForKey:@"favorite_orders"];
-    theOrderManager = [[OrderManager alloc] init];
-    [theOrderManager setMenu:theMenu];
-    [theOrderManager setOrder:currentOrder];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCreateButtonState) name:ORDER_MANAGER_NEEDS_REDRAW object:theOrderManager];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
     
-    [self updateCreateButtonState];
+    if ([fileManager fileExistsAtPath: harddiskFileFolder])
+    {
+        NSString *path = [harddiskFileFolder stringByAppendingPathComponent: harddiskFileName];
+        
+        NSDictionary* rootObject;
+        rootObject = [NSKeyedUnarchiver unarchiveObjectWithFile:path];    
+        theMenu = [rootObject valueForKey:@"menu"];
+        currentOrder = [rootObject valueForKey:@"current_order"];
+        ordersHistory = [rootObject valueForKey:@"order_history"];
+        favoriteOrders = [rootObject valueForKey:@"favorite_orders"];
+        theOrderManager = [[OrderManager alloc] init];
+        [theOrderManager setMenu:theMenu];
+        [theOrderManager setOrder:currentOrder];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCreateButtonState) name:ORDER_MANAGER_NEEDS_REDRAW object:theOrderManager];
+        
+        [self updateCreateButtonState];
+    }
+    
 }
 
 -(void)saveDataToDisk
 {
-    NSString *path = [self dataFilePath];
+    //Create the folder if it's not there already
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    [fileManager createDirectoryAtPath:harddiskFileFolder withIntermediateDirectories:YES attributes:nil error:nil];
+    NSString *path = [harddiskFileFolder stringByAppendingPathComponent: harddiskFileName];
+    
     NSMutableDictionary * rootObject;    
     rootObject = [NSMutableDictionary dictionary];
     [rootObject setValue: theMenu forKey:@"menu"];
@@ -433,6 +445,18 @@
         
     }
     
+}
+
+-(void)getLocation
+{
+    [GetLocations getLocationsForRestaurant:RESTAURANT_ID 
+                                    success:^(GetLocations* call) {
+                                        locations = [call locations];
+                                        [self updateStoreHourInfo];
+                                    }
+                                    failure:^(GetLocations* call, NSError* error) {
+                                        CLLog(LOG_LEVEL_WARNING ,[NSString stringWithFormat: @"Can't fetch locations:\n%@", error]);
+                                    }];
 }
 
 //This will obviously have to change.

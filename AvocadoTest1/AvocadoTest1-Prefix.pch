@@ -15,6 +15,7 @@
     #import <Foundation/Foundation.h>
 #endif
 
+
 #ifndef RESTAURANT_ID
 // Ultimately, this is something the automated builder changes 
 // to point at the restaurant we're making the app for.
@@ -24,9 +25,9 @@
 #ifdef DEBUG
 #define CLLog(level, ...) [Utilities logLevel:level message:__VA_ARGS__]
 #else
-#define CLLog(level, ...) CLLog##level(message)
-#define CLLogError(...)[Utilities logLevel:Error message:__VA_ARGS__]
-#define CLLogWarning(...)[Utilities logLevel:Warning message:__VA_ARGS__]
-#define CLLogInfo(message)
-#define CLLogDebug(message)
+#define CLLog(level, ...) CLLog##level(__VA_ARGS__)
+#define CLLogLOG_LEVEL_ERROR(...)[Utilities logLevel:LOG_LEVEL_ERROR message:__VA_ARGS__]
+#define CLLogLOG_LEVEL_WARNING(...)[Utilities logLevel:LOG_LEVEL_WARNING message:__VA_ARGS__]
+#define CLLogLOG_LEVEL_INFO(...)
+#define CLLogLOG_LEVEL_DEBUG(...)
 #endif

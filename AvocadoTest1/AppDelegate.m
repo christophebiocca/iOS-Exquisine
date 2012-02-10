@@ -17,13 +17,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[LocalyticsSession sharedLocalyticsSession] startSession:@"a89ce01d2cb72e5bf8ac21f-cc230fc2-4cfd-11e1-a7ce-008545fe83d2"];
     // WE NEED OUR COOKIES, AT ALL TIMES
     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
     // Override point for customization after application launch.
-    
-    //TODO: change the key to a89ce01d2cb72e5bf8ac21f-cc230fc2-4cfd-11e1-a7ce-008545fe83d2 before launch.
-    
-    [[LocalyticsSession sharedLocalyticsSession] startSession:@"a7ab9ad2b1f72cb00e6fc28-657c7da8-4d09-11e1-a7d4-008545fe83d2"];
     
     [self setWindow:[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]]];
     page = [[MainPageViewController alloc] init];
@@ -55,6 +52,7 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
+    
     /*
      Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
      */
@@ -65,6 +63,7 @@
     // WE NEED OUR COOKIES, AT ALL TIMES
     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
     [page initiateMenuRefresh];
+    [page getLocation];
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
