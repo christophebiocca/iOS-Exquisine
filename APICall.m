@@ -278,7 +278,7 @@ static NSURL* serverURL;
     NSString* csrfToken = nil;
     NSArray* cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[request URL]];
     for(NSHTTPCookie* cookie in cookies){
-        CLLog(LOG_LEVEL_INFO, [NSString stringWithFormat: @"Cookie : %@", cookie]);
+        CLLog(LOG_LEVEL_DEBUG, [NSString stringWithFormat: @"Cookie : %@", cookie]);
         if([[cookie name] isEqualToString:@"csrftoken"]){
             csrfToken = [cookie value];
             break;
