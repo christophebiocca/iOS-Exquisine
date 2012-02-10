@@ -26,6 +26,7 @@
     PaymentProcessingViewController* processingController;
     PaymentCompleteViewController* completionController;
     
+    void(^successBlock)();
     void(^completionBlock)();
     void(^cancelledBlock)();
     
@@ -36,8 +37,7 @@
 
 @property(retain, readonly)UINavigationController* navigationController;
 
--(id)initWithOrder:(Order*)order locations:(NSArray*)locations completionBlock:(void(^)())completion cancellationBlock:(void(^)())cancelled;
-
--(void)afterAnimating:(void(^)())after;
+-(id)initWithOrder:(Order*)order locations:(NSArray*)locations successBlock:(void(^)())success 
+   completionBlock:(void(^)())completion cancellationBlock:(void(^)())cancelled;
 
 @end

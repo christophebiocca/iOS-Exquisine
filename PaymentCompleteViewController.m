@@ -11,11 +11,12 @@
 
 @implementation PaymentCompleteViewController
 
--(id)initWithDoneCallback:(void(^)())doneCallback;
+@synthesize doneCallback;
+
+-(id)init
 {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
-        done = doneCallback;
     }
     return self;
 }
@@ -63,7 +64,7 @@
 }
 
 -(void)done{
-    done();
+    doneCallback();
 }
 
 @end

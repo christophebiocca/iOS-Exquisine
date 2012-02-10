@@ -11,12 +11,10 @@
 
 @implementation PaymentConfirmationController
 
--(id)initWithCCDigits:(NSString*)digits accept:(void(^)())accept change:(void(^)())change cancel:(void(^)())cancel{
+@synthesize acceptBlock, changeBlock, cancelBlock, ccDigits;
+
+-(id)init{
     if(self = [super initWithNibName:nil bundle:nil]){
-        acceptBlock = [accept copy];
-        changeBlock = [change copy];
-        cancelBlock = [cancel copy];
-        ccDigits = digits;
     }
     return self;
 }

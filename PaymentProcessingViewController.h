@@ -6,13 +6,7 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-@class PaymentSuccessInfo;
-@class PaymentError;
-
-@interface PaymentProcessingViewController : UIViewController{
-    void (^success)(PaymentSuccessInfo*);
-    void (^failure)(PaymentError*);
-}
+@interface PaymentProcessingViewController : UIViewController
 
 -(id)init;
 

@@ -14,12 +14,11 @@
 
 @implementation PaymentInfoViewController
 
-- (id)initWithCompletionBlock:(void(^)(PaymentInfo*))completion 
-            cancellationBlock:(void(^)())cancelled
+@synthesize completionBlock, cancelledBlock;
+
+- (id)init
 {
-    if (self = [super init]) {
-        completionBlock = [completion copy];
-        cancelledBlock = [cancelled copy];
+    if (self = [super initWithNibName:nil bundle:nil]) {
     }
     return self;
 }

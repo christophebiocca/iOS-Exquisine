@@ -163,6 +163,9 @@
     
     PaymentStack* paymentStack = 
     [[PaymentStack alloc] initWithOrder:[[orderViewController theOrderManager] thisOrder] locations:locations
+                           successBlock:^{
+                               
+                           }
                             completionBlock:^() {
                                 //Push the current order on the history list
                                 [ordersHistory addObject:[[orderViewController theOrderManager] thisOrder]];
