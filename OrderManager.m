@@ -71,64 +71,59 @@ NSString* ORDER_MANAGER_NEEDS_REDRAW = @"CroutonLabs/OrderManagerNeedsRedraw";
     [self recalculate:nil];
 }
 
++(NSArray*)optimalCombosFromChoices:(NSArray*)combos withItems:(NSArray*)items{
+    NSMutableArray* applicable = [NSMutableArray arrayWithCapacity:[combos count]];
+    for(Combo* combo in combos){
+        Combo* optimal = [combo optimalPickFromItems:items];
+        if(optimal){
+            [applicable addObject:optimal];
+        }
+    }
+    NSArray* bestPick = [NSArray array];
+    NSDecimalNumber* bestSavings = [NSDecimalNumber minimumDecimalNumber];
+    for(Combo* combo in applicable){
+        NSArray* optimalRemainder;
+        {
+            NSMutableArray* remainingItems = [NSMutableArray arrayWithArray:items];
+            [remainingItems removeObjectsInArray:[combo listOfAssociatedItems]];
+            optimalRemainder = [self optimalCombosFromChoices:applicable withItems:remainingItems];
+        }
+        NSDecimalNumber* savings = [combo savings];
+        for(Combo* other in optimalRemainder){
+            savings = [savings decimalNumberByAdding:[other savings]];
+        }
+        if([savings compare:bestSavings] == NSOrderedDescending){
+            bestPick = [optimalRemainder arrayByAddingObject:combo];
+        }
+    }
+    return bestPick;
+}
+
 //This is where everything has to happen that determines which combos apply to the order.
 -(void)recalculate:(NSNotification *)aNotification
 {
-    //This is to avoid concurrancy issues. There may be a better way though.. idk.
-    if(!recalculating)
-    {
-        recalculating = YES;
-        if(thisMenu&&thisOrder)
-        {
-            //We can do some intelligent caching if this becomes expensive.
-            
-            //Well, I guess first we'll just grab all the items from the order in list form:
-            NSMutableArray *itemsInOrder = [[NSMutableArray alloc] initWithArray:[thisOrder itemList]];
-            
-            for (Combo *aCombo in [thisOrder comboList]) {
-                [itemsInOrder addObjectsFromArray:[aCombo listOfAssociatedItems]];
-            }
-            
-            //Now we need all of the combos from the menu:
-            NSMutableArray *allCombos = [[NSMutableArray alloc] initWithArray:[thisMenu recursiveComboList]];
-            
-            NSMutableArray *potentialCombos = [[NSMutableArray alloc] initWithCapacity:0];
-            
-            for (Combo *eachCombo in allCombos) {
-                if ([eachCombo satisfiedWithItemList:itemsInOrder])
-                    [potentialCombos addObject:eachCombo];
-            }
-            
-            [potentialCombos sortUsingSelector:@selector(savingsSort:)];
-            
-            NSMutableArray *orderCombos = [[NSMutableArray alloc] initWithCapacity:0];
-            //Now we'll apply the combos in the best possible order.
-            for (Combo *eachCombo in potentialCombos) 
-            {
-                while ([eachCombo satisfiedWithItemList:itemsInOrder]) {
-                    
-                    Combo *newCombo = [eachCombo copy];
-                    
-                    [newCombo removeAllItems];
-                    
-                    for (NSMutableArray *satisfactionArray in [eachCombo satisfactionListsForItemList:itemsInOrder]) {
-                        Item *satisfyingItem = [satisfactionArray objectAtIndex:0];
-                        [newCombo addItem:satisfyingItem];
-                        [itemsInOrder removeObject:satisfyingItem];
-                    }
-                    
-                    [orderCombos addObject:newCombo];
-                }
-            }
-            
-            [thisOrder setItemList:itemsInOrder];
-            [thisOrder setComboList:orderCombos];
-            //Whew
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:ORDER_MANAGER_NEEDS_REDRAW object:self];
+    @synchronized(self){
+        if(!thisOrder || !thisMenu){
+            return;
         }
-        recalculating = NO;
+        NSMutableArray *itemsInOrder = [[NSMutableArray alloc] initWithArray:[thisOrder itemList]];
+        
+        for (Combo *aCombo in [thisOrder comboList]) {
+            [itemsInOrder addObjectsFromArray:[aCombo listOfAssociatedItems]];
+        }
+        
+        NSMutableArray *allCombos = [[NSMutableArray alloc] initWithArray:[thisMenu recursiveComboList]];
+        
+        NSArray* newCombos = [OrderManager optimalCombosFromChoices:allCombos withItems:itemsInOrder];
+        
+        [thisOrder setComboList:[NSMutableArray arrayWithArray:newCombos]];
+        NSMutableSet* allRemainingItems = [NSMutableSet setWithArray:itemsInOrder];
+        for(Combo* combo in newCombos){
+            [allRemainingItems minusSet:[NSSet setWithArray:[combo listOfAssociatedItems]]];
+        }
+        [thisOrder setItemList:[NSMutableArray arrayWithArray:[allRemainingItems allObjects]]];
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:ORDER_MANAGER_NEEDS_REDRAW object:self];
 }
 
 -(void)redrawNotify:(NSNotification *)aNotification
