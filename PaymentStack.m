@@ -7,12 +7,15 @@
 //
 
 #import "PaymentStack.h"
-#import "GetLocations.h"
+
+#import "PaymentConfirmationController.h"
 #import "PaymentInfoViewController.h"
 #import "PaymentProcessingViewController.h"
-#import "PlaceOrder.h"
 #import "PaymentCompleteViewController.h"
+
+#import "PlaceOrder.h"
 #import "GetPaymentProfileInfo.h"
+#import "PaymentProfileInfo.h"
 
 @interface PaymentStack(PrivateMethods)
 
@@ -20,6 +23,7 @@
 @property(retain, readonly)PaymentInfoViewController* paymentInfoController;
 @property(retain, readonly)PaymentProcessingViewController* processingController;
 @property(retain, readonly)PaymentCompleteViewController* completionController;
+-(PaymentConfirmationController*)paymentConfirmationControllerForDigits:(NSString*)digits;
 
 -(void)queryPaymentInfo;
 -(void)sendOrder:(PaymentInfo*)payment;
@@ -54,9 +58,9 @@
 }
 
 -(void)queryPaymentInfo{
-    [GetPaymentProfileInfo fetchInfo:^(GetPaymentProfileInfo* info){
+    [GetPaymentProfileInfo fetchInfo:^(GetPaymentProfileInfo* request){
         CLLog(LOG_LEVEL_INFO, [NSString stringWithFormat:@"Success %@", self]);
-        // We need to do other stuff.
+        [[self navigationController] pushViewController:[self paymentConfirmationControllerForDigits:[[request info] last4Digits]] animated:YES];
     } failure:^(GetPaymentProfileInfo* info, NSError* error){
         if([[error domain] isEqualToString:JSON_API_ERROR] && 
            [[[error userInfo] objectForKey:@"class"] isEqualToString:@"NoPaymentInfoError"]){
@@ -83,6 +87,32 @@
         preProcessingController = [[PaymentProcessingViewController alloc] init];
     }
     return preProcessingController;
+}
+
+-(PaymentConfirmationController*)paymentConfirmationControllerForDigits:(NSString*)digits{
+    if(!paymentConfirmationController){
+        paymentConfirmationController = [[PaymentConfirmationController alloc] 
+                                         initWithCCDigits:digits 
+                                         accept:^{
+                                             NSArray* controllers = [[self navigationController] viewControllers];
+                                             controllers = [controllers arrayByAddingObjectsFromArray:
+                                                            [NSArray arrayWithObjects:
+                                                             [self paymentInfoController], 
+                                                             [self processingController], 
+                                                             nil]];
+                                             [[self navigationController] setViewControllers:controllers animated:YES];
+                                             [self sendOrder:nil];
+                                         } 
+                                         change:^{
+                                             [self afterAnimating:^{
+                                                 [[self navigationController] pushViewController:[self paymentInfoController] animated:YES];
+                                             }];
+                                         }
+                                         cancel:^{
+                                             cancelledBlock();
+                                         }];
+    }
+    return paymentConfirmationController;
 }
 
 -(PaymentInfoViewController*)paymentInfoController{

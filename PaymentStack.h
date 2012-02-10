@@ -11,6 +11,7 @@
 @class Order;
 @class Location;
 @class PaymentInfoViewController;
+@class PaymentConfirmationController;
 @class PaymentProcessingViewController;
 @class PaymentCompleteViewController;
 
@@ -20,6 +21,7 @@
     
     UINavigationController* navigationController;
     PaymentProcessingViewController* preProcessingController;
+    PaymentConfirmationController* paymentConfirmationController;
     PaymentInfoViewController* paymentInfoController;
     PaymentProcessingViewController* processingController;
     PaymentCompleteViewController* completionController;

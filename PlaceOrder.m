@@ -23,7 +23,9 @@
     NSMutableDictionary* placement = [NSMutableDictionary dictionaryWithCapacity:3];
     [placement setObject:[order orderRepresentation] forKey:@"order"];
     [placement setObject:[location primaryKey] forKey:@"location"];
-    [placement setObject:[paymentInfo dictionaryRepresentation] forKey:@"payment"];
+    if(paymentInfo){
+        [placement setObject:[paymentInfo dictionaryRepresentation] forKey:@"payment"];
+    }
     
     [self sendPOSTRequestForLocation:@"customer/orders/" 
                         withJSONData:placement 

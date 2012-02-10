@@ -128,6 +128,8 @@
 		D9768A6514D73EB300BBA467 /* PaymentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D9768A6214D73EB300BBA467 /* PaymentInfo.m */; };
 		D9768A6614D73EB300BBA467 /* PaymentInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9768A6414D73EB300BBA467 /* PaymentInfoViewController.m */; };
 		D9768A7E14D74AAD00BBA467 /* PaymentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9768A7D14D74AAD00BBA467 /* PaymentView.m */; };
+		D9AA88C714E4B08400491139 /* PaymentConfirmationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AA88C614E4B08400491139 /* PaymentConfirmationController.m */; };
+		D9AA88CB14E4B34200491139 /* PaymentConfirmationView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AA88CA14E4B34200491139 /* PaymentConfirmationView.m */; };
 		D9AF662614D22C0A00632EA8 /* JSONAPICall.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AF662514D22C0A00632EA8 /* JSONAPICall.m */; };
 		D9B0F6BD14E075A000CA3B13 /* GetPaymentProfileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B0F6BC14E075A000CA3B13 /* GetPaymentProfileInfo.m */; };
 		D9B0F6C214E075E400CA3B13 /* PaymentProfileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B0F6C114E075E400CA3B13 /* PaymentProfileInfo.m */; };
@@ -366,6 +368,10 @@
 		D9768A6414D73EB300BBA467 /* PaymentInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentInfoViewController.m; sourceTree = "<group>"; };
 		D9768A7C14D74AAD00BBA467 /* PaymentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentView.h; sourceTree = "<group>"; };
 		D9768A7D14D74AAD00BBA467 /* PaymentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentView.m; sourceTree = "<group>"; };
+		D9AA88C514E4B08400491139 /* PaymentConfirmationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentConfirmationController.h; sourceTree = "<group>"; };
+		D9AA88C614E4B08400491139 /* PaymentConfirmationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentConfirmationController.m; sourceTree = "<group>"; };
+		D9AA88C914E4B34200491139 /* PaymentConfirmationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentConfirmationView.h; sourceTree = "<group>"; };
+		D9AA88CA14E4B34200491139 /* PaymentConfirmationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentConfirmationView.m; sourceTree = "<group>"; };
 		D9AF662414D22C0A00632EA8 /* JSONAPICall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONAPICall.h; sourceTree = "<group>"; };
 		D9AF662514D22C0A00632EA8 /* JSONAPICall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONAPICall.m; sourceTree = "<group>"; };
 		D9AF662714D2308B00632EA8 /* APICallProtectedMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APICallProtectedMethods.h; sourceTree = "<group>"; };
@@ -1261,6 +1267,8 @@
 				D92D24C814DB363E007B5890 /* PaymentProcessingViewController.m */,
 				D92D24CB14DB368E007B5890 /* PaymentCompleteViewController.h */,
 				D92D24CC14DB368E007B5890 /* PaymentCompleteViewController.m */,
+				D9AA88C514E4B08400491139 /* PaymentConfirmationController.h */,
+				D9AA88C614E4B08400491139 /* PaymentConfirmationController.m */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -1354,6 +1362,8 @@
 				D933EF1514DB566D00B0BDC7 /* PaymentProcessingView.m */,
 				D933EF1814DB568400B0BDC7 /* PaymentCompletedView.h */,
 				D933EF1914DB568400B0BDC7 /* PaymentCompletedView.m */,
+				D9AA88C914E4B34200491139 /* PaymentConfirmationView.h */,
+				D9AA88CA14E4B34200491139 /* PaymentConfirmationView.m */,
 			);
 			name = PaymentViews;
 			sourceTree = "<group>";
@@ -1584,6 +1594,8 @@
 				D947368714E20042005D4409 /* ItemGroupPricingStrategy.m in Sources */,
 				D947368B14E20337005D4409 /* ItemGroupTrivialPricing.m in Sources */,
 				D947368F14E20E15005D4409 /* ComboPricingStrategy.m in Sources */,
+				D9AA88C714E4B08400491139 /* PaymentConfirmationController.m in Sources */,
+				D9AA88CB14E4B34200491139 /* PaymentConfirmationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
