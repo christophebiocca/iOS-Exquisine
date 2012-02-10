@@ -51,4 +51,9 @@
     return maxItem;
 }
 
+-(NSString *)description
+{
+    return @"Group multiplicative pricing strategy";
+}
+
 @end

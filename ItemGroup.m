@@ -82,6 +82,11 @@ NSString* ITEM_GROUP_MODIFIED = @"CroutonLabs/ItemGroupModified";
         listOfItems = [decoder decodeObjectForKey:@"list_of_items"];
         satisfyingItem = [decoder decodeObjectForKey:@"satisfying_item"];
         strategy = [decoder decodeObjectForKey:@"strategy"];
+        
+        if ((!listOfItems) || (!satisfyingItem) || (!strategy))
+        {
+            CLLog(LOG_LEVEL_ERROR, [NSString stringWithFormat: @"Combo failed to load properly from harddisk: \n%@" , self]);
+        }
     }
     return self;
 }
@@ -176,6 +181,7 @@ NSString* ITEM_GROUP_MODIFIED = @"CroutonLabs/ItemGroupModified";
     
     [output appendFormat:@"%@ItemGroup:%\n",padString];
     [output appendString:[super descriptionWithIndent:indentLevel]];
+    [output appendFormat:@"%@Pricing strategy: %@\n",padString,strategy];
     [output appendFormat:@"%@Satisfied: %i\n",padString,[self satisfied]];
     [output appendFormat:@"%@Satisfying item: %@\n",padString,[satisfyingItem descriptionWithIndent:(indentLevel + 1)]];
     [output appendFormat:@"%@Items:\n",padString];

@@ -42,6 +42,11 @@ NSString* CHOICE_CHANGED = @"CroutonLabs/ChoiceChanged";
         basePrice = [decoder decodeObjectForKey:@"price"];
         selected = [[decoder decodeObjectForKey:@"selected"] intValue];
         isFree = [[decoder decodeObjectForKey:@"free"] boolValue];
+        
+        if (!basePrice)
+        {
+            CLLog(LOG_LEVEL_ERROR, [NSString stringWithFormat: @"Choice failed to load properly from harddisk: \n%@" , self]);
+        }
     }
     return self;
 }

@@ -24,7 +24,6 @@ NSString* ORDER_MANAGER_NEEDS_REDRAW = @"CroutonLabs/OrderManagerNeedsRedraw";
     
     thisOrder = [[Order alloc] init];
     thisMenu = [[Menu alloc] init];
-    recalculating = NO;
     
     return self;
 }
@@ -33,10 +32,14 @@ NSString* ORDER_MANAGER_NEEDS_REDRAW = @"CroutonLabs/OrderManagerNeedsRedraw";
 {
     
     thisOrder = [decoder decodeObjectForKey:@"order"];
+    thisMenu = [decoder decodeObjectForKey:@"menu"];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recalculate:) name:ORDER_MODIFIED object:thisOrder];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(redrawNotify:) name:ORDER_FAVORITE_MODIFIED object:thisOrder];
-    thisMenu = [decoder decodeObjectForKey:@"menu"];
-    recalculating = NO;
+    
+    if ((!thisOrder) || (!thisMenu))
+    {
+        CLLog(LOG_LEVEL_ERROR, [NSString stringWithFormat: @"OrderManager failed to load properly from harddisk: \n%@" , self]);
+    }
     
     return self;
 }

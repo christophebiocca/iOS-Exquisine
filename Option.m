@@ -68,6 +68,10 @@ NSString* OPTION_INVALID_DESELECTION = @"CroutonLabs/OptionInvalidDeselection";
                 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recalculate:) name:CHOICE_SELECTED_CHANGED object:newChoice];
             }
         }
+        else
+        {
+            CLLog(LOG_LEVEL_ERROR, [NSString stringWithFormat: @"Option failed to load properly from harddisk: \n%@" , self]);
+        }
         
     }
     return self;

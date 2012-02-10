@@ -68,6 +68,11 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
         
         strategy = [decoder decodeObjectForKey:@"strategy"];
         
+        if ((!strategy) || (!listOfItemGroups))
+        {
+            CLLog(LOG_LEVEL_ERROR, [NSString stringWithFormat: @"Combo failed to load properly from harddisk: \n%@" , self]);
+        }
+        
     }
     return self;
 }
@@ -279,7 +284,8 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
     
     NSMutableString *output = [[NSMutableString alloc] initWithCapacity:0];
     
-    [output appendFormat:@"%@Combo:%\n",padString];
+    [output appendFormat:@"%@Combo:\n",padString];
+    [output appendFormat:@"%@Pricing strategy: %@ \n", padString, strategy];
     [output appendString:[super descriptionWithIndent:indentLevel]];
     [output appendFormat:@"%@ItemGroups:\n",padString];
     

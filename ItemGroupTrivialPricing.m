@@ -34,4 +34,9 @@
     return [items lastObject];
 }
 
+-(NSString *)description
+{
+    return @"Trivial pricing strategy";
+}
+
 @end

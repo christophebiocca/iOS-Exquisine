@@ -42,4 +42,9 @@
     return [items lastObject];
 }
 
+-(NSString *)description
+{
+    return @"Group discount pricing strategy";
+}
+
 @end

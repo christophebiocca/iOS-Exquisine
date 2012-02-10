@@ -52,4 +52,9 @@
     return maxItem;
 }
 
+-(NSString *)description
+{
+    return @"Group absolute pricing strategy";
+}
+
 @end

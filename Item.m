@@ -57,6 +57,11 @@ NSString* ITEM_MODIFIED = @"CroutonLabs/ItemModified";
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(optionAltered) name:OPTION_MODIFIED object:option];
         }
         
+        if ((!basePrice) || (!options))
+        {
+            CLLog(LOG_LEVEL_ERROR, [NSString stringWithFormat: @"Item failed to load properly from harddisk: \n%@" , self]);
+        }
+        
     }
     return self;
 }

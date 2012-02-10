@@ -70,6 +70,11 @@ NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
         creationDate = [decoder decodeObjectForKey:@"creation_date"];
         mostRecentSubmitDate = [decoder decodeObjectForKey:@"most_recent_submit_date"];
         
+        if ((!itemList) || (!comboList) || (!status) || (!orderIdentifier) || (!creationDate))
+        {
+            CLLog(LOG_LEVEL_ERROR, [NSString stringWithFormat: @"Order failed to load properly from harddisk: \n%@" , self]);
+        }
+        
     }
     return self;
 }

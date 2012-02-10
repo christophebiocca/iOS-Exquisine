@@ -73,4 +73,9 @@
     return bestChoice;
 }
 
+-(NSString *)description
+{
+    return @"Trivial pricing strategy";
+}
+
 @end

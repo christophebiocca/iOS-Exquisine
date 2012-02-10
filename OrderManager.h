@@ -23,7 +23,6 @@ extern NSString* ORDER_MANAGER_NEEDS_REDRAW;
 {
     Order *thisOrder;
     Menu *thisMenu;
-    BOOL recalculating;
 }
 
 @property (readonly) Order *thisOrder;

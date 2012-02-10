@@ -86,6 +86,12 @@
     {
         submenuList = [decoder decodeObjectForKey:@"submenu_list"];
         comboList = [decoder decodeObjectForKey:@"combo_list"];
+        
+        if ((!comboList) || (!submenuList))
+        {
+            CLLog(LOG_LEVEL_ERROR, [NSString stringWithFormat: @"Menu failed to load properly from harddisk: \n%@" , self]);
+        }
+        
     }
     return self;
 }
