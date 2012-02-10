@@ -141,6 +141,7 @@ static NSURL* serverURL;
         successBlock:(void (^)(APICall *))theSuccessBlock 
           errorBlock:(void (^)(APICall *, NSError *))theErrorBlock{
     if((self = [super init])){
+        attemptCounter = 0;
         request = [therequest copy];
         successblock = [theSuccessBlock copy];
         errorblock = [theErrorBlock copy];
@@ -149,6 +150,11 @@ static NSURL* serverURL;
 }
 
 -(void)send{
+    if((attemptCounter += 1) >= 5){
+        error = [NSError errorWithDomain:@"Too many attempts." code:0 userInfo:[NSDictionary dictionaryWithObject:[NSNumber numberWithInt:attemptCounter] forKey:@"Attempt count"]];
+        errorblock(self, error);
+        return;
+    }
     [self setCSRFToken];
     NSURLConnection* connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     completed = NO;

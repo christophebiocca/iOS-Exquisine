@@ -14,6 +14,8 @@ extern NSString* SERVER_HTTP_ERROR_DOMAIN;
     @private
     BOOL completed;
     
+    NSInteger attemptCounter;
+    
     NSMutableURLRequest* request;
     NSHTTPURLResponse* response;
     
