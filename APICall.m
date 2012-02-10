@@ -141,6 +141,7 @@ static NSURL* serverURL;
         successBlock:(void (^)(APICall *))theSuccessBlock 
           errorBlock:(void (^)(APICall *, NSError *))theErrorBlock{
     if((self = [super init])){
+        attemptCounter = 0;
         request = [therequest copy];
         successblock = [theSuccessBlock copy];
         errorblock = [theErrorBlock copy];
@@ -149,6 +150,11 @@ static NSURL* serverURL;
 }
 
 -(void)send{
+    if((attemptCounter += 1) >= 5){
+        error = [NSError errorWithDomain:@"Too many attempts." code:0 userInfo:[NSDictionary dictionaryWithObject:[NSNumber numberWithInt:attemptCounter] forKey:@"Attempt count"]];
+        errorblock(self, error);
+        return;
+    }
     [self setCSRFToken];
     NSURLConnection* connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     completed = NO;
@@ -167,6 +173,11 @@ static NSURL* serverURL;
         // Most likely a csrf token issue, we can fix it by hitting our favorite url.
         CLLog(LOG_LEVEL_INFO, @"GOING TO ACQUIRE A CSRF TOKEN/COOKIE");
         [connection cancel];
+        // Nucleate all the cookies.
+        NSHTTPCookieStorage* storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+        for(NSHTTPCookie* cookie in [storage cookies]){
+            [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
+        }
         [APICall sendGETRequestForLocation:@"customer/phoneapplogin/" 
                                    success:^(APICall* cookieRequest) {
                                        CLLog(LOG_LEVEL_INFO, [NSString stringWithFormat:@"token ACQUIRED! %@", cookieRequest]);
@@ -267,7 +278,7 @@ static NSURL* serverURL;
     NSString* csrfToken = nil;
     NSArray* cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[request URL]];
     for(NSHTTPCookie* cookie in cookies){
-        CLLog(LOG_LEVEL_INFO, [NSString stringWithFormat: @"Cookie : %@", cookie]);
+        CLLog(LOG_LEVEL_DEBUG, [NSString stringWithFormat: @"Cookie : %@", cookie]);
         if([[cookie name] isEqualToString:@"csrftoken"]){
             csrfToken = [cookie value];
             break;
