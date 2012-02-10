@@ -30,9 +30,14 @@ static NSDictionary* itemGroupClassDictionary = nil;
 }
 
 +(id<ItemGroupPricingStrategy>)pricingStrategyFromData:(NSDictionary*)data{
-    return [(id<ItemGroupPricingStrategy>)[[itemGroupClassDictionary 
+    id<ItemGroupPricingStrategy> returnStrategy = [(id<ItemGroupPricingStrategy>)[[itemGroupClassDictionary 
                                             objectForKey:[data objectForKey:@"name"]] alloc] 
             initWithData:data];
+    
+    if (!returnStrategy)
+        CLLog(LOG_LEVEL_ERROR, [NSString stringWithFormat: @"A strategy tried to load with name: %@. That name doesn't exist in the class dictionary.",[data objectForKey:@"name"]]);
+    
+    return returnStrategy;
 }
 
 @end

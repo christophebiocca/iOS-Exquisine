@@ -394,6 +394,19 @@ static LocalyticsSession *_sharedLocalyticsSession = nil;
             return;
         }
         
+        //Make a timestamp attribute:
+        if (!attributes)
+        {
+            attributes = [[NSMutableDictionary alloc] init];
+        }
+        else
+        {
+            attributes = [NSMutableDictionary dictionaryWithDictionary:attributes];
+        }
+        
+        [attributes setValue:[[[NSDate alloc] initWithTimeIntervalSinceNow:0.0] description]forKey:@"timestamp"];
+        
+        
 		// Create the JSON for the event
 		NSMutableString *eventString = [[[NSMutableString alloc] init] autorelease];
         [eventString appendString:@"{"];
