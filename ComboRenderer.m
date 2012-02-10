@@ -87,7 +87,7 @@
     NSMutableArray *returnList = [[NSMutableArray alloc] initWithCapacity:0];
     CellData *newCell = [super detailedStaticRenderDefaultCell];
     newCell.cellTitle = currentCombo.name;
-    newCell.cellDesc = [currentCombo.price stringValue];
+    newCell.cellDesc = [Utilities FormatToPrice:currentCombo.price];
     
     [returnList addObject:newCell];
     

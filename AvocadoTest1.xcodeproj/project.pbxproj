@@ -1004,9 +1004,9 @@
 		23DA7A4414C609C6008281DD /* MenuCompositeRenderers */ = {
 			isa = PBXGroup;
 			children = (
-				23D6F4A314D9DFBD0043C75E /* ItemGroupRenderer */,
 				23DA7A4514C609FD008281DD /* MenuComponentRenderer.h */,
 				23DA7A4614C609FD008281DD /* MenuComponentRenderer.m */,
+				23D6F4A314D9DFBD0043C75E /* ItemGroupRenderer */,
 				232C797B14D0BA1500C3868D /* ComboRenderer */,
 				23DA7A6B14C6371D008281DD /* MenuRenderer */,
 				23DA7A4D14C618EE008281DD /* OrderRenderer */,
