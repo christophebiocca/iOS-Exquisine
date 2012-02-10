@@ -71,8 +71,12 @@ NSString* ORDER_MANAGER_NEEDS_REDRAW = @"CroutonLabs/OrderManagerNeedsRedraw";
     [self recalculate:nil];
 }
 
-+(NSArray*)optimalCombosFromChoices:(NSArray*)combos withItems:(NSArray*)items{
++(NSArray*)optimalCombosFromChoices:(NSArray*)combos withItems:(NSArray*)items usingCache:(NSMutableDictionary*)cache{
     NSMutableArray* applicable = [NSMutableArray arrayWithCapacity:[combos count]];
+    NSArray* cached = [cache objectForKey:items];
+    if(cached){
+        return cached;
+    }
     for(Combo* combo in combos){
         Combo* optimal = [combo optimalPickFromItems:items];
         if(optimal){
@@ -86,7 +90,7 @@ NSString* ORDER_MANAGER_NEEDS_REDRAW = @"CroutonLabs/OrderManagerNeedsRedraw";
         {
             NSMutableArray* remainingItems = [NSMutableArray arrayWithArray:items];
             [remainingItems removeObjectsInArray:[combo listOfAssociatedItems]];
-            optimalRemainder = [self optimalCombosFromChoices:applicable withItems:remainingItems];
+            optimalRemainder = [self optimalCombosFromChoices:applicable withItems:remainingItems usingCache:cache];
         }
         NSDecimalNumber* savings = [combo savings];
         for(Combo* other in optimalRemainder){
@@ -96,7 +100,12 @@ NSString* ORDER_MANAGER_NEEDS_REDRAW = @"CroutonLabs/OrderManagerNeedsRedraw";
             bestPick = [optimalRemainder arrayByAddingObject:combo];
         }
     }
+    [cache setObject:bestPick forKey:items];
     return bestPick;
+}
+
++(NSArray*)optimalCombosFromChoices:(NSArray*)combos withItems:(NSArray*)items{
+    return [self optimalCombosFromChoices:combos withItems:items usingCache:[NSMutableDictionary dictionary]];
 }
 
 //This is where everything has to happen that determines which combos apply to the order.
