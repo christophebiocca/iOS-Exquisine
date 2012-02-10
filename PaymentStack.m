@@ -19,14 +19,23 @@
 
 @interface PaymentStack(PrivateMethods)
 
+/* Controllers in use */
 @property(retain, readonly)PaymentProcessingViewController* preProcessingController;
 @property(retain, readonly)PaymentInfoViewController* paymentInfoController;
 @property(retain, readonly)PaymentProcessingViewController* processingController;
 @property(retain, readonly)PaymentCompleteViewController* completionController;
--(PaymentConfirmationController*)paymentConfirmationControllerForDigits:(NSString*)digits;
+@property(retain, readonly)PaymentConfirmationController* paymentConfirmationController;
 
--(void)queryPaymentInfo;
+/* Stack states */
+-(void)checkForProfile;
+-(void)requestConfirmation;
+-(void)requestPaymentInfo;
+-(void)changePaymentInfo;
 -(void)sendOrder:(PaymentInfo*)payment;
+-(void)showSuccess;
+
+/* Animation Control */
+-(void)afterAnimating:(void(^)())after;
 
 @end
 
@@ -34,11 +43,13 @@
 
 - (id)initWithOrder:(Order*)orderToPlace
           locations:(NSArray*)locations 
+       successBlock:(void (^)())success
     completionBlock:(void(^)())completion 
   cancellationBlock:(void(^)())cancelled
 {
     if (self = [super init]) {
         order = orderToPlace;
+        successBlock = [success copy];
         void (^complete)() = [completion copy];
         completionBlock = [^{
             complete();
@@ -52,26 +63,13 @@
         NSAssert([locations count] == 1, @"Expected exactly one location. (Got %@)", locations);
         location = [locations lastObject];
         postAnimation = [NSMutableArray new];
-        [self performSelectorOnMainThread:@selector(queryPaymentInfo) withObject:nil waitUntilDone:NO];
+        [self performSelectorOnMainThread:@selector(checkForProfile) withObject:nil waitUntilDone:NO];
     }
     return self;
 }
 
--(void)queryPaymentInfo{
-    [GetPaymentProfileInfo fetchInfo:^(GetPaymentProfileInfo* request){
-        CLLog(LOG_LEVEL_INFO, [NSString stringWithFormat:@"Success %@", self]);
-        [[self navigationController] pushViewController:[self paymentConfirmationControllerForDigits:[[request info] last4Digits]] animated:YES];
-    } failure:^(GetPaymentProfileInfo* info, NSError* error){
-        if([[error domain] isEqualToString:JSON_API_ERROR] && 
-           [[[error userInfo] objectForKey:@"class"] isEqualToString:@"NoPaymentInfoError"]){
-            [self afterAnimating:^{
-                [[self navigationController] pushViewController:[self paymentInfoController] animated:YES];
-            }];
-        } else {
-            cancelledBlock();
-        }
-    }];
-}
+#pragma mark -
+#pragma mark Controllers
 
 -(UINavigationController*)navigationController{
     if(!navigationController){
@@ -89,63 +87,20 @@
     return preProcessingController;
 }
 
--(PaymentConfirmationController*)paymentConfirmationControllerForDigits:(NSString*)digits{
+-(PaymentConfirmationController*)paymentConfirmationController{
     if(!paymentConfirmationController){
-        paymentConfirmationController = [[PaymentConfirmationController alloc] 
-                                         initWithCCDigits:digits 
-                                         accept:^{
-                                             NSArray* controllers = [[self navigationController] viewControllers];
-                                             controllers = [controllers arrayByAddingObjectsFromArray:
-                                                            [NSArray arrayWithObjects:
-                                                             [self paymentInfoController], 
-                                                             [self processingController], 
-                                                             nil]];
-                                             [[self navigationController] setViewControllers:controllers animated:YES];
-                                             [self sendOrder:nil];
-                                         } 
-                                         change:^{
-                                             [self afterAnimating:^{
-                                                 [[self navigationController] pushViewController:[self paymentInfoController] animated:YES];
-                                             }];
-                                         }
-                                         cancel:^{
-                                             cancelledBlock();
-                                         }];
+        paymentConfirmationController = [[PaymentConfirmationController alloc] init];
     }
     return paymentConfirmationController;
 }
 
 -(PaymentInfoViewController*)paymentInfoController{
     if(!paymentInfoController){
-        paymentInfoController = [[PaymentInfoViewController alloc] initWithCompletionBlock:^(PaymentInfo* info){
-            [self afterAnimating:^{
-                [[self navigationController] pushViewController:[self processingController] animated:YES];
-            }];
-            [self sendOrder:info];
-        } cancellationBlock:^{
-            cancelledBlock();
-        }];
+        paymentInfoController = [[PaymentInfoViewController alloc] init];
     }
     return paymentInfoController;
 }
 
--(void)sendOrder:(PaymentInfo*)info{
-    [PlaceOrder sendOrder:order toLocation:location withPaymentInfo:info 
-           paymentSuccess:^(PaymentSuccessInfo* success){
-               PaymentCompleteViewController* complete = [self completionController];
-               [complete setSuccessInfo:success];
-               [self afterAnimating:^{
-                   [[self navigationController] pushViewController:complete animated:YES];
-               }];
-           } 
-           paymentFailure:^(PaymentError* error){
-               PaymentInfoViewController* info = [self paymentInfoController];
-               [info setError:error];
-               [self performSelector:@selector(afterAnimating:) withObject:[^{
-                   [[self navigationController] popToViewController:info animated:YES];
-               } copy] afterDelay:2];
-           }];
-}
 
 -(PaymentProcessingViewController*)processingController{
     if(!processingController){
@@ -156,14 +111,107 @@
 
 -(PaymentCompleteViewController*)completionController{
     if(!completionController){
-        completionController = [[PaymentCompleteViewController alloc] initWithDoneCallback:^{
-            completionBlock();
-        }];
+        completionController = [[PaymentCompleteViewController alloc] init];
     }
     return completionController;
 }
+    
+#pragma mark Stack States
 
-/* Animation Control */
+-(void)checkForProfile{
+    [self afterAnimating:^{
+        [[self navigationController] setViewControllers:[NSArray arrayWithObject:[self preProcessingController]] 
+                                               animated:YES];
+    }];
+    [GetPaymentProfileInfo fetchInfo:^(GetPaymentProfileInfo* request){
+        CLLog(LOG_LEVEL_INFO, [NSString stringWithFormat:@"Success %@", self]);
+        [[self paymentConfirmationController] setCcDigits:[[request info] last4Digits]];
+        [self requestConfirmation];
+    } failure:^(GetPaymentProfileInfo* info, NSError* error){
+        if([[error domain] isEqualToString:JSON_API_ERROR] && 
+           [[[error userInfo] objectForKey:@"class"] isEqualToString:@"NoPaymentInfoError"]){
+            [self requestPaymentInfo];
+        } else {
+            cancelledBlock();
+        }
+    }];
+}
+
+-(void)requestConfirmation{
+    PaymentConfirmationController* controller = [self paymentConfirmationController];
+    [self afterAnimating:^{
+        [[self navigationController] setViewControllers:[NSArray arrayWithObject:controller] 
+                                               animated:YES];
+    }];
+    [controller setAcceptBlock:^{
+        [self sendOrder:nil];
+    }];
+    [controller setCancelBlock:^{
+        cancelledBlock();
+    }];
+    [controller setChangeBlock:^{
+        [self changePaymentInfo];
+    }];
+}
+
+-(void)requestPaymentInfo{
+    PaymentInfoViewController* controller = [self paymentInfoController];
+    [self afterAnimating:^{
+        [[self navigationController] setViewControllers:[NSArray arrayWithObject:[self paymentInfoController]] animated:YES];
+    }];
+    [controller setCompletionBlock:^(PaymentInfo* info){
+        [self sendOrder:info];
+    }];
+    [controller setCancelledBlock:^{
+        cancelledBlock();
+    }];
+}
+
+-(void)changePaymentInfo{
+    PaymentInfoViewController* controller = [self paymentInfoController];
+    [self afterAnimating:^{
+        [[self navigationController] setViewControllers:[NSArray arrayWithObjects:
+                                                         [self paymentConfirmationController], 
+                                                         [self paymentInfoController], 
+                                                         nil]
+                                               animated:YES];
+    }];
+    [controller setCompletionBlock:^(PaymentInfo* info){
+        [self sendOrder:info];
+    }];
+    [controller setCancelledBlock:^{
+        [self requestConfirmation];
+    }];
+}
+
+-(void)sendOrder:(PaymentInfo*)info{
+    [self afterAnimating:^{
+        [[self navigationController] setViewControllers:[NSArray arrayWithObjects:[self paymentInfoController], 
+                                                         [self processingController], nil] animated:YES];
+    }];
+    [PlaceOrder sendOrder:order toLocation:location withPaymentInfo:info 
+           paymentSuccess:^(PaymentSuccessInfo* success){
+               successBlock();
+               [[self completionController] setSuccessInfo:success];
+               [self showSuccess];
+           } 
+           paymentFailure:^(PaymentError* error){
+               [[self paymentInfoController] setError:error];
+               [self requestPaymentInfo];
+           }];
+}
+
+-(void)showSuccess{
+    PaymentCompleteViewController* controller = [self completionController];
+    [self afterAnimating:^{
+        [[self navigationController] setViewControllers:[NSArray arrayWithObject:controller] animated:YES];
+    }];
+    [controller setDoneCallback:^{
+        completionBlock();
+    }];
+}
+
+#pragma mark Animation Control
 
 -(void)navigationController:(UINavigationController *)navigationController 
      willShowViewController:(UIViewController *)viewController 

@@ -21,7 +21,10 @@
     void(^cancelledBlock)();
 }
 
--(id)initWithCompletionBlock:(void(^)(PaymentInfo*))completion cancellationBlock:(void(^)())cancelled;
+-(id)init;
+
+@property(copy, nonatomic)void(^completionBlock)(PaymentInfo*);
+@property(copy, nonatomic)void(^cancelledBlock)();
 
 -(void)setError:(PaymentError*)error;
 

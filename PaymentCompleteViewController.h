@@ -12,10 +12,10 @@
 @interface PaymentCompleteViewController : UIViewController{
     PaymentSuccessInfo* successInfo;
     PaymentCompletedView* paymentView;
-    void (^done)();
+    void (^doneCallback)();
 }
 
--(id)initWithDoneCallback:(void(^)())doneCallback;
+@property(copy, nonatomic)void(^doneCallback)();
 -(void)setSuccessInfo:(PaymentSuccessInfo*)info;
 
 @end

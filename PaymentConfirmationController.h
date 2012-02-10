@@ -17,6 +17,11 @@
     void (^cancelBlock)();
 }
 
--(id)initWithCCDigits:(NSString*)digits accept:(void(^)())accept change:(void(^)())change cancel:(void(^)())cancel;
+-(id)init;
+
+@property(retain, nonatomic)NSString* ccDigits;
+@property(copy, nonatomic)void (^acceptBlock)();
+@property(copy, nonatomic)void (^changeBlock)();
+@property(copy, nonatomic)void (^cancelBlock)();
 
 @end
