@@ -90,6 +90,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Entered an option page"];
     [optionRenderer redraw];
     [[optionView optionTable] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
 }

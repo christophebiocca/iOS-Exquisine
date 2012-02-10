@@ -224,7 +224,7 @@ NSString* OPTION_INVALID_DESELECTION = @"CroutonLabs/OptionInvalidDeselection";
         }
         else
         {
-            NSLog(@"ERROR: A notification from a choice to which there is no pointer was recieved.\nMe:\n%@\nThe choice:\n%@", self, theChoice);
+            CLLog(LOG_LEVEL_ERROR , [NSString stringWithFormat:@"A notification from a choice to which there is no pointer was recieved.\nMe:\n%@\nThe choice:\n%@", self, theChoice]);
             [[NSNotificationCenter defaultCenter] postNotificationName:OPTION_MODIFIED object:self];
         }
     }
@@ -238,8 +238,8 @@ NSString* OPTION_INVALID_DESELECTION = @"CroutonLabs/OptionInvalidDeselection";
     {
         //If this is the case, we need to know, but also we don't want the app to cack.
         //I'll log an error and try to recover.
-        NSLog(@"ERROR, Option is in a bad state. \
-              \n Here's a readout of the Option in a bad state before attempting to recover:\n%@",self);
+        CLLog(LOG_LEVEL_WARNING, [NSString stringWithFormat: @"Option is in a bad state. \
+              \n Here's a readout of the Option in a bad state before attempting to recover:\n%@",self]);
         
         //Recovery routine:
         int i = 0;

@@ -85,6 +85,7 @@
 - (void) loadView
 {
     comboView = [[ComboView alloc] init];
+    
     [[comboView comboTable] setDelegate:self];
     [[comboView comboTable] setDataSource:comboRenderer];
     
@@ -98,6 +99,8 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
+    [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Viewed a combo page"];
     
     for (ItemGroup *itemGroup in [comboInfo listOfItemGroups]) {
         if (([[itemGroup listOfItems] count] == 1)&&([[(Item *)[[itemGroup listOfItems] objectAtIndex:0] options] count] == 0))
@@ -120,6 +123,7 @@
 
 -(void)addThisComboToOrder
 {
+    [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Added a combo to the order"];
     for (ItemGroup *anItemGroup in [comboInfo listOfItemGroups]) {
         [orderInfo addItem:[[anItemGroup satisfyingItem] copy]];
     }

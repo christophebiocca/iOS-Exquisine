@@ -228,7 +228,7 @@ NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
     
     //If we've made it here, somebody did something wrong.
     
-    NSLog(@"ERROR: Somebody tried to remove this item from this order, and that item isn't in this order!:\n%@\n%@",anItem,self);
+    CLLog(LOG_LEVEL_WARNING, [NSString stringWithFormat: @"ERROR: Somebody tried to remove this item from this order, and that item isn't in this order!:\n%@\n%@",anItem,self]);
 
 }
 

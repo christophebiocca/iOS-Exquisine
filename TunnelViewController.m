@@ -49,7 +49,7 @@
         }
         else
         {
-            NSLog(@"The end of a Tunnel was reached without a delegate being set.");
+            CLLog(LOG_LEVEL_WARNING,@"The end of a Tunnel was reached without a delegate being set.");
         }
     }
     else
@@ -70,7 +70,7 @@
         }
         else
         {
-            NSLog(@"A pop was attempted at the start of a Tunnel that has no defined delegate. O NOES! What do?!?");
+            CLLog(LOG_LEVEL_WARNING, @"A pop was attempted at the start of a Tunnel that has no defined delegate. O NOES! What do?!?");
         }
     }
     else

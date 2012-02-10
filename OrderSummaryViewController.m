@@ -66,6 +66,9 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
+    [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Viewed the order summary"];
+    
     [orderSummaryRenderer redraw];
     [[orderView orderTable] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
 

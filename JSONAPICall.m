@@ -40,7 +40,7 @@ NSString* JSON_API_ERROR = @"com.croutonlabs.server.json";
 -(void)postCompletionHook{
     [super postCompletionHook];
     NSError* parsingError = nil;
-    DebugLog(@"PARSING JSON %@", [[NSString alloc] initWithData:[self rawData] encoding:NSASCIIStringEncoding]);
+    CLLog(LOG_LEVEL_INFO, [NSString stringWithFormat:@"Parsing JSON: \n%@", [[NSString alloc] initWithData:[self rawData] encoding:NSASCIIStringEncoding]]);
     NSDictionary* parsed = [NSJSONSerialization JSONObjectWithData:[self rawData] 
                                                            options:0 
                                                              error:&parsingError];

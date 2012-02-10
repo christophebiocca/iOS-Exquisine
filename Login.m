@@ -28,7 +28,7 @@ static NSString* redirectSuccessString = @"/ArbitraryValidStaticUrlPath";
                                  success(login);
                              }
                              failure:^(Login* login, NSError* error) {
-                                 NSLog(@"Serious issues here, can't login apparently.\n%@", error);
+                                 CLLog(LOG_LEVEL_ERROR ,[NSString stringWithFormat: @"Serious issues here, can't login apparently.\n%@", error]);
                              }];
 }
 
@@ -38,7 +38,7 @@ static NSString* redirectSuccessString = @"/ArbitraryValidStaticUrlPath";
           redirectResponse:(NSURLResponse *)response{
     if([(NSHTTPURLResponse*)response statusCode] == 302){
         NSString* path = [[request URL] path];
-        NSLog(@"Redirection %@", path);
+        CLLog(LOG_LEVEL_INFO, [NSString stringWithFormat: @"Redirection %@", path]);
         if([path isEqualToString:redirectSuccessString]){
             [connection cancel];
             [self complete];

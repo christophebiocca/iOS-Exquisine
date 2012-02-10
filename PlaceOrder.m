@@ -30,12 +30,12 @@
                              success:^(PlaceOrder* call) {
                                  PaymentSuccessInfo* successInfo = 
                                  [[PaymentSuccessInfo alloc] initWithData:[call jsonData]];
-                                 DebugLog(@"Placed an order successfully %@", successInfo);
+                                 CLLog(LOG_LEVEL_INFO, [NSString stringWithFormat:@"Placed an order successfully %@", successInfo]);
                                  [order placedWithTransactionInfo:successInfo];
                                  successBlock(successInfo);
                              } 
                              failure:^(PlaceOrder* call, NSError* error) {
-                                 NSLog(@"Couldn't place order %@! %@", call, error);
+                                 CLLog(LOG_LEVEL_WARNING, [NSString stringWithFormat: @"Couldn't place order %@! %@", call, error]);
                                  errorBlock([[PaymentError alloc] initWithCause:error]);
                              }];
     [order submit];

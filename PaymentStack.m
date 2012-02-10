@@ -55,7 +55,7 @@
 
 -(void)queryPaymentInfo{
     [GetPaymentProfileInfo fetchInfo:^(GetPaymentProfileInfo* info){
-        NSLog(@"Success %@", self);
+        CLLog(LOG_LEVEL_INFO, [NSString stringWithFormat:@"Success %@", self]);
         // We need to do other stuff.
     } failure:^(GetPaymentProfileInfo* info, NSError* error){
         if([[error domain] isEqualToString:JSON_API_ERROR] && 

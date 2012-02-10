@@ -86,7 +86,7 @@
                                         [self updateStoreHourInfo];
                                     }
                                     failure:^(GetLocations* call, NSError* error) {
-                                        NSLog(@"Can't fetch locations:\n%@", error);
+                                        CLLog(LOG_LEVEL_WARNING ,[NSString stringWithFormat: @"Can't fetch locations:\n%@", error]);
                                     }];
 }
 
@@ -105,7 +105,7 @@
     
     if(!theMenu)
     {
-        NSLog(@"The menu had not been fetched upon clicking new order");
+        CLLog(LOG_LEVEL_DEBUG, @"The menu had not been fetched upon clicking new order");
     }
     else
     {
@@ -127,7 +127,7 @@
 {
     if(!theMenu)
     {
-        NSLog(@"The menu had not been fetched upon clicking favorites");
+        CLLog(LOG_LEVEL_INFO,@"The menu had not been fetched upon clicking favorites");
     }
     FavoritesViewController *favoritesViewController = [[FavoritesViewController alloc] initWithFavoritesListAndMenu:favoriteOrders :theMenu];
     
@@ -325,7 +325,6 @@
 
 -(void)saveDataToDisk
 {
-    
     NSString *path = [self dataFilePath];
     NSMutableDictionary * rootObject;
     rootObject = [NSMutableDictionary dictionary];
@@ -340,8 +339,6 @@
 {
     for (Order *eachOrder in [self allKnownOrders]) {
         [eachOrder setFavorite:NO];
-        if (eachOrder == [[self pendingOrders] lastObject])
-            NSLog(@"something");
         for (Order *favOrder in favoriteOrders) {
             if([eachOrder isEffectivelyEqual:favOrder])
             {
@@ -371,7 +368,7 @@
                 [self updateCreateButtonState];
             }
             failure:^(GetMenu* menuCall, NSError* error){
-                NSLog(@"call %@ errored with %@", menuCall, error);
+                CLLog(LOG_LEVEL_WARNING, [NSString stringWithFormat: @"call %@ errored with %@", menuCall, error]);
             }];  
 }
 

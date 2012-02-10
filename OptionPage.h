@@ -23,6 +23,4 @@
 
 -(void)initializeViewWithOption:(Option *) anOption;
 
--(void)ConfigureUITableViewCell: (UITableViewCell *) newCell;
-
 @end

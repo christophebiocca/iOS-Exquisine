@@ -20,7 +20,6 @@
 #import "ItemRenderer.h"
 #import "CellData.h"
 #import "MenuRenderer.h"
-#import "LocalyticsSession.h"
 #import "OrderManager.h"
 
 @implementation OrderViewController
@@ -51,6 +50,8 @@
     {
         UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Oops" message:@"You havn't selected anything to purchase" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
         
+        [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Tried to place an empty order"];
+        
         [areYouSure show];
         
         return;
@@ -59,6 +60,8 @@
     if(![delegate locationIsOpen])
     {
         UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Oops" message:@"The restaurant isn't open right now. You'll have to wait until it is." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+        
+        [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Tried to place order when the restautant isn't open"];
         
         [areYouSure show];
         
@@ -144,29 +147,38 @@
     {
         if (buttonIndex == 1)
         {
+            [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Placed order"];
             [delegate submitOrderForController:self];
             [[theOrderManager thisOrder] setStatus:@"Transmitting"];
             [self popToMainPage];
         }
+        if (buttonIndex == 2)
+            [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Canceled placing an order"];
     }
     
     if ([alertView tag] == 2) // Order Rename
     {
         if (buttonIndex == 1)
         {
+            [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Renamed order"];
             NSString *entered = [ (AlertPrompt *)alertView enteredText];
             [self renameOrder:entered];
             [delegate addToFavoritesForController:self];
         }
+        if (buttonIndex == 2)
+            [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Canceled renaming order"];
     }
     
     if ([alertView tag] == 3) // Delete from favorites
     {
         if (buttonIndex == 1)
         {
+            [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Removed a favorite"];
             [delegate deleteFromFavoritesForController:self];
             [self popToMainPage];
         }
+        if (buttonIndex == 2)
+            [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Canceled removing a favorite"];
     }
     
 }
@@ -246,6 +258,7 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+    [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Opened order page"];
     [super viewWillAppear:animated];
     [self orderAltered:nil];
 }
@@ -276,10 +289,12 @@
     if(editing)
     {
         [self exitEditingMode];
+        [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Exited order editing mode"];
     }
     else
     {
         [self enterEditingMode];
+        [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Entered order editing mode"];
     }
     editing = !editing;
 }

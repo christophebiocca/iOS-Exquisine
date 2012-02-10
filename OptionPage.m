@@ -19,11 +19,6 @@
 
 @synthesize currentOption;
 
--(void)ConfigureUITableViewCell: (UITableViewCell *) newCell
-{
-    NSLog(@"I got Called!");
-}
-
 //Custom functions
 //***********************************************************
 

@@ -8,6 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString* ITEM_GROUP_MODIFIED;
+
+typedef enum LogLevel {
+    LOG_LEVEL_ERROR = 0,
+    LOG_LEVEL_WARNING = 1,
+    LOG_LEVEL_INFO = 2,
+    LOG_LEVEL_DEBUG = 3,
+} LogLevel;
+
 @interface Utilities : NSObject
 
 +(NSString *)FormatToPrice:(NSDecimalNumber*) price;
@@ -15,5 +24,7 @@
 +(NSInteger)CompositeListCount:(NSMutableArray *) compositeList;
 
 +(id)MemberOfCompositeListAtIndex:(NSMutableArray *)compositeList:(NSInteger) anInt;
+
++(void)logLevel:(LogLevel)level message:(NSString*)message;
 
 @end

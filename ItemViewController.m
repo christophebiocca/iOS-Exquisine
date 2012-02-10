@@ -86,6 +86,7 @@
 - (void) loadView
 {
     
+    
     itemView = [[ItemView alloc] init];
     [[itemView itemTable] setDelegate:self];
     [[itemView itemTable] setDataSource:itemRenderer];
@@ -100,6 +101,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Entered an item page"];
     [[itemView priceButton] setTitle:[NSString stringWithFormat:@"Item Price: %@",[Utilities FormatToPrice:[itemInfo price]] ]];
     [[itemView itemTable] reloadData];
 }

@@ -13,7 +13,7 @@
     NSString* cardnumber;
     NSString* cardnumberError;
     NSString* cardholderName;
-    NSString* cardholderError;
+    NSString* cardholderNameError;
     NSInteger expirationMonth;
     NSInteger expirationYear;
     NSString* expirationError;

@@ -38,7 +38,7 @@ static NSURL* serverURL;
     NSString* serverString;
     
 #if DEBUG
-    serverString = @"http://staging.croutonlabs.com";
+    serverString = @"http://10.172.71.27:8000";
 #else
     serverString = @"http://croutonlabs.com";
 #endif
@@ -161,30 +161,31 @@ static NSURL* serverURL;
 -(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)theResponse{
     response = (NSHTTPURLResponse*) theResponse;
     NSInteger status = [response statusCode];
-    DebugLog(@"Got response: %d", status);
+    CLLog(LOG_LEVEL_INFO,[NSString stringWithFormat:@"Got response: %d", status] );
+     
     if(status == 403){
         // Most likely a csrf token issue, we can fix it by hitting our favorite url.
-        DebugLog(@"GOING TO ACQUIRE A CSRF TOKEN/COOKIE");
+        CLLog(LOG_LEVEL_INFO, @"GOING TO ACQUIRE A CSRF TOKEN/COOKIE");
         [connection cancel];
         [APICall sendGETRequestForLocation:@"customer/phoneapplogin/" 
                                    success:^(APICall* cookieRequest) {
-                                       DebugLog(@"token ACQUIRED! %@", cookieRequest);
+                                       CLLog(LOG_LEVEL_INFO, [NSString stringWithFormat:@"token ACQUIRED! %@", cookieRequest]);
                                        [self send];
                                    } 
                                    failure:^(APICall* cookieRequest, NSError* cookieError) {
-                                       DebugLog(@"OK, at this stage, we are well and truly fucked. %@", cookieError);
+                                       CLLog(LOG_LEVEL_ERROR, [NSString stringWithFormat:@"The cookie request errored with:\n%@", cookieError]);
                                        // We should do some diagnostics on this, because it shouldn't happen.
                                    }];
     }
 }
 
 -(void)connection:(NSURLConnection*)connection didReceiveData:(NSData*)dataToAdd{
-    DebugLog(@"GOT %d bytes of data", [dataToAdd length]);
+    CLLog(LOG_LEVEL_INFO, [NSString stringWithFormat: @"GOT %d bytes of data", [dataToAdd length]]);
     [data appendData:dataToAdd];
 }
 
 -(void)complete{
-    DebugLog(@"Completing");
+    CLLog(LOG_LEVEL_INFO, @"Completing");
     NSInteger status = [response statusCode];
     if((status / 100) == 4 || (status / 100) == 5){
         error = [NSError errorWithDomain:SERVER_HTTP_ERROR_DOMAIN
@@ -206,13 +207,13 @@ static NSURL* serverURL;
 }
 
 -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)theError{
-    DebugLog(@"HOLY SHIT GUYS WE HAVE AN ERROR!\n%@", theError);
+    CLLog(LOG_LEVEL_ERROR, [NSString stringWithFormat: @"Connection failed with the following error:\n%@", theError]);
     [self setError:theError];
     [self complete];
 }
 
 -(void)connectionDidFinishLoading:(NSURLConnection*)connection{
-    DebugLog(@"Finished loading.");
+    CLLog(LOG_LEVEL_INFO, @"Finished loading.");
     [self complete];
 }
 
@@ -220,12 +221,12 @@ static NSURL* serverURL;
            willSendRequest:(NSURLRequest *)theRequest 
           redirectResponse:(NSURLResponse *)response{
     NSURL* newURL = [theRequest URL];
-    DebugLog(@"REDIRECT TO %@ (%@)", newURL, theRequest);
+    CLLog(LOG_LEVEL_INFO, [NSString stringWithFormat: @"Redirect to: %@ (%@)", newURL, theRequest]);
     if([[newURL pathComponents] isEqualToArray:[loginURL pathComponents]]){
-        DebugLog(@"HOLY SHIT GUYS WE SHOULD LOGIN!");
-        [connection cancel]; // No point in trying anymore, it's fucked.
+        CLLog(LOG_LEVEL_INFO,@"Killing current connection to server");
+        [connection cancel]; // killing current connection.
         [Login login:^(Login* login){
-            DebugLog(@"Following successful login %@, relaunching request %@.", login, self);
+            CLLog(LOG_LEVEL_INFO, [NSString stringWithFormat: @"Following successful login %@, relaunching request %@.", login, self]);
             [self send];
         }];
     }
@@ -267,7 +268,7 @@ static NSURL* serverURL;
     NSString* csrfToken = nil;
     NSArray* cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[request URL]];
     for(NSHTTPCookie* cookie in cookies){
-        DebugLog(@"Cookie : %@", cookie);
+        CLLog(LOG_LEVEL_INFO, [NSString stringWithFormat: @"Cookie : %@", cookie]);
         if([[cookie name] isEqualToString:@"csrftoken"]){
             csrfToken = [cookie value];
             break;

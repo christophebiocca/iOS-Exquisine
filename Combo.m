@@ -41,7 +41,7 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
     
     if(!strategy)
     {
-        NSLog(@"ERROR: an invalid stratagy string was parsed from JSON data");
+        CLLog(LOG_LEVEL_WARNING, @"an invalid stratagy string was parsed from JSON data");
     }
     
     for (NSDictionary *componentInfo in [inputData objectForKey:@"components"]) {

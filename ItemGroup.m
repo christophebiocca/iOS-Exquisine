@@ -40,7 +40,7 @@ NSString* ITEM_GROUP_MODIFIED = @"CroutonLabs/ItemGroupModified";
         
     if(!strategy)
     {
-        NSLog(@"ERROR: An invalid ItemStrategy string was parsed from JSON data");
+        CLLog(LOG_LEVEL_ERROR, @"An invalid ItemStrategy string was parsed from JSON data");
     }
     
     NSMutableArray *itemPKs = [inputData objectForKey:@"items"];
@@ -55,7 +55,7 @@ NSString* ITEM_GROUP_MODIFIED = @"CroutonLabs/ItemGroupModified";
         }
         else
         {
-            NSLog(@"ERROR: A dereference was attempted on an invalid item PK %i\n%@",intItemPK,parentMenu);
+            CLLog(LOG_LEVEL_ERROR, [NSString stringWithFormat: @"A dereference was attempted on an invalid item PK %i\n%@",intItemPK,parentMenu]);
         }
         
     }
@@ -68,7 +68,7 @@ NSString* ITEM_GROUP_MODIFIED = @"CroutonLabs/ItemGroupModified";
         }
         else
         {
-            NSLog(@"ERROR: A dereference was attempted on an invalid menu PK %@\n%@",menuPK,parentMenu);
+            CLLog(LOG_LEVEL_ERROR, [NSString stringWithFormat: @"A dereference was attempted on an invalid menu PK %@\n%@",menuPK,parentMenu]);
         }
     }
     

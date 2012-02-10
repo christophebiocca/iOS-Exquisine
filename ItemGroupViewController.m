@@ -93,6 +93,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Entered an item group page"];
     [[itemGroupView itemGroupTable] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 

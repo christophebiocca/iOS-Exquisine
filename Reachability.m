@@ -152,9 +152,7 @@ static void TMReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
         CFRelease(self.reachabilityRef);
         self.reachabilityRef = nil;
     }
-#ifdef DEBUG
-    NSLog(@"Reachability: dealloc");
-#endif
+    CLLog(LOG_LEVEL_DEBUG, @"Reachability: dealloc");
 }
 
 #pragma mark - notifier methods
@@ -176,9 +174,7 @@ static void TMReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
     
     if (!SCNetworkReachabilitySetCallback(self.reachabilityRef, TMReachabilityCallback, &context)) 
     {
-#ifdef DEBUG
-        NSLog(@"SCNetworkReachabilitySetCallback() failed: %s", SCErrorString(SCError()));
-#endif
+        CLLog(LOG_LEVEL_DEBUG, [NSString stringWithFormat: @"SCNetworkReachabilitySetCallback() failed: %s", SCErrorString(SCError())]);
         return NO;
     }
     
@@ -411,17 +407,14 @@ static void TMReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 
 -(void)reachabilityChanged:(SCNetworkReachabilityFlags)flags
 {
-#ifdef DEBUG
-    NSLog(@"Reachability: %@", reachabilityFlags(flags));
-#endif
+    CLLog(LOG_LEVEL_DEBUG, [NSString stringWithFormat:@"Reachability: %@", reachabilityFlags(flags)]);
+
     
     if([self isReachableWithFlags:flags])
     {
         if(self.reachableBlock)
         {
-#ifdef DEBUG
-            NSLog(@"Reachability: blocks are not called on the main thread.\n Use dispatch_async(dispatch_get_main_queue(), ^{}); to update your UI!");
-#endif
+            CLLog(LOG_LEVEL_DEBUG , [NSString stringWithFormat:@"Reachability: blocks are not called on the main thread.\n Use dispatch_async(dispatch_get_main_queue(), ^{}); to update your UI!"]);
             self.reachableBlock(self);
         }
     }
@@ -429,9 +422,7 @@ static void TMReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
     {
         if(self.unreachableBlock)
         {
-#ifdef DEBUG
-            NSLog(@"Reachability: blocks are not called on the main thread.\n Use dispatch_async(dispatch_get_main_queue(), ^{}); to update your UI!");
-#endif
+            CLLog(LOG_LEVEL_DEBUG, [NSString stringWithFormat: @"Reachability: blocks are not called on the main thread.\n Use dispatch_async(dispatch_get_main_queue(), ^{}); to update your UI!"]);
             self.unreachableBlock(self);
         }
     }

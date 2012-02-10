@@ -23,7 +23,7 @@ static NSRegularExpression* separator;
         creditCard = [[NSRegularExpression alloc] initWithPattern:(NSString*) pattern options:0 error:&err];
         NSAssert(!err, @"Incorrect regex (%@)? UNACCEPTABLE", pattern);
         if(err){
-            NSLog(@"%@", err);
+            CLLog(LOG_LEVEL_DEBUG, [NSString stringWithFormat:@"%@", err]);
         }
     }
     if(!separator){
@@ -32,7 +32,7 @@ static NSRegularExpression* separator;
         separator = [[NSRegularExpression alloc] initWithPattern:(NSString*) pattern options:0 error:&err];
         NSAssert(!err, @"Incorrect regex (%@)? UNACCEPTABLE", pattern);
         if(err){
-            NSLog(@"%@", err);
+            CLLog(LOG_LEVEL_DEBUG, [NSString stringWithFormat:@"%@", err]);
         }
     }
 }
@@ -73,13 +73,12 @@ static NSRegularExpression* separator;
     NSUInteger length = [cleaned length];
     for(int i=0; i < length ; ++i) {
         unichar c = [cleaned characterAtIndex:(length - i) - 1];
-        DebugLog(@"#cc: %c", c);
         NSInteger value = c - 48;
         if(i%2) value *= 2;
         sum += (value / 10) + (value % 10);
     }
     if(sum %= 10){
-        DebugLog(@"Invalid lunh checksum %d", sum);
+        CLLog(LOG_LEVEL_INFO, [NSString stringWithFormat: @"Invalid lunh checksum %d", sum]);
         cardnumberError = @"This number is invalid";
     }
 }
