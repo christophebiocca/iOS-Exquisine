@@ -29,15 +29,20 @@
         notificationMessage = [[UILabel alloc] initWithFrame:CGRectZero];
         [notificationMessage setLineBreakMode:UILineBreakModeWordWrap];
         [notificationMessage setNumberOfLines:0];
-        [notificationMessage setText:[NSString stringWithFormat:@"We will charge your credit card ending in %@.", ccDigits]];
         [self addSubview:notificationMessage];
         change = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [change setTitle:@"Click here to change your payment information." forState:UIControlStateNormal];
         [[change titleLabel] setLineBreakMode:UILineBreakModeWordWrap];
         [[change titleLabel] setAdjustsFontSizeToFitWidth:YES];
         [self addSubview:change];
+        
+        [self setCCDigits:ccDigits];
     }
     return self;
+}
+
+-(void)setCCDigits:(NSString *)ccDigits{
+    [notificationMessage setText:[NSString stringWithFormat:@"We will charge your credit card ending in %@.", ccDigits]];
 }
 
 #define PADDING 12

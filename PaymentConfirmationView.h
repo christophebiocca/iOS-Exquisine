@@ -24,4 +24,6 @@
 @property(retain, readonly)UIBarButtonItem* cancel;
 @property(retain, readonly)UIButton* change;
 
+-(void)setCCDigits:(NSString*)ccDigits;
+
 @end

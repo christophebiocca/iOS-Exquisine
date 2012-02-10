@@ -46,4 +46,9 @@
     changeBlock();
 }
 
+-(void)setCcDigits:(NSString*)digits{
+    ccDigits = digits;
+    [paymentView setCCDigits:digits];
+}
+
 @end
