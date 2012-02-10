@@ -167,6 +167,11 @@ static NSURL* serverURL;
         // Most likely a csrf token issue, we can fix it by hitting our favorite url.
         CLLog(LOG_LEVEL_INFO, @"GOING TO ACQUIRE A CSRF TOKEN/COOKIE");
         [connection cancel];
+        // Nucleate all the cookies.
+        NSHTTPCookieStorage* storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+        for(NSHTTPCookie* cookie in [storage cookies]){
+            [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
+        }
         [APICall sendGETRequestForLocation:@"customer/phoneapplogin/" 
                                    success:^(APICall* cookieRequest) {
                                        CLLog(LOG_LEVEL_INFO, [NSString stringWithFormat:@"token ACQUIRED! %@", cookieRequest]);
