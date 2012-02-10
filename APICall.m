@@ -195,11 +195,10 @@ static NSURL* serverURL;
     completed = YES;
     [self postCompletionHook];
     if(error){
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"APIError" 
-                                                            object:self 
-                                                          userInfo:[NSDictionary 
-                                                                    dictionaryWithObject:error 
-                                                                    forKey:@"error"]];
+        if([[error domain] isEqualToString:SERVER_HTTP_ERROR_DOMAIN] &&
+           ([error code] / 100) == 5){
+            CLLog(LOG_LEVEL_ERROR, [NSString stringWithFormat: @"Received a server error:%@", error]);
+        }
         errorblock(self, error);
     } else {
         successblock(self);
