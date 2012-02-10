@@ -160,16 +160,17 @@
 
 -(void)submitOrderForController:(id)orderViewController
 {
-    if ([[[orderViewController theOrderManager] thisOrder] isEffectivelyEqual:currentOrder])
-    {
-        //Allocate a new order
-        currentOrder = [[Order alloc] init];
-    }
+    
     PaymentStack* paymentStack = 
     [[PaymentStack alloc] initWithOrder:[[orderViewController theOrderManager] thisOrder] locations:locations
                             completionBlock:^() {
                                 //Push the current order on the history list
                                 [ordersHistory addObject:[[orderViewController theOrderManager] thisOrder]];
+                                if ([[[orderViewController theOrderManager] thisOrder] isEffectivelyEqual:currentOrder])
+                                {
+                                    //Allocate a new order
+                                    currentOrder = [[Order alloc] init];
+                                }
                                 [self dismissModalViewControllerAnimated:YES];
                             } 
                           cancellationBlock:^{
