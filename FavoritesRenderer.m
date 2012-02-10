@@ -55,8 +55,8 @@
     else
     {
         CellData *aCell = [[CellData alloc] init];
-        [aCell setCellTitleFontSize:17];
-        [aCell setCellDescFontSize:17];
+        [aCell setCellTitleFontSize:13];
+        [aCell setCellDescFontSize:13];
         [aCell setCellTitleFontType:@"HelveticaNeue-Medium"];
         [aCell setCellDescFontType:@"HelveticaNeue"];
         aCell.cellTitle = @"You have not saved any favorites!";

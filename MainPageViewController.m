@@ -326,9 +326,7 @@
 -(void)saveDataToDisk
 {
     NSString *path = [self dataFilePath];
-    NSMutableDictionary * rootObject;
-    rootObject = [NSMutableDictionary dictionary];
-    [rootObject setValue: theMenu forKey:@"menu"];
+    NSMutableDictionary * rootObject;    [rootObject setValue: theMenu forKey:@"menu"];
     [rootObject setValue: currentOrder forKey:@"current_order"];
     [rootObject setValue: ordersHistory forKey:@"order_history"];
     [rootObject setValue: favoriteOrders forKey:@"favorite_orders"];
