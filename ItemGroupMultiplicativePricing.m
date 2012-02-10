@@ -36,4 +36,19 @@
 {
     return [[item price] decimalNumberByMultiplyingBy:multiplicativeValue];
 }
+
+-(Item*)optimalItem:(NSArray*)items{
+    // The biggest savings comes from picking the most expensive item.
+    Item* maxItem = nil;
+    NSDecimalNumber* maxPrice = [NSDecimalNumber minimumDecimalNumber];
+    for(Item* item in items){
+        NSDecimalNumber* price = [item price];
+        if([price compare:maxPrice] == NSOrderedDescending){
+            maxPrice = price;
+            maxItem = item;
+        }
+    }
+    return maxItem;
+}
+
 @end

@@ -123,7 +123,7 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
 
 -(NSArray *)listOfAssociatedItems
 {
-    NSMutableArray *output = [[NSMutableArray alloc] initWithCapacity:0];
+    NSMutableArray *output = [[NSMutableArray alloc] initWithCapacity:[listOfItemGroups count]];
     for (ItemGroup *eachItemGroup in listOfItemGroups) {
         if ([eachItemGroup satisfied]) {
             [output addObject:[eachItemGroup satisfyingItem]];
@@ -135,6 +135,14 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
 -(NSDecimalNumber *)price
 {
     return [strategy priceForItemGroups:listOfItemGroups];
+}
+
+-(NSDecimalNumber *)savings{
+    NSDecimalNumber* oldTotal = [NSDecimalNumber zero];
+    for(Item* item in [self listOfAssociatedItems]){
+        oldTotal = [oldTotal decimalNumberByAdding:[item price]];
+    }
+    return [oldTotal decimalNumberBySubtracting:[self price]];
 }
 
 -(BOOL)satisfiedWithItemList:(NSArray *)anItemList
@@ -253,6 +261,18 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
     return [[aCombo savingsMagnitude] compare:[self savingsMagnitude]];
 }
 
+-(Combo*)optimalPickFromItems:(NSArray *)items{
+    NSArray* satisfyingItems = [strategy optimalPickFromItems:items usingItemGroups:listOfItemGroups];
+    if(!satisfyingItems){
+        return nil;
+    }
+    Combo* new = [self copy];
+    [new removeAllItems];
+    [new setListOfItemGroups:[NSMutableArray arrayWithArray:satisfyingItems]];
+    [new recalculate:nil];
+    return new;
+}
+
 -(NSString *) descriptionWithIndent:(NSInteger) indentLevel
 {
     NSString *padString = [@"" stringByPaddingToLength:(indentLevel*4) withString:@" " startingAtIndex:0];
@@ -272,9 +292,7 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
 
 -(void)dealloc
 {
-    for (ItemGroup *anItemGroup in listOfItemGroups) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:ITEM_GROUP_MODIFIED object:anItemGroup];
-    }
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

@@ -127,6 +127,6 @@
 
 -(void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:ITEM_MODIFIED object:itemInfo];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 @end

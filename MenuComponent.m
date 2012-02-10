@@ -41,7 +41,7 @@ NSString* MENU_COMPONENT_PK_CHANGED = @"CroutonLabs/MenuComponentPrimaryKeyChang
 -(MenuComponent *)initFromData:(NSDictionary *)inputData
 {
     name = [inputData objectForKey:@"name"];
-    primaryKey = [[inputData objectForKey:@"pk"] intValue];
+    primaryKey = [[inputData objectForKey:@"pk"] unsignedIntegerValue];
     desc = [inputData objectForKey:@"description"];
     
     return self;
@@ -53,7 +53,7 @@ NSString* MENU_COMPONENT_PK_CHANGED = @"CroutonLabs/MenuComponentPrimaryKeyChang
     {
         name = [decoder decodeObjectForKey:@"name"];
         desc = [decoder decodeObjectForKey:@"desc"];
-        primaryKey = [[decoder decodeObjectForKey:@"primary_key"]intValue];
+        primaryKey = [[decoder decodeObjectForKey:@"primary_key"] unsignedIntegerValue];
     }
     return self;
 }
@@ -63,7 +63,7 @@ NSString* MENU_COMPONENT_PK_CHANGED = @"CroutonLabs/MenuComponentPrimaryKeyChang
     //Rinse and repeat this:
     [encoder encodeObject:name forKey:@"name"];
     [encoder encodeObject:desc forKey:@"desc"];
-    [encoder encodeObject:[NSString stringWithFormat:@"%i", primaryKey] forKey:@"primary_key"];
+    [encoder encodeObject:[NSNumber numberWithUnsignedInteger:primaryKey] forKey:@"primary_key"];
 }
 
 -(MenuComponent *)copy
@@ -85,7 +85,7 @@ NSString* MENU_COMPONENT_PK_CHANGED = @"CroutonLabs/MenuComponentPrimaryKeyChang
     
     [output appendFormat:@"%@name:%@ \n",padString,name];
     [output appendFormat:@"%@desc:%@ \n",padString,desc];
-    [output appendFormat:@"%@primary key:%i \n",padString,primaryKey];
+    [output appendFormat:@"%@primary key:%lu \n",padString, (unsigned long) primaryKey];
     
     return output;
 }

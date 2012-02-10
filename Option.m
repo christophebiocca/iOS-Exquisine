@@ -312,9 +312,7 @@ NSString* OPTION_INVALID_DESELECTION = @"CroutonLabs/OptionInvalidDeselection";
 
 -(void)dealloc
 {
-    for (Choice *eachChoice in choiceList) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:CHOICE_SELECTED_CHANGED object:eachChoice];
-    }
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

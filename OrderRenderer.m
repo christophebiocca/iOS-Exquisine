@@ -260,8 +260,7 @@
 
 -(void)dealloc
 {
-
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:ORDER_MANAGER_NEEDS_REDRAW object:orderManager];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

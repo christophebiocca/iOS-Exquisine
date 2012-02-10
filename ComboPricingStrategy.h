@@ -10,6 +10,7 @@
 
 -(id)initWithData:(NSDictionary*)data;
 -(NSDecimalNumber*)priceForItemGroups:(NSArray*)itemGroups;
+-(NSArray*)optimalPickFromItems:(NSArray*)items usingItemGroups:(NSArray*)listOfItemGroups;
 
 @end
 

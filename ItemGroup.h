@@ -26,9 +26,12 @@ extern NSString* ITEM_GROUP_MODIFIED;
     Item *satisfyingItem;
     id<ItemGroupPricingStrategy> strategy;
     
+    // Temporary, cached values
+    NSSet* itemIds;
 }
 
 @property (retain,readonly) NSMutableArray *listOfItems;
+@property (retain,readonly) NSSet *itemIds;
 @property (retain,nonatomic) Item *satisfyingItem;
 @property (readonly) BOOL satisfied;
 
@@ -42,10 +45,13 @@ extern NSString* ITEM_GROUP_MODIFIED;
 
 -(ItemGroup *) copy;
 
+-(ItemGroup *)optimalPickFromItems:(NSArray*)items;
+
 //Access Methods
 - (BOOL) containsItem: (Item *) anItem;
 
 - (NSDecimalNumber *) price;
+- (NSDecimalNumber *) savings;
 
 //Mutation Methods
 - (void) addItem: (Item *) anItem;

@@ -25,7 +25,6 @@ NSString* ITEM_GROUP_MODIFIED = @"CroutonLabs/ItemGroupModified";
     self = [super init];
     
     listOfItems = [[NSMutableArray alloc] initWithCapacity:0];
-    satisfyingItem = [[Item alloc] init];
     
     return self;
 }
@@ -72,8 +71,6 @@ NSString* ITEM_GROUP_MODIFIED = @"CroutonLabs/ItemGroupModified";
         }
     }
     
-    satisfyingItem = [[Item alloc] init];
-    
     return self;
     
 }
@@ -114,22 +111,24 @@ NSString* ITEM_GROUP_MODIFIED = @"CroutonLabs/ItemGroupModified";
 
 -(BOOL)containsItem:(Item *)anItem
 {
-    for (Item *item in listOfItems) {
-        if ([anItem.name isEqualToString:item.name]) {
-            return YES;
-        }
-    }
-    return NO;
+    return [[self itemIds] containsObject:[NSNumber numberWithUnsignedInteger:[anItem primaryKey]]];
 }
 
 -(BOOL)satisfied
 {
-    return [self containsItem:satisfyingItem];
+    return satisfyingItem && [self containsItem:satisfyingItem];
 }
 
 -(NSDecimalNumber *)price
 {
+    if(!satisfyingItem) return nil;
     return [strategy priceForItem:satisfyingItem];
+}
+
+-(NSDecimalNumber *)savings
+{
+    if(!satisfyingItem) return nil;
+    return [[[self satisfyingItem] price] decimalNumberBySubtracting:[self price]];
 }
 
 -(void)setSatisfyingItem:(Item *)anItem
@@ -143,16 +142,30 @@ NSString* ITEM_GROUP_MODIFIED = @"CroutonLabs/ItemGroupModified";
 -(void)addItem:(Item *)anItem
 {
     [listOfItems addObject:anItem];
+    itemIds = nil;
 }
 
 -(void) addListOfItems:(NSArray *)items
 {
     [listOfItems addObjectsFromArray:items];
+    itemIds = nil;
 }
 
 -(void)addMenu:(Menu *)aMenu
 {
     [listOfItems addObjectsFromArray:[aMenu flatItemList]];
+    itemIds = nil;
+}
+
+-(NSSet*)itemIds{
+    if(!itemIds){
+        NSMutableSet* ids = [NSMutableSet setWithCapacity:[listOfItems count]];
+        for(Item* item in listOfItems){
+            [ids addObject:[NSNumber numberWithUnsignedInteger:[item primaryKey]]];
+        }
+        itemIds = ids;
+    }
+    return itemIds;
 }
 
 - (NSString *) descriptionWithIndent:(NSInteger) indentLevel
@@ -174,10 +187,22 @@ NSString* ITEM_GROUP_MODIFIED = @"CroutonLabs/ItemGroupModified";
     return output;
 }
 
--(void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:ITEM_MODIFIED object:satisfyingItem];
+-(ItemGroup*)optimalPickFromItems:(NSArray *)items{
+    NSSet* ids = [self itemIds];
+    NSArray* applicable = [items filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(Item* item, NSDictionary *bindings) {
+        return [ids containsObject:[NSNumber numberWithUnsignedInteger:[item primaryKey]]];
+    }]];
+    if(![applicable count]){
+        return nil;
+    }
+    ItemGroup* new = [self copy];
+    [new setSatisfyingItem:[strategy optimalItem:applicable]];
+    return new;
 }
 
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 @end

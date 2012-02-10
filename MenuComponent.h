@@ -21,12 +21,12 @@ extern NSString* MENU_COMPONENT_PK_CHANGED;
 @interface MenuComponent : NSObject <NSCoding> {
     NSString *name;
     NSString *desc;
-    NSInteger primaryKey;
+    NSUInteger primaryKey;
 }
 
 @property (retain, nonatomic) NSString *name;
 @property (retain, nonatomic) NSString *desc;
-@property (readonly) NSInteger primaryKey;
+@property (readonly) NSUInteger primaryKey;
 
 -(MenuComponent *) initFromData:(NSDictionary *) inputData;
 
