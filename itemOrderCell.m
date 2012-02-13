@@ -9,6 +9,7 @@
 #import "ItemOrderCell.h"
 #import "Item.h"
 #import "Utilities.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation ItemOrderCell
 
@@ -22,7 +23,7 @@
 {
     self = [super initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:[ItemOrderCell cellIdentifier]];
     if (self) {
-        
+        deleteImage = [UIImage imageNamed:@"Delete"];
     }
     return self;
 }
@@ -42,6 +43,19 @@
     [[self textLabel] setText:[item name]];
     [[self detailTextLabel] setText:[Utilities FormatToPrice:[item price]]];
     
+}
+
+-(void)willTransitionToState:(UITableViewCellStateMask)state{
+    [super willTransitionToState:state];
+    if(state & UITableViewCellStateShowingDeleteConfirmationMask){
+        NSLog(@"transition");
+        for(UIView* subview in [self subviews]){
+            if([NSStringFromClass([subview class]) isEqualToString:@"UITableViewCellDeleteConfirmationControl"]){
+                UIView* buttonThingy = [[subview subviews] objectAtIndex:0];
+                [[buttonThingy layer] setContents:(id)[deleteImage CGImage]];
+            }
+        }
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
