@@ -87,4 +87,11 @@
     #endif
 }
 
++(NSString*)uuid{
+    CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
+    NSString* uuidString = [(__bridge_transfer NSString*) CFUUIDCreateString(kCFAllocatorDefault, uuid) lowercaseString];
+    CFRelease(uuid);
+    return uuidString;
+}
+
 @end

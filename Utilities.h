@@ -27,4 +27,6 @@ typedef enum LogLevel {
 
 +(void)logLevel:(LogLevel)level message:(NSString*)message;
 
++(NSString*)uuid;
+
 @end
