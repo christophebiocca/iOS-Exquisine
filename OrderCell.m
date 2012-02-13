@@ -41,7 +41,9 @@
     [[self detailTextLabel] setFont:descFont];
     
     [[self textLabel] setText:[order name]];
+    [[self textLabel] setAdjustsFontSizeToFitWidth:YES];
     [[self detailTextLabel] setText:[Utilities FormatToPrice:[order subtotalPrice]]];
+    [[self detailTextLabel] setAdjustsFontSizeToFitWidth:YES];
     
 }
 

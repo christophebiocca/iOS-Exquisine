@@ -38,7 +38,9 @@
     [[self detailTextLabel] setFont:descFont];
     
     [[self textLabel] setText:[choice name]];
+    [[self textLabel] setAdjustsFontSizeToFitWidth:YES];
     [[self detailTextLabel] setText:[Utilities FormatToPrice:[choice price]]];
+    [[self detailTextLabel] setAdjustsFontSizeToFitWidth:YES];
     
     [self setSelectionStyle:UITableViewCellSelectionStyleNone];
     

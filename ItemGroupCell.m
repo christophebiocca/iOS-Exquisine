@@ -39,6 +39,7 @@
     [[self detailTextLabel] setFont:descFont];
     
     [[self textLabel] setText:[itemGroup name]];
+    [[self textLabel] setAdjustsFontSizeToFitWidth:YES];
     [[self detailTextLabel] setText:@""];
     
     if([itemGroup satisfied])

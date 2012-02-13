@@ -43,7 +43,9 @@
     [[self detailTextLabel] setFont:descFont];
     
     [[self textLabel] setText:[combo name]];
+    [[self textLabel] setAdjustsFontSizeToFitWidth:YES];
     [[self detailTextLabel] setText:@""];
+    [[self detailTextLabel] setAdjustsFontSizeToFitWidth:YES];
     
     if( [style isEqualToString:@"plain"])
     {
