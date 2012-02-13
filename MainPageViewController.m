@@ -182,7 +182,6 @@
                              [self performSelector:@selector(dismissView) withObject:self afterDelay:1.5];
                           }];
     
-    [theOrderManager setOrder:currentOrder];
     [self presentModalViewController:[paymentStack navigationController] animated:YES];
 }
 
