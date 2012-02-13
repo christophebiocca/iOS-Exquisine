@@ -59,14 +59,21 @@
     
     [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
     
-    if (!([indexPath section] == [[itemInfo options] count]))
+    if(![[itemInfo desc] isEqualToString:@""])
     {
-        
-        Option *thisOption = [[itemInfo options] objectAtIndex:[indexPath section]];
-        Choice *thisChoice = [[thisOption choiceList] objectAtIndex:[indexPath row]];
-        [thisChoice toggleSelected];
-        [tableView reloadSections:[NSIndexSet indexSetWithIndex:[indexPath section]] withRowAnimation:UITableViewRowAnimationNone];        
+        if([indexPath section] > 0)
+        {
+            Option *thisOption = [[itemInfo options] objectAtIndex:([indexPath section] - 1)];
+            Choice *thisChoice = [[thisOption choiceList] objectAtIndex:[indexPath row]];
+            [thisChoice toggleSelected];
+            [tableView reloadSections:[NSIndexSet indexSetWithIndex:([indexPath section] - 1)] withRowAnimation:UITableViewRowAnimationNone];
+        }
     }
+    
+    Option *thisOption = [[itemInfo options] objectAtIndex:[indexPath section]];
+    Choice *thisChoice = [[thisOption choiceList] objectAtIndex:[indexPath row]];
+    [thisChoice toggleSelected];
+    [tableView reloadSections:[NSIndexSet indexSetWithIndex:[indexPath section]] withRowAnimation:UITableViewRowAnimationNone];
     
 }
 

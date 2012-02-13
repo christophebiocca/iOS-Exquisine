@@ -13,18 +13,19 @@
 #import "Utilities.h"
 #import "OrderManagementDelegate.h"
 #import "AlertPrompt.h"
+#import "OrderManager.h"
 
 @implementation OrderSummaryViewController
 
-@synthesize orderInfo;
+@synthesize theOrderManager;
 @synthesize delegate;
 
--(OrderSummaryViewController *)initializeWithOrder:(Order *) anOrder
+-(OrderSummaryViewController *)initializeWithOrderManager:(OrderManager *) anOrderManager
 {    
     
-    orderInfo = anOrder;
-    orderSummaryRenderer = [[OrderSummaryRenderer alloc] initWithOrder:orderInfo];
-    [[self navigationItem] setTitle:orderInfo.status];
+    theOrderManager = anOrderManager;
+    orderSummaryRenderer = [[OrderSummaryRenderer alloc] initWithOrder:[anOrderManager thisOrder]];
+    [[self navigationItem] setTitle:[anOrderManager thisOrder].status];
     
     return self;
 }
@@ -72,7 +73,7 @@
     [orderSummaryRenderer redraw];
     [[orderView orderTable] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
 
-    if([orderInfo isFavorite])
+    if([[theOrderManager thisOrder] isFavorite])
     {
         [[orderView favoriteButton] setTintColor:[UIColor yellowColor]];
     }
@@ -105,7 +106,7 @@
 
 -(void) toggleWhetherFavorite
 {
-    if (!orderInfo.isFavorite)
+    if (![theOrderManager thisOrder].isFavorite)
     {
         [self promptUserForRename];
     }
@@ -127,6 +128,15 @@
 
             //This is pretty bad form, but I think it'll be ok.. =/
             [delegate addToFavoritesForController:(id)self];
+            
+            if([[theOrderManager thisOrder] isFavorite])
+            {
+                [[orderView favoriteButton] setTintColor:[UIColor yellowColor]];
+            }
+            else
+            {
+                [[orderView favoriteButton] setTintColor:[UIColor whiteColor]];
+            }
         }
     }
     
@@ -135,7 +145,14 @@
         if (buttonIndex == 1)
         {
             [delegate deleteFromFavoritesForController:(id)self];
-            [self popToMainPage];
+            if([[theOrderManager thisOrder] isFavorite])
+            {
+                [[orderView favoriteButton] setTintColor:[UIColor yellowColor]];
+            }
+            else
+            {
+                [[orderView favoriteButton] setTintColor:[UIColor whiteColor]];
+            }
         }
     }
     
@@ -150,7 +167,7 @@
 -(void)promptUserForRename
 {
     
-    AlertPrompt *renamePrompt = [[AlertPrompt alloc] initWithPromptTitle:@"Choose a name for your order" message:orderInfo.name delegate:self cancelButtonTitle:@"Cancel" okButtonTitle:@"OK"];
+    AlertPrompt *renamePrompt = [[AlertPrompt alloc] initWithPromptTitle:@"Choose a name for your order" message:[theOrderManager thisOrder].name delegate:self cancelButtonTitle:@"Cancel" okButtonTitle:@"OK"];
     [renamePrompt setTag:2];
     
     [renamePrompt show];
@@ -158,7 +175,7 @@
 
 -(void)promptForFavDeletion
 {
-    UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Delete from favorites?" message:[NSString stringWithFormat: @"If you unfavorite this order it will dissapear. Are you sure you want that?", [Utilities FormatToPrice:[orderInfo totalPrice]]] delegate:self cancelButtonTitle:@"Oh... nevermind" otherButtonTitles:@"Yep", nil];
+    UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Delete from favorites?" message:[NSString stringWithFormat: @"If you unfavorite this order it will dissapear. Are you sure you want that?", [Utilities FormatToPrice:[[theOrderManager thisOrder] totalPrice]]] delegate:self cancelButtonTitle:@"Oh... nevermind" otherButtonTitles:@"Yep", nil];
     
     [areYouSure setTag:3];
     
@@ -167,8 +184,29 @@
 
 -(void)renameOrder:(NSString *)newName
 {
-    [orderInfo setName:newName];
+    [[theOrderManager thisOrder] setName:newName];
     [[self navigationItem] setTitle:newName];
+}
+
+-(void)didPresentAlertView:(UIAlertView *)alertView
+{
+    if ([alertView tag] == 2) {
+        //All this hackery is just to highlight the text by default.
+        
+        AlertPrompt *renamePrompt = (id)alertView;
+        
+        NSString *defaultName = [NSString stringWithString:[[theOrderManager thisOrder] defaultFavName]];
+        
+        [[renamePrompt textField] setText:defaultName];
+        
+        UITextField* field = [renamePrompt textField];
+        
+        UITextRange *textRange = [field 
+                                  textRangeFromPosition:[field beginningOfDocument] 
+                                  toPosition:[field endOfDocument]];
+        
+        [field setSelectedTextRange:textRange];
+    }
 }
 
 @end

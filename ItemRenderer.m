@@ -30,26 +30,54 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
+    if (![[itemInfo desc] isEqualToString:@""]) {
+        return ([[itemInfo options] count] + 1);
+    }
     return ([[itemInfo options] count]);
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if(![[itemInfo desc] isEqualToString:@""])
+    {
+        if (section == 0) 
+        {
+            return 1;
+        }
+        else
+        {
+            return [[[[itemInfo options] objectAtIndex:(section - 1)] choiceList] count];
+        }
+    }
     return [[[[itemInfo options] objectAtIndex:section] choiceList] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    if ([indexPath section] == [[itemInfo options] count]) 
+    if(![[itemInfo desc] isEqualToString:@""])
     {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
+        if([indexPath section] == 0)
+        {
+            ChoiceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+            if (cell == nil) {
+                cell = [[ChoiceCell alloc] init];
+            }
+            [[cell textLabel] setText:[itemInfo desc]];
+            return cell;
         }
-        
-        
-        return cell;
+        else
+        {
+            ChoiceCell *cell = [tableView dequeueReusableCellWithIdentifier:[ChoiceCell cellIdentifier]];
+            if (cell == nil) {
+                cell = [[ChoiceCell alloc] init];
+            }
+            
+            Option *thisOption = [[itemInfo options] objectAtIndex:([indexPath section] - 1)];
+            Choice *thisChoice = [[thisOption choiceList] objectAtIndex:[indexPath row]];
+            [cell setChoice:thisChoice];    
+            
+            return cell;
+        }
     }
     
     ChoiceCell *cell = [tableView dequeueReusableCellWithIdentifier:[ChoiceCell cellIdentifier]];
@@ -67,8 +95,10 @@
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if (section == [[itemInfo options] count]) {
-        return @"Price";
+    if (![[itemInfo desc] isEqualToString:@""]) {
+        if(section == 0)
+            return @"Description";
+        return [[[itemInfo options] objectAtIndex:(section - 1)] name];
     }
     return [[[itemInfo options] objectAtIndex:section] name];
 }

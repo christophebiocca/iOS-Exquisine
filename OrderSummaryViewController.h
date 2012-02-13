@@ -13,11 +13,12 @@
 @class Order;
 @class OrderView;
 @class OrderSummaryRenderer;
+@class OrderManager;
 
 @interface OrderSummaryViewController : UITableViewController <UITableViewDelegate,UIAlertViewDelegate>
 {
     
-    Order *orderInfo;
+    OrderManager *theOrderManager;
     OrderView *orderView;
     OrderSummaryRenderer *orderSummaryRenderer;  
     UIBarButtonItem *optionsButton;
@@ -26,11 +27,11 @@
     
 }
 
-@property (retain) Order *orderInfo;
+@property (retain) OrderManager *theOrderManager;
 
 @property (retain) id<OrderManagementDelegate> delegate;
 
--(OrderSummaryViewController *)initializeWithOrder:(Order *) anOrder;
+-(OrderSummaryViewController *)initializeWithOrderManager:(OrderManager *) anOrderManager;
 
 -(void) toggleWhetherFavorite;
 

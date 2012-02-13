@@ -141,7 +141,8 @@
 -(void)pendingButtonPressed
 {
     Order *pendingOrder = [[self pendingOrders] lastObject];
-    OrderSummaryViewController *orderSummaryController = [[OrderSummaryViewController alloc] initializeWithOrder:pendingOrder];
+    [theOrderManager setOrder:pendingOrder];
+    OrderSummaryViewController *orderSummaryController = [[OrderSummaryViewController alloc] initializeWithOrderManager:theOrderManager];
     [orderSummaryController setDelegate:self];
     
     [[self navigationController] pushViewController:orderSummaryController animated:YES];
@@ -224,11 +225,15 @@
     
     //Move view control to the favorites view.
     
-    FavoritesViewController *favoritesViewController = [[FavoritesViewController alloc] initWithFavoritesListAndMenu:favoriteOrders :theMenu];
-    
-    [favoritesViewController setDelegate:self];
-    
-    [[self navigationController] setViewControllers:[[NSArray alloc]initWithObjects:self,favoritesViewController,orderViewController, nil] animated:YES]; 
+    //I hate myself right now:
+    if (![orderViewController isKindOfClass:[OrderSummaryViewController class]])
+    {
+        FavoritesViewController *favoritesViewController = [[FavoritesViewController alloc] initWithFavoritesListAndMenu:favoriteOrders :theMenu];
+        
+        [favoritesViewController setDelegate:self];
+        
+        [[self navigationController] setViewControllers:[[NSArray alloc]initWithObjects:self,favoritesViewController,orderViewController, nil] animated:YES]; 
+    }
     
 }
 
