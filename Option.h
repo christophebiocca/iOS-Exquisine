@@ -59,7 +59,11 @@ extern NSString* OPTION_INVALID_DESELECTION;
 
 - (void) selectChoiceByIndex:(NSInteger) aChoice;
 
+- (void) selectChoiceByIndexUnsafe:(NSInteger) aChoice;
+
 - (void) deselectChoiceByIndex:(NSInteger) aChoice;
+
+- (void) deselectChoiceByIndexUnsafe:(NSInteger) aChoice;
 
 - (void) toggleChoiceByIndex:(NSInteger) aChoice;
 

@@ -39,6 +39,12 @@ static NSURL* serverURL;
     
 #if DEBUG
     serverString = @"http://staging.croutonlabs.com";
+    
+     //@"http://10.172.71.61:8000";  //Drew
+    
+    //@"http://10.172.71.154:8000/";  //Jake
+    
+    //@"http://staging.croutonlabs.com";  //Staging
 #else
     serverString = @"http://croutonlabs.com";
 #endif

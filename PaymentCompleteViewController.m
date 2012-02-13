@@ -47,6 +47,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [paymentView setSuccessInfo:successInfo];
+    [[self navigationItem] setTitle: @"Payment complete"];
     [[paymentView done] setTarget:self];
     [[paymentView done] setAction:@selector(done)];
 }

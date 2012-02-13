@@ -88,6 +88,11 @@ NSString* CHOICE_CHANGED = @"CroutonLabs/ChoiceChanged";
     [[NSNotificationCenter defaultCenter] postNotificationName:CHOICE_CHANGED object:self];
 }
 
+-(void)setSelectedUnsafe:(BOOL)isSelected
+{
+    selected = isSelected;
+}
+
 -(void)toggleSelected
 {
     if(selected)
@@ -101,6 +106,12 @@ NSString* CHOICE_CHANGED = @"CroutonLabs/ChoiceChanged";
     isFree = free;
     [[NSNotificationCenter defaultCenter] postNotificationName:CHOICE_FREE_CHANGED object:self];
     [[NSNotificationCenter defaultCenter] postNotificationName:CHOICE_CHANGED object:self];
+    
+}
+
+-(void)setIsFreeUnsafe:(BOOL)free
+{
+    isFree = free;
     
 }
 

@@ -151,16 +151,32 @@ NSString* OPTION_INVALID_DESELECTION = @"CroutonLabs/OptionInvalidDeselection";
 }
 
 //These three selectors just call the other selectors
--(void)selectChoiceByIndex:(NSInteger)aChoice{
+-(void)selectChoiceByIndex:(NSInteger)aChoice
+{
     
     [[choiceList objectAtIndex:aChoice] setSelected:YES];
     
 }
 
--(void)deselectChoiceByIndex:(NSInteger)aChoice{
+-(void)selectChoiceByIndexUnsafe:(NSInteger)aChoice
+{
+    
+    [[choiceList objectAtIndex:aChoice] setSelectedUnsafe:YES];
+    
+}
+
+-(void)deselectChoiceByIndex:(NSInteger)aChoice
+{
     
     [[choiceList objectAtIndex:aChoice] setSelected:NO];
     
+}
+
+-(void)deselectChoiceByIndexUnsafe:(NSInteger)aChoice
+{
+    
+    [[choiceList objectAtIndex:aChoice] setSelectedUnsafe:NO];
+
 }
 
 -(void)toggleChoiceByIndex:(NSInteger)aChoice
@@ -193,9 +209,9 @@ NSString* OPTION_INVALID_DESELECTION = @"CroutonLabs/OptionInvalidDeselection";
                     if([self numberOfSelectedChoices] > upperBound)
                     {
                         NSMutableArray *helper = [[NSMutableArray alloc] initWithArray:choiceList];
-                        [helper removeObject:theChoice];
+                        [helper removeObjectIdenticalTo:theChoice];
                         for (Choice *aChoice in helper) {
-                            [aChoice setSelected:NO];
+                            [aChoice setSelectedUnsafe:NO];
                         }
                     }
                     [[NSNotificationCenter defaultCenter] postNotificationName:OPTION_MODIFIED object:self];
@@ -208,7 +224,7 @@ NSString* OPTION_INVALID_DESELECTION = @"CroutonLabs/OptionInvalidDeselection";
                     }
                     else
                     {
-                        [theChoice setSelected:NO];
+                        [theChoice setSelectedUnsafe:NO];
                         [[NSNotificationCenter defaultCenter] postNotificationName:OPTION_INVALID_SELECTION object:self];
                     }
                 }
@@ -217,7 +233,7 @@ NSString* OPTION_INVALID_DESELECTION = @"CroutonLabs/OptionInvalidDeselection";
             {
                 if ([self numberOfSelectedChoices] < lowerBound)
                 {
-                    [theChoice setSelected:YES];
+                    [theChoice setSelectedUnsafe:YES];
                     [[NSNotificationCenter defaultCenter] postNotificationName:OPTION_INVALID_DESELECTION object:self];
                 }
                 else
@@ -248,11 +264,11 @@ NSString* OPTION_INVALID_DESELECTION = @"CroutonLabs/OptionInvalidDeselection";
         //Recovery routine:
         int i = 0;
         while (([self numberOfSelectedChoices] > upperBound)) {
-            [self deselectChoiceByIndex:i];
+            [self deselectChoiceByIndexUnsafe:i];
             i++;
         }
         while (([self numberOfSelectedChoices] < lowerBound)) {
-            [self selectChoiceByIndex:i];
+            [self selectChoiceByIndexUnsafe:i];
             i++;
         }
     }
@@ -260,11 +276,13 @@ NSString* OPTION_INVALID_DESELECTION = @"CroutonLabs/OptionInvalidDeselection";
     int j = 0;
     for (Choice *aChoice in [self selectedChoices]) {
         if (j >= numberOfFreeChoices) 
-            [aChoice setIsFree:NO];
+            [aChoice setIsFreeUnsafe:NO];
         else
-            [aChoice setIsFree:YES];
+            [aChoice setIsFreeUnsafe:YES];
         j++;
     }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:OPTION_MODIFIED object:self];
 }
 
 -(BOOL)isEffectivelyEqual:(Option *)anOption

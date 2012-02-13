@@ -63,6 +63,7 @@
                 cell = [[ChoiceCell alloc] init];
             }
             [[cell textLabel] setText:[itemInfo desc]];
+            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             return cell;
         }
         else

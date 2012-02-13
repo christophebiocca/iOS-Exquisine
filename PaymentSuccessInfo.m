@@ -10,8 +10,18 @@
 
 @implementation PaymentSuccessInfo
 
+@synthesize authCode;
+@synthesize messageText;
+@synthesize trnAmount;
+@synthesize trnDate;
+
 -(id)initWithData:(NSDictionary*)data{
     if(self = [super init]){
+        
+        authCode = [data objectForKey:@"authCode"];
+        messageText = [data objectForKey:@"messageText"];
+        trnAmount = [data objectForKey:@"trnAmount"];
+        trnDate = [data objectForKey:@"trnDate"];
         
     }
     return self;

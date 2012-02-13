@@ -11,7 +11,12 @@
 @interface PaymentCompletedView : UIView{
     UIToolbar* bar;
     UIBarButtonItem* done;
-    UILabel* message;
+    UILabel* authCode;
+    UILabel* messageText;
+    UILabel* trnAmount;
+    UILabel* trnDate;
+    UILabel* pickupTime;
+    UILabel* signoff;
 }
 
 -(void)setSuccessInfo:(PaymentSuccessInfo*)info;

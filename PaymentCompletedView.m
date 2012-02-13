@@ -7,6 +7,7 @@
 //
 
 #import "PaymentCompletedView.h"
+#import "PaymentSuccessInfo.h"
 
 @implementation PaymentCompletedView
 
@@ -25,17 +26,35 @@
         [bar setItems:[NSArray arrayWithObjects:space, done, nil]];
         [self addSubview:bar];
         
-        message = [[UILabel alloc] initWithFrame:CGRectMake(0, 50, 0, 0)];
-        [message setLineBreakMode:UILineBreakModeWordWrap];
-        [message setNumberOfLines:0];
-        [message setText:@"Success"];
-        [self addSubview:message];
+        authCode = [[UILabel alloc] init];
+        messageText = [[UILabel alloc] init];
+        trnAmount = [[UILabel alloc] init];
+        trnDate = [[UILabel alloc] init];
+        pickupTime = [[UILabel alloc] init];
+        signoff = [[UILabel alloc] init];
+        
+        UIFont *theFont = [UIFont fontWithName:@"Helvetica" size:16];
+        
+        [authCode setFont:theFont];
+        [messageText setFont:theFont];
+        [trnAmount setFont:theFont];
+        [trnDate setFont:theFont];
+        [pickupTime setFont:theFont];
+        [signoff setFont:theFont];
+        
+        [self addSubview:authCode];
+        [self addSubview:messageText];
+        [self addSubview:trnAmount];
+        [self addSubview:trnDate];
+        [self addSubview:pickupTime];
+        [self addSubview:signoff];
     }
     return self;
 }
 
 #define TOOLBAR_HEIGHT 44
-#define PADDING 10
+#define PADDING 6
+#define LABELHEIGHT 30
 
 -(void)layoutSubviews{
     CGSize lims = [self frame].size;
@@ -45,14 +64,64 @@
             .height = TOOLBAR_HEIGHT
         }
     }];
-    [message setFrame:(CGRect){
+    [messageText setFrame:(CGRect){
         .origin = {
             .x = PADDING,
-            .y = TOOLBAR_HEIGHT + PADDING
+            .y = TOOLBAR_HEIGHT + PADDING + (PADDING + LABELHEIGHT) * 0
         },
         .size = {
             .width = lims.width - 2*PADDING,
-            .height = lims.height - 2*PADDING - TOOLBAR_HEIGHT
+            .height = LABELHEIGHT
+        }
+    }];
+    [authCode setFrame:(CGRect){
+        .origin = {
+            .x = PADDING,
+            .y = TOOLBAR_HEIGHT + PADDING + (PADDING + LABELHEIGHT) * 1
+        },
+        .size = {
+            .width = lims.width - 2*PADDING,
+            .height = LABELHEIGHT
+        }
+    }];
+    [trnAmount setFrame:(CGRect){
+        .origin = {
+            .x = PADDING,
+            .y = TOOLBAR_HEIGHT + PADDING + (PADDING + LABELHEIGHT) * 2
+        },
+        .size = {
+            .width = lims.width - 2*PADDING,
+            .height = LABELHEIGHT
+        }
+    }];
+    [trnDate setFrame:(CGRect){
+        .origin = {
+            .x = PADDING,
+            .y = TOOLBAR_HEIGHT + PADDING + (PADDING + LABELHEIGHT) * 3
+        },
+        .size = {
+            .width = lims.width - 2*PADDING,
+            .height = LABELHEIGHT
+        }
+    }];
+    [pickupTime setFrame:(CGRect){
+        .origin = {
+            .x = PADDING,
+            .y = TOOLBAR_HEIGHT + PADDING + (PADDING + LABELHEIGHT) * 5
+        },
+        .size = {
+            .width = lims.width - 2*PADDING,
+            .height = LABELHEIGHT
+        }
+    }];
+    [signoff setFrame:(CGRect){
+        .origin = {
+            .x = PADDING,
+            .y = TOOLBAR_HEIGHT + PADDING + (PADDING + LABELHEIGHT) * 6
+        },
+        .size = {
+            .width = lims.width - 2*PADDING,
+            .height = LABELHEIGHT
         }
     }];
 }
@@ -67,6 +136,13 @@
 */
 
 -(void)setSuccessInfo:(PaymentSuccessInfo*)info{
+    
+    [messageText setText: [NSString stringWithFormat:@"Transaction result: %@", [info messageText]]];
+    [authCode setText: [NSString stringWithFormat:@"Authorization code: %@", [info authCode]]];
+    [trnAmount setText: [NSString stringWithFormat:@"Total: $%@", [info trnAmount]]];
+    [trnDate setText: [NSString stringWithFormat:@"Date: %@", [info trnDate]]];
+    [pickupTime setText: @"Your pita will be done in 5 to 10 minutes."];
+    [signoff setText:@"Enjoy!"];
     
 }
 

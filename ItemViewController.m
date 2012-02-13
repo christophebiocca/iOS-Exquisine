@@ -68,6 +68,7 @@
             [thisChoice toggleSelected];
             [tableView reloadSections:[NSIndexSet indexSetWithIndex:([indexPath section] - 1)] withRowAnimation:UITableViewRowAnimationNone];
         }
+        return;
     }
     
     Option *thisOption = [[itemInfo options] objectAtIndex:[indexPath section]];

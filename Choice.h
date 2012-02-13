@@ -41,9 +41,13 @@ extern NSString* CHOICE_CHANGED;
 
 - (void)setSelected:(BOOL)isSelected;
 
+- (void)setSelectedUnsafe:(BOOL)isSelected;
+
 - (void)toggleSelected;
 
 - (void)setIsFree:(BOOL)free;
+
+-(void)setIsFreeUnsafe:(BOOL)free;
 
 - (NSDecimalNumber *)price;
 

@@ -175,17 +175,22 @@
                                }
                            }
                             completionBlock:^() {
-                                
                                 [self dismissModalViewControllerAnimated:YES];
+                                
                             } 
                           cancellationBlock:^{
-                              [self dismissModalViewControllerAnimated:YES];
+                             [self performSelector:@selector(dismissView) withObject:self afterDelay:1.5];
                           }];
     
     [theOrderManager setOrder:currentOrder];
     [self presentModalViewController:[paymentStack navigationController] animated:YES];
 }
 
+-(void)dismissView
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+     
 -(NSInteger)numberOfFavorites
 {
     return [favoriteOrders count];
@@ -284,7 +289,7 @@
 {
     if (theMenu)
     {
-        if ([currentOrder.itemList count] > 0 )
+        if ([currentOrder.itemList count] > 0 || [currentOrder.comboList count] > 0)
         {
             [mainPageView.createOrderButton setTitle:@"Continue Order" forState:UIControlStateNormal];
         }
