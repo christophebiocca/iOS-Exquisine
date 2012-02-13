@@ -38,7 +38,7 @@ NSString* OPTION_INVALID_DESELECTION = @"CroutonLabs/OptionInvalidDeselection";
     
     lowerBound = [[inputData objectForKey:@"min_choice"] intValue];
     upperBound = [[inputData objectForKey:@"max_choice"] intValue];
-    numberOfFreeChoices = [[inputData objectForKey:@"free_choices"] intValue];
+    numberOfFreeChoices = [[inputData objectForKey:@"free_choice"] intValue];
     
     choiceList = [[NSMutableArray alloc] initWithCapacity:0];
     
@@ -270,6 +270,18 @@ NSString* OPTION_INVALID_DESELECTION = @"CroutonLabs/OptionInvalidDeselection";
         while (([self numberOfSelectedChoices] < lowerBound)) {
             [self selectChoiceByIndexUnsafe:i];
             i++;
+        }
+    }
+    
+    if ([[self selectedChoices] count] >= numberOfFreeChoices) {
+        for (Choice *aChoice in choiceList) {
+            [aChoice setIsFreeUnsafe:NO];
+        }
+    }
+    else
+    {
+        for (Choice *aChoice in choiceList) {
+            [aChoice setIsFreeUnsafe:YES];
         }
     }
     
