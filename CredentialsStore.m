@@ -40,9 +40,7 @@ static CredentialsStore* store = nil;
         CFRelease(data);
     } else if(res == errSecItemNotFound){
         // Create it.
-        CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
-        NSString* uuidString = [(__bridge_transfer NSString*) CFUUIDCreateString(kCFAllocatorDefault, uuid) lowercaseString];
-        CFRelease(uuid);
+        NSString* uuidString = [Utilities uuid];
         CFDataRef data = (__bridge CFDataRef)[uuidString dataUsingEncoding:NSASCIIStringEncoding];
         CFDictionaryRemoveValue(searchDict, kSecReturnData);
         CFDictionaryAddValue(searchDict, kSecAttrAccessible, kSecAttrAccessibleAfterFirstUnlock);
