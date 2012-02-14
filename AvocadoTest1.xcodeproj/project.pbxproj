@@ -198,7 +198,7 @@
 		2352723714DA322900DDC7FA /* pfLogo_low.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pfLogo_low.png; sourceTree = "<group>"; };
 		2352724014DB145600DDC7FA /* IndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndicatorView.h; sourceTree = "<group>"; };
 		2352724114DB145600DDC7FA /* IndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndicatorView.m; sourceTree = "<group>"; };
-		23658CBC14BDFB15002C0996 /* AvocadoTest1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AvocadoTest1.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		23658CBC14BDFB15002C0996 /* Pita Factory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pita Factory.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		23658CC014BDFB15002C0996 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		23658CC214BDFB15002C0996 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		23658CC414BDFB15002C0996 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -668,7 +668,7 @@
 		23658CBD14BDFB15002C0996 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				23658CBC14BDFB15002C0996 /* AvocadoTest1.app */,
+				23658CBC14BDFB15002C0996 /* Pita Factory.app */,
 				23658CE014BDFB15002C0996 /* AvocadoTest1Tests.octest */,
 			);
 			name = Products;
@@ -1412,7 +1412,7 @@
 			);
 			name = AvocadoTest1;
 			productName = AvocadoTest1;
-			productReference = 23658CBC14BDFB15002C0996 /* AvocadoTest1.app */;
+			productReference = 23658CBC14BDFB15002C0996 /* Pita Factory.app */;
 			productType = "com.apple.product-type.application";
 		};
 		23658CDF14BDFB15002C0996 /* AvocadoTest1Tests */ = {
@@ -1710,7 +1710,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AvocadoTest1/AvocadoTest1-Prefix.pch";
 				INFOPLIST_FILE = "AvocadoTest1/AvocadoTest1-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Pita Factory";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -1723,7 +1723,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AvocadoTest1/AvocadoTest1-Prefix.pch";
 				INFOPLIST_FILE = "AvocadoTest1/AvocadoTest1-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Pita Factory";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
