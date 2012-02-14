@@ -272,6 +272,7 @@
     [self getLocation];
     
     [self updatePendingButtonState];
+    [self resetApplicationBadgeNumber];
     
     [self updateCreateButtonState];
     [self updateStoreHourInfo];
@@ -493,7 +494,7 @@
     return nil;
 }
 
--(void) resetApplicationBadgeIconNumber
+-(void) resetApplicationBadgeNumber
 {
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:(-[[UIApplication sharedApplication] applicationIconBadgeNumber])];
 }
@@ -508,7 +509,7 @@
         if ( thisOrderIdentifier ) {
             [[self dereferenceOrderIdentifier:thisOrderIdentifier] setComplete];
         }
-        [self resetApplicationBadgeIconNumber];
+        [self resetApplicationBadgeNumber];
     }
     
     [self updatePendingButtonState];
@@ -525,7 +526,7 @@
     if ( thisOrderIdentifier ) {
         [[self dereferenceOrderIdentifier:thisOrderIdentifier] setComplete];
     }
-    [self resetApplicationBadgeIconNumber];
+    [self resetApplicationBadgeNumber];
     [self updatePendingButtonState];
 
 }
