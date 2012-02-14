@@ -133,6 +133,8 @@
 		D9AF662614D22C0A00632EA8 /* JSONAPICall.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AF662514D22C0A00632EA8 /* JSONAPICall.m */; };
 		D9B0F6BD14E075A000CA3B13 /* GetPaymentProfileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B0F6BC14E075A000CA3B13 /* GetPaymentProfileInfo.m */; };
 		D9B0F6C214E075E400CA3B13 /* PaymentProfileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B0F6C114E075E400CA3B13 /* PaymentProfileInfo.m */; };
+		D9B9D39E14EA4B7300D6B0BC /* PaymentFailureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B9D39D14EA4B7300D6B0BC /* PaymentFailureViewController.m */; };
+		D9B9D3A214EA4B8800D6B0BC /* PaymentFailureView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B9D3A114EA4B8800D6B0BC /* PaymentFailureView.m */; };
 		D9D658C214E5EFE000ACDBF6 /* Delete.png in Resources */ = {isa = PBXBuildFile; fileRef = D9D658C014E5EFE000ACDBF6 /* Delete.png */; };
 		D9D658C314E5EFE000ACDBF6 /* Delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9D658C114E5EFE000ACDBF6 /* Delete@2x.png */; };
 /* End PBXBuildFile section */
@@ -381,6 +383,10 @@
 		D9B0F6BC14E075A000CA3B13 /* GetPaymentProfileInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetPaymentProfileInfo.m; sourceTree = "<group>"; };
 		D9B0F6C014E075E400CA3B13 /* PaymentProfileInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentProfileInfo.h; sourceTree = "<group>"; };
 		D9B0F6C114E075E400CA3B13 /* PaymentProfileInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentProfileInfo.m; sourceTree = "<group>"; };
+		D9B9D39C14EA4B7300D6B0BC /* PaymentFailureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentFailureViewController.h; sourceTree = "<group>"; };
+		D9B9D39D14EA4B7300D6B0BC /* PaymentFailureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentFailureViewController.m; sourceTree = "<group>"; };
+		D9B9D3A014EA4B8800D6B0BC /* PaymentFailureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentFailureView.h; sourceTree = "<group>"; };
+		D9B9D3A114EA4B8800D6B0BC /* PaymentFailureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentFailureView.m; sourceTree = "<group>"; };
 		D9D658C014E5EFE000ACDBF6 /* Delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Delete.png; sourceTree = "<group>"; };
 		D9D658C114E5EFE000ACDBF6 /* Delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Delete@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1275,6 +1281,8 @@
 				D92D24CC14DB368E007B5890 /* PaymentCompleteViewController.m */,
 				D9AA88C514E4B08400491139 /* PaymentConfirmationController.h */,
 				D9AA88C614E4B08400491139 /* PaymentConfirmationController.m */,
+				D9B9D39C14EA4B7300D6B0BC /* PaymentFailureViewController.h */,
+				D9B9D39D14EA4B7300D6B0BC /* PaymentFailureViewController.m */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -1370,6 +1378,8 @@
 				D933EF1914DB568400B0BDC7 /* PaymentCompletedView.m */,
 				D9AA88C914E4B34200491139 /* PaymentConfirmationView.h */,
 				D9AA88CA14E4B34200491139 /* PaymentConfirmationView.m */,
+				D9B9D3A014EA4B8800D6B0BC /* PaymentFailureView.h */,
+				D9B9D3A114EA4B8800D6B0BC /* PaymentFailureView.m */,
 			);
 			name = PaymentViews;
 			sourceTree = "<group>";
@@ -1604,6 +1614,8 @@
 				D947368F14E20E15005D4409 /* ComboPricingStrategy.m in Sources */,
 				D9AA88C714E4B08400491139 /* PaymentConfirmationController.m in Sources */,
 				D9AA88CB14E4B34200491139 /* PaymentConfirmationView.m in Sources */,
+				D9B9D39E14EA4B7300D6B0BC /* PaymentFailureViewController.m in Sources */,
+				D9B9D3A214EA4B8800D6B0BC /* PaymentFailureView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

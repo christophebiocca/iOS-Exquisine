@@ -41,7 +41,9 @@
     [[self detailTextLabel] setFont:descFont];
     
     [[self textLabel] setText:[item name]];
+    [[self textLabel] setAdjustsFontSizeToFitWidth:YES];
     [[self detailTextLabel] setText:[Utilities FormatToPrice:[item price]]];
+    [[self detailTextLabel] setAdjustsFontSizeToFitWidth:YES];
     
 }
 

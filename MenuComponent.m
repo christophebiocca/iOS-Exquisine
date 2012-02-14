@@ -43,6 +43,9 @@ NSString* MENU_COMPONENT_PK_CHANGED = @"CroutonLabs/MenuComponentPrimaryKeyChang
     name = [inputData objectForKey:@"name"];
     primaryKey = [[inputData objectForKey:@"pk"] unsignedIntegerValue];
     desc = [inputData objectForKey:@"description"];
+    if(!desc || ((id)desc == [NSNull null])){
+        desc = @"";
+    }
     
     return self;
 }

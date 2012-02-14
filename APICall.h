@@ -26,18 +26,18 @@ extern NSString* SERVER_HTTP_ERROR_DOMAIN;
     void (^errorblock)(APICall*, NSError*);
 }
 
-+(void)sendGETRequestForLocation:(NSString*)location withDelegate:(id<APICallDelegate>)delegate;
-+(void)sendPOSTRequestForLocation:(NSString*)location withBodyData:(NSData*)data withDelegate:(id<APICallDelegate>)delegate;
-+(void)sendPOSTRequestForLocation:(NSString*)location withFormData:(NSDictionary*)form andDelegate:(id<APICallDelegate>)delegate;
++(id)sendGETRequestForLocation:(NSString*)location withDelegate:(id<APICallDelegate>)delegate;
++(id)sendPOSTRequestForLocation:(NSString*)location withBodyData:(NSData*)data withDelegate:(id<APICallDelegate>)delegate;
++(id)sendPOSTRequestForLocation:(NSString*)location withFormData:(NSDictionary*)form andDelegate:(id<APICallDelegate>)delegate;
 
-+(void)sendGETRequestForLocation:(NSString*)location 
++(id)sendGETRequestForLocation:(NSString*)location 
                          success:(void(^)(id))success 
                          failure:(void(^)(id, NSError*))failure;
-+(void)sendPOSTRequestForLocation:(NSString*)location 
++(id)sendPOSTRequestForLocation:(NSString*)location 
                      withBodyData:(NSData*)data 
                           success:(void (^)(id))success
                           failure:(void(^)(id, NSError*))failure;
-+(void)sendPOSTRequestForLocation:(NSString*)location 
++(id)sendPOSTRequestForLocation:(NSString*)location 
                      withFormData:(NSDictionary*)form 
                           success:(void (^)(id))success
                           failure:(void(^)(id, NSError*))failure;

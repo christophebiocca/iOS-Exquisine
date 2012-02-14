@@ -78,6 +78,6 @@ extern NSString* COMBO_MODIFIED;
 
 - (NSString *) descriptionWithIndent:(NSInteger) indentLevel;
 
-
+- (NSDictionary*)orderRepresentation;
 
 @end

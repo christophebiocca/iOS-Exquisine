@@ -14,22 +14,42 @@ static NSString* redirectSuccessString = @"/ArbitraryValidStaticUrlPath";
 
 @implementation Login
 
+static Login* currentLoginRequest = nil;
+static NSMutableArray* waiters;
+
 +(void)login:(void (^)(id))success{
-    CredentialsStore* store = [CredentialsStore credentialsStore];
-    NSDictionary* formData = [NSDictionary dictionaryWithObjectsAndKeys:
-                              [store appID], @"app_id",
-                              [store phoneID], @"phone_id",
-                              [store signature], @"signature",
-                              nil];
-    success = [success copy];
-    [self sendPOSTRequestForLocation:[NSString stringWithFormat:@"customer/phoneapplogin/?next=%@", redirectSuccessString]
-                        withFormData:formData 
-                             success:^(Login* login){
-                                 success(login);
-                             }
-                             failure:^(Login* login, NSError* error) {
-                                 CLLog(LOG_LEVEL_ERROR ,[NSString stringWithFormat: @"Serious issues here, can't login apparently.\n%@", error]);
-                             }];
+    @synchronized(self){
+        if(currentLoginRequest){
+            [waiters addObject:[success copy]];
+            return;
+        }
+        waiters = [NSMutableArray arrayWithObject:[success copy]];
+        CredentialsStore* store = [CredentialsStore credentialsStore];
+        NSDictionary* formData = [NSDictionary dictionaryWithObjectsAndKeys:
+                                  [store appID], @"app_id",
+                                  [store phoneID], @"phone_id",
+                                  [store signature], @"signature",
+                                  nil];
+        currentLoginRequest = [self sendPOSTRequestForLocation:
+                               [NSString stringWithFormat:@"customer/phoneapplogin/?next=%@", redirectSuccessString]
+                                                  withFormData:formData 
+                                                       success:^(Login* login){
+                                                           @synchronized(self){
+                                                               for(void (^successBlock)() in waiters){
+                                                                   successBlock(currentLoginRequest);
+                                                               }
+                                                               currentLoginRequest = nil;
+                                                               waiters = nil;
+                                                           }
+                                                       }
+                                                       failure:^(Login* login, NSError* error) {
+                                                           CLLog(LOG_LEVEL_ERROR ,[NSString stringWithFormat: @"Serious issues here, can't login apparently.\n%@", error]);
+                                                           @synchronized(self){
+                                                               currentLoginRequest = nil;
+                                                               waiters = nil;
+                                                           }
+                                                       }];
+    }
 }
 
 // Check if we have a redirect for success.

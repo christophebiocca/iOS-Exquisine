@@ -7,12 +7,14 @@
 //
 
 @interface PaymentError : NSObject{
+    BOOL isUserError;
     NSString* userMessage;
     NSError* cause;
 }
 
 -(id)initWithCause:(NSError*)cause;
 
+@property(readonly)BOOL isUserError;
 @property(retain, readonly)NSString* userMessage;
 @property(retain, readonly)NSError* cause;
 
