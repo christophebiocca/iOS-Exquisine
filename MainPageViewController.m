@@ -272,7 +272,6 @@
     [self getLocation];
     
     [self updatePendingButtonState];
-    [self resetApplicationBadgeNumber];
     
     [self updateCreateButtonState];
     [self updateStoreHourInfo];

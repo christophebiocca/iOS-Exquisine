@@ -74,6 +74,7 @@
     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
     [page initiateMenuRefresh];
     [page getLocation];
+    [page resetApplicationBadgeNumber];
     [page updateOrderHistory];
     [page updatePendingButtonState];
     /*
