@@ -123,9 +123,7 @@
 -(void)addThisComboToOrder
 {
     [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Added a combo to the order"];
-    for (ItemGroup *anItemGroup in [comboInfo listOfItemGroups]) {
-        [orderInfo addItem:[[anItemGroup satisfyingItem] copy]];
-    }
+    [orderInfo addCombo:[comboInfo copy]];
     [comboInfo removeAllItems];
     [[self navigationController]popToViewController:returnController animated:YES];
     
