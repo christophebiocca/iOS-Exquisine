@@ -317,22 +317,6 @@
     }
 }
 
--(NSString *)dataFilePath
-{
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    
-    NSString *folder = @"~/Library/Application Support/PitaFactoryFiles/";
-    folder = [folder stringByExpandingTildeInPath];
-    
-    if ([fileManager fileExistsAtPath: folder] == NO)
-    {
-        [fileManager createDirectoryAtPath:folder withIntermediateDirectories:YES attributes:nil error:nil];
-    }
-    
-    NSString *fileName = @"MainPageViewControllerInfo.plist";
-    return [folder stringByAppendingPathComponent: fileName];
-}
-
 -(void)loadDataFromDisk
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];

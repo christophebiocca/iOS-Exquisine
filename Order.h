@@ -15,7 +15,7 @@
 @class PaymentInfo;
 @class PaymentSuccessInfo;
 
-#define DEFAULT_PITA_FINISHED_TIME @"20"
+#define DEFAULT_PITA_FINISHED_TIME @"300"
 
 extern NSString* ORDER_ITEMS_MODIFIED;
 extern NSString* ORDER_COMBOS_MODIFIED;
