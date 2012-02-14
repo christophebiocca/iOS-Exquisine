@@ -42,6 +42,7 @@
 - (void)loadView
 {
     failureView = [[PaymentFailureView alloc] initWithFrame:CGRectZero];
+    [self setView: failureView];
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.

@@ -14,6 +14,7 @@
 @class PaymentConfirmationController;
 @class PaymentProcessingViewController;
 @class PaymentCompleteViewController;
+@class PaymentFailureViewController;
 
 @interface PaymentStack : NSObject<UINavigationControllerDelegate>{
     Order* order;
@@ -25,6 +26,7 @@
     PaymentInfoViewController* paymentInfoController;
     PaymentProcessingViewController* processingController;
     PaymentCompleteViewController* completionController;
+    PaymentFailureViewController* failureController;
     
     void(^successBlock)();
     void(^completionBlock)();

@@ -12,10 +12,12 @@
 #import "PaymentInfoViewController.h"
 #import "PaymentProcessingViewController.h"
 #import "PaymentCompleteViewController.h"
+#import "PaymentFailureViewController.h"
 
 #import "PlaceOrder.h"
 #import "GetPaymentProfileInfo.h"
 #import "PaymentProfileInfo.h"
+#import "PaymentError.h"
 
 @interface PaymentStack(PrivateMethods)
 
@@ -25,6 +27,7 @@
 @property(retain, readonly)PaymentProcessingViewController* processingController;
 @property(retain, readonly)PaymentCompleteViewController* completionController;
 @property(retain, readonly)PaymentConfirmationController* paymentConfirmationController;
+@property(retain, readonly)PaymentFailureViewController* failureController;
 
 /* Stack states */
 -(void)checkForProfile;
@@ -33,6 +36,7 @@
 -(void)changePaymentInfo;
 -(void)sendOrder:(PaymentInfo*)payment;
 -(void)showSuccess;
+-(void)showFailure:(NSError*)error;
 
 /* Animation Control */
 -(void)afterAnimating:(void(^)())after;
@@ -115,6 +119,13 @@
     }
     return completionController;
 }
+
+-(PaymentFailureViewController*)failureController{
+    if(!failureController){
+        failureController = [[PaymentFailureViewController alloc] init];
+    }
+    return failureController;
+}
     
 #pragma mark Stack States
 
@@ -132,7 +143,7 @@
            [[[error userInfo] objectForKey:@"class"] isEqualToString:@"NoPaymentInfoError"]){
             [self requestPaymentInfo];
         } else {
-            cancelledBlock();
+            [self showFailure:error];
         }
     }];
 }
@@ -196,8 +207,12 @@
                [self showSuccess];
            } 
            paymentFailure:^(PaymentError* error){
-               [[self paymentInfoController] setError:error];
-               [self requestPaymentInfo];
+               if([error isUserError]){
+                   [[self paymentInfoController] setError:error];
+                   [self requestPaymentInfo];
+               } else {
+                   [self showFailure:[error cause]];
+               }
            }];
 }
 
@@ -208,6 +223,17 @@
     }];
     [controller setDoneCallback:^{
         completionBlock();
+    }];
+}
+
+-(void)showFailure:(NSError*)error{
+    PaymentFailureViewController* controller = [self failureController];
+    [controller setError:error];
+    [self afterAnimating:^{
+        [[self navigationController] setViewControllers:[NSArray arrayWithObject:controller] animated:YES];
+    }];
+    [controller setCancelCallback:^{
+        cancelledBlock();
     }];
 }
 
