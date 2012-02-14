@@ -309,7 +309,14 @@ NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
     for(Item* item in itemList){
         [orderitems addObject:[item orderRepresentation]];
     }
-    return [NSDictionary dictionaryWithObject:orderitems forKey:@"items"];
+    NSMutableArray* ordercombos = [NSMutableArray arrayWithCapacity:[comboList count]];
+    for(Combo* combo in comboList){
+        [ordercombos addObject:[combo orderRepresentation]];
+    }
+    return [NSDictionary dictionaryWithObjectsAndKeys:
+            orderitems, @"items",
+            ordercombos, @"combos",
+            nil];
 }
 
 - (NSString *) descriptionWithIndent:(NSInteger) indentLevel
