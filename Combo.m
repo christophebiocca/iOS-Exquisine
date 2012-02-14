@@ -296,6 +296,17 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
     return output;
 }
 
+-(NSDictionary*)orderRepresentation{
+    NSMutableArray* components = [NSMutableArray arrayWithCapacity:[listOfItemGroups count]];
+    for(ItemGroup* group in listOfItemGroups){
+        [components addObject:[group orderRepresentation]];
+    }
+    return [NSDictionary dictionaryWithObjectsAndKeys:
+            [NSNumber numberWithUnsignedInteger:primaryKey], @"combo",
+            components, @"components",
+            nil];
+}
+
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
