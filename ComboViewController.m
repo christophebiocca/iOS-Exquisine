@@ -105,8 +105,7 @@
     for (ItemGroup *itemGroup in [comboInfo listOfItemGroups]) {
         if (([[itemGroup listOfItems] count] == 1)&&([[(Item *)[[itemGroup listOfItems] objectAtIndex:0] options] count] == 0))
         {
-            [comboInfo addItem:[[itemGroup listOfItems] objectAtIndex:0]];
-            return;
+            [itemGroup setSatisfyingItem:[[itemGroup listOfItems] objectAtIndex:0]];
         }
     }
     
