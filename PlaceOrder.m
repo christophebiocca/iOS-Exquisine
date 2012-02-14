@@ -26,9 +26,19 @@
     if(paymentInfo){
         [placement setObject:[paymentInfo dictionaryRepresentation] forKey:@"payment"];
     }
+    
+    NSDecimalNumberHandler* handler = 
+    [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundPlain 
+                                                           scale:0 
+                                                raiseOnExactness:NO 
+                                                 raiseOnOverflow:YES 
+                                                raiseOnUnderflow:YES 
+                                             raiseOnDivideByZero:YES];
+    
     [placement setObject:[NSNumber 
-                          numberWithInt:[[[order totalPrice] 
+                          numberWithInt:[[[[order totalPrice] 
                                           decimalNumberByMultiplyingByPowerOf10:2] 
+                                          decimalNumberByRoundingAccordingToBehavior:handler]
                                          integerValue]] 
                   forKey:@"total_cents"];
     
