@@ -65,4 +65,6 @@ extern NSString* ITEM_GROUP_MODIFIED;
 //; and Descriptor Methods
 - (NSString *) descriptionWithIndent:(NSInteger) indentLevel;
 
+-(NSDictionary*)orderRepresentation;
+
 @end

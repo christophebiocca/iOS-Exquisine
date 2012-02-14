@@ -206,6 +206,13 @@ NSString* ITEM_GROUP_MODIFIED = @"CroutonLabs/ItemGroupModified";
     return new;
 }
 
+-(NSDictionary*)orderRepresentation{
+    NSMutableDictionary* itemDictionary = 
+    [NSMutableDictionary dictionaryWithDictionary:[satisfyingItem orderRepresentation]];
+    [itemDictionary setObject:[NSNumber numberWithUnsignedInteger:primaryKey] forKey:@"component"];
+    return itemDictionary;
+}
+
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
