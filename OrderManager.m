@@ -114,27 +114,6 @@ NSString* ORDER_MANAGER_NEEDS_REDRAW = @"CroutonLabs/OrderManagerNeedsRedraw";
 //This is where everything has to happen that determines which combos apply to the order.
 -(void)recalculate:(NSNotification *)aNotification
 {
-    @synchronized(self){
-        if(!thisOrder || !thisMenu){
-            return;
-        }
-        NSMutableArray *itemsInOrder = [[NSMutableArray alloc] initWithArray:[thisOrder itemList]];
-        
-        for (Combo *aCombo in [thisOrder comboList]) {
-            [itemsInOrder addObjectsFromArray:[aCombo listOfAssociatedItems]];
-        }
-        
-        NSMutableArray *allCombos = [[NSMutableArray alloc] initWithArray:[thisMenu recursiveComboList]];
-        
-        NSArray* newCombos = [OrderManager optimalCombosFromChoices:allCombos withItems:itemsInOrder];
-        
-        [thisOrder setComboList:[NSMutableArray arrayWithArray:newCombos]];
-        NSMutableSet* allRemainingItems = [NSMutableSet setWithArray:itemsInOrder];
-        for(Combo* combo in newCombos){
-            [allRemainingItems minusSet:[NSSet setWithArray:[combo listOfAssociatedItems]]];
-        }
-        [thisOrder setItemList:[NSMutableArray arrayWithArray:[allRemainingItems allObjects]]];
-    }
     [[NSNotificationCenter defaultCenter] postNotificationName:ORDER_MANAGER_NEEDS_REDRAW object:self];
 }
 
