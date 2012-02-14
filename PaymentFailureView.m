@@ -30,6 +30,8 @@
         [self setBackgroundColor:[UIColor whiteColor]];
         error = [[UILabel alloc] initWithFrame:CGRectZero];
         [error setTextColor:[UIColor colorWithRed:0.7 green:0.3 blue:0.3 alpha:1]];
+        [error setLineBreakMode:UILineBreakModeWordWrap];
+        [error setNumberOfLines:0];
         [self addSubview:error];
     }
     return self;
@@ -55,20 +57,25 @@
             .height = TOOLBAR_HEIGHT
         }
     }];
+    CGSize limitSize = {
+        .width = lims.width - 2*PADDING,
+        .height = lims.height - TOOLBAR_HEIGHT - 2*PADDING
+    };
+    limitSize = [[error text] sizeWithFont:[error font] 
+                         constrainedToSize:limitSize 
+                             lineBreakMode:UILineBreakModeWordWrap];
     [error setFrame:(CGRect){
         .origin = {
             .x = PADDING,
             .y = TOOLBAR_HEIGHT + PADDING
         },
-        .size = {
-            .width = lims.width - 2*PADDING,
-            .height = lims.height - TOOLBAR_HEIGHT - 2*PADDING
-        }
+        .size = limitSize
     }];
 }
 
 -(void)setErrorMessage:(NSString *)message{
     [error setText:message];
+    [self setNeedsLayout];
 }
 
 @end

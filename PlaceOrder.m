@@ -26,6 +26,11 @@
     if(paymentInfo){
         [placement setObject:[paymentInfo dictionaryRepresentation] forKey:@"payment"];
     }
+    [placement setObject:[NSNumber 
+                          numberWithInt:[[[order totalPrice] 
+                                          decimalNumberByMultiplyingByPowerOf10:2] 
+                                         integerValue]] 
+                  forKey:@"total_cents"];
     
     [self sendPOSTRequestForLocation:@"customer/orders/" 
                         withJSONData:placement 
