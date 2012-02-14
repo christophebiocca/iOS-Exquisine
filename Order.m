@@ -234,7 +234,10 @@ NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
     
     for (Combo *aCombo in comboList) {
         if ([aCombo containsItem:anItem]) {
-            [aCombo removeItem:anItem];
+            NSMutableArray* comboItems = [NSMutableArray arrayWithArray:[aCombo listOfAssociatedItems]];
+            [comboItems removeObject:anItem];
+            [itemList addObjectsFromArray:comboItems];
+            [comboList removeObject:aCombo];
             [[NSNotificationCenter defaultCenter] removeObserver:self name:ITEM_MODIFIED object:anItem];
             [self recalculate:nil];
             [[NSNotificationCenter defaultCenter] postNotificationName:ORDER_ITEMS_MODIFIED object:self];
