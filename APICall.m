@@ -53,64 +53,66 @@ static NSURL* serverURL;
     loginURL = [self urlForLocation:@"accounts/login/"];
 }
 
-+(void)sendGETRequestForLocation:(NSString*)location withDelegate:(id<APICallDelegate>)delegate{
++(id)sendGETRequestForLocation:(NSString*)location withDelegate:(id<APICallDelegate>)delegate{
     __block id<APICallDelegate> theDelegate = delegate;
-    [self sendGETRequestForLocation:location 
-                            success:^(APICall* call){
-                                [theDelegate apiCallCompleted:call];
-                            }
-                            failure:^(APICall* call, NSError* error) {
-                                [theDelegate apiCall:call returnedError:error];
-                            }];
+    return [self sendGETRequestForLocation:location 
+                                   success:^(APICall* call){
+                                       [theDelegate apiCallCompleted:call];
+                                   }
+                                   failure:^(APICall* call, NSError* error) {
+                                       [theDelegate apiCall:call returnedError:error];
+                                   }];
 }
 
-+(void)sendPOSTRequestForLocation:(NSString*)location withBodyData:(NSData*)data withDelegate:(id<APICallDelegate>)delegate{
++(id)sendPOSTRequestForLocation:(NSString*)location withBodyData:(NSData*)data withDelegate:(id<APICallDelegate>)delegate{
     __block id<APICallDelegate> theDelegate = delegate;
-    [self sendPOSTRequestForLocation:location 
-                        withBodyData:data 
-                             success:^(APICall* call){
-                                 [theDelegate apiCallCompleted:call];
-                             } 
-                             failure:^(APICall* call, NSError* error) {
-                                 [theDelegate apiCall:call returnedError:error];
-                             }];
+    return [self sendPOSTRequestForLocation:location 
+                               withBodyData:data 
+                                    success:^(APICall* call){
+                                        [theDelegate apiCallCompleted:call];
+                                    } 
+                                    failure:^(APICall* call, NSError* error) {
+                                        [theDelegate apiCall:call returnedError:error];
+                                    }];
 }
 
-+(void)sendPOSTRequestForLocation:(NSString*)location withFormData:(NSDictionary*)form andDelegate:(id<APICallDelegate>)delegate{
++(id)sendPOSTRequestForLocation:(NSString*)location withFormData:(NSDictionary*)form andDelegate:(id<APICallDelegate>)delegate{
     __block id<APICallDelegate> theDelegate = delegate;
-    [self sendPOSTRequestForLocation:location 
-                        withFormData:form 
-                             success:^(APICall* call){
-                                 [theDelegate apiCallCompleted:call];
-                             }
-                             failure:^(APICall* call, NSError* error) {
-                                 [theDelegate apiCall:call returnedError:error];
-                             }];
+    return [self sendPOSTRequestForLocation:location 
+                               withFormData:form 
+                                    success:^(APICall* call){
+                                        [theDelegate apiCallCompleted:call];
+                                    }
+                                    failure:^(APICall* call, NSError* error) {
+                                        [theDelegate apiCall:call returnedError:error];
+                                    }];
 }
 
-+(void)sendGETRequestForLocation:(NSString*)location 
-                         success:(void(^)(id))success 
-                         failure:(void(^)(id, NSError*))failure{
++(id)sendGETRequestForLocation:(NSString*)location 
+                       success:(void(^)(id))success 
+                       failure:(void(^)(id, NSError*))failure{
     APICall* call = [[self alloc] initWithRequest:[self baseRequestForLocation:location] 
                         successBlock:success 
                           errorBlock:failure];
     [call send];
+    return call;
 }
 
-+(void)sendPOSTRequestForLocation:(NSString*)location 
-                     withBodyData:(NSData*)data 
-                          success:(void (^)(id))success 
++(id)sendPOSTRequestForLocation:(NSString*)location 
+                   withBodyData:(NSData*)data 
+                        success:(void (^)(id))success 
                           failure:(void (^)(id, NSError *))failure{
     APICall* call = [[self alloc] initWithRequest:[self postRequestForLocation:location data:data]
                                         successBlock:success 
                                           errorBlock:failure];
     [call send];
+    return call;
 }
 
-+(void)sendPOSTRequestForLocation:(NSString*)location 
-                     withFormData:(NSDictionary*)form 
-                          success:(void (^)(id))success 
-                          failure:(void (^)(id, NSError *))failure{
++(id)sendPOSTRequestForLocation:(NSString*)location 
+                   withFormData:(NSDictionary*)form 
+                        success:(void (^)(id))success 
+                        failure:(void (^)(id, NSError *))failure{
     __block NSMutableString* buffer = [[NSMutableString alloc] init];
     __block NSInteger index = 0;
     [form enumerateKeysAndObjectsUsingBlock:^(NSString* key, id obj, BOOL* stop){
@@ -127,7 +129,7 @@ static NSURL* serverURL;
         }
     }];
     NSData* body = [buffer dataUsingEncoding:NSASCIIStringEncoding];
-    [self sendPOSTRequestForLocation:location withBodyData:body success:success failure:failure];
+    return [self sendPOSTRequestForLocation:location withBodyData:body success:success failure:failure];
 }
 
 +(NSMutableURLRequest*)baseRequestForLocation:(NSString*)location{

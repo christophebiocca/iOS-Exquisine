@@ -22,19 +22,19 @@ NSString* JSON_API_ERROR = @"com.croutonlabs.server.json";
     return jsonData;
 }
 
-+(void)sendPOSTRequestForLocation:(NSString *)location withJSONData:(NSDictionary *)json andDelegate:(id<APICallDelegate>)delegate{
-    [self sendPOSTRequestForLocation:location 
-                        withBodyData:[self getJSONData:json]
-                        withDelegate:delegate];
++(id)sendPOSTRequestForLocation:(NSString *)location withJSONData:(NSDictionary *)json andDelegate:(id<APICallDelegate>)delegate{
+    return [self sendPOSTRequestForLocation:location 
+                               withBodyData:[self getJSONData:json]
+                               withDelegate:delegate];
 }
 
-+(void)sendPOSTRequestForLocation:(NSString *)location withJSONData:(NSDictionary *)json 
-                          success:(void (^)(id))success 
-                          failure:(void (^)(id, NSError *))failure{
-    [self sendPOSTRequestForLocation:location 
-                        withBodyData:[self getJSONData:json]
-                             success:success 
-                             failure:failure];
++(id)sendPOSTRequestForLocation:(NSString *)location withJSONData:(NSDictionary *)json 
+                        success:(void (^)(id))success 
+                        failure:(void (^)(id, NSError *))failure{
+    return [self sendPOSTRequestForLocation:location 
+                               withBodyData:[self getJSONData:json]
+                                    success:success 
+                                    failure:failure];
 }
 
 -(void)postCompletionHook{
