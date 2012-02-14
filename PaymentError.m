@@ -17,7 +17,10 @@
     if(self = [super init]){
         cause = theCause;
         isUserError = NO;
-        if([cause domain] == JSON_API_ERROR){
+        if([cause domain] == JSON_API_ERROR &&
+           [[NSArray arrayWithObjects:@"PaymentProfileError", @"TransactionError", nil] 
+            containsObject:[[cause userInfo] objectForKey:@"class"]]
+           ){
             isUserError = YES;
             userMessage = @"Your credit card info is invalid.";
         }
