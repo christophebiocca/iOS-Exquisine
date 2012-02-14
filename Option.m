@@ -299,7 +299,7 @@ NSString* OPTION_INVALID_DESELECTION = @"CroutonLabs/OptionInvalidDeselection";
 
 -(BOOL)isEffectivelyEqual:(Option *)anOption
 {
-    if (![[anOption name] isEqual: name])
+    if (![anOption primaryKey] == primaryKey)
         return NO;
     
     if([[anOption choiceList] count] != [choiceList count])

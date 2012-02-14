@@ -132,13 +132,10 @@ NSString* CHOICE_CHANGED = @"CroutonLabs/ChoiceChanged";
     if (![aChoice isKindOfClass:[Choice class]])
         return NO;
     
-    if(![name isEqual:[aChoice name]])
+    if(! (primaryKey == [aChoice primaryKey]))
         return NO;
     
-    if([self selected] != [aChoice selected])
-        return NO;
-    
-    if (![basePrice isEqual:((Choice *)aChoice)->basePrice]) 
+    if(selected != [aChoice selected])
         return NO;
     
     return YES;

@@ -269,7 +269,6 @@
     
     //We need to do this in case a favorited order was modified, but not removed.
     [self doFavoriteConsistancyCheck];
-    [self getLocation];
     
     [self updatePendingButtonState];
     
@@ -375,7 +374,11 @@
 {
     NSMutableArray *returnList = [[NSMutableArray alloc] initWithCapacity:0];
     
-    [returnList addObjectsFromArray:ordersHistory];
+    if ([ordersHistory count] > 0)
+    {
+        [returnList addObject:[ordersHistory lastObject]];
+    }
+    
     if (currentOrder)
         [returnList addObject:currentOrder];
     

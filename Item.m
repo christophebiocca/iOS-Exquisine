@@ -123,7 +123,7 @@ NSString* ITEM_MODIFIED = @"CroutonLabs/ItemModified";
 {
     if (![anItem isKindOfClass:[Item class]]) 
         return NO;
-    if (![name isEqual:[anItem name]])
+    if (! (primaryKey == [anItem primaryKey]))
         return NO;
     if ([options count] != [[(Item *)anItem options] count])
         return NO;
