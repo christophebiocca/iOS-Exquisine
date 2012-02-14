@@ -15,6 +15,8 @@
 @class PaymentInfo;
 @class PaymentSuccessInfo;
 
+#define DEFAULT_PITA_FINISHED_TIME @"20"
+
 extern NSString* ORDER_ITEMS_MODIFIED;
 extern NSString* ORDER_COMBOS_MODIFIED;
 extern NSString* ORDER_FAVORITE_MODIFIED;
@@ -37,6 +39,10 @@ extern NSString* ORDER_MODIFIED;
     
     NSDate *mostRecentSubmitDate;
     
+    NSDecimalNumber *pitaFinishedTime;
+    
+    PaymentSuccessInfo *successInfo;
+    
 }
 
 @property (nonatomic,readonly) BOOL isFavorite;
@@ -46,6 +52,7 @@ extern NSString* ORDER_MODIFIED;
 @property (retain) NSString *orderIdentifier;
 @property (readonly) NSDate *creationDate;
 @property (readonly) NSDate *mostRecentSubmitDate;
+@property (readonly) PaymentSuccessInfo *successInfo;
 @property(readonly)NSDecimalNumber* subtotalPrice;
 @property(readonly)NSDecimalNumber* taxPrice;
 @property(readonly)NSDecimalNumber* totalPrice;
@@ -80,6 +87,8 @@ extern NSString* ORDER_MODIFIED;
 -(void)placedWithTransactionInfo:(PaymentSuccessInfo*)info;
 
 -(void)submit;
+
+-(void)setComplete;
 
 //Housekeeping Methods
 -(void) recalculate:(NSNotification *) aNotification;

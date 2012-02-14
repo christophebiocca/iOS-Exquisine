@@ -62,7 +62,7 @@ extern NSString* ITEM_GROUP_MODIFIED;
 
 //Housekeeping Methods
 
-//; and Descriptor Methods
+//Comparitor and Descriptor Methods
 - (NSString *) descriptionWithIndent:(NSInteger) indentLevel;
 
 -(NSDictionary*)orderRepresentation;

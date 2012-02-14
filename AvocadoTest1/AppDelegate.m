@@ -27,6 +27,16 @@
     navigationController = [[UINavigationController alloc] initWithRootViewController:page];
     [[self window] addSubview:[navigationController view]];
     [[self window] makeKeyAndVisible];
+    
+    
+    //The main page view controller should be handling notifications.
+    UILocalNotification *thisNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    
+    if(thisNotification)
+    {
+        [page application:application didFinishLaunchingWithOptions:launchOptions];
+    }
+    
     return YES;
 }
 							
@@ -64,6 +74,8 @@
     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
     [page initiateMenuRefresh];
     [page getLocation];
+    [page updateOrderHistory];
+    [page updatePendingButtonState];
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
@@ -78,6 +90,12 @@
      */
     [[LocalyticsSession sharedLocalyticsSession] close];
     [[LocalyticsSession sharedLocalyticsSession] upload];
+}
+
+-(void) application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    //The main page view controller should always be handling local notifications.
+    [page application:application didReceiveLocalNotification:notification];
 }
 
 @end

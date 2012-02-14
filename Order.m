@@ -15,6 +15,7 @@
 #import "PlaceOrder.h"
 #import "PaymentInfo.h"
 #import "Utilities.h"
+#import "PaymentSuccessInfo.h"
 
 NSString* ORDER_ITEMS_MODIFIED = @"CroutonLabs/OrderItemsModified";
 NSString* ORDER_COMBOS_MODIFIED = @"CroutonLabs/OrderCombosModified";
@@ -30,6 +31,7 @@ NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
 @synthesize orderIdentifier;
 @synthesize creationDate;
 @synthesize mostRecentSubmitDate;
+@synthesize successInfo;
 
 -(id)init
 {
@@ -45,6 +47,10 @@ NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
     status = @"Not yet submitted";
     
     creationDate = [[NSDate alloc] initWithTimeIntervalSinceNow:0.0];
+    
+    pitaFinishedTime = [NSDecimalNumber decimalNumberWithString:DEFAULT_PITA_FINISHED_TIME];
+    
+    orderIdentifier = [Utilities uuid];
     
     return self;
 }
@@ -69,11 +75,14 @@ NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
         orderIdentifier = [decoder decodeObjectForKey:@"order_identifier"];
         creationDate = [decoder decodeObjectForKey:@"creation_date"];
         mostRecentSubmitDate = [decoder decodeObjectForKey:@"most_recent_submit_date"];
+        successInfo = [decoder decodeObjectForKey:@"success_info"];
         
         if ((!itemList) || (!comboList) || (!status) || (!orderIdentifier) || (!creationDate))
         {
             CLLog(LOG_LEVEL_ERROR, [NSString stringWithFormat: @"Order failed to load properly from harddisk: \n%@" , self]);
         }
+        
+        pitaFinishedTime = [NSDecimalNumber decimalNumberWithString:DEFAULT_PITA_FINISHED_TIME];
         
     }
     return self;
@@ -92,6 +101,7 @@ NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
     [encoder encodeObject:orderIdentifier forKey:@"order_identifier"];\
     [encoder encodeObject:creationDate forKey:@"creation_date"];
     [encoder encodeObject:mostRecentSubmitDate forKey:@"most_recent_submit_date"];
+    [encoder encodeObject:successInfo forKey:@"success_info"];
 }
 
 
@@ -124,6 +134,8 @@ NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
     creationDate = [anOrder.creationDate copy];
     mostRecentSubmitDate = [anOrder.mostRecentSubmitDate copy];
 
+    anOrder->pitaFinishedTime = [NSDecimalNumber decimalNumberWithString:DEFAULT_PITA_FINISHED_TIME];
+    
     return anOrder;
 }
 
@@ -273,13 +285,32 @@ NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
 
 -(void)placedWithTransactionInfo:(PaymentSuccessInfo*)info{
     // We'll also need to save up the payment info somewhere.
+    successInfo = info;
+    
     [self setStatus:@"Placed"];
+    
+    UILocalNotification *notification= [[UILocalNotification alloc] init];
+    
+    [notification setAlertBody:@"Your pita is ready for pickup"];
+    
+    [notification setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:orderIdentifier,@"order", nil]];
+    
+    [notification setFireDate:[NSDate dateWithTimeIntervalSinceNow:[DEFAULT_PITA_FINISHED_TIME intValue]]];
+    
+    [notification setApplicationIconBadgeNumber:1];
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
 }
 
 -(void)submit
 {
     mostRecentSubmitDate = [[NSDate alloc] initWithTimeIntervalSinceNow:0.0];
     [self setStatus:@"Sending"];
+}
+
+-(void)setComplete
+{
+    [self setStatus:@"Done"];
 }
 
 -(void)recalculate:(NSNotification *)aNotification
@@ -305,6 +336,7 @@ NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
 }
 
 -(NSDictionary*)orderRepresentation{
+    
     NSMutableArray* orderitems = [NSMutableArray arrayWithCapacity:[itemList count]];
     for(Item* item in itemList){
         [orderitems addObject:[item orderRepresentation]];
@@ -317,6 +349,7 @@ NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
             orderitems, @"items",
             ordercombos, @"combos",
             nil];
+
 }
 
 - (NSString *) descriptionWithIndent:(NSInteger) indentLevel

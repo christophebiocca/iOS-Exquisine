@@ -102,7 +102,14 @@ NSString* ITEM_GROUP_MODIFIED = @"CroutonLabs/ItemGroupModified";
 
 -(ItemGroup *)copy
 {
+    
     ItemGroup *anItemGroup = [[ItemGroup alloc] init];
+    
+    anItemGroup->primaryKey = primaryKey;
+    
+    anItemGroup->name = name;
+    
+    anItemGroup->desc = desc;
     
     anItemGroup->listOfItems = [[NSMutableArray alloc] initWithArray:listOfItems];
     

@@ -20,6 +20,7 @@
 #import "Reachability.h"
 #import "PaymentStack.h"
 #import "PaymentInfoViewController.h"
+#import "PaymentSuccessInfo.h"
 #import "IndicatorView.h"
 #import "Location.h"
 #import "OrderManager.h"
@@ -140,7 +141,7 @@
 
 -(void)pendingButtonPressed
 {
-    Order *pendingOrder = [[self pendingOrders] lastObject];
+    Order *pendingOrder = [ordersHistory lastObject];
     [theOrderManager setOrder:pendingOrder];
     OrderSummaryViewController *orderSummaryController = [[OrderSummaryViewController alloc] initializeWithOrderManager:theOrderManager];
     [orderSummaryController setDelegate:self];
@@ -268,17 +269,9 @@
     
     //We need to do this in case a favorited order was modified, but not removed.
     [self doFavoriteConsistancyCheck];
+    [self getLocation];
     
-    if ([[self pendingOrders] count] > 0)
-    {
-        [mainPageView.pendingOrderButton setTitle:[NSString stringWithFormat:@"Order Status: %@" ,[[[self pendingOrders] lastObject] status]] forState:UIControlStateNormal];
-        
-        [mainPageView.pendingOrderButton setEnabled:YES];
-    }
-    else
-    {
-        [mainPageView.pendingOrderButton setEnabled:NO];
-    }
+    [self updatePendingButtonState];
     
     [self updateCreateButtonState];
     [self updateStoreHourInfo];
@@ -301,6 +294,26 @@
     else
     {
         [mainPageView.createOrderButton setEnabled:NO];
+    }
+}
+
+-(void)updatePendingButtonState
+{
+    if ([ordersHistory count] > 0)
+    {
+        if ([[[ordersHistory lastObject] status] isEqualToString:@"Done"]) {
+            [mainPageView.pendingOrderButton setTitle:[NSString stringWithFormat:@"Order Number %@ %@" ,[[[ordersHistory lastObject] successInfo]orderNumber],  [[ordersHistory lastObject] status]] forState:UIControlStateNormal];
+        }
+        else
+        {
+            [mainPageView.pendingOrderButton setTitle:[NSString stringWithFormat:@"Order Status: %@" ,[[ordersHistory lastObject] status]] forState:UIControlStateNormal];
+        }
+        
+        [mainPageView.pendingOrderButton setEnabled:YES];
+    }
+    else
+    {
+        [mainPageView.pendingOrderButton setEnabled:NO];
     }
 }
 
@@ -383,6 +396,16 @@
         [returnList addObject:currentOrder];
     
     return returnList;
+}
+
+-(Order *)dereferenceOrderIdentifier:(NSString *)orderIdentifier
+{
+    for ( Order *eachOrder in [self allKnownOrders]) 
+    {
+        if ([eachOrder.orderIdentifier isEqualToString:orderIdentifier])
+            return eachOrder;
+    }
+    return nil;
 }
 
 -(void)initiateMenuRefresh
@@ -468,12 +491,59 @@
                                     }];
 }
 
+-(void)updateOrderHistory
+{
+    for (Order *eachOrder in ordersHistory) {
+        if ([[eachOrder mostRecentSubmitDate] compare:[NSDate dateWithTimeIntervalSinceNow:(- [DEFAULT_PITA_FINISHED_TIME intValue])]] == NSOrderedAscending)
+        {
+            [eachOrder setComplete];
+        }
+    }
+}
+
 //This will obviously have to change.
 -(Location *)currentLocation
 {
     if([locations count] > 0)
         return [locations objectAtIndex:0];
     return nil;
+}
+
+-(void) resetApplicationBadgeIconNumber
+{
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:(-[[UIApplication sharedApplication] applicationIconBadgeNumber])];
+}
+
+-(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    UILocalNotification *thisNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    
+    if(thisNotification)
+    {
+        NSString *thisOrderIdentifier = [[thisNotification userInfo] objectForKey:@"order"];
+        if ( thisOrderIdentifier ) {
+            [[self dereferenceOrderIdentifier:thisOrderIdentifier] setComplete];
+        }
+        [self resetApplicationBadgeIconNumber];
+    }
+    
+    [self updatePendingButtonState];
+    return YES;
+}
+
+-(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification 
+{
+    UIAlertView * pitaIsReady = [[UIAlertView alloc] initWithTitle:@"Notice" message:@"Your pita is ready!" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+    
+    [pitaIsReady show];
+    
+    NSString *thisOrderIdentifier = [[notification userInfo] objectForKey:@"order"];
+    if ( thisOrderIdentifier ) {
+        [[self dereferenceOrderIdentifier:thisOrderIdentifier] setComplete];
+    }
+    [self resetApplicationBadgeIconNumber];
+    [self updatePendingButtonState];
+
 }
 
 -(void)dealloc

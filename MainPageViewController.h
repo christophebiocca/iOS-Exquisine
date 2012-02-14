@@ -51,16 +51,28 @@
 
 -(NSArray *) allKnownOrders;
 
+-(Order *)dereferenceOrderIdentifier:(NSString *) orderIdentifier;
+
 -(void) updateCreateButtonState;
+
+-(void) updatePendingButtonState;
 
 -(void) initiateMenuRefresh;
 
 -(void) getLocation;
 
+-(void) updateOrderHistory;
+
 -(void) createOrderPressed;
 
 -(void) updateStoreHourInfo;
 
+-(void) resetApplicationBadgeNumber;
+
 -(Location *) currentLocation;
+
+-(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
+
+-(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification;
 
 @end
