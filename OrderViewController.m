@@ -95,7 +95,7 @@
     }
     
     
-    AlertPrompt *renamePrompt = [[AlertPrompt alloc] initWithPromptTitle:@"Choose a name for your order" message:@"a" delegate:self cancelButtonTitle:@"Cancel" okButtonTitle:@"OK"];
+    AlertPrompt *renamePrompt = [[AlertPrompt alloc] initWithPromptTitle:@"Choose a name for your order" message:@"a" delegate:self cancelButtonTitle:@"Cancel" okButtonTitle:@"Okay"];
     
     
     [renamePrompt setTag:2];
@@ -128,7 +128,7 @@
 
 -(void)promptForFavDeletion
 {
-    UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Delete from favorites?" message:[NSString stringWithFormat: @"If you unfavorite this order it will dissapear. Are you sure you want that?", [Utilities FormatToPrice:[[theOrderManager thisOrder] totalPrice]]] delegate:self cancelButtonTitle:@"Oh... nevermind" otherButtonTitles:@"Yep", nil];
+    UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Delete from favorites?" message:[NSString stringWithFormat: @"If you unfavorite this order it will dissapear. Are you sure you want that?", [Utilities FormatToPrice:[[theOrderManager thisOrder] totalPrice]]] delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
     
     [areYouSure setTag:3];
     

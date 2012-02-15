@@ -200,9 +200,9 @@
 {
     
     for (Order *anOrder in favoriteOrders) {
-        if (anOrder.name == [[orderViewController theOrderManager] thisOrder].name)
+        if ([anOrder.name isEqualToString:[[orderViewController theOrderManager] thisOrder].name])
         {
-            UIAlertView *tsktsk = [[UIAlertView alloc] initWithTitle:@"Error" message:@"An order with that name is already in the favorites list!" delegate:self cancelButtonTitle:@"OK, my bad" otherButtonTitles:nil];
+            UIAlertView *tsktsk = [[UIAlertView alloc] initWithTitle:@"Error" message:@"An order with that name is already in the favorites list!" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
             
             [tsktsk setTag:3];
             
@@ -250,6 +250,7 @@
         {
             [anOrder setFavorite:NO];
             [favoriteOrders removeObject:anOrder];
+            break;
         }
     }
     
