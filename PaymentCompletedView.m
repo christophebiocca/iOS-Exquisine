@@ -141,7 +141,8 @@
     [authCode setText: [NSString stringWithFormat:@"Authorization code: %@", [info authCode]]];
     [trnAmount setText: [NSString stringWithFormat:@"Total: $%@", [info trnAmount]]];
     [trnDate setText: [NSString stringWithFormat:@"Date: %@", [info trnDate]]];
-    [pickupTime setText: @"Your pita will be done in 5 to 10 minutes."];
+    [pickupTime setText: @"Your pita will be done in 5 to 10 minutes and can"
+     @" be picked up from the UW Plaza Pita Factory."];
     [signoff setText:@"Enjoy!"];
     
 }
