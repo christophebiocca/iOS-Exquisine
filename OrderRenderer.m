@@ -201,10 +201,13 @@
         {
             [[orderManager thisOrder] removeItem:cellObject];
             [tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
-            
-            if([orderDisplayList count] == 0)
-                [tableView setEditing:NO animated:YES];
+        } else if([cellObject isKindOfClass:[Combo class]]){
+            [[orderManager thisOrder] removeCombo:cellObject];
+            [tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
         }
+        
+        if([orderDisplayList count] == 0)
+            [tableView setEditing:NO animated:YES];
     }
     else if (editingStyle == UITableViewCellEditingStyleInsert)
     {
@@ -222,7 +225,8 @@
     //To assess whether we can edit the row, we grab the cell renderer:
     id cellObject = [self objectForCellAtIndex:indexPath];
     //Then see if it's an item:
-    if ([cellObject isKindOfClass:[Item class]])
+    if ([cellObject isKindOfClass:[Item class]] ||
+        [cellObject isKindOfClass:[Combo class]])
     {
         //if so,  we can edit it.
         return YES;
