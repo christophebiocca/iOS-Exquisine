@@ -62,7 +62,13 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-    
+    // WE NEED OUR COOKIES, AT ALL TIMES
+    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
+    [page initiateMenuRefresh];
+    [page getLocation];
+    [page updateOrderHistory];
+    [page updatePendingButtonState];
+    [page resetApplicationBadgeNumber];
     /*
      Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
      */
@@ -70,13 +76,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    // WE NEED OUR COOKIES, AT ALL TIMES
-    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
-    [page initiateMenuRefresh];
-    [page getLocation];
-    [page resetApplicationBadgeNumber];
-    [page updateOrderHistory];
-    [page updatePendingButtonState];
+    
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */

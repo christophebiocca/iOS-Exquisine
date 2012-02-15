@@ -301,7 +301,7 @@
     if ([ordersHistory count] > 0)
     {
         if ([[[ordersHistory lastObject] status] isEqualToString:@"Done"]) {
-            [mainPageView.pendingOrderButton setTitle:[NSString stringWithFormat:@"Order Number %@ %@" ,[[[ordersHistory lastObject] successInfo]orderNumber],  [[ordersHistory lastObject] status]] forState:UIControlStateNormal];
+            [mainPageView.pendingOrderButton setTitle:[NSString stringWithFormat:@"Order Number: %@ Status: %@" ,[[[ordersHistory lastObject] successInfo]orderNumber],  [[ordersHistory lastObject] status]] forState:UIControlStateNormal];
         }
         else
         {
@@ -498,7 +498,10 @@
 
 -(void) resetApplicationBadgeNumber
 {
-    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:(-[[UIApplication sharedApplication] applicationIconBadgeNumber])];
+    int badgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber];
+    if (badgeNumber != 0) {
+        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:(0)];
+    }
 }
 
 -(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
