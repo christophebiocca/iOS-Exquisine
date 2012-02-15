@@ -9,6 +9,7 @@
 #import "ComboCell.h"
 #import "Combo.h"
 #import "Utilities.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation ComboCell
 
@@ -17,6 +18,14 @@
 
 +(NSString *)cellIdentifier{
     return @"ComboCell";
+}
+
+static UIImage* deleteImage = nil;
+
++(void)initialize{
+    if(!deleteImage){
+        deleteImage = [UIImage imageNamed:@"Delete"];
+    }
 }
 
 - (id)init
@@ -91,6 +100,18 @@
         {
             [self setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
             [self setBackgroundColor:[UIColor whiteColor]];
+        }
+    }
+}
+
+-(void)willTransitionToState:(UITableViewCellStateMask)state{
+    [super willTransitionToState:state];
+    if(state & UITableViewCellStateShowingDeleteConfirmationMask){
+        for(UIView* subview in [self subviews]){
+            if([NSStringFromClass([subview class]) isEqualToString:@"UITableViewCellDeleteConfirmationControl"]){
+                UIView* buttonThingy = [[subview subviews] objectAtIndex:0];
+                [[buttonThingy layer] setContents:(id)[deleteImage CGImage]];
+            }
         }
     }
 }
