@@ -57,7 +57,6 @@ static UIImage* deleteImage;
 -(void)willTransitionToState:(UITableViewCellStateMask)state{
     [super willTransitionToState:state];
     if(state & UITableViewCellStateShowingDeleteConfirmationMask){
-        NSLog(@"transition");
         for(UIView* subview in [self subviews]){
             if([NSStringFromClass([subview class]) isEqualToString:@"UITableViewCellDeleteConfirmationControl"]){
                 UIView* buttonThingy = [[subview subviews] objectAtIndex:0];
