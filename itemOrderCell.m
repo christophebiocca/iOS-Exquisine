@@ -19,11 +19,18 @@
     return @"ItemOrderCell";
 }
 
+static UIImage* deleteImage;
+
++(void)initialize{
+    if(!deleteImage){
+        deleteImage = [UIImage imageNamed:@"Delete"];
+    }
+}
+
 - (id)init
 {
     self = [super initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:[ItemOrderCell cellIdentifier]];
     if (self) {
-        deleteImage = [UIImage imageNamed:@"Delete"];
     }
     return self;
 }

@@ -13,7 +13,6 @@
 @interface ItemOrderCell : UITableViewCell
 {
     Item* item;
-    UIImage* deleteImage;
 }
 
 @property(nonatomic,retain)Item* item;
