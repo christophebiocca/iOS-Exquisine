@@ -8,6 +8,7 @@
 
 #import "PaymentFailureViewController.h"
 #import "PaymentFailureView.h"
+#import "PaymentError.h"
 
 @implementation PaymentFailureViewController
 
@@ -31,8 +32,13 @@
 
 -(void)setMessage{
     if(failureInfo && failureView){
+#ifdef DEBUG
+        [failureView setErrorMessage:[NSString stringWithFormat:
+                                      @"The server seems to be unresponsive, and we are unable to process your order at this time. Your credit card was not charged. DEBUG INFO:(%@)", failureInfo]];
+#else
         [failureView setErrorMessage:[NSString stringWithFormat:
                                       @"The server seems to be unresponsive, and we are unable to process your order at this time. Your credit card was not charged."]];
+#endif
     }
 }
 
