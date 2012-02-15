@@ -340,7 +340,12 @@ NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
         }
         
     }
-    
+    for (int i = 0; i < [itemList count] ; i++)
+    {
+        if (![[itemList objectAtIndex:i] isEffectivelyEqual:[[anOrder itemList] objectAtIndex:i]]) {
+            return NO;
+        }
+    }
     return YES;
 }
 
