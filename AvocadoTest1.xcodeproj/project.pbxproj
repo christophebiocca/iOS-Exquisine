@@ -389,6 +389,7 @@
 		D9B9D3A114EA4B8800D6B0BC /* PaymentFailureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentFailureView.m; sourceTree = "<group>"; };
 		D9D658C014E5EFE000ACDBF6 /* Delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Delete.png; sourceTree = "<group>"; };
 		D9D658C114E5EFE000ACDBF6 /* Delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Delete@2x.png"; sourceTree = "<group>"; };
+		D9E6F37F14ECB0E300217415 /* Pita Factory.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "Pita Factory.entitlements"; path = "AvocadoTest1/Pita Factory.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -647,6 +648,7 @@
 		23658CB114BDFB15002C0996 = {
 			isa = PBXGroup;
 			children = (
+				D9E6F37F14ECB0E300217415 /* Pita Factory.entitlements */,
 				38CFAEA614D9D7A8000A679D /* Localytics */,
 				38CFAE9A14D9C70B000A679D /* libsqlite3.dylib */,
 				38CFAE9814D9C6F2000A679D /* libz.dylib */,
@@ -1678,6 +1680,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PRODUCT_NAME = "Pita Factory";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1698,6 +1701,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PRODUCT_NAME = "Pita Factory";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1707,10 +1711,10 @@
 		23658CF314BDFB16002C0996 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "AvocadoTest1/Pita Factory.entitlements";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AvocadoTest1/AvocadoTest1-Prefix.pch";
 				INFOPLIST_FILE = "AvocadoTest1/AvocadoTest1-Info.plist";
-				PRODUCT_NAME = "Pita Factory";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -1720,10 +1724,10 @@
 		23658CF414BDFB16002C0996 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "AvocadoTest1/Pita Factory.entitlements";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AvocadoTest1/AvocadoTest1-Prefix.pch";
 				INFOPLIST_FILE = "AvocadoTest1/AvocadoTest1-Info.plist";
-				PRODUCT_NAME = "Pita Factory";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
