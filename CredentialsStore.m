@@ -24,7 +24,7 @@ static CredentialsStore* store = nil;
 }
 
 -(void)obtainSecureAppID{
-    CFStringRef accessKey = (CFStringRef) @"Exquisine - Security Key";
+    CFStringRef accessKey = (CFStringRef) @"CroutonLabs - Security Key";
     CFStringRef serviceKey = (CFStringRef) @"service";
     CFMutableDictionaryRef searchDict = 
     CFDictionaryCreateMutable(kCFAllocatorDefault, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
