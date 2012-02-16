@@ -28,7 +28,6 @@
 		232D7A1014C8B23A00DD5911 /* UICustomActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 232D7A0F14C8B23A00DD5911 /* UICustomActionSheet.m */; };
 		232D7A1214C8B4FC00DD5911 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 232D7A1114C8B4FC00DD5911 /* QuartzCore.framework */; };
 		2345980B14DE0B2000910F3B /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2345980A14DE0B2000910F3B /* OrderManager.m */; };
-		2352723A14DA322900DDC7FA /* pfLogo_low.png in Resources */ = {isa = PBXBuildFile; fileRef = 2352723714DA322900DDC7FA /* pfLogo_low.png */; };
 		2352724214DB145600DDC7FA /* IndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2352724114DB145600DDC7FA /* IndicatorView.m */; };
 		23658CC114BDFB15002C0996 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23658CC014BDFB15002C0996 /* UIKit.framework */; };
 		23658CC314BDFB15002C0996 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23658CC214BDFB15002C0996 /* Foundation.framework */; };
@@ -193,7 +192,6 @@
 		232D7A1114C8B4FC00DD5911 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		2345980914DE0B2000910F3B /* OrderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderManager.h; sourceTree = "<group>"; };
 		2345980A14DE0B2000910F3B /* OrderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderManager.m; sourceTree = "<group>"; };
-		2352723714DA322900DDC7FA /* pfLogo_low.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pfLogo_low.png; sourceTree = "<group>"; };
 		2352724014DB145600DDC7FA /* IndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndicatorView.h; sourceTree = "<group>"; };
 		2352724114DB145600DDC7FA /* IndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndicatorView.m; sourceTree = "<group>"; };
 		23658CBC14BDFB15002C0996 /* Pita Factory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pita Factory.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1263,7 +1261,6 @@
 				23718F0514EC23A200F543BD /* pfLogo_114.png */,
 				D9D658C014E5EFE000ACDBF6 /* Delete.png */,
 				D9D658C114E5EFE000ACDBF6 /* Delete@2x.png */,
-				2352723714DA322900DDC7FA /* pfLogo_low.png */,
 				2329BB2D14D9A8DD008E505F /* pfLogo@2x.png */,
 				38D4132E14D3324200031B60 /* pfLogo.png */,
 				23E7D87B14C9BA88006D6C13 /* behindButton.png */,
@@ -1474,7 +1471,6 @@
 				38D4133014D3324200031B60 /* pfLogo.png in Resources */,
 				D95B788014D318A300FC0F29 /* checkRelease.rb in Resources */,
 				2329BB2E14D9A8DD008E505F /* pfLogo@2x.png in Resources */,
-				2352723A14DA322900DDC7FA /* pfLogo_low.png in Resources */,
 				23E3035714DB3BAA00BABB10 /* IndicatorImageOn.png in Resources */,
 				23E3035814DB3BAA00BABB10 /* IndicatorImageOn@2x.png in Resources */,
 				23E3035914DB3BAA00BABB10 /* IndicatorImageOff.png in Resources */,
