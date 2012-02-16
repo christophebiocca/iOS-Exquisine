@@ -31,6 +31,9 @@ static CredentialsStore* store = nil;
     CFDictionaryAddValue(searchDict, kSecClass, kSecClassGenericPassword);
     CFDictionaryAddValue(searchDict, kSecAttrService, serviceKey);
     CFDictionaryAddValue(searchDict, kSecAttrAccount, accessKey);
+#if !TARGET_IPHONE_SIMULATOR
+    CFDictionaryAddValue(searchDict, kSecAttrAccessGroup, @"AP5C358JXU.com.croutonlabs.restaurantapps");
+#endif
     CFDictionaryAddValue(searchDict, kSecReturnData, kCFBooleanTrue);
     
     CFDataRef data = nil;
