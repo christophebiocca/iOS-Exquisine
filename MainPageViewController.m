@@ -502,6 +502,8 @@
                                     }
                                     failure:^(GetLocations* call, NSError* error) {
                                         CLLog(LOG_LEVEL_WARNING ,[NSString stringWithFormat: @"Can't fetch locations:\n%@", error]);
+                                        [[mainPageView openIndicator] setState:IndicatorViewOff];
+                                        [[mainPageView storeHours] setText:@"Unable to obtain opening hours."];
                                     }];
 }
 
