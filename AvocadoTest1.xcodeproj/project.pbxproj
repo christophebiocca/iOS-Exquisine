@@ -124,6 +124,7 @@
 		D95B787414D2BE4B00FC0F29 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = D95B787314D2BE4B00FC0F29 /* Location.m */; };
 		D95B787714D2C4F800FC0F29 /* GetLocations.m in Sources */ = {isa = PBXBuildFile; fileRef = D95B787614D2C4F800FC0F29 /* GetLocations.m */; };
 		D95B788014D318A300FC0F29 /* checkRelease.rb in Resources */ = {isa = PBXBuildFile; fileRef = D95B787F14D318A300FC0F29 /* checkRelease.rb */; };
+		D969488014ECDB570035AB9E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D969487F14ECDB570035AB9E /* Default.png */; };
 		D9768A6514D73EB300BBA467 /* PaymentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D9768A6214D73EB300BBA467 /* PaymentInfo.m */; };
 		D9768A6614D73EB300BBA467 /* PaymentInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9768A6414D73EB300BBA467 /* PaymentInfoViewController.m */; };
 		D9768A7E14D74AAD00BBA467 /* PaymentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9768A7D14D74AAD00BBA467 /* PaymentView.m */; };
@@ -134,6 +135,7 @@
 		D9B0F6C214E075E400CA3B13 /* PaymentProfileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B0F6C114E075E400CA3B13 /* PaymentProfileInfo.m */; };
 		D9B9D39E14EA4B7300D6B0BC /* PaymentFailureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B9D39D14EA4B7300D6B0BC /* PaymentFailureViewController.m */; };
 		D9B9D3A214EA4B8800D6B0BC /* PaymentFailureView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B9D3A114EA4B8800D6B0BC /* PaymentFailureView.m */; };
+		D9CB5FD614ECDB8B00FC5071 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9CB5FD514ECDB8B00FC5071 /* Default@2x.png */; };
 		D9D5A3AB14ECCD0B003B0B11 /* pfLogo_29.png in Resources */ = {isa = PBXBuildFile; fileRef = D9D5A3A914ECCD0B003B0B11 /* pfLogo_29.png */; };
 		D9D5A3AC14ECCD0B003B0B11 /* pfLogo_58.png in Resources */ = {isa = PBXBuildFile; fileRef = D9D5A3AA14ECCD0B003B0B11 /* pfLogo_58.png */; };
 		D9D658C214E5EFE000ACDBF6 /* Delete.png in Resources */ = {isa = PBXBuildFile; fileRef = D9D658C014E5EFE000ACDBF6 /* Delete.png */; };
@@ -366,6 +368,7 @@
 		D95B787514D2C4F700FC0F29 /* GetLocations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetLocations.h; sourceTree = "<group>"; };
 		D95B787614D2C4F800FC0F29 /* GetLocations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetLocations.m; sourceTree = "<group>"; };
 		D95B787F14D318A300FC0F29 /* checkRelease.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = checkRelease.rb; path = ../checkRelease.rb; sourceTree = "<group>"; };
+		D969487F14ECDB570035AB9E /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		D9768A6114D73EB300BBA467 /* PaymentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentInfo.h; sourceTree = "<group>"; };
 		D9768A6214D73EB300BBA467 /* PaymentInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentInfo.m; sourceTree = "<group>"; };
 		D9768A6314D73EB300BBA467 /* PaymentInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentInfoViewController.h; sourceTree = "<group>"; };
@@ -387,6 +390,7 @@
 		D9B9D39D14EA4B7300D6B0BC /* PaymentFailureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentFailureViewController.m; sourceTree = "<group>"; };
 		D9B9D3A014EA4B8800D6B0BC /* PaymentFailureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentFailureView.h; sourceTree = "<group>"; };
 		D9B9D3A114EA4B8800D6B0BC /* PaymentFailureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentFailureView.m; sourceTree = "<group>"; };
+		D9CB5FD514ECDB8B00FC5071 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		D9D5A3A914ECCD0B003B0B11 /* pfLogo_29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pfLogo_29.png; sourceTree = "<group>"; };
 		D9D5A3AA14ECCD0B003B0B11 /* pfLogo_58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pfLogo_58.png; sourceTree = "<group>"; };
 		D9D658C014E5EFE000ACDBF6 /* Delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Delete.png; sourceTree = "<group>"; };
@@ -1261,6 +1265,8 @@
 		38D4132C14D3321C00031B60 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D969487F14ECDB570035AB9E /* Default.png */,
+				D9CB5FD514ECDB8B00FC5071 /* Default@2x.png */,
 				D9D5A3A914ECCD0B003B0B11 /* pfLogo_29.png */,
 				D9D5A3AA14ECCD0B003B0B11 /* pfLogo_58.png */,
 				23718F0414EC23A200F543BD /* pfLogo_57.png */,
@@ -1489,6 +1495,8 @@
 				23718F0714EC23A300F543BD /* pfLogo_114.png in Resources */,
 				D9D5A3AB14ECCD0B003B0B11 /* pfLogo_29.png in Resources */,
 				D9D5A3AC14ECCD0B003B0B11 /* pfLogo_58.png in Resources */,
+				D969488014ECDB570035AB9E /* Default.png in Resources */,
+				D9CB5FD614ECDB8B00FC5071 /* Default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
