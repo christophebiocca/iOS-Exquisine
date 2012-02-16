@@ -415,6 +415,21 @@
                 [self updateCreateButtonState];
             }
             failure:^(GetMenu* menuCall, NSError* error){
+                if(!theMenu){
+                    [[[UIAlertView alloc] initWithTitle:@"No internet access"
+                                                message:@"An internet connection is required to "
+                      @"load the menu the first time this app runs."
+                                               delegate:nil
+                                      cancelButtonTitle:@"OK"
+                                      otherButtonTitles:nil] show];
+                } else {
+                    [[[UIAlertView alloc] initWithTitle:@"No internet access"
+                                                message:@"You can browse the menu, but won't"
+                      @" be able to place an order until you connect to the internet."
+                                               delegate:nil
+                                      cancelButtonTitle:@"OK"
+                                      otherButtonTitles:nil] show];
+                }
                 CLLog(LOG_LEVEL_WARNING, [NSString stringWithFormat: @"call %@ errored with %@", menuCall, error]);
             }];  
 }
