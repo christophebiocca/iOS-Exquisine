@@ -244,15 +244,18 @@
 
 -(void)deleteFromFavoritesForController:(id)orderViewController
 {
+    NSMutableIndexSet* toRemove = [NSMutableIndexSet indexSet];
+    NSUInteger i = 0;
     for (Order *anOrder in favoriteOrders) 
     {
         if([anOrder isEffectivelyEqual: [[orderViewController theOrderManager] thisOrder]])
         {
             [anOrder setFavorite:NO];
-            [favoriteOrders removeObject:anOrder];
-            break;
+            [toRemove addIndex:i];
         }
+        ++i;
     }
+    [favoriteOrders removeObjectsAtIndexes:toRemove];
     
     //Now, it's a little strange, but we need to do a consistancy check between all of the orders
     //that we're aware of (which should be all of them, if that's no longer true, so help us god)
