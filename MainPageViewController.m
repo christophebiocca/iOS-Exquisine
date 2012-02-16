@@ -161,9 +161,18 @@
     return pendingOrderList;
 }
 
+-(void)dismissThisModal:(id)modalController{
+    if(modalController == [self presentedViewController]){
+        [self dismissModalViewControllerAnimated:YES];
+        [self performSelector:@selector(dismissThisModal:) 
+                   withObject:modalController 
+                   afterDelay:0.1f];
+    }
+}
+
 -(void)submitOrderForController:(id)orderViewController
 {
-    
+    __block UINavigationController* modalController = nil;
     PaymentStack* paymentStack = 
     [[PaymentStack alloc] initWithOrder:[[orderViewController theOrderManager] thisOrder] locations:locations
                            successBlock:^{
@@ -175,15 +184,14 @@
                                    currentOrder = [[Order alloc] init];
                                }
                            }
-                            completionBlock:^() {
-                                [self dismissModalViewControllerAnimated:YES];
-                                
+                            completionBlock:^{
+                                [self dismissThisModal:modalController];
                             } 
                           cancellationBlock:^{
-                             [self performSelector:@selector(dismissView) withObject:self afterDelay:1.5];
+                             [self dismissThisModal:modalController];
                           }];
-    
-    [self presentModalViewController:[paymentStack navigationController] animated:YES];
+    modalController = [paymentStack navigationController];
+    [self presentModalViewController:modalController animated:YES];
 }
 
 -(void)dismissView
