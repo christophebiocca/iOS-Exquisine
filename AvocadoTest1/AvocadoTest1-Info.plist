@@ -12,6 +12,8 @@
 	<array>
 		<string>pfLogo_57.png</string>
 		<string>pfLogo_114.png</string>
+		<string>pfLogo_29.png</string>
+		<string>pfLogo_58.png</string>
 	</array>
 	<key>CFBundleIcons</key>
 	<dict>
@@ -21,6 +23,8 @@
 			<array>
 				<string>pfLogo_57.png</string>
 				<string>pfLogo_114.png</string>
+				<string>pfLogo_29.png</string>
+				<string>pfLogo_58.png</string>
 			</array>
 			<key>UIPrerenderedIcon</key>
 			<false/>
