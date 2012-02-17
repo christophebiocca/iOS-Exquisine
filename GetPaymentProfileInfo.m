@@ -14,7 +14,7 @@
 @synthesize info;
 
 +(void)fetchInfo:(void (^)(id))success failure:(void (^)(id, NSError *))failure{
-    [self sendGETRequestForLocation:@"/customer/paymentinfo/"
+    [self sendGETRequestForLocation:@"customer/paymentinfo/"
                             success:success
                             failure:failure];
 }
