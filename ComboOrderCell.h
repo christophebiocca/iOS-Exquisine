@@ -1,5 +1,5 @@
 //
-//  itemOrderCell.h
+//  ComboCell.h
 //  AvocadoTest1
 //
 //  Created by Jake on 12-01-27.
@@ -7,18 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-
 #import "MenuCompositeCell.h"
 
-@class Item;
+@class Combo;
 
-@interface ItemOrderCell : MenuCompositeCell
+@interface ComboOrderCell : MenuCompositeCell
 {
-    Item* item;
+    Combo *combo;
 }
 
--(void)setMenuComponent:(Item *)theItem;
-
-+(NSString*)cellIdentifier;
+-(void)setMenuComponent:(Combo*)theCombo;
 
 @end

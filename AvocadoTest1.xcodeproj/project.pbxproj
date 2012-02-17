@@ -11,6 +11,8 @@
 		23082F5614D88513003964CE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 23082F5414D88513003964CE /* Reachability.m */; };
 		23082F5C14D8968F003964CE /* ComboViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23082F5B14D8968F003964CE /* ComboViewController.m */; };
 		23082F6114D897D1003964CE /* ComboView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23082F6014D897D1003964CE /* ComboView.m */; };
+		230C353514EEB994004DCF85 /* GeneralPurposeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 230C353414EEB994004DCF85 /* GeneralPurposeViewCell.m */; };
+		230C353814EECD5A004DCF85 /* ComboMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 230C353714EECD5A004DCF85 /* ComboMenuCell.m */; };
 		231C510E14E1B7F1004F2CCC /* ComboTrivialPricingStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 231C510D14E1B7F1004F2CCC /* ComboTrivialPricingStrategy.m */; };
 		231C511214E1BC8B004F2CCC /* ItemGroupMultiplicativePricing.m in Sources */ = {isa = PBXBuildFile; fileRef = 231C511114E1BC8B004F2CCC /* ItemGroupMultiplicativePricing.m */; };
 		231C511614E1C1A5004F2CCC /* ItemGroupAbsolutePricing.m in Sources */ = {isa = PBXBuildFile; fileRef = 231C511514E1C1A5004F2CCC /* ItemGroupAbsolutePricing.m */; };
@@ -57,7 +59,7 @@
 		238FC78014D36702007E175B /* itemOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 238FC77F14D36702007E175B /* itemOrderCell.m */; };
 		238FC78514D36916007E175B /* MenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 238FC78414D36916007E175B /* MenuCell.m */; };
 		238FC78914D372FC007E175B /* ChoiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 238FC78814D372FC007E175B /* ChoiceCell.m */; };
-		238FC78D14D37402007E175B /* ComboCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 238FC78C14D37402007E175B /* ComboCell.m */; };
+		238FC78D14D37402007E175B /* ComboOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 238FC78C14D37402007E175B /* ComboOrderCell.m */; };
 		2391EA7314BE3699001BDC1B /* ConfigurableTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2391EA7114BE3699001BDC1B /* ConfigurableTableViewDataSource.m */; };
 		2391EA7714BE387D001BDC1B /* CellInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2391EA7614BE387D001BDC1B /* CellInfo.m */; };
 		23AAD98B14BF525A00F88AA8 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AAD98A14BF525A00F88AA8 /* Utilities.m */; };
@@ -163,6 +165,10 @@
 		23082F5B14D8968F003964CE /* ComboViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComboViewController.m; sourceTree = "<group>"; };
 		23082F5F14D897D1003964CE /* ComboView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComboView.h; sourceTree = "<group>"; };
 		23082F6014D897D1003964CE /* ComboView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComboView.m; sourceTree = "<group>"; };
+		230C353314EEB994004DCF85 /* GeneralPurposeViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneralPurposeViewCell.h; sourceTree = "<group>"; };
+		230C353414EEB994004DCF85 /* GeneralPurposeViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneralPurposeViewCell.m; sourceTree = "<group>"; };
+		230C353614EECD5A004DCF85 /* ComboMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComboMenuCell.h; sourceTree = "<group>"; };
+		230C353714EECD5A004DCF85 /* ComboMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComboMenuCell.m; sourceTree = "<group>"; };
 		231C510C14E1B7F1004F2CCC /* ComboTrivialPricingStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComboTrivialPricingStrategy.h; sourceTree = "<group>"; };
 		231C510D14E1B7F1004F2CCC /* ComboTrivialPricingStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComboTrivialPricingStrategy.m; sourceTree = "<group>"; };
 		231C511014E1BC8B004F2CCC /* ItemGroupMultiplicativePricing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemGroupMultiplicativePricing.h; sourceTree = "<group>"; };
@@ -246,8 +252,8 @@
 		238FC78414D36916007E175B /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
 		238FC78714D372FC007E175B /* ChoiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoiceCell.h; sourceTree = "<group>"; };
 		238FC78814D372FC007E175B /* ChoiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoiceCell.m; sourceTree = "<group>"; };
-		238FC78B14D37402007E175B /* ComboCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComboCell.h; sourceTree = "<group>"; };
-		238FC78C14D37402007E175B /* ComboCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComboCell.m; sourceTree = "<group>"; };
+		238FC78B14D37402007E175B /* ComboOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; path = ComboOrderCell.h; sourceTree = "<group>"; };
+		238FC78C14D37402007E175B /* ComboOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComboOrderCell.m; sourceTree = "<group>"; };
 		2391EA7014BE3699001BDC1B /* ConfigurableTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurableTableViewDataSource.h; sourceTree = "<group>"; };
 		2391EA7114BE3699001BDC1B /* ConfigurableTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigurableTableViewDataSource.m; sourceTree = "<group>"; };
 		2391EA7514BE387D001BDC1B /* CellInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellInfo.h; sourceTree = "<group>"; };
@@ -461,6 +467,15 @@
 				23082F6014D897D1003964CE /* ComboView.m */,
 			);
 			name = ComboView;
+			sourceTree = "<group>";
+		};
+		230C353114EEB94D004DCF85 /* OtherCells */ = {
+			isa = PBXGroup;
+			children = (
+				230C353314EEB994004DCF85 /* GeneralPurposeViewCell.h */,
+				230C353414EEB994004DCF85 /* GeneralPurposeViewCell.m */,
+			);
+			name = OtherCells;
 			sourceTree = "<group>";
 		};
 		231C510F14E1BC4D004F2CCC /* ItemGroupMultiplicativePricing */ = {
@@ -810,6 +825,7 @@
 				2368B52B14EDB6D800D880D3 /* CustomViewCell.h */,
 				2368B52C14EDB6D800D880D3 /* CustomViewCell.m */,
 				2368B52F14EDB85F00D880D3 /* MenuCompositeCells */,
+				230C353114EEB94D004DCF85 /* OtherCells */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -846,8 +862,10 @@
 		238FC78A14D373EC007E175B /* ComboCell */ = {
 			isa = PBXGroup;
 			children = (
-				238FC78B14D37402007E175B /* ComboCell.h */,
-				238FC78C14D37402007E175B /* ComboCell.m */,
+				238FC78B14D37402007E175B /* ComboOrderCell.h */,
+				238FC78C14D37402007E175B /* ComboOrderCell.m */,
+				230C353614EECD5A004DCF85 /* ComboMenuCell.h */,
+				230C353714EECD5A004DCF85 /* ComboMenuCell.m */,
 			);
 			name = ComboCell;
 			sourceTree = "<group>";
@@ -1608,7 +1626,7 @@
 				238FC78014D36702007E175B /* itemOrderCell.m in Sources */,
 				238FC78514D36916007E175B /* MenuCell.m in Sources */,
 				238FC78914D372FC007E175B /* ChoiceCell.m in Sources */,
-				238FC78D14D37402007E175B /* ComboCell.m in Sources */,
+				238FC78D14D37402007E175B /* ComboOrderCell.m in Sources */,
 				238476F114D607A400DE9270 /* OrderCell.m in Sources */,
 				D9768A6514D73EB300BBA467 /* PaymentInfo.m in Sources */,
 				D9768A6614D73EB300BBA467 /* PaymentInfoViewController.m in Sources */,
@@ -1650,6 +1668,8 @@
 				D9B9D3A214EA4B8800D6B0BC /* PaymentFailureView.m in Sources */,
 				2368B52D14EDB6D900D880D3 /* CustomViewCell.m in Sources */,
 				2368B53214EDB8B000D880D3 /* MenuCompositeCell.m in Sources */,
+				230C353514EEB994004DCF85 /* GeneralPurposeViewCell.m in Sources */,
+				230C353814EECD5A004DCF85 /* ComboMenuCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

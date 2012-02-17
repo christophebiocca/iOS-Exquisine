@@ -16,10 +16,10 @@
     Menu *menu;
 }
 
-@property (nonatomic, retain) Menu *menu;
+-(void)setMenuComponent:(Menu *)theMenu;
 
 + (NSString*)cellIdentifier;
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated;
+-(void)updateCell;
 
 @end

@@ -16,7 +16,7 @@
     Order *order;
 }
 
-@property (nonatomic,retain) Order *order;
+-(void)setMenuComponent:(Order *)theOrder;
 
 +(NSString *) cellIdentifier;
 

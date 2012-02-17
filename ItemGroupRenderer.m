@@ -34,7 +34,7 @@
         cell = [[ItemMenuCell alloc] init];
     }
     
-    [cell setItem:thingToDisplay];
+    [cell setMenuComponent:thingToDisplay];
     
     return cell;
     

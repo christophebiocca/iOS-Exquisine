@@ -16,10 +16,20 @@
     return @"ItemGroupCell";
 }
 
--(void)setItemGroup:(ItemGroup *)theItemGroup
+-(void)setMenuComponent:(ItemGroup *)theItemGroup
 {   
+    
     itemGroup = theItemGroup;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCell) name:ITEM_GROUP_MODIFIED object:theItemGroup];
     [super setMenuComponent:theItemGroup];
+    
+    [self updateCell];
+}
+
+-(void)updateCell
+{
+    [super updateCell];
+    
     [[self detailTextLabel] setText:@""];
     
     if([itemGroup satisfied])
@@ -33,12 +43,7 @@
         [self setBackgroundColor:[UIColor colorWithRed:1.0f green:0.83f blue:0.83f alpha:1.0f]];
     }
     
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-    
+    [self setNeedsDisplay];
 }
 
 @end

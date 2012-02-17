@@ -1,23 +1,23 @@
 //
-//  itemOrderCell.m
+//  ComboCell.m
 //  AvocadoTest1
 //
 //  Created by Jake on 12-01-27.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "ItemOrderCell.h"
-#import "Item.h"
+#import "ComboOrderCell.h"
+#import "Combo.h"
 #import "Utilities.h"
 #import <QuartzCore/QuartzCore.h>
 
-@implementation ItemOrderCell
+@implementation ComboOrderCell
 
-+(NSString*)cellIdentifier{
-    return @"ItemOrderCell";
++(NSString *)cellIdentifier{
+    return @"ComboOrderCell";
 }
 
-static UIImage* deleteImage;
+static UIImage* deleteImage = nil;
 
 +(void)initialize{
     if(!deleteImage){
@@ -25,23 +25,18 @@ static UIImage* deleteImage;
     }
 }
 
--(void)setMenuComponent:(Item*)theItem{
+-(void)setMenuComponent:(Combo*)theCombo{
     
-    item = theItem;
+    combo = theCombo;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCell) name:ITEM_MODIFIED object:item];
+    [super setMenuComponent:theCombo];
     
-    [super setMenuComponent:theItem];
-    
-    [self updateCell];
 }
 
 -(void)updateCell
 {
     [super updateCell];
-    
-    [[self detailTextLabel] setText:[Utilities FormatToPrice:[item price]]];
-    
+    [[self detailTextLabel] setText:[Utilities FormatToPrice:[combo price]]];
     [self setNeedsDisplay];
 }
 

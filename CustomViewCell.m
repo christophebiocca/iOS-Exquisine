@@ -7,6 +7,8 @@
 //
 
 #import "CustomViewCell.h"
+#import "MenuCompositeCell.h"
+#import "GeneralPurposeViewCell.h"
 
 @implementation CustomViewCell
 
@@ -28,6 +30,11 @@
         
     }
     return self;
+}
+
+-(void)setStyle:(CellStyle)style
+{
+    
 }
 
 +(NSString*)cellIdentifier{

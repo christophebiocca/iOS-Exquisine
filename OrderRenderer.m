@@ -11,7 +11,7 @@
 #import "MenuCell.h"
 #import "ItemMenuCell.h"
 #import "ItemOrderCell.h"
-#import "ComboCell.h"
+#import "ComboOrderCell.h"
 #import "Menu.h"
 #import "Order.h"
 #import "Item.h"
@@ -110,7 +110,7 @@
             cell = [[ItemMenuCell alloc] init];
         }
         
-        [cell setItem:thingToDisplay];
+        [cell setMenuComponent:thingToDisplay];
         return cell;
     }
     else if([thingToDisplay isKindOfClass:([Menu class])])
@@ -119,7 +119,7 @@
         if (cell == nil) {
             cell = [[MenuCell alloc] init];
         }
-        [cell setMenu:thingToDisplay];
+        [cell setMenuComponent:thingToDisplay];
         return cell;
     }
     
@@ -139,7 +139,7 @@
                 cell = [[ItemOrderCell alloc] init];
             }
             
-            [cell setItem:thingToDisplay];
+            [cell setMenuComponent:thingToDisplay];
             
             [cell setIndentationLevel:0];
             
@@ -153,12 +153,12 @@
         }
         else if([thingToDisplay isKindOfClass:([Combo class])])
         {
-            ComboCell *cell = [tableView dequeueReusableCellWithIdentifier:[ComboCell cellIdentifier]];
+            ComboOrderCell *cell = [tableView dequeueReusableCellWithIdentifier:[ComboOrderCell cellIdentifier]];
             if (cell == nil) {
-                cell = [[ComboCell alloc] init];
+                cell = [[ComboOrderCell alloc] init];
             }
-            [cell setStyle:@"with_price"];
-            [cell setCombo:thingToDisplay];
+            [cell setStyle:CELL_STYLE_PLAIN];
+            [cell setMenuComponent:thingToDisplay];
             return cell;
         }
         

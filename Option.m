@@ -275,22 +275,22 @@ NSString* OPTION_INVALID_DESELECTION = @"CroutonLabs/OptionInvalidDeselection";
     
     if ([[self selectedChoices] count] >= numberOfFreeChoices) {
         for (Choice *aChoice in choiceList) {
-            [aChoice setIsFreeUnsafe:NO];
+            [aChoice setIsFree:NO];
         }
     }
     else
     {
         for (Choice *aChoice in choiceList) {
-            [aChoice setIsFreeUnsafe:YES];
+            [aChoice setIsFree:YES];
         }
     }
     
     int j = 0;
     for (Choice *aChoice in [self selectedChoices]) {
         if (j >= numberOfFreeChoices) 
-            [aChoice setIsFreeUnsafe:NO];
+            [aChoice setIsFree:NO];
         else
-            [aChoice setIsFreeUnsafe:YES];
+            [aChoice setIsFree:YES];
         j++;
     }
     

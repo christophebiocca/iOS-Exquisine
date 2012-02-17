@@ -12,7 +12,6 @@
 #import "MenuCell.h"
 #import "ItemMenuCell.h"
 #import "Combo.h"
-#import "ComboCell.h"
 
 @implementation MenuRenderer
 
@@ -45,51 +44,20 @@
     
     id thingToDisplay = [displayList objectAtIndex:[indexPath row]];
     
-    if ([thingToDisplay isKindOfClass:[Item class]]) {
-        
-        ItemMenuCell *cell = [tableView dequeueReusableCellWithIdentifier:[ItemMenuCell cellIdentifier]];
-        
-        if (cell == nil)
-        {
-            cell = [[ItemMenuCell alloc] init];
-        }
-        
-        [cell setItem:thingToDisplay];
-        
-        return cell;
-        
+    MenuCompositeCell *cell = [tableView dequeueReusableCellWithIdentifier:[MenuCompositeCell cellIdentifierForMenuComponent:thingToDisplay AndContext:VIEW_CELL_CONTEXT_MENU]];
+    
+    if (cell == nil)
+    {
+        cell = [MenuCompositeCell customViewCellWithMenuComponent:thingToDisplay AndContext:VIEW_CELL_CONTEXT_MENU];
+    }
+    else
+    {
+        [cell setMenuComponent:thingToDisplay];
     }
     
-    if ([thingToDisplay isKindOfClass:[Menu class]]) {
-        
-        MenuCell *cell = [tableView dequeueReusableCellWithIdentifier:[MenuCell cellIdentifier]];
-        
-        if (cell == nil)
-        {
-            cell = [[MenuCell alloc] init];
-        }
-        
-        [cell setMenu:thingToDisplay];
-        
-        return cell;
-    }
+    [cell setStyle:CELL_STYLE_PLAIN];
     
-    if ([thingToDisplay isKindOfClass:[Combo class]]) {
-        
-        ComboCell *cell = [tableView dequeueReusableCellWithIdentifier:[ComboCell cellIdentifier]];
-        
-        if (cell == nil)
-        {
-            cell = [[ComboCell alloc] init];
-        }
-        
-        [cell setCombo:thingToDisplay];
-        [cell setStyle:@"plain"];
-        
-        return cell;
-    }
-    
-    return nil;
+    return cell;
 }
 
 

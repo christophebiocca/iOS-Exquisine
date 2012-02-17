@@ -75,20 +75,24 @@
             
             Option *thisOption = [[itemInfo options] objectAtIndex:([indexPath section] - 1)];
             Choice *thisChoice = [[thisOption choiceList] objectAtIndex:[indexPath row]];
-            [cell setChoice:thisChoice];    
+            [cell setMenuComponent:thisChoice];    
             
             return cell;
         }
     }
     
-    ChoiceCell *cell = [tableView dequeueReusableCellWithIdentifier:[ChoiceCell cellIdentifier]];
-    if (cell == nil) {
-        cell = [[ChoiceCell alloc] init];
-    }
-    
     Option *thisOption = [[itemInfo options] objectAtIndex:[indexPath section]];
-    Choice *thisChoice = [[thisOption choiceList] objectAtIndex:[indexPath row]];
-    [cell setChoice:thisChoice];    
+    MenuComponent *thisChoice = [[thisOption choiceList] objectAtIndex:[indexPath row]];
+    
+    MenuCompositeCell *cell = [tableView dequeueReusableCellWithIdentifier:[MenuCompositeCell cellIdentifierForMenuComponent:thisChoice AndContext:VIEW_CELL_CONTEXT_MENU]];
+    
+    if (cell == nil) {
+        cell = [MenuCompositeCell customViewCellWithMenuComponent:thisChoice AndContext:VIEW_CELL_CONTEXT_MENU];
+    }
+    else
+    {
+        [cell setMenuComponent:thisChoice];
+    }
     
     return cell;
 

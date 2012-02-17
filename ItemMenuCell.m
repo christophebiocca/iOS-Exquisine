@@ -16,10 +16,13 @@
     return @"ItemMenuCell";
 }
 
--(void)setItem:(Item*)theItem
+-(void)setMenuComponent:(Item *)theItem
 {
     
     item = theItem;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCell) name:ITEM_MODIFIED object:theItem];
+    
     [super setMenuComponent:theItem];
     
     UIFont *titleFont = [UIFont fontWithName:@"HelveticaNeue-Medium" size:17];
@@ -27,13 +30,16 @@
     [[self textLabel] setFont:titleFont];
     [[self detailTextLabel] setFont:descFont];
     
+    [self updateCell];
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+-(void)updateCell
 {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+    [super updateCell];
+    
+    [[self detailTextLabel] setText:[Utilities FormatToPrice:[item price]]];
+    
+    [self setNeedsDisplay];
 }
 
 @end

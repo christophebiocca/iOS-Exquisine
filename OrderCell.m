@@ -13,15 +13,15 @@
 
 @implementation OrderCell
 
-@synthesize order;
-
 +(NSString *)cellIdentifier{
     return @"OrderCell";
 }
 
--(void)setOrder:(Order *)theOrder
+-(void)setMenuComponent:(Order *)theOrder
 {   
     order = theOrder;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCell) name:ORDER_MODIFIED object:theOrder];
     
     [super setMenuComponent:theOrder];
     
@@ -29,10 +29,11 @@
     
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+-(void)updateCell
 {
-    [super setSelected:selected animated:animated];
-    
+    [super updateCell];
+    [[self detailTextLabel] setText:[Utilities FormatToPrice:[order subtotalPrice]]];
+    [self setNeedsDisplay];
 }
 
 @end

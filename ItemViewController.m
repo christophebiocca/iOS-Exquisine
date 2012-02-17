@@ -74,7 +74,7 @@
     Option *thisOption = [[itemInfo options] objectAtIndex:[indexPath section]];
     Choice *thisChoice = [[thisOption choiceList] objectAtIndex:[indexPath row]];
     [thisChoice toggleSelected];
-    [tableView reloadSections:[NSIndexSet indexSetWithIndex:[indexPath section]] withRowAnimation:UITableViewRowAnimationNone];
+    //[tableView reloadSections:[NSIndexSet indexSetWithIndex:[indexPath section]] withRowAnimation:UITableViewRowAnimationNone];
     
 }
 
@@ -111,7 +111,7 @@
     [super viewWillAppear:animated];
     [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Entered an item page"];
     [[itemView priceButton] setTitle:[NSString stringWithFormat:@"Item Price: %@",[Utilities FormatToPrice:[itemInfo price]] ]];
-    [[itemView itemTable] reloadData];
+    //[[itemView itemTable] reloadData];
 }
 
 - (void)viewDidUnload
@@ -130,7 +130,7 @@
 -(void) itemAltered
 {
     [[itemView priceButton] setTitle:[NSString stringWithFormat:@"Item Price: %@",[Utilities FormatToPrice:[itemInfo price]] ]];
-    [[itemView itemTable] reloadData];
+    //[[itemView itemTable] reloadData];
 }
 
 -(void)dealloc

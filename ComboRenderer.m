@@ -54,7 +54,7 @@
         cell = [[ItemGroupCell alloc] init];
     }
     
-    [cell setItemGroup:thingToDisplay];
+    [cell setMenuComponent:thingToDisplay];
     
     return cell;
     

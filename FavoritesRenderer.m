@@ -48,7 +48,7 @@
             cell = [[OrderCell alloc] init];
         }
         
-        [cell setOrder:[favoriteOrders objectAtIndex:[indexPath row]]];
+        [cell setMenuComponent:[favoriteOrders objectAtIndex:[indexPath row]]];
         
         return cell;
     }

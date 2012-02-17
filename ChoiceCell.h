@@ -16,7 +16,7 @@
     Choice *choice;
 }
 
-@property (nonatomic,retain) Choice *choice;
+-(void)setMenuComponent:(Choice*)theChoice;
 
 +(NSString*)cellIdentifier;
 
