@@ -16,21 +16,11 @@
     
     OrderManager *orderManager;
     
-    //This list just contains the stuff that
-    //we should be trying to make cells for in
-    //the order section of the table.
-    NSMutableArray *orderDisplayList;
-    
 }
 
--(void) refreshOrderList:(NSNotification *)aNotification;
+-(void) orderChanged:(NSNotification *)aNotification;
 
 -(OrderRenderer *)initWithOrderManager:(OrderManager *) anOrderManager;
 
--(id) objectForCellAtIndex:(NSIndexPath *) index;
-
-- (UITableViewCell *)menuCellForIndexPath:(UITableView *) tableView:(NSIndexPath *) indexPath;
-
-- (UITableViewCell *)itemCellForIndexPath:(UITableView *) tableView:(NSIndexPath *) indexPath;
 
 @end

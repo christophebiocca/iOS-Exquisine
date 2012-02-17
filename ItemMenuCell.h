@@ -18,6 +18,6 @@
 
 +(NSString*)cellIdentifier;
 
--(void)setMenuComponent:(Item *)theItem;
+-(void)setData:(id)theItem;
 
 @end

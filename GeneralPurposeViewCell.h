@@ -7,7 +7,19 @@
 //
 
 #import "CustomViewCell.h"
+@class GeneralPurposeViewCellData;
 
 @interface GeneralPurposeViewCell : CustomViewCell
+{
+    GeneralPurposeViewCellData *cellData;
+}
+
+-(id)initWithCellData:(GeneralPurposeViewCellData *) theData;
+
++(CustomViewCell *)customViewCellWithGeneralData:(GeneralPurposeViewCellData *) theCellData;
+
+-(void)updateCell;
+
+-(void)setData:(GeneralPurposeViewCellData *) theCellData;
 
 @end

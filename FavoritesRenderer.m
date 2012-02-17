@@ -8,71 +8,30 @@
 
 #import "FavoritesRenderer.h"
 #import "Order.h"
+#import "GeneralPurposeViewCellData.h"
 #import "OrderRenderer.h"
 #import "Utilities.h"
-#import "CellData.h"
-#import "Menu.h"
 #import "OrderCell.h"
 
 @implementation FavoritesRenderer
 
--(FavoritesRenderer *)initWithOrderListAndMenu:(NSMutableArray *)anOrderList:(Menu *)aMenu
+-(FavoritesRenderer *)initWithOrderList:(NSMutableArray *)anOrderList
 {
-    theMenu = aMenu;
     favoriteOrders = anOrderList;
+    listData = [NSArray arrayWithObject:anOrderList];
     
-    return self;
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    if ([favoriteOrders count])
-        return [favoriteOrders count];
-    return 1;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+    sectionNames = [NSArray arrayWithObject:@"Favorites"]; 
     
-    if ([favoriteOrders count])
-    {
-        OrderCell *cell = [tableView dequeueReusableCellWithIdentifier:[OrderCell cellIdentifier]];        
-        
-        if (cell == nil) {
-            cell = [[OrderCell alloc] init];
-        }
-        
-        [cell setMenuComponent:[favoriteOrders objectAtIndex:[indexPath row]]];
-        
-        return cell;
-    }
+    if ([anOrderList count] > 0) 
+        listData = [NSArray arrayWithObject:anOrderList];
     else
     {
-        CellData *aCell = [[CellData alloc] init];
-        [aCell setCellTitleFontSize:13];
-        [aCell setCellDescFontSize:13];
-        [aCell setCellTitleFontType:@"HelveticaNeue-Medium"];
-        [aCell setCellDescFontType:@"HelveticaNeue"];
-        aCell.cellTitle = @"You have not saved any favorites!";
-        aCell.cellDesc = @"";
-        
-        static NSString *CellIdentifier = @"Cell";
-        
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
-        }
-        
-        [aCell configureCell:cell];
-        
-        return cell;
+        GeneralPurposeViewCellData *data = [[GeneralPurposeViewCellData alloc] init];
+        [data setTitle:@"You have not saved any favorites"];
+        listData = [NSArray arrayWithObject:anOrderList];
     }
+    
+    return self;
 }
 
 @end

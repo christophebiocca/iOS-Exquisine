@@ -16,7 +16,7 @@
     Menu *menu;
 }
 
--(void)setMenuComponent:(Menu *)theMenu;
+-(void)setData:(id)theMenu;
 
 + (NSString*)cellIdentifier;
 

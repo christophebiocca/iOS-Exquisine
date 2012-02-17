@@ -25,7 +25,7 @@
     currentMenu = aMenu;
     
     favoritesList = favList;
-    favoritesRenderer = [[FavoritesRenderer alloc] initWithOrderListAndMenu:favoritesList :currentMenu];
+    favoritesRenderer = [[FavoritesRenderer alloc] initWithOrderList:favoritesList];
     favoritesView = [[FavoritesView alloc] init];
     
     [[favoritesView orderTable] setDelegate:self];

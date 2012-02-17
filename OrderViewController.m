@@ -18,7 +18,6 @@
 #import "OrderManagementDelegate.h"
 #import "Utilities.h"
 #import "ItemRenderer.h"
-#import "CellData.h"
 #import "MenuRenderer.h"
 #import "OrderManager.h"
 
@@ -206,6 +205,15 @@
     {
         
         ItemViewController *newItemController = [[ItemViewController alloc] initializeWithItemAndOrderAndReturnController:cellObject:[theOrderManager thisOrder] :self];
+        
+        [[self navigationController] pushViewController:newItemController animated:YES];
+        
+    }
+    
+    if ( [cellObject isKindOfClass:([NSDictionary class])])
+    {
+        
+        ItemViewController *newItemController = [[ItemViewController alloc] initializeWithItemAndOrderAndReturnController:[cellObject objectForKey:@"data"]:[theOrderManager thisOrder] :self];
         
         [[self navigationController] pushViewController:newItemController animated:YES];
         

@@ -6,16 +6,14 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "Renderer.h"
+#import "ListRenderer.h"
 @class Menu;
 
-@interface FavoritesRenderer : Renderer <UITableViewDataSource>
+@interface FavoritesRenderer : ListRenderer <UITableViewDataSource>
 {
-    Menu *theMenu;
-    
     NSMutableArray *favoriteOrders;
 }
 
--(FavoritesRenderer *)initWithOrderListAndMenu:(NSMutableArray *)anOrderList:(Menu *)aMenu;
+-(FavoritesRenderer *)initWithOrderList:(NSMutableArray *)anOrderList;
 
 @end

@@ -16,14 +16,14 @@
     return @"ItemMenuCell";
 }
 
--(void)setMenuComponent:(Item *)theItem
+-(void)setData:(id)theItem
 {
     
     item = theItem;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCell) name:ITEM_MODIFIED object:theItem];
     
-    [super setMenuComponent:theItem];
+    [super setData:theItem];
     
     UIFont *titleFont = [UIFont fontWithName:@"HelveticaNeue-Medium" size:17];
     UIFont *descFont = [UIFont fontWithName:@"HelveticaNeue" size:17];

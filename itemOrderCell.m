@@ -25,13 +25,13 @@ static UIImage* deleteImage;
     }
 }
 
--(void)setMenuComponent:(Item*)theItem{
+-(void)setData:(id)theItem{
     
     item = theItem;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCell) name:ITEM_MODIFIED object:item];
     
-    [super setMenuComponent:theItem];
+    [super setData:theItem];
     
     [self updateCell];
 }

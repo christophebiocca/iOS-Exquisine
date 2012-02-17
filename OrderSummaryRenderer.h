@@ -6,10 +6,10 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "Renderer.h"
+#import "ListRenderer.h"
 @class Order;
 
-@interface OrderSummaryRenderer : Renderer <UITableViewDataSource>
+@interface OrderSummaryRenderer : ListRenderer <UITableViewDataSource>
 {
     Order *orderInfo;
     
@@ -26,14 +26,6 @@
     NSMutableArray *comboRenderList;
 }
 
-@property (retain) NSMutableArray *displayLists;
-
--(void) redraw;
-
 -(OrderSummaryRenderer *)initWithOrder:(Order *)anOrder;
-
--(UITableViewCell *) configureCell:(UITableViewCell *) aCell;
-
--(id) objectForCellAtIndex:(NSIndexPath *) index;
 
 @end

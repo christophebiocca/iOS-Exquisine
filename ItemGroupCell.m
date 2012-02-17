@@ -16,12 +16,12 @@
     return @"ItemGroupCell";
 }
 
--(void)setMenuComponent:(ItemGroup *)theItemGroup
+-(void)setData:(id)theItemGroup
 {   
     
     itemGroup = theItemGroup;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCell) name:ITEM_GROUP_MODIFIED object:theItemGroup];
-    [super setMenuComponent:theItemGroup];
+    [super setData:theItemGroup];
     
     [self updateCell];
 }

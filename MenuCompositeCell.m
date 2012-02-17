@@ -17,6 +17,7 @@
 #import "ItemGroupCell.h"
 #import "Item.h"
 #import "Menu.h"
+#import "ItemComboCell.h"
 #import "Choice.h"
 #import "Combo.h"
 #import "Order.h"
@@ -25,18 +26,22 @@
 
 @implementation MenuCompositeCell
 
-+(MenuCompositeCell *)customViewCellWithMenuComponent:(MenuComponent *)component AndContext:(MenuComponentCellContext) context
++(MenuCompositeCell *)customViewCellWithMenuComponent:(MenuComponent *)component AndContext:(CellContext) context
 {
     MenuCompositeCell *newCustomViewCell = nil;
     if([component isKindOfClass:[Item class]])
     {
         switch (context) {
-            case VIEW_CELL_CONTEXT_MENU:
+            case CELL_CONTEXT_MENU:
                 newCustomViewCell = [[ItemMenuCell alloc] init];
                 break;
                 
-            case VIEW_CELL_CONTEXT_ORDER:
+            case CELL_CONTEXT_ORDER:
                 newCustomViewCell =  [[ItemOrderCell alloc]init];
+                break;
+                
+            case CELL_CONTEXT_COMBO:
+                newCustomViewCell =  [[ItemComboCell alloc]init];
                 break;
                 
             default:
@@ -54,11 +59,11 @@
     if([component isKindOfClass:[Combo class]])
     {
         switch (context) {
-            case VIEW_CELL_CONTEXT_MENU:
+            case CELL_CONTEXT_MENU:
                 newCustomViewCell = [[ComboMenuCell alloc] init];
                 break;
                 
-            case VIEW_CELL_CONTEXT_ORDER:
+            case CELL_CONTEXT_ORDER:
                 newCustomViewCell =  [[ComboOrderCell alloc]init];
                 break;
                 
@@ -77,25 +82,31 @@
     
     if(!newCustomViewCell)
     {
-        newCustomViewCell = [[self alloc]init];
+        newCustomViewCell = [[self alloc] init];
     }
     
-    [newCustomViewCell setMenuComponent:component];
+    [newCustomViewCell setData:component];
+    
+    context = context;
     
     return newCustomViewCell;
 }
 
-+(NSString *)cellIdentifierForMenuComponent:(MenuComponent *)component AndContext:(MenuComponentCellContext) context
++(NSString *)cellIdentifierWithMenuComponent:(MenuComponent *)component AndContext:(CellContext) context
 {
     if([component isKindOfClass:[Item class]])
     {
         switch (context) {
-            case VIEW_CELL_CONTEXT_MENU:
+            case CELL_CONTEXT_MENU:
                 return [ItemMenuCell cellIdentifier];
                 break;
                 
-            case VIEW_CELL_CONTEXT_ORDER:
+            case CELL_CONTEXT_ORDER:
                 return [ItemOrderCell cellIdentifier];
+                break;
+                
+            case CELL_CONTEXT_COMBO:
+                return [ItemComboCell cellIdentifier];
                 break;
                 
             default:
@@ -113,11 +124,11 @@
     if([component isKindOfClass:[Combo class]])
     {
         switch (context) {
-            case VIEW_CELL_CONTEXT_MENU:
+            case CELL_CONTEXT_MENU:
                 return [ComboMenuCell cellIdentifier];
                 break;
                 
-            case VIEW_CELL_CONTEXT_ORDER:
+            case CELL_CONTEXT_ORDER:
                 return [ComboOrderCell cellIdentifier];
                 break;
                 
@@ -141,9 +152,9 @@
     return @"MenuCompositeCell";
 }
 
--(void)setMenuComponent:(MenuComponent *)aMenuComponent
+-(void)setData:(id)data
 {
-    componentInfo = aMenuComponent;
+    componentInfo = data;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCell) name:MENU_COMPONENT_NAME_CHANGED object:componentInfo];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCell) name:MENU_COMPONENT_DESC_CHANGED object:componentInfo];
     [self updateCell];

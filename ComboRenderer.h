@@ -9,17 +9,8 @@
 #import "MenuComponentRenderer.h"
 @class Order;
 @class Combo;
-@interface ComboRenderer : MenuComponentRenderer <UITableViewDataSource>
-{
-    Combo *currentCombo;
-}
+@interface ComboRenderer : MenuComponentRenderer 
 
--(ComboRenderer *) initFromComboAndOrder: (Combo *) aCombo:(Order *) anOrder;
-
--(ComboRenderer *) initFromCombo: (Combo *) aCombo;
-
--(NSMutableArray *) produceRenderList;
-
--(NSMutableArray *) detailedStaticRenderList;
+-(ComboRenderer *) initWithCombo: (Combo *) aCombo;
 
 @end

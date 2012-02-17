@@ -17,10 +17,10 @@
     return @"ChoiceCell";
 }
 
--(void)setMenuComponent:(Choice*)theChoice
+-(void)setData:(id)theChoice
 {
     
-    [super setMenuComponent:theChoice];
+    [super setData:theChoice];
     choice = theChoice;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCell) name:CHOICE_CHANGED object:theChoice];

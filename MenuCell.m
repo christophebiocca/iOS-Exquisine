@@ -16,10 +16,10 @@
     return @"MenuCell";
 }
 
--(void)setMenuComponent:(Menu *)theMenu
+-(void)setData:(id)theMenu
 {
     menu = theMenu;
-    [super setMenuComponent:theMenu];
+    [super setData:theMenu];
     
     UIFont *titleFont = [UIFont fontWithName:@"HelveticaNeue-Medium" size:17];
     UIFont *descFont = [UIFont fontWithName:@"HelveticaNeue" size:17];

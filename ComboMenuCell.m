@@ -15,13 +15,13 @@
     return @"ComboMenuCell";
 }
 
--(void)setMenuComponent:(Combo*)theCombo{
+-(void)setData:(id)theCombo{
     
     combo = theCombo;
     
     [self setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
     
-    [super setMenuComponent:theCombo];
+    [super setData:theCombo];
     
     UIFont *titleFont = [UIFont fontWithName:@"HelveticaNeue-Medium" size:17];
     UIFont *descFont = [UIFont fontWithName:@"HelveticaNeue" size:17];

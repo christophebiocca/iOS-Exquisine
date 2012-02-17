@@ -29,7 +29,7 @@
     
     currentOrder = anOrder;
     
-    itemGroupRenderer = [[ItemGroupRenderer alloc] initFromItemGroup:anItemGroup];
+    itemGroupRenderer = [[ItemGroupRenderer alloc] initWithItemGroup:anItemGroup];
     
     [[self navigationItem] setTitle:itemGroupInfo.name]; 
     

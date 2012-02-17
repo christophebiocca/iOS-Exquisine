@@ -19,45 +19,30 @@
 {
     self = [super init];
     
-    menuInfo = aMenu;
+    if(self)
+    {
+        NSMutableArray *data = [[NSMutableArray alloc] initWithCapacity:0];
+        NSMutableArray *sections = [[NSMutableArray alloc] initWithCapacity:0];
+        
+        if ([[aMenu submenuList] count] > 0)
+        {
+            [data addObject:[aMenu submenuList]];
+            [sections addObject:@""];
+        }
+        
+        if ([[aMenu comboList] count] > 0)
+        {
+            [data addObject:[aMenu comboList]];
+            [sections addObject:@"Combos"];
+        }
+        
+        listData = [NSArray arrayWithArray:data];
+        sectionNames = [NSArray arrayWithArray:sections];
+        context = CELL_CONTEXT_MENU;
+        
+    }
     
     return self;
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return ([[menuInfo submenuList] count] + [[menuInfo comboList] count]);
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    NSMutableArray *displayList = [[NSMutableArray alloc] initWithArray:[menuInfo submenuList]];
-    
-    [displayList addObjectsFromArray:[menuInfo comboList]];
-    
-    id thingToDisplay = [displayList objectAtIndex:[indexPath row]];
-    
-    MenuCompositeCell *cell = [tableView dequeueReusableCellWithIdentifier:[MenuCompositeCell cellIdentifierForMenuComponent:thingToDisplay AndContext:VIEW_CELL_CONTEXT_MENU]];
-    
-    if (cell == nil)
-    {
-        cell = [MenuCompositeCell customViewCellWithMenuComponent:thingToDisplay AndContext:VIEW_CELL_CONTEXT_MENU];
-    }
-    else
-    {
-        [cell setMenuComponent:thingToDisplay];
-    }
-    
-    [cell setStyle:CELL_STYLE_PLAIN];
-    
-    return cell;
 }
 
 

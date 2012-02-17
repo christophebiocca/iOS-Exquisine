@@ -10,7 +10,6 @@
 #import "Item.h"
 #import "Order.h"
 #import "ItemRenderer.h"
-#import "OptionViewController.h"
 #import "OrderViewController.h"
 #import "ItemView.h"
 #import "Choice.h"

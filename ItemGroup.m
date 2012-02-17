@@ -133,7 +133,7 @@ NSString* ITEM_GROUP_MODIFIED = @"CroutonLabs/ItemGroupModified";
 
 -(NSDecimalNumber *)price
 {
-    if(!satisfyingItem) return nil;
+    if(!satisfyingItem) return [NSDecimalNumber decimalNumberWithString:@"0"];
     return [strategy priceForItem:satisfyingItem];
 }
 

@@ -16,7 +16,7 @@
     Order *order;
 }
 
--(void)setMenuComponent:(Order *)theOrder;
+-(void)setData:(id)theOrder;
 
 +(NSString *) cellIdentifier;
 

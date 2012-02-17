@@ -8,12 +8,6 @@
 
 #import "CustomViewCell.h"
 
-typedef enum menuComponentCellContext {
-    VIEW_CELL_CONTEXT_ORDER = 0,
-    VIEW_CELL_CONTEXT_MENU = 1,
-    VIEW_CELL_CONTEXT_RECEIPT = 2
-} MenuComponentCellContext;
-
 @class MenuComponent;
 
 @interface MenuCompositeCell : CustomViewCell
@@ -21,11 +15,11 @@ typedef enum menuComponentCellContext {
     MenuComponent* componentInfo; 
 }
 
-+(MenuCompositeCell *)customViewCellWithMenuComponent:(MenuComponent *)component AndContext:(MenuComponentCellContext) context;
++(MenuCompositeCell *)customViewCellWithMenuComponent:(MenuComponent *)component AndContext:(CellContext) context;
 
-+(NSString *)cellIdentifierForMenuComponent:(MenuComponent *)component AndContext:(MenuComponentCellContext) context;
++(NSString *)cellIdentifierWithMenuComponent:(MenuComponent *)component AndContext:(CellContext) context;
 
--(void)setMenuComponent:(MenuComponent *) aMenuComponent;
+-(void)setData:(MenuComponent *) aMenuComponent;
 
 -(void)updateCell;
 

@@ -1,20 +1,17 @@
 //
-//  itemOrderCell.h
+//  ItemComboCell.h
 //  AvocadoTest1
 //
-//  Created by Jake on 12-01-27.
+//  Created by Jake on 12-02-17.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
 #import "MenuCompositeCell.h"
-
 @class Item;
 
-@interface ItemOrderCell : MenuCompositeCell
+@interface ItemComboCell : MenuCompositeCell
 {
-    Item* item;
+    Item *item;
 }
 
 -(void)setData:(id)theItem;

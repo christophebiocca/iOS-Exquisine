@@ -10,16 +10,7 @@
 @class Item;
 
 @interface ItemRenderer : MenuComponentRenderer <UITableViewDataSource>
-{
-    
-    Item *itemInfo;
-    
-}
-
-@property (retain) Item *itemInfo;
 
 -(ItemRenderer *) initWithItem:(Item *) anItem;
-
--(NSArray *) detailedStaticRenderList;
 
 @end

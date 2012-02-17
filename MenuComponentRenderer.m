@@ -8,31 +8,52 @@
 
 #import "MenuComponentRenderer.h"
 #import "MenuComponent.h"
-#import "CellData.h"
+#import "OrderManager.h"
+#import "Item.h"
+#import "Combo.h"
+#import "Menu.h"
+#import "MenuRenderer.h"
+#import "ItemGroup.h"
+#import "OrderRenderer.h"
+#import "ItemRenderer.h"
+#import "ComboRenderer.h"
+#import "ItemGroupRenderer.h"
 
 @implementation MenuComponentRenderer
 
--(MenuComponentRenderer *)initWithMenuComponent:(MenuComponent *)aMenuComponent
++(MenuComponentRenderer *) menuComponentRendererFromData:(id) data;
 {
-    menuComponent = aMenuComponent;
+    if([data isKindOfClass:[OrderManager class]])
+    {
+        return [[OrderRenderer alloc] initWithOrderManager:data];
+    }
+    if([data isKindOfClass:[Item class]])
+    {
+        return [[ItemRenderer alloc] initWithItem:data];
+    }
+    if([data isKindOfClass:[Combo class]])
+    {
+        return [[ComboRenderer alloc] initWithCombo:data];
+    }
+    if([data isKindOfClass:[ItemGroup class]])
+    {
+        return [[ItemGroupRenderer alloc] initWithItemGroup:data];
+    }
+    if([data isKindOfClass:[Menu class]])
+    {
+        return [[MenuRenderer alloc] initWithMenu:data];
+    }
+    
+    CLLog(LOG_LEVEL_WARNING, @"menuComponentRendererFromData was called with an unknown data type");
+    return nil;
+}
+
+-(MenuComponentRenderer *)init
+{
+    self = [super init];
+    
     return self;
 }
 
--(UITableViewCell *) configureCell:(UITableViewCell *) aCell
-{
-    [[aCell detailTextLabel] setText:menuComponent.desc];
-    [[aCell textLabel] setText:menuComponent.name];
-    return aCell;
-}
-
--(CellData *) detailedStaticRenderDefaultCell
-{
-    CellData *newCell = [[CellData alloc] init];
-    [newCell setCellTitleFontSize: 13];
-    [newCell setCellTitleFontType: @"HelveticaNeue-Medium"];
-    [newCell setCellDescFontSize: 13];
-    [newCell setCellDescFontType: @"HelveticaNeue"];
-    return newCell;
-}
 
 @end

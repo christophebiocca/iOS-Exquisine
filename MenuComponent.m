@@ -7,8 +7,6 @@
 //
 
 #import "MenuComponent.h"
-#import "TableData.h"
-#import "CellData.h"
 
 NSString* MENU_COMPONENT_NAME_CHANGED = @"CroutonLabs/MenuComponentNameChanged";
 NSString* MENU_COMPONENT_DESC_CHANGED = @"CroutonLabs/MenuComponentDescChanged";

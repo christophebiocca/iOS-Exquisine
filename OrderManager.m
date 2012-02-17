@@ -104,6 +104,8 @@ NSString* ORDER_MANAGER_NEEDS_REDRAW = @"CroutonLabs/OrderManagerNeedsRedraw";
         }
     }
     [cache setObject:bestPick forKey:items];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:ORDER_MANAGER_NEEDS_REDRAW object:self];
     return bestPick;
 }
 

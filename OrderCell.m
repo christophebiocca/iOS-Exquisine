@@ -17,13 +17,13 @@
     return @"OrderCell";
 }
 
--(void)setMenuComponent:(Order *)theOrder
+-(void)setData:(id)theOrder
 {   
     order = theOrder;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCell) name:ORDER_MODIFIED object:theOrder];
     
-    [super setMenuComponent:theOrder];
+    [super setData:theOrder];
     
     [[self detailTextLabel] setText:[Utilities FormatToPrice:[order subtotalPrice]]];
     

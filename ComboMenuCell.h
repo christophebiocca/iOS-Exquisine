@@ -14,6 +14,6 @@
     Combo *combo;
 }
 
--(void)setMenuComponent:(Combo*)theCombo;
+-(void)setData:(id)theCombo;
 
 @end

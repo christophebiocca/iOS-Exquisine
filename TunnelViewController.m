@@ -7,7 +7,6 @@
 //
 
 #import "TunnelViewController.h"
-#import "OptionViewController.h"
 
 @implementation TunnelViewController
 
@@ -26,10 +25,6 @@
     [navController setDelegate:self];
     
     controllerTunnelList = controllerList;
-    
-    for (OptionViewController *currentOptionController in controllerList) {
-        [currentOptionController setSuperviewDelegate:self];
-    }
     
     currentListIndexCursor = 0;
     

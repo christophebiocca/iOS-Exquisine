@@ -12,11 +12,12 @@
 #import "ItemMenuCell.h"
 #import "ItemOrderCell.h"
 #import "ComboOrderCell.h"
+#import "GeneralPurposeViewCell.h"
+#import "GeneralPurposeViewCellData.h"
 #import "Menu.h"
 #import "Order.h"
 #import "Item.h"
 #import "Combo.h"
-#import "CellData.h"
 #import "OrderManager.h"
 
 @implementation OrderRenderer
@@ -25,169 +26,76 @@
 -(OrderRenderer *)initWithOrderManager:(OrderManager *)anOrderManager
 {
     
-    self = [super initWithMenuComponent:[anOrderManager thisOrder]];
+    self = [super init];
     
-    orderManager = anOrderManager;
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshOrderList:) name:ORDER_MANAGER_NEEDS_REDRAW object:orderManager];
-    
-    orderDisplayList = [[NSMutableArray alloc] initWithCapacity:0];
-    
-    [self refreshOrderList:nil];
+    if(self)
+    {
+        orderManager = anOrderManager;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orderChanged:) name:ORDER_MANAGER_NEEDS_REDRAW object:orderManager];
+        
+        NSMutableArray *data = [[NSMutableArray alloc] initWithCapacity:0];
+        NSMutableArray *sections = [[NSMutableArray alloc] initWithCapacity:0];
+        
+        NSMutableArray *itemSection = [[NSMutableArray alloc] initWithCapacity:0];
+        
+        [sections addObject:@"Your Order"];
+        for (Combo* aCombo in [[anOrderManager thisOrder] comboList]) {
+            [itemSection addObjectsFromArray:[aCombo prepareDisplayList]];
+        }
+        for (Item* anItem in [[anOrderManager thisOrder] itemList]) {
+            [itemSection addObject:anItem];
+        }
+        
+        if([itemSection count] > 0)
+            [data addObject:itemSection];
+        else
+        {
+            GeneralPurposeViewCellData *cellData = [[GeneralPurposeViewCellData alloc] init];
+            [cellData setTitle:@"You have not selected any Items"];
+            [data addObject:[NSArray arrayWithObject:cellData]];
+        }
+         
+        if ([[[anOrderManager thisMenu] submenuList] count] > 0)
+        {
+            [data addObject:[[anOrderManager thisMenu] submenuList]];
+            [sections addObject:@"Menu"];
+        }
+        
+        if ([[[anOrderManager thisMenu] comboList] count] > 0)
+        {
+            [data addObject:[[anOrderManager thisMenu] comboList]];
+            [sections addObject:@"Combos"];
+        }
+        
+        listData = [NSMutableArray arrayWithArray:data];
+        sectionNames = [NSMutableArray arrayWithArray:sections];
+        
+        [self orderChanged:nil];
+    }
     
     return self;
 }
 
-
-//Eventually we can call this intelligently.
--(void) refreshOrderList:(NSNotification *)aNotification
+-(void) orderChanged:(NSNotification *)aNotification
 {
-    [orderDisplayList removeAllObjects];
-    
-    for (Combo *combo in  [[orderManager thisOrder] comboList]) 
-    {
-        [orderDisplayList addObject:combo];
-        [orderDisplayList addObjectsFromArray:[combo listOfAssociatedItems]];
+    NSMutableArray *itemSection = [[NSMutableArray alloc] initWithCapacity:0];
+    for (Combo* aCombo in [[orderManager thisOrder] comboList]) {
+        [itemSection addObjectsFromArray:[aCombo prepareDisplayList]];
+    }
+    for (Item* anItem in [[orderManager thisOrder] itemList]) {
+        [itemSection addObject:anItem];
     }
     
-    [orderDisplayList addObjectsFromArray:[[orderManager thisOrder] itemList]];
-    
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
-    return 2;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    
-    switch (section) {
-            
-        case 0:
-            if([orderDisplayList count] > 0)
-                return ([orderDisplayList count]);
-            else
-                return 1;
-        case 1:
-            return [[[orderManager thisMenu] submenuList] count];
-            break;
-            
-        default:
-            break;
-    }
-    
-    return 0;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    switch ([indexPath section]) {
-        case 0:
-            return [self itemCellForIndexPath:tableView:indexPath];
-            break;
-        case 1:
-            return [self menuCellForIndexPath:tableView:indexPath];
-            break;
-        default:
-            break;
-    }
-    
-    return nil;
-}
-
-- (UITableViewCell *)menuCellForIndexPath:(UITableView *) tableView:(NSIndexPath *) indexPath
-{
-    
-    id thingToDisplay = [[[orderManager thisMenu] submenuList] objectAtIndex:[indexPath row]];
-    
-    if([thingToDisplay isKindOfClass:([Item class])])
-    {
-        ItemMenuCell *cell = [tableView dequeueReusableCellWithIdentifier:[ItemMenuCell cellIdentifier]];
-        if (cell == nil) {
-            cell = [[ItemMenuCell alloc] init];
-        }
-        
-        [cell setMenuComponent:thingToDisplay];
-        return cell;
-    }
-    else if([thingToDisplay isKindOfClass:([Menu class])])
-    {
-        MenuCell *cell = [tableView dequeueReusableCellWithIdentifier:[MenuCell cellIdentifier]];
-        if (cell == nil) {
-            cell = [[MenuCell alloc] init];
-        }
-        [cell setMenuComponent:thingToDisplay];
-        return cell;
-    }
-    
-    return nil;
-}
-
-- (UITableViewCell *)itemCellForIndexPath:(UITableView *) tableView:(NSIndexPath *) indexPath
-{
-    if([orderDisplayList count] > 0)
-    {
-        id thingToDisplay = [orderDisplayList objectAtIndex:[indexPath row]];
-        
-        if([thingToDisplay isKindOfClass:([Item class])])
-        {
-            ItemOrderCell *cell = [tableView dequeueReusableCellWithIdentifier:[ItemOrderCell cellIdentifier]];
-            if (cell == nil) {
-                cell = [[ItemOrderCell alloc] init];
-            }
-            
-            [cell setMenuComponent:thingToDisplay];
-            
-            [cell setIndentationLevel:0];
-            
-            if (![[[orderManager thisOrder] itemList] containsObject:thingToDisplay])
-            {
-                [cell setIndentationLevel:1];
-                [[cell detailTextLabel] setText:@""];
-            }
-            
-            return cell;
-        }
-        else if([thingToDisplay isKindOfClass:([Combo class])])
-        {
-            ComboOrderCell *cell = [tableView dequeueReusableCellWithIdentifier:[ComboOrderCell cellIdentifier]];
-            if (cell == nil) {
-                cell = [[ComboOrderCell alloc] init];
-            }
-            [cell setStyle:CELL_STYLE_PLAIN];
-            [cell setMenuComponent:thingToDisplay];
-            return cell;
-        }
-        
-        return nil;
-    }
+    if([itemSection count] > 0)
+        [listData replaceObjectAtIndex:0 withObject:itemSection];
     else
     {
-        
-        //if the order is empty, we need to put something there to tell people.
-        
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cell"];
-        }
-        
-        
-        CellData *newCell = [[CellData alloc] init];
-        [newCell setCellTitle:@"You have no items in your order"];
-        [newCell setCellDesc:@""];
-        
-        [newCell setCellTitleFontSize: 13];
-        [newCell setCellTitleFontType: @"HelveticaNeue-Medium"];
-        [newCell setCellDescFontSize: 13];
-        [newCell setCellDescFontType: @"HelveticaNeue"];
-        
-        [newCell configureCell:cell];
-        
-        return cell;
+        GeneralPurposeViewCellData *cellData = [[GeneralPurposeViewCellData alloc] init];
+        [cellData setTitle:@"You have not selected any Items"];
+        [listData replaceObjectAtIndex:0 withObject:[NSArray arrayWithObject:cellData]];
     }
+    
 }
 
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -206,7 +114,7 @@
             [tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
         }
         
-        if([orderDisplayList count] == 0)
+        if([[listData objectAtIndex:0] count] == 0)
             [tableView setEditing:NO animated:YES];
     }
     else if (editingStyle == UITableViewCellEditingStyleInsert)
@@ -232,39 +140,6 @@
         return YES;
     }
     return NO;
-}
-
-
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    switch (section) {
-        case 0:
-            return @"Your Order";
-            break;
-        case 1:
-            return @"Menu";
-            break;
-        default:
-            break;
-    }
-    return nil;
-}
-
--(id)objectForCellAtIndex:(NSIndexPath *)index
-{
-    if ([index section] == 0) {
-        if ( [orderDisplayList count] > 0)
-            return [orderDisplayList objectAtIndex:[index row]];
-    }
-    if ([index section] == 1)
-        return [[[orderManager thisMenu] submenuList] objectAtIndex:[index row]];
-    
-    return nil;
-}
-
--(void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

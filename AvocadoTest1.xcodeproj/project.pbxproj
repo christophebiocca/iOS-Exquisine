@@ -13,6 +13,8 @@
 		23082F6114D897D1003964CE /* ComboView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23082F6014D897D1003964CE /* ComboView.m */; };
 		230C353514EEB994004DCF85 /* GeneralPurposeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 230C353414EEB994004DCF85 /* GeneralPurposeViewCell.m */; };
 		230C353814EECD5A004DCF85 /* ComboMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 230C353714EECD5A004DCF85 /* ComboMenuCell.m */; };
+		230C353C14EEE446004DCF85 /* GeneralPurposeViewCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 230C353B14EEE446004DCF85 /* GeneralPurposeViewCellData.m */; };
+		230C354114EF02AB004DCF85 /* ItemComboCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 230C354014EF02AB004DCF85 /* ItemComboCell.m */; };
 		231C510E14E1B7F1004F2CCC /* ComboTrivialPricingStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 231C510D14E1B7F1004F2CCC /* ComboTrivialPricingStrategy.m */; };
 		231C511214E1BC8B004F2CCC /* ItemGroupMultiplicativePricing.m in Sources */ = {isa = PBXBuildFile; fileRef = 231C511114E1BC8B004F2CCC /* ItemGroupMultiplicativePricing.m */; };
 		231C511614E1C1A5004F2CCC /* ItemGroupAbsolutePricing.m in Sources */ = {isa = PBXBuildFile; fileRef = 231C511514E1C1A5004F2CCC /* ItemGroupAbsolutePricing.m */; };
@@ -50,8 +52,6 @@
 		2368B53214EDB8B000D880D3 /* MenuCompositeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2368B53114EDB8B000D880D3 /* MenuCompositeCell.m */; };
 		23718F0614EC23A300F543BD /* pfLogo_57.png in Resources */ = {isa = PBXBuildFile; fileRef = 23718F0414EC23A200F543BD /* pfLogo_57.png */; };
 		23718F0714EC23A300F543BD /* pfLogo_114.png in Resources */ = {isa = PBXBuildFile; fileRef = 23718F0514EC23A200F543BD /* pfLogo_114.png */; };
-		237EC00E14BE635C009D9268 /* ItemPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 237EC00D14BE635C009D9268 /* ItemPage.m */; };
-		237EC01314BE64D5009D9268 /* ItemPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 237EC01214BE64D5009D9268 /* ItemPageView.m */; };
 		238476F114D607A400DE9270 /* OrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 238476F014D607A400DE9270 /* OrderCell.m */; };
 		238476F314D7577C00DE9270 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 238476F214D7577C00DE9270 /* SystemConfiguration.framework */; };
 		238FC77914D35E6D007E175B /* Favorite Star.png in Resources */ = {isa = PBXBuildFile; fileRef = 238FC77814D35E6D007E175B /* Favorite Star.png */; };
@@ -65,17 +65,13 @@
 		23AAD98B14BF525A00F88AA8 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AAD98A14BF525A00F88AA8 /* Utilities.m */; };
 		23AAD99014BF68DC00F88AA8 /* MainPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AAD98F14BF68DC00F88AA8 /* MainPageView.m */; };
 		23AAD99314BF690F00F88AA8 /* MainPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AAD99214BF690F00F88AA8 /* MainPageViewController.m */; };
-		23C26A0014BFA8F100DD53DF /* OptionPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C269FF14BFA8F100DD53DF /* OptionPage.m */; };
-		23C26A0314BFA90A00DD53DF /* OptionPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C26A0214BFA90A00DD53DF /* OptionPageView.m */; };
 		23C26A0A14C0F00600DD53DF /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C26A0914C0F00600DD53DF /* Menu.m */; };
-		23C26A0F14C4887E00DD53DF /* TableData.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C26A0E14C4887E00DD53DF /* TableData.m */; };
-		23C26A1614C48F8B00DD53DF /* CellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C26A1514C48F8B00DD53DF /* CellData.m */; };
 		23C26A2014C4D5A700DD53DF /* MenuComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C26A1F14C4D5A600DD53DF /* MenuComponent.m */; };
 		23C26A2314C4D6FA00DD53DF /* VisualizableData.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C26A2214C4D6FA00DD53DF /* VisualizableData.m */; };
 		23D6F4A214D9DD3A0043C75E /* ItemGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D6F4A114D9DD3A0043C75E /* ItemGroupView.m */; };
 		23D6F4A614D9E0490043C75E /* ItemGroupRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D6F4A514D9E0490043C75E /* ItemGroupRenderer.m */; };
 		23D6F4AB14D9F5340043C75E /* ItemGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D6F4AA14D9F5340043C75E /* ItemGroupViewController.m */; };
-		23DA7A4014C60284008281DD /* Renderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA7A3F14C60284008281DD /* Renderer.m */; };
+		23DA7A4014C60284008281DD /* ListRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA7A3F14C60284008281DD /* ListRenderer.m */; };
 		23DA7A4314C603E4008281DD /* MenuComponentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA7A4214C603E4008281DD /* MenuComponentViewController.m */; };
 		23DA7A4714C609FD008281DD /* MenuComponentRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA7A4614C609FD008281DD /* MenuComponentRenderer.m */; };
 		23DA7A4C14C613D4008281DD /* MenuComponentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA7A4B14C613D4008281DD /* MenuComponentView.m */; };
@@ -84,12 +80,9 @@
 		23DA7A5914C6283E008281DD /* OrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA7A5814C6283E008281DD /* OrderViewController.m */; };
 		23DA7A5E14C6310E008281DD /* ItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA7A5D14C6310E008281DD /* ItemView.m */; };
 		23DA7A6214C63242008281DD /* ItemRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA7A6114C63242008281DD /* ItemRenderer.m */; };
-		23DA7A6714C63708008281DD /* ChoiceRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA7A6614C63708008281DD /* ChoiceRenderer.m */; };
-		23DA7A6A14C63717008281DD /* OptionRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA7A6914C63717008281DD /* OptionRenderer.m */; };
 		23DA7A6F14C63734008281DD /* MenuRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA7A6E14C63734008281DD /* MenuRenderer.m */; };
 		23DA7A7614C63CA6008281DD /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA7A7514C63CA6008281DD /* MenuViewController.m */; };
 		23DA7A7914C63CBB008281DD /* ItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA7A7814C63CBB008281DD /* ItemViewController.m */; };
-		23DA7A7C14C63CC8008281DD /* OptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA7A7B14C63CC8008281DD /* OptionViewController.m */; };
 		23DA7A8014C6401A008281DD /* OptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA7A7F14C6401A008281DD /* OptionView.m */; };
 		23DA7A8714C72F40008281DD /* MenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA7A8614C72F40008281DD /* MenuView.m */; };
 		23DA7A8C14C73DC1008281DD /* APICall.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA7A8B14C73DC1008281DD /* APICall.m */; };
@@ -169,6 +162,10 @@
 		230C353414EEB994004DCF85 /* GeneralPurposeViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneralPurposeViewCell.m; sourceTree = "<group>"; };
 		230C353614EECD5A004DCF85 /* ComboMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComboMenuCell.h; sourceTree = "<group>"; };
 		230C353714EECD5A004DCF85 /* ComboMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComboMenuCell.m; sourceTree = "<group>"; };
+		230C353A14EEE446004DCF85 /* GeneralPurposeViewCellData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneralPurposeViewCellData.h; sourceTree = "<group>"; };
+		230C353B14EEE446004DCF85 /* GeneralPurposeViewCellData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneralPurposeViewCellData.m; sourceTree = "<group>"; };
+		230C353F14EF02AB004DCF85 /* ItemComboCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemComboCell.h; sourceTree = "<group>"; };
+		230C354014EF02AB004DCF85 /* ItemComboCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemComboCell.m; sourceTree = "<group>"; };
 		231C510C14E1B7F1004F2CCC /* ComboTrivialPricingStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComboTrivialPricingStrategy.h; sourceTree = "<group>"; };
 		231C510D14E1B7F1004F2CCC /* ComboTrivialPricingStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComboTrivialPricingStrategy.m; sourceTree = "<group>"; };
 		231C511014E1BC8B004F2CCC /* ItemGroupMultiplicativePricing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemGroupMultiplicativePricing.h; sourceTree = "<group>"; };
@@ -236,10 +233,6 @@
 		2368B53114EDB8B000D880D3 /* MenuCompositeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCompositeCell.m; sourceTree = "<group>"; };
 		23718F0414EC23A200F543BD /* pfLogo_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pfLogo_57.png; sourceTree = "<group>"; };
 		23718F0514EC23A200F543BD /* pfLogo_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pfLogo_114.png; sourceTree = "<group>"; };
-		237EC00C14BE635C009D9268 /* ItemPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemPage.h; sourceTree = "<group>"; };
-		237EC00D14BE635C009D9268 /* ItemPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemPage.m; sourceTree = "<group>"; };
-		237EC01114BE64D5009D9268 /* ItemPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemPageView.h; sourceTree = "<group>"; };
-		237EC01214BE64D5009D9268 /* ItemPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemPageView.m; sourceTree = "<group>"; };
 		238476EF14D607A400DE9270 /* OrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderCell.h; sourceTree = "<group>"; };
 		238476F014D607A400DE9270 /* OrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderCell.m; sourceTree = "<group>"; };
 		238476F214D7577C00DE9270 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -252,7 +245,7 @@
 		238FC78414D36916007E175B /* MenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCell.m; sourceTree = "<group>"; };
 		238FC78714D372FC007E175B /* ChoiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoiceCell.h; sourceTree = "<group>"; };
 		238FC78814D372FC007E175B /* ChoiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoiceCell.m; sourceTree = "<group>"; };
-		238FC78B14D37402007E175B /* ComboOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; path = ComboOrderCell.h; sourceTree = "<group>"; };
+		238FC78B14D37402007E175B /* ComboOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComboOrderCell.h; sourceTree = "<group>"; };
 		238FC78C14D37402007E175B /* ComboOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComboOrderCell.m; sourceTree = "<group>"; };
 		2391EA7014BE3699001BDC1B /* ConfigurableTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurableTableViewDataSource.h; sourceTree = "<group>"; };
 		2391EA7114BE3699001BDC1B /* ConfigurableTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigurableTableViewDataSource.m; sourceTree = "<group>"; };
@@ -264,16 +257,8 @@
 		23AAD98F14BF68DC00F88AA8 /* MainPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageView.m; sourceTree = "<group>"; };
 		23AAD99114BF690F00F88AA8 /* MainPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageViewController.h; sourceTree = "<group>"; };
 		23AAD99214BF690F00F88AA8 /* MainPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageViewController.m; sourceTree = "<group>"; };
-		23C269FE14BFA8F100DD53DF /* OptionPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionPage.h; sourceTree = "<group>"; };
-		23C269FF14BFA8F100DD53DF /* OptionPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionPage.m; sourceTree = "<group>"; };
-		23C26A0114BFA90A00DD53DF /* OptionPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionPageView.h; sourceTree = "<group>"; };
-		23C26A0214BFA90A00DD53DF /* OptionPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionPageView.m; sourceTree = "<group>"; };
 		23C26A0814C0F00600DD53DF /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Menu.h; sourceTree = "<group>"; };
 		23C26A0914C0F00600DD53DF /* Menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Menu.m; sourceTree = "<group>"; };
-		23C26A0D14C4887E00DD53DF /* TableData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableData.h; sourceTree = "<group>"; };
-		23C26A0E14C4887E00DD53DF /* TableData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableData.m; sourceTree = "<group>"; };
-		23C26A1414C48F8B00DD53DF /* CellData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellData.h; sourceTree = "<group>"; };
-		23C26A1514C48F8B00DD53DF /* CellData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellData.m; sourceTree = "<group>"; };
 		23C26A1E14C4D5A600DD53DF /* MenuComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuComponent.h; sourceTree = "<group>"; };
 		23C26A1F14C4D5A600DD53DF /* MenuComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuComponent.m; sourceTree = "<group>"; };
 		23C26A2114C4D6FA00DD53DF /* VisualizableData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisualizableData.h; sourceTree = "<group>"; };
@@ -285,8 +270,8 @@
 		23D6F4A514D9E0490043C75E /* ItemGroupRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemGroupRenderer.m; sourceTree = "<group>"; };
 		23D6F4A914D9F5340043C75E /* ItemGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemGroupViewController.h; sourceTree = "<group>"; };
 		23D6F4AA14D9F5340043C75E /* ItemGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemGroupViewController.m; sourceTree = "<group>"; };
-		23DA7A3E14C60284008281DD /* Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
-		23DA7A3F14C60284008281DD /* Renderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Renderer.m; sourceTree = "<group>"; };
+		23DA7A3E14C60284008281DD /* ListRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListRenderer.h; sourceTree = "<group>"; };
+		23DA7A3F14C60284008281DD /* ListRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListRenderer.m; sourceTree = "<group>"; };
 		23DA7A4114C603E4008281DD /* MenuComponentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuComponentViewController.h; sourceTree = "<group>"; };
 		23DA7A4214C603E4008281DD /* MenuComponentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuComponentViewController.m; sourceTree = "<group>"; };
 		23DA7A4514C609FD008281DD /* MenuComponentRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuComponentRenderer.h; sourceTree = "<group>"; };
@@ -303,18 +288,12 @@
 		23DA7A5D14C6310E008281DD /* ItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemView.m; sourceTree = "<group>"; };
 		23DA7A6014C63242008281DD /* ItemRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemRenderer.h; sourceTree = "<group>"; };
 		23DA7A6114C63242008281DD /* ItemRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemRenderer.m; sourceTree = "<group>"; };
-		23DA7A6514C63708008281DD /* ChoiceRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoiceRenderer.h; sourceTree = "<group>"; };
-		23DA7A6614C63708008281DD /* ChoiceRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoiceRenderer.m; sourceTree = "<group>"; };
-		23DA7A6814C63717008281DD /* OptionRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionRenderer.h; sourceTree = "<group>"; };
-		23DA7A6914C63717008281DD /* OptionRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionRenderer.m; sourceTree = "<group>"; };
 		23DA7A6D14C63734008281DD /* MenuRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuRenderer.h; sourceTree = "<group>"; };
 		23DA7A6E14C63734008281DD /* MenuRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuRenderer.m; sourceTree = "<group>"; };
 		23DA7A7414C63CA6008281DD /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
 		23DA7A7514C63CA6008281DD /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		23DA7A7714C63CBB008281DD /* ItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemViewController.h; sourceTree = "<group>"; };
 		23DA7A7814C63CBB008281DD /* ItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemViewController.m; sourceTree = "<group>"; };
-		23DA7A7A14C63CC8008281DD /* OptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionViewController.h; sourceTree = "<group>"; };
-		23DA7A7B14C63CC8008281DD /* OptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionViewController.m; sourceTree = "<group>"; };
 		23DA7A7E14C6401A008281DD /* OptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionView.h; sourceTree = "<group>"; };
 		23DA7A7F14C6401A008281DD /* OptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionView.m; sourceTree = "<group>"; };
 		23DA7A8514C72F40008281DD /* MenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuView.h; sourceTree = "<group>"; };
@@ -474,8 +453,19 @@
 			children = (
 				230C353314EEB994004DCF85 /* GeneralPurposeViewCell.h */,
 				230C353414EEB994004DCF85 /* GeneralPurposeViewCell.m */,
+				230C353A14EEE446004DCF85 /* GeneralPurposeViewCellData.h */,
+				230C353B14EEE446004DCF85 /* GeneralPurposeViewCellData.m */,
 			);
 			name = OtherCells;
+			sourceTree = "<group>";
+		};
+		230C353D14EEF2DC004DCF85 /* OrderSummaryRenderer */ = {
+			isa = PBXGroup;
+			children = (
+				232C798514D209D600C3868D /* OrderSummaryRenderer.h */,
+				232C798614D209D600C3868D /* OrderSummaryRenderer.m */,
+			);
+			name = OrderSummaryRenderer;
 			sourceTree = "<group>";
 		};
 		231C510F14E1BC4D004F2CCC /* ItemGroupMultiplicativePricing */ = {
@@ -533,7 +523,6 @@
 				23DA7A7314C63C41008281DD /* MenuViewController */,
 				23DA7A5614C627FC008281DD /* OrderViewController */,
 				23DA7A7214C63C3C008281DD /* ItemViewController */,
-				23DA7A7014C63C2A008281DD /* OptionViewController */,
 			);
 			name = MenuComponentControllers;
 			sourceTree = "<group>";
@@ -564,14 +553,6 @@
 				232C796414CF71AA00C3868D /* FavoritesView.m */,
 			);
 			name = FavoritesView;
-			sourceTree = "<group>";
-		};
-		232C796614CF724900C3868D /* OtherRenderers */ = {
-			isa = PBXGroup;
-			children = (
-				232C796714CF727D00C3868D /* FavoritesRenderer */,
-			);
-			name = OtherRenderers;
 			sourceTree = "<group>";
 		};
 		232C796714CF727D00C3868D /* FavoritesRenderer */ = {
@@ -686,7 +667,7 @@
 				2391EA7814BE3D44001BDC1B /* Model Structure */,
 				238FC77A14D364E5007E175B /* Cells */,
 				23DA7A5A14C63071008281DD /* Views */,
-				23DA7A3814C60087008281DD /* Renderers */,
+				23DA7A3814C60087008281DD /* ListRenderers */,
 				38D4132C14D3321C00031B60 /* Images */,
 				23DA7A3914C600B1008281DD /* Controllers */,
 				23DA7A3714C6003F008281DD /* Other Shit */,
@@ -773,17 +754,6 @@
 			name = MenuCompositeCells;
 			sourceTree = "<group>";
 		};
-		237EC00614BE55A7009D9268 /* ItemPage */ = {
-			isa = PBXGroup;
-			children = (
-				237EC00C14BE635C009D9268 /* ItemPage.h */,
-				237EC00D14BE635C009D9268 /* ItemPage.m */,
-				237EC01114BE64D5009D9268 /* ItemPageView.h */,
-				237EC01214BE64D5009D9268 /* ItemPageView.m */,
-			);
-			name = ItemPage;
-			sourceTree = "<group>";
-		};
 		237EC00A14BE5824009D9268 /* Order */ = {
 			isa = PBXGroup;
 			children = (
@@ -837,6 +807,8 @@
 				238FC77C14D3650F007E175B /* ItemMenuCell.m */,
 				238FC77E14D36702007E175B /* itemOrderCell.h */,
 				238FC77F14D36702007E175B /* itemOrderCell.m */,
+				230C353F14EF02AB004DCF85 /* ItemComboCell.h */,
+				230C354014EF02AB004DCF85 /* ItemComboCell.m */,
 			);
 			name = ItemCells;
 			sourceTree = "<group>";
@@ -912,21 +884,8 @@
 			children = (
 				23C26A0B14C4752F00DD53DF /* MenuPage */,
 				23AAD98D14BF685300F88AA8 /* MainPage */,
-				23C269FD14BFA88F00DD53DF /* OptionPage */,
-				237EC00614BE55A7009D9268 /* ItemPage */,
 			);
 			name = Pages;
-			sourceTree = "<group>";
-		};
-		23C269FD14BFA88F00DD53DF /* OptionPage */ = {
-			isa = PBXGroup;
-			children = (
-				23C269FE14BFA8F100DD53DF /* OptionPage.h */,
-				23C269FF14BFA8F100DD53DF /* OptionPage.m */,
-				23C26A0114BFA90A00DD53DF /* OptionPageView.h */,
-				23C26A0214BFA90A00DD53DF /* OptionPageView.m */,
-			);
-			name = OptionPage;
 			sourceTree = "<group>";
 		};
 		23C26A0B14C4752F00DD53DF /* MenuPage */ = {
@@ -941,8 +900,6 @@
 			children = (
 				23C26A2114C4D6FA00DD53DF /* VisualizableData.h */,
 				23C26A2214C4D6FA00DD53DF /* VisualizableData.m */,
-				23C26A0D14C4887E00DD53DF /* TableData.h */,
-				23C26A0E14C4887E00DD53DF /* TableData.m */,
 			);
 			name = VisualizableDataTypes;
 			sourceTree = "<group>";
@@ -978,7 +935,7 @@
 		23DA7A3514C5FFCE008281DD /* Obsolete */ = {
 			isa = PBXGroup;
 			children = (
-				23DA7A3814C60087008281DD /* Renderers */,
+				23DA7A3814C60087008281DD /* ListRenderers */,
 				23C26A0C14C4884B00DD53DF /* VisualizableDataTypes */,
 				2391EA6F14BE35D4001BDC1B /* ConfigurableTableViewDataSource */,
 				23AAD99414BF692500F88AA8 /* Pages */,
@@ -997,16 +954,16 @@
 			name = "Other Shit";
 			sourceTree = "<group>";
 		};
-		23DA7A3814C60087008281DD /* Renderers */ = {
+		23DA7A3814C60087008281DD /* ListRenderers */ = {
 			isa = PBXGroup;
 			children = (
-				23DA7A3E14C60284008281DD /* Renderer.h */,
-				23DA7A3F14C60284008281DD /* Renderer.m */,
+				23DA7A3E14C60284008281DD /* ListRenderer.h */,
+				23DA7A3F14C60284008281DD /* ListRenderer.m */,
+				230C353D14EEF2DC004DCF85 /* OrderSummaryRenderer */,
+				232C796714CF727D00C3868D /* FavoritesRenderer */,
 				23DA7A4414C609C6008281DD /* MenuCompositeRenderers */,
-				232C796614CF724900C3868D /* OtherRenderers */,
-				23DA7A5514C61FB6008281DD /* RendererHelpers */,
 			);
-			name = Renderers;
+			name = ListRenderers;
 			sourceTree = "<group>";
 		};
 		23DA7A3914C600B1008281DD /* Controllers */ = {
@@ -1065,8 +1022,6 @@
 				23DA7A6B14C6371D008281DD /* MenuRenderer */,
 				23DA7A4D14C618EE008281DD /* OrderRenderer */,
 				23DA7A5F14C631F1008281DD /* ItemRenderer */,
-				23DA7A6314C636D2008281DD /* OptionRenderer */,
-				23DA7A6414C636E5008281DD /* ChoiceRenderer */,
 			);
 			name = MenuCompositeRenderers;
 			sourceTree = "<group>";
@@ -1091,8 +1046,6 @@
 			children = (
 				23DA7A4F14C61926008281DD /* OrderRenderer.h */,
 				23DA7A5014C61926008281DD /* OrderRenderer.m */,
-				232C798514D209D600C3868D /* OrderSummaryRenderer.h */,
-				232C798614D209D600C3868D /* OrderSummaryRenderer.m */,
 			);
 			name = OrderRenderer;
 			sourceTree = "<group>";
@@ -1104,15 +1057,6 @@
 				23DA7A5314C61946008281DD /* OrderView.m */,
 			);
 			name = OrderView;
-			sourceTree = "<group>";
-		};
-		23DA7A5514C61FB6008281DD /* RendererHelpers */ = {
-			isa = PBXGroup;
-			children = (
-				23C26A1414C48F8B00DD53DF /* CellData.h */,
-				23C26A1514C48F8B00DD53DF /* CellData.m */,
-			);
-			name = RendererHelpers;
 			sourceTree = "<group>";
 		};
 		23DA7A5614C627FC008281DD /* OrderViewController */ = {
@@ -1154,24 +1098,6 @@
 			name = ItemRenderer;
 			sourceTree = "<group>";
 		};
-		23DA7A6314C636D2008281DD /* OptionRenderer */ = {
-			isa = PBXGroup;
-			children = (
-				23DA7A6814C63717008281DD /* OptionRenderer.h */,
-				23DA7A6914C63717008281DD /* OptionRenderer.m */,
-			);
-			name = OptionRenderer;
-			sourceTree = "<group>";
-		};
-		23DA7A6414C636E5008281DD /* ChoiceRenderer */ = {
-			isa = PBXGroup;
-			children = (
-				23DA7A6514C63708008281DD /* ChoiceRenderer.h */,
-				23DA7A6614C63708008281DD /* ChoiceRenderer.m */,
-			);
-			name = ChoiceRenderer;
-			sourceTree = "<group>";
-		};
 		23DA7A6B14C6371D008281DD /* MenuRenderer */ = {
 			isa = PBXGroup;
 			children = (
@@ -1179,15 +1105,6 @@
 				23DA7A6E14C63734008281DD /* MenuRenderer.m */,
 			);
 			name = MenuRenderer;
-			sourceTree = "<group>";
-		};
-		23DA7A7014C63C2A008281DD /* OptionViewController */ = {
-			isa = PBXGroup;
-			children = (
-				23DA7A7A14C63CC8008281DD /* OptionViewController.h */,
-				23DA7A7B14C63CC8008281DD /* OptionViewController.m */,
-			);
-			name = OptionViewController;
 			sourceTree = "<group>";
 		};
 		23DA7A7214C63C3C008281DD /* ItemViewController */ = {
@@ -1575,19 +1492,13 @@
 				23658D0A14BE1D06002C0996 /* Choice.m in Sources */,
 				2391EA7314BE3699001BDC1B /* ConfigurableTableViewDataSource.m in Sources */,
 				2391EA7714BE387D001BDC1B /* CellInfo.m in Sources */,
-				237EC00E14BE635C009D9268 /* ItemPage.m in Sources */,
-				237EC01314BE64D5009D9268 /* ItemPageView.m in Sources */,
 				23AAD98B14BF525A00F88AA8 /* Utilities.m in Sources */,
 				23AAD99014BF68DC00F88AA8 /* MainPageView.m in Sources */,
 				23AAD99314BF690F00F88AA8 /* MainPageViewController.m in Sources */,
-				23C26A0014BFA8F100DD53DF /* OptionPage.m in Sources */,
-				23C26A0314BFA90A00DD53DF /* OptionPageView.m in Sources */,
 				23C26A0A14C0F00600DD53DF /* Menu.m in Sources */,
-				23C26A0F14C4887E00DD53DF /* TableData.m in Sources */,
-				23C26A1614C48F8B00DD53DF /* CellData.m in Sources */,
 				23C26A2014C4D5A700DD53DF /* MenuComponent.m in Sources */,
 				23C26A2314C4D6FA00DD53DF /* VisualizableData.m in Sources */,
-				23DA7A4014C60284008281DD /* Renderer.m in Sources */,
+				23DA7A4014C60284008281DD /* ListRenderer.m in Sources */,
 				23DA7A4314C603E4008281DD /* MenuComponentViewController.m in Sources */,
 				23DA7A4714C609FD008281DD /* MenuComponentRenderer.m in Sources */,
 				23DA7A4C14C613D4008281DD /* MenuComponentView.m in Sources */,
@@ -1596,12 +1507,9 @@
 				23DA7A5914C6283E008281DD /* OrderViewController.m in Sources */,
 				23DA7A5E14C6310E008281DD /* ItemView.m in Sources */,
 				23DA7A6214C63242008281DD /* ItemRenderer.m in Sources */,
-				23DA7A6714C63708008281DD /* ChoiceRenderer.m in Sources */,
-				23DA7A6A14C63717008281DD /* OptionRenderer.m in Sources */,
 				23DA7A6F14C63734008281DD /* MenuRenderer.m in Sources */,
 				23DA7A7614C63CA6008281DD /* MenuViewController.m in Sources */,
 				23DA7A7914C63CBB008281DD /* ItemViewController.m in Sources */,
-				23DA7A7C14C63CC8008281DD /* OptionViewController.m in Sources */,
 				23DA7A8014C6401A008281DD /* OptionView.m in Sources */,
 				23DA7A8714C72F40008281DD /* MenuView.m in Sources */,
 				23DA7A8C14C73DC1008281DD /* APICall.m in Sources */,
@@ -1670,6 +1578,8 @@
 				2368B53214EDB8B000D880D3 /* MenuCompositeCell.m in Sources */,
 				230C353514EEB994004DCF85 /* GeneralPurposeViewCell.m in Sources */,
 				230C353814EECD5A004DCF85 /* ComboMenuCell.m in Sources */,
+				230C353C14EEE446004DCF85 /* GeneralPurposeViewCellData.m in Sources */,
+				230C354114EF02AB004DCF85 /* ItemComboCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

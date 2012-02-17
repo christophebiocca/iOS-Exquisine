@@ -10,11 +10,7 @@
 @class ItemGroup;
 
 @interface ItemGroupRenderer : MenuComponentRenderer<UITableViewDataSource>
-{
-    ItemGroup *currentItemGroup;
-    
-}
 
--(ItemGroupRenderer *) initFromItemGroup:(ItemGroup *) anItemGroup;
+-(ItemGroupRenderer *) initWithItemGroup:(ItemGroup *) anItemGroup;
 
 @end

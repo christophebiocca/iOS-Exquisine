@@ -16,7 +16,7 @@
     Choice *choice;
 }
 
--(void)setMenuComponent:(Choice*)theChoice;
+-(void)setData:(id)theChoice;
 
 +(NSString*)cellIdentifier;
 

@@ -6,20 +6,17 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "Renderer.h"
+#import "ListRenderer.h"
+
 @class MenuComponent;
 @class MenuComponentView;
 @class CellData;
 
-@interface MenuComponentRenderer : Renderer
+@interface MenuComponentRenderer : ListRenderer
 {
-    MenuComponent *menuComponent;
+    
 }
 
--(MenuComponentRenderer *) initWithMenuComponent:(MenuComponent *) aMenuComponent;
-
--(UITableViewCell *) configureCell:(UITableViewCell *) aCell;
-
--(CellData *) detailedStaticRenderDefaultCell;
++(MenuComponentRenderer *) menuComponentRendererFromData:(id) data;
 
 @end

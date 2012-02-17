@@ -7,18 +7,45 @@
 //
 
 #import "GeneralPurposeViewCell.h"
+#import "GeneralPurposeViewCellData.h"
 
 @implementation GeneralPurposeViewCell
 
-+(CustomViewCell *)customViewCellWithTitle:(NSString *) aTitle AndDescription:(NSString *)aDescription
++(CustomViewCell *)customViewCellWithGeneralData:(GeneralPurposeViewCellData *) theCellData
 {
-    CustomViewCell *returnCell = [[CustomViewCell alloc] init];
-    
-    [[returnCell textLabel] setText:aTitle];
-    [[returnCell detailTextLabel] setText:aDescription];
+    CustomViewCell *returnCell = [[GeneralPurposeViewCell alloc] initWithCellData:theCellData];
     
     return returnCell;
+}
+
+-(id)initWithCellData:(GeneralPurposeViewCellData *)theData
+{
+    self = [super init];
+    if (self) {
+        [self setData:theData];
+    }
     
+    return self;
+}
+
+-(void)setData:(GeneralPurposeViewCellData *) theCellData
+{
+    cellData = theCellData;
+    [self updateCell];
+}
+
+-(void)updateCell
+{
+    [[self textLabel] setText:[cellData title]];
+    [[self textLabel] setFont:[cellData titleFont]];
+    
+    [[self detailTextLabel] setText:[cellData description]];
+    [[self detailTextLabel] setFont:[cellData descriptionFont]];
+}
+
++(NSString *)cellIdentifier
+{
+    return @"GeneralPurposeCell";
 }
 
 @end

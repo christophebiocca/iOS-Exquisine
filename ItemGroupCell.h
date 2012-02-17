@@ -17,6 +17,6 @@
 
 +(NSString *) cellIdentifier;
 
--(void)setMenuComponent:(ItemGroup *)theItemGroup;
+-(void)setData:(id)theItemGroup;
 
 @end

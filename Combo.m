@@ -12,6 +12,7 @@
 #import "Menu.h"
 #import "ItemGroup.h"
 #import "ComboPricingStrategy.h"
+#import "CustomViewCell.h"
 #import "ComboTrivialPricingStrategy.h"
 
 NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
@@ -305,6 +306,20 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
             [NSNumber numberWithUnsignedInteger:primaryKey], @"combo",
             components, @"components",
             nil];
+}
+
+-(NSMutableArray *)prepareDisplayList
+{
+    NSMutableArray *listOutput = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    [listOutput addObject:self];
+    for (ItemGroup *anItemGroup in listOfItemGroups) {
+        NSMutableDictionary *newDict = [[NSMutableDictionary alloc] init];
+        [newDict setValue:[anItemGroup satisfyingItem] forKey:@"data"];
+        [newDict setValue:[NSNumber numberWithInt:CELL_CONTEXT_COMBO] forKey:@"context"];
+        [listOutput addObject:newDict];
+    }
+    return listOutput;
 }
 
 -(void)dealloc

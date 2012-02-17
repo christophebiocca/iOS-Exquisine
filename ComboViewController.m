@@ -24,7 +24,7 @@
     orderInfo = anOrder;
     comboInfo = aCombo;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(comboChanged:) name:COMBO_MODIFIED object:aCombo];
-    comboRenderer = [[ComboRenderer alloc] initFromComboAndOrder:aCombo:anOrder]; 
+    comboRenderer = [[ComboRenderer alloc] initWithCombo:aCombo]; 
     returnController = aController;
     [[self navigationItem] setTitle:comboInfo.name];
     

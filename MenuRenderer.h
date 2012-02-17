@@ -12,8 +12,6 @@
 @interface MenuRenderer : MenuComponentRenderer<UITableViewDataSource>
 {
     
-    Menu *menuInfo;
-    
 }
 
 -(MenuRenderer *) initWithMenu:(Menu *) aMenu;

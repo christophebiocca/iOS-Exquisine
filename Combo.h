@@ -80,4 +80,6 @@ extern NSString* COMBO_MODIFIED;
 
 - (NSDictionary*)orderRepresentation;
 
+- (NSMutableArray *)prepareDisplayList;
+
 @end
