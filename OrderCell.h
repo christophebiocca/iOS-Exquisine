@@ -7,16 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MenuCompositeCell.h"
+
 @class Order;
 
-@interface OrderCell : UITableViewCell
+@interface OrderCell : MenuCompositeCell
 {
     Order *order;
 }
 
 @property (nonatomic,retain) Order *order;
-
--(id)init;
 
 +(NSString *) cellIdentifier;
 

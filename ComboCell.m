@@ -28,79 +28,42 @@ static UIImage* deleteImage = nil;
     }
 }
 
-- (id)init
-{
-    self = [super initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:[ComboCell cellIdentifier]];
-    if (self) {
-        
-    }
-    return self;
-    style = @"plain";
-    combo = [[Combo alloc] init];
-}
-
 -(void)setCombo:(Combo*)theCombo{
     
     combo = theCombo;
     
-    [self setSelectionStyle:UITableViewCellSelectionStyleNone];
+    [super setMenuComponent:theCombo];
     
-    UIFont *titleFont = [UIFont fontWithName:@"HelveticaNeue-Medium" size:13];
-    UIFont *descFont = [UIFont fontWithName:@"HelveticaNeue" size:13];
-    
-    [[self textLabel] setFont:titleFont];
-    [[self detailTextLabel] setFont:descFont];
-    
-    [[self textLabel] setText:[combo name]];
-    [[self textLabel] setAdjustsFontSizeToFitWidth:YES];
     [[self detailTextLabel] setText:@""];
-    [[self detailTextLabel] setAdjustsFontSizeToFitWidth:YES];
     
-    if( [style isEqualToString:@"plain"])
-    {
-        [self setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
-        [self setBackgroundColor:[UIColor whiteColor]];
-    }
-    else if ( [style isEqualToString:@"fancy"])
-    {
-        if([combo satisfied])
-        {
-            [self setAccessoryType:UITableViewCellAccessoryCheckmark];
-            [self setBackgroundColor:[UIColor colorWithRed:0.6f green:0.9f blue:0.6f alpha:1.0f]];
-        }
-        else
-        {
-            [self setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
-            [self setBackgroundColor:[UIColor whiteColor]];
-        }
-    }
-    else if ( [style isEqualToString:@"with_price"])
-    {
-        [[self detailTextLabel] setText:[Utilities FormatToPrice:[combo price]]];
-    }
+    style = CELL_STYLE_PLAIN;
+    [self setStyle:style];
     
 }
 
--(void)setStyle:(NSString *)aStyle
+-(void)setStyle:(CellStyle)aStyle
 {
-    style = aStyle;
-    if( [style isEqualToString:@"plain"])
-    {
-        [self setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
-        [self setBackgroundColor:[UIColor whiteColor]];
-    }
-    else if ( [style isEqualToString:@"fancy"])
-    {
-        if([combo satisfied])
-        {
-            [self setAccessoryType:UITableViewCellAccessoryCheckmark];
-            [self setBackgroundColor:[UIColor colorWithRed:0.6f green:0.9f blue:0.6f alpha:1.0f]];
-        }
-        else
-        {
+    
+    switch (aStyle) {
+        case CELL_STYLE_PLAIN:
             [self setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
             [self setBackgroundColor:[UIColor whiteColor]];
-        }
+            break;
+        case CELL_STYLE_FANCY:
+            if([combo satisfied])
+            {
+                [self setAccessoryType:UITableViewCellAccessoryCheckmark];
+                [self setBackgroundColor:[UIColor colorWithRed:0.6f green:0.9f blue:0.6f alpha:1.0f]];
+            }
+            else
+            {
+                [self setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
+                [self setBackgroundColor:[UIColor whiteColor]];
+            }
+            break;
+            
+        default:
+            break;
     }
 }
 

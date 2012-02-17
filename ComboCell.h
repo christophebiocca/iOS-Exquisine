@@ -7,19 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MenuCompositeCell.h"
+
+typedef enum CellStyle {
+    CELL_STYLE_PLAIN = 0,
+    CELL_STYLE_FANCY = 1
+    } CellStyle;
 
 @class Combo;
 
-@interface ComboCell : UITableViewCell
+@interface ComboCell : MenuCompositeCell
 {
     Combo *combo;
-    NSString *style;
+    CellStyle style;
 }
 
 @property (nonatomic,retain) Combo *combo;
-@property (nonatomic,retain) NSString *style;
-
--(id)init;
+@property (nonatomic) CellStyle style;
 
 +(NSString *) cellIdentifier;
 

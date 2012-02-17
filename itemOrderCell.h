@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+#import "MenuCompositeCell.h"
+
 @class Item;
 
-@interface ItemOrderCell : UITableViewCell
+@interface ItemOrderCell : MenuCompositeCell
 {
     Item* item;
 }
@@ -18,8 +20,5 @@
 @property(nonatomic,retain)Item* item;
 
 +(NSString*)cellIdentifier;
--(id)init;
-
-
 
 @end

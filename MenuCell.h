@@ -7,18 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MenuCompositeCell.h"
+
 @class Menu;
 
 
-@interface MenuCell : UITableViewCell{
+@interface MenuCell : MenuCompositeCell{
     Menu *menu;
 }
 
 @property (nonatomic, retain) Menu *menu;
 
 + (NSString*)cellIdentifier;
-    
-- (id)init;
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated;
 

@@ -18,17 +18,9 @@
     return @"ChoiceCell";
 }
 
-- (id)init
-{
-    self = [super initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:[ChoiceCell cellIdentifier]];
-    if (self) {
-        
-    }
-    return self;
-}
-
 -(void)setChoice:(Choice*)theChoice{
     
+    [super setMenuComponent:theChoice];
     choice = theChoice;
     
     UIFont *titleFont = [UIFont fontWithName:@"HelveticaNeue-Medium" size:17];
@@ -37,12 +29,7 @@
     [[self textLabel] setFont:titleFont];
     [[self detailTextLabel] setFont:descFont];
     
-    [[self textLabel] setText:[choice name]];
-    [[self textLabel] setAdjustsFontSizeToFitWidth:YES];
     [[self detailTextLabel] setText:[Utilities FormatToPrice:[choice price]]];
-    [[self detailTextLabel] setAdjustsFontSizeToFitWidth:YES];
-    
-    [self setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     if ([choice selected])
     {

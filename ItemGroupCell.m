@@ -7,39 +7,19 @@
 //
 
 #import "ItemGroupCell.h"
+#import "ItemGroup.h"
 
 @implementation ItemGroupCell
 
-
-@synthesize itemGroup;
 
 +(NSString *)cellIdentifier{
     return @"ItemGroupCell";
 }
 
-- (id)init
-{
-    self = [super initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:[ItemGroupCell cellIdentifier]];
-    if (self) {
-        
-    }
-    return self;
-}
-
 -(void)setItemGroup:(ItemGroup *)theItemGroup
 {   
     itemGroup = theItemGroup;
-    
-    [self setSelectionStyle:UITableViewCellSelectionStyleNone];
-    
-    UIFont *titleFont = [UIFont fontWithName:@"HelveticaNeue-Medium" size:13];
-    UIFont *descFont = [UIFont fontWithName:@"HelveticaNeue" size:13];
-    
-    [[self textLabel] setFont:titleFont];
-    [[self detailTextLabel] setFont:descFont];
-    
-    [[self textLabel] setText:[itemGroup name]];
-    [[self textLabel] setAdjustsFontSizeToFitWidth:YES];
+    [super setMenuComponent:theItemGroup];
     [[self detailTextLabel] setText:@""];
     
     if([itemGroup satisfied])

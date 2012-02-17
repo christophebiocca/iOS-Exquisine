@@ -7,20 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MenuCompositeCell.h"
 
 @class Item;
 
-@interface ItemMenuCell : UITableViewCell
+@interface ItemMenuCell : MenuCompositeCell
 {
     Item* item;
 }
 
-@property(nonatomic,retain)Item* item;
-
 +(NSString*)cellIdentifier;
 
--(id)init;
+-(void)setItem:(Item *)theItem;
 
--(void)calcFontSizeToFitRect:(CGRect)r;
 
 @end

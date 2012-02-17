@@ -7,17 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ItemGroup.h"
+#import "MenuCompositeCell.h"
+@class ItemGroup;
 
-@interface ItemGroupCell : UITableViewCell
+@interface ItemGroupCell : MenuCompositeCell
 {
     ItemGroup *itemGroup;
 }
 
-@property (nonatomic,retain) ItemGroup *itemGroup;
-
--(id)init;
-
 +(NSString *) cellIdentifier;
+
+-(void)setItemGroup:(ItemGroup *)theItemGroup;
 
 @end

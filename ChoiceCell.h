@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MenuCompositeCell.h"
+
 @class Choice;
 
-@interface ChoiceCell : UITableViewCell
+@interface ChoiceCell : MenuCompositeCell
 {
     Choice *choice;
 }
@@ -17,7 +19,5 @@
 @property (nonatomic,retain) Choice *choice;
 
 +(NSString*)cellIdentifier;
-
-- (id)init;
 
 @end

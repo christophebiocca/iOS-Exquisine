@@ -27,30 +27,10 @@ static UIImage* deleteImage;
     }
 }
 
-- (id)init
-{
-    self = [super initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:[ItemOrderCell cellIdentifier]];
-    if (self) {
-    }
-    return self;
-}
-
 -(void)setItem:(Item*)theItem{
     
     item = theItem;
-    
-    [self setSelectionStyle:UITableViewCellSelectionStyleNone];
-    
-    UIFont *titleFont = [UIFont fontWithName:@"HelveticaNeue-Medium" size:13];
-    UIFont *descFont = [UIFont fontWithName:@"HelveticaNeue" size:13];
-    
-    [[self textLabel] setFont:titleFont];
-    [[self detailTextLabel] setFont:descFont];
-    
-    [[self textLabel] setText:[item name]];
-    [[self textLabel] setAdjustsFontSizeToFitWidth:YES];
-    [[self detailTextLabel] setText:[Utilities FormatToPrice:[item price]]];
-    [[self detailTextLabel] setAdjustsFontSizeToFitWidth:YES];
+    [super setMenuComponent:theItem];
     
 }
 
@@ -64,13 +44,6 @@ static UIImage* deleteImage;
             }
         }
     }
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-    
-    // Configure the view for the selected state
 }
 
 @end

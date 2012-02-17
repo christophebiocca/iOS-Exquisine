@@ -19,31 +19,13 @@
     return @"OrderCell";
 }
 
-- (id)init
-{
-    self = [super initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:[OrderCell cellIdentifier]];
-    if (self) {
-        
-    }
-    return self;
-}
-
 -(void)setOrder:(Order *)theOrder
 {   
     order = theOrder;
     
-    [self setSelectionStyle:UITableViewCellSelectionStyleNone];
+    [super setMenuComponent:theOrder];
     
-    UIFont *titleFont = [UIFont fontWithName:@"HelveticaNeue-Medium" size:13];
-    UIFont *descFont = [UIFont fontWithName:@"HelveticaNeue" size:13];
-    
-    [[self textLabel] setFont:titleFont];
-    [[self detailTextLabel] setFont:descFont];
-    
-    [[self textLabel] setText:[order name]];
-    [[self textLabel] setAdjustsFontSizeToFitWidth:YES];
     [[self detailTextLabel] setText:[Utilities FormatToPrice:[order subtotalPrice]]];
-    [[self detailTextLabel] setAdjustsFontSizeToFitWidth:YES];
     
 }
 

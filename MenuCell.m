@@ -18,20 +18,10 @@
     return @"MenuCell";
 }
 
-- (id)init
-{
-    self = [super initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:[MenuCell cellIdentifier]];
-    if (self) {
-        
-    }
-    return self;
-}
-
 -(void)setMenu:(Menu *)theMenu
 {
     menu = theMenu;
-
-    [self setSelectionStyle:UITableViewCellSelectionStyleNone];
+    [super setMenuComponent:theMenu];
     
     UIFont *titleFont = [UIFont fontWithName:@"HelveticaNeue-Medium" size:17];
     UIFont *descFont = [UIFont fontWithName:@"HelveticaNeue" size:17];
@@ -39,17 +29,9 @@
     [[self textLabel] setFont:titleFont];
     [[self detailTextLabel] setFont:descFont];
     
-    [[self textLabel] setText:[menu name]];
-    [[self textLabel] setAdjustsFontSizeToFitWidth:YES];
+    [[self detailTextLabel] setText:@""];
     [self setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
     
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-    
-    // Configure the view for the selected state
 }
 
 @end
