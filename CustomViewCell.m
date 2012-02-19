@@ -41,7 +41,7 @@
         return [GeneralPurposeViewCell cellIdentifier];
     }
     if ([data isKindOfClass:[NSDictionary class]]) {
-        return [GeneralPurposeViewCell cellIdentifier];
+        return [MenuCompositeCell cellIdentifier];
     }
     
     CLLog(LOG_LEVEL_WARNING, @"An unknown data type was passed to cellIdentifierForData.");
@@ -60,8 +60,8 @@
     if (self) {
         [self setSelectionStyle:UITableViewCellSelectionStyleNone];
         
-        UIFont *titleFont = [UIFont fontWithName:@"HelveticaNeue-Medium" size:13];
-        UIFont *descFont = [UIFont fontWithName:@"HelveticaNeue" size:13];
+        UIFont *titleFont = [UIFont fontWithName:@"HelveticaNeue-Medium" size:17];
+        UIFont *descFont = [UIFont fontWithName:@"HelveticaNeue" size:17];
         
         [[self textLabel] setFont:titleFont];
         [[self detailTextLabel] setFont:descFont];
@@ -85,6 +85,11 @@
 +(UITableViewCellStyle)cellStyle
 {
     return UITableViewCellStyleValue1;
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

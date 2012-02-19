@@ -13,7 +13,7 @@
 
 @implementation ItemComboCell
 +(NSString*)cellIdentifier{
-    return @"ItemOrderCell";
+    return @"ItemComboCell";
 }
 
 static UIImage* deleteImage;
@@ -33,6 +33,11 @@ static UIImage* deleteImage;
     [super setData:theItem];
     
     [self setIndentationLevel:3];
+    
+    UIFont *titleFont = [UIFont fontWithName:@"HelveticaNeue-Medium" size:13];
+    UIFont *descFont = [UIFont fontWithName:@"HelveticaNeue" size:13];
+    [[self textLabel] setFont:titleFont];
+    [[self detailTextLabel] setFont:descFont];
     
     [self updateCell];
 }

@@ -29,7 +29,7 @@
         
         GeneralPurposeViewCellData *data = [[GeneralPurposeViewCellData alloc] init];
         [data setTitle:[anItem desc]];
-        [listData addObject:data];
+        [listData addObject:[NSArray arrayWithObject:data]];
     }
     
     for (Option *anOption in [anItem options]) 

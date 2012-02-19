@@ -8,10 +8,13 @@
 
 #import "GeneralPurposeViewCellData.h"
 
+NSString* VIEW_CELL_NEEDS_REDRAW = @"CroutonLabs/ViewCellNeedsRedraw";
+
 @implementation GeneralPurposeViewCellData
+
 @synthesize title;
-@synthesize description;
 @synthesize titleFont;
+@synthesize description;
 @synthesize descriptionFont;
 
 -(id)init
@@ -22,11 +25,33 @@
     {
         title = @"";
         description = @"";
-        titleFont = [UIFont fontWithName:@"HelveticaNeue-Medium" size:13];
-        descriptionFont = [UIFont fontWithName:@"HelveticaNeue" size:13];
     }
     
     return self;
+}
+
+-(void)setTitle:(NSString *)aTitle
+{
+    title = aTitle;
+    [[NSNotificationCenter defaultCenter] postNotificationName:VIEW_CELL_NEEDS_REDRAW object:self];
+}
+
+-(void)setTitleFont:(UIFont *)aFont
+{
+    titleFont = aFont;
+    [[NSNotificationCenter defaultCenter] postNotificationName:VIEW_CELL_NEEDS_REDRAW object:self];
+}
+
+-(void)setDescription:(NSString *)aDescription
+{
+    description = aDescription;
+    [[NSNotificationCenter defaultCenter] postNotificationName:VIEW_CELL_NEEDS_REDRAW object:self];
+}
+
+-(void)setDescriptionFont:(UIFont *)aFont
+{
+    descriptionFont = aFont;
+    [[NSNotificationCenter defaultCenter] postNotificationName:VIEW_CELL_NEEDS_REDRAW object:self];
 }
 
 @end

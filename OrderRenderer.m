@@ -37,25 +37,10 @@
         NSMutableArray *data = [[NSMutableArray alloc] initWithCapacity:0];
         NSMutableArray *sections = [[NSMutableArray alloc] initWithCapacity:0];
         
-        NSMutableArray *itemSection = [[NSMutableArray alloc] initWithCapacity:0];
-        
         [sections addObject:@"Your Order"];
-        for (Combo* aCombo in [[anOrderManager thisOrder] comboList]) {
-            [itemSection addObjectsFromArray:[aCombo prepareDisplayList]];
-        }
-        for (Item* anItem in [[anOrderManager thisOrder] itemList]) {
-            [itemSection addObject:anItem];
-        }
+        //orderChanged: will deal with populating this section.
+        [data addObject:[NSMutableArray arrayWithCapacity:0]];
         
-        if([itemSection count] > 0)
-            [data addObject:itemSection];
-        else
-        {
-            GeneralPurposeViewCellData *cellData = [[GeneralPurposeViewCellData alloc] init];
-            [cellData setTitle:@"You have not selected any Items"];
-            [data addObject:[NSArray arrayWithObject:cellData]];
-        }
-         
         if ([[[anOrderManager thisMenu] submenuList] count] > 0)
         {
             [data addObject:[[anOrderManager thisMenu] submenuList]];
@@ -70,6 +55,7 @@
         
         listData = [NSMutableArray arrayWithArray:data];
         sectionNames = [NSMutableArray arrayWithArray:sections];
+        context = CELL_CONTEXT_ORDER;
         
         [self orderChanged:nil];
     }
@@ -93,6 +79,7 @@
     {
         GeneralPurposeViewCellData *cellData = [[GeneralPurposeViewCellData alloc] init];
         [cellData setTitle:@"You have not selected any Items"];
+        [cellData setTitleFont:[UIFont fontWithName:@"HelveticaNeue-Medium" size:13]];
         [listData replaceObjectAtIndex:0 withObject:[NSArray arrayWithObject:cellData]];
     }
     
@@ -111,6 +98,9 @@
             [tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
         } else if([cellObject isKindOfClass:[Combo class]]){
             [[orderManager thisOrder] removeCombo:cellObject];
+            [tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }else if([cellObject isKindOfClass:[NSDictionary class]]){
+            [[orderManager thisOrder] removeItem:[cellObject objectForKey:@"data"]];
             [tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
         }
         
@@ -134,7 +124,8 @@
     id cellObject = [self objectForCellAtIndex:indexPath];
     //Then see if it's an item:
     if ([cellObject isKindOfClass:[Item class]] ||
-        [cellObject isKindOfClass:[Combo class]])
+        [cellObject isKindOfClass:[Combo class]]||
+        [cellObject isKindOfClass:[NSDictionary class]])
     {
         //if so,  we can edit it.
         return YES;

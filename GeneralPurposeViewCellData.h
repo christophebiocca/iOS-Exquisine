@@ -8,18 +8,19 @@
 
 #import "CustomViewCell.h"
 
+extern NSString* VIEW_CELL_NEEDS_REDRAW;
+
 @interface GeneralPurposeViewCellData : CustomViewCell
 {
     NSString *title;
-    NSString *description;
     UIFont *titleFont;
+    NSString *description;
     UIFont *descriptionFont;
 }
 
-
-@property (retain) NSString *title;
-@property (retain) NSString *description;
-@property (retain) UIFont *titleFont;
-@property (retain) UIFont *descriptionFont;
+@property (nonatomic, retain) NSString *title;
+@property (nonatomic, retain) NSString *description;
+@property (nonatomic, retain) UIFont *titleFont;
+@property (nonatomic, retain) UIFont *descriptionFont;
 
 @end

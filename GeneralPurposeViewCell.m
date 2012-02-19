@@ -31,16 +31,24 @@
 -(void)setData:(GeneralPurposeViewCellData *) theCellData
 {
     cellData = theCellData;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCell) name:VIEW_CELL_NEEDS_REDRAW object:theCellData];
     [self updateCell];
 }
 
 -(void)updateCell
 {
     [[self textLabel] setText:[cellData title]];
-    [[self textLabel] setFont:[cellData titleFont]];
+    
+    if ([cellData titleFont]) {
+        [[self textLabel] setFont:[cellData titleFont]];
+    }
     
     [[self detailTextLabel] setText:[cellData description]];
-    [[self detailTextLabel] setFont:[cellData descriptionFont]];
+    
+    if ([cellData descriptionFont]) {
+        [[self detailTextLabel] setFont:[cellData descriptionFont]];
+    }
+    
 }
 
 +(NSString *)cellIdentifier

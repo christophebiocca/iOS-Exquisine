@@ -25,11 +25,6 @@
     
     [super setData:theItem];
     
-    UIFont *titleFont = [UIFont fontWithName:@"HelveticaNeue-Medium" size:17];
-    UIFont *descFont = [UIFont fontWithName:@"HelveticaNeue" size:17];
-    [[self textLabel] setFont:titleFont];
-    [[self detailTextLabel] setFont:descFont];
-    
     [self updateCell];
 }
 

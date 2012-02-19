@@ -28,7 +28,8 @@
     {
         GeneralPurposeViewCellData *data = [[GeneralPurposeViewCellData alloc] init];
         [data setTitle:@"You have not saved any favorites"];
-        listData = [NSArray arrayWithObject:anOrderList];
+        [data setTitleFont:[UIFont fontWithName:@"HelveticaNeue-Medium" size:13]];
+        listData = [NSArray arrayWithObject:data];
     }
     
     return self;

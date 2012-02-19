@@ -18,7 +18,7 @@
     if (self) {
         listData = [[NSMutableArray alloc] init];
         sectionNames = [[NSMutableArray alloc] init];
-        context = CELL_CONTEXT_ORDER;
+        context = CELL_CONTEXT_MENU;
     }
     
     return self;
