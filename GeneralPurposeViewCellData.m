@@ -16,6 +16,8 @@ NSString* VIEW_CELL_NEEDS_REDRAW = @"CroutonLabs/ViewCellNeedsRedraw";
 @synthesize titleFont;
 @synthesize description;
 @synthesize descriptionFont;
+@synthesize indent;
+@synthesize cellColour;
 
 -(id)init
 {
@@ -25,6 +27,8 @@ NSString* VIEW_CELL_NEEDS_REDRAW = @"CroutonLabs/ViewCellNeedsRedraw";
     {
         title = @"";
         description = @"";
+        indent = 0;
+        cellColour = [UIColor whiteColor];
     }
     
     return self;
@@ -51,6 +55,18 @@ NSString* VIEW_CELL_NEEDS_REDRAW = @"CroutonLabs/ViewCellNeedsRedraw";
 -(void)setDescriptionFont:(UIFont *)aFont
 {
     descriptionFont = aFont;
+    [[NSNotificationCenter defaultCenter] postNotificationName:VIEW_CELL_NEEDS_REDRAW object:self];
+}
+
+-(void)setIndent:(NSInteger)anIndent
+{
+    indent = anIndent;
+    [[NSNotificationCenter defaultCenter] postNotificationName:VIEW_CELL_NEEDS_REDRAW object:self];
+}
+
+-(void)setCellColour:(UIColor *)aColour
+{
+    cellColour = aColour;
     [[NSNotificationCenter defaultCenter] postNotificationName:VIEW_CELL_NEEDS_REDRAW object:self];
 }
 

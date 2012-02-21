@@ -95,7 +95,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 34.0f;
+    return 28.0f;
 }
 
 -(void) toggleWhetherFavorite

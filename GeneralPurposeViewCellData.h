@@ -16,11 +16,15 @@ extern NSString* VIEW_CELL_NEEDS_REDRAW;
     UIFont *titleFont;
     NSString *description;
     UIFont *descriptionFont;
+    NSInteger indent;
+    UIColor *cellColour;
 }
 
 @property (nonatomic, retain) NSString *title;
 @property (nonatomic, retain) NSString *description;
 @property (nonatomic, retain) UIFont *titleFont;
 @property (nonatomic, retain) UIFont *descriptionFont;
+@property (nonatomic) NSInteger indent;
+@property (nonatomic, retain) UIColor *cellColour;
 
 @end

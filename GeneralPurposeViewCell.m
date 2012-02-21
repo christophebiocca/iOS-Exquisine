@@ -38,6 +38,8 @@
 -(void)updateCell
 {
     [[self textLabel] setText:[cellData title]];
+    [self setIndentationLevel:([cellData indent] * 3)];
+    [self setBackgroundColor:[cellData cellColour]];
     
     if ([cellData titleFont]) {
         [[self textLabel] setFont:[cellData titleFont]];
