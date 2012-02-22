@@ -5,22 +5,30 @@
 //  Created by Christophe Biocca on 12-01-27.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
+#import <Foundation/Foundation.h>
+#import <MapKit/MapKit.h>
 
-typedef enum StoreState {
+typedef enum StoreState 
+{
     Open,
     Closing,
     Closed
 } StoreState;
 
-@interface Location : NSObject{
+@interface Location : NSObject<MKAnnotation>
+{
     NSString* primaryKey;
     NSArray* storeHours;
     NSInteger lastCall;
+    NSDecimalNumber *latitude;
+    NSDecimalNumber *longitude;
+    NSString *address;
 }
 
 -(id)initFromData:(NSDictionary*)inputData;
 
-@property(retain,readonly)NSString* primaryKey;
+@property (retain,readonly) NSString *address;
+@property (retain,readonly) NSString *primaryKey;
 
 -(StoreState)storeState;
 -(NSDate*)opensOnDay:(NSDate*)date;
@@ -29,5 +37,6 @@ typedef enum StoreState {
 -(NSDate*)closesToday;
 -(NSDate*)nextOpen;
 -(NSDate*)nextClose;
+-(NSString*)storeHourBlurb;
 
 @end

@@ -20,10 +20,12 @@
 #import "Reachability.h"
 #import "PaymentStack.h"
 #import "PaymentInfoViewController.h"
+#import "LocationViewController.h"
 #import "PaymentSuccessInfo.h"
 #import "IndicatorView.h"
 #import "Location.h"
 #import "OrderManager.h"
+#import "LocationView.h"
 
 @implementation MainPageViewController
 
@@ -85,16 +87,15 @@
     
     [mainPageView.pendingOrderButton addTarget:self action:@selector(pendingButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     
+    [mainPageView.locationButton addTarget:self action:@selector(locationButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    
     [self setView:mainPageView];
 }
 
--(void)viewDidAppear:(BOOL)animated{
-    
-}
-
-- (void)viewDidUnload
+-(void)locationButtonPressed
 {
-    [super viewDidUnload];
+    LocationViewController *locationViewController = [[LocationViewController alloc] initWithLocations:locations];
+    [[self navigationController] pushViewController:locationViewController animated:YES];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -469,27 +470,10 @@
             break;
     }
     
-    NSDateFormatter* formatter = [NSDateFormatter new];
-    [formatter setDateStyle:NSDateFormatterNoStyle];
-    [formatter setTimeStyle:NSDateFormatterShortStyle];
-    
-    if([[self currentLocation] storeState] != Closed)
-    {
-        //NSString *openTime = [formatter stringFromDate:[[self currentLocation] opensToday]];
-        //NSString *closeTime = [formatter stringFromDate:[[self currentLocation] closesToday]];
-        
-        [[mainPageView storeHours] setText:@""];//[NSString stringWithFormat:@"Open from %@ to %@",openTime,closeTime]];
-    }
+    if([[self currentLocation] storeState] == Closed)
+        [[mainPageView storeHours] setText:[[self currentLocation] storeHourBlurb]];
     else
-    {
-        NSString *openTime = [formatter stringFromDate:[[self currentLocation] nextOpen]];
-        //NSString *closeTime = [formatter stringFromDate:[[self currentLocation] nextClose]];
-        [formatter setDateFormat:@"EEEE"];
-        NSString *dayOfWeek = [formatter stringFromDate:[[self currentLocation] nextClose]];
-        
-        [[mainPageView storeHours] setText:[NSString stringWithFormat:@"Pita Factory opens on %@ at %@.",dayOfWeek,openTime]];
-        
-    }
+        [[mainPageView storeHours] setText:@""];
     
 }
 
@@ -498,6 +482,7 @@
     [GetLocations getLocationsForRestaurant:RESTAURANT_ID 
                                     success:^(GetLocations* call) {
                                         locations = [call locations];
+                                        [[mainPageView storeLocationLabel] setText:[self currentLocation].address];
                                         [self updateStoreHourInfo];
                                     }
                                     failure:^(GetLocations* call, NSError* error) {

@@ -12,6 +12,7 @@
 @implementation Location
 
 @synthesize primaryKey;
+@synthesize address;
 
 static NSDateComponents* oneDay;
 static NSDateComponents* minusOneDay;
@@ -31,6 +32,11 @@ static NSDateComponents* minusOneDay;
     if(self = [super init]){
         primaryKey = [inputData objectForKey:@"pk"];
         NSDictionary* hoursDict = [inputData objectForKey:@"hours"];
+        latitude = [inputData objectForKey:@"latitude"];
+        longitude = [inputData objectForKey:@"longitude"];
+        address = [inputData objectForKey:@"address"];
+        
+        NSLog(@"LOCATION: %@", inputData);
         NSMutableArray* hours = [NSMutableArray arrayWithCapacity:7];
         [hoursDict enumerateKeysAndObjectsUsingBlock:^(NSString* key, NSDictionary* obj, BOOL *stop) {
             [hours addObject:[[OpeningHours alloc] initWithData:obj day:key]];
@@ -139,6 +145,44 @@ static NSDateComponents* minusOneDay;
                                                                                toDate:now 
                                                                               options:0]];
     }
+}
+
+-(NSString *)storeHourBlurb
+{
+    NSDateFormatter* formatter = [NSDateFormatter new];
+    [formatter setDateStyle:NSDateFormatterNoStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    
+    if([self storeState] != Closed)
+    {
+        NSString *openTime = [formatter stringFromDate:[self  opensToday]];
+        NSString *closeTime = [formatter stringFromDate:[self  closesToday]];
+        
+        return [NSString stringWithFormat:@"Open from %@ to %@",openTime,closeTime];
+    }
+    else
+    {
+        NSString *openTime = [formatter stringFromDate:[self nextOpen]];
+        //NSString *closeTime = [formatter stringFromDate:[[self currentLocation] nextClose]];
+        [formatter setDateFormat:@"EEEE"];
+        NSString *dayOfWeek = [formatter stringFromDate:[self nextClose]];
+        
+        return [NSString stringWithFormat:@"Pita Factory opens on %@ at %@.",dayOfWeek,openTime];
+        
+    }
+}
+
+- (NSString *)subtitle{
+	return [self storeHourBlurb];
+}
+
+- (NSString *)title{
+	return @"Pita Factory";
+}
+
+- (CLLocationCoordinate2D)coordinate
+{
+    return CLLocationCoordinate2DMake([latitude doubleValue], [longitude doubleValue]);
 }
 
 @end
