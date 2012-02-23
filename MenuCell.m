@@ -41,7 +41,7 @@
     
     [[self textLabel] setText:[menu name]];
     [[self textLabel] setAdjustsFontSizeToFitWidth:YES];
-    [self setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
+    [self setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     
 }
 
