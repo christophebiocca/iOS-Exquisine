@@ -46,7 +46,7 @@ static NSURL* serverURL;
     
     //@"http://staging.croutonlabs.com";  //Staging
 #else
-    serverString = @"https://croutonlabs.com/beta/";
+    serverString = @"https://croutonlabs.com/";
 #endif
     
     serverURL = [NSURL URLWithString:serverString];
