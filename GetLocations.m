@@ -15,7 +15,7 @@
 @synthesize locations;
 
 +(void)getLocationsForRestaurant:(NSInteger)restaurant success:(void(^)(id))success failure:(void(^)(id,NSError*))failure{
-    [self sendGETRequestForLocation:[NSString stringWithFormat:@"/customer/locations/%d/", restaurant] 
+    [self sendGETRequestForLocation:[NSString stringWithFormat:@"customer/locations/%d/", restaurant] 
                             success:success
                             failure:failure];
 }
