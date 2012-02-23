@@ -58,7 +58,7 @@ static UIImage* deleteImage = nil;
     
     if( [style isEqualToString:@"plain"])
     {
-        [self setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
+        [self setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
         [self setBackgroundColor:[UIColor whiteColor]];
     }
     else if ( [style isEqualToString:@"fancy"])
@@ -70,7 +70,7 @@ static UIImage* deleteImage = nil;
         }
         else
         {
-            [self setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
+            [self setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
             [self setBackgroundColor:[UIColor whiteColor]];
         }
     }
@@ -86,7 +86,7 @@ static UIImage* deleteImage = nil;
     style = aStyle;
     if( [style isEqualToString:@"plain"])
     {
-        [self setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
+        [self setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
         [self setBackgroundColor:[UIColor whiteColor]];
     }
     else if ( [style isEqualToString:@"fancy"])
@@ -98,7 +98,7 @@ static UIImage* deleteImage = nil;
         }
         else
         {
-            [self setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
+            [self setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
             [self setBackgroundColor:[UIColor whiteColor]];
         }
     }

@@ -53,7 +53,7 @@
 {
     [[aCell detailTextLabel] setText:[Utilities FormatToPrice:[optionInfo price]]];
     [[aCell textLabel] setText:optionInfo.name];
-    [aCell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
+    [aCell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     return aCell;
 }
 
