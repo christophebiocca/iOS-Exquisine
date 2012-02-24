@@ -442,7 +442,11 @@
 
 -(BOOL)locationIsOpen
 {
-    return ([[locationState selectedLocation] storeState] == Open);
+    for (Location *eachLocation in [locationState locations]) {
+        if ([eachLocation storeState] == Open)
+            return YES;
+    }
+    return NO;
 }
 
 -(void)updateStoreHourInfo

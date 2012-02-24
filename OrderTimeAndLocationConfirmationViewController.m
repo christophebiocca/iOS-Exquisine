@@ -9,7 +9,9 @@
 #import "OrderTimeAndLocationConfirmationViewController.h"
 #import "OrderTimeAndLocationConfirmationView.h"
 #import "Location.h"
+#import "LocationMapView.h"
 #import "LocationState.h"
+#import "Order.h"
 
 @implementation OrderTimeAndLocationConfirmationViewController
 
@@ -19,28 +21,31 @@
 //See [self initialize]
 static NSArray* pickerTimes = nil;
 
+//These numbers will be formatted when the rows are requested. Numbers are in minutes.
 +(void)initialize{
     if (!pickerTimes) {
         pickerTimes = [[NSArray alloc] initWithObjects:
-                       @"5 Minutes",
-                       @"10 Minutes",
-                       @"15 Minutes",
-                       @"20 Minutes",
-                       @"30 Minutes", 
-                       @"45 Minutes", 
-                       @"1 Hour", 
-                       @"1 Hour and 15 Minutes", 
-                       @"1 Hour and 30 Minutes", 
+                       [NSNumber numberWithInt:5],
+                       [NSNumber numberWithInt:10],
+                       [NSNumber numberWithInt:15],
+                       [NSNumber numberWithInt:20],
+                       [NSNumber numberWithInt:30],
+                       [NSNumber numberWithInt:45],
+                       [NSNumber numberWithInt:60],
+                       [NSNumber numberWithInt:75],
+                       [NSNumber numberWithInt:90],
                        nil];
     }
 }
 
--(id)initWithLocationState:(LocationState *)theLocationState
+-(id)initWithLocationState:(LocationState *)theLocationState AndOrder:(Order *)anOrder
 {
     self = [super init];
     if(self)
     {
         orderTimeAndLocationConfirmationView = [[OrderTimeAndLocationConfirmationView alloc] initWithLocationState:theLocationState];
+        
+        theOrder = anOrder;
         
         UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel)];
         UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
@@ -53,6 +58,8 @@ static NSArray* pickerTimes = nil;
         
         [[orderTimeAndLocationConfirmationView orderCompletionDurationPicker] setDelegate:self];
         [[orderTimeAndLocationConfirmationView orderCompletionDurationPicker] setDataSource:self];
+        
+        [theOrder setPitaFinishedTime:[NSDate dateWithTimeIntervalSinceNow:300]];
         
     }
     return self;
@@ -81,6 +88,15 @@ static NSArray* pickerTimes = nil;
 
 -(void) done
 {
+    if (!([[[[orderTimeAndLocationConfirmationView locationView] locationState] selectedLocation] storeState] == Open))
+    {
+        UIAlertView *tryAgain = [[UIAlertView alloc] initWithTitle: @"Oops" message:@"The location you have selected is not open. Select one that is open to continue." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+        
+        [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Tried to order from a store that is closed"];
+        
+        [tryAgain show];
+        return;
+    }
     doneBlock();
 }
 
@@ -90,6 +106,11 @@ static NSArray* pickerTimes = nil;
 }
 
 //Delegate and Datasource methods:
+
+-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    [theOrder setPitaFinishedTime:[NSDate dateWithTimeIntervalSinceNow:([[pickerTimes objectAtIndex:row] intValue] * 60)]];
+}
 
 -(CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
 {
@@ -103,7 +124,25 @@ static NSArray* pickerTimes = nil;
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    return [pickerTimes objectAtIndex:row];
+    NSMutableString *rowTitle = [[NSMutableString alloc] initWithCapacity:0];
+    
+    int hour = [[pickerTimes objectAtIndex:row] intValue] / 60; 
+    if (hour) {
+        if(hour == 1)
+            [rowTitle appendFormat:@"%i hour ", hour];
+        else
+            [rowTitle appendFormat:@"%i hours ", hour];
+    }
+    
+    int minutes = [[pickerTimes objectAtIndex:row] intValue] % 60;
+    if (minutes) {
+        if(minutes == 1)
+            [rowTitle appendFormat:@"%i minute", minutes];
+        else
+            [rowTitle appendFormat:@"%i minutes", minutes];
+    }
+    
+    return rowTitle;
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView

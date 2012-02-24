@@ -8,12 +8,15 @@
 
 #import <UIKit/UIKit.h>
 @class OrderTimeAndLocationConfirmationView;
+@class Order;
 @class Location;
 @class LocationState;
 
 @interface OrderTimeAndLocationConfirmationViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
 {
     OrderTimeAndLocationConfirmationView *orderTimeAndLocationConfirmationView;
+    
+    Order *theOrder;
     
     void(^doneBlock)();
     void(^cancelledBlock)();
@@ -22,6 +25,6 @@
 @property(copy, nonatomic)void (^doneBlock)();
 @property(copy, nonatomic)void (^cancelledBlock)();
 
--(id)initWithLocationState:(LocationState *)theLocationState;
+-(id)initWithLocationState:(LocationState *)theLocationState AndOrder:(Order *) anOrder;
 
 @end

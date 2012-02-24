@@ -58,7 +58,7 @@
     
     if(![delegate locationIsOpen])
     {
-        UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Oops" message:@"The restaurant isn't open right now. You'll have to wait until it is." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+        UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Oops" message:@"None of the restaurants are open right now. You'll have to wait until they are." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
         
         [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Tried to place order when the restautant isn't open"];
         
