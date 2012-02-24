@@ -25,7 +25,6 @@
 @synthesize logoView;
 @synthesize openIndicator;
 @synthesize storeHours;
-@synthesize storeLocationLabel;
 
 
 - (id)initWithFrame:(CGRect)frame
@@ -39,7 +38,6 @@
         orderStatus = [[UILabel alloc] init];
         openIndicator = [[IndicatorView alloc] init];
         storeHours = [[UILabel alloc] init];
-        storeLocationLabel = [[UILabel alloc] init];
         
         logo = [UIImage imageNamed:@"pfLogo"];
         logoView = [[UIImageView alloc] initWithImage:logo];
@@ -70,7 +68,6 @@
         [self addSubview:createOrderButton];
         [self addSubview:favoriteOrderButton];
         [self addSubview:pendingOrderButton];
-        [self addSubview:storeLocationLabel];
         //For now, there is no account info button. If we decide to never have it, chuck it.
         [self addSubview:locationButton];
         //[self addSubview:greetingLabel];
@@ -90,7 +87,6 @@
     [orderStatus setFrame:CGRectMake(20, 243, 280, 37)];
     [logoView setFrame:CGRectMake(75, 10,170, 170)];
     [storeHours setFrame:CGRectMake(20, 374, 280, 37)];
-    [storeLocationLabel setFrame:CGRectMake(66, 180, 200, 30)];
 }
 
 @end

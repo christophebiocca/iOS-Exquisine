@@ -147,6 +147,7 @@
         if (buttonIndex == 1)
         {
             [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Placed order"];
+            
             [delegate submitOrderForController:self];
             [[theOrderManager thisOrder] setStatus:@"Transmitting"];
             [self popToMainPage];

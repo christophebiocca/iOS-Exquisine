@@ -7,47 +7,51 @@
 //
 
 #import "LocationViewController.h"
-#import "LocationView.h"
+#import "LocationMapView.h"
+#import "LocationState.h"
 #import "Location.h"
-
-#define DEFAULT_VIEW_SCALE 40000
 
 @implementation LocationViewController
 
--(LocationViewController *)initWithLocations:
-(NSArray *) theLocations
+@synthesize locationMapView;
+
+-(LocationViewController *)initWithLocationState:
+(LocationState *) aLocationState
 {
     self = [super init];
  
-    locations = theLocations;
-    locationView = [[LocationView alloc] init];
+    locationState = aLocationState;
+    locationMapView = [[LocationMapView alloc] initWithLocationState:aLocationState AndFrame:CGRectMake(0, 44, 320, 416)];
     
-    [[self navigationItem] setTitle:@"Choose Location"];
+    [[self navigationItem] setTitle:@"Set Location"];
+    
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonPressed)];
+    
+    [[self navigationItem] setRightBarButtonItem:doneButton];
     
     return self;
 }
 
+-(void) doneButtonPressed
+{
+    [[self navigationController] popViewControllerAnimated:YES];
+}
+
 - (void)viewWillAppear:(BOOL)animated 
 {
-    CLLocationCoordinate2D currentLocation;
-    currentLocation.latitude = 43.47256;
-    currentLocation.longitude = -80.53830;
-    
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMake(currentLocation, MKCoordinateSpanMake(0.008f, 0.008f));
-    // 3
-    MKCoordinateRegion adjustedRegion = [[locationView locationMap] regionThatFits:viewRegion];                
-    // 4
-    [[locationView locationMap] setRegion:adjustedRegion animated:YES];
-    
-    for (Location *eachLocation in locations) {
-        [[locationView locationMap] addAnnotation:eachLocation];
-    }
+    [super viewWillAppear:animated];
     
 }
 
 - (void) loadView
 {
-    [self setView:locationView];
+    [super loadView];
+    [self setView:locationMapView];
+}
+
+-(void)viewDidLoad
+{
+    [super viewDidLoad];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

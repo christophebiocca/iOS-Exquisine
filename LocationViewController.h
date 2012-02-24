@@ -7,16 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
-@class LocationView;
-@class Location;
+#import <Mapkit/Mapkit.h>
+@class LocationMapView;
+@class LocationState;
 
 @interface LocationViewController : UIViewController
 {
-    LocationView *locationView;
-    NSArray *locations;
+    LocationMapView *locationMapView;
+    LocationState *locationState;
 }
 
--(LocationViewController *)initWithLocations:
-(NSArray *) theLocations;
+@property (readonly) LocationMapView *locationMapView;
+
+-(LocationViewController *)initWithLocationState:
+(LocationState *) aLocationState;
 
 @end

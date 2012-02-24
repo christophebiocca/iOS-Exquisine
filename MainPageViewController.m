@@ -25,7 +25,7 @@
 #import "IndicatorView.h"
 #import "Location.h"
 #import "OrderManager.h"
-#import "LocationView.h"
+#import "LocationState.h"
 
 @implementation MainPageViewController
 
@@ -94,7 +94,7 @@
 
 -(void)locationButtonPressed
 {
-    LocationViewController *locationViewController = [[LocationViewController alloc] initWithLocations:locations];
+    LocationViewController *locationViewController = [[LocationViewController alloc] initWithLocationState:locationState];
     [[self navigationController] pushViewController:locationViewController animated:YES];
 }
 
@@ -175,7 +175,7 @@
 {
     __block UINavigationController* modalController = nil;
     PaymentStack* paymentStack = 
-    [[PaymentStack alloc] initWithOrder:[[orderViewController theOrderManager] thisOrder] locations:locations
+    [[PaymentStack alloc] initWithOrder:[[orderViewController theOrderManager] thisOrder] locationState:locationState
                            successBlock:^{
                                //Push the current order on the history list
                                [ordersHistory addObject:[[orderViewController theOrderManager] thisOrder]];
@@ -442,19 +442,19 @@
 
 -(BOOL)locationIsOpen
 {
-    return ([[self currentLocation] storeState] == Open);
+    return ([[locationState selectedLocation] storeState] == Open);
 }
 
 -(void)updateStoreHourInfo
 {
-    if(![self currentLocation])
+    if(![locationState selectedLocation])
     {
         [[mainPageView openIndicator] setState:IndicatorViewOff];
         [[mainPageView storeHours] setText:@"Fetching store hours from server..."];
         return;
     }
     
-    switch ([[self currentLocation] storeState]) {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+    switch ([[locationState selectedLocation] storeState]) {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
         case Open:
             [[mainPageView openIndicator] setState:IndicatorViewOn];
             //[[mainPageView storeHours] setText:@""];
@@ -470,8 +470,8 @@
             break;
     }
     
-    if([[self currentLocation] storeState] == Closed)
-        [[mainPageView storeHours] setText:[[self currentLocation] storeHourBlurb]];
+    if([[locationState selectedLocation] storeState] == Closed)
+        [[mainPageView storeHours] setText:[[locationState selectedLocation] storeHourBlurb]];
     else
         [[mainPageView storeHours] setText:@""];
     
@@ -481,8 +481,7 @@
 {
     [GetLocations getLocationsForRestaurant:RESTAURANT_ID 
                                     success:^(GetLocations* call) {
-                                        locations = [call locations];
-                                        [[mainPageView storeLocationLabel] setText:[self currentLocation].address];
+                                        locationState = [[LocationState alloc] initWithLocations:[call locations]];
                                         [self updateStoreHourInfo];
                                     }
                                     failure:^(GetLocations* call, NSError* error) {
@@ -494,20 +493,13 @@
 
 -(void)updateOrderHistory
 {
-    for (Order *eachOrder in ordersHistory) {
-        if ([[eachOrder mostRecentSubmitDate] compare:[NSDate dateWithTimeIntervalSinceNow:(- [DEFAULT_PITA_FINISHED_TIME intValue])]] == NSOrderedAscending)
+    for (Order *eachOrder in ordersHistory) 
+    {
+        if ([[eachOrder pitaFinishedTime] compare:[NSDate dateWithTimeIntervalSinceNow:0]] == NSOrderedAscending)
         {
             [eachOrder setComplete];
         }
     }
-}
-
-//This will obviously have to change.
--(Location *)currentLocation
-{
-    if([locations count] > 0)
-        return [locations objectAtIndex:0];
-    return nil;
 }
 
 -(void) resetApplicationBadgeNumber

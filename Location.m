@@ -180,6 +180,11 @@ static NSDateComponents* minusOneDay;
 	return @"Pita Factory";
 }
 
+-(id)copyWithZone:(NSZone *)zone
+{
+    return self;
+}
+
 - (CLLocationCoordinate2D)coordinate
 {
     return CLLocationCoordinate2DMake([latitude doubleValue], [longitude doubleValue]);
