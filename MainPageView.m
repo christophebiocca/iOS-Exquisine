@@ -18,14 +18,13 @@
 
 @synthesize createOrderButton;
 @synthesize favoriteOrderButton;
-@synthesize accountInfoButton;
+@synthesize locationButton;
 @synthesize orderStatus;
 @synthesize pendingOrderButton;
 @synthesize logo;
 @synthesize logoView;
 @synthesize openIndicator;
 @synthesize storeHours;
-@synthesize storeLocationLabel;
 
 
 - (id)initWithFrame:(CGRect)frame
@@ -35,13 +34,10 @@
         createOrderButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         favoriteOrderButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         pendingOrderButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        accountInfoButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        locationButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         orderStatus = [[UILabel alloc] init];
         openIndicator = [[IndicatorView alloc] init];
         storeHours = [[UILabel alloc] init];
-        storeLocationLabel = [[UILabel alloc] init];
-        
-        [storeLocationLabel setText:@"170 University Ave West"];
         
         logo = [UIImage imageNamed:@"pfLogo"];
         logoView = [[UIImageView alloc] initWithImage:logo];
@@ -55,7 +51,7 @@
         
         [favoriteOrderButton setTitle:@"Favorites" forState:UIControlStateNormal];
         
-        [accountInfoButton setTitle:@"Account Information" forState:UIControlStateNormal];
+        [locationButton setTitle:@"Set Location" forState:UIControlStateNormal];
         
         [pendingOrderButton setTitle: @"Order status: No pending orders" forState:UIControlStateDisabled];
         [pendingOrderButton setTitleColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.5] forState:UIControlStateDisabled];
@@ -72,9 +68,8 @@
         [self addSubview:createOrderButton];
         [self addSubview:favoriteOrderButton];
         [self addSubview:pendingOrderButton];
-        [self addSubview:storeLocationLabel];
         //For now, there is no account info button. If we decide to never have it, chuck it.
-        //[self addSubview:accountInfoButton];
+        [self addSubview:locationButton];
         //[self addSubview:greetingLabel];
         [self addSubview:logoView];
         //[self addSubview:orderStatus];
@@ -85,15 +80,13 @@
 -(void)layoutSubviews
 {
     [self setBackgroundColor:[UIColor whiteColor]];
-    [createOrderButton setFrame:CGRectMake(20, 233, 280, 37)];
-    [favoriteOrderButton setFrame:CGRectMake(20, 278, 280, 37)];
-    [accountInfoButton setFrame:CGRectMake(20, 449, 280, 37)];
-    [pendingOrderButton setFrame:CGRectMake(20, 323, 280, 37)];
-    [orderStatus setFrame:CGRectMake(20, 263, 280, 37)];
-    [logoView setFrame:CGRectMake(75, 30,170, 170)];
-    //[openIndicator setFrame:CGRectMake(38, 224, 16, 16)];
+    [createOrderButton setFrame:CGRectMake(20, 213, 280, 37)];
+    [favoriteOrderButton setFrame:CGRectMake(20, 258, 280, 37)];
+    [locationButton setFrame:CGRectMake(20, 348, 280, 37)];
+    [pendingOrderButton setFrame:CGRectMake(20, 303, 280, 37)];
+    [orderStatus setFrame:CGRectMake(20, 243, 280, 37)];
+    [logoView setFrame:CGRectMake(75, 24 ,170, 170)];
     [storeHours setFrame:CGRectMake(20, 374, 280, 37)];
-    [storeLocationLabel setFrame:CGRectMake(66, 200, 200, 30)];
 }
 
 @end

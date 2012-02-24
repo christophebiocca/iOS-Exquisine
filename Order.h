@@ -16,9 +16,9 @@
 @class PaymentSuccessInfo;
 
 #ifdef DEBUG
-#define DEFAULT_PITA_FINISHED_TIME @"20"
+#define DEFAULT_PITA_PREP_TIME @"20"
 #else
-#define DEFAULT_PITA_FINISHED_TIME @"300"
+#define DEFAULT_PITA_PREP_TIME @"300"
 #endif
 
 
@@ -44,7 +44,7 @@ extern NSString* ORDER_MODIFIED;
     
     NSDate *mostRecentSubmitDate;
     
-    NSDecimalNumber *pitaFinishedTime;
+    NSDate *pitaFinishedTime;
     
     PaymentSuccessInfo *successInfo;
     
@@ -57,6 +57,7 @@ extern NSString* ORDER_MODIFIED;
 @property (retain) NSString *orderIdentifier;
 @property (readonly) NSDate *creationDate;
 @property (readonly) NSDate *mostRecentSubmitDate;
+@property (retain) NSDate *pitaFinishedTime;
 @property (readonly) PaymentSuccessInfo *successInfo;
 @property(readonly)NSDecimalNumber* subtotalPrice;
 @property(readonly)NSDecimalNumber* taxPrice;

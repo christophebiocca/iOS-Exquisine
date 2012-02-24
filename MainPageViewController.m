@@ -20,10 +20,12 @@
 #import "Reachability.h"
 #import "PaymentStack.h"
 #import "PaymentInfoViewController.h"
+#import "LocationViewController.h"
 #import "PaymentSuccessInfo.h"
 #import "IndicatorView.h"
 #import "Location.h"
 #import "OrderManager.h"
+#import "LocationState.h"
 
 @implementation MainPageViewController
 
@@ -85,16 +87,15 @@
     
     [mainPageView.pendingOrderButton addTarget:self action:@selector(pendingButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     
+    [mainPageView.locationButton addTarget:self action:@selector(locationButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    
     [self setView:mainPageView];
 }
 
--(void)viewDidAppear:(BOOL)animated{
-    
-}
-
-- (void)viewDidUnload
+-(void)locationButtonPressed
 {
-    [super viewDidUnload];
+    LocationViewController *locationViewController = [[LocationViewController alloc] initWithLocationState:locationState];
+    [[self navigationController] pushViewController:locationViewController animated:YES];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -174,7 +175,7 @@
 {
     __block UINavigationController* modalController = nil;
     PaymentStack* paymentStack = 
-    [[PaymentStack alloc] initWithOrder:[[orderViewController theOrderManager] thisOrder] locations:locations
+    [[PaymentStack alloc] initWithOrder:[[orderViewController theOrderManager] thisOrder] locationState:locationState
                            successBlock:^{
                                //Push the current order on the history list
                                [ordersHistory addObject:[[orderViewController theOrderManager] thisOrder]];
@@ -441,19 +442,23 @@
 
 -(BOOL)locationIsOpen
 {
-    return ([[self currentLocation] storeState] == Open);
+    for (Location *eachLocation in [locationState locations]) {
+        if ([eachLocation storeState] == Open)
+            return YES;
+    }
+    return NO;
 }
 
 -(void)updateStoreHourInfo
 {
-    if(![self currentLocation])
+    if(![locationState selectedLocation])
     {
         [[mainPageView openIndicator] setState:IndicatorViewOff];
         [[mainPageView storeHours] setText:@"Fetching store hours from server..."];
         return;
     }
     
-    switch ([[self currentLocation] storeState]) {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+    switch ([[locationState selectedLocation] storeState]) {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
         case Open:
             [[mainPageView openIndicator] setState:IndicatorViewOn];
             //[[mainPageView storeHours] setText:@""];
@@ -469,27 +474,10 @@
             break;
     }
     
-    NSDateFormatter* formatter = [NSDateFormatter new];
-    [formatter setDateStyle:NSDateFormatterNoStyle];
-    [formatter setTimeStyle:NSDateFormatterShortStyle];
-    
-    if([[self currentLocation] storeState] != Closed)
-    {
-        //NSString *openTime = [formatter stringFromDate:[[self currentLocation] opensToday]];
-        //NSString *closeTime = [formatter stringFromDate:[[self currentLocation] closesToday]];
-        
-        [[mainPageView storeHours] setText:@""];//[NSString stringWithFormat:@"Open from %@ to %@",openTime,closeTime]];
-    }
+    if([[locationState selectedLocation] storeState] == Closed)
+        [[mainPageView storeHours] setText:[[locationState selectedLocation] storeHourBlurb]];
     else
-    {
-        NSString *openTime = [formatter stringFromDate:[[self currentLocation] nextOpen]];
-        //NSString *closeTime = [formatter stringFromDate:[[self currentLocation] nextClose]];
-        [formatter setDateFormat:@"EEEE"];
-        NSString *dayOfWeek = [formatter stringFromDate:[[self currentLocation] nextClose]];
-        
-        [[mainPageView storeHours] setText:[NSString stringWithFormat:@"Pita Factory opens on %@ at %@.",dayOfWeek,openTime]];
-        
-    }
+        [[mainPageView storeHours] setText:@""];
     
 }
 
@@ -497,7 +485,7 @@
 {
     [GetLocations getLocationsForRestaurant:RESTAURANT_ID 
                                     success:^(GetLocations* call) {
-                                        locations = [call locations];
+                                        locationState = [[LocationState alloc] initWithLocations:[call locations]];
                                         [self updateStoreHourInfo];
                                     }
                                     failure:^(GetLocations* call, NSError* error) {
@@ -509,20 +497,13 @@
 
 -(void)updateOrderHistory
 {
-    for (Order *eachOrder in ordersHistory) {
-        if ([[eachOrder mostRecentSubmitDate] compare:[NSDate dateWithTimeIntervalSinceNow:(- [DEFAULT_PITA_FINISHED_TIME intValue])]] == NSOrderedAscending)
+    for (Order *eachOrder in ordersHistory) 
+    {
+        if ([[eachOrder pitaFinishedTime] compare:[NSDate dateWithTimeIntervalSinceNow:0]] == NSOrderedAscending)
         {
             [eachOrder setComplete];
         }
     }
-}
-
-//This will obviously have to change.
--(Location *)currentLocation
-{
-    if([locations count] > 0)
-        return [locations objectAtIndex:0];
-    return nil;
 }
 
 -(void) resetApplicationBadgeNumber

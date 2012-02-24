@@ -10,6 +10,8 @@
 
 @class Order;
 @class Location;
+@class LocationState;
+@class OrderTimeAndLocationConfirmationViewController;
 @class PaymentInfoViewController;
 @class PaymentConfirmationController;
 @class PaymentProcessingViewController;
@@ -18,9 +20,10 @@
 
 @interface PaymentStack : NSObject<UINavigationControllerDelegate>{
     Order* order;
-    Location* location;
+    LocationState *locationState;
     
     UINavigationController* navigationController;
+    OrderTimeAndLocationConfirmationViewController *locationConfirmationController;
     PaymentProcessingViewController* preProcessingController;
     PaymentConfirmationController* paymentConfirmationController;
     PaymentInfoViewController* paymentInfoController;
@@ -39,7 +42,12 @@
 
 @property(retain, readonly)UINavigationController* navigationController;
 
--(id)initWithOrder:(Order*)order locations:(NSArray*)locations successBlock:(void(^)())success 
-   completionBlock:(void(^)())completion cancellationBlock:(void(^)())cancelled;
+- (id)initWithOrder:(Order*)orderToPlace
+      locationState:(LocationState*)theLocationState 
+       successBlock:(void (^)())success
+    completionBlock:(void(^)())completion 
+  cancellationBlock:(void(^)())cancelled;
+
+-(Location *) currentLocation;
 
 @end

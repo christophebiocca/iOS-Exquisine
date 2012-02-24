@@ -32,6 +32,7 @@ NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
 @synthesize creationDate;
 @synthesize mostRecentSubmitDate;
 @synthesize successInfo;
+@synthesize pitaFinishedTime;
 
 -(id)init
 {
@@ -47,8 +48,6 @@ NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
     status = @"Not yet submitted";
     
     creationDate = [[NSDate alloc] initWithTimeIntervalSinceNow:0.0];
-    
-    pitaFinishedTime = [NSDecimalNumber decimalNumberWithString:DEFAULT_PITA_FINISHED_TIME];
     
     orderIdentifier = [Utilities uuid];
     
@@ -81,8 +80,6 @@ NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
         {
             CLLog(LOG_LEVEL_ERROR, [NSString stringWithFormat: @"Order failed to load properly from harddisk: \n%@" , self]);
         }
-        
-        pitaFinishedTime = [NSDecimalNumber decimalNumberWithString:DEFAULT_PITA_FINISHED_TIME];
         
     }
     return self;
@@ -134,8 +131,7 @@ NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
     creationDate = [anOrder.creationDate copy];
     mostRecentSubmitDate = [anOrder.mostRecentSubmitDate copy];
 
-    anOrder->pitaFinishedTime = [NSDecimalNumber decimalNumberWithString:DEFAULT_PITA_FINISHED_TIME];
-    
+    anOrder->pitaFinishedTime = pitaFinishedTime;    
     return anOrder;
 }
 
@@ -286,7 +282,8 @@ NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
     [[NSNotificationCenter defaultCenter] postNotificationName:ORDER_MODIFIED object:self];
 }
 
--(void)placedWithTransactionInfo:(PaymentSuccessInfo*)info{
+-(void)placedWithTransactionInfo:(PaymentSuccessInfo*)info
+{
     // We'll also need to save up the payment info somewhere.
     successInfo = info;
     
@@ -298,7 +295,7 @@ NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
     
     [notification setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:orderIdentifier,@"order", nil]];
     
-    [notification setFireDate:[NSDate dateWithTimeIntervalSinceNow:[DEFAULT_PITA_FINISHED_TIME intValue]]];
+    [notification setFireDate:pitaFinishedTime];
     
     [notification setApplicationIconBadgeNumber:1];
     
@@ -359,7 +356,9 @@ NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
     for(Combo* combo in comboList){
         [ordercombos addObject:[combo orderRepresentation]];
     }
+    
     return [NSDictionary dictionaryWithObjectsAndKeys:
+            [NSNumber numberWithDouble:[pitaFinishedTime timeIntervalSince1970]], @"completion_time",
             orderitems, @"items",
             ordercombos, @"combos",
             nil];

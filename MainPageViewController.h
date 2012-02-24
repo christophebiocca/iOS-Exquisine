@@ -16,6 +16,7 @@
 @class Order;
 @class Reachability;
 @class OrderManager;
+@class LocationState;
 
 @interface MainPageViewController : UIViewController<UITableViewDelegate, OrderManagementDelegate>{
     
@@ -29,7 +30,8 @@
     
     NSMutableArray *ordersHistory;
     NSMutableArray *favoriteOrders;
-    NSArray* locations;
+    LocationState *locationState;
+    
     NSString* harddiskFileName;
     NSString* harddiskFileFolder;
     
@@ -55,6 +57,8 @@
 
 -(void) updatePendingButtonState;
 
+-(void) locationButtonPressed;
+
 -(void) initiateMenuRefresh;
 
 -(void) getLocation;
@@ -66,8 +70,6 @@
 -(void) updateStoreHourInfo;
 
 -(void) resetApplicationBadgeNumber;
-
--(Location *) currentLocation;
 
 -(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
 

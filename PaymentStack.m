@@ -7,13 +7,13 @@
 //
 
 #import "PaymentStack.h"
-
+#import "LocationState.h"
 #import "PaymentConfirmationController.h"
 #import "PaymentInfoViewController.h"
 #import "PaymentProcessingViewController.h"
 #import "PaymentCompleteViewController.h"
 #import "PaymentFailureViewController.h"
-
+#import "OrderTimeAndLocationConfirmationViewController.h"
 #import "PlaceOrder.h"
 #import "GetPaymentProfileInfo.h"
 #import "PaymentProfileInfo.h"
@@ -46,13 +46,14 @@
 @implementation PaymentStack
 
 - (id)initWithOrder:(Order*)orderToPlace
-          locations:(NSArray*)locations 
+          locationState:(LocationState*)theLocationState 
        successBlock:(void (^)())success
     completionBlock:(void(^)())completion 
   cancellationBlock:(void(^)())cancelled
 {
     if (self = [super init]) {
         order = orderToPlace;
+        locationState = theLocationState;
         successBlock = [success copy];
         void (^complete)() = [completion copy];
         completionBlock = [^{
@@ -64,10 +65,8 @@
             cancel();
             [navigationController setDelegate:nil];
         } copy];
-        NSAssert([locations count] == 1, @"Expected exactly one location. (Got %@)", locations);
-        location = [locations lastObject];
         postAnimation = [NSMutableArray new];
-        [self performSelectorOnMainThread:@selector(checkForProfile) withObject:nil waitUntilDone:NO];
+        [self performSelectorOnMainThread:@selector(confirmLocationAndTime) withObject:nil waitUntilDone:NO];
     }
     return self;
 }
@@ -126,8 +125,38 @@
     }
     return failureController;
 }
+
+-(OrderTimeAndLocationConfirmationViewController *) locationConfirmationController
+{
+    if (!locationConfirmationController)
+    {
+        locationConfirmationController = [[OrderTimeAndLocationConfirmationViewController alloc] initWithLocationState:locationState AndOrder: order];
+    }
+    return locationConfirmationController;
+}
     
 #pragma mark Stack States
+
+-(void)confirmLocationAndTime
+{
+    OrderTimeAndLocationConfirmationViewController *controller = [self locationConfirmationController];
+    
+    [controller setDoneBlock:^(void){
+        [self checkForProfile];
+    }];
+    
+    [controller setCancelledBlock:^(void){
+        cancelledBlock();
+    }];
+     
+    
+    [self afterAnimating:^{
+        [[self navigationController] setViewControllers:[NSArray arrayWithObject:controller] 
+                                               animated:YES];
+    }];
+    
+    
+}
 
 -(void)checkForProfile{
     [self afterAnimating:^{
@@ -200,7 +229,7 @@
         [[self navigationController] setViewControllers:[NSArray arrayWithObjects:[self paymentInfoController], 
                                                          [self processingController], nil] animated:YES];
     }];
-    [PlaceOrder sendOrder:order toLocation:location withPaymentInfo:info 
+    [PlaceOrder sendOrder:order toLocation:[self currentLocation] withPaymentInfo:info 
            paymentSuccess:^(PaymentSuccessInfo* success){
                successBlock();
                [[self completionController] setSuccessInfo:success];
@@ -270,6 +299,11 @@
             after();
         }
     }
+}
+
+-(Location *)currentLocation
+{
+    return [locationState selectedLocation];
 }
 
 @end
