@@ -85,7 +85,7 @@
     [locationButton setFrame:CGRectMake(20, 348, 280, 37)];
     [pendingOrderButton setFrame:CGRectMake(20, 303, 280, 37)];
     [orderStatus setFrame:CGRectMake(20, 243, 280, 37)];
-    [logoView setFrame:CGRectMake(75, 10,170, 170)];
+    [logoView setFrame:CGRectMake(75, 24 ,170, 170)];
     [storeHours setFrame:CGRectMake(20, 374, 280, 37)];
 }
 
