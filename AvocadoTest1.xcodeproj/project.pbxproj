@@ -21,6 +21,9 @@
 		231C511214E1BC8B004F2CCC /* ItemGroupMultiplicativePricing.m in Sources */ = {isa = PBXBuildFile; fileRef = 231C511114E1BC8B004F2CCC /* ItemGroupMultiplicativePricing.m */; };
 		231C511614E1C1A5004F2CCC /* ItemGroupAbsolutePricing.m in Sources */ = {isa = PBXBuildFile; fileRef = 231C511514E1C1A5004F2CCC /* ItemGroupAbsolutePricing.m */; };
 		231C511A14E1C1C6004F2CCC /* ItemGroupDiscountPricing.m in Sources */ = {isa = PBXBuildFile; fileRef = 231C511914E1C1C6004F2CCC /* ItemGroupDiscountPricing.m */; };
+		231D25FB14FC2D5100F736F0 /* SettingsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 231D25FA14FC2D5100F736F0 /* SettingsView.m */; };
+		231D25FF14FC2E0800F736F0 /* SettingsRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 231D25FE14FC2E0800F736F0 /* SettingsRenderer.m */; };
+		231D260214FC307100F736F0 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 231D260114FC307100F736F0 /* SettingsViewController.m */; };
 		2329BB2E14D9A8DD008E505F /* pfLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2329BB2D14D9A8DD008E505F /* pfLogo@2x.png */; };
 		232C795414CDF5F100C3868D /* AlertPrompt.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C795314CDF5F100C3868D /* AlertPrompt.m */; };
 		232C795B14CF1A0900C3868D /* TunnelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C795A14CF1A0900C3868D /* TunnelViewController.m */; };
@@ -188,6 +191,12 @@
 		231C511514E1C1A5004F2CCC /* ItemGroupAbsolutePricing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemGroupAbsolutePricing.m; sourceTree = "<group>"; };
 		231C511814E1C1C6004F2CCC /* ItemGroupDiscountPricing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemGroupDiscountPricing.h; sourceTree = "<group>"; };
 		231C511914E1C1C6004F2CCC /* ItemGroupDiscountPricing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemGroupDiscountPricing.m; sourceTree = "<group>"; };
+		231D25F914FC2D5100F736F0 /* SettingsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsView.h; sourceTree = "<group>"; };
+		231D25FA14FC2D5100F736F0 /* SettingsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsView.m; sourceTree = "<group>"; };
+		231D25FD14FC2E0800F736F0 /* SettingsRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsRenderer.h; sourceTree = "<group>"; };
+		231D25FE14FC2E0800F736F0 /* SettingsRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsRenderer.m; sourceTree = "<group>"; };
+		231D260014FC307100F736F0 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		231D260114FC307100F736F0 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		2329BB2D14D9A8DD008E505F /* pfLogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pfLogo@2x.png"; sourceTree = "<group>"; };
 		232C795214CDF5F100C3868D /* AlertPrompt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertPrompt.h; sourceTree = "<group>"; };
 		232C795314CDF5F100C3868D /* AlertPrompt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertPrompt.m; sourceTree = "<group>"; };
@@ -536,6 +545,33 @@
 			name = ItemGroupDiscountPricing;
 			sourceTree = "<group>";
 		};
+		231D25F614FC2CE500F736F0 /* SettingsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				231D260014FC307100F736F0 /* SettingsViewController.h */,
+				231D260114FC307100F736F0 /* SettingsViewController.m */,
+			);
+			name = SettingsViewController;
+			sourceTree = "<group>";
+		};
+		231D25F814FC2D1900F736F0 /* SettingsView */ = {
+			isa = PBXGroup;
+			children = (
+				231D25F914FC2D5100F736F0 /* SettingsView.h */,
+				231D25FA14FC2D5100F736F0 /* SettingsView.m */,
+			);
+			name = SettingsView;
+			sourceTree = "<group>";
+		};
+		231D25FC14FC2DEC00F736F0 /* SettingsRenderer */ = {
+			isa = PBXGroup;
+			children = (
+				231D25FD14FC2E0800F736F0 /* SettingsRenderer.h */,
+				231D25FE14FC2E0800F736F0 /* SettingsRenderer.m */,
+			);
+			name = SettingsRenderer;
+			sourceTree = "<group>";
+		};
 		2329BB2F14D9C56D008E505F /* ItemGroupView */ = {
 			isa = PBXGroup;
 			children = (
@@ -608,6 +644,7 @@
 		232C796B14CF77A400C3868D /* OtherControllers */ = {
 			isa = PBXGroup;
 			children = (
+				231D25F614FC2CE500F736F0 /* SettingsViewController */,
 				23E021E914F41E4500099E1E /* LocationViewController */,
 				23DA7A8314C64680008281DD /* MainPageViewController */,
 				232C796C14CF77CC00C3868D /* FavoritesViewController */,
@@ -1013,6 +1050,7 @@
 			children = (
 				23DA7A3E14C60284008281DD /* ListRenderer.h */,
 				23DA7A3F14C60284008281DD /* ListRenderer.m */,
+				231D25FC14FC2DEC00F736F0 /* SettingsRenderer */,
 				230C353D14EEF2DC004DCF85 /* OrderSummaryRenderer */,
 				232C796714CF727D00C3868D /* FavoritesRenderer */,
 				23DA7A4414C609C6008281DD /* MenuCompositeRenderers */,
@@ -1192,6 +1230,7 @@
 		23DA7A8114C6462C008281DD /* OtherViews */ = {
 			isa = PBXGroup;
 			children = (
+				231D25F814FC2D1900F736F0 /* SettingsView */,
 				231527A414F83CCC00F57B88 /* CustomAnnotationViews */,
 				23E021E214F41AF800099E1E /* LocationView */,
 				2352723F14DB13DF00DDC7FA /* IndicatorView */,
@@ -1668,6 +1707,9 @@
 				23D1DCB814F7156200CFD279 /* FlexableDictionary.m in Sources */,
 				231527A814F83D3500F57B88 /* CLPinAnnotationView.m in Sources */,
 				231527AB14F84D9500F57B88 /* CLCalloutView.m in Sources */,
+				231D25FB14FC2D5100F736F0 /* SettingsView.m in Sources */,
+				231D25FF14FC2E0800F736F0 /* SettingsRenderer.m in Sources */,
+				231D260214FC307100F736F0 /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

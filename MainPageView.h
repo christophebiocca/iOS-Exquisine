@@ -14,7 +14,7 @@
     
     UIButton *createOrderButton;
     UIButton *favoriteOrderButton;
-    UIButton *locationButton;
+    UIButton *settingsButton;
     UIButton *pendingOrderButton;
     UILabel *orderStatus;
     UILabel *storeHours;
@@ -24,7 +24,7 @@
 @property (retain) UIButton *createOrderButton;  	
 @property (retain) UIButton *pendingOrderButton;
 @property (retain) UIButton *favoriteOrderButton;
-@property (retain) UIButton *locationButton;
+@property (retain) UIButton *settingsButton;
 @property (retain) UILabel *orderStatus;
 @property (retain) UIImage *logo;
 @property (retain) UIImageView *logoView;

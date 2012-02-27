@@ -9,7 +9,7 @@
 #import "ListRenderer.h"
 @class Menu;
 
-@interface FavoritesRenderer : ListRenderer <UITableViewDataSource>
+@interface FavoritesRenderer : ListRenderer
 {
     NSMutableArray *favoriteOrders;
 }

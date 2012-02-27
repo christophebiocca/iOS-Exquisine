@@ -57,7 +57,7 @@
 
 -(void) updatePendingButtonState;
 
--(void) locationButtonPressed;
+-(void) settingsButtonPressed;
 
 -(void) initiateMenuRefresh;
 

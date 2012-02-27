@@ -26,7 +26,7 @@
         
         CLLocationCoordinate2D currentLocation = [[aLocationState selectedLocation] coordinate];
         
-        MKCoordinateRegion viewRegion = MKCoordinateRegionMake(currentLocation, MKCoordinateSpanMake(0.008f, 0.008f));
+        MKCoordinateRegion viewRegion = MKCoordinateRegionMake(currentLocation, MKCoordinateSpanMake(0.8f, 0.8f));
         // 3
         MKCoordinateRegion adjustedRegion = [self regionThatFits:viewRegion];                
         // 4

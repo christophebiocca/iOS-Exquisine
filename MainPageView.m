@@ -18,7 +18,7 @@
 
 @synthesize createOrderButton;
 @synthesize favoriteOrderButton;
-@synthesize locationButton;
+@synthesize settingsButton;
 @synthesize orderStatus;
 @synthesize pendingOrderButton;
 @synthesize logo;
@@ -34,7 +34,7 @@
         createOrderButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         favoriteOrderButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         pendingOrderButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        locationButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        settingsButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         orderStatus = [[UILabel alloc] init];
         openIndicator = [[IndicatorView alloc] init];
         storeHours = [[UILabel alloc] init];
@@ -51,7 +51,7 @@
         
         [favoriteOrderButton setTitle:@"Favorites" forState:UIControlStateNormal];
         
-        [locationButton setTitle:@"Set Location" forState:UIControlStateNormal];
+        [settingsButton setTitle:@"Settings" forState:UIControlStateNormal];
         
         [pendingOrderButton setTitle: @"Order status: No pending orders" forState:UIControlStateDisabled];
         [pendingOrderButton setTitleColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.5] forState:UIControlStateDisabled];
@@ -69,7 +69,7 @@
         [self addSubview:favoriteOrderButton];
         [self addSubview:pendingOrderButton];
         //For now, there is no account info button. If we decide to never have it, chuck it.
-        [self addSubview:locationButton];
+        [self addSubview:settingsButton];
         //[self addSubview:greetingLabel];
         [self addSubview:logoView];
         //[self addSubview:orderStatus];
@@ -82,7 +82,7 @@
     [self setBackgroundColor:[UIColor whiteColor]];
     [createOrderButton setFrame:CGRectMake(20, 213, 280, 37)];
     [favoriteOrderButton setFrame:CGRectMake(20, 258, 280, 37)];
-    [locationButton setFrame:CGRectMake(20, 348, 280, 37)];
+    [settingsButton setFrame:CGRectMake(20, 348, 280, 37)];
     [pendingOrderButton setFrame:CGRectMake(20, 303, 280, 37)];
     [orderStatus setFrame:CGRectMake(20, 243, 280, 37)];
     [logoView setFrame:CGRectMake(75, 24 ,170, 170)];

@@ -26,6 +26,7 @@
 #import "Location.h"
 #import "OrderManager.h"
 #import "LocationState.h"
+#import "SettingsViewController.h"
 
 @implementation MainPageViewController
 
@@ -87,15 +88,15 @@
     
     [mainPageView.pendingOrderButton addTarget:self action:@selector(pendingButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     
-    [mainPageView.locationButton addTarget:self action:@selector(locationButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    [mainPageView.settingsButton addTarget:self action:@selector(settingsButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     
     [self setView:mainPageView];
 }
 
--(void)locationButtonPressed
+-(void)settingsButtonPressed
 {
-    LocationViewController *locationViewController = [[LocationViewController alloc] initWithLocationState:locationState];
-    [[self navigationController] pushViewController:locationViewController animated:YES];
+    SettingsViewController *settingsViewController = [[SettingsViewController alloc] initWithLocationState:locationState];
+    [[self navigationController] pushViewController:settingsViewController animated:YES];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
