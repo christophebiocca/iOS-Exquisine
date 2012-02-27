@@ -106,7 +106,15 @@
     }
     else
     {
-        [self promptForFavDeletion];
+        [delegate deleteFromFavoritesForController:(id)self];
+        if([[theOrderManager thisOrder] isFavorite])
+        {
+            [[orderView favoriteButton] setTintColor:[UIColor yellowColor]];
+        }
+        else
+        {
+            [[orderView favoriteButton] setTintColor:[UIColor whiteColor]];
+        }
     }
 }
 
@@ -134,22 +142,6 @@
         }
     }
     
-    if ([alertView tag] == 3) // Order Delete
-    {
-        if (buttonIndex == 1)
-        {
-            [delegate deleteFromFavoritesForController:(id)self];
-            if([[theOrderManager thisOrder] isFavorite])
-            {
-                [[orderView favoriteButton] setTintColor:[UIColor yellowColor]];
-            }
-            else
-            {
-                [[orderView favoriteButton] setTintColor:[UIColor whiteColor]];
-            }
-        }
-    }
-    
 }
 
 -(void)popToMainPage
@@ -165,15 +157,6 @@
     [renamePrompt setTag:2];
     
     [renamePrompt show];
-}
-
--(void)promptForFavDeletion
-{
-    UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Delete from favorites?" message:[NSString stringWithFormat: @"If you unfavorite this order it will disappear. Are you sure you want that?", [Utilities FormatToPrice:[[theOrderManager thisOrder] totalPrice]]] delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
-    
-    [areYouSure setTag:3];
-    
-    [areYouSure show];
 }
 
 -(void)renameOrder:(NSString *)newName

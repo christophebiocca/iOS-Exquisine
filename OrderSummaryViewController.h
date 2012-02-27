@@ -35,8 +35,6 @@
 
 -(void) toggleWhetherFavorite;
 
--(void) promptForFavDeletion;
-
 -(void) promptUserForRename;
 
 -(void) popToMainPage;
