@@ -22,6 +22,9 @@
 #define RESTAURANT_ID 1
 #endif
 
+//Make this 1 if you want the info logs to display at debug time.
+#define INFO 0
+
 #ifdef DEBUG
 #define CLLog(level, ...) [Utilities logLevel:level message:__VA_ARGS__]
 #else

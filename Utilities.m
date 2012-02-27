@@ -53,37 +53,52 @@
 
 +(void)logLevel:(LogLevel)level message:(NSString *)message
 {
-    #ifdef DEBUG
-        switch (level) {
-            case LOG_LEVEL_INFO:
-                NSLog(@"INFO: %@",message);
-                break;
-            case LOG_LEVEL_DEBUG:
-                NSLog(@"DEBUG: %@",message);
-                break;
-            case LOG_LEVEL_WARNING:
-                NSLog(@"WARNING: %@",message);
-                break;
-            case LOG_LEVEL_ERROR:
-                NSLog(@"ERROR: %@",message);
-                break;
-                
-            default:
-                break;
-        }
-    #else
-        switch (level) {
-            case LOG_LEVEL_WARNING:
-                [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"WARNING encountered:" attributes:[NSDictionary dictionaryWithObject:message forKey:@"message"]];
-                break;
-            case LOG_LEVEL_ERROR:
-                [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"ERROR encountered:" attributes:[NSDictionary dictionaryWithObject:message forKey:@"message"]];
-                break;
-                
-            default:
-                break;
-        }
+    #if INFO && DEBUG
+    switch (level) {
+        case LOG_LEVEL_INFO:
+            NSLog(@"INFO: %@",message);
+            break;
+        case LOG_LEVEL_DEBUG:
+            NSLog(@"DEBUG: %@",message);
+            break;
+        case LOG_LEVEL_WARNING:
+            NSLog(@"WARNING: %@",message);
+            break;
+        case LOG_LEVEL_ERROR:
+            NSLog(@"ERROR: %@",message);
+            break;
+            
+        default:
+            break;
+    }
+    #elif DEBUG
     
+    switch (level) {
+        case LOG_LEVEL_DEBUG:
+            NSLog(@"DEBUG: %@",message);
+            break;
+        case LOG_LEVEL_WARNING:
+            NSLog(@"WARNING: %@",message);
+            break;
+        case LOG_LEVEL_ERROR:
+            NSLog(@"ERROR: %@",message);
+            break;
+            
+        default:
+            break;
+    }
+    #else
+    switch (level) {
+        case LOG_LEVEL_WARNING:
+            [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"WARNING encountered:" attributes:[NSDictionary dictionaryWithObject:message forKey:@"message"]];
+            break;
+        case LOG_LEVEL_ERROR:
+            [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"ERROR encountered:" attributes:[NSDictionary dictionaryWithObject:message forKey:@"message"]];
+            break;
+            
+        default:
+            break;
+    }
     #endif
 }
 

@@ -83,7 +83,7 @@ NSString* ITEM_GROUP_MODIFIED = @"CroutonLabs/ItemGroupModified";
         satisfyingItem = [decoder decodeObjectForKey:@"satisfying_item"];
         strategy = [decoder decodeObjectForKey:@"strategy"];
         
-        if ((!listOfItems) || (!satisfyingItem) || (!strategy))
+        if ((!listOfItems) || (!strategy))
         {
             CLLog(LOG_LEVEL_ERROR, [NSString stringWithFormat: @"Combo failed to load properly from harddisk: \n%@" , self]);
         }

@@ -36,7 +36,8 @@ static NSDateComponents* minusOneDay;
         longitude = [inputData objectForKey:@"longitude"];
         address = [inputData objectForKey:@"address"];
         
-        NSLog(@"LOCATION: %@", inputData);
+        CLLog(LOG_LEVEL_INFO, [NSString stringWithFormat:@"LOCATION: %@", inputData]);
+        
         NSMutableArray* hours = [NSMutableArray arrayWithCapacity:7];
         [hoursDict enumerateKeysAndObjectsUsingBlock:^(NSString* key, NSDictionary* obj, BOOL *stop) {
             [hours addObject:[[OpeningHours alloc] initWithData:obj day:key]];
