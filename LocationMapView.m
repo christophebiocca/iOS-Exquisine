@@ -10,6 +10,7 @@
 #import "LocationState.h"
 #import "Location.h"
 #import "FlexableDictionary.h"
+#import "CLPinAnnotationView.h"
 
 @implementation LocationMapView
 
@@ -46,24 +47,38 @@
 
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {
-    MKPinAnnotationView *returnView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"whatever"];
+    // Use custom annotation view for anything but the user's locaiton pin
+    
+    CLPinAnnotationView *clAnnotationView = (CLPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier: @"CLPin"];
+    
+    if (!clAnnotationView)
+    {
+        clAnnotationView = [[CLPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"CLPin"];
+    }
+    else
+    {
+        clAnnotationView.annotation = annotation;
+        clAnnotationView.titleLabel.text = annotation.title;
+        clAnnotationView.subtitleLabel.text = annotation.subtitle;
+    }
     
     if ([annotation isEqual:[locationState selectedLocation]])
     {
-        [returnView setPinColor:MKPinAnnotationColorGreen];
+        [clAnnotationView setPinColor:MKPinAnnotationColorGreen];
         if (!lastSelectedView) {
-            lastSelectedView = returnView;
+            lastSelectedView = clAnnotationView;
         }
     }
     else
-        [returnView setPinColor:MKPinAnnotationColorRed];
+        [clAnnotationView setPinColor:MKPinAnnotationColorRed];
     
-    [returnView setCanShowCallout:YES];    
-    [returnView setAnimatesDrop:YES];
+    [clAnnotationView setAnimatesDrop:YES];
     
-    [annotationViewDict setAssociativeTuple:returnView :annotation];
+    [annotationViewDict setAssociativeTuple:clAnnotationView :annotation];
     
-    return returnView;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(centerMapToAnnotation:) name:@"annotationSelected" object:clAnnotationView];
+    
+    return clAnnotationView;
     
 }
 
@@ -82,6 +97,20 @@
     [(MKPinAnnotationView *)lastSelectedView setPinColor:MKPinAnnotationColorRed];
     [locationState setSelectedLocation:[self annotationForAnnotationView:view]];
     [(MKPinAnnotationView *)view setPinColor:MKPinAnnotationColorGreen];
+}
+
+-(void) centerMapToAnnotation:(NSNotification *)note
+{
+    // Type dispatching annotation object
+    CLPinAnnotationView *annotation = (CLPinAnnotationView *)[note object];
+    
+    // animate the map to the pin's coordinates
+    [self setCenterCoordinate:annotation.annotation.coordinate animated: YES];
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

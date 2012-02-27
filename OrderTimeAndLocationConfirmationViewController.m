@@ -58,8 +58,7 @@ static NSArray* pickerTimes = nil;
         
         [[orderTimeAndLocationConfirmationView orderCompletionDurationPicker] setDelegate:self];
         [[orderTimeAndLocationConfirmationView orderCompletionDurationPicker] setDataSource:self];
-        
-        [theOrder setPitaFinishedTime:[NSDate dateWithTimeIntervalSinceNow:300]];
+        pickerTime = [[pickerTimes objectAtIndex:0] intValue];
         
     }
     return self;
@@ -97,6 +96,9 @@ static NSArray* pickerTimes = nil;
         [tryAgain show];
         return;
     }
+    
+    [theOrder setPitaFinishedTime:[NSDate dateWithTimeIntervalSinceNow:(pickerTime * 60)]];
+    
     doneBlock();
 }
 
@@ -109,7 +111,7 @@ static NSArray* pickerTimes = nil;
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    [theOrder setPitaFinishedTime:[NSDate dateWithTimeIntervalSinceNow:([[pickerTimes objectAtIndex:row] intValue] * 60)]];
+    pickerTime = [[pickerTimes objectAtIndex:row] intValue];
 }
 
 -(CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component

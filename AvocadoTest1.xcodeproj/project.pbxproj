@@ -15,6 +15,8 @@
 		230C353814EECD5A004DCF85 /* ComboMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 230C353714EECD5A004DCF85 /* ComboMenuCell.m */; };
 		230C353C14EEE446004DCF85 /* GeneralPurposeViewCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 230C353B14EEE446004DCF85 /* GeneralPurposeViewCellData.m */; };
 		230C354114EF02AB004DCF85 /* ItemComboCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 230C354014EF02AB004DCF85 /* ItemComboCell.m */; };
+		231527A814F83D3500F57B88 /* CLPinAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 231527A714F83D3500F57B88 /* CLPinAnnotationView.m */; };
+		231527AB14F84D9500F57B88 /* CLCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 231527AA14F84D9500F57B88 /* CLCalloutView.m */; };
 		231C510E14E1B7F1004F2CCC /* ComboTrivialPricingStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 231C510D14E1B7F1004F2CCC /* ComboTrivialPricingStrategy.m */; };
 		231C511214E1BC8B004F2CCC /* ItemGroupMultiplicativePricing.m in Sources */ = {isa = PBXBuildFile; fileRef = 231C511114E1BC8B004F2CCC /* ItemGroupMultiplicativePricing.m */; };
 		231C511614E1C1A5004F2CCC /* ItemGroupAbsolutePricing.m in Sources */ = {isa = PBXBuildFile; fileRef = 231C511514E1C1A5004F2CCC /* ItemGroupAbsolutePricing.m */; };
@@ -174,6 +176,10 @@
 		230C353B14EEE446004DCF85 /* GeneralPurposeViewCellData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneralPurposeViewCellData.m; sourceTree = "<group>"; };
 		230C353F14EF02AB004DCF85 /* ItemComboCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemComboCell.h; sourceTree = "<group>"; };
 		230C354014EF02AB004DCF85 /* ItemComboCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemComboCell.m; sourceTree = "<group>"; };
+		231527A614F83D3500F57B88 /* CLPinAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPinAnnotationView.h; sourceTree = "<group>"; };
+		231527A714F83D3500F57B88 /* CLPinAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLPinAnnotationView.m; sourceTree = "<group>"; };
+		231527A914F84D9500F57B88 /* CLCalloutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLCalloutView.h; sourceTree = "<group>"; };
+		231527AA14F84D9500F57B88 /* CLCalloutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLCalloutView.m; sourceTree = "<group>"; };
 		231C510C14E1B7F1004F2CCC /* ComboTrivialPricingStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComboTrivialPricingStrategy.h; sourceTree = "<group>"; };
 		231C510D14E1B7F1004F2CCC /* ComboTrivialPricingStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComboTrivialPricingStrategy.m; sourceTree = "<group>"; };
 		231C511014E1BC8B004F2CCC /* ItemGroupMultiplicativePricing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemGroupMultiplicativePricing.h; sourceTree = "<group>"; };
@@ -490,6 +496,17 @@
 				232C798614D209D600C3868D /* OrderSummaryRenderer.m */,
 			);
 			name = OrderSummaryRenderer;
+			sourceTree = "<group>";
+		};
+		231527A414F83CCC00F57B88 /* CustomAnnotationViews */ = {
+			isa = PBXGroup;
+			children = (
+				231527A614F83D3500F57B88 /* CLPinAnnotationView.h */,
+				231527A714F83D3500F57B88 /* CLPinAnnotationView.m */,
+				231527A914F84D9500F57B88 /* CLCalloutView.h */,
+				231527AA14F84D9500F57B88 /* CLCalloutView.m */,
+			);
+			name = CustomAnnotationViews;
 			sourceTree = "<group>";
 		};
 		231C510F14E1BC4D004F2CCC /* ItemGroupMultiplicativePricing */ = {
@@ -1175,6 +1192,7 @@
 		23DA7A8114C6462C008281DD /* OtherViews */ = {
 			isa = PBXGroup;
 			children = (
+				231527A414F83CCC00F57B88 /* CustomAnnotationViews */,
 				23E021E214F41AF800099E1E /* LocationView */,
 				2352723F14DB13DF00DDC7FA /* IndicatorView */,
 				D9768A7A14D74A8A00BBA467 /* OrderPlacementViews */,
@@ -1648,6 +1666,8 @@
 				23D1DCB014F6D66E00CFD279 /* LocationMapView.m in Sources */,
 				23D1DCB414F6D6DF00CFD279 /* LocationState.m in Sources */,
 				23D1DCB814F7156200CFD279 /* FlexableDictionary.m in Sources */,
+				231527A814F83D3500F57B88 /* CLPinAnnotationView.m in Sources */,
+				231527AB14F84D9500F57B88 /* CLCalloutView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

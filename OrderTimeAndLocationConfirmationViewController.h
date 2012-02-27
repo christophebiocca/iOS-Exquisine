@@ -16,6 +16,8 @@
 {
     OrderTimeAndLocationConfirmationView *orderTimeAndLocationConfirmationView;
     
+    int pickerTime;
+    
     Order *theOrder;
     
     void(^doneBlock)();

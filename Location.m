@@ -173,7 +173,7 @@ static NSDateComponents* minusOneDay;
 }
 
 - (NSString *)subtitle{
-	return [self storeHourBlurb];
+	return [NSString stringWithFormat:@"%@\n%@", address, [self storeHourBlurb]];
 }
 
 - (NSString *)title{
