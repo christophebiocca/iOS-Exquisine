@@ -57,6 +57,10 @@
             
             [[itemView itemToolBar] setItems:[NSArray arrayWithObjects:minusSignButton, spacer1,[itemView priceButton],spacer2, plusSignButton, nil]];
         }
+        else
+        {
+            [[itemView itemToolBar] setItems:nil];
+        }
         
     }
     

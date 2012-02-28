@@ -41,7 +41,9 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
     
     strategy = [ComboPricingStrategy pricingStrategyFromData:[inputData objectForKey:@"pricing_strategy"]];
     
-    displayPrice = [inputData objectForKey:@"price_cents"];
+    //Brutal!
+    displayPrice = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%i",[[inputData objectForKey:@"price_cents"] intValue]]];
+    displayPrice = [displayPrice decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"100"]];
     
     if(!strategy)
     {
