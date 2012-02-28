@@ -126,7 +126,6 @@
 		D92D24D414DB375B007B5890 /* PaymentError.m in Sources */ = {isa = PBXBuildFile; fileRef = D92D24D314DB375B007B5890 /* PaymentError.m */; };
 		D933EF1614DB566D00B0BDC7 /* PaymentProcessingView.m in Sources */ = {isa = PBXBuildFile; fileRef = D933EF1514DB566D00B0BDC7 /* PaymentProcessingView.m */; };
 		D933EF1A14DB568400B0BDC7 /* PaymentCompletedView.m in Sources */ = {isa = PBXBuildFile; fileRef = D933EF1914DB568400B0BDC7 /* PaymentCompletedView.m */; };
-		D93E9DD514FC4D53006AD608 /* DeletePaymentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D93E9DD414FC4D53006AD608 /* DeletePaymentInfo.m */; };
 		D947368714E20042005D4409 /* ItemGroupPricingStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = D947368614E20042005D4409 /* ItemGroupPricingStrategy.m */; };
 		D947368B14E20337005D4409 /* ItemGroupTrivialPricing.m in Sources */ = {isa = PBXBuildFile; fileRef = D947368A14E20337005D4409 /* ItemGroupTrivialPricing.m */; };
 		D947368F14E20E15005D4409 /* ComboPricingStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = D947368E14E20E15005D4409 /* ComboPricingStrategy.m */; };
@@ -721,6 +720,19 @@
 			name = ComboTrivialPricing;
 			sourceTree = "<group>";
 		};
+		233D143A14FD835800297F5D /* ListRenderers */ = {
+			isa = PBXGroup;
+			children = (
+				23DA7A3E14C60284008281DD /* ListRenderer.h */,
+				23DA7A3F14C60284008281DD /* ListRenderer.m */,
+				231D25FC14FC2DEC00F736F0 /* SettingsRenderer */,
+				230C353D14EEF2DC004DCF85 /* OrderSummaryRenderer */,
+				232C796714CF727D00C3868D /* FavoritesRenderer */,
+				23DA7A4414C609C6008281DD /* MenuCompositeRenderers */,
+			);
+			name = ListRenderers;
+			sourceTree = "<group>";
+		};
 		2345980714DE0AD900910F3B /* OrderManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -759,8 +771,8 @@
 				2391EA7814BE3D44001BDC1B /* Model Structure */,
 				238FC77A14D364E5007E175B /* Cells */,
 				23DA7A5A14C63071008281DD /* Views */,
-				23DA7A3814C60087008281DD /* ListRenderers */,
 				38D4132C14D3321C00031B60 /* Images */,
+				233D143A14FD835800297F5D /* ListRenderers */,
 				23DA7A3914C600B1008281DD /* Controllers */,
 				23DA7A3714C6003F008281DD /* Other Shit */,
 				23DA7A3514C5FFCE008281DD /* Obsolete */,
@@ -1079,15 +1091,10 @@
 		23DA7A3814C60087008281DD /* ListRenderers */ = {
 			isa = PBXGroup;
 			children = (
-				23DA7A3E14C60284008281DD /* ListRenderer.h */,
-				23DA7A3F14C60284008281DD /* ListRenderer.m */,
-				231D25FC14FC2DEC00F736F0 /* SettingsRenderer */,
-				230C353D14EEF2DC004DCF85 /* OrderSummaryRenderer */,
-				232C796714CF727D00C3868D /* FavoritesRenderer */,
-				23DA7A4414C609C6008281DD /* MenuCompositeRenderers */,
 			);
 			name = ListRenderers;
-			sourceTree = "<group>";
+			path = /Users/jake/Documents/Avocado/AvocadoTest1.0;
+			sourceTree = "<absolute>";
 		};
 		23DA7A3914C600B1008281DD /* Controllers */ = {
 			isa = PBXGroup;
