@@ -44,6 +44,11 @@
     switch ([indexPath row]) {
         case 0:
         {
+            if ([[theLocationState locations] count] < 1) {
+                UIAlertView *uhoh = [[UIAlertView alloc] initWithTitle:@"Oops" message:@"There isn't any location data loaded yet. You'll have to access the internet with this app at least once." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+                [uhoh show];
+                break;
+            }
             LocationViewController *controller = [[LocationViewController alloc] initWithLocationState:theLocationState];
             [[self navigationController] pushViewController:controller animated:YES];
             break;

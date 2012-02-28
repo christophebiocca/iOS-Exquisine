@@ -11,7 +11,7 @@
 @class SettingsRenderer;
 @class LocationState;
 
-@interface SettingsViewController : UITableViewController <UITableViewDelegate>
+@interface SettingsViewController : UITableViewController <UITableViewDelegate, UIAlertViewDelegate>
 {
     LocationState *theLocationState;
     SettingsView *settingsView;
