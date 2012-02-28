@@ -31,25 +31,21 @@
     [[self textLabel] setFont:titleFont];
     [[self detailTextLabel] setFont:descFont];
     
-    [[self detailTextLabel] setText:[Utilities FormatToPrice:[choice price]]];
-    
-    if ([choice selected])
-    {
-        [self setAccessoryType:UITableViewCellAccessoryCheckmark];
-        [self setBackgroundColor:[UIColor colorWithRed:0.83f green:1.0f blue:0.83f alpha:1.0f]];
-    }
-    else
-    {
-        [self setAccessoryType:UITableViewCellAccessoryNone];
-        [self setBackgroundColor:[UIColor whiteColor]];
-    }
+    [self updateCell];
     
 }
 
 -(void)updateCell
 {
     [super updateCell];
-    [[self detailTextLabel] setText:[Utilities FormatToPrice:[choice price]]];
+    if (!([[choice price] compare:[NSNumber numberWithInt:0]] == NSOrderedSame)) {
+        [[self detailTextLabel] setText:[Utilities FormatToPrice:[choice price]]];
+    }
+    else
+    {
+        [[self detailTextLabel] setText:@""];
+    }
+    
     if ([choice selected])
     {
         [self setAccessoryType:UITableViewCellAccessoryCheckmark];
