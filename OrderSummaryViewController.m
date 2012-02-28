@@ -153,7 +153,7 @@
 -(void)promptUserForRename
 {
     
-    AlertPrompt *renamePrompt = [[AlertPrompt alloc] initWithPromptTitle:@"Choose a name for your order" message:[theOrderManager thisOrder].name delegate:self cancelButtonTitle:@"Cancel" okButtonTitle:@"OK"];
+    AlertPrompt *renamePrompt = [[AlertPrompt alloc] initWithPromptTitle:@"Choose a name for this favorite" message:[theOrderManager thisOrder].name delegate:self cancelButtonTitle:@"Cancel" okButtonTitle:@"OK"];
     [renamePrompt setTag:2];
     
     [renamePrompt show];
