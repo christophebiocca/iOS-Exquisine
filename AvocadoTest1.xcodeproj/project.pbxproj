@@ -55,6 +55,9 @@
 		23658D0A14BE1D06002C0996 /* Choice.m in Sources */ = {isa = PBXBuildFile; fileRef = 23658D0914BE1D06002C0996 /* Choice.m */; };
 		2368B52D14EDB6D900D880D3 /* CustomViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2368B52C14EDB6D800D880D3 /* CustomViewCell.m */; };
 		2368B53214EDB8B000D880D3 /* MenuCompositeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2368B53114EDB8B000D880D3 /* MenuCompositeCell.m */; };
+		236A4E7C14FC3974003FB4EF /* PaymentSettingsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 236A4E7B14FC3974003FB4EF /* PaymentSettingsView.m */; };
+		236A4E8414FC405C003FB4EF /* PaymentSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 236A4E8314FC405C003FB4EF /* PaymentSettingsViewController.m */; };
+		236A4E8714FC5083003FB4EF /* DeletePaymentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 236A4E8614FC5083003FB4EF /* DeletePaymentInfo.m */; };
 		236C53F314F5776F006A58BB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 236C53F214F5776F006A58BB /* CoreLocation.framework */; };
 		236C53FE14F59C5B006A58BB /* OrderTimeAndLocationConfirmationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 236C53FD14F59C5B006A58BB /* OrderTimeAndLocationConfirmationView.m */; };
 		236C540114F5A053006A58BB /* OrderTimeAndLocationConfirmationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 236C540014F5A053006A58BB /* OrderTimeAndLocationConfirmationViewController.m */; };
@@ -254,6 +257,12 @@
 		2368B52C14EDB6D800D880D3 /* CustomViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomViewCell.m; sourceTree = "<group>"; };
 		2368B53014EDB8B000D880D3 /* MenuCompositeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCompositeCell.h; sourceTree = "<group>"; };
 		2368B53114EDB8B000D880D3 /* MenuCompositeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCompositeCell.m; sourceTree = "<group>"; };
+		236A4E7A14FC3974003FB4EF /* PaymentSettingsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentSettingsView.h; sourceTree = "<group>"; };
+		236A4E7B14FC3974003FB4EF /* PaymentSettingsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentSettingsView.m; sourceTree = "<group>"; };
+		236A4E8214FC405C003FB4EF /* PaymentSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentSettingsViewController.h; sourceTree = "<group>"; };
+		236A4E8314FC405C003FB4EF /* PaymentSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentSettingsViewController.m; sourceTree = "<group>"; };
+		236A4E8514FC5083003FB4EF /* DeletePaymentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeletePaymentInfo.h; sourceTree = "<group>"; };
+		236A4E8614FC5083003FB4EF /* DeletePaymentInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeletePaymentInfo.m; sourceTree = "<group>"; };
 		236C53F214F5776F006A58BB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		236C53FC14F59C5A006A58BB /* OrderTimeAndLocationConfirmationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderTimeAndLocationConfirmationView.h; sourceTree = "<group>"; };
 		236C53FD14F59C5B006A58BB /* OrderTimeAndLocationConfirmationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderTimeAndLocationConfirmationView.m; sourceTree = "<group>"; };
@@ -548,6 +557,7 @@
 		231D25F614FC2CE500F736F0 /* SettingsViewController */ = {
 			isa = PBXGroup;
 			children = (
+				236A4E8114FC4035003FB4EF /* PaymentSettingsViewController */,
 				231D260014FC307100F736F0 /* SettingsViewController.h */,
 				231D260114FC307100F736F0 /* SettingsViewController.m */,
 			);
@@ -833,6 +843,24 @@
 				23FDE9D114D8B3B4005AA6D6 /* ItemGroupCell */,
 			);
 			name = MenuCompositeCells;
+			sourceTree = "<group>";
+		};
+		236A4E7914FC3955003FB4EF /* PaymentSettingsView */ = {
+			isa = PBXGroup;
+			children = (
+				236A4E7A14FC3974003FB4EF /* PaymentSettingsView.h */,
+				236A4E7B14FC3974003FB4EF /* PaymentSettingsView.m */,
+			);
+			name = PaymentSettingsView;
+			sourceTree = "<group>";
+		};
+		236A4E8114FC4035003FB4EF /* PaymentSettingsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				236A4E8214FC405C003FB4EF /* PaymentSettingsViewController.h */,
+				236A4E8314FC405C003FB4EF /* PaymentSettingsViewController.m */,
+			);
+			name = PaymentSettingsViewController;
 			sourceTree = "<group>";
 		};
 		237EC00A14BE5824009D9268 /* Order */ = {
@@ -1230,6 +1258,7 @@
 		23DA7A8114C6462C008281DD /* OtherViews */ = {
 			isa = PBXGroup;
 			children = (
+				236A4E7914FC3955003FB4EF /* PaymentSettingsView */,
 				231D25F814FC2D1900F736F0 /* SettingsView */,
 				231527A414F83CCC00F57B88 /* CustomAnnotationViews */,
 				23E021E214F41AF800099E1E /* LocationView */,
@@ -1470,6 +1499,8 @@
 		D9B0F6BF14E075A900CA3B13 /* Payment */ = {
 			isa = PBXGroup;
 			children = (
+				236A4E8514FC5083003FB4EF /* DeletePaymentInfo.h */,
+				236A4E8614FC5083003FB4EF /* DeletePaymentInfo.m */,
 				D9B0F6BB14E075A000CA3B13 /* GetPaymentProfileInfo.h */,
 				D9B0F6BC14E075A000CA3B13 /* GetPaymentProfileInfo.m */,
 				D95B786D14D28A6900FC0F29 /* PlaceOrder.h */,
@@ -1710,6 +1741,9 @@
 				231D25FB14FC2D5100F736F0 /* SettingsView.m in Sources */,
 				231D25FF14FC2E0800F736F0 /* SettingsRenderer.m in Sources */,
 				231D260214FC307100F736F0 /* SettingsViewController.m in Sources */,
+				236A4E7C14FC3974003FB4EF /* PaymentSettingsView.m in Sources */,
+				236A4E8414FC405C003FB4EF /* PaymentSettingsViewController.m in Sources */,
+				236A4E8714FC5083003FB4EF /* DeletePaymentInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

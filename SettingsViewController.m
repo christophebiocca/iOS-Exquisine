@@ -11,6 +11,7 @@
 #import "SettingsRenderer.h"
 #import "LocationState.h"
 #import "LocationViewController.h"
+#import "PaymentSettingsViewController.h"
 
 @implementation SettingsViewController
 
@@ -49,7 +50,9 @@
         }
         case 1:
         {
-            //Push a payment info view controller
+            PaymentSettingsViewController *controller = [[PaymentSettingsViewController alloc] init];
+            [[self navigationController] pushViewController:controller animated:YES];
+            break;
         }
             
         default:
