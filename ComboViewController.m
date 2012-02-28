@@ -13,6 +13,7 @@
 #import "Order.h"
 #import "ItemGroup.h"
 #import "Item.h"
+#import "ItemViewController.h"
 #import "ItemGroupViewController.h"
 
 @implementation ComboViewController
@@ -42,12 +43,25 @@
     
     id itemGroup = [[comboInfo listOfItemGroups] objectAtIndex:[indexPath row]];
         
-    if (!(([[itemGroup listOfItems] count] == 1)&&([[(Item *)[[itemGroup listOfItems] objectAtIndex:0] options] count] == 0)))
-    {
-        ItemGroupViewController *newController = [[ItemGroupViewController alloc] initWithItemGroupAndOrderAndReturnViewController:itemGroup :orderInfo :self];
-        
-        [[self navigationController] pushViewController:newController animated:YES];
+    //If there's only one Item, and the item has no options, then it's selected by default
+    //Therefore, don't do anything
+    if (([[itemGroup listOfItems] count] == 1)&&([[(Item *)[[itemGroup listOfItems] objectAtIndex:0] options] count] == 0)){
+        return;
     }
+    
+    ItemGroupViewController *groupController = [[ItemGroupViewController alloc] initWithItemGroupAndOrderAndReturnViewController:itemGroup :orderInfo :self];
+    
+    if ([[itemGroup listOfItems] count] == 1) {
+        
+        ItemViewController *itemController = [[ItemViewController alloc] initializeWithItemAndOrderAndReturnController:[[itemGroup listOfItems] objectAtIndex:0] :orderInfo :self];
+        
+        [itemController setDelegate:groupController];
+        
+        [[self navigationController] pushViewController:itemController animated:YES];
+        return;
+    }
+    
+    [[self navigationController] pushViewController:groupController animated:YES];
     
 }
 

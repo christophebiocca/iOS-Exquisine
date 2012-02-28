@@ -16,6 +16,7 @@
 #import "Option.h"
 #import "Utilities.h"
 #import "ItemManagementDelegate.h"
+#import "ComboViewController.h"
 
 @implementation ItemViewController
 
@@ -38,23 +39,30 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(itemAltered) name:ITEM_MODIFIED object:anItem];
     
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Add to order" style:UIBarButtonItemStyleDone target:self action:@selector(addThisItemToOrder)];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Add this item" style:UIBarButtonItemStyleDone target:self action:@selector(addThisItemToOrder)];
     
     if (![anOrder containsExactItem:anItem]) {
         [[self navigationItem] setRightBarButtonItem:doneButton];
         
-        UIBarButtonItem *minusSignButton = [[UIBarButtonItem alloc] initWithTitle:@"-" style:UIBarButtonItemStylePlain target:self action:@selector(minusButtonPressed)];
+        //This really isn't the way to be doing this. 
+        //I should be subclassing item view controller.
+        if (![returnController isKindOfClass:[ComboViewController class]]) {
+            UIBarButtonItem *minusSignButton = [[UIBarButtonItem alloc] initWithTitle:@"-" style:UIBarButtonItemStylePlain target:self action:@selector(minusButtonPressed)];
+            
+            UIBarButtonItem *spacer1 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+            
+            UIBarButtonItem *spacer2 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+            
+            UIBarButtonItem *plusSignButton = [[UIBarButtonItem alloc] initWithTitle:@"+" style:UIBarButtonItemStylePlain target:self action:@selector(plusButtonPressed)];
+            
+            [[itemView itemToolBar] setItems:[NSArray arrayWithObjects:minusSignButton, spacer1,[itemView priceButton],spacer2, plusSignButton, nil]];
+        }
         
-        UIBarButtonItem *spacer1 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
-        
-        UIBarButtonItem *spacer2 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
-        
-        UIBarButtonItem *plusSignButton = [[UIBarButtonItem alloc] initWithTitle:@"+" style:UIBarButtonItemStylePlain target:self action:@selector(plusButtonPressed)];
-        
-        [[itemView itemToolBar] setItems:[NSArray arrayWithObjects:minusSignButton, spacer1,[itemView priceButton],spacer2, plusSignButton, nil]];
     }
     
     [[self navigationItem] setTitle:anItem.name];
+    
+    [self itemAltered];
     
     return self;
 }
@@ -121,8 +129,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Entered an item page"];
-    [[itemView priceButton] setTitle:[NSString stringWithFormat:@"Item Price: %@",[Utilities FormatToPrice:[itemInfo price]] ]];
-    //[[itemView itemTable] reloadData];
+    [self itemAltered];
 }
 
 - (void)viewDidUnload
@@ -154,15 +161,24 @@
 
 -(void) itemAltered
 {
-    if (numberOfItems == 1) {
+    UIBarButtonItem *doneButton = nil;
+    
+    if (numberOfItems == 1) 
+    {
+        doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Add this item" style:UIBarButtonItemStyleDone target:self action:@selector(addThisItemToOrder)];
+        
         [[itemView priceButton] setTitle:[NSString stringWithFormat:@"1 Item: %@",[Utilities FormatToPrice:[itemInfo price]]]];
     }
     else
     {
+        doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Add these items" style:UIBarButtonItemStyleDone target:self action:@selector(addThisItemToOrder)];
         
         [[itemView priceButton] setTitle:[NSString stringWithFormat:@"%i Items: %@",numberOfItems, [Utilities FormatToPrice:[[itemInfo price] decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%i", numberOfItems]]]]]];
     }
-    //[[itemView itemTable] reloadData];
+    
+    if (![ownerOrder containsExactItem:itemInfo]) {
+        [[self navigationItem] setRightBarButtonItem:doneButton];
+    }
 }
 
 -(void)dealloc
