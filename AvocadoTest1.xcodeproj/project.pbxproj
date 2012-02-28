@@ -123,6 +123,7 @@
 		D92D24D414DB375B007B5890 /* PaymentError.m in Sources */ = {isa = PBXBuildFile; fileRef = D92D24D314DB375B007B5890 /* PaymentError.m */; };
 		D933EF1614DB566D00B0BDC7 /* PaymentProcessingView.m in Sources */ = {isa = PBXBuildFile; fileRef = D933EF1514DB566D00B0BDC7 /* PaymentProcessingView.m */; };
 		D933EF1A14DB568400B0BDC7 /* PaymentCompletedView.m in Sources */ = {isa = PBXBuildFile; fileRef = D933EF1914DB568400B0BDC7 /* PaymentCompletedView.m */; };
+		D93E9DD514FC4D53006AD608 /* DeletePaymentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D93E9DD414FC4D53006AD608 /* DeletePaymentInfo.m */; };
 		D947368714E20042005D4409 /* ItemGroupPricingStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = D947368614E20042005D4409 /* ItemGroupPricingStrategy.m */; };
 		D947368B14E20337005D4409 /* ItemGroupTrivialPricing.m in Sources */ = {isa = PBXBuildFile; fileRef = D947368A14E20337005D4409 /* ItemGroupTrivialPricing.m */; };
 		D947368F14E20E15005D4409 /* ComboPricingStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = D947368E14E20E15005D4409 /* ComboPricingStrategy.m */; };
@@ -377,6 +378,8 @@
 		D933EF1514DB566D00B0BDC7 /* PaymentProcessingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentProcessingView.m; sourceTree = "<group>"; };
 		D933EF1814DB568400B0BDC7 /* PaymentCompletedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentCompletedView.h; sourceTree = "<group>"; };
 		D933EF1914DB568400B0BDC7 /* PaymentCompletedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentCompletedView.m; sourceTree = "<group>"; };
+		D93E9DD314FC4D53006AD608 /* DeletePaymentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeletePaymentInfo.h; sourceTree = "<group>"; };
+		D93E9DD414FC4D53006AD608 /* DeletePaymentInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeletePaymentInfo.m; sourceTree = "<group>"; };
 		D945ABC914D8D757007DCC32 /* PaymentViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentViewDelegate.h; sourceTree = "<group>"; };
 		D947368514E20042005D4409 /* ItemGroupPricingStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemGroupPricingStrategy.h; sourceTree = "<group>"; };
 		D947368614E20042005D4409 /* ItemGroupPricingStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemGroupPricingStrategy.m; sourceTree = "<group>"; };
@@ -1474,6 +1477,8 @@
 				D9B0F6BC14E075A000CA3B13 /* GetPaymentProfileInfo.m */,
 				D95B786D14D28A6900FC0F29 /* PlaceOrder.h */,
 				D95B786E14D28A6900FC0F29 /* PlaceOrder.m */,
+				D93E9DD314FC4D53006AD608 /* DeletePaymentInfo.h */,
+				D93E9DD414FC4D53006AD608 /* DeletePaymentInfo.m */,
 			);
 			name = Payment;
 			sourceTree = "<group>";
@@ -1710,6 +1715,7 @@
 				231D25FB14FC2D5100F736F0 /* SettingsView.m in Sources */,
 				231D25FF14FC2E0800F736F0 /* SettingsRenderer.m in Sources */,
 				231D260214FC307100F736F0 /* SettingsViewController.m in Sources */,
+				D93E9DD514FC4D53006AD608 /* DeletePaymentInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
