@@ -28,7 +28,7 @@
 -(void)updateCell
 {
     [super updateCell];
-    [[self detailTextLabel] setText:@""];
+    [[self detailTextLabel] setText:[Utilities FormatToPrice:[combo displayPrice]]];
     [self setNeedsDisplay];
 }
 

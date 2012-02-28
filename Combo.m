@@ -21,6 +21,7 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
 @implementation Combo
 
 @synthesize listOfItemGroups;
+@synthesize displayPrice;
 
 -(Combo *)init
 {
@@ -39,6 +40,8 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
     listOfItemGroups = [[NSMutableArray alloc] initWithCapacity:0];
     
     strategy = [ComboPricingStrategy pricingStrategyFromData:[inputData objectForKey:@"pricing_strategy"]];
+    
+    displayPrice = [inputData objectForKey:@"price_cents"];
     
     if(!strategy)
     {
@@ -63,6 +66,8 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
         
         listOfItemGroups = [decoder decodeObjectForKey:@"list_of_item_groups"];
         
+        displayPrice = [decoder decodeObjectForKey:@"price"];
+        
         for (ItemGroup *newItemGroup in listOfItemGroups) {
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recalculate:) name:ITEM_GROUP_MODIFIED object:newItemGroup];
         }
@@ -84,6 +89,7 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
     [super encodeWithCoder:encoder];
     [encoder encodeObject:listOfItemGroups forKey:@"list_of_item_groups"];
     [encoder encodeObject:strategy forKey:@"strategy"];
+    [encoder encodeObject:displayPrice forKey:@"price"];
 }
 
 - (Combo *)copy
@@ -102,6 +108,7 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
     
     //doesnt need to be copied
     aCombo->strategy = strategy;
+    aCombo->displayPrice = displayPrice;
     
     return aCombo;
 }

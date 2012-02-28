@@ -10,10 +10,13 @@
 
 @interface ComboView : MenuComponentView
 {
+    UIBarButtonItem *priceButton;
     UITableView* comboTable;
     UIToolbar* comboToolBar;
 }
 
+
+@property(retain) UIBarButtonItem *priceButton;
 @property(readonly)UITableView* comboTable;
 @property(readonly)UIToolbar* comboToolBar;
 

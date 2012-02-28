@@ -20,9 +20,11 @@ extern NSString* COMBO_MODIFIED;
     
     id<ComboPricingStrategy> strategy;
     NSMutableArray *listOfItemGroups;
+    NSDecimalNumber *displayPrice;
     
 }
 
+@property (readonly) NSDecimalNumber *displayPrice;
 @property (retain) NSMutableArray *listOfItemGroups;
 
 //Initializers

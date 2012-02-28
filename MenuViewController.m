@@ -69,7 +69,7 @@
     if([submenuThing isKindOfClass:[Combo class]])
     {
         
-        ComboViewController *newController = [[ComboViewController alloc] initializeWithComboAndOrderAndReturnController:submenuThing:orderInfo:orderViewController];
+        ComboViewController *newController = [[ComboViewController alloc] initializeWithComboAndOrderAndReturnController:[submenuThing copy]:orderInfo:orderViewController];
         
         [[self navigationController] pushViewController:newController animated:YES];
         

@@ -26,8 +26,15 @@
     comboInfo = aCombo;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(comboChanged:) name:COMBO_MODIFIED object:aCombo];
     comboRenderer = [[ComboRenderer alloc] initWithCombo:aCombo]; 
+    
+    comboView = [[ComboView alloc] init];
+    [[comboView comboTable] setDelegate:self];
+    [[comboView comboTable] setDataSource:comboRenderer];
+    
     returnController = aController;
     [[self navigationItem] setTitle:comboInfo.name];
+    
+    [self comboChanged:nil];
     
     return self;
 }
@@ -80,7 +87,14 @@
         [doneButton setEnabled:NO];
     
     [[self navigationItem] setRightBarButtonItem:doneButton];
-    [[comboView comboTable] reloadData];
+    
+    if ([[comboInfo price] compare:[NSDecimalNumber numberWithInt:0]] == NSOrderedSame) {
+        [[comboView priceButton] setTitle:@"Combo price: $0"];
+    }
+    else
+    {
+        [[comboView priceButton] setTitle:[NSString stringWithFormat:@"Combo price: %@", [Utilities FormatToPrice:[comboInfo price]]]];
+    }
 }
 
 //View related functions
@@ -98,11 +112,6 @@
 
 - (void) loadView
 {
-    comboView = [[ComboView alloc] init];
-    
-    [[comboView comboTable] setDelegate:self];
-    [[comboView comboTable] setDataSource:comboRenderer];
-    
     [self setView:comboView];
 }
 
