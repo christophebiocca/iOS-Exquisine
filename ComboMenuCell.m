@@ -19,7 +19,7 @@
     
     combo = theCombo;
     
-    [self setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
+    [self setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     
     [super setData:theCombo];
     
