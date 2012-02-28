@@ -33,14 +33,27 @@
 
 -(void)refreshCreditCardInfo
 {
-    [GetPaymentProfileInfo fetchInfo:^(GetPaymentProfileInfo* request){
+    [GetPaymentProfileInfo 
+    fetchInfo:^(GetPaymentProfileInfo* request)
+     {
         CLLog(LOG_LEVEL_INFO, [NSString stringWithFormat:@"Success %@", self]);
-        [[paymentSettingsView creditCardLabel] setText:[NSString stringWithFormat:@"Your credit card's last four digits are: %@",[[request info] last4Digits]]];
-    } failure:^(GetPaymentProfileInfo* info, NSError* error){
+        if ([[[request info] last4Digits] length] == 4) 
+        {
+            [[paymentSettingsView creditCardLabel] setText:[NSString stringWithFormat:@"Your credit card's last four digits are: %@",[[request info] last4Digits]]];
+        }
+        else
+        {
+            [[paymentSettingsView creditCardLabel] setText:[NSString stringWithFormat:@"You have no registered credit card info",[[request info] last4Digits]]];
+        }
+    } 
+    failure:^(GetPaymentProfileInfo* info, NSError* error)
+    {
         if([[error domain] isEqualToString:JSON_API_ERROR] && 
            [[[error userInfo] objectForKey:@"class"] isEqualToString:@"NoPaymentInfoError"]){
-            [[paymentSettingsView creditCardLabel] setText:@"You have not yet registered a credit card"];
-        } else {
+            [[paymentSettingsView creditCardLabel] setText:@"You have no registered credit card info"];
+        } 
+        else 
+        {
             [[paymentSettingsView creditCardLabel] setText:@"Unable to fetch payment information"];
             CLLog(LOG_LEVEL_ERROR, @"Payment info request failed from payment settings page.");
         }
