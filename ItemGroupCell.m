@@ -39,7 +39,7 @@
     }
     else
     {
-        [self setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
+        [self setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
         [self setBackgroundColor:[UIColor colorWithRed:1.0f green:0.83f blue:0.83f alpha:1.0f]];
     }
     

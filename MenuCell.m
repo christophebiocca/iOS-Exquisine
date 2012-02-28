@@ -27,7 +27,7 @@
     [[self textLabel] setFont:titleFont];
     [[self detailTextLabel] setFont:descFont];
     
-    [self setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
+    [self setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     
 }
 
