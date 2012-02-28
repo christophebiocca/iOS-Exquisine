@@ -15,7 +15,7 @@ typedef enum StoreState
     Closed
 } StoreState;
 
-@interface Location : NSObject<MKAnnotation, NSCopying>
+@interface Location : NSObject<MKAnnotation, NSCopying, NSCoding>
 {
     NSString* primaryKey;
     NSArray* storeHours;

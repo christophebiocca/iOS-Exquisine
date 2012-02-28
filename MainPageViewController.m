@@ -344,6 +344,7 @@
         currentOrder = [rootObject valueForKey:@"current_order"];
         ordersHistory = [rootObject valueForKey:@"order_history"];
         favoriteOrders = [rootObject valueForKey:@"favorite_orders"];
+        locationState = [rootObject valueForKey:@"locationState"];
         theOrderManager = [[OrderManager alloc] init];
         [theOrderManager setMenu:theMenu];
         [theOrderManager setOrder:currentOrder];
@@ -367,6 +368,7 @@
     [rootObject setValue: currentOrder forKey:@"current_order"];
     [rootObject setValue: ordersHistory forKey:@"order_history"];
     [rootObject setValue: favoriteOrders forKey:@"favorite_orders"];
+    [rootObject setValue: locationState forKey:@"locationState"];
     [NSKeyedArchiver archiveRootObject: rootObject toFile: path];
 }
 

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 @class Location;
 
-@interface LocationState : NSObject
+@interface LocationState : NSObject <NSCoding>
 {
     Location *selectedLocation;
     NSArray *locations;

@@ -59,4 +59,24 @@ static NSArray* weekdays;
     return self;
 }
 
+- (OpeningHours *)initWithCoder:(NSCoder *)decoder
+{
+    if (self = [super init])
+    {
+        day = [[decoder decodeObjectForKey:@"day"] intValue];
+        isOpen = [[decoder decodeObjectForKey:@"isOpen"] intValue];
+        opens = [decoder decodeObjectForKey:@"opens"];
+        closes = [decoder decodeObjectForKey:@"closes"];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+    [encoder encodeObject:[NSNumber numberWithInt:day] forKey:@"day"];
+    [encoder encodeObject:[NSNumber numberWithInt:isOpen] forKey:@"isOpen"];
+    [encoder encodeObject:opens forKey:@"opens"];
+    [encoder encodeObject:closes forKey:@"closes"];
+}
+
 @end

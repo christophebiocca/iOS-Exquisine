@@ -49,6 +49,30 @@ static NSDateComponents* minusOneDay;
     return self;
 }
 
+- (Location *)initWithCoder:(NSCoder *)decoder
+{
+    if (self = [super init])
+    {
+        primaryKey = [decoder decodeObjectForKey:@"primaryKey"];
+        storeHours = [decoder decodeObjectForKey:@"storeHours"];
+        lastCall = [[decoder decodeObjectForKey:@"lastCall"] intValue];
+        latitude = [decoder decodeObjectForKey:@"latitude"];
+        longitude = [decoder decodeObjectForKey:@"longitude"];
+        address = [decoder decodeObjectForKey:@"address"];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+    [encoder encodeObject:primaryKey forKey:@"primaryKey"];
+    [encoder encodeObject:storeHours forKey:@"storeHours"];
+    [encoder encodeObject:[NSNumber numberWithInt:lastCall] forKey:@"lastCall"];
+    [encoder encodeObject:latitude forKey:@"latitude"]; 
+    [encoder encodeObject:longitude forKey:@"longitude"]; 
+    [encoder encodeObject:address forKey:@"address"];
+}
+
 +(NSDate*)mergeComponents:(NSDateComponents*)components withDate:(NSDate*)date{
     NSDateComponents* dateComponents = [[NSCalendar currentCalendar] 
                                         components:

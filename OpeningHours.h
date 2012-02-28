@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-@interface OpeningHours : NSObject{
+@interface OpeningHours : NSObject <NSCoding>{
     NSInteger day;
     BOOL isOpen;
     NSDateComponents* opens;
