@@ -27,7 +27,7 @@
     if (self) {
         //It's not pretty, but I cant think of a less messy way of doing it at the moment.
         context = CELL_CONTEXT_RECEIPT;
-        sectionNames = [[NSMutableArray alloc] initWithObjects:@"Reciept", nil];
+        sectionNames = [[NSMutableArray alloc] initWithObjects:@"Receipt", nil];
                 
         UIFont *titleFont = [UIFont fontWithName:@"HelveticaNeue-Medium" size:13];
         UIFont *descFont = [UIFont fontWithName:@"HelveticaNeue" size:13];
