@@ -171,7 +171,7 @@
     {
         doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Add this item" style:UIBarButtonItemStyleDone target:self action:@selector(addThisItemToOrder)];
         
-        [[itemView priceButton] setTitle:[NSString stringWithFormat:@"1 Item: %@",[Utilities FormatToPrice:[itemInfo price]]]];
+        [[itemView priceButton] setTitle:[NSString stringWithFormat:@"Item Price: %@",[Utilities FormatToPrice:[itemInfo price]]]];
     }
     else
     {
