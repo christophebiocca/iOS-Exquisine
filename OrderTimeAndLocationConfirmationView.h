@@ -11,6 +11,7 @@
 @class LocationMapView;
 @class LocationViewController;
 @class LocationState;
+@class PickerViewLayover;
 
 @interface OrderTimeAndLocationConfirmationView : UIView
 {

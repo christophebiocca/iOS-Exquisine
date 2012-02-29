@@ -70,17 +70,6 @@
 
 -(void) done
 {
-    //There are some odd bugs that result in the model and view not agreeing. This 
-    //will make sure that we have consistancy.
-    pickerHour = [[orderTimeAndLocationConfirmationView orderCompletionDurationPicker] selectedRowInComponent:0];
-    
-    if (pickerHour == 0) {
-        pickerMinute = [[orderTimeAndLocationConfirmationView orderCompletionDurationPicker] selectedRowInComponent:1] + 5;
-    }
-    else
-    {
-        pickerMinute = [[orderTimeAndLocationConfirmationView orderCompletionDurationPicker] selectedRowInComponent:1];
-    }
    
     if (![[[[orderTimeAndLocationConfirmationView locationView] locationState] selectedLocation] wouldBeOpenAt:[NSDate dateWithTimeIntervalSinceNow:(pickerMinute * 60 + pickerHour * 3600)]])
     {
@@ -105,11 +94,9 @@
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
+    //This needs to be here to fix a delegate bug.
+    pickerHour = [pickerView selectedRowInComponent:0];
     switch (component) {
-        case 0:
-            pickerHour = row;
-            break;
-            
         case 1:
             if(pickerHour > 0)
                 pickerMinute = row;

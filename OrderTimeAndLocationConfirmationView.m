@@ -21,7 +21,9 @@
 {
     self = [super init];
     if (self) {
-        orderCompletionDurationPicker = [[UIPickerView alloc] init];
+        orderCompletionDurationPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 298,320, 162)];
+        
+        [orderCompletionDurationPicker setShowsSelectionIndicator:YES];
         
         locationView = [[LocationMapView alloc] initWithLocationState:locationState AndFrame:CGRectMake(0, 73, 320, 229)];
         
@@ -44,19 +46,10 @@
 
 -(void)layoutSubviews
 {
+    
     [navBar setFrame:CGRectMake(0, 0, 320, 44)];
     [locationPrompt setFrame:CGRectMake(10, 48, 300, 21)];
-    [orderCompletionDurationPicker setFrame:CGRectMake(0, 298,320, 162)];
     
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end
