@@ -38,5 +38,6 @@ typedef enum StoreState
 -(NSDate*)nextOpen;
 -(NSDate*)nextClose;
 -(NSString*)storeHourBlurb;
+-(BOOL)wouldBeOpenAt:(NSDate*)thisTime;
 
 @end

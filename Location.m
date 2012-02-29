@@ -197,6 +197,18 @@ static NSDateComponents* minusOneDay;
     }
 }
 
+-(BOOL)wouldBeOpenAt:(NSDate *)thisTime
+{
+    //If the store opens before this time
+    if ([thisTime compare:[self opensOnDay:thisTime]] == NSOrderedDescending) {
+        //If the store closes after this time
+        if ([thisTime compare:[self closesOnDay:thisTime]] == NSOrderedAscending) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
 - (NSString *)subtitle{
 	return [NSString stringWithFormat:@"%@\n%@", address, [self storeHourBlurb]];
 }

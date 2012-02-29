@@ -34,6 +34,13 @@ static NSArray* pickerTimes = nil;
                        [NSNumber numberWithInt:60],
                        [NSNumber numberWithInt:75],
                        [NSNumber numberWithInt:90],
+                       [NSNumber numberWithInt:120],
+                       [NSNumber numberWithInt:150],
+                       [NSNumber numberWithInt:180],
+                       [NSNumber numberWithInt:210],
+                       [NSNumber numberWithInt:240],
+                       [NSNumber numberWithInt:270],
+                       [NSNumber numberWithInt:500],
                        nil];
     }
 }
@@ -87,18 +94,19 @@ static NSArray* pickerTimes = nil;
 
 -(void) done
 {
-    if (!([[[[orderTimeAndLocationConfirmationView locationView] locationState] selectedLocation] storeState] == Open))
+    
+   
+    if (![[[[orderTimeAndLocationConfirmationView locationView] locationState] selectedLocation] wouldBeOpenAt:[NSDate dateWithTimeIntervalSinceNow:(pickerTime * 60)]])
     {
-        UIAlertView *tryAgain = [[UIAlertView alloc] initWithTitle: @"Oops" message:@"The location you have selected is not open. Select one that is open to continue." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+        UIAlertView *tryAgain = [[UIAlertView alloc] initWithTitle: @"Oops" message:@"The restaurant would be closed at the time you requested your pita to be done." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
         
-        [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Tried to order from a store that is closed"];
+        [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Tried to order a pita set to be completed after closing time."];
         
         [tryAgain show];
         return;
     }
     
     [theOrder setPitaFinishedTime:[NSDate dateWithTimeIntervalSinceNow:(pickerTime * 60)]];
-    
     doneBlock();
 }
 
