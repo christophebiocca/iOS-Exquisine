@@ -331,10 +331,7 @@ NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
     {
         if (![[comboList objectAtIndex:i] isEffectivelyEqual:[[anOrder comboList] objectAtIndex:i]]) {
             return NO;
-        }
-        if (![[itemList objectAtIndex:i] isEffectivelyEqual:[[anOrder itemList] objectAtIndex:i]]) {
-            return NO;
-        }
+        }g
         
     }
     for (int i = 0; i < [itemList count] ; i++)

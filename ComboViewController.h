@@ -15,6 +15,7 @@
 @interface ComboViewController : MenuComponentViewController<UITableViewDelegate> 
 {
     
+    int numberToAdd;
     Order *orderInfo;
     Combo *comboInfo;
     ComboView *comboView;
@@ -28,6 +29,10 @@
 -(ComboViewController *)initializeWithComboAndOrderAndReturnController:(Combo *) aCombo:(Order *) anOrder:(UIViewController *) aController;
 
 -(void) addThisComboToOrder;
+
+-(void) plusButtonPressed;
+
+-(void) minusButtonPressed;
 
 -(void) comboChanged:(NSNotification *)aNotification;
 
