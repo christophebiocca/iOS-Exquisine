@@ -9,10 +9,12 @@
 #import "PaymentSettingsViewController.h"
 #import "PaymentSettingsView.h"
 #import "PaymentInfoViewController.h"
+#import "PaymentInfo.h"
 #import "PaymentStack.h"
 #import "GetPaymentProfileInfo.h"
 #import "PaymentProfileInfo.h"
 #import "DeletePaymentInfo.h"
+#import "SetPaymentProfileInfo.h"
 
 @implementation PaymentSettingsViewController
 
@@ -65,6 +67,7 @@
     PaymentInfoViewController *controller = [[PaymentInfoViewController alloc] init];
     
     [controller setCompletionBlock:^(PaymentInfo* info){
+        [self sendPaymentInfo:info];
         [[self navigationController] popViewControllerAnimated:YES];
     }];
     [controller setCancelledBlock:^{
@@ -72,6 +75,33 @@
     }];
     
     [[self navigationController] pushViewController:controller animated:YES];
+}
+
+-(void)sendPaymentInfo:(PaymentInfo *)paymentInfo
+{
+    [SetPaymentProfileInfo setPaymentInfo:paymentInfo:
+    ^(id success) {
+        [self refreshCreditCardInfo];
+    } failure:^(id failure, NSError *errorCode) {
+        
+        UIAlertView *fail = nil;
+        
+        if ([[[errorCode userInfo] valueForKey:@"message"] isEqualToString:@"Unaccepted card type\nInvalid Card Number\n"]) {
+            fail = [[UIAlertView alloc] initWithTitle:@"Oops" message:@"The credit card information that you input was not valid. Please try again." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+        }
+        else
+        {
+            
+            
+            fail = [[UIAlertView alloc] initWithTitle:@"Oops" message:@"The server doesn't appear to be up, your payment info cannot be set." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+        }
+        
+        [fail show];
+        
+        [self refreshCreditCardInfo];
+    }];
+    
+    [[paymentSettingsView creditCardLabel] setText:@"Contacting server..."];
 }
 
 - (void) deletePaymentInfo
@@ -85,7 +115,10 @@
         UIAlertView *oops = [[UIAlertView alloc] initWithTitle:@"Oops" message:@"Your credit card info could not be deleted because the server cannot be accessed at the moment. Please try again later." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles: nil];
         
         [oops show];
+        
+        [self refreshCreditCardInfo];
     }];
+    [[paymentSettingsView creditCardLabel] setText:@"Contacting server..."];
 }
 
 - (void) loadView

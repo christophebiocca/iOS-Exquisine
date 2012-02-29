@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 @class PaymentSettingsView;
+@class PaymentInfo;
 @interface PaymentSettingsViewController : UIViewController <UIAlertViewDelegate>
 {
     PaymentSettingsView *paymentSettingsView;
 }
 
 - (void) refreshCreditCardInfo;
+
+- (void) sendPaymentInfo:(PaymentInfo *)paymentInfo;
 
 @end

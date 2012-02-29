@@ -36,6 +36,7 @@
 		232C798714D209D600C3868D /* OrderSummaryRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C798614D209D600C3868D /* OrderSummaryRenderer.m */; };
 		232D7A1014C8B23A00DD5911 /* UICustomActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 232D7A0F14C8B23A00DD5911 /* UICustomActionSheet.m */; };
 		232D7A1214C8B4FC00DD5911 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 232D7A1114C8B4FC00DD5911 /* QuartzCore.framework */; };
+		233D143E14FD8AA100297F5D /* SetPaymentProfileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 233D143D14FD8AA100297F5D /* SetPaymentProfileInfo.m */; };
 		2345980B14DE0B2000910F3B /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2345980A14DE0B2000910F3B /* OrderManager.m */; };
 		2352724214DB145600DDC7FA /* IndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2352724114DB145600DDC7FA /* IndicatorView.m */; };
 		23658CC114BDFB15002C0996 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23658CC014BDFB15002C0996 /* UIKit.framework */; };
@@ -225,6 +226,8 @@
 		232D7A0E14C8B23A00DD5911 /* UICustomActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICustomActionSheet.h; sourceTree = "<group>"; };
 		232D7A0F14C8B23A00DD5911 /* UICustomActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICustomActionSheet.m; sourceTree = "<group>"; };
 		232D7A1114C8B4FC00DD5911 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		233D143C14FD8AA100297F5D /* SetPaymentProfileInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetPaymentProfileInfo.h; sourceTree = "<group>"; };
+		233D143D14FD8AA100297F5D /* SetPaymentProfileInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetPaymentProfileInfo.m; sourceTree = "<group>"; };
 		2345980914DE0B2000910F3B /* OrderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderManager.h; sourceTree = "<group>"; };
 		2345980A14DE0B2000910F3B /* OrderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderManager.m; sourceTree = "<group>"; };
 		2352724014DB145600DDC7FA /* IndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndicatorView.h; sourceTree = "<group>"; };
@@ -1513,6 +1516,8 @@
 				236A4E8614FC5083003FB4EF /* DeletePaymentInfo.m */,
 				D9B0F6BB14E075A000CA3B13 /* GetPaymentProfileInfo.h */,
 				D9B0F6BC14E075A000CA3B13 /* GetPaymentProfileInfo.m */,
+				233D143C14FD8AA100297F5D /* SetPaymentProfileInfo.h */,
+				233D143D14FD8AA100297F5D /* SetPaymentProfileInfo.m */,
 				D95B786D14D28A6900FC0F29 /* PlaceOrder.h */,
 				D95B786E14D28A6900FC0F29 /* PlaceOrder.m */,
 				D93E9DD314FC4D53006AD608 /* DeletePaymentInfo.h */,
@@ -1756,6 +1761,7 @@
 				236A4E7C14FC3974003FB4EF /* PaymentSettingsView.m in Sources */,
 				236A4E8414FC405C003FB4EF /* PaymentSettingsViewController.m in Sources */,
 				236A4E8714FC5083003FB4EF /* DeletePaymentInfo.m in Sources */,
+				233D143E14FD8AA100297F5D /* SetPaymentProfileInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
