@@ -7,6 +7,7 @@
 //
 
 @class PaymentSuccessInfo;
+@class Order;
 
 @interface PaymentCompletedView : UIView{
     UIToolbar* bar;
@@ -19,7 +20,7 @@
     UILabel* signoff;
 }
 
--(void)setSuccessInfo:(PaymentSuccessInfo*)info;
+-(void)setSuccessInfo:(PaymentSuccessInfo*)info AndOrderInfo:(Order *) theOrder;
 
 @property(retain, readonly)UIBarButtonItem* done;
 

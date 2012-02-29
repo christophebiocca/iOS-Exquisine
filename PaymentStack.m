@@ -232,7 +232,7 @@
     [PlaceOrder sendOrder:order toLocation:[self currentLocation] withPaymentInfo:info 
            paymentSuccess:^(PaymentSuccessInfo* success){
                successBlock();
-               [[self completionController] setSuccessInfo:success];
+               [[self completionController] setSuccessInfo:success AndOrder:order];
                [self showSuccess];
            } 
            paymentFailure:^(PaymentError* error){

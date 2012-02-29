@@ -8,6 +8,7 @@
 
 #import "PaymentCompletedView.h"
 #import "PaymentSuccessInfo.h"
+#import "Order.h"
 
 @implementation PaymentCompletedView
 
@@ -135,14 +136,19 @@
 }
 */
 
--(void)setSuccessInfo:(PaymentSuccessInfo*)info{
+-(void)setSuccessInfo:(PaymentSuccessInfo*)info AndOrderInfo:(Order *) theOrder{
     
     [messageText setText: [NSString stringWithFormat:@"Transaction result: %@", [info messageText]]];
     [authCode setText: [NSString stringWithFormat:@"Authorization code: %@", [info authCode]]];
     [trnAmount setText: [NSString stringWithFormat:@"Total: $%@", [info trnAmount]]];
     [trnDate setText: [NSString stringWithFormat:@"Date: %@", [info trnDate]]];
-    [pickupTime setText: @"Your pita will be done in 5 to 10 minutes and can"
-     @" be picked up from the UW Plaza Pita Factory."];
+    
+    NSDateFormatter* formatter = [NSDateFormatter new];
+    
+    [formatter setDateFormat:@"h:m a"];
+    
+    [pickupTime setText: [NSString stringWithFormat:@"Your pita will be done at %@", [formatter stringFromDate:[theOrder pitaFinishedTime]]]];
+    
     [signoff setText:@"Enjoy!"];
     
 }

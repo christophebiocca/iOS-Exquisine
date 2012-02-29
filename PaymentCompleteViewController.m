@@ -38,16 +38,17 @@
     [self setView:paymentView];
 }
 
--(void)setSuccessInfo:(PaymentSuccessInfo *)info{
+-(void)setSuccessInfo:(PaymentSuccessInfo *)info AndOrder:(Order *)anOrder{
     successInfo = info;
-    [paymentView setSuccessInfo:successInfo];
+    theOrder = anOrder;
+    [paymentView setSuccessInfo:successInfo AndOrderInfo:anOrder];
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [paymentView setSuccessInfo:successInfo];
+    [paymentView setSuccessInfo:successInfo AndOrderInfo:theOrder];
     [[self navigationItem] setTitle: @"Payment complete"];
     [[paymentView done] setTarget:self];
     [[paymentView done] setAction:@selector(done)];
