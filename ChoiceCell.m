@@ -56,7 +56,9 @@
         [self setAccessoryType:UITableViewCellAccessoryNone];
         [self setBackgroundColor:[UIColor whiteColor]];
     }
-    [self setNeedsDisplay];
+    
+    [self setNeedsLayout];
+    [self setNeedsDisplay]; 
 }
 
 @end
