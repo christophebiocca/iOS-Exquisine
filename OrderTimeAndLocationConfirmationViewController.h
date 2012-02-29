@@ -16,7 +16,8 @@
 {
     OrderTimeAndLocationConfirmationView *orderTimeAndLocationConfirmationView;
     
-    int pickerTime;
+    int pickerHour;
+    int pickerMinute;
     
     Order *theOrder;
     
@@ -28,5 +29,7 @@
 @property(copy, nonatomic)void (^cancelledBlock)();
 
 -(id)initWithLocationState:(LocationState *)theLocationState AndOrder:(Order *) anOrder;
+
+-(void)refreshRowLocation;
 
 @end

@@ -18,33 +18,6 @@
 @synthesize doneBlock;
 @synthesize cancelledBlock;
 
-//See [self initialize]
-static NSArray* pickerTimes = nil;
-
-//These numbers will be formatted when the rows are requested. Numbers are in minutes.
-+(void)initialize{
-    if (!pickerTimes) {
-        pickerTimes = [[NSArray alloc] initWithObjects:
-                       [NSNumber numberWithInt:5],
-                       [NSNumber numberWithInt:10],
-                       [NSNumber numberWithInt:15],
-                       [NSNumber numberWithInt:20],
-                       [NSNumber numberWithInt:30],
-                       [NSNumber numberWithInt:45],
-                       [NSNumber numberWithInt:60],
-                       [NSNumber numberWithInt:75],
-                       [NSNumber numberWithInt:90],
-                       [NSNumber numberWithInt:120],
-                       [NSNumber numberWithInt:150],
-                       [NSNumber numberWithInt:180],
-                       [NSNumber numberWithInt:210],
-                       [NSNumber numberWithInt:240],
-                       [NSNumber numberWithInt:270],
-                       [NSNumber numberWithInt:500],
-                       nil];
-    }
-}
-
 -(id)initWithLocationState:(LocationState *)theLocationState AndOrder:(Order *)anOrder
 {
     self = [super init];
@@ -65,7 +38,10 @@ static NSArray* pickerTimes = nil;
         
         [[orderTimeAndLocationConfirmationView orderCompletionDurationPicker] setDelegate:self];
         [[orderTimeAndLocationConfirmationView orderCompletionDurationPicker] setDataSource:self];
-        pickerTime = [[pickerTimes objectAtIndex:0] intValue];
+        
+        //Starts at 5 minutes
+        pickerMinute = 5;
+        pickerHour = 0;
         
     }
     return self;
@@ -94,9 +70,19 @@ static NSArray* pickerTimes = nil;
 
 -(void) done
 {
+    //There are some odd bugs that result in the model and view not agreeing. This 
+    //will make sure that we have consistancy.
+    pickerHour = [[orderTimeAndLocationConfirmationView orderCompletionDurationPicker] selectedRowInComponent:0];
     
+    if (pickerHour == 0) {
+        pickerMinute = [[orderTimeAndLocationConfirmationView orderCompletionDurationPicker] selectedRowInComponent:1] + 5;
+    }
+    else
+    {
+        pickerMinute = [[orderTimeAndLocationConfirmationView orderCompletionDurationPicker] selectedRowInComponent:1];
+    }
    
-    if (![[[[orderTimeAndLocationConfirmationView locationView] locationState] selectedLocation] wouldBeOpenAt:[NSDate dateWithTimeIntervalSinceNow:(pickerTime * 60)]])
+    if (![[[[orderTimeAndLocationConfirmationView locationView] locationState] selectedLocation] wouldBeOpenAt:[NSDate dateWithTimeIntervalSinceNow:(pickerMinute * 60 + pickerHour * 3600)]])
     {
         UIAlertView *tryAgain = [[UIAlertView alloc] initWithTitle: @"Oops" message:@"The restaurant would be closed at the time you requested your pita to be done." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
         
@@ -106,7 +92,7 @@ static NSArray* pickerTimes = nil;
         return;
     }
     
-    [theOrder setPitaFinishedTime:[NSDate dateWithTimeIntervalSinceNow:(pickerTime * 60)]];
+    [theOrder setPitaFinishedTime:[NSDate dateWithTimeIntervalSinceNow:(pickerMinute * 60 + pickerHour * 3600)]];
     doneBlock();
 }
 
@@ -119,7 +105,41 @@ static NSArray* pickerTimes = nil;
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    pickerTime = [[pickerTimes objectAtIndex:row] intValue];
+    switch (component) {
+        case 0:
+            pickerHour = row;
+            break;
+            
+        case 1:
+            if(pickerHour > 0)
+                pickerMinute = row;
+            else
+                pickerMinute = row + 5;
+            break;
+        default:
+            break;
+    }
+    
+    if (pickerHour == 0)
+    {
+        if (pickerMinute < 5)
+        {
+            pickerMinute = 5;
+        }
+    }
+    
+    [self refreshRowLocation];
+}
+         
+-(void)refreshRowLocation
+{
+    if(pickerHour != 0)
+        [[orderTimeAndLocationConfirmationView orderCompletionDurationPicker] selectRow:pickerMinute inComponent:1 animated:NO];
+    else
+        [[orderTimeAndLocationConfirmationView orderCompletionDurationPicker] selectRow:(pickerMinute - 5) inComponent:1 animated:NO];
+    
+    [[orderTimeAndLocationConfirmationView orderCompletionDurationPicker] setNeedsLayout];
+    [[orderTimeAndLocationConfirmationView orderCompletionDurationPicker] setNeedsDisplay];
 }
 
 -(CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
@@ -129,27 +149,32 @@ static NSArray* pickerTimes = nil;
 
 - (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component
 {
-    return 300.0f;
+    return 130;
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
     NSMutableString *rowTitle = [[NSMutableString alloc] initWithCapacity:0];
     
-    int hour = [[pickerTimes objectAtIndex:row] intValue] / 60; 
-    if (hour) {
-        if(hour == 1)
-            [rowTitle appendFormat:@"%i hour ", hour];
-        else
-            [rowTitle appendFormat:@"%i hours ", hour];
-    }
-    
-    int minutes = [[pickerTimes objectAtIndex:row] intValue] % 60;
-    if (minutes) {
-        if(minutes == 1)
-            [rowTitle appendFormat:@"%i minute", minutes];
-        else
-            [rowTitle appendFormat:@"%i minutes", minutes];
+    switch (component) {
+        case 0:
+            if(row == 1)
+                [rowTitle appendFormat:@"%i Hour",row];
+            else
+                [rowTitle appendFormat:@"%i Hours",row];
+            break;
+            
+        case 1:
+            if(pickerHour > 0)
+                if(row == 1)
+                    [rowTitle appendFormat:@"%i Minute",row];
+                else
+                    [rowTitle appendFormat:@"%i Minutes",row];
+            else
+                [rowTitle appendFormat:@"%i Minutes",(row + 5)];
+            break;
+        default:
+            break;
     }
     
     return rowTitle;
@@ -157,12 +182,26 @@ static NSArray* pickerTimes = nil;
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return [pickerTimes count];
+    switch (component) {
+        case 0:
+            return 37;
+            break;
+            
+        case 1:
+            if(pickerHour > 0)
+                return 60;
+            else
+                return 55;
+            break;
+        default:
+            break;
+    }
+    return 0;
 }
 
 
