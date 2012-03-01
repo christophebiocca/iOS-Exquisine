@@ -36,6 +36,17 @@
 		232C798714D209D600C3868D /* OrderSummaryRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C798614D209D600C3868D /* OrderSummaryRenderer.m */; };
 		232D7A1014C8B23A00DD5911 /* UICustomActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 232D7A0F14C8B23A00DD5911 /* UICustomActionSheet.m */; };
 		232D7A1214C8B4FC00DD5911 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 232D7A1114C8B4FC00DD5911 /* QuartzCore.framework */; };
+		233C46DD14FEC9CC0003C295 /* AppData.m in Sources */ = {isa = PBXBuildFile; fileRef = 233C46DC14FEC9CC0003C295 /* AppData.m */; };
+		233C46E714FEE8630003C295 /* MasterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 233C46E614FEE8630003C295 /* MasterView.m */; };
+		233C46EA14FEE9350003C295 /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 233C46E914FEE9350003C295 /* LoadingView.m */; };
+		233C46ED14FEEF7D0003C295 /* splashScreen.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 233C46EC14FEEF7D0003C295 /* splashScreen.jpg */; };
+		233C46F114FEF0EE0003C295 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 233C46F014FEF0EE0003C295 /* MasterViewController.m */; };
+		233C46F51500279E0003C295 /* LocationTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 233C46F41500279E0003C295 /* LocationTabView.m */; };
+		233C46F8150029E60003C295 /* LocationBarImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 233C46F6150029E60003C295 /* LocationBarImage.jpg */; };
+		233C46F9150029E60003C295 /* LocationBarImage@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 233C46F7150029E60003C295 /* LocationBarImage@2x.jpg */; };
+		233C46FE15002A560003C295 /* LocationTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 233C46FD15002A560003C295 /* LocationTabViewController.m */; };
+		233C4700150030DC0003C295 /* LocationBarImageShadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 233C46FF150030DC0003C295 /* LocationBarImageShadow.png */; };
+		233C47021500387A0003C295 /* LocationBarImageShadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 233C47011500387A0003C295 /* LocationBarImageShadow@2x.png */; };
 		233D143E14FD8AA100297F5D /* SetPaymentProfileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 233D143D14FD8AA100297F5D /* SetPaymentProfileInfo.m */; };
 		2345980B14DE0B2000910F3B /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2345980A14DE0B2000910F3B /* OrderManager.m */; };
 		2352724214DB145600DDC7FA /* IndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2352724114DB145600DDC7FA /* IndicatorView.m */; };
@@ -226,6 +237,23 @@
 		232D7A0E14C8B23A00DD5911 /* UICustomActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICustomActionSheet.h; sourceTree = "<group>"; };
 		232D7A0F14C8B23A00DD5911 /* UICustomActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICustomActionSheet.m; sourceTree = "<group>"; };
 		232D7A1114C8B4FC00DD5911 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		233C46DB14FEC9CC0003C295 /* AppData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppData.h; sourceTree = "<group>"; };
+		233C46DC14FEC9CC0003C295 /* AppData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppData.m; sourceTree = "<group>"; };
+		233C46E514FEE8630003C295 /* MasterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterView.h; sourceTree = "<group>"; };
+		233C46E614FEE8630003C295 /* MasterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterView.m; sourceTree = "<group>"; };
+		233C46E814FEE9350003C295 /* LoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingView.h; sourceTree = "<group>"; };
+		233C46E914FEE9350003C295 /* LoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingView.m; sourceTree = "<group>"; };
+		233C46EC14FEEF7D0003C295 /* splashScreen.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = splashScreen.jpg; path = FravicArtAssets/splashScreen.jpg; sourceTree = "<group>"; };
+		233C46EF14FEF0EE0003C295 /* MasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
+		233C46F014FEF0EE0003C295 /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
+		233C46F31500279E0003C295 /* LocationTabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationTabView.h; sourceTree = "<group>"; };
+		233C46F41500279E0003C295 /* LocationTabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationTabView.m; sourceTree = "<group>"; };
+		233C46F6150029E60003C295 /* LocationBarImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = LocationBarImage.jpg; path = FravicArtAssets/LocationBarImage.jpg; sourceTree = "<group>"; };
+		233C46F7150029E60003C295 /* LocationBarImage@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "LocationBarImage@2x.jpg"; path = "FravicArtAssets/LocationBarImage@2x.jpg"; sourceTree = "<group>"; };
+		233C46FC15002A560003C295 /* LocationTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationTabViewController.h; sourceTree = "<group>"; };
+		233C46FD15002A560003C295 /* LocationTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationTabViewController.m; sourceTree = "<group>"; };
+		233C46FF150030DC0003C295 /* LocationBarImageShadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LocationBarImageShadow.png; path = FravicArtAssets/LocationBarImageShadow.png; sourceTree = "<group>"; };
+		233C47011500387A0003C295 /* LocationBarImageShadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LocationBarImageShadow@2x.png"; path = "FravicArtAssets/LocationBarImageShadow@2x.png"; sourceTree = "<group>"; };
 		233D143C14FD8AA100297F5D /* SetPaymentProfileInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetPaymentProfileInfo.h; sourceTree = "<group>"; };
 		233D143D14FD8AA100297F5D /* SetPaymentProfileInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetPaymentProfileInfo.m; sourceTree = "<group>"; };
 		2345980914DE0B2000910F3B /* OrderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderManager.h; sourceTree = "<group>"; };
@@ -714,6 +742,82 @@
 			name = UICustomActionSheet;
 			sourceTree = "<group>";
 		};
+		233C46E214FEE7FE0003C295 /* ShinyViews */ = {
+			isa = PBXGroup;
+			children = (
+				233C46E514FEE8630003C295 /* MasterView.h */,
+				233C46E614FEE8630003C295 /* MasterView.m */,
+				233C46E414FEE83F0003C295 /* LoadingView */,
+				233C46E314FEE8140003C295 /* TabBarViews */,
+			);
+			name = ShinyViews;
+			sourceTree = "<group>";
+		};
+		233C46E314FEE8140003C295 /* TabBarViews */ = {
+			isa = PBXGroup;
+			children = (
+				233C46F21500277D0003C295 /* LocationTabView */,
+			);
+			name = TabBarViews;
+			sourceTree = "<group>";
+		};
+		233C46E414FEE83F0003C295 /* LoadingView */ = {
+			isa = PBXGroup;
+			children = (
+				233C46E814FEE9350003C295 /* LoadingView.h */,
+				233C46E914FEE9350003C295 /* LoadingView.m */,
+			);
+			name = LoadingView;
+			sourceTree = "<group>";
+		};
+		233C46EB14FEEF620003C295 /* SampleDesignImages */ = {
+			isa = PBXGroup;
+			children = (
+				233C47011500387A0003C295 /* LocationBarImageShadow@2x.png */,
+				233C46FF150030DC0003C295 /* LocationBarImageShadow.png */,
+				233C46F6150029E60003C295 /* LocationBarImage.jpg */,
+				233C46F7150029E60003C295 /* LocationBarImage@2x.jpg */,
+				233C46EC14FEEF7D0003C295 /* splashScreen.jpg */,
+			);
+			name = SampleDesignImages;
+			sourceTree = "<group>";
+		};
+		233C46EE14FEF0CC0003C295 /* ShinyControllers */ = {
+			isa = PBXGroup;
+			children = (
+				233C46FA15002A0F0003C295 /* TabBarViewControllers */,
+				233C46EF14FEF0EE0003C295 /* MasterViewController.h */,
+				233C46F014FEF0EE0003C295 /* MasterViewController.m */,
+			);
+			name = ShinyControllers;
+			sourceTree = "<group>";
+		};
+		233C46F21500277D0003C295 /* LocationTabView */ = {
+			isa = PBXGroup;
+			children = (
+				233C46F31500279E0003C295 /* LocationTabView.h */,
+				233C46F41500279E0003C295 /* LocationTabView.m */,
+			);
+			name = LocationTabView;
+			sourceTree = "<group>";
+		};
+		233C46FA15002A0F0003C295 /* TabBarViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				233C46FB15002A3A0003C295 /* LocationTabViewController */,
+			);
+			name = TabBarViewControllers;
+			sourceTree = "<group>";
+		};
+		233C46FB15002A3A0003C295 /* LocationTabViewController */ = {
+			isa = PBXGroup;
+			children = (
+				233C46FC15002A560003C295 /* LocationTabViewController.h */,
+				233C46FD15002A560003C295 /* LocationTabViewController.m */,
+			);
+			name = LocationTabViewController;
+			sourceTree = "<group>";
+		};
 		233C4CCE14E1ABF9005C8CC9 /* ComboTrivialPricing */ = {
 			isa = PBXGroup;
 			children = (
@@ -983,6 +1087,8 @@
 		2391EA7814BE3D44001BDC1B /* Model Structure */ = {
 			isa = PBXGroup;
 			children = (
+				233C46DB14FEC9CC0003C295 /* AppData.h */,
+				233C46DC14FEC9CC0003C295 /* AppData.m */,
 				237EC00B14BE5842009D9268 /* MenuComposites */,
 				D95B787114D2BE3400FC0F29 /* Location */,
 				D9768A6814D73EBC00BBA467 /* Payment */,
@@ -1102,6 +1208,7 @@
 		23DA7A3914C600B1008281DD /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				233C46EE14FEF0CC0003C295 /* ShinyControllers */,
 				232C795814CF196A00C3868D /* LargeScopeControllers */,
 				232C795714CF195200C3868D /* MenuComponentControllers */,
 				232C796B14CF77A400C3868D /* OtherControllers */,
@@ -1207,6 +1314,7 @@
 		23DA7A5A14C63071008281DD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				233C46E214FEE7FE0003C295 /* ShinyViews */,
 				23DA7A8114C6462C008281DD /* OtherViews */,
 				23DA7A4914C61336008281DD /* MenuCompositeViews */,
 			);
@@ -1373,6 +1481,7 @@
 		38D4132C14D3321C00031B60 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				233C46EB14FEEF620003C295 /* SampleDesignImages */,
 				D969487F14ECDB570035AB9E /* Default.png */,
 				D9CB5FD514ECDB8B00FC5071 /* Default@2x.png */,
 				D9D5A3A914ECCD0B003B0B11 /* pfLogo_29.png */,
@@ -1617,6 +1726,11 @@
 				D9D5A3AC14ECCD0B003B0B11 /* pfLogo_58.png in Resources */,
 				D969488014ECDB570035AB9E /* Default.png in Resources */,
 				D9CB5FD614ECDB8B00FC5071 /* Default@2x.png in Resources */,
+				233C46ED14FEEF7D0003C295 /* splashScreen.jpg in Resources */,
+				233C46F8150029E60003C295 /* LocationBarImage.jpg in Resources */,
+				233C46F9150029E60003C295 /* LocationBarImage@2x.jpg in Resources */,
+				233C4700150030DC0003C295 /* LocationBarImageShadow.png in Resources */,
+				233C47021500387A0003C295 /* LocationBarImageShadow@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1762,6 +1876,12 @@
 				236A4E8414FC405C003FB4EF /* PaymentSettingsViewController.m in Sources */,
 				236A4E8714FC5083003FB4EF /* DeletePaymentInfo.m in Sources */,
 				233D143E14FD8AA100297F5D /* SetPaymentProfileInfo.m in Sources */,
+				233C46DD14FEC9CC0003C295 /* AppData.m in Sources */,
+				233C46E714FEE8630003C295 /* MasterView.m in Sources */,
+				233C46EA14FEE9350003C295 /* LoadingView.m in Sources */,
+				233C46F114FEF0EE0003C295 /* MasterViewController.m in Sources */,
+				233C46F51500279E0003C295 /* LocationTabView.m in Sources */,
+				233C46FE15002A560003C295 /* LocationTabViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

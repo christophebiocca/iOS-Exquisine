@@ -10,6 +10,8 @@
 #import "OrderViewController.h"
 #import "MainPageViewController.h"
 #import "LocalyticsSession.h"
+#import "MasterView.h"
+#import "MasterViewController.h"
 
 @implementation AppDelegate
 
@@ -23,19 +25,23 @@
     // Override point for customization after application launch.
     
     [self setWindow:[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]]];
-    page = [[MainPageViewController alloc] init];
-    navigationController = [[UINavigationController alloc] initWithRootViewController:page];
-    [[self window] addSubview:[navigationController view]];
+    
+    page = [[MasterViewController alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    [page viewWillAppear:NO];
+    [[self window] addSubview:[page masterView]];
     [[self window] makeKeyAndVisible];
+    [page viewDidAppear:NO];
     
-    
+    /*
     //The main page view controller should be handling notifications.
     UILocalNotification *thisNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    
     
     if(thisNotification)
     {
         [page application:application didFinishLaunchingWithOptions:launchOptions];
-    }
+    }*/
     
     return YES;
 }
@@ -53,7 +59,7 @@
     [[LocalyticsSession sharedLocalyticsSession] resume];
     [[LocalyticsSession sharedLocalyticsSession] upload];
     
-    [page saveDataToDisk];
+    //[page saveDataToDisk];
     /*
      Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
      If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
@@ -64,11 +70,12 @@
 {
     // WE NEED OUR COOKIES, AT ALL TIMES
     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
+    /*
     [page initiateMenuRefresh];
     [page getLocation];
     [page updateOrderHistory];
     [page updatePendingButtonState];
-    [page resetApplicationBadgeNumber];
+    [page resetApplicationBadgeNumber];*/
     /*
      Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
      */
@@ -96,7 +103,7 @@
 -(void) application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
 {
     //The main page view controller should always be handling local notifications.
-    [page application:application didReceiveLocalNotification:notification];
+    //[page application:application didReceiveLocalNotification:notification];
 }
 
 @end

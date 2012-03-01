@@ -19,21 +19,7 @@
 @class LocationState;
 
 @interface MainPageViewController : UIViewController<UITableViewDelegate, OrderManagementDelegate>{
-    
-    Reachability *networkChecker;
-    
     MainPageView *mainPageView;
-    
-    Menu *theMenu;
-    Order *currentOrder;
-    OrderManager *theOrderManager;
-    
-    NSMutableArray *ordersHistory;
-    NSMutableArray *favoriteOrders;
-    LocationState *locationState;
-    
-    NSString* harddiskFileName;
-    NSString* harddiskFileFolder;
     
 }
 
@@ -42,16 +28,6 @@
 -(void) favoritesButtonPressed;
 
 -(void) pendingButtonPressed;
-
--(void) loadDataFromDisk;
-
--(void) saveDataToDisk;
-
--(void) doFavoriteConsistancyCheck;
-
--(NSArray *) allKnownOrders;
-
--(Order *)dereferenceOrderIdentifier:(NSString *) orderIdentifier;
 
 -(void) updateCreateButtonState;
 

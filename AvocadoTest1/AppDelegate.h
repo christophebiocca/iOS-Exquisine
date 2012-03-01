@@ -9,11 +9,10 @@
 #import <UIKit/UIKit.h>
 
 
-@class MainPageViewController;
+@class MasterViewController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>{
-    UINavigationController* navigationController;
-    MainPageViewController* page;
+    MasterViewController* page;
 }
 
 @property (strong, nonatomic) UIWindow *window;

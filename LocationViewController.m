@@ -19,11 +19,9 @@
 (LocationState *) aLocationState
 {
     self = [super init];
- 
+    
     locationState = aLocationState;
     locationMapView = [[LocationMapView alloc] initWithLocationState:aLocationState AndFrame:CGRectMake(0, 44, 320, 416)];
-    
-    [[self navigationItem] setTitle:@"Set Location"];
     
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonPressed)];
     
