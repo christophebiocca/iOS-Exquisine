@@ -104,7 +104,8 @@ static UIColor* errorLabelColor;
         [self addSubview:rememberLabel];
 
         remember = [[UISwitch alloc] initWithFrame:CGRectZero];
-        [remember setOn:YES];
+        [remember setOn:[paymentInfo remember]];
+        [remember addTarget:self action:@selector(rememberChanged:) forControlEvents:UIControlEventEditingChanged];
         [self addSubview:remember];
 
         expirationLabel = [PaymentView nameLabel:@"Expiry Date"];
@@ -234,6 +235,10 @@ static UIColor* errorLabelColor;
 -(void)flushExpirationYear{
     [paymentInfo setExpirationYear:[self yearForRow:[expiration selectedRowInComponent:Year]]];
     [self setErrorMessage:[paymentInfo expirationError] onErrorLabel:expirationErrorLabel];
+}
+
+-(void)rememberChanged:(UISwitch*)rememberSwitch{
+    [paymentInfo setRemember:[rememberSwitch isOn]];
 }
 
 #pragma mark UITextFieldDelegate    
