@@ -12,8 +12,8 @@
 
 #define UIToolbarHeight 44
 #define TextFieldHeight 30
-#define LabelFieldPadding 5
-#define InterFieldPadding 18
+#define LabelFieldPadding 3
+#define InterFieldPadding 12
 
 @implementation PaymentView
 
