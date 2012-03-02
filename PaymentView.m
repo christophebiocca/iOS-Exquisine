@@ -35,6 +35,7 @@ static UIColor* errorLabelColor;
 
 +(UILabel*)nameLabel:(NSString*)text{
     UILabel* label = [[UILabel alloc] initWithFrame:CGRectZero];
+    [label setFont:[UIFont systemFontOfSize:15]];
     [label setText:text];
     return label;
 }
