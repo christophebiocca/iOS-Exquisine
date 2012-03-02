@@ -100,6 +100,13 @@ static UIColor* errorLabelColor;
         [cardnumberField setRightViewMode:UITextFieldViewModeAlways];
         [self addSubview:cardnumberField];
         
+        rememberLabel = [PaymentView nameLabel:@"Remember my payment information"];
+        [self addSubview:rememberLabel];
+
+        remember = [[UISwitch alloc] initWithFrame:CGRectZero];
+        [remember setOn:YES];
+        [self addSubview:remember];
+
         expirationLabel = [PaymentView nameLabel:@"Expiry Date"];
         [self addSubview:expirationLabel];
         
@@ -176,6 +183,9 @@ static UIColor* errorLabelColor;
     layoutLabels(cardnumberLabel, cardnumberErrorLabel);
     layoutWidget(cardnumberField, TextFieldHeight, NO);
     
+    layoutLabels(rememberLabel, nil);
+    layoutWidget(remember, [remember frame].size.height, NO);
+
     layoutLabels(expirationLabel, expirationErrorLabel);
     layoutWidget(expiration, 162, YES);
 }
