@@ -153,20 +153,22 @@ static UIColor* errorLabelColor;
     
     layoutWidget(topBar, UIToolbarHeight, YES);
     
-    CGSize labelSize = [[serverErrorMessageLabel text] 
-                        sizeWithFont:[serverErrorMessageLabel font] 
-                        constrainedToSize:CGSizeMake(adjustedWidth, 9999) 
-                        lineBreakMode:UILineBreakModeWordWrap];
-    [serverErrorMessageLabel setFrame:(CGRect){
-        .origin = {
-            .x = InterFieldPadding,
-            .y = height
-        },
-        .size = labelSize
-    }];
-    
-    height += labelSize.height + InterFieldPadding;
-    
+    if([[serverErrorMessageLabel text] length]){
+        CGSize labelSize = [[serverErrorMessageLabel text]
+                            sizeWithFont:[serverErrorMessageLabel font]
+                            constrainedToSize:CGSizeMake(adjustedWidth, 9999)
+                            lineBreakMode:UILineBreakModeWordWrap];
+        [serverErrorMessageLabel setFrame:(CGRect){
+            .origin = {
+                .x = InterFieldPadding,
+                .y = height
+            },
+            .size = labelSize
+        }];
+
+        height += labelSize.height + InterFieldPadding;
+    }
+
     layoutLabels(cardholderNameLabel, cardholderNameErrorLabel);
     layoutWidget(cardholderNameField, TextFieldHeight, NO);
     
