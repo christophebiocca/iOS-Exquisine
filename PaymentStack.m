@@ -16,8 +16,11 @@
 
 #import "PlaceOrder.h"
 #import "GetPaymentProfileInfo.h"
+#import "DeletePaymentInfo.h"
 #import "PaymentProfileInfo.h"
 #import "PaymentError.h"
+
+#import "PaymentInfo.h"
 
 @interface PaymentStack(PrivateMethods)
 
@@ -204,6 +207,13 @@
            paymentSuccess:^(PaymentSuccessInfo* success){
                successBlock();
                [[self completionController] setSuccessInfo:success];
+               if(![info remember]){
+                   [DeletePaymentInfo deletePaymentInfo:^(DeletePaymentInfo* delete) {
+                       CLLog(LOG_LEVEL_DEBUG, @"Successfully deleted payment info.");
+                   } failure:^(DeletePaymentInfo* delete, NSError* error){
+                       CLLog(LOG_LEVEL_ERROR, @"Got an error when deleting payment info.");
+                   }];
+               }
                [self showSuccess];
            } 
            paymentFailure:^(PaymentError* error){
