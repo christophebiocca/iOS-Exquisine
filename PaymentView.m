@@ -84,7 +84,7 @@ static UIColor* errorLabelColor;
         [cardholderNameField setDelegate:self];
         [self addSubview:cardholderNameField];
         
-        cardnumberLabel = [PaymentView nameLabel:@"Card number"];
+        cardnumberLabel = [PaymentView nameLabel:@"Card Number"];
         [self addSubview:cardnumberLabel];
         
         cardnumberErrorLabel = [PaymentView errorLabel];
