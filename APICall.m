@@ -133,6 +133,9 @@ static NSURL* serverURL;
 }
 
 +(NSMutableURLRequest*)baseRequestForLocation:(NSString*)location{
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleVersionKey];
+    
+    location = [NSString stringWithFormat:@"%@?client_version=iphone-%@", location, version];
     NSURL* requestURL = [self urlForLocation:location];
     NSMutableURLRequest* req = [NSMutableURLRequest requestWithURL:requestURL];
     return req;
