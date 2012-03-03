@@ -42,4 +42,6 @@
 -(id)initWithOrder:(Order*)order locations:(NSArray*)locations successBlock:(void(^)())success 
    completionBlock:(void(^)())completion cancellationBlock:(void(^)())cancelled;
 
+-(void)deletePaymentInfoNow;
+
 @end

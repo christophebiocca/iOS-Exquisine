@@ -12,12 +12,12 @@
 
 #define UIToolbarHeight 44
 #define TextFieldHeight 30
-#define LabelFieldPadding 5
-#define InterFieldPadding 18
+#define LabelFieldPadding 3
+#define InterFieldPadding 12
 
 @implementation PaymentView
 
-@synthesize paymentInfo, delegate;
+@synthesize paymentInfo, delegate, deleteButton;
 
 typedef enum PickerSections{
     Month,
@@ -35,6 +35,7 @@ static UIColor* errorLabelColor;
 
 +(UILabel*)nameLabel:(NSString*)text{
     UILabel* label = [[UILabel alloc] initWithFrame:CGRectZero];
+    [label setFont:[UIFont systemFontOfSize:15]];
     [label setText:text];
     return label;
 }
@@ -59,7 +60,7 @@ static UIColor* errorLabelColor;
                                                                                  action:nil];
         paymentInfo = [[PaymentInfo alloc] init];
         topBar = [[UIToolbar alloc] initWithFrame:CGRectZero];
-        botBar = [[UIToolbar alloc] initWithFrame:CGRectZero];
+        //botBar = [[UIToolbar alloc] initWithFrame:CGRectZero];
         [topBar setItems:[NSArray arrayWithObjects:cancel, flexibleSpace, done, nil]];
         [self addSubview:topBar];
         [self addSubview:botBar];
@@ -99,6 +100,14 @@ static UIColor* errorLabelColor;
         [cardnumberField setRightViewMode:UITextFieldViewModeAlways];
         [self addSubview:cardnumberField];
         
+        rememberLabel = [PaymentView nameLabel:@"Remember my payment information"];
+        [self addSubview:rememberLabel];
+
+        remember = [[UISwitch alloc] initWithFrame:CGRectZero];
+        [remember setOn:[paymentInfo remember]];
+        [remember addTarget:self action:@selector(rememberChanged:) forControlEvents:UIControlEventEditingChanged];
+        [self addSubview:remember];
+
         expirationLabel = [PaymentView nameLabel:@"Expiry Date"];
         [self addSubview:expirationLabel];
         
@@ -110,6 +119,11 @@ static UIColor* errorLabelColor;
         [expiration setDataSource:self];
         [expiration setShowsSelectionIndicator:YES];
         [self addSubview:expiration];
+        
+        deleteButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [deleteButton setTitle:@"Forget my credit card now" forState:UIControlStateNormal];
+        [self addSubview:deleteButton];
+        
     }
     return self;
 }
@@ -153,26 +167,33 @@ static UIColor* errorLabelColor;
     
     layoutWidget(topBar, UIToolbarHeight, YES);
     
-    CGSize labelSize = [[serverErrorMessageLabel text] 
-                        sizeWithFont:[serverErrorMessageLabel font] 
-                        constrainedToSize:CGSizeMake(adjustedWidth, 9999) 
-                        lineBreakMode:UILineBreakModeWordWrap];
-    [serverErrorMessageLabel setFrame:(CGRect){
-        .origin = {
-            .x = InterFieldPadding,
-            .y = height
-        },
-        .size = labelSize
-    }];
-    
-    height += labelSize.height + InterFieldPadding;
-    
+    if([[serverErrorMessageLabel text] length]){
+        CGSize labelSize = [[serverErrorMessageLabel text]
+                            sizeWithFont:[serverErrorMessageLabel font]
+                            constrainedToSize:CGSizeMake(adjustedWidth, 9999)
+                            lineBreakMode:UILineBreakModeWordWrap];
+        [serverErrorMessageLabel setFrame:(CGRect){
+            .origin = {
+                .x = InterFieldPadding,
+                .y = height
+            },
+            .size = labelSize
+        }];
+
+        height += labelSize.height + InterFieldPadding;
+    }
+
     layoutLabels(cardholderNameLabel, cardholderNameErrorLabel);
     layoutWidget(cardholderNameField, TextFieldHeight, NO);
     
     layoutLabels(cardnumberLabel, cardnumberErrorLabel);
     layoutWidget(cardnumberField, TextFieldHeight, NO);
     
+    layoutLabels(rememberLabel, nil);
+    layoutWidget(remember, [remember frame].size.height, NO);
+    
+    layoutWidget(deleteButton, 22,NO);
+
     layoutLabels(expirationLabel, expirationErrorLabel);
     layoutWidget(expiration, 162, YES);
 }
@@ -221,6 +242,10 @@ static UIColor* errorLabelColor;
 -(void)flushExpirationYear{
     [paymentInfo setExpirationYear:[self yearForRow:[expiration selectedRowInComponent:Year]]];
     [self setErrorMessage:[paymentInfo expirationError] onErrorLabel:expirationErrorLabel];
+}
+
+-(void)rememberChanged:(UISwitch*)rememberSwitch{
+    [paymentInfo setRemember:[rememberSwitch isOn]];
 }
 
 #pragma mark UITextFieldDelegate    

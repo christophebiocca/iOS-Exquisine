@@ -17,11 +17,14 @@
     NSInteger expirationMonth;
     NSInteger expirationYear;
     NSString* expirationError;
+    
+    BOOL remember;
 }
 
 @property(retain, readonly)NSString* cardnumberError;
 @property(retain, readonly)NSString* cardholderNameError;
 @property(retain, readonly)NSString* expirationError;
+@property(assign, nonatomic)BOOL remember;
 
 -(BOOL)anyErrors;
 
