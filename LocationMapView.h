@@ -18,6 +18,8 @@
     MKAnnotationView *lastSelectedView;
 }
 
+@property (readonly) LocationState *locationState;
+
 -(id) initWithLocationState:(LocationState *) aLocationState AndFrame:(CGRect)frame;
 
 -(Location *) annotationForAnnotationView:(MKAnnotationView *) view;

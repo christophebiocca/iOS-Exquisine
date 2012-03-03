@@ -13,6 +13,8 @@
 
 @implementation LocationMapView
 
+@synthesize locationState;
+
 -(id)initWithLocationState:(LocationState *)aLocationState AndFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -55,7 +57,9 @@
     }
     else
         [returnView setPinColor:MKPinAnnotationColorRed];
-    [returnView setCanShowCallout:YES];
+    
+    [returnView setCanShowCallout:YES];    
+    [returnView setAnimatesDrop:YES];
     
     [annotationViewDict setAssociativeTuple:returnView :annotation];
     

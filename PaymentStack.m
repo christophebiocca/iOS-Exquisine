@@ -130,7 +130,7 @@
 {
     if (!locationConfirmationController)
     {
-        locationConfirmationController = [[OrderTimeAndLocationConfirmationViewController alloc] initWithLocationState:locationState];
+        locationConfirmationController = [[OrderTimeAndLocationConfirmationViewController alloc] initWithLocationState:locationState AndOrder: order];
     }
     return locationConfirmationController;
 }

@@ -356,7 +356,9 @@ NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
     for(Combo* combo in comboList){
         [ordercombos addObject:[combo orderRepresentation]];
     }
+    
     return [NSDictionary dictionaryWithObjectsAndKeys:
+            [NSNumber numberWithDouble:[pitaFinishedTime timeIntervalSince1970]], @"completion_time",
             orderitems, @"items",
             ordercombos, @"combos",
             nil];
