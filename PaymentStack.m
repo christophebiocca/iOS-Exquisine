@@ -197,7 +197,7 @@
         [self sendOrder:info];
     }];
     [controller setCancelledBlock:^{
-        [self requestConfirmation];
+        cancelledBlock();
     }];
 }
 

@@ -105,7 +105,7 @@ static UIColor* errorLabelColor;
 
         remember = [[UISwitch alloc] initWithFrame:CGRectZero];
         [remember setOn:[paymentInfo remember]];
-        [remember addTarget:self action:@selector(rememberChanged:) forControlEvents:UIControlEventEditingChanged];
+        [remember addTarget:self action:@selector(rememberChanged:) forControlEvents:UIControlEventValueChanged];
         [self addSubview:remember];
 
         expirationLabel = [PaymentView nameLabel:@"Expiry Date"];
