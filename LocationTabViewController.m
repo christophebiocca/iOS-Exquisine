@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "LocationTabViewController.h"
 #import "LocationTabView.h"
 #import "LocationState.h"
+#import "LocationTabViewController.h"
 
 @implementation LocationTabViewController
 

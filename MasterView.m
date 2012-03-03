@@ -21,6 +21,7 @@
         loadingView = [[LoadingView alloc] initWithFrame:frame];
         
         tabController = [[UITabBarController alloc] init];
+        [[tabController view]setBackgroundColor:[UIColor redColor]];
         tabView = [tabController view];
         
         [self addSubview:tabView];

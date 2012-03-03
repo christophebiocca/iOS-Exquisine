@@ -10,6 +10,8 @@
 #import "MasterView.h"
 #import "LoadingView.h"
 #import "LocationTabViewController.h"
+#import "OrderViewController.h"
+#import "FavoritesViewController.h"
 #import "AppData.h"
 
 @implementation MasterViewController
@@ -78,10 +80,20 @@
 
 -(void) initializationSuccess
 {
-    LocationTabViewController *locationTabController = [[LocationTabViewController alloc] initWithLocationState:[appData locationState]];
-    UITabBarItem *locationTabBarItem = [[UITabBarItem alloc] initWithTitle:@"Location" image:nil tag:0];
-    [[masterView tabController] setTabBarItem:locationTabBarItem];
-    [[masterView tabController] addChildViewController:locationTabController];
+    LocationTabViewController *locationTabViewController = [[LocationTabViewController alloc] initWithLocationState:[appData locationState]];
+    
+    [locationTabViewController setTitle:@"Location"];
+    
+    OrderViewController *orderTabViewController = [[OrderViewController alloc] initializeWithOrderManager:[appData theOrderManager]];
+    
+    [orderTabViewController setTitle:@"Order"];
+    
+    FavoritesViewController *favoritesTabViewController = [[FavoritesViewController alloc] initWithFavoritesListAndMenu:[appData favoriteOrders] :[appData theMenu]];
+    
+    [favoritesTabViewController setTitle:@"Favorites"];
+    
+    [[masterView tabController] setViewControllers:[NSArray arrayWithObjects:locationTabViewController,orderTabViewController,favoritesTabViewController,nil]];
+    
     [[[masterView tabController] view] setNeedsLayout];
     [[[masterView tabController] view] setNeedsDisplay];
     [masterView dissolveLoadingView];
