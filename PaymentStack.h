@@ -50,4 +50,6 @@
 
 -(Location *) currentLocation;
 
+-(void)deletePaymentInfoNow;
+
 @end

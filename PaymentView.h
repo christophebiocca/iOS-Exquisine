@@ -30,11 +30,17 @@
     UILabel* cardnumberErrorLabel;
     UITextField* cardnumberField;
     
+    UILabel* rememberLabel;
+    UISwitch* remember;
+
     UILabel* expirationLabel;
     UILabel* expirationErrorLabel;
     UIPickerView* expiration;
+    
+    UIButton *deleteButton;
 }
 
+@property(retain) UIButton *deleteButton;
 @property(retain, readonly)PaymentInfo* paymentInfo;
 @property(retain, nonatomic)id<PaymentViewDelegate> delegate;
 

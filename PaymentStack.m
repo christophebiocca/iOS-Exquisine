@@ -8,6 +8,9 @@
 
 #import "PaymentStack.h"
 #import "LocationState.h"
+
+#import "PaymentView.h"
+
 #import "PaymentConfirmationController.h"
 #import "PaymentInfoViewController.h"
 #import "PaymentProcessingViewController.h"
@@ -16,8 +19,11 @@
 #import "OrderTimeAndLocationConfirmationViewController.h"
 #import "PlaceOrder.h"
 #import "GetPaymentProfileInfo.h"
+#import "DeletePaymentInfo.h"
 #import "PaymentProfileInfo.h"
 #import "PaymentError.h"
+
+#import "PaymentInfo.h"
 
 @interface PaymentStack(PrivateMethods)
 
@@ -100,6 +106,7 @@
 -(PaymentInfoViewController*)paymentInfoController{
     if(!paymentInfoController){
         paymentInfoController = [[PaymentInfoViewController alloc] init];
+        [[(PaymentView *)[[self paymentInfoController] view] deleteButton] addTarget:self action:@selector(deletePaymentInfoNow) forControlEvents:UIControlEventTouchUpInside];
     }
     return paymentInfoController;
 }
@@ -220,12 +227,13 @@
         [self sendOrder:info];
     }];
     [controller setCancelledBlock:^{
-        [self requestConfirmation];
+        cancelledBlock();
     }];
 }
 
 -(void)sendOrder:(PaymentInfo*)info{
     [self afterAnimating:^{
+        
         [[self navigationController] setViewControllers:[NSArray arrayWithObjects:[self paymentInfoController], 
                                                          [self processingController], nil] animated:YES];
     }];
@@ -233,6 +241,9 @@
            paymentSuccess:^(PaymentSuccessInfo* success){
                successBlock();
                [[self completionController] setSuccessInfo:success AndOrder:order];
+               if(![info remember]){
+                   [self deletePaymentInfoNow];
+               }
                [self showSuccess];
            } 
            paymentFailure:^(PaymentError* error){
@@ -243,6 +254,15 @@
                    [self showFailure:[error cause]];
                }
            }];
+}
+
+-(void)deletePaymentInfoNow
+{
+    [DeletePaymentInfo deletePaymentInfo:^(DeletePaymentInfo* delete) {
+        CLLog(LOG_LEVEL_DEBUG, @"Successfully deleted payment info.");
+    } failure:^(DeletePaymentInfo* delete, NSError* error){
+        CLLog(LOG_LEVEL_ERROR, @"Got an error when deleting payment info.");
+    }];
 }
 
 -(void)showSuccess{
