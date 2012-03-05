@@ -14,7 +14,7 @@
 
 @implementation PaymentInfoViewController
 
-@synthesize completionBlock, cancelledBlock, paymentView;
+@synthesize completionBlock, cancelledBlock;
 
 - (id)init
 {

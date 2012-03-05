@@ -17,7 +17,7 @@
 
 @implementation PaymentView
 
-@synthesize paymentInfo, delegate, deleteButton;
+@synthesize paymentInfo, delegate;
 
 typedef enum PickerSections{
     Month,
@@ -119,11 +119,6 @@ static UIColor* errorLabelColor;
         [expiration setDataSource:self];
         [expiration setShowsSelectionIndicator:YES];
         [self addSubview:expiration];
-        
-        deleteButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [deleteButton setTitle:@"Forget my credit card now" forState:UIControlStateNormal];
-        [self addSubview:deleteButton];
-        
     }
     return self;
 }
@@ -191,8 +186,6 @@ static UIColor* errorLabelColor;
     
     layoutLabels(rememberLabel, nil);
     layoutWidget(remember, [remember frame].size.height, NO);
-    
-    layoutWidget(deleteButton, 22,NO);
 
     layoutLabels(expirationLabel, expirationErrorLabel);
     layoutWidget(expiration, 162, YES);

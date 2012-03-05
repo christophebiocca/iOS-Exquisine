@@ -21,8 +21,6 @@
     void(^cancelledBlock)();
 }
 
-@property (retain) PaymentView *paymentView;
-
 -(id)init;
 
 @property(copy, nonatomic)void(^completionBlock)(PaymentInfo*);
