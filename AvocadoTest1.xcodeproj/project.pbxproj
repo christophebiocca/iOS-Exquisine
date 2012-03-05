@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		23082F5514D88513003964CE /* APICallFailureHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 23082F5214D88513003964CE /* APICallFailureHandler.m */; };
 		23082F5614D88513003964CE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 23082F5414D88513003964CE /* Reachability.m */; };
 		23082F5C14D8968F003964CE /* ComboViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23082F5B14D8968F003964CE /* ComboViewController.m */; };
 		23082F6114D897D1003964CE /* ComboView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23082F6014D897D1003964CE /* ComboView.m */; };
@@ -167,8 +166,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		23082F5114D88513003964CE /* APICallFailureHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APICallFailureHandler.h; sourceTree = "<group>"; };
-		23082F5214D88513003964CE /* APICallFailureHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APICallFailureHandler.m; sourceTree = "<group>"; };
 		23082F5314D88513003964CE /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		23082F5414D88513003964CE /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		23082F5A14D8968F003964CE /* ComboViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComboViewController.h; sourceTree = "<group>"; };
@@ -475,8 +472,6 @@
 		23082F4F14D884F1003964CE /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				23082F5114D88513003964CE /* APICallFailureHandler.h */,
-				23082F5214D88513003964CE /* APICallFailureHandler.m */,
 				23082F5314D88513003964CE /* Reachability.h */,
 				23082F5414D88513003964CE /* Reachability.m */,
 			);
@@ -1706,7 +1701,6 @@
 				D9768A6514D73EB300BBA467 /* PaymentInfo.m in Sources */,
 				D9768A6614D73EB300BBA467 /* PaymentInfoViewController.m in Sources */,
 				D9768A7E14D74AAD00BBA467 /* PaymentView.m in Sources */,
-				23082F5514D88513003964CE /* APICallFailureHandler.m in Sources */,
 				23082F5614D88513003964CE /* Reachability.m in Sources */,
 				23082F5C14D8968F003964CE /* ComboViewController.m in Sources */,
 				23082F6114D897D1003964CE /* ComboView.m in Sources */,
