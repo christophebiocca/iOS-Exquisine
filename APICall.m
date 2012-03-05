@@ -64,6 +64,16 @@ static NSURL* serverURL;
                                    }];
 }
 
++(id)sendDELETERequestForLocation:(NSString *)location withDelegate:(id<APICallDelegate>)delegate{
+    __block id<APICallDelegate> theDelegate = delegate;
+    return [self sendDELETERequestForLocation:location 
+                                      success:^(APICall* call) {
+                                          [theDelegate apiCallCompleted:call];
+                                      } failure:^(APICall* call, NSError* error) {
+                                          [theDelegate apiCall:call returnedError:error];
+                                      }];
+}
+
 +(id)sendPOSTRequestForLocation:(NSString*)location withBodyData:(NSData*)data withDelegate:(id<APICallDelegate>)delegate{
     __block id<APICallDelegate> theDelegate = delegate;
     return [self sendPOSTRequestForLocation:location 
@@ -94,6 +104,18 @@ static NSURL* serverURL;
     APICall* call = [[self alloc] initWithRequest:[self baseRequestForLocation:location] 
                         successBlock:success 
                           errorBlock:failure];
+    [call send];
+    return call;
+}
+
++(id)sendDELETERequestForLocation:(NSString *)location 
+                          success:(void (^)(id))success 
+                          failure:(void (^)(id, NSError *))failure{
+    NSMutableURLRequest* req = [self baseRequestForLocation:location];
+    [req setHTTPMethod:@"DELETE"];
+    APICall* call = [[self alloc] initWithRequest:req 
+                                     successBlock:success 
+                                       errorBlock:failure];
     [call send];
     return call;
 }
@@ -133,6 +155,9 @@ static NSURL* serverURL;
 }
 
 +(NSMutableURLRequest*)baseRequestForLocation:(NSString*)location{
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleVersionKey];
+    
+    location = [NSString stringWithFormat:@"%@?client_version=iphone-%@", location, version];
     NSURL* requestURL = [self urlForLocation:location];
     NSMutableURLRequest* req = [NSMutableURLRequest requestWithURL:requestURL];
     return req;

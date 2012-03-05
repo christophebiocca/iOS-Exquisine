@@ -27,12 +27,16 @@ extern NSString* SERVER_HTTP_ERROR_DOMAIN;
 }
 
 +(id)sendGETRequestForLocation:(NSString*)location withDelegate:(id<APICallDelegate>)delegate;
++(id)sendDELETERequestForLocation:(NSString*)location withDelegate:(id<APICallDelegate>)delegate;
 +(id)sendPOSTRequestForLocation:(NSString*)location withBodyData:(NSData*)data withDelegate:(id<APICallDelegate>)delegate;
 +(id)sendPOSTRequestForLocation:(NSString*)location withFormData:(NSDictionary*)form andDelegate:(id<APICallDelegate>)delegate;
 
 +(id)sendGETRequestForLocation:(NSString*)location 
                          success:(void(^)(id))success 
                          failure:(void(^)(id, NSError*))failure;
++(id)sendDELETERequestForLocation:(NSString*)location 
+                       success:(void(^)(id))success 
+                       failure:(void(^)(id, NSError*))failure;
 +(id)sendPOSTRequestForLocation:(NSString*)location 
                      withBodyData:(NSData*)data 
                           success:(void (^)(id))success
