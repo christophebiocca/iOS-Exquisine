@@ -277,7 +277,6 @@
 -(void)viewWillAppear:(BOOL)animated{
     [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Opened order page"];
     [super viewWillAppear:animated];
-    [self orderAltered:nil];
 }
 
 - (void)viewDidUnload
