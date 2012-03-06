@@ -11,9 +11,9 @@
 #import "PaymentInfo.h"
 
 #define UIToolbarHeight 44
-#define TextFieldHeight 30
-#define LabelFieldPadding 3
-#define InterFieldPadding 12
+#define TextFieldHeight 25
+#define LabelFieldPadding 2
+#define InterFieldPadding 8
 
 @implementation PaymentView
 
@@ -60,15 +60,12 @@ static UIColor* errorLabelColor;
                                                                                  action:nil];
         paymentInfo = [[PaymentInfo alloc] init];
         topBar = [[UIToolbar alloc] initWithFrame:CGRectZero];
-        //botBar = [[UIToolbar alloc] initWithFrame:CGRectZero];
         [topBar setItems:[NSArray arrayWithObjects:cancel, flexibleSpace, done, nil]];
         [self addSubview:topBar];
-        [self addSubview:botBar];
         
         serverErrorMessageLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        [serverErrorMessageLabel setFont:[UIFont systemFontOfSize:20]];
-        [serverErrorMessageLabel setLineBreakMode:UILineBreakModeWordWrap];
-        [serverErrorMessageLabel setNumberOfLines:0];
+        [serverErrorMessageLabel setFont:[UIFont systemFontOfSize:16]];
+        [serverErrorMessageLabel setNumberOfLines:1];
         [serverErrorMessageLabel setTextColor:errorLabelColor];
         [self addSubview:serverErrorMessageLabel];
         
@@ -93,14 +90,14 @@ static UIColor* errorLabelColor;
         
         cardnumberField = [[UITextField alloc] initWithFrame:CGRectZero];
         [cardnumberField setBorderStyle:UITextBorderStyleRoundedRect];
-        [cardnumberField setKeyboardType:UIKeyboardTypeNumbersAndPunctuation];
+        [cardnumberField setKeyboardType:UIKeyboardTypeNumberPad];
         [cardnumberField setClearButtonMode:UITextFieldViewModeWhileEditing];
         [cardnumberField setPlaceholder:@"Credit Card #"];
         [cardnumberField setDelegate:self];
         [cardnumberField setRightViewMode:UITextFieldViewModeAlways];
         [self addSubview:cardnumberField];
         
-        rememberLabel = [PaymentView nameLabel:@"Remember my payment information"];
+        rememberLabel = [PaymentView nameLabel:@"Remember Info"];
         [self addSubview:rememberLabel];
 
         remember = [[UISwitch alloc] initWithFrame:CGRectZero];
@@ -114,23 +111,36 @@ static UIColor* errorLabelColor;
         expirationErrorLabel = [PaymentView errorLabel];
         [self addSubview:expirationErrorLabel];
         
-        expiration = [[UIPickerView alloc] initWithFrame:CGRectZero];
-        [expiration setDelegate:self];
-        [expiration setDataSource:self];
-        [expiration setShowsSelectionIndicator:YES];
-        [self addSubview:expiration];
+        NSDateFormatter* formatter = [NSDateFormatter new];
+        NSDate* today = [NSDate date];
+
+        [formatter setDateFormat:@"MM"];
+        expirationMonth = [[UITextField alloc] initWithFrame:CGRectZero];
+        [expirationMonth setBorderStyle:UITextBorderStyleRoundedRect];
+        [expirationMonth setKeyboardType:UIKeyboardTypeNumberPad];
+        [expirationMonth setClearButtonMode:UITextFieldViewModeWhileEditing];
+        [expirationMonth setPlaceholder:[formatter stringFromDate:today]];
+        [expirationMonth setDelegate:self];
+        [self addSubview:expirationMonth];
+
+        [formatter setDateFormat:@"yyyy"];
+        expirationYear = [[UITextField alloc] initWithFrame:CGRectZero];
+        [expirationYear setBorderStyle:UITextBorderStyleRoundedRect];
+        [expirationYear setKeyboardType:UIKeyboardTypeNumberPad];
+        [expirationYear setClearButtonMode:UITextFieldViewModeWhileEditing];
+        [expirationYear setPlaceholder:[formatter stringFromDate:today]];
+        [expirationYear setDelegate:self];
+        [self addSubview:expirationYear];
     }
     return self;
 }
 
 -(void)layoutSubviews{
     CGRect frame = [self bounds];
-    [botBar setFrame:CGRectMake(0, 416, 320, 44)];
-    NSInteger rightLimit = frame.size.width - InterFieldPadding;
     NSInteger adjustedWidth = frame.size.width - 2*InterFieldPadding;
-    __block NSInteger height = 0;
     
-    void (^layoutLabels)(UILabel*, UILabel*) = ^(UILabel* label, UILabel* errorLabel){
+    NSInteger (^layoutLabels)(NSInteger, UILabel*, UILabel*, NSInteger,NSInteger) =
+    ^(NSInteger height, UILabel* label, UILabel* errorLabel, NSInteger x,NSInteger width){
         [label sizeToFit];
         CGRect leftFrame = [label frame];
         [errorLabel sizeToFit];
@@ -138,29 +148,34 @@ static UIColor* errorLabelColor;
         CGFloat maxHeight = MAX(leftFrame.size.height,rightFrame.size.height);
         height += maxHeight;
         leftFrame.origin.y = height - leftFrame.size.height;
-        leftFrame.origin.x = InterFieldPadding;
+        leftFrame.origin.x = x;
         rightFrame.origin.y = height - rightFrame.size.height;
-        rightFrame.origin.x = rightLimit - rightFrame.size.width;
+        rightFrame.origin.x = (x+width) - rightFrame.size.width;
         [label setFrame:leftFrame];
         [errorLabel setFrame:rightFrame];
         height += LabelFieldPadding;
+        return height;
     };
     
-    void (^layoutWidget)(UIView*, NSInteger, BOOL)= ^(UIView* widget, NSInteger setHeight, BOOL fullWidth){
+    NSInteger (^layoutWidget)(NSInteger, UIView*, NSInteger, NSInteger,NSInteger)=
+    ^(NSInteger height, UIView* widget, NSInteger setHeight, NSInteger x,NSInteger width){
         [widget setFrame:(CGRect){
             .origin = {
-                .x = fullWidth ? 0 : InterFieldPadding,
+                .x = x,
                 .y = height
             },
             .size = {
-                .width = fullWidth ? frame.size.width : adjustedWidth,
+                .width = width,
                 .height = setHeight
             }
         }];
         height += setHeight + InterFieldPadding;
+        return height;
     };
     
-    layoutWidget(topBar, UIToolbarHeight, YES);
+    NSInteger height = 0;
+    
+    height = layoutWidget(height, topBar, UIToolbarHeight, 0, frame.size.width);
     
     if([[serverErrorMessageLabel text] length]){
         CGSize labelSize = [[serverErrorMessageLabel text]
@@ -178,17 +193,34 @@ static UIColor* errorLabelColor;
         height += labelSize.height + InterFieldPadding;
     }
 
-    layoutLabels(cardholderNameLabel, cardholderNameErrorLabel);
-    layoutWidget(cardholderNameField, TextFieldHeight, NO);
+    height = layoutLabels(height, cardholderNameLabel, cardholderNameErrorLabel,
+                          InterFieldPadding, adjustedWidth);
+    height = layoutWidget(height, cardholderNameField, TextFieldHeight,
+                          InterFieldPadding, adjustedWidth);
     
-    layoutLabels(cardnumberLabel, cardnumberErrorLabel);
-    layoutWidget(cardnumberField, TextFieldHeight, NO);
-    
-    layoutLabels(rememberLabel, nil);
-    layoutWidget(remember, [remember frame].size.height, NO);
+    height = layoutLabels(height, cardnumberLabel, cardnumberErrorLabel,
+                          InterFieldPadding, adjustedWidth);
+    height = layoutWidget(height, cardnumberField, TextFieldHeight,
+                          InterFieldPadding, adjustedWidth);
 
-    layoutLabels(expirationLabel, expirationErrorLabel);
-    layoutWidget(expiration, 162, YES);
+    [rememberLabel sizeToFit];
+    NSInteger leftWidth = MAX([rememberLabel frame].size.width,
+                              [remember frame].size.width);
+    NSInteger midpoint = InterFieldPadding*2 + leftWidth;
+    NSInteger rightWidth = frame.size.width - InterFieldPadding - midpoint;
+    NSInteger leftHeight = layoutLabels(height, rememberLabel, nil,
+                                        InterFieldPadding, leftWidth);
+    NSInteger rightHeight = layoutLabels(height, expirationLabel,expirationErrorLabel,
+                                         midpoint, rightWidth);
+    height = MAX(leftHeight, rightHeight);
+    leftHeight = layoutWidget(height, remember, [remember frame].size.height, 
+                              InterFieldPadding, leftWidth);
+    NSInteger threeQuarters = midpoint + rightWidth/2 + InterFieldPadding/2;
+    NSInteger halfRightWidth = rightWidth/2 - InterFieldPadding/2;
+    layoutWidget(height, expirationMonth, TextFieldHeight,
+                               midpoint, halfRightWidth);
+    layoutWidget(height, expirationYear, TextFieldHeight,
+                               threeQuarters, halfRightWidth);
 }
 
 /*
@@ -228,12 +260,12 @@ static UIColor* errorLabelColor;
 }
 
 -(void)flushExpirationMonth{
-    [paymentInfo setExpirationMonth:[self monthForRow:[expiration selectedRowInComponent:Month]]];
+    [paymentInfo setExpirationMonth:[expirationMonth text]];
     [self setErrorMessage:[paymentInfo expirationError] onErrorLabel:expirationErrorLabel];
 }
 
 -(void)flushExpirationYear{
-    [paymentInfo setExpirationYear:[self yearForRow:[expiration selectedRowInComponent:Year]]];
+    [paymentInfo setExpirationYear:[expirationYear text]];
     [self setErrorMessage:[paymentInfo expirationError] onErrorLabel:expirationErrorLabel];
 }
 
@@ -246,11 +278,15 @@ static UIColor* errorLabelColor;
 -(BOOL)textFieldShouldReturn:(UITextField*)textField{
     if(textField == cardholderNameField){
         [self flushCardholderName];
-        [cardholderNameField resignFirstResponder];
-        return YES;
+        [cardnumberField becomeFirstResponder];
     } else if(textField == cardnumberField) {
         [self flushCardnumber];
-        [cardnumberField resignFirstResponder];
+        [expirationMonth becomeFirstResponder];
+    } else if(textField == expirationMonth) {
+        [expirationYear becomeFirstResponder];
+        [self flushExpirationMonth];
+    } else if(textField == expirationYear) {
+        [self flushExpirationYear];
     } else {
         NSAssert(NO, @"Got a message from a random text field!");
     }
@@ -262,68 +298,42 @@ static UIColor* errorLabelColor;
         [self flushCardholderName];
     } else if(textField == cardnumberField){
         [self flushCardnumber];
+    } else if(textField == expirationMonth){
+        [self flushExpirationMonth];
+    } else if(textField == expirationYear){
+        [self flushExpirationYear];
     } else {
         NSAssert(NO, @"Got a message from a random text field (%@) !", textField);
     }
 }
 
-#pragma mark UIPickerDataSource
-
--(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
-    return NumberOfPickerSections;
-}
-
--(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
-    switch (component) {
-        case Month:
-            return 12;
-        case Year:
-            return 10;
-        default:
-            NSAssert(NO, @"Impossible index passed in %d", component);
-            return -1;
+-(void)textFieldDidBeginEditing:(UITextField*)textField{
+    if(textField == cardholderNameField){
+        [self setErrorMessage:nil onErrorLabel:cardholderNameErrorLabel];
+    } else if(textField == cardnumberField){
+        [self setErrorMessage:nil onErrorLabel:cardnumberErrorLabel];
+    } else if(textField == expirationMonth){
+        [self setErrorMessage:nil onErrorLabel:expirationErrorLabel];
+    } else if(textField == expirationYear){
+        [self setErrorMessage:nil onErrorLabel:expirationErrorLabel];
+    } else {
+        NSAssert(NO, @"Got a message from a random text field (%@) !", textField);
     }
 }
 
-#pragma mark UIPickerViewDelegate
-
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-    switch (component) {
-        case Month:
-            return [NSString stringWithFormat:@"%2d", [self monthForRow:row]];
-        case Year:
-        {
-            return [NSString stringWithFormat:@"%4d", [self yearForRow:row]];
-        }   
-        default:
-            NSAssert(NO, @"Impossible index passed in %d", component);
-            return nil;
+-(BOOL)textField:(UITextField*)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    NSInteger finalSize = [[textField text] length] + [string length] - range.length;
+    NSLog(@"FINALSIZE: %i", finalSize);
+    if(textField == cardnumberField && finalSize >= 16){
+        [expirationMonth performSelectorOnMainThread:@selector(becomeFirstResponder) 
+                                          withObject:nil 
+                                       waitUntilDone:NO];
+    } else if(textField == expirationMonth && finalSize >= 2){
+        [expirationYear performSelectorOnMainThread:@selector(becomeFirstResponder) 
+                                         withObject:nil 
+                                      waitUntilDone:NO];
     }
-}
-
--(CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component{
-    return 30;
-}
-
--(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
-    for(UITextField* textfield in [NSArray arrayWithObjects:cardholderNameField, cardnumberField, nil]){
-        if([textfield isFirstResponder]){
-            [textfield resignFirstResponder];
-        }
-    }
-    switch (component) {
-        case Year:
-            [paymentInfo setExpirationYear:[self yearForRow:row]];
-            [paymentInfo setExpirationMonth:[self monthForRow:[pickerView selectedRowInComponent:Month]]];
-            break;
-        case Month:
-            [paymentInfo setExpirationMonth:[self monthForRow:row]];
-            [paymentInfo setExpirationYear:[self yearForRow:[pickerView selectedRowInComponent:Year]]];
-            break;    
-        default:
-            NSAssert(NO, @"Impossible index passed in %d", component);
-    }
-    [self setErrorMessage:[paymentInfo expirationError] onErrorLabel:expirationErrorLabel];
+    return YES;
 }
 
 #pragma mark buttons

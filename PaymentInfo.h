@@ -30,8 +30,8 @@
 
 -(void)setCardnumber:(NSString*)number;
 -(void)setCardholderName:(NSString*)name;
--(void)setExpirationMonth:(NSInteger)month;
--(void)setExpirationYear:(NSInteger)year;
+-(void)setExpirationMonth:(NSString*)month;
+-(void)setExpirationYear:(NSString*)year;
 
 -(NSDictionary*)dictionaryRepresentation;
 
