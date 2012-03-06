@@ -323,7 +323,6 @@ static UIColor* errorLabelColor;
 
 -(BOOL)textField:(UITextField*)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     NSInteger finalSize = [[textField text] length] + [string length] - range.length;
-    NSLog(@"FINALSIZE: %i", finalSize);
     if(textField == cardnumberField && finalSize >= 16){
         [expirationMonth performSelectorOnMainThread:@selector(becomeFirstResponder) 
                                           withObject:nil 
