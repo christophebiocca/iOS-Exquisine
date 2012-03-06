@@ -16,7 +16,6 @@
     
     PaymentInfo* info;
     UIToolbar* topBar;
-    UIToolbar* botBar;
     UIBarButtonItem* done;
     UIBarButtonItem* cancel;
     

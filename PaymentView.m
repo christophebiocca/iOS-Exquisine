@@ -60,10 +60,8 @@ static UIColor* errorLabelColor;
                                                                                  action:nil];
         paymentInfo = [[PaymentInfo alloc] init];
         topBar = [[UIToolbar alloc] initWithFrame:CGRectZero];
-        //botBar = [[UIToolbar alloc] initWithFrame:CGRectZero];
         [topBar setItems:[NSArray arrayWithObjects:cancel, flexibleSpace, done, nil]];
         [self addSubview:topBar];
-        [self addSubview:botBar];
         
         serverErrorMessageLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         [serverErrorMessageLabel setFont:[UIFont systemFontOfSize:20]];
@@ -125,7 +123,6 @@ static UIColor* errorLabelColor;
 
 -(void)layoutSubviews{
     CGRect frame = [self bounds];
-    [botBar setFrame:CGRectMake(0, 416, 320, 44)];
     NSInteger rightLimit = frame.size.width - InterFieldPadding;
     NSInteger adjustedWidth = frame.size.width - 2*InterFieldPadding;
     __block NSInteger height = 0;
