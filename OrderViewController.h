@@ -56,6 +56,8 @@
 
 -(void) toggleWhetherFavorite;
 
+-(void) updateEditButton;
+
 -(void) orderAltered:(NSNotification *)aNotification;
 
 @end

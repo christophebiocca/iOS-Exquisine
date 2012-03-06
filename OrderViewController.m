@@ -266,6 +266,8 @@
     [[orderView editButton] setTarget:self];
     [[orderView editButton] setAction:@selector(toggleEditing)];
     
+    [self orderAltered:nil];
+    
     [self setView:orderView];
 }
 
@@ -328,6 +330,8 @@
     [newItemsList replaceObjectAtIndex:0 withObject:doneButton];
     
     [[orderView orderToolbar] setItems:newItemsList animated:YES];
+    
+    [self updateEditButton];
 }
 
 -(void)exitEditingMode
@@ -341,6 +345,7 @@
     [newItemsList replaceObjectAtIndex:0 withObject:edButton];
     
     [[orderView orderToolbar] setItems:newItemsList animated:YES];
+    [self updateEditButton];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -362,6 +367,18 @@
         [self promptForFavDeletion];
     }
     
+}
+
+-(void)updateEditButton
+{
+    
+    if ([[[theOrderManager thisOrder] itemList] count] + [[[theOrderManager thisOrder] comboList] count] > 0) {
+        [[[[orderView orderToolbar] items] objectAtIndex:0] setEnabled:YES];
+    }
+    else
+    {
+        [[[[orderView orderToolbar] items] objectAtIndex:0] setEnabled:NO];
+    }
 }
 
 -(void)orderAltered:(NSNotification *)aNotification
@@ -386,6 +403,7 @@
     {
         [self exitEditingMode];
     }
+    [self updateEditButton];
 }
 
 -(void)dealloc
