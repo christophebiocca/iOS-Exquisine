@@ -12,14 +12,19 @@
 extern NSString* ITEM_MODIFIED;
 
 @class Option;
+@class NSMutableNumber;
 
 @interface Item : MenuComponent
 {
-    
+    //i.e. the number of this item that this
+    //one object represents
+    NSMutableNumber* numberOfItems;
     NSDecimalNumber* basePrice;
     NSMutableArray *options;
     
 }
+
+@property (retain) NSMutableNumber *numberOfItems;
 
 @property (retain, readonly) NSMutableArray *options; 
 @property (retain, readonly) NSDecimalNumber* basePrice;
@@ -39,6 +44,8 @@ extern NSString* ITEM_MODIFIED;
 -(void) addOption:(Option *) anOption;
 
 -(void) optionAltered;
+
+-(void) numberAltered;
 
 -(BOOL) isEffectivelyEqual:(id) anItem;
 

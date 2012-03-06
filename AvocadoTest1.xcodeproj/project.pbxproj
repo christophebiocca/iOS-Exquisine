@@ -110,6 +110,9 @@
 		23E3035B14DB3BAA00BABB10 /* IndicatorImageStale.png in Resources */ = {isa = PBXBuildFile; fileRef = 23E3035514DB3BAA00BABB10 /* IndicatorImageStale.png */; };
 		23E3035C14DB3BAA00BABB10 /* IndicatorImageStale@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 23E3035614DB3BAA00BABB10 /* IndicatorImageStale@2x.png */; };
 		23E7D87C14C9BA88006D6C13 /* behindButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 23E7D87B14C9BA88006D6C13 /* behindButton.png */; };
+		23FAB38B150560F900606816 /* IntegerInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23FAB38A150560F900606816 /* IntegerInputCell.m */; };
+		23FAB38E1505615300606816 /* IntegerInputCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 23FAB38D1505615300606816 /* IntegerInputCellData.m */; };
+		23FAB39615056AE800606816 /* NSMutableNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 23FAB39515056AE800606816 /* NSMutableNumber.m */; };
 		23FDE9CF14D8A9BB005AA6D6 /* ItemGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 23FDE9CE14D8A9BB005AA6D6 /* ItemGroup.m */; };
 		23FDE9D414D8B3D6005AA6D6 /* ItemGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23FDE9D314D8B3D6005AA6D6 /* ItemGroupCell.m */; };
 		38CFAE9914D9C6F2000A679D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 38CFAE9814D9C6F2000A679D /* libz.dylib */; };
@@ -356,6 +359,12 @@
 		23E3035514DB3BAA00BABB10 /* IndicatorImageStale.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IndicatorImageStale.png; sourceTree = "<group>"; };
 		23E3035614DB3BAA00BABB10 /* IndicatorImageStale@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IndicatorImageStale@2x.png"; sourceTree = "<group>"; };
 		23E7D87B14C9BA88006D6C13 /* behindButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = behindButton.png; sourceTree = "<group>"; };
+		23FAB389150560F900606816 /* IntegerInputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntegerInputCell.h; sourceTree = "<group>"; };
+		23FAB38A150560F900606816 /* IntegerInputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntegerInputCell.m; sourceTree = "<group>"; };
+		23FAB38C1505615300606816 /* IntegerInputCellData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntegerInputCellData.h; sourceTree = "<group>"; };
+		23FAB38D1505615300606816 /* IntegerInputCellData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntegerInputCellData.m; sourceTree = "<group>"; };
+		23FAB39415056AE800606816 /* NSMutableNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSMutableNumber.h; sourceTree = "<group>"; };
+		23FAB39515056AE800606816 /* NSMutableNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSMutableNumber.m; sourceTree = "<group>"; };
 		23FDE9CD14D8A9BB005AA6D6 /* ItemGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemGroup.h; sourceTree = "<group>"; };
 		23FDE9CE14D8A9BB005AA6D6 /* ItemGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemGroup.m; sourceTree = "<group>"; };
 		23FDE9D214D8B3D6005AA6D6 /* ItemGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemGroupCell.h; sourceTree = "<group>"; };
@@ -499,10 +508,8 @@
 		230C353114EEB94D004DCF85 /* OtherCells */ = {
 			isa = PBXGroup;
 			children = (
-				230C353314EEB994004DCF85 /* GeneralPurposeViewCell.h */,
-				230C353414EEB994004DCF85 /* GeneralPurposeViewCell.m */,
-				230C353A14EEE446004DCF85 /* GeneralPurposeViewCellData.h */,
-				230C353B14EEE446004DCF85 /* GeneralPurposeViewCellData.m */,
+				23FAB388150560C800606816 /* IntegerInputCell */,
+				23FAB387150560B100606816 /* GeneralPurposeCell */,
 			);
 			name = OtherCells;
 			sourceTree = "<group>";
@@ -1032,6 +1039,8 @@
 			children = (
 				23D1DCB614F7156200CFD279 /* FlexableDictionary.h */,
 				23D1DCB714F7156200CFD279 /* FlexableDictionary.m */,
+				23FAB39415056AE800606816 /* NSMutableNumber.h */,
+				23FAB39515056AE800606816 /* NSMutableNumber.m */,
 			);
 			name = SpecializedTypes;
 			sourceTree = "<group>";
@@ -1340,6 +1349,28 @@
 				23E021EB14F41E6900099E1E /* LocationViewController.m */,
 			);
 			name = LocationViewController;
+			sourceTree = "<group>";
+		};
+		23FAB387150560B100606816 /* GeneralPurposeCell */ = {
+			isa = PBXGroup;
+			children = (
+				230C353314EEB994004DCF85 /* GeneralPurposeViewCell.h */,
+				230C353414EEB994004DCF85 /* GeneralPurposeViewCell.m */,
+				230C353A14EEE446004DCF85 /* GeneralPurposeViewCellData.h */,
+				230C353B14EEE446004DCF85 /* GeneralPurposeViewCellData.m */,
+			);
+			name = GeneralPurposeCell;
+			sourceTree = "<group>";
+		};
+		23FAB388150560C800606816 /* IntegerInputCell */ = {
+			isa = PBXGroup;
+			children = (
+				23FAB389150560F900606816 /* IntegerInputCell.h */,
+				23FAB38A150560F900606816 /* IntegerInputCell.m */,
+				23FAB38C1505615300606816 /* IntegerInputCellData.h */,
+				23FAB38D1505615300606816 /* IntegerInputCellData.m */,
+			);
+			name = IntegerInputCell;
 			sourceTree = "<group>";
 		};
 		23FDE9D114D8B3B4005AA6D6 /* ItemGroupCell */ = {
@@ -1756,6 +1787,9 @@
 				236A4E8414FC405C003FB4EF /* PaymentSettingsViewController.m in Sources */,
 				236A4E8714FC5083003FB4EF /* DeletePaymentInfo.m in Sources */,
 				233D143E14FD8AA100297F5D /* SetPaymentProfileInfo.m in Sources */,
+				23FAB38B150560F900606816 /* IntegerInputCell.m in Sources */,
+				23FAB38E1505615300606816 /* IntegerInputCellData.m in Sources */,
+				23FAB39615056AE800606816 /* NSMutableNumber.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

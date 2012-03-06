@@ -13,6 +13,7 @@
 #import "Utilities.h"
 #import "GeneralPurposeViewCell.h"
 #import "GeneralPurposeViewCellData.h"
+#import "IntegerInputCellData.h"
 
 @implementation ItemRenderer
 
@@ -31,6 +32,15 @@
         [data setTitle:[anItem desc]];
         [listData addObject:[NSArray arrayWithObject:data]];
     }
+    
+    [sectionNames addObject:@"Number of Items"];
+    IntegerInputCellData *inputCellData = [[IntegerInputCellData alloc] init];
+    [inputCellData setNumber:[anItem numberOfItems]];
+    [inputCellData setNumberPrompt:@"Number of items"];
+    [inputCellData setLowerBound:[NSNumber numberWithInt:1]];
+    [inputCellData setUpperBound:[NSNumber numberWithInt:100]];
+    
+    [listData addObject:[NSArray arrayWithObject:inputCellData]];
     
     for (Option *anOption in [anItem options]) 
     {

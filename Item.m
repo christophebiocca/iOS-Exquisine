@@ -9,6 +9,7 @@
 #import "Item.h"
 #import "Option.h"
 #import "Utilities.h"
+#import "NSMutableNumber.h"
 
 @implementation Item
 
@@ -16,6 +17,7 @@ NSString* ITEM_MODIFIED = @"CroutonLabs/ItemModified";
 
 @synthesize options;
 @synthesize basePrice;
+@synthesize numberOfItems;
 
 -(Item *)init
 {
@@ -23,6 +25,8 @@ NSString* ITEM_MODIFIED = @"CroutonLabs/ItemModified";
     
     options = [[NSMutableArray alloc] initWithCapacity:0];
     basePrice = [[NSDecimalNumber alloc] initWithInt:0];
+    numberOfItems = [[NSMutableNumber alloc] initWithNumber:[NSNumber numberWithInt:1]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(numberAltered) name:NUMBER_MODIFIED object:numberOfItems];
     
     return self;
 }
@@ -35,6 +39,9 @@ NSString* ITEM_MODIFIED = @"CroutonLabs/ItemModified";
     basePrice = [[[NSDecimalNumber alloc] initWithInteger:cents] decimalNumberByMultiplyingByPowerOf10:-2];
     
     options = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    numberOfItems = [[NSMutableNumber alloc] initWithNumber:[NSNumber numberWithInt:1]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(numberAltered) name:NUMBER_MODIFIED object:numberOfItems];
     
     for (NSDictionary *option in [inputData objectForKey:@"all_options"]) {
         
@@ -52,6 +59,8 @@ NSString* ITEM_MODIFIED = @"CroutonLabs/ItemModified";
     {
         basePrice = [decoder decodeObjectForKey:@"base_price"];
         options = [decoder decodeObjectForKey:@"options"];
+        numberOfItems = [decoder decodeObjectForKey:@"number_of_items"];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(numberAltered) name:NUMBER_MODIFIED object:numberOfItems];
         
         for (Option *option in options) {
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(optionAltered) name:OPTION_MODIFIED object:option];
@@ -72,6 +81,7 @@ NSString* ITEM_MODIFIED = @"CroutonLabs/ItemModified";
     [super encodeWithCoder:encoder];
     [encoder encodeObject:basePrice forKey:@"base_price"];
     [encoder encodeObject:options forKey:@"options"];
+    [encoder encodeObject:numberOfItems forKey:@"number_of_items"];
 }
 
 -(Item *)copy;
@@ -82,6 +92,9 @@ NSString* ITEM_MODIFIED = @"CroutonLabs/ItemModified";
     anItem->desc = desc;
     anItem->primaryKey = primaryKey; 
     anItem->basePrice = basePrice;
+    anItem->numberOfItems = [[NSMutableNumber alloc] initWithNumber:[NSNumber numberWithInt:[numberOfItems intValue]]];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:anItem selector:@selector(numberAltered) name:NUMBER_MODIFIED object:anItem->numberOfItems];
     
     anItem->options = [[NSMutableArray alloc] initWithCapacity:0];
     
@@ -107,6 +120,11 @@ NSString* ITEM_MODIFIED = @"CroutonLabs/ItemModified";
     [[NSNotificationCenter defaultCenter] postNotificationName:ITEM_MODIFIED object:self];
 }
 
+-(void)numberAltered
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:ITEM_MODIFIED object:self];
+}
+
 -(NSDecimalNumber*)price
 {
     NSDecimalNumber* tabulation = basePrice;
@@ -116,7 +134,7 @@ NSString* ITEM_MODIFIED = @"CroutonLabs/ItemModified";
         tabulation = [tabulation decimalNumberByAdding:[currentOption price]];
     }
     
-    return tabulation;
+    return [tabulation decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%i" ,[numberOfItems intValue]]]];
 }
 
 -(BOOL)isEffectivelyEqual:(id)anItem
@@ -190,9 +208,7 @@ NSString* ITEM_MODIFIED = @"CroutonLabs/ItemModified";
 
 -(void)dealloc
 {
-    for (Option *eachOption in options) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self];
-    }
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end
