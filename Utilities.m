@@ -16,7 +16,7 @@
     
     if([price isEqual:[NSDecimalNumber zero]])
     {
-        return @"Free!";
+        return @"$0";
     }
     return [NSNumberFormatter localizedStringFromNumber:price 
                                             numberStyle:NSNumberFormatterCurrencyStyle];
