@@ -35,6 +35,11 @@ NSString *NUMBER_MODIFIED = @"NUMBER_MODIFIED";
     return [theNumber intValue];
 }
 
+-(NSString *)stringValue
+{
+    return [theNumber stringValue];
+}
+
 - (id)initWithCoder:(NSCoder *)decoder
 {
     self = [super init];

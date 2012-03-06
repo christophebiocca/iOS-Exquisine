@@ -38,6 +38,9 @@
 		233D143E14FD8AA100297F5D /* SetPaymentProfileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 233D143D14FD8AA100297F5D /* SetPaymentProfileInfo.m */; };
 		2345980B14DE0B2000910F3B /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2345980A14DE0B2000910F3B /* OrderManager.m */; };
 		2352724214DB145600DDC7FA /* IndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2352724114DB145600DDC7FA /* IndicatorView.m */; };
+		2361B90A1506B78C007270CC /* ComboItemRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2361B9091506B78C007270CC /* ComboItemRenderer.m */; };
+		2361B90E1506B86C007270CC /* ComboItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2361B90D1506B86C007270CC /* ComboItemViewController.m */; };
+		2361B9111506BEEA007270CC /* OrderComboViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2361B9101506BEEA007270CC /* OrderComboViewController.m */; };
 		23658CC114BDFB15002C0996 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23658CC014BDFB15002C0996 /* UIKit.framework */; };
 		23658CC314BDFB15002C0996 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23658CC214BDFB15002C0996 /* Foundation.framework */; };
 		23658CC514BDFB15002C0996 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23658CC414BDFB15002C0996 /* CoreGraphics.framework */; };
@@ -232,6 +235,12 @@
 		2345980A14DE0B2000910F3B /* OrderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderManager.m; sourceTree = "<group>"; };
 		2352724014DB145600DDC7FA /* IndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndicatorView.h; sourceTree = "<group>"; };
 		2352724114DB145600DDC7FA /* IndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndicatorView.m; sourceTree = "<group>"; };
+		2361B9081506B78C007270CC /* ComboItemRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComboItemRenderer.h; sourceTree = "<group>"; };
+		2361B9091506B78C007270CC /* ComboItemRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComboItemRenderer.m; sourceTree = "<group>"; };
+		2361B90C1506B86C007270CC /* ComboItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComboItemViewController.h; sourceTree = "<group>"; };
+		2361B90D1506B86C007270CC /* ComboItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComboItemViewController.m; sourceTree = "<group>"; };
+		2361B90F1506BEEA007270CC /* OrderComboViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderComboViewController.h; sourceTree = "<group>"; };
+		2361B9101506BEEA007270CC /* OrderComboViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderComboViewController.m; sourceTree = "<group>"; };
 		23658CBC14BDFB15002C0996 /* Pita Factory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pita Factory.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		23658CC014BDFB15002C0996 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		23658CC214BDFB15002C0996 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -492,6 +501,8 @@
 			children = (
 				23082F5A14D8968F003964CE /* ComboViewController.h */,
 				23082F5B14D8968F003964CE /* ComboViewController.m */,
+				2361B90F1506BEEA007270CC /* OrderComboViewController.h */,
+				2361B9101506BEEA007270CC /* OrderComboViewController.m */,
 			);
 			name = ComboViewController;
 			sourceTree = "<group>";
@@ -1231,6 +1242,8 @@
 			children = (
 				23DA7A6014C63242008281DD /* ItemRenderer.h */,
 				23DA7A6114C63242008281DD /* ItemRenderer.m */,
+				2361B9081506B78C007270CC /* ComboItemRenderer.h */,
+				2361B9091506B78C007270CC /* ComboItemRenderer.m */,
 			);
 			name = ItemRenderer;
 			sourceTree = "<group>";
@@ -1250,6 +1263,8 @@
 				23C9EFE714E2F9C4000E8C2A /* ItemManagementDelegate.h */,
 				23DA7A7714C63CBB008281DD /* ItemViewController.h */,
 				23DA7A7814C63CBB008281DD /* ItemViewController.m */,
+				2361B90C1506B86C007270CC /* ComboItemViewController.h */,
+				2361B90D1506B86C007270CC /* ComboItemViewController.m */,
 			);
 			name = ItemViewController;
 			sourceTree = "<group>";
@@ -1790,6 +1805,9 @@
 				23FAB38B150560F900606816 /* IntegerInputCell.m in Sources */,
 				23FAB38E1505615300606816 /* IntegerInputCellData.m in Sources */,
 				23FAB39615056AE800606816 /* NSMutableNumber.m in Sources */,
+				2361B90A1506B78C007270CC /* ComboItemRenderer.m in Sources */,
+				2361B90E1506B86C007270CC /* ComboItemViewController.m in Sources */,
+				2361B9111506BEEA007270CC /* OrderComboViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

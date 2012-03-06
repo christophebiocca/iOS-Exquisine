@@ -14,15 +14,16 @@
 #import "ItemGroup.h"
 #import "Item.h"
 #import "ItemViewController.h"
+#import "ComboItemViewController.h"
 #import "ItemGroupViewController.h"
+#import "NSMutableNumber.h"
 
 @implementation ComboViewController
 
 @synthesize comboInfo;
 
--(ComboViewController *)initializeWithComboAndOrderAndReturnController:(Combo *)aCombo :(Order *)anOrder:(UIViewController *) aController
+-(id)initializeWithComboAndOrderAndReturnController:(Combo *)aCombo :(Order *)anOrder:(UIViewController *) aController
 {
-    numberToAdd = 1;
     orderInfo = anOrder;
     comboInfo = aCombo;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(comboChanged:) name:COMBO_MODIFIED object:aCombo];
@@ -35,36 +36,10 @@
     returnController = aController;
     [[self navigationItem] setTitle:comboInfo.name];
     
-    
-    UIBarButtonItem *minusSignButton = [[UIBarButtonItem alloc] initWithTitle:@"-" style:UIBarButtonItemStylePlain target:self action:@selector(minusButtonPressed)];
-    
-    UIBarButtonItem *spacer1 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
-    
-    UIBarButtonItem *spacer2 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
-    
-    UIBarButtonItem *plusSignButton = [[UIBarButtonItem alloc] initWithTitle:@"+" style:UIBarButtonItemStylePlain target:self action:@selector(plusButtonPressed)];
-    
-    [[comboView comboToolBar] setItems:[NSArray arrayWithObjects:minusSignButton, spacer1,[comboView priceButton],spacer2, plusSignButton, nil]];
-    
     [self comboChanged:nil];
     
     return self;
 }
-
--(void)plusButtonPressed
-{
-    numberToAdd++;
-    [self comboChanged:nil];
-}
-
--(void)minusButtonPressed
-{
-    if (numberToAdd != 1) {
-        numberToAdd--;
-        [self comboChanged:nil];
-    }
-}
-
 //Delegate functions
 //***********************************************************
 
@@ -86,7 +61,7 @@
     
     if ([[itemGroup listOfItems] count] == 1) {
         
-        ItemViewController *itemController = [[ItemViewController alloc] initializeWithItemAndOrderAndReturnController:[[itemGroup listOfItems] objectAtIndex:0] :orderInfo :self];
+        ComboItemViewController *itemController = [[ComboItemViewController alloc] initWithItemAndOrderAndReturnController:[[itemGroup listOfItems] objectAtIndex:0] :orderInfo :self];
         
         [itemController setDelegate:groupController];
         
@@ -108,18 +83,18 @@
     
     UIBarButtonItem *doneButton = nil;
     
-    if (numberToAdd == 1) 
+    if ([[comboInfo numberOfCombos] intValue] == 1) 
     {
         doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Add This Combo" style:UIBarButtonItemStyleDone target:self action:@selector(addThisComboToOrder)];
         
-        [[comboView priceButton] setTitle:[NSString stringWithFormat:@"Combo Price: %@",[Utilities FormatToPrice:[comboInfo price]]]];
+        [[comboView priceButton] setTitle:[NSString stringWithFormat:@"1 Combo: %@",[Utilities FormatToPrice:[comboInfo price]]]];
     }
     else
     {
         doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Add These Combos" style:UIBarButtonItemStyleDone target:self action:@selector(addThisComboToOrder)];
         
         [[comboView priceButton] setTitle:[NSString stringWithFormat:@"%i Combos: %@"
-                                        , numberToAdd, [Utilities FormatToPrice:[[comboInfo price] decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%i", numberToAdd]]]]]];
+                                        , [[comboInfo numberOfCombos] intValue], [Utilities FormatToPrice:[comboInfo price]], [[comboInfo numberOfCombos] intValue]]];
     }
     
     
@@ -174,11 +149,9 @@
 
 -(void)addThisComboToOrder
 {
-    [[LocalyticsSession sharedLocalyticsSession] tagEvent:[NSString stringWithFormat: @"Added %i combo(s) to the order", numberToAdd]];
+    [[LocalyticsSession sharedLocalyticsSession] tagEvent:[NSString stringWithFormat: @"Added %i combo(s) to the order", [[comboInfo numberOfCombos] intValue]]];
     
-    for (int i = 0; i < numberToAdd; i++) {
-        [orderInfo addCombo:[comboInfo copy]];
-    }
+    [orderInfo addCombo:[comboInfo copy]];
     [[self navigationController]popToViewController:returnController animated:YES];
     
 }

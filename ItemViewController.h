@@ -31,7 +31,7 @@
 
 @property (retain) Item *itemInfo;
 
--(ItemViewController *)initializeWithItemAndOrderAndReturnController:(Item *) anItem:(Order *)anOrder:(UIViewController *) aController;
+-(ItemViewController *)initWithItemAndOrderAndReturnController:(Item *) anItem:(Order *)anOrder:(UIViewController *) aController;
 
 -(void) addThisItemToOrder;
 

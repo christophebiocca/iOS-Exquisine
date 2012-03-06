@@ -20,6 +20,9 @@
 #import "ItemRenderer.h"
 #import "MenuRenderer.h"
 #import "OrderManager.h"
+#import "ComboItemViewController.h"
+#import "Combo.h"
+#import "OrderComboViewController.h"
 
 @implementation OrderViewController
 
@@ -205,16 +208,21 @@
     if ( [cellObject isKindOfClass:([Item class])])
     {
         
-        ItemViewController *newItemController = [[ItemViewController alloc] initializeWithItemAndOrderAndReturnController:cellObject:[theOrderManager thisOrder] :self];
+        ItemViewController *newItemController = [[ItemViewController alloc] initWithItemAndOrderAndReturnController:cellObject:[theOrderManager thisOrder] :self];
         
         [[self navigationController] pushViewController:newItemController animated:YES];
         
     }
     
+    if ([cellObject isKindOfClass:[Combo class]]) {
+        OrderComboViewController *newController = [[OrderComboViewController alloc] initializeWithComboAndOrderAndReturnController:cellObject :[theOrderManager thisOrder] :self];
+        [[self navigationController] pushViewController:newController animated:YES];
+    }
+    
     if ( [cellObject isKindOfClass:([NSDictionary class])])
     {
         
-        ItemViewController *newItemController = [[ItemViewController alloc] initializeWithItemAndOrderAndReturnController:[cellObject objectForKey:@"data"]:[theOrderManager thisOrder] :self];
+        ComboItemViewController *newItemController = [[ComboItemViewController alloc] initWithItemAndOrderAndReturnController:[cellObject objectForKey:@"data"]:[theOrderManager thisOrder] :self];
         
         [[self navigationController] pushViewController:newItemController animated:YES];
         

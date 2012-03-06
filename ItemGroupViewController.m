@@ -13,6 +13,7 @@
 #import "Item.h"
 #import "Order.h"
 #import "ItemViewController.h"
+#import "ComboItemViewController.h"
 
 
 @implementation ItemGroupViewController
@@ -46,7 +47,7 @@
     
     id thingToPush = [[itemGroupInfo listOfItems] objectAtIndex:[indexPath row]];
     
-    ItemViewController *newView = [[ItemViewController alloc] initializeWithItemAndOrderAndReturnController:[thingToPush copy] :currentOrder:returnController];
+    ComboItemViewController *newView = [[ComboItemViewController alloc] initWithItemAndOrderAndReturnController:[thingToPush copy] :currentOrder:returnController];
         
     [newView setDelegate:self];
     

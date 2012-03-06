@@ -9,6 +9,7 @@
 #import "ComboOrderCell.h"
 #import "Combo.h"
 #import "Utilities.h"
+#import "NSMutableNumber.h"
 #import <QuartzCore/QuartzCore.h>
 
 @implementation ComboOrderCell
@@ -41,6 +42,8 @@ static UIImage* deleteImage = nil;
 -(void)updateCell
 {
     [super updateCell];
+    [[self textLabel] setText:[NSString stringWithFormat:@"%@  x%i",[combo name], [[combo numberOfCombos] intValue]]];
+    
     [[self detailTextLabel] setText:[Utilities FormatToPrice:[combo price]]];
     [self setNeedsDisplay];
 }

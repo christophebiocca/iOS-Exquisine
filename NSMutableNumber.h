@@ -21,4 +21,6 @@ extern NSString *NUMBER_MODIFIED;
 
 -(int) intValue;
 
+-(NSString *) stringValue;
+
 @end

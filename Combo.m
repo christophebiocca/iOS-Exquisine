@@ -12,6 +12,7 @@
 #import "Menu.h"
 #import "ItemGroup.h"
 #import "ComboPricingStrategy.h"
+#import "NSMutableNumber.h"
 #import "CustomViewCell.h"
 #import "ComboTrivialPricingStrategy.h"
 
@@ -20,6 +21,7 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
 
 @implementation Combo
 
+@synthesize numberOfCombos;
 @synthesize listOfItemGroups;
 @synthesize displayPrice;
 
@@ -27,6 +29,8 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
 {
     self = [super init];
     
+    numberOfCombos = [[NSMutableNumber alloc] initWithNumber:[NSNumber numberWithInt:1]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(numberChanged) name:NUMBER_MODIFIED object:numberOfCombos];
     listOfItemGroups = [[NSMutableArray alloc] initWithCapacity:0];
     strategy = [[ComboTrivialPricingStrategy alloc] init];
     
@@ -38,7 +42,8 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
     self = [super initFromData:inputData];
     
     listOfItemGroups = [[NSMutableArray alloc] initWithCapacity:0];
-    
+    numberOfCombos = [[NSMutableNumber alloc] initWithNumber:[NSNumber numberWithInt:1]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(numberChanged) name:NUMBER_MODIFIED object:numberOfCombos];
     strategy = [ComboPricingStrategy pricingStrategyFromData:[inputData objectForKey:@"pricing_strategy"]];
     
     //Brutal!
@@ -67,7 +72,8 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
     {
         
         listOfItemGroups = [decoder decodeObjectForKey:@"list_of_item_groups"];
-        
+        numberOfCombos = [decoder decodeObjectForKey:@"number_of_combos"];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(numberChanged) name:NUMBER_MODIFIED object:numberOfCombos];
         displayPrice = [decoder decodeObjectForKey:@"price"];
         
         for (ItemGroup *newItemGroup in listOfItemGroups) {
@@ -92,6 +98,7 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
     [encoder encodeObject:listOfItemGroups forKey:@"list_of_item_groups"];
     [encoder encodeObject:strategy forKey:@"strategy"];
     [encoder encodeObject:displayPrice forKey:@"price"];
+    [encoder encodeObject:numberOfCombos forKey:@"number_of_combos"];
 }
 
 - (Combo *)copy
@@ -101,6 +108,8 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
     aCombo->name = name;
     aCombo->desc = desc;
     aCombo->primaryKey = primaryKey;
+    aCombo->numberOfCombos = [[NSMutableNumber alloc] initWithNumber:[NSNumber numberWithInt:[numberOfCombos intValue]]];
+    [[NSNotificationCenter defaultCenter] addObserver:aCombo selector:@selector(numberChanged) name:NUMBER_MODIFIED object:aCombo->numberOfCombos];
     
     for (ItemGroup *anItemGroup in listOfItemGroups) {
         ItemGroup *newItemGroup = [anItemGroup copy];
@@ -108,14 +117,13 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
         [[NSNotificationCenter defaultCenter] addObserver:aCombo selector:@selector(recalculate:) name:ITEM_GROUP_MODIFIED object:newItemGroup];
     }
     
-    //doesnt need to be copied
+    //doesnt need to be deep copied
     aCombo->strategy = strategy;
     aCombo->displayPrice = displayPrice;
     
     return aCombo;
 }
 
-//Just placeholders****************V
 
 -(NSArray *)satisfactionListsForItemList:(NSArray *)anItemList
 {
@@ -149,7 +157,7 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
 
 -(NSDecimalNumber *)price
 {
-    return [strategy priceForItemGroups:listOfItemGroups];
+    return [[strategy priceForItemGroups:listOfItemGroups]decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:[numberOfCombos stringValue]]];
 }
 
 -(NSDecimalNumber *)savings{
@@ -329,6 +337,11 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
         [listOutput addObject:newDict];
     }
     return listOutput;
+}
+
+-(void)numberChanged
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:COMBO_MODIFIED object:self];
 }
 
 -(void)dealloc

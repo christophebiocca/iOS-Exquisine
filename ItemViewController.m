@@ -24,7 +24,7 @@
 @synthesize itemInfo;
 @synthesize delegate;
 
--(ItemViewController *)initializeWithItemAndOrderAndReturnController:(Item *) anItem:(Order *)anOrder:(UIViewController *) aController
+-(ItemViewController *)initWithItemAndOrderAndReturnController:(Item *) anItem:(Order *)anOrder:(UIViewController *) aController
 {
     
     itemRenderer = [[ItemRenderer alloc] initWithItem:anItem];
