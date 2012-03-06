@@ -11,7 +11,7 @@
 // Form-like object to validate all values in real time.
 @implementation PaymentInfo
 
-@synthesize cardholderNameError, cardnumberError, expirationError;
+@synthesize cardholderNameError, cardnumberError, expirationError, remember;
 
 static NSRegularExpression* creditCard;
 static NSRegularExpression* separator;
@@ -41,13 +41,9 @@ static NSRegularExpression* separator;
     if(self = [super init]){
         [self setCardnumber:nil];
         [self setCardholderName:nil];
-        
-        NSDateComponents* components = [[NSCalendar currentCalendar]
-                                        components:NSYearCalendarUnit 
-                                        fromDate:[NSDate date]];
-        
-        [self setExpirationYear:[components year]];
-        [self setExpirationMonth:0];
+        expirationYear = -1;
+        expirationMonth = -1;
+        [self setRemember:YES];
     }
     return self;
 }
@@ -92,6 +88,10 @@ static NSRegularExpression* separator;
 }
 
 -(void)checkDate{
+    if(expirationMonth == -1 || expirationYear == -1){
+        expirationError = @"This field is required";
+        return;
+    }
     NSDate* today = [NSDate new];
     NSDate* actualExpiration;
     {
@@ -109,14 +109,22 @@ static NSRegularExpression* separator;
     }
 }
 
--(void)setExpirationMonth:(NSInteger)month{
-    expirationMonth = month;
+-(void)setExpirationMonth:(NSString*)month{
+    if(month && [month length]){
+        expirationMonth = [month integerValue];
+    } else {
+        expirationMonth = -1;
+    }
     expirationError = nil;
     [self checkDate];
 }
 
--(void)setExpirationYear:(NSInteger)year{
-    expirationYear = year;
+-(void)setExpirationYear:(NSString*)year{
+    if(year && [year length]){
+        expirationYear = [year integerValue];
+    } else {
+        expirationYear = -1;
+    }
     expirationError = nil;
     [self checkDate];
 }

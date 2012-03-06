@@ -8,6 +8,7 @@
 
 #import "PaymentStack.h"
 #import "LocationState.h"
+
 #import "PaymentConfirmationController.h"
 #import "PaymentInfoViewController.h"
 #import "PaymentProcessingViewController.h"
@@ -16,8 +17,11 @@
 #import "OrderTimeAndLocationConfirmationViewController.h"
 #import "PlaceOrder.h"
 #import "GetPaymentProfileInfo.h"
+#import "DeletePaymentInfo.h"
 #import "PaymentProfileInfo.h"
 #import "PaymentError.h"
+
+#import "PaymentInfo.h"
 
 @interface PaymentStack(PrivateMethods)
 
@@ -220,7 +224,7 @@
         [self sendOrder:info];
     }];
     [controller setCancelledBlock:^{
-        [self requestConfirmation];
+        cancelledBlock();
     }];
 }
 
@@ -233,6 +237,13 @@
            paymentSuccess:^(PaymentSuccessInfo* success){
                successBlock();
                [[self completionController] setSuccessInfo:success AndOrder:order];
+               if(![info remember]){
+                   [DeletePaymentInfo deletePaymentInfo:^(DeletePaymentInfo* delete) {
+                       CLLog(LOG_LEVEL_DEBUG, @"Successfully deleted payment info.");
+                   } failure:^(DeletePaymentInfo* delete, NSError* error){
+                       CLLog(LOG_LEVEL_ERROR, @"Got an error when deleting payment info.");
+                   }];
+               }
                [self showSuccess];
            } 
            paymentFailure:^(PaymentError* error){
