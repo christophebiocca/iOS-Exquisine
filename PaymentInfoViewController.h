@@ -16,6 +16,7 @@
 @interface PaymentInfoViewController : UIViewController<PaymentViewDelegate>{
     PaymentView* paymentView;
     PaymentInfo* info;
+    BOOL navigationBarWasHidden;
     
     void(^completionBlock)(PaymentInfo*);
     void(^cancelledBlock)();

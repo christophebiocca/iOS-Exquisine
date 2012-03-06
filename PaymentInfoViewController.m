@@ -55,6 +55,17 @@
     cancelledBlock();
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    navigationBarWasHidden = [[[self navigationController] navigationBar] isHidden];
+    [[[self navigationController] navigationBar] setHidden:YES];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [[[self navigationController] navigationBar] setHidden:navigationBarWasHidden];
+}
+
 - (void)viewDidUnload
 {
     [super viewDidUnload];

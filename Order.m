@@ -16,6 +16,7 @@
 #import "PaymentInfo.h"
 #import "Utilities.h"
 #import "PaymentSuccessInfo.h"
+#import "NSMutableNumber.h"
 
 NSString* ORDER_ITEMS_MODIFIED = @"CroutonLabs/OrderItemsModified";
 NSString* ORDER_COMBOS_MODIFIED = @"CroutonLabs/OrderCombosModified";
@@ -347,11 +348,15 @@ NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
     
     NSMutableArray* orderitems = [NSMutableArray arrayWithCapacity:[itemList count]];
     for(Item* item in itemList){
-        [orderitems addObject:[item orderRepresentation]];
+        for (int i = 0; i < [[item numberOfItems] intValue]; i++) {
+            [orderitems addObject:[item orderRepresentation]];
+        }
     }
     NSMutableArray* ordercombos = [NSMutableArray arrayWithCapacity:[comboList count]];
     for(Combo* combo in comboList){
-        [ordercombos addObject:[combo orderRepresentation]];
+        for (int i = 0; i < [[combo numberOfCombos] intValue]; i++) {
+            [ordercombos addObject:[combo orderRepresentation]];
+        }
     }
     
     return [NSDictionary dictionaryWithObjectsAndKeys:
