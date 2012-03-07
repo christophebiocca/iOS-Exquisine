@@ -27,7 +27,6 @@
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"hh:mm a, EEE, MMM dd, yyyy"];
-    NSString *dummy = [formatter stringFromDate:theDate];
     
     return [formatter stringFromDate:theDate]; 
 }

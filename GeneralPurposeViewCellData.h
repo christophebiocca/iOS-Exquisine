@@ -18,8 +18,10 @@ extern NSString* VIEW_CELL_NEEDS_REDRAW;
     UIFont *descriptionFont;
     NSInteger indent;
     UIColor *cellColour;
+    BOOL disclosureArrow;
 }
 
+@property (nonatomic) BOOL disclosureArrow;
 @property (nonatomic, retain) NSString *title;
 @property (nonatomic, retain) NSString *description;
 @property (nonatomic, retain) UIFont *titleFont;

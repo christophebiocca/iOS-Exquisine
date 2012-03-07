@@ -50,6 +50,10 @@
     if ([cellData descriptionFont]) {
         [[self detailTextLabel] setFont:[cellData descriptionFont]];
     }
+    if ([cellData disclosureArrow])
+        [self setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+    else
+        [self setAccessoryType:UITableViewCellAccessoryNone];
     
 }
 

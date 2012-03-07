@@ -38,6 +38,9 @@
     UITextField* expirationYear;
 }
 
+@property (retain) UISwitch *remember;
+@property (retain) UILabel *rememberLabel;
+
 @property(retain, readonly)PaymentInfo* paymentInfo;
 @property(retain, nonatomic)id<PaymentViewDelegate> delegate;
 

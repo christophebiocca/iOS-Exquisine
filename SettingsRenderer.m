@@ -26,10 +26,17 @@
         
         data = [[GeneralPurposeViewCellData alloc] init];
         [data setTitle:@"Set Location"];
+        [data setDisclosureArrow:YES];
         [settingsSection1 addObject:data];
         
         data = [[GeneralPurposeViewCellData alloc] init];
         [data setTitle:@"Payment Information"];
+        [data setDisclosureArrow:YES];
+        [settingsSection1 addObject:data];
+        
+        data = [[GeneralPurposeViewCellData alloc] init];
+        [data setTitle:@"Technical Support:"];
+        [data setDescription:@"(519) 616-6193"];
         [settingsSection1 addObject:data];
         
         [listData addObject:settingsSection1];
