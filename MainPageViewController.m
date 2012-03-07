@@ -340,19 +340,31 @@
         
         NSDictionary* rootObject;
         rootObject = [NSKeyedUnarchiver unarchiveObjectWithFile:path];    
-        theMenu = [rootObject valueForKey:@"menu"];
-        currentOrder = [rootObject valueForKey:@"current_order"];
-        ordersHistory = [rootObject valueForKey:@"order_history"];
-        favoriteOrders = [rootObject valueForKey:@"favorite_orders"];
-        locationState = [rootObject valueForKey:@"locationState"];
-        theOrderManager = [[OrderManager alloc] init];
-        [theOrderManager setMenu:theMenu];
-        [theOrderManager setOrder:currentOrder];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCreateButtonState) name:ORDER_MANAGER_NEEDS_REDRAW object:theOrderManager];
+        NSString *versionString = [rootObject valueForKey:@"version"];
+        [self loadData:rootObject WithVersion:versionString];
         
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCreateButtonState) name:ORDER_MANAGER_NEEDS_REDRAW object:theOrderManager];
         [self updateCreateButtonState];
     }
     
+}
+
+-(void)loadData:(NSDictionary *)data WithVersion:(NSString *)version
+{
+    
+    if ((!version)||[version isEqualToString:@"1.1.0"]) {
+        //This is version 1.0.0, 1.0.1, or 1.1.0
+        theMenu = [data valueForKey:@"menu"];
+        currentOrder = [data valueForKey:@"current_order"];
+        ordersHistory = [data valueForKey:@"order_history"];
+        favoriteOrders = [data valueForKey:@"favorite_orders"];
+        locationState = [data valueForKey:@"locationState"];
+        theOrderManager = [[OrderManager alloc] init];
+        [theOrderManager setMenu:theMenu];
+        [theOrderManager setOrder:currentOrder];
+        return;
+    }
+    CLLog(LOG_LEVEL_ERROR, [NSString stringWithFormat: @"Unrecognised version string: \"%@\" while loading data from harddisk",version]);    
 }
 
 -(void)saveDataToDisk
@@ -364,6 +376,10 @@
     
     NSMutableDictionary * rootObject;    
     rootObject = [NSMutableDictionary dictionary];
+    
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleVersionKey];
+    
+    [rootObject setValue: version forKey:@"version"];
     [rootObject setValue: theMenu forKey:@"menu"];
     [rootObject setValue: currentOrder forKey:@"current_order"];
     [rootObject setValue: ordersHistory forKey:@"order_history"];

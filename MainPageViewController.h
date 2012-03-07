@@ -45,6 +45,8 @@
 
 -(void) loadDataFromDisk;
 
+-(void) loadData:(NSDictionary *)data WithVersion:(NSString *)version;
+
 -(void) saveDataToDisk;
 
 -(void) doFavoriteConsistancyCheck;
