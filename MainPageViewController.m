@@ -28,6 +28,8 @@
 #import "LocationState.h"
 #import "SettingsViewController.h"
 
+
+
 @implementation MainPageViewController
 
 - (id)init
@@ -341,7 +343,22 @@
         NSDictionary* rootObject;
         rootObject = [NSKeyedUnarchiver unarchiveObjectWithFile:path];    
         NSString *versionString = [rootObject valueForKey:@"version"];
-        [self loadData:rootObject WithVersion:versionString];
+        
+        //Assign ver according to the version string
+        Version ver = VERSION_0_0_0;
+        if (!versionString)
+            ver = VERSION_1_0_0;
+        if ([versionString isEqualToString:@"1.1.0"])
+            ver = VERSION_1_1_0;
+        
+        //Check to make sure that a version was actually identified (just as a sanity check)
+        if (ver == VERSION_0_0_0) {
+            //Bitch and moan if we don't have the version listed
+            CLLog(LOG_LEVEL_ERROR, [NSString stringWithFormat: @"Unrecognised version string: \"%@\" while loading data from harddisk",versionString]);
+            return;
+        }
+        
+        [self loadData:rootObject WithVersion:ver];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCreateButtonState) name:ORDER_MANAGER_NEEDS_REDRAW object:theOrderManager];
         [self updateCreateButtonState];
@@ -349,23 +366,35 @@
     
 }
 
--(void)loadData:(NSDictionary *)data WithVersion:(NSString *)version
+-(void)loadData:(NSDictionary *)data WithVersion:(Version) version
 {
-    
-    if ((!version)||[version isEqualToString:@"1.1.0"]) {
-        //This is version 1.0.0, 1.0.1, or 1.1.0
-        theMenu = [data valueForKey:@"menu"];
-        currentOrder = [data valueForKey:@"current_order"];
-        ordersHistory = [data valueForKey:@"order_history"];
-        favoriteOrders = [data valueForKey:@"favorite_orders"];
-        locationState = [data valueForKey:@"locationState"];
-        theOrderManager = [[OrderManager alloc] init];
-        [theOrderManager setMenu:theMenu];
-        [theOrderManager setOrder:currentOrder];
-        return;
-    }
-    CLLog(LOG_LEVEL_ERROR, [NSString stringWithFormat: @"Unrecognised version string: \"%@\" while loading data from harddisk",version]);    
+    NSMutableDictionary *mutableData = [[NSMutableDictionary alloc] initWithDictionary:data];
+    //Each case of the switch will modify the dictionary appropriately to map
+    //one version to the next. The final version case will actually load the data
+    //into variables and break.
+    switch (version) {
+        case VERSION_1_0_0:
+            //Nothing to do here.
+        case VERSION_1_0_1:
+            
+        case VERSION_1_1_0:
+            theMenu = [mutableData valueForKey:@"menu"];
+            currentOrder = [mutableData valueForKey:@"current_order"];
+            ordersHistory = [mutableData valueForKey:@"order_history"];
+            favoriteOrders = [mutableData valueForKey:@"favorite_orders"];
+            locationState = [mutableData valueForKey:@"locationState"];
+            theOrderManager = [[OrderManager alloc] init];
+            [theOrderManager setMenu:theMenu];
+            [theOrderManager setOrder:currentOrder];
+            break; //<--- Make sure this guy moves with every release
+            
+        default:
+            CLLog(LOG_LEVEL_ERROR, [NSString stringWithFormat: @"Version enum is not being handled by the loadData switch! version: %i",version]);
+            break;
+    } 
 }
+
+
 
 -(void)saveDataToDisk
 {

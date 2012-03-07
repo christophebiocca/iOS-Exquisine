@@ -82,6 +82,7 @@ NSString* ITEM_MODIFIED = @"CroutonLabs/ItemModified";
     [encoder encodeObject:basePrice forKey:@"base_price"];
     [encoder encodeObject:options forKey:@"options"];
     [encoder encodeObject:numberOfItems forKey:@"number_of_items"];
+    [encoder encodeObject:@"item" forKey:@"type"];
 }
 
 -(Item *)copy;

@@ -18,6 +18,13 @@
 @class OrderManager;
 @class LocationState;
 
+typedef enum Version {
+    VERSION_0_0_0 = 0,
+    VERSION_1_0_0 = 1,
+    VERSION_1_0_1 = 2,
+    VERSION_1_1_0 = 3,
+} Version;
+
 @interface MainPageViewController : UIViewController<UITableViewDelegate, OrderManagementDelegate>{
     
     Reachability *networkChecker;
@@ -45,7 +52,7 @@
 
 -(void) loadDataFromDisk;
 
--(void) loadData:(NSDictionary *)data WithVersion:(NSString *)version;
+-(void) loadData:(NSDictionary *)data WithVersion:(Version) version;
 
 -(void) saveDataToDisk;
 

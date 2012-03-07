@@ -31,6 +31,7 @@
 -(void)encodeWithCoder:(NSCoder *)aCoder
 {
     [aCoder encodeObject:absoluteValue forKey:@"absolute_value"];
+    [aCoder encodeObject:@"item_group_absolute_pricing" forKey:@"type"];
 }
 
 -(NSDecimalNumber*)priceForItem:(Item*)item

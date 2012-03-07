@@ -98,6 +98,7 @@ NSString* ITEM_GROUP_MODIFIED = @"CroutonLabs/ItemGroupModified";
     [encoder encodeObject:listOfItems forKey:@"list_of_items"];
     [encoder encodeObject:satisfyingItem forKey:@"satisfying_item"];
     [encoder encodeObject:strategy forKey:@"strategy"];
+    [encoder encodeObject:@"item_group" forKey:@"type"];
 }
 
 -(ItemGroup *)copy

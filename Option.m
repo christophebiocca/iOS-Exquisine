@@ -85,6 +85,7 @@ NSString* OPTION_INVALID_DESELECTION = @"CroutonLabs/OptionInvalidDeselection";
     [encoder encodeObject:[NSString stringWithFormat:@"%i", upperBound] forKey:@"upper_bound"];
     [encoder encodeObject:[NSString stringWithFormat:@"%i", numberOfFreeChoices] forKey:@"number_of_free_choices"];
     [encoder encodeObject:choiceList forKey:@"choice_list"];
+    [encoder encodeObject:@"option" forKey:@"type"];
 }
 
 -(Option *)copy

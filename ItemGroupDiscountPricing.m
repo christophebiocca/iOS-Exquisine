@@ -31,6 +31,7 @@
 -(void)encodeWithCoder:(NSCoder *)aCoder
 {
     [aCoder encodeObject:discountValue forKey:@"discount_value"];
+    [aCoder encodeObject:@"item_group_discount_pricing" forKey:@"type"];
 }
 
 -(NSDecimalNumber*)priceForItem:(Item*)item

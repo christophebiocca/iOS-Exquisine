@@ -24,7 +24,7 @@
 
 -(void)encodeWithCoder:(NSCoder *)aCoder
 {
-   
+    [aCoder encodeObject:@"combo_trivial_pricing_strategy" forKey:@"type"];
 }
 
 -(NSDecimalNumber*)priceForItemGroups:(NSArray*)itemGroups{

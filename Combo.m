@@ -99,6 +99,7 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
     [encoder encodeObject:strategy forKey:@"strategy"];
     [encoder encodeObject:displayPrice forKey:@"price"];
     [encoder encodeObject:numberOfCombos forKey:@"number_of_combos"];
+    [encoder encodeObject:@"combo" forKey:@"type"];
 }
 
 - (Combo *)copy

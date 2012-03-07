@@ -100,6 +100,7 @@ NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
     [encoder encodeObject:creationDate forKey:@"creation_date"];
     [encoder encodeObject:mostRecentSubmitDate forKey:@"most_recent_submit_date"];
     [encoder encodeObject:successInfo forKey:@"success_info"];
+    [encoder encodeObject:@"order" forKey:@"type"];
 }
 
 

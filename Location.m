@@ -71,6 +71,7 @@ static NSDateComponents* minusOneDay;
     [encoder encodeObject:latitude forKey:@"latitude"]; 
     [encoder encodeObject:longitude forKey:@"longitude"]; 
     [encoder encodeObject:address forKey:@"address"];
+    [encoder encodeObject:@"location" forKey:@"type"];
 }
 
 +(NSDate*)mergeComponents:(NSDateComponents*)components withDate:(NSDate*)date{

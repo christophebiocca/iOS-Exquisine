@@ -23,6 +23,7 @@
 
 -(void)encodeWithCoder:(NSCoder *)aCoder
 {
+    [aCoder encodeObject:@"item_group_trivial_pricing" forKey:@"type"];
     
 }
 

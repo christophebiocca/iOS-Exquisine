@@ -57,6 +57,7 @@ NSString* CHOICE_CHANGED = @"CroutonLabs/ChoiceChanged";
     [encoder encodeObject:basePrice forKey:@"price"];
     [encoder encodeObject:[NSString stringWithFormat:@"%i", selected] forKey:@"selected"];
     [encoder encodeObject:[NSString stringWithFormat:@"%i", isFree] forKey:@"free"];
+    [encoder encodeObject:@"choice" forKey:@"type"];
 }
 
 - (Choice *)copy

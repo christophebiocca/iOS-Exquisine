@@ -43,6 +43,7 @@
 {
     [encoder encodeObject:selectedLocation forKey:@"selectedLocation"];
     [encoder encodeObject:locations forKey:@"locations"];
+    [encoder encodeObject:@"location_state" forKey:@"type"];
 }
 
 

@@ -102,6 +102,7 @@
     [super encodeWithCoder:encoder];
     [encoder encodeObject:submenuList forKey:@"submenu_list"];
     [encoder encodeObject:comboList forKey:@"combo_list"];
+    [encoder encodeObject:@"menu" forKey:@"type"];
 }
 
 -(Menu *)copy

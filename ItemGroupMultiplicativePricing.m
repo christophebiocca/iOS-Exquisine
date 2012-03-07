@@ -30,6 +30,7 @@
 -(void)encodeWithCoder:(NSCoder *)aCoder
 {
     [aCoder encodeObject:multiplicativeValue forKey:@"multiplicative_value"];
+    [aCoder encodeObject:@"item_group_multiplicative_pricing" forKey:@"type"];
 }
 
 -(NSDecimalNumber *)priceForItem:(Item *)item

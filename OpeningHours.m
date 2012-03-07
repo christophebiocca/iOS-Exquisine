@@ -77,6 +77,7 @@ static NSArray* weekdays;
     [encoder encodeObject:[NSNumber numberWithInt:isOpen] forKey:@"isOpen"];
     [encoder encodeObject:opens forKey:@"opens"];
     [encoder encodeObject:closes forKey:@"closes"];
+    [encoder encodeObject:@"opening_hours" forKey:@"type"];
 }
 
 @end

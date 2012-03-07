@@ -48,6 +48,7 @@ NSString* ORDER_MANAGER_NEEDS_REDRAW = @"CroutonLabs/OrderManagerNeedsRedraw";
 {
     [encoder encodeObject:thisOrder forKey:@"order"];
     [encoder encodeObject:thisMenu forKey:@"menu"];
+    [encoder encodeObject:@"order_manager" forKey:@"type"];
 }
 
 -(OrderManager *)copy
