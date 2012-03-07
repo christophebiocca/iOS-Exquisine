@@ -237,7 +237,7 @@
            paymentSuccess:^(PaymentSuccessInfo* success){
                successBlock();
                [[self completionController] setSuccessInfo:success AndOrder:order];
-               if(![info remember]){
+               if(info && (![info remember])){
                    [DeletePaymentInfo deletePaymentInfo:^(DeletePaymentInfo* delete) {
                        CLLog(LOG_LEVEL_DEBUG, @"Successfully deleted payment info.");
                    } failure:^(DeletePaymentInfo* delete, NSError* error){

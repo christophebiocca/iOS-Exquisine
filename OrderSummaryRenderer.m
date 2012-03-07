@@ -121,6 +121,20 @@
         [newCellData setDescriptionFont:descFont];
         [displayList addObject:newCellData];
         
+        newCellData = [[GeneralPurposeViewCellData alloc] init];
+        [newCellData setTitle:@"Order submitted:"];
+        [newCellData setDescription:[Utilities FormatToDate:[anOrder mostRecentSubmitDate]]];
+        [newCellData setTitleFont:titleFont];
+        [newCellData setDescriptionFont:descFont];
+        [displayList addObject:newCellData];
+        
+        newCellData = [[GeneralPurposeViewCellData alloc] init];
+        [newCellData setTitle:@"Order pickup time:"];
+        [newCellData setDescription:[Utilities FormatToDate:[anOrder pitaFinishedTime]]];
+        [newCellData setTitleFont:titleFont];
+        [newCellData setDescriptionFont:descFont];
+        [displayList addObject:newCellData];
+        
         listData = [[NSMutableArray alloc] initWithObjects:displayList, nil];
     }
     

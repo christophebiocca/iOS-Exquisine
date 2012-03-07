@@ -21,6 +21,8 @@ typedef enum LogLevel {
 
 +(NSString *)FormatToPrice:(NSDecimalNumber*) price;
 
++(NSString *)FormatToDate:(NSDate *)theDate;
+
 +(NSInteger)CompositeListCount:(NSMutableArray *) compositeList;
 
 +(id)MemberOfCompositeListAtIndex:(NSMutableArray *)compositeList:(NSInteger) anInt;
