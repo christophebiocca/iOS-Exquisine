@@ -53,9 +53,11 @@ NSString* MENU_COMPONENT_PK_CHANGED = @"CroutonLabs/MenuComponentPrimaryKeyChang
     switch (harddiskDataVersion) {
         case VERSION_0_0_0:
             //fall through to next
+        case VERSION_1_0_0:
+            //fall through to next
         case VERSION_1_0_1:
             name = [decoder decodeObjectForKey:@"name"];
-        case VERSION_1_0_0:
+        case VERSION_1_1_0:
             break;
         default:
             break;
@@ -67,9 +69,11 @@ NSString* MENU_COMPONENT_PK_CHANGED = @"CroutonLabs/MenuComponentPrimaryKeyChang
     switch (harddiskDataVersion) {
         case VERSION_0_0_0:
             //fall through to next
+        case VERSION_1_0_0:
+            //fall through to next
         case VERSION_1_0_1:
             desc = [decoder decodeObjectForKey:@"desc"];
-        case VERSION_1_0_0:
+        case VERSION_1_1_0:
             break;
         default:
             break;

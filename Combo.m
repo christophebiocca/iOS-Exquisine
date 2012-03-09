@@ -71,9 +71,11 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
     switch (harddiskDataVersion) {
         case VERSION_0_0_0:
             //fall through to next
+        case VERSION_1_0_0:
+            //fall through to next
         case VERSION_1_0_1:
             listOfItemGroups = [decoder decodeObjectForKey:@"list_of_item_groups"];
-        case VERSION_1_0_0:
+        case VERSION_1_1_0:
             break;
         default:
             break;
@@ -85,9 +87,11 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
     switch (harddiskDataVersion) {
         case VERSION_0_0_0:
             //fall through to next
+        case VERSION_1_0_0:
+            //fall through to next
         case VERSION_1_0_1:
             displayPrice = [decoder decodeObjectForKey:@"price"];
-        case VERSION_1_0_0:
+        case VERSION_1_1_0:
             break;
         default:
             break;

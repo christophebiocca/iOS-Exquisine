@@ -40,9 +40,11 @@ NSString* CHOICE_CHANGED = @"CroutonLabs/ChoiceChanged";
     switch (harddiskDataVersion) {
         case VERSION_0_0_0:
             //fall through to next
+        case VERSION_1_0_0:
+            //fall through to next
         case VERSION_1_0_1:
             basePrice = [decoder decodeObjectForKey:@"price"];
-        case VERSION_1_0_0:
+        case VERSION_1_1_0:
             break;
         default:
             break;

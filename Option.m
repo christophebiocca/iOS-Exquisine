@@ -58,9 +58,11 @@ NSString* OPTION_INVALID_DESELECTION = @"CroutonLabs/OptionInvalidDeselection";
     switch (harddiskDataVersion) {
         case VERSION_0_0_0:
             //fall through to next
+        case VERSION_1_0_0:
+            //fall through to next
         case VERSION_1_0_1:
             choiceList = [decoder decodeObjectForKey:@"choice_list"];
-        case VERSION_1_0_0:
+        case VERSION_1_1_0:
             for (Choice *newChoice in choiceList) {
                 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recalculate:) name:CHOICE_SELECTED_CHANGED object:newChoice];
             }

@@ -33,9 +33,11 @@ NSString* ORDER_MANAGER_NEEDS_REDRAW = @"CroutonLabs/OrderManagerNeedsRedraw";
     switch (harddiskDataVersion) {
         case VERSION_0_0_0:
             //fall through to next
+        case VERSION_1_0_0:
+            //fall through to next
         case VERSION_1_0_1:
             thisOrder = [decoder decodeObjectForKey:@"order"];
-        case VERSION_1_0_0:
+        case VERSION_1_1_0:
             break;
         default:
             break;
@@ -47,9 +49,11 @@ NSString* ORDER_MANAGER_NEEDS_REDRAW = @"CroutonLabs/OrderManagerNeedsRedraw";
     switch (harddiskDataVersion) {
         case VERSION_0_0_0:
             //fall through to next
+        case VERSION_1_0_0:
+            //fall through to next
         case VERSION_1_0_1:
             thisMenu = [decoder decodeObjectForKey:@"menu"];
-        case VERSION_1_0_0:
+        case VERSION_1_1_0:
             break;
         default:
             break;

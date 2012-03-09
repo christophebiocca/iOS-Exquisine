@@ -60,9 +60,11 @@ NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
     switch (harddiskDataVersion) {
         case VERSION_0_0_0:
             //fall through to next
+        case VERSION_1_0_0:
+            //fall through to next
         case VERSION_1_0_1:
             itemList = [decoder decodeObjectForKey:@"item_list"];
-        case VERSION_1_0_0:
+        case VERSION_1_1_0:
             for (Item *anItem in itemList) {
                 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recalculate:) name:ITEM_MODIFIED object:anItem];
             }
@@ -77,9 +79,11 @@ NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
     switch (harddiskDataVersion) {
         case VERSION_0_0_0:
             //fall through to next
+        case VERSION_1_0_0:
+            //fall through to next
         case VERSION_1_0_1:
             comboList = [decoder decodeObjectForKey:@"combo_list"];
-        case VERSION_1_0_0:
+        case VERSION_1_1_0:
             for (Combo *aCombo in comboList) {
                 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recalculate:) name:COMBO_MODIFIED object:aCombo];
             }
@@ -94,9 +98,11 @@ NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
     switch (harddiskDataVersion) {
         case VERSION_0_0_0:
             //fall through to next
+        case VERSION_1_0_0:
+            //fall through to next
         case VERSION_1_0_1:
             orderIdentifier = [decoder decodeObjectForKey:@"order_identifier"];
-        case VERSION_1_0_0:
+        case VERSION_1_1_0:
             break;
         default:
             break;
@@ -108,9 +114,11 @@ NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
     switch (harddiskDataVersion) {
         case VERSION_0_0_0:
             //fall through to next
+        case VERSION_1_0_0:
+            //fall through to next
         case VERSION_1_0_1:
             creationDate = [decoder decodeObjectForKey:@"creation_date"];
-        case VERSION_1_0_0:
+        case VERSION_1_1_0:
             break;
         default:
             break;
@@ -122,9 +130,11 @@ NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
     switch (harddiskDataVersion) {
         case VERSION_0_0_0:
             //fall through to next
+        case VERSION_1_0_0:
+            //fall through to next
         case VERSION_1_0_1:
             mostRecentSubmitDate = [decoder decodeObjectForKey:@"most_recent_submit_date"];
-        case VERSION_1_0_0:
+        case VERSION_1_1_0:
             break;
         default:
             break;
@@ -139,9 +149,11 @@ NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
     switch (harddiskDataVersion) {
         case VERSION_0_0_0:
             //fall through to next
+        case VERSION_1_0_0:
+            //fall through to next
         case VERSION_1_0_1:
             successInfo = [decoder decodeObjectForKey:@"success_info"];
-        case VERSION_1_0_0:
+        case VERSION_1_1_0:
             break;
         default:
             break;
