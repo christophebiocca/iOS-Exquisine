@@ -67,6 +67,11 @@ NSString* ITEM_MODIFIED = @"CroutonLabs/ItemModified";
     }
 }
 
+-(void) numberOfItemsRecovery:(NSCoder *)decoder
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(numberAltered) name:NUMBER_MODIFIED object:numberOfItems];
+}
+
 -(Item *)copy;
 {
     Item * anItem = [[Item alloc] init];
@@ -76,7 +81,6 @@ NSString* ITEM_MODIFIED = @"CroutonLabs/ItemModified";
     anItem->primaryKey = primaryKey; 
     anItem->basePrice = basePrice;
     anItem->numberOfItems = [[NSMutableNumber alloc] initWithNumber:[NSNumber numberWithInt:[numberOfItems intValue]]];
-    
     [[NSNotificationCenter defaultCenter] addObserver:anItem selector:@selector(numberAltered) name:NUMBER_MODIFIED object:anItem->numberOfItems];
     
     anItem->options = [[NSMutableArray alloc] initWithCapacity:0];
