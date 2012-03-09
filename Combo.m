@@ -108,7 +108,7 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
         case VERSION_1_0_1:
             numberOfCombos = [[NSMutableNumber alloc] initWithNumber:[NSNumber numberWithInt:1]];
         case VERSION_1_1_0:
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(numberAltered) name:NUMBER_MODIFIED object:numberOfCombos];
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(numberChanged) name:NUMBER_MODIFIED object:numberOfCombos];
             break;
         default:
             break;
