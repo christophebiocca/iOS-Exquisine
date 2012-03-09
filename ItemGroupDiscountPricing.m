@@ -21,6 +21,22 @@
     return self;
 }
 
+-(void) discountValueRecovery:(NSCoder *)decoder
+{
+    switch (harddiskDataVersion) {
+        case VERSION_0_0_0:
+            //fall through to next
+        case VERSION_1_0_0:
+            //fall through to next
+        case VERSION_1_0_1:
+            discountValue = [decoder decodeObjectForKey:@"discount_value"];
+        case VERSION_1_1_0:
+            break;
+        default:
+            break;
+    }
+}
+
 -(NSDecimalNumber*)priceForItem:(Item*)item
 {
     return [[item price] decimalNumberBySubtracting:discountValue];

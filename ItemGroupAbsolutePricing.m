@@ -21,6 +21,22 @@
     return self;
 }
 
+-(void) absoluteValueRecovery:(NSCoder *)decoder
+{
+    switch (harddiskDataVersion) {
+        case VERSION_0_0_0:
+            //fall through to next
+        case VERSION_1_0_0:
+            //fall through to next
+        case VERSION_1_0_1:
+            absoluteValue = [decoder decodeObjectForKey:@"absolute_value"];
+        case VERSION_1_1_0:
+            break;
+        default:
+            break;
+    }
+}
+
 -(NSDecimalNumber*)priceForItem:(Item*)item
 {
     return absoluteValue;
