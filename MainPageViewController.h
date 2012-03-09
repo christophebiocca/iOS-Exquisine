@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "APICallDelegate.h"
 #import "OrderManagementDelegate.h"
+#import "AutomagicalCoder.h"
 
 @class Location;
 @class MainPageView;
@@ -17,13 +18,6 @@
 @class Reachability;
 @class OrderManager;
 @class LocationState;
-
-typedef enum Version {
-    VERSION_0_0_0 = 0,
-    VERSION_1_0_0 = 1,
-    VERSION_1_0_1 = 2,
-    VERSION_1_1_0 = 3,
-} Version;
 
 @interface MainPageViewController : UIViewController<UITableViewDelegate, OrderManagementDelegate>{
     
@@ -51,8 +45,6 @@ typedef enum Version {
 -(void) pendingButtonPressed;
 
 -(void) loadDataFromDisk;
-
--(void) loadData:(NSDictionary *)data WithVersion:(Version) version;
 
 -(void) saveDataToDisk;
 

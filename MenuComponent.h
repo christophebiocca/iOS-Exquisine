@@ -13,12 +13,13 @@
 //owner to be looking for failing setters, but it is up to the model to regulate its state.
 
 #import <Foundation/Foundation.h>
+#import "AutomagicalCoder.h"
 
 extern NSString* MENU_COMPONENT_NAME_CHANGED;
 extern NSString* MENU_COMPONENT_DESC_CHANGED;
 extern NSString* MENU_COMPONENT_PK_CHANGED;
 
-@interface MenuComponent : NSObject <NSCoding> {
+@interface MenuComponent :AutomagicalCoder {
     NSString *name;
     NSString *desc;
     NSUInteger primaryKey;

@@ -53,6 +53,23 @@ NSString* OPTION_INVALID_DESELECTION = @"CroutonLabs/OptionInvalidDeselection";
     return self;
 }
 
+-(void) choiceListRecovery:(NSCoder *)decoder
+{
+    switch (harddiskDataVersion) {
+        case VERSION_0_0_0:
+            //fall through to next
+        case VERSION_1_0_1:
+            choiceList = [decoder decodeObjectForKey:@"choice_list"];
+        case VERSION_1_0_0:
+            for (Choice *newChoice in choiceList) {
+                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recalculate:) name:CHOICE_SELECTED_CHANGED object:newChoice];
+            }
+            break;
+        default:
+            break;
+    }
+}
+
 - (MenuComponent *)initWithCoder:(NSCoder *)decoder
 {
     if (self = [super initWithCoder:decoder])
@@ -60,32 +77,16 @@ NSString* OPTION_INVALID_DESELECTION = @"CroutonLabs/OptionInvalidDeselection";
         lowerBound = [[decoder decodeObjectForKey:@"lower_bound"] intValue];
         upperBound = [[decoder decodeObjectForKey:@"upper_bound"] intValue];
         numberOfFreeChoices = [[decoder decodeObjectForKey:@"number_of_free_choices"] intValue];
-        choiceList = [decoder decodeObjectForKey:@"choice_list"];
-        
-        if(choiceList)
-        {
-            for (Choice *newChoice in choiceList) {
-                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recalculate:) name:CHOICE_SELECTED_CHANGED object:newChoice];
-            }
-        }
-        else
-        {
-            CLLog(LOG_LEVEL_ERROR, [NSString stringWithFormat: @"Option failed to load properly from harddisk: \n%@" , self]);
-        }
-        
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
-    //Rinse and repeat this:
     [super encodeWithCoder:encoder];
     [encoder encodeObject:[NSString stringWithFormat:@"%i", lowerBound] forKey:@"lower_bound"];
     [encoder encodeObject:[NSString stringWithFormat:@"%i", upperBound] forKey:@"upper_bound"];
     [encoder encodeObject:[NSString stringWithFormat:@"%i", numberOfFreeChoices] forKey:@"number_of_free_choices"];
-    [encoder encodeObject:choiceList forKey:@"choice_list"];
-    [encoder encodeObject:@"option" forKey:@"type"];
 }
 
 -(Option *)copy

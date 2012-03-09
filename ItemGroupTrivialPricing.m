@@ -15,18 +15,6 @@
     return [super init];
 }
 
--(id)initWithCoder:(NSCoder *)aDecoder
-{
-    self = [super init];
-    return self;
-}
-
--(void)encodeWithCoder:(NSCoder *)aCoder
-{
-    [aCoder encodeObject:@"item_group_trivial_pricing" forKey:@"type"];
-    
-}
-
 -(NSDecimalNumber*)priceForItem:(Item*)item{
     return [item price];
 }

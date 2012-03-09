@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AutomagicalCoder.h"
 @class Location;
 
-@interface LocationState : NSObject <NSCoding>
+@interface LocationState : AutomagicalCoder
 {
     Location *selectedLocation;
     NSArray *locations;

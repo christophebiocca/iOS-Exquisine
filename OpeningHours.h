@@ -6,7 +6,9 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-@interface OpeningHours : NSObject <NSCoding>{
+#import "AutomagicalCoder.h"
+
+@interface OpeningHours : AutomagicalCoder{
     NSInteger day;
     BOOL isOpen;
     NSDateComponents* opens;

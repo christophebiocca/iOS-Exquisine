@@ -16,17 +16,6 @@
     return [super init];
 }
 
--(id)initWithCoder:(NSCoder *)aDecoder
-{
-    self = [super init];
-    return self;
-}
-
--(void)encodeWithCoder:(NSCoder *)aCoder
-{
-    [aCoder encodeObject:@"combo_trivial_pricing_strategy" forKey:@"type"];
-}
-
 -(NSDecimalNumber*)priceForItemGroups:(NSArray*)itemGroups{
     NSDecimalNumber *tally = [NSDecimalNumber zero];
     for (ItemGroup *eachItemGroup in itemGroups) {

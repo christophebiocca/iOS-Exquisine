@@ -7,9 +7,9 @@
 //
 
 #import "ItemGroupPricingStrategy.h"
-#import "Item.h"
+#import "AutomagicalCoder.h"
 
-@interface ItemGroupMultiplicativePricing : NSObject<ItemGroupPricingStrategy>
+@interface ItemGroupMultiplicativePricing : AutomagicalCoder<ItemGroupPricingStrategy>
 {
     NSDecimalNumber *multiplicativeValue;
 }

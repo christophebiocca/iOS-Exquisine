@@ -12,7 +12,7 @@
 @class Order;
 @class Combo;
 
-@interface Menu : MenuComponent{
+@interface Menu : MenuComponent<NSCoding>{
 
     NSMutableArray *submenuList;
     NSMutableArray *comboList;
@@ -28,10 +28,6 @@
 -(Menu *) initFromData:(NSDictionary *)inputData;
 
 -(Menu *) initFromDataAndRootMenu:(NSDictionary *)inputData:(Menu *)theRootMenu;
-
-- (MenuComponent *)initWithCoder:(NSCoder *)decoder;
-
-- (void)encodeWithCoder:(NSCoder *)encoder;
 
 -(Menu *) copy;
 

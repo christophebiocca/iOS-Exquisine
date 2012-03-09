@@ -82,6 +82,7 @@
 		23C26A0A14C0F00600DD53DF /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C26A0914C0F00600DD53DF /* Menu.m */; };
 		23C26A2014C4D5A700DD53DF /* MenuComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C26A1F14C4D5A600DD53DF /* MenuComponent.m */; };
 		23C26A2314C4D6FA00DD53DF /* VisualizableData.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C26A2214C4D6FA00DD53DF /* VisualizableData.m */; };
+		23D003CE15095B7D001964D4 /* AutomagicalCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D003CD15095B7D001964D4 /* AutomagicalCoder.m */; };
 		23D1DCB014F6D66E00CFD279 /* LocationMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D1DCAF14F6D66E00CFD279 /* LocationMapView.m */; };
 		23D1DCB414F6D6DF00CFD279 /* LocationState.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D1DCB314F6D6DF00CFD279 /* LocationState.m */; };
 		23D1DCB814F7156200CFD279 /* FlexableDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D1DCB714F7156200CFD279 /* FlexableDictionary.m */; };
@@ -313,6 +314,8 @@
 		23C26A2114C4D6FA00DD53DF /* VisualizableData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisualizableData.h; sourceTree = "<group>"; };
 		23C26A2214C4D6FA00DD53DF /* VisualizableData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisualizableData.m; sourceTree = "<group>"; };
 		23C9EFE714E2F9C4000E8C2A /* ItemManagementDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemManagementDelegate.h; sourceTree = "<group>"; };
+		23D003CC15095B7D001964D4 /* AutomagicalCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutomagicalCoder.h; sourceTree = "<group>"; };
+		23D003CD15095B7D001964D4 /* AutomagicalCoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutomagicalCoder.m; sourceTree = "<group>"; };
 		23D1DCAE14F6D66E00CFD279 /* LocationMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationMapView.h; sourceTree = "<group>"; };
 		23D1DCAF14F6D66E00CFD279 /* LocationMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationMapView.m; sourceTree = "<group>"; };
 		23D1DCB214F6D6DF00CFD279 /* LocationState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationState.h; sourceTree = "<group>"; };
@@ -996,6 +999,8 @@
 		2391EA7814BE3D44001BDC1B /* Model Structure */ = {
 			isa = PBXGroup;
 			children = (
+				23D003CC15095B7D001964D4 /* AutomagicalCoder.h */,
+				23D003CD15095B7D001964D4 /* AutomagicalCoder.m */,
 				237EC00B14BE5842009D9268 /* MenuComposites */,
 				D95B787114D2BE3400FC0F29 /* Location */,
 				D9768A6814D73EBC00BBA467 /* Payment */,
@@ -1808,6 +1813,7 @@
 				2361B90A1506B78C007270CC /* ComboItemRenderer.m in Sources */,
 				2361B90E1506B86C007270CC /* ComboItemViewController.m in Sources */,
 				2361B9111506BEEA007270CC /* OrderComboViewController.m in Sources */,
+				23D003CE15095B7D001964D4 /* AutomagicalCoder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

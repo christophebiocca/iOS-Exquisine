@@ -35,10 +35,6 @@ extern NSString* ITEM_MODIFIED;
 
 -(Item *)initFromData:(NSDictionary *) inputData;
 
-- (MenuComponent *)initWithCoder:(NSCoder *)decoder;
-
-- (void)encodeWithCoder:(NSCoder *)encoder;
-
 -(Item *)copy;
 
 -(void) addOption:(Option *) anOption;

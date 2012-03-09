@@ -21,19 +21,6 @@
     return self;
 }
 
--(id)initWithCoder:(NSCoder *)aDecoder
-{
-    self = [super init];
-    discountValue = [aDecoder decodeObjectForKey:@"discount_value"];
-    return self;
-}
-
--(void)encodeWithCoder:(NSCoder *)aCoder
-{
-    [aCoder encodeObject:discountValue forKey:@"discount_value"];
-    [aCoder encodeObject:@"item_group_discount_pricing" forKey:@"type"];
-}
-
 -(NSDecimalNumber*)priceForItem:(Item*)item
 {
     return [[item price] decimalNumberBySubtracting:discountValue];

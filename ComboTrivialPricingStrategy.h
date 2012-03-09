@@ -7,6 +7,7 @@
 //
 
 #import "ComboPricingStrategy.h"
+#import "AutomagicalCoder.h"
 
-@interface ComboTrivialPricingStrategy : NSObject<ComboPricingStrategy>
+@interface ComboTrivialPricingStrategy : AutomagicalCoder<ComboPricingStrategy>
 @end

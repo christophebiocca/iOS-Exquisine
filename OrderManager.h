@@ -16,10 +16,12 @@
 extern NSString* ORDER_MANAGER_NEEDS_REDRAW;
 
 #import <Foundation/Foundation.h>
+#import "AutomagicalCoder.h"
+
 @class Order;
 @class Menu;
 
-@interface OrderManager : NSObject
+@interface OrderManager : AutomagicalCoder
 {
     Order *thisOrder;
     Menu *thisMenu;
@@ -30,10 +32,6 @@ extern NSString* ORDER_MANAGER_NEEDS_REDRAW;
 
 //Initializers
 -(OrderManager *)init;
-
-- (OrderManager *)initWithCoder:(NSCoder *)decoder;
-
-- (void)encodeWithCoder:(NSCoder *)encoder;
 
 -(OrderManager *)copy;
 

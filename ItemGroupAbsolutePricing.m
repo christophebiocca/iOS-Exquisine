@@ -21,19 +21,6 @@
     return self;
 }
 
--(id)initWithCoder:(NSCoder *)aDecoder
-{
-    self = [super init];
-    absoluteValue = [aDecoder decodeObjectForKey:@"absolute_value"];
-    return self;
-}
-
--(void)encodeWithCoder:(NSCoder *)aCoder
-{
-    [aCoder encodeObject:absoluteValue forKey:@"absolute_value"];
-    [aCoder encodeObject:@"item_group_absolute_pricing" forKey:@"type"];
-}
-
 -(NSDecimalNumber*)priceForItem:(Item*)item
 {
     return absoluteValue;

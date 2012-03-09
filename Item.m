@@ -53,36 +53,18 @@ NSString* ITEM_MODIFIED = @"CroutonLabs/ItemModified";
     return self;
 }
 
-- (MenuComponent *)initWithCoder:(NSCoder *)decoder
+-(void) basePriceRecovery:(NSCoder *)decoder
 {
-    if (self = [super initWithCoder:decoder])
-    {
-        basePrice = [decoder decodeObjectForKey:@"base_price"];
-        options = [decoder decodeObjectForKey:@"options"];
-        numberOfItems = [decoder decodeObjectForKey:@"number_of_items"];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(numberAltered) name:NUMBER_MODIFIED object:numberOfItems];
-        
-        for (Option *option in options) {
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(optionAltered) name:OPTION_MODIFIED object:option];
-        }
-        
-        if ((!basePrice) || (!options))
-        {
-            CLLog(LOG_LEVEL_ERROR, [NSString stringWithFormat: @"Item failed to load properly from harddisk: \n%@" , self]);
-        }
-        
+    switch (harddiskDataVersion) {
+        case VERSION_0_0_0:
+            //fall through to next
+        case VERSION_1_0_1:
+            basePrice = [decoder decodeObjectForKey:@"base_price"];
+        case VERSION_1_0_0:
+            break;
+        default:
+            break;
     }
-    return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)encoder
-{
-    //Rinse and repeat this:
-    [super encodeWithCoder:encoder];
-    [encoder encodeObject:basePrice forKey:@"base_price"];
-    [encoder encodeObject:options forKey:@"options"];
-    [encoder encodeObject:numberOfItems forKey:@"number_of_items"];
-    [encoder encodeObject:@"item" forKey:@"type"];
 }
 
 -(Item *)copy;

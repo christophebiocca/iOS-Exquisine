@@ -35,18 +35,26 @@ NSString* CHOICE_CHANGED = @"CroutonLabs/ChoiceChanged";
     return self;
 }
 
+-(void) basePriceRecovery:(NSCoder *)decoder
+{
+    switch (harddiskDataVersion) {
+        case VERSION_0_0_0:
+            //fall through to next
+        case VERSION_1_0_1:
+            basePrice = [decoder decodeObjectForKey:@"price"];
+        case VERSION_1_0_0:
+            break;
+        default:
+            break;
+    }
+}
+
 - (MenuComponent *)initWithCoder:(NSCoder *)decoder
 {
     if (self = [super initWithCoder:decoder])
     {
-        basePrice = [decoder decodeObjectForKey:@"price"];
         selected = [[decoder decodeObjectForKey:@"selected"] intValue];
         isFree = [[decoder decodeObjectForKey:@"free"] boolValue];
-        
-        if (!basePrice)
-        {
-            CLLog(LOG_LEVEL_ERROR, [NSString stringWithFormat: @"Choice failed to load properly from harddisk: \n%@" , self]);
-        }
     }
     return self;
 }
@@ -54,10 +62,8 @@ NSString* CHOICE_CHANGED = @"CroutonLabs/ChoiceChanged";
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
     [super encodeWithCoder:encoder];
-    [encoder encodeObject:basePrice forKey:@"price"];
     [encoder encodeObject:[NSString stringWithFormat:@"%i", selected] forKey:@"selected"];
     [encoder encodeObject:[NSString stringWithFormat:@"%i", isFree] forKey:@"free"];
-    [encoder encodeObject:@"choice" forKey:@"type"];
 }
 
 - (Choice *)copy

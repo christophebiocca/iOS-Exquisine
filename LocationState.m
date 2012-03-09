@@ -29,22 +29,4 @@
     return self;
 }
 
-- (LocationState *)initWithCoder:(NSCoder *)decoder
-{
-    if (self = [super init])
-    {
-        selectedLocation = [decoder decodeObjectForKey:@"selectedLocation"];
-        locations = [decoder decodeObjectForKey:@"locations"];
-    }
-    return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)encoder
-{
-    [encoder encodeObject:selectedLocation forKey:@"selectedLocation"];
-    [encoder encodeObject:locations forKey:@"locations"];
-    [encoder encodeObject:@"location_state" forKey:@"type"];
-}
-
-
 @end

@@ -33,10 +33,6 @@ extern NSString* COMBO_MODIFIED;
 //Initializers
 - (Combo *)initFromDataAndMenu:(NSDictionary *)inputData:(Menu *) associatedMenu;
 
-- (MenuComponent *)initWithCoder:(NSCoder *)decoder;
-
-- (void)encodeWithCoder:(NSCoder *)encoder;
-
 - (Combo *)copy;
 
 -(void) numberChanged;

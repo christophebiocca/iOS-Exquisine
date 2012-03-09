@@ -341,110 +341,21 @@
         NSString *path = [harddiskFileFolder stringByAppendingPathComponent: harddiskFileName];
         
         NSDictionary* rootObject;
-        rootObject = [NSKeyedUnarchiver unarchiveObjectWithFile:path];    
-        NSString *versionString = [rootObject valueForKey:@"version"];
+    
+        rootObject = [NSKeyedUnarchiver unarchiveObjectWithFile:path]; 
         
-        //Assign ver according to the version string
-        Version ver = VERSION_0_0_0;
-        if (!versionString)
-            ver = VERSION_1_0_0;
-        if ([versionString isEqualToString:@"1.1.0"])
-            ver = VERSION_1_1_0;
-        
-        //Check to make sure that a version was actually identified (just as a sanity check)
-        if (ver == VERSION_0_0_0) {
-            //Bitch and moan if we don't have the version listed
-            CLLog(LOG_LEVEL_ERROR, [NSString stringWithFormat: @"Unrecognised version string: \"%@\" while loading data from harddisk",versionString]);
-            return;
-        }
-        
-        [self loadData:rootObject WithVersion:ver];
+        //All of the versioning compatability is the responsibiliy of the composite objects. See AutomagicalCoder.m/.h for details.
+        theMenu = [rootObject valueForKey:@"menu"];
+        currentOrder = [rootObject valueForKey:@"current_order"];
+        ordersHistory = [rootObject valueForKey:@"order_history"];
+        favoriteOrders = [rootObject valueForKey:@"favorite_orders"];
+        locationState = [rootObject valueForKey:@"locationState"];
+        theOrderManager = [[OrderManager alloc] init];
+        [theOrderManager setMenu:theMenu];
+        [theOrderManager setOrder:currentOrder];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCreateButtonState) name:ORDER_MANAGER_NEEDS_REDRAW object:theOrderManager];
         [self updateCreateButtonState];
-    }
-    
-}
-
--(void)loadData:(NSDictionary *)data WithVersion:(Version) version
-{
-    NSMutableDictionary *mutableData = [[NSMutableDictionary alloc] initWithDictionary:data];
-    //Each case of the switch will modify the dictionary appropriately to map
-    //one version to the next. The final version case will actually load the data
-    //into variables and break.
-    switch (version) {
-        case VERSION_1_0_0:
-            //Nothing to do here.
-        case VERSION_1_0_1:
-            //This will go through the dictionary and add the 'type' key to each constituent dictionary
-            //We can then perform updates much more intelligently.
-            [self performSelector:@selector(initializeTypeKeys:) withObject:mutableData];
-        case VERSION_1_1_0:
-            theMenu = [mutableData valueForKey:@"menu"];
-            currentOrder = [mutableData valueForKey:@"current_order"];
-            ordersHistory = [mutableData valueForKey:@"order_history"];
-            favoriteOrders = [mutableData valueForKey:@"favorite_orders"];
-            locationState = [mutableData valueForKey:@"locationState"];
-            theOrderManager = [[OrderManager alloc] init];
-            [theOrderManager setMenu:theMenu];
-            [theOrderManager setOrder:currentOrder];
-            break; //<--- Make sure this guy moves with every release
-            
-        default:
-            CLLog(LOG_LEVEL_ERROR, [NSString stringWithFormat: @"Version enum is not being handled by the loadData switch! version: %i",version]);
-            break;
-    } 
-}
-
--(void) initializeTypeKeys:(NSMutableDictionary *)data
-{
-    for (NSString *key in [data keyEnumerator]) {
-        //First, check to see if the key will help us identify the class type that this data is representing
-        if ([key isEqualToString:@"order"]) 
-            [data setValue:@"order_manager" forKey:@"type"];
-        
-        if ([key isEqualToString:@"discount_value"]) 
-            [data setValue:@"item_group_discount_pricing" forKey:@"type"];
-        
-        if ([key isEqualToString:@"absolute_value"]) 
-            [data setValue:@"item_group_absolute_pricing" forKey:@"type"];
-        
-        if ([key isEqualToString:@"multiplicative_value"]) 
-            [data setValue:@"item_group_multiplicative_pricing" forKey:@"type"];
-        
-        if ([key isEqualToString:@"satisfying_item"]) 
-            [data setValue:@"item_group" forKey:@"type"];
-        
-        if ([key isEqualToString:@"list_of_item_groups"]) 
-            [data setValue:@"combo" forKey:@"type"];
-        
-        if ([key isEqualToString:@"submenu_list"]) 
-            [data setValue:@"menu" forKey:@"type"];
-        
-        if ([key isEqualToString:@"status"]) 
-            [data setValue:@"order" forKey:@"type"];
-        
-        if ([key isEqualToString:@"options"]) 
-            [data setValue:@"item" forKey:@"type"];
-        
-        if ([key isEqualToString:@"choice_list"]) 
-            [data setValue:@"option" forKey:@"type"];
-        
-        if ([key isEqualToString:@"storeHours"]) 
-            [data setValue:@"location" forKey:@"type"];
-        
-        if ([key isEqualToString:@"opens"]) 
-            [data setValue:@"opening_hours" forKey:@"type"];
-        
-        if ([key isEqualToString:@"selectedLocation"]) 
-            [data setValue:@"location_state" forKey:@"type"];
-        
-        //be sure to traverse all nessesary keys
-        id objectForKey = [data valueForKey:key];
-        if ([objectForKey isKindOfClass:[NSDictionary class]]) {
-            [self initializeTypeKeys:objectForKey];
-        }
-        
     }
 }
 

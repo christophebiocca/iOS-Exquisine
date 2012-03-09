@@ -66,40 +66,32 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
     return self;
 }
 
-- (MenuComponent *)initWithCoder:(NSCoder *)decoder
+-(void) listOfItemGroupsRecovery:(NSCoder *)decoder
 {
-    if (self = [super initWithCoder:decoder])
-    {
-        
-        listOfItemGroups = [decoder decodeObjectForKey:@"list_of_item_groups"];
-        numberOfCombos = [decoder decodeObjectForKey:@"number_of_combos"];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(numberChanged) name:NUMBER_MODIFIED object:numberOfCombos];
-        displayPrice = [decoder decodeObjectForKey:@"price"];
-        
-        for (ItemGroup *newItemGroup in listOfItemGroups) {
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recalculate:) name:ITEM_GROUP_MODIFIED object:newItemGroup];
-        }
-        
-        strategy = [decoder decodeObjectForKey:@"strategy"];
-        
-        if ((!strategy) || (!listOfItemGroups))
-        {
-            CLLog(LOG_LEVEL_ERROR, [NSString stringWithFormat: @"Combo failed to load properly from harddisk: \n%@" , self]);
-        }
-        
+    switch (harddiskDataVersion) {
+        case VERSION_0_0_0:
+            //fall through to next
+        case VERSION_1_0_1:
+            listOfItemGroups = [decoder decodeObjectForKey:@"list_of_item_groups"];
+        case VERSION_1_0_0:
+            break;
+        default:
+            break;
     }
-    return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)encoder
+-(void) displayPriceRecovery:(NSCoder *)decoder
 {
-    //Rinse and repeat this:
-    [super encodeWithCoder:encoder];
-    [encoder encodeObject:listOfItemGroups forKey:@"list_of_item_groups"];
-    [encoder encodeObject:strategy forKey:@"strategy"];
-    [encoder encodeObject:displayPrice forKey:@"price"];
-    [encoder encodeObject:numberOfCombos forKey:@"number_of_combos"];
-    [encoder encodeObject:@"combo" forKey:@"type"];
+    switch (harddiskDataVersion) {
+        case VERSION_0_0_0:
+            //fall through to next
+        case VERSION_1_0_1:
+            displayPrice = [decoder decodeObjectForKey:@"price"];
+        case VERSION_1_0_0:
+            break;
+        default:
+            break;
+    }
 }
 
 - (Combo *)copy
