@@ -28,26 +28,36 @@ NSString* ORDER_MANAGER_NEEDS_REDRAW = @"CroutonLabs/OrderManagerNeedsRedraw";
     return self;
 }
 
-- (OrderManager *)initWithCoder:(NSCoder *)decoder
+-(void) thisOrderRecovery:(NSCoder *)decoder
 {
-    
-    thisOrder = [decoder decodeObjectForKey:@"order"];
-    thisMenu = [decoder decodeObjectForKey:@"menu"];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recalculate:) name:ORDER_MODIFIED object:thisOrder];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(redrawNotify:) name:ORDER_FAVORITE_MODIFIED object:thisOrder];
-    
-    if ((!thisOrder) || (!thisMenu))
-    {
-        CLLog(LOG_LEVEL_ERROR, [NSString stringWithFormat: @"OrderManager failed to load properly from harddisk: \n%@" , self]);
+    switch (harddiskDataVersion) {
+        case VERSION_0_0_0:
+            //fall through to next
+        case VERSION_1_0_0:
+            //fall through to next
+        case VERSION_1_0_1:
+            thisOrder = [decoder decodeObjectForKey:@"order"];
+        case VERSION_1_1_0:
+            break;
+        default:
+            break;
     }
-    
-    return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)encoder
+-(void) thisMenuRecovery:(NSCoder *)decoder
 {
-    [encoder encodeObject:thisOrder forKey:@"order"];
-    [encoder encodeObject:thisMenu forKey:@"menu"];
+    switch (harddiskDataVersion) {
+        case VERSION_0_0_0:
+            //fall through to next
+        case VERSION_1_0_0:
+            //fall through to next
+        case VERSION_1_0_1:
+            thisMenu = [decoder decodeObjectForKey:@"menu"];
+        case VERSION_1_1_0:
+            break;
+        default:
+            break;
+    }
 }
 
 -(OrderManager *)copy

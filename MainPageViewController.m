@@ -28,6 +28,8 @@
 #import "LocationState.h"
 #import "SettingsViewController.h"
 
+
+
 @implementation MainPageViewController
 /*
 
@@ -362,7 +364,180 @@
         [mainPageView.pendingOrderButton setEnabled:NO];
     }
 }
+-(void)loadDataFromDisk
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    if ([fileManager fileExistsAtPath: harddiskFileFolder])
+    {
+        NSString *path = [harddiskFileFolder stringByAppendingPathComponent: harddiskFileName];
+        
+        NSDictionary* rootObject;
+    
+        rootObject = [NSKeyedUnarchiver unarchiveObjectWithFile:path]; 
+        
+        //All of the versioning compatability is the responsibiliy of the composite objects. See AutomagicalCoder.m/.h for details.
+        theMenu = [rootObject valueForKey:@"menu"];
+        currentOrder = [rootObject valueForKey:@"current_order"];
+        ordersHistory = [rootObject valueForKey:@"order_history"];
+        favoriteOrders = [rootObject valueForKey:@"favorite_orders"];
+        locationState = [rootObject valueForKey:@"locationState"];
+        theOrderManager = [[OrderManager alloc] init];
+        [theOrderManager setMenu:theMenu];
+        [theOrderManager setOrder:currentOrder];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCreateButtonState) name:ORDER_MANAGER_NEEDS_REDRAW object:theOrderManager];
+        [self updateCreateButtonState];
+    }
+}
 
+-(void)saveDataToDisk
+{
+    //Create the folder if it's not there already
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    [fileManager createDirectoryAtPath:harddiskFileFolder withIntermediateDirectories:YES attributes:nil error:nil];
+    NSString *path = [harddiskFileFolder stringByAppendingPathComponent: harddiskFileName];
+    
+    NSMutableDictionary * rootObject;    
+    rootObject = [NSMutableDictionary dictionary];
+    
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleVersionKey];
+    
+    [rootObject setValue: version forKey:@"version"];
+    [rootObject setValue: theMenu forKey:@"menu"];
+    [rootObject setValue: currentOrder forKey:@"current_order"];
+    [rootObject setValue: ordersHistory forKey:@"order_history"];
+    [rootObject setValue: favoriteOrders forKey:@"favorite_orders"];
+    [rootObject setValue: locationState forKey:@"locationState"];
+    [NSKeyedArchiver archiveRootObject: rootObject toFile: path];
+}
+
+-(void)doFavoriteConsistancyCheck
+{
+    for (Order *eachOrder in [self allKnownOrders]) {
+        [eachOrder setFavorite:NO];
+        for (Order *favOrder in favoriteOrders) {
+            if([eachOrder isEffectivelyEqual:favOrder])
+            {
+                [eachOrder setFavorite:YES];
+                break;
+            }
+        }
+    }
+}
+
+-(NSArray *)allKnownOrders 
+{
+    NSMutableArray *returnList = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    if ([ordersHistory count] > 0)
+    {
+        [returnList addObject:[ordersHistory lastObject]];
+    }
+    
+    if (currentOrder)
+        [returnList addObject:currentOrder];
+    
+    return returnList;
+}
+
+-(Order *)dereferenceOrderIdentifier:(NSString *)orderIdentifier
+{
+    for ( Order *eachOrder in [self allKnownOrders]) 
+    {
+        if ([eachOrder.orderIdentifier isEqualToString:orderIdentifier])
+            return eachOrder;
+    }
+    return nil;
+}
+
+-(void)initiateMenuRefresh
+{
+    [GetMenu getMenuForRestaurant:RESTAURANT_ID
+            success:^(GetMenu* menuCall){
+                theMenu = [menuCall menu];
+                [self updateCreateButtonState];
+            }
+            failure:^(GetMenu* menuCall, NSError* error){
+                if(!theMenu){
+                    [[[UIAlertView alloc] initWithTitle:@"No internet access"
+                                                message:@"An internet connection is required to "
+                      @"load the menu the first time this app runs."
+                                               delegate:nil
+                                      cancelButtonTitle:@"OK"
+                                      otherButtonTitles:nil] show];
+                } else {
+                    [[[UIAlertView alloc] initWithTitle:@"No internet access"
+                                                message:@"You can browse the menu, but won't"
+                      @" be able to place an order until you connect to the internet."
+                                               delegate:nil
+                                      cancelButtonTitle:@"OK"
+                                      otherButtonTitles:nil] show];
+                }
+                CLLog(LOG_LEVEL_WARNING, [NSString stringWithFormat: @"call %@ errored with %@", menuCall, error]);
+            }];  
+}
+
+-(BOOL)hasServerConnection
+{
+    return [networkChecker isReachable];
+}
+
+-(BOOL)locationIsOpen
+{
+    for (Location *eachLocation in [locationState locations]) {
+        if ([eachLocation storeState] == Open)
+            return YES;
+    }
+    return NO;
+}
+
+-(void)updateStoreHourInfo
+{
+    if(![locationState selectedLocation])
+    {
+        [[mainPageView openIndicator] setState:IndicatorViewOff];
+        [[mainPageView storeHours] setText:@"Fetching store hours from server..."];
+        return;
+    }
+    
+    switch ([[locationState selectedLocation] storeState]) {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+        case Open:
+            [[mainPageView openIndicator] setState:IndicatorViewOn];
+            //[[mainPageView storeHours] setText:@""];
+            break;
+        case Closing:
+            [[mainPageView openIndicator] setState:IndicatorViewStale];
+            break;
+        case Closed:
+            [[mainPageView openIndicator] setState:IndicatorViewOff];
+            break;
+            
+        default:
+            break;
+    }
+    
+    if([[locationState selectedLocation] storeState] == Closed)
+        [[mainPageView storeHours] setText:[[locationState selectedLocation] storeHourBlurb]];
+    else
+        [[mainPageView storeHours] setText:@""];
+    
+}
+
+-(void)getLocation
+{
+    [GetLocations getLocationsForRestaurant:RESTAURANT_ID 
+                                    success:^(GetLocations* call) {
+                                        locationState = [[LocationState alloc] initWithLocations:[call locations]];
+                                        [self updateStoreHourInfo];
+                                    }
+                                    failure:^(GetLocations* call, NSError* error) {
+                                        CLLog(LOG_LEVEL_WARNING ,[NSString stringWithFormat: @"Can't fetch locations:\n%@", error]);
+                                        [[mainPageView openIndicator] setState:IndicatorViewOff];
+                                        [[mainPageView storeHours] setText:@"Unable to obtain opening hours."];
+                                    }];
+}
+>>>>>>> update_1
 
 
 -(void) resetApplicationBadgeNumber

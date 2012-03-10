@@ -10,6 +10,7 @@
 @class Order;
 @class Menu;
 @class Item;
+@class NSMutableNumber;
 @protocol ComboPricingStrategy;
 
 extern NSString* COMBO_MODIFIED;
@@ -17,12 +18,14 @@ extern NSString* COMBO_MODIFIED;
 
 @interface Combo : MenuComponent
 {
-    
+    NSMutableNumber *numberOfCombos;
     id<ComboPricingStrategy> strategy;
     NSMutableArray *listOfItemGroups;
     NSDecimalNumber *displayPrice;
     
 }
+
+@property (retain) NSMutableNumber *numberOfCombos;
 
 @property (readonly) NSDecimalNumber *displayPrice;
 @property (retain) NSMutableArray *listOfItemGroups;
@@ -30,11 +33,9 @@ extern NSString* COMBO_MODIFIED;
 //Initializers
 - (Combo *)initFromDataAndMenu:(NSDictionary *)inputData:(Menu *) associatedMenu;
 
-- (MenuComponent *)initWithCoder:(NSCoder *)decoder;
-
-- (void)encodeWithCoder:(NSCoder *)encoder;
-
 - (Combo *)copy;
+
+-(void) numberChanged;
 
 - (Combo *)optimalPickFromItems:(NSArray*)items;
 

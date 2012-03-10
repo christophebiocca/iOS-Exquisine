@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "APICallDelegate.h"
 #import "OrderManagementDelegate.h"
+#import "AutomagicalCoder.h"
 
 @class Location;
 @class MainPageView;

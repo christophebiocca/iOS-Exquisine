@@ -12,6 +12,7 @@
 #import "ItemRenderer.h"
 #import "ItemGroup.h"
 #import "ItemGroupCell.h"
+#import "IntegerInputCellData.h"
 
 @implementation ComboRenderer
 
@@ -21,8 +22,16 @@
     
     if(self)
     {
-        listData = [NSMutableArray arrayWithObject:[aCombo listOfItemGroups]];
-        sectionNames = [NSArray arrayWithObject:[aCombo name]];
+        [sectionNames addObject:@"Number of combos"];
+        IntegerInputCellData *inputCellData = [[IntegerInputCellData alloc] init];
+        [inputCellData setNumber:[aCombo numberOfCombos]];
+        [inputCellData setNumberPrompt:@"Number of combos"];
+        [inputCellData setLowerBound:[NSNumber numberWithInt:1]];
+        [inputCellData setUpperBound:[NSNumber numberWithInt:100]];
+        [listData addObject:[NSArray arrayWithObject:inputCellData]];
+        
+        [sectionNames addObject:[aCombo name]];
+        [listData addObject:[aCombo listOfItemGroups]];
     }
     
     return self;

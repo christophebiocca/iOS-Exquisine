@@ -59,7 +59,6 @@
             [[self navigationController] pushViewController:controller animated:YES];
             break;
         }
-            
         default:
             break;
     }

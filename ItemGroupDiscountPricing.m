@@ -21,16 +21,20 @@
     return self;
 }
 
--(id)initWithCoder:(NSCoder *)aDecoder
+-(void) discountValueRecovery:(NSCoder *)decoder
 {
-    self = [super init];
-    discountValue = [aDecoder decodeObjectForKey:@"discount_value"];
-    return self;
-}
-
--(void)encodeWithCoder:(NSCoder *)aCoder
-{
-    [aCoder encodeObject:discountValue forKey:@"discount_value"];
+    switch (harddiskDataVersion) {
+        case VERSION_0_0_0:
+            //fall through to next
+        case VERSION_1_0_0:
+            //fall through to next
+        case VERSION_1_0_1:
+            discountValue = [decoder decodeObjectForKey:@"discount_value"];
+        case VERSION_1_1_0:
+            break;
+        default:
+            break;
+    }
 }
 
 -(NSDecimalNumber*)priceForItem:(Item*)item

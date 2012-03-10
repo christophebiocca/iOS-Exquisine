@@ -39,7 +39,7 @@ NSString* MENU_COMPONENT_PK_CHANGED = @"CroutonLabs/MenuComponentPrimaryKeyChang
 -(MenuComponent *)initFromData:(NSDictionary *)inputData
 {
     name = [inputData objectForKey:@"name"];
-    primaryKey = [[inputData objectForKey:@"pk"] unsignedIntegerValue];
+    primaryKey = [[inputData objectForKey:@"pk"] integerValue];
     desc = [inputData objectForKey:@"description"];
     if(!desc || ((id)desc == [NSNull null])){
         desc = @"";
@@ -48,23 +48,55 @@ NSString* MENU_COMPONENT_PK_CHANGED = @"CroutonLabs/MenuComponentPrimaryKeyChang
     return self;
 }
 
-- (MenuComponent *)initWithCoder:(NSCoder *)decoder
+-(void) nameRecovery:(NSCoder *)decoder
 {
-    if (self = [super init])
-    {
-        name = [decoder decodeObjectForKey:@"name"];
-        desc = [decoder decodeObjectForKey:@"desc"];
-        primaryKey = [[decoder decodeObjectForKey:@"primary_key"] unsignedIntegerValue];
+    switch (harddiskDataVersion) {
+        case VERSION_0_0_0:
+            //fall through to next
+        case VERSION_1_0_0:
+            //fall through to next
+        case VERSION_1_0_1:
+            name = [decoder decodeObjectForKey:@"name"];
+        case VERSION_1_1_0:
+            break;
+        default:
+            break;
     }
+}
+
+-(void) descRecovery:(NSCoder *)decoder
+{
+    switch (harddiskDataVersion) {
+        case VERSION_0_0_0:
+            //fall through to next
+        case VERSION_1_0_0:
+            //fall through to next
+        case VERSION_1_0_1:
+            desc = [decoder decodeObjectForKey:@"desc"];
+        case VERSION_1_1_0:
+            break;
+        default:
+            break;
+    }
+}
+
+-(id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    
+    if (self) {
+        //base types can't be automagically coded. This should really
+        //be switched to an automagical type.
+        primaryKey = [[aDecoder decodeObjectForKey:@"primary_key"] integerValue];
+    }
+    
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)encoder
+-(void)encodeWithCoder:(NSCoder *)aCoder
 {
-    //Rinse and repeat this:
-    [encoder encodeObject:name forKey:@"name"];
-    [encoder encodeObject:desc forKey:@"desc"];
-    [encoder encodeObject:[NSNumber numberWithUnsignedInteger:primaryKey] forKey:@"primary_key"];
+    [super encodeWithCoder:aCoder];
+    [aCoder encodeObject:[NSString stringWithFormat:@"%i",primaryKey] forKey:@"primary_key"];
 }
 
 -(MenuComponent *)copy

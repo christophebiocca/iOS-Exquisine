@@ -19,6 +19,9 @@
 
 @synthesize paymentInfo, delegate;
 
+@synthesize remember;
+@synthesize rememberLabel;
+
 typedef enum PickerSections{
     Month,
     Year,

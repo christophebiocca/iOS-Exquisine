@@ -21,16 +21,20 @@
     return self;
 }
 
--(id)initWithCoder:(NSCoder *)aDecoder
+-(void) absoluteValueRecovery:(NSCoder *)decoder
 {
-    self = [super init];
-    absoluteValue = [aDecoder decodeObjectForKey:@"absolute_value"];
-    return self;
-}
-
--(void)encodeWithCoder:(NSCoder *)aCoder
-{
-    [aCoder encodeObject:absoluteValue forKey:@"absolute_value"];
+    switch (harddiskDataVersion) {
+        case VERSION_0_0_0:
+            //fall through to next
+        case VERSION_1_0_0:
+            //fall through to next
+        case VERSION_1_0_1:
+            absoluteValue = [decoder decodeObjectForKey:@"absolute_value"];
+        case VERSION_1_1_0:
+            break;
+        default:
+            break;
+    }
 }
 
 -(NSDecimalNumber*)priceForItem:(Item*)item

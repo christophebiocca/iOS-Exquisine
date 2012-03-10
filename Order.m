@@ -16,6 +16,7 @@
 #import "PaymentInfo.h"
 #import "Utilities.h"
 #import "PaymentSuccessInfo.h"
+#import "NSMutableNumber.h"
 
 NSString* ORDER_ITEMS_MODIFIED = @"CroutonLabs/OrderItemsModified";
 NSString* ORDER_COMBOS_MODIFIED = @"CroutonLabs/OrderCombosModified";
@@ -54,53 +55,127 @@ NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
     return self;
 }
 
-- (MenuComponent *)initWithCoder:(NSCoder *)decoder
+-(void) itemListRecovery:(NSCoder *)decoder
 {
-    if (self = [super initWithCoder:decoder])
-    {
-        isFavorite = [[decoder decodeObjectForKey:@"is_favorite"] intValue];
-        
-        itemList = [decoder decodeObjectForKey:@"item_list"];
-        for (Item *anItem in itemList) {
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recalculate:) name:ITEM_MODIFIED object:anItem];
-        }
-        
-        comboList = [decoder decodeObjectForKey:@"combo_list"];
-        for (Combo *aCombo in comboList) {
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recalculate:) name:COMBO_MODIFIED object:aCombo];
-        }
-        
-        status = [decoder decodeObjectForKey:@"status"];
-        orderIdentifier = [decoder decodeObjectForKey:@"order_identifier"];
-        creationDate = [decoder decodeObjectForKey:@"creation_date"];
-        mostRecentSubmitDate = [decoder decodeObjectForKey:@"most_recent_submit_date"];
-        successInfo = [decoder decodeObjectForKey:@"success_info"];
-        
-        if ((!itemList) || (!comboList) || (!status) || (!orderIdentifier) || (!creationDate))
-        {
-            CLLog(LOG_LEVEL_ERROR, [NSString stringWithFormat: @"Order failed to load properly from harddisk: \n%@" , self]);
-        }
-        
+    switch (harddiskDataVersion) {
+        case VERSION_0_0_0:
+            //fall through to next
+        case VERSION_1_0_0:
+            //fall through to next
+        case VERSION_1_0_1:
+            itemList = [decoder decodeObjectForKey:@"item_list"];
+        case VERSION_1_1_0:
+            for (Item *anItem in itemList) {
+                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recalculate:) name:ITEM_MODIFIED object:anItem];
+            }
+            break;
+        default:
+            break;
     }
+}
+
+-(void) comboListRecovery:(NSCoder *)decoder
+{
+    switch (harddiskDataVersion) {
+        case VERSION_0_0_0:
+            //fall through to next
+        case VERSION_1_0_0:
+            //fall through to next
+        case VERSION_1_0_1:
+            comboList = [decoder decodeObjectForKey:@"combo_list"];
+        case VERSION_1_1_0:
+            for (Combo *aCombo in comboList) {
+                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recalculate:) name:COMBO_MODIFIED object:aCombo];
+            }
+            break;
+        default:
+            break;
+    }
+}
+
+-(void) orderIdentifierRecovery:(NSCoder *)decoder
+{
+    switch (harddiskDataVersion) {
+        case VERSION_0_0_0:
+            //fall through to next
+        case VERSION_1_0_0:
+            //fall through to next
+        case VERSION_1_0_1:
+            orderIdentifier = [decoder decodeObjectForKey:@"order_identifier"];
+        case VERSION_1_1_0:
+            break;
+        default:
+            break;
+    }
+}
+
+-(void) creationDateRecovery:(NSCoder *)decoder
+{
+    switch (harddiskDataVersion) {
+        case VERSION_0_0_0:
+            //fall through to next
+        case VERSION_1_0_0:
+            //fall through to next
+        case VERSION_1_0_1:
+            creationDate = [decoder decodeObjectForKey:@"creation_date"];
+        case VERSION_1_1_0:
+            break;
+        default:
+            break;
+    }
+}
+
+-(void) mostRecentSubmitDateRecovery:(NSCoder *)decoder
+{
+    switch (harddiskDataVersion) {
+        case VERSION_0_0_0:
+            //fall through to next
+        case VERSION_1_0_0:
+            //fall through to next
+        case VERSION_1_0_1:
+            mostRecentSubmitDate = [decoder decodeObjectForKey:@"most_recent_submit_date"];
+        case VERSION_1_1_0:
+            break;
+        default:
+            break;
+    }
+}
+
+//We don't need a pita finished time recovery because we weren't recording
+//it in the last version. Oops!
+
+-(void) successInfoRecovery:(NSCoder *)decoder
+{
+    switch (harddiskDataVersion) {
+        case VERSION_0_0_0:
+            //fall through to next
+        case VERSION_1_0_0:
+            //fall through to next
+        case VERSION_1_0_1:
+            successInfo = [decoder decodeObjectForKey:@"success_info"];
+        case VERSION_1_1_0:
+            break;
+        default:
+            break;
+    }
+}
+
+-(Order *)initWithCoder:(NSCoder *)decoder
+{
+    self = [super initWithCoder:decoder];
+    
+    if (self) {
+        isFavorite = [[decoder decodeObjectForKey:@"is_favorite"] intValue];
+    }
+    
     return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)encoder
+-(void)encodeWithCoder:(NSCoder *)encoder
 {
-    //Rinse and repeat this:
     [super encodeWithCoder:encoder];
-    
     [encoder encodeObject:[NSString stringWithFormat:@"%i", isFavorite] forKey:@"is_favorite"];
-    
-    [encoder encodeObject:itemList forKey:@"item_list"];
-    [encoder encodeObject:comboList forKey:@"combo_list"];
-    [encoder encodeObject:status forKey:@"status"];
-    [encoder encodeObject:orderIdentifier forKey:@"order_identifier"];\
-    [encoder encodeObject:creationDate forKey:@"creation_date"];
-    [encoder encodeObject:mostRecentSubmitDate forKey:@"most_recent_submit_date"];
-    [encoder encodeObject:successInfo forKey:@"success_info"];
 }
-
 
 -(id)copy
 {
@@ -347,11 +422,15 @@ NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
     
     NSMutableArray* orderitems = [NSMutableArray arrayWithCapacity:[itemList count]];
     for(Item* item in itemList){
-        [orderitems addObject:[item orderRepresentation]];
+        for (int i = 0; i < [[item numberOfItems] intValue]; i++) {
+            [orderitems addObject:[item orderRepresentation]];
+        }
     }
     NSMutableArray* ordercombos = [NSMutableArray arrayWithCapacity:[comboList count]];
     for(Combo* combo in comboList){
-        [ordercombos addObject:[combo orderRepresentation]];
+        for (int i = 0; i < [[combo numberOfCombos] intValue]; i++) {
+            [ordercombos addObject:[combo orderRepresentation]];
+        }
     }
     
     return [NSDictionary dictionaryWithObjectsAndKeys:

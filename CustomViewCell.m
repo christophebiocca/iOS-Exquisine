@@ -10,6 +10,8 @@
 #import "MenuCompositeCell.h"
 #import "GeneralPurposeViewCell.h"
 #import "GeneralPurposeViewCellData.h"
+#import "IntegerInputCell.h"
+#import "IntegerInputCellData.h"
 #import "MenuComponent.h"
 
 @implementation CustomViewCell
@@ -25,6 +27,11 @@
     }
     if ([data isKindOfClass:[GeneralPurposeViewCellData class]]) {
         return [GeneralPurposeViewCell customViewCellWithGeneralData:data];
+    }
+    if ([data isKindOfClass:[IntegerInputCellData class]]) {
+        IntegerInputCell *returnCell = [[IntegerInputCell alloc] init];
+        [returnCell setData:data];
+        return returnCell;
     }
     
     CLLog(LOG_LEVEL_WARNING, @"An unknown data type was passed to customViewCellFromData.");
@@ -42,6 +49,9 @@
     }
     if ([data isKindOfClass:[NSDictionary class]]) {
         return [MenuCompositeCell cellIdentifier];
+    }
+    if ([data isKindOfClass:[IntegerInputCellData class]]) {
+        return [IntegerInputCell cellIdentifier];
     }
     
     CLLog(LOG_LEVEL_WARNING, @"An unknown data type was passed to cellIdentifierForData.");

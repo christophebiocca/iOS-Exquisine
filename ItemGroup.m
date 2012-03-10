@@ -75,29 +75,36 @@ NSString* ITEM_GROUP_MODIFIED = @"CroutonLabs/ItemGroupModified";
     
 }
 
-- (MenuComponent *)initWithCoder:(NSCoder *)decoder
+-(void) listOfItemsRecovery:(NSCoder *)decoder
 {
-    if (self = [super initWithCoder:decoder])
-    {
-        listOfItems = [decoder decodeObjectForKey:@"list_of_items"];
-        satisfyingItem = [decoder decodeObjectForKey:@"satisfying_item"];
-        strategy = [decoder decodeObjectForKey:@"strategy"];
-        
-        if ((!listOfItems) || (!strategy))
-        {
-            CLLog(LOG_LEVEL_ERROR, [NSString stringWithFormat: @"Combo failed to load properly from harddisk: \n%@" , self]);
-        }
+    switch (harddiskDataVersion) {
+        case VERSION_0_0_0:
+            //fall through to next
+        case VERSION_1_0_0:
+            //fall through to next
+        case VERSION_1_0_1:
+            listOfItems = [decoder decodeObjectForKey:@"list_of_items"];
+        case VERSION_1_1_0:
+            break;
+        default:
+            break;
     }
-    return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)encoder
+-(void) satisfyingItemRecovery:(NSCoder *)decoder
 {
-    //Rinse and repeat this:
-    [super encodeWithCoder:encoder];    
-    [encoder encodeObject:listOfItems forKey:@"list_of_items"];
-    [encoder encodeObject:satisfyingItem forKey:@"satisfying_item"];
-    [encoder encodeObject:strategy forKey:@"strategy"];
+    switch (harddiskDataVersion) {
+        case VERSION_0_0_0:
+            //fall through to next
+        case VERSION_1_0_0:
+            //fall through to next
+        case VERSION_1_0_1:
+            satisfyingItem = [decoder decodeObjectForKey:@"satisfying_item"];
+        case VERSION_1_1_0:
+            break;
+        default:
+            break;
+    }
 }
 
 -(ItemGroup *)copy

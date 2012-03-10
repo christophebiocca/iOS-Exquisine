@@ -20,16 +20,20 @@
     return self;
 }
 
--(id)initWithCoder:(NSCoder *)aDecoder
+-(void) multiplicativeValueRecovery:(NSCoder *)decoder
 {
-    self = [super init];
-    multiplicativeValue = [aDecoder decodeObjectForKey:@"multiplicative_value"];
-    return self;
-}
-
--(void)encodeWithCoder:(NSCoder *)aCoder
-{
-    [aCoder encodeObject:multiplicativeValue forKey:@"multiplicative_value"];
+    switch (harddiskDataVersion) {
+        case VERSION_0_0_0:
+            //fall through to next
+        case VERSION_1_0_0:
+            //fall through to next
+        case VERSION_1_0_1:
+            multiplicativeValue = [decoder decodeObjectForKey:@"multiplicative_value"];
+        case VERSION_1_1_0:
+            break;
+        default:
+            break;
+    }
 }
 
 -(NSDecimalNumber *)priceForItem:(Item *)item

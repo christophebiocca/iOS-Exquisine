@@ -16,10 +16,19 @@
     
     if([price isEqual:[NSDecimalNumber zero]])
     {
-        return @"Free!";
+        return @"$0";
     }
     return [NSNumberFormatter localizedStringFromNumber:price 
                                             numberStyle:NSNumberFormatterCurrencyStyle];
+}
+
++(NSString *)FormatToDate:(NSDate *) theDate
+{
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"hh:mm a, EEE, MMM dd, yyyy"];
+    
+    return [formatter stringFromDate:theDate]; 
 }
 
 +(NSInteger)CompositeListCount:(NSMutableArray *) compositeList

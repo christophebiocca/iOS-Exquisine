@@ -7,6 +7,7 @@
 //
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
+#import "AutomagicalCoder.h"
 
 typedef enum StoreState 
 {
@@ -15,7 +16,7 @@ typedef enum StoreState
     Closed
 } StoreState;
 
-@interface Location : NSObject<MKAnnotation, NSCopying, NSCoding>
+@interface Location : AutomagicalCoder<MKAnnotation, NSCopying, NSCoding>
 {
     NSString* primaryKey;
     NSArray* storeHours;

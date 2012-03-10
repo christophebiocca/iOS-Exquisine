@@ -39,10 +39,6 @@ extern NSString* ITEM_GROUP_MODIFIED;
 
 -(ItemGroup *)initWithDataAndParentMenu:(NSDictionary *)inputData:(Menu *) parentMenu;
 
-- (MenuComponent *)initWithCoder:(NSCoder *)decoder;
-
-- (void)encodeWithCoder:(NSCoder *)encoder;
-
 -(ItemGroup *) copy;
 
 -(ItemGroup *)optimalPickFromItems:(NSArray*)items;

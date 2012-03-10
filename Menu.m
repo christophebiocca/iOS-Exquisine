@@ -80,28 +80,36 @@
     return self;
 }
 
-- (MenuComponent *)initWithCoder:(NSCoder *)decoder
+-(void) submenuListRecovery:(NSCoder *)decoder
 {
-    if (self = [super initWithCoder:decoder])
-    {
-        submenuList = [decoder decodeObjectForKey:@"submenu_list"];
-        comboList = [decoder decodeObjectForKey:@"combo_list"];
-        
-        if ((!comboList) || (!submenuList))
-        {
-            CLLog(LOG_LEVEL_ERROR, [NSString stringWithFormat: @"Menu failed to load properly from harddisk: \n%@" , self]);
-        }
-        
+    switch (harddiskDataVersion) {
+        case VERSION_0_0_0:
+            //fall through to next
+        case VERSION_1_0_0:
+            //fall through to next
+        case VERSION_1_0_1:
+            submenuList = [decoder decodeObjectForKey:@"submenu_list"];
+        case VERSION_1_1_0:
+            break;
+        default:
+            break;
     }
-    return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)encoder
+-(void) comboListRecovery:(NSCoder *)decoder
 {
-    //Rinse and repeat this:
-    [super encodeWithCoder:encoder];
-    [encoder encodeObject:submenuList forKey:@"submenu_list"];
-    [encoder encodeObject:comboList forKey:@"combo_list"];
+    switch (harddiskDataVersion) {
+        case VERSION_0_0_0:
+            //fall through to next
+        case VERSION_1_0_0:
+            //fall through to next
+        case VERSION_1_0_1:
+            comboList = [decoder decodeObjectForKey:@"combo_list"];
+        case VERSION_1_1_0:
+            break;
+        default:
+            break;
+    }
 }
 
 -(Menu *)copy

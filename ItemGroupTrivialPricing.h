@@ -7,6 +7,7 @@
 //
 
 #import "ItemGroupPricingStrategy.h"
+#import "AutomagicalCoder.h"
 
-@interface ItemGroupTrivialPricing : NSObject<ItemGroupPricingStrategy>
+@interface ItemGroupTrivialPricing : AutomagicalCoder <ItemGroupPricingStrategy>
 @end

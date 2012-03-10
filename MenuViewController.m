@@ -51,7 +51,7 @@
         
         Item *newItem = [submenuThing copy];
         
-        ItemViewController *newView = [[ItemViewController alloc] initializeWithItemAndOrderAndReturnController:newItem :orderInfo :orderViewController];
+        ItemViewController *newView = [[ItemViewController alloc] initWithItemAndOrderAndReturnController:newItem :orderInfo :orderViewController];
         
         [newView setDelegate:self];
         

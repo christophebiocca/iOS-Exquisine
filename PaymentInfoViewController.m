@@ -15,10 +15,12 @@
 @implementation PaymentInfoViewController
 
 @synthesize completionBlock, cancelledBlock;
+@synthesize paymentView;
 
 - (id)init
 {
     if (self = [super initWithNibName:nil bundle:nil]) {
+        paymentView = [[PaymentView alloc] init];
     }
     return self;
 }
@@ -36,7 +38,6 @@
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView
 {
-    paymentView = [[PaymentView alloc] init];
     [self setView:paymentView];
 }
 
@@ -53,6 +54,17 @@
 
 -(void)paymentCancelled{
     cancelledBlock();
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    navigationBarWasHidden = [[[self navigationController] navigationBar] isHidden];
+    [[[self navigationController] navigationBar] setHidden:YES];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [[[self navigationController] navigationBar] setHidden:navigationBarWasHidden];
 }
 
 - (void)viewDidUnload

@@ -20,6 +20,9 @@
 #import "ItemRenderer.h"
 #import "MenuRenderer.h"
 #import "OrderManager.h"
+#import "ComboItemViewController.h"
+#import "Combo.h"
+#import "OrderComboViewController.h"
 
 @implementation OrderViewController
 
@@ -205,16 +208,21 @@
     if ( [cellObject isKindOfClass:([Item class])])
     {
         
-        ItemViewController *newItemController = [[ItemViewController alloc] initializeWithItemAndOrderAndReturnController:cellObject:[theOrderManager thisOrder] :self];
+        ItemViewController *newItemController = [[ItemViewController alloc] initWithItemAndOrderAndReturnController:cellObject:[theOrderManager thisOrder] :self];
         
         [[self navigationController] pushViewController:newItemController animated:YES];
         
     }
     
+    if ([cellObject isKindOfClass:[Combo class]]) {
+        OrderComboViewController *newController = [[OrderComboViewController alloc] initializeWithComboAndOrderAndReturnController:cellObject :[theOrderManager thisOrder] :self];
+        [[self navigationController] pushViewController:newController animated:YES];
+    }
+    
     if ( [cellObject isKindOfClass:([NSDictionary class])])
     {
         
-        ItemViewController *newItemController = [[ItemViewController alloc] initializeWithItemAndOrderAndReturnController:[cellObject objectForKey:@"data"]:[theOrderManager thisOrder] :self];
+        ComboItemViewController *newItemController = [[ComboItemViewController alloc] initWithItemAndOrderAndReturnController:[cellObject objectForKey:@"data"]:[theOrderManager thisOrder] :self];
         
         [[self navigationController] pushViewController:newItemController animated:YES];
         
@@ -258,6 +266,8 @@
     [[orderView editButton] setTarget:self];
     [[orderView editButton] setAction:@selector(toggleEditing)];
     
+    [self orderAltered:nil];
+    
     [self setView:orderView];
 }
 
@@ -269,7 +279,6 @@
 -(void)viewWillAppear:(BOOL)animated{
     [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Opened order page"];
     [super viewWillAppear:animated];
-    [self orderAltered:nil];
 }
 
 - (void)viewDidUnload
@@ -321,6 +330,8 @@
     [newItemsList replaceObjectAtIndex:0 withObject:doneButton];
     
     [[orderView orderToolbar] setItems:newItemsList animated:YES];
+    
+    [self updateEditButton];
 }
 
 -(void)exitEditingMode
@@ -334,6 +345,7 @@
     [newItemsList replaceObjectAtIndex:0 withObject:edButton];
     
     [[orderView orderToolbar] setItems:newItemsList animated:YES];
+    [self updateEditButton];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -355,6 +367,18 @@
         [self promptForFavDeletion];
     }
     
+}
+
+-(void)updateEditButton
+{
+    
+    if ([[[theOrderManager thisOrder] itemList] count] + [[[theOrderManager thisOrder] comboList] count] > 0) {
+        [[[[orderView orderToolbar] items] objectAtIndex:0] setEnabled:YES];
+    }
+    else
+    {
+        [[[[orderView orderToolbar] items] objectAtIndex:0] setEnabled:NO];
+    }
 }
 
 -(void)orderAltered:(NSNotification *)aNotification
@@ -379,6 +403,7 @@
     {
         [self exitEditingMode];
     }
+    [self updateEditButton];
 }
 
 -(void)dealloc

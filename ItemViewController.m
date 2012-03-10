@@ -17,16 +17,16 @@
 #import "Utilities.h"
 #import "ItemManagementDelegate.h"
 #import "ComboViewController.h"
+#import "NSMutableNumber.h"
 
 @implementation ItemViewController
 
 @synthesize itemInfo;
 @synthesize delegate;
 
--(ItemViewController *)initializeWithItemAndOrderAndReturnController:(Item *) anItem:(Order *)anOrder:(UIViewController *) aController
+-(ItemViewController *)initWithItemAndOrderAndReturnController:(Item *) anItem:(Order *)anOrder:(UIViewController *) aController
 {
     
-    numberOfItems = 1;
     itemRenderer = [[ItemRenderer alloc] initWithItem:anItem];
     
     itemView = [[ItemView alloc] init];
@@ -46,21 +46,6 @@
         
         //This really isn't the way to be doing this. 
         //I should be subclassing item view controller.
-        if (![returnController isKindOfClass:[ComboViewController class]]) {
-            UIBarButtonItem *minusSignButton = [[UIBarButtonItem alloc] initWithTitle:@"-" style:UIBarButtonItemStylePlain target:self action:@selector(minusButtonPressed)];
-            
-            UIBarButtonItem *spacer1 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
-            
-            UIBarButtonItem *spacer2 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
-            
-            UIBarButtonItem *plusSignButton = [[UIBarButtonItem alloc] initWithTitle:@"+" style:UIBarButtonItemStylePlain target:self action:@selector(plusButtonPressed)];
-            
-            [[itemView itemToolBar] setItems:[NSArray arrayWithObjects:minusSignButton, spacer1,[itemView priceButton],spacer2, plusSignButton, nil]];
-        }
-        else
-        {
-            [[itemView itemToolBar] setItems:nil];
-        }
         
     }
     
@@ -73,12 +58,9 @@
 
 -(void)addThisItemToOrder
 {
-    for (int i = 0; i < numberOfItems; i++) {
-        [delegate addItemForController:self];
-    }
+    [delegate addItemForController:self];
 
     [[self navigationController] popToViewController:returnController animated:YES];
-    
 }
 
 //Delegate functions
@@ -88,22 +70,11 @@
     
     [[tableView cellForRowAtIndexPath:indexPath] setSelected:NO];
     
-    if(![[itemInfo desc] isEqualToString:@""])
-    {
-        if([indexPath section] > 0)
-        {
-            Option *thisOption = [[itemInfo options] objectAtIndex:([indexPath section] - 1)];
-            Choice *thisChoice = [[thisOption choiceList] objectAtIndex:[indexPath row]];
-            [thisChoice toggleSelected];
-            [tableView reloadSections:[NSIndexSet indexSetWithIndex:([indexPath section] - 1)] withRowAnimation:UITableViewRowAnimationNone];
-        }
-        return;
-    }
+    id thingAtIndexPath = [itemRenderer objectForCellAtIndex:indexPath];
     
-    Option *thisOption = [[itemInfo options] objectAtIndex:[indexPath section]];
-    Choice *thisChoice = [[thisOption choiceList] objectAtIndex:[indexPath row]];
-    [thisChoice toggleSelected];
-    //[tableView reloadSections:[NSIndexSet indexSetWithIndex:[indexPath section]] withRowAnimation:UITableViewRowAnimationNone];
+    if ([thingAtIndexPath isKindOfClass:[Choice class]]) {
+        [thingAtIndexPath toggleSelected];
+    }
     
 }
 
@@ -149,35 +120,21 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
--(void)plusButtonPressed
-{
-    numberOfItems++;
-    [self itemAltered];
-}
-
--(void)minusButtonPressed
-{
-    if (numberOfItems != 1) {
-        numberOfItems--;
-        [self itemAltered];
-    }
-}
-
 -(void) itemAltered
 {
     UIBarButtonItem *doneButton = nil;
     
-    if (numberOfItems == 1) 
+    if ([[itemInfo numberOfItems] intValue] == 1) 
     {
         doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Add this item" style:UIBarButtonItemStyleDone target:self action:@selector(addThisItemToOrder)];
         
-        [[itemView priceButton] setTitle:[NSString stringWithFormat:@"Item Price: %@",[Utilities FormatToPrice:[itemInfo price]]]];
+        [[itemView priceButton] setTitle:[NSString stringWithFormat:@"1 Item: %@",[Utilities FormatToPrice:[itemInfo price]]]];
     }
     else
     {
         doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Add these items" style:UIBarButtonItemStyleDone target:self action:@selector(addThisItemToOrder)];
         
-        [[itemView priceButton] setTitle:[NSString stringWithFormat:@"%i Items: %@",numberOfItems, [Utilities FormatToPrice:[[itemInfo price] decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%i", numberOfItems]]]]]];
+        [[itemView priceButton] setTitle:[NSString stringWithFormat:@"%i Items: %@",[[itemInfo numberOfItems] intValue], [Utilities FormatToPrice:[itemInfo price]]]];
     }
     
     if (![ownerOrder containsExactItem:itemInfo]) {

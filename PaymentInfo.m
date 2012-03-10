@@ -11,7 +11,8 @@
 // Form-like object to validate all values in real time.
 @implementation PaymentInfo
 
-@synthesize cardholderNameError, cardnumberError, expirationError, remember;
+@synthesize cardholderNameError, cardnumberError, expirationError;
+@synthesize remember;
 
 static NSRegularExpression* creditCard;
 static NSRegularExpression* separator;

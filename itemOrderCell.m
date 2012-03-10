@@ -9,6 +9,7 @@
 #import "ItemOrderCell.h"
 #import "Item.h"
 #import "Utilities.h"
+#import "NSMutableNumber.h"
 #import <QuartzCore/QuartzCore.h>
 
 @implementation ItemOrderCell
@@ -44,6 +45,8 @@ static UIImage* deleteImage;
 -(void)updateCell
 {
     [super updateCell];
+    
+    [[self textLabel] setText:[NSString stringWithFormat:@"%@   x%i", [item name], [[item numberOfItems] intValue]]];
     
     [[self detailTextLabel] setText:[Utilities FormatToPrice:[item price]]];
     

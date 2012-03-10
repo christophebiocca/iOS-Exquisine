@@ -16,12 +16,15 @@
 @interface PaymentInfoViewController : UIViewController<PaymentViewDelegate>{
     PaymentView* paymentView;
     PaymentInfo* info;
+    BOOL navigationBarWasHidden;
     
     void(^completionBlock)(PaymentInfo*);
     void(^cancelledBlock)();
 }
 
 -(id)init;
+
+@property(retain) PaymentView *paymentView;
 
 @property(copy, nonatomic)void(^completionBlock)(PaymentInfo*);
 @property(copy, nonatomic)void(^cancelledBlock)();

@@ -18,7 +18,6 @@
 @interface ItemViewController :UITableViewController<UITableViewDelegate>
 {
     
-    int numberOfItems;
     UIViewController *returnController;
     Order *ownerOrder;
     Item *itemInfo;
@@ -32,11 +31,7 @@
 
 @property (retain) Item *itemInfo;
 
--(ItemViewController *)initializeWithItemAndOrderAndReturnController:(Item *) anItem:(Order *)anOrder:(UIViewController *) aController;
-
--(void) plusButtonPressed;
-
--(void) minusButtonPressed;
+-(ItemViewController *)initWithItemAndOrderAndReturnController:(Item *) anItem:(Order *)anOrder:(UIViewController *) aController;
 
 -(void) addThisItemToOrder;
 

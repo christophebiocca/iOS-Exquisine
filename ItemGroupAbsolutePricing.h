@@ -7,8 +7,9 @@
 //
 
 #import "ItemGroupPricingStrategy.h"
+#import "AutomagicalCoder.h"
 
-@interface ItemGroupAbsolutePricing : NSObject<ItemGroupPricingStrategy>
+@interface ItemGroupAbsolutePricing : AutomagicalCoder<ItemGroupPricingStrategy>
 {
     NSDecimalNumber *absoluteValue;
 }
