@@ -11,12 +11,11 @@
 @class PaymentInfo;
 @protocol PaymentViewDelegate;
 
-@interface PaymentView : UIView<UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource>{
+@interface PaymentView : UIView<UITextFieldDelegate>{
     id<PaymentViewDelegate>delegate;
     
     PaymentInfo* info;
     UIToolbar* topBar;
-    UIToolbar* botBar;
     UIBarButtonItem* done;
     UIBarButtonItem* cancel;
     
@@ -30,9 +29,13 @@
     UILabel* cardnumberErrorLabel;
     UITextField* cardnumberField;
     
+    UILabel* rememberLabel;
+    UISwitch* remember;
+
     UILabel* expirationLabel;
     UILabel* expirationErrorLabel;
-    UIPickerView* expiration;
+    UITextField* expirationMonth;
+    UITextField* expirationYear;
 }
 
 @property(retain, readonly)PaymentInfo* paymentInfo;
