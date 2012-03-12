@@ -20,6 +20,7 @@
     {
         integerCellData = [[IntegerInputCellData alloc] init];
         numberLabel = [[UILabel alloc] init];
+        [numberLabel setBackgroundColor:[UIColor clearColor]];
         plusButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [plusButton setTitle:@"+" forState:UIControlStateNormal];
         [plusButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];

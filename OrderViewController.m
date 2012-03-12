@@ -97,7 +97,7 @@
     }
     
     
-    AlertPrompt *renamePrompt = [[AlertPrompt alloc] initWithPromptTitle:@"Favorite name:" message:@"" delegate:self cancelButtonTitle:@"Cancel" okButtonTitle:@"Okay"];
+    AlertPrompt *renamePrompt = [[AlertPrompt alloc] initWithPromptTitle:@"Favorite name:" message:@" " delegate:self cancelButtonTitle:@"Cancel" okButtonTitle:@"Okay"];
     
     
     [renamePrompt setTag:2];
