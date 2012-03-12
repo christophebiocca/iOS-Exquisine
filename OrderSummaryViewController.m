@@ -120,7 +120,6 @@
 
 - (void)alertView:(UIAlertView *)alertView willDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    
     if ([alertView tag] == 2) // Order Rename
     {
         if (buttonIndex == 1)

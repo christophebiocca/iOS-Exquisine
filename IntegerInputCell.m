@@ -9,6 +9,7 @@
 #import "IntegerInputCell.h"
 #import "IntegerInputCellData.h"
 #import "NSMutableNumber.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation IntegerInputCell
 
@@ -27,6 +28,7 @@
         minusButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [minusButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [minusButton setTitle:@"-" forState:UIControlStateNormal];
+        
         
         [plusButton addTarget:self action:@selector(plusPushed) forControlEvents:UIControlEventTouchUpInside];
         [minusButton addTarget:self action:@selector(minusPushed) forControlEvents:UIControlEventTouchUpInside];
@@ -48,12 +50,12 @@
 
 -(void)layoutSubviews
 {
-    [plusButton setFrame:CGRectMake(
+    [minusButton setFrame:CGRectMake(
                                     20, 
                                     [self frame].size.height/2 - 15, 
                                     30, 
                                     30)];
-    [minusButton setFrame:CGRectMake(
+    [plusButton setFrame:CGRectMake(
                                      65, 
                                      [self frame].size.height/2 - 15, 
                                      30, 
