@@ -2,18 +2,19 @@
 // Prefix header for all source files of the 'AvocadoTest1' target in the 'AvocadoTest1' project
 //
 
-#import <Availability.h>
-#import "Utilities.h"
-#import "LocalyticsSession.h"
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#endif
 
 #ifndef __IPHONE_5_0
 #warning "This project uses features only available in iOS SDK 5.0 and later."
 #endif
 
-#ifdef __OBJC__
-    #import <UIKit/UIKit.h>
-    #import <Foundation/Foundation.h>
-#endif
+#import <Availability.h>
+#import "Utilities.h"
+#import "LocalyticsSession.h"
+#import "NSObject+SubclassEnumeration.h"
 
 #ifndef RESTAURANT_ID
 // Ultimately, this is something the automated builder changes 
