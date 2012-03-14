@@ -11,6 +11,9 @@
 
 @implementation ListRenderer
 
+@synthesize listData;
+@synthesize sectionNames;
+
 -(id)init
 {
     self = [super init];
@@ -18,7 +21,6 @@
     if (self) {
         listData = [[NSMutableArray alloc] init];
         sectionNames = [[NSMutableArray alloc] init];
-        context = CELL_CONTEXT_MENU;
     }
     
     return self;
@@ -39,10 +41,10 @@
 {
     id cellData = [[listData objectAtIndex:[indexPath section]]objectAtIndex:[indexPath row]];
     
-    CustomViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[CustomViewCell cellIdentifierForData:cellData AndContext:context]];
+    CustomViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[CustomViewCell cellIdentifierForData:cellData]];
     
     if (cell == nil) {
-        cell = [CustomViewCell customViewCellFromData:cellData AndContext:context];
+        cell = [CustomViewCell customViewCellFromData:cellData];
     }
     else
     {

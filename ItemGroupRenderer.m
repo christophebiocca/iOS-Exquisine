@@ -9,7 +9,6 @@
 #import "ItemGroupRenderer.h"
 #import "Item.h"
 #import "ItemGroup.h"
-#import "ItemMenuCell.h"
 
 @implementation ItemGroupRenderer
 

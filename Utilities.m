@@ -118,4 +118,29 @@
     return uuidString;
 }
 
++(UIFont *) fravicHeadingFont
+{
+    return [UIFont fontWithName:@"ArialHebrew-Bold" size:22];
+}
+
++(UIFont *) fravicTextFont
+{
+    return [UIFont fontWithName:@"ArialHebrew" size:14];
+}
+
++(UIColor *)fravicDarkRedColor
+{
+    return [UIColor colorWithRed:(134.0f/255.0f) green:(7.0f/255.0f) blue:(6.0f/255.0f) alpha:1];
+}
+
++(UIColor *)fravicDarkPinkColor
+{
+    return [UIColor colorWithRed:(250.0/255.0) green:(208.0/255.0) blue:(208.0/255.0) alpha:1.0];
+}
+
++(UIColor *)fravicLightPinkColor
+{
+    return [UIColor colorWithRed:(251.0/255.0) green:(228.0/255.0) blue:(228.0/255.0) alpha:1.0];
+}
+
 @end

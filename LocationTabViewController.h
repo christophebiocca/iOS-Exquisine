@@ -16,4 +16,5 @@
 }
 
 - (id)initWithLocationState:(LocationState *) locationState;
+
 @end

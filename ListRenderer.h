@@ -15,8 +15,10 @@
 {
     NSMutableArray *listData;
     NSMutableArray *sectionNames;
-    CellContext context;
 }
+
+@property (retain) NSMutableArray *listData;
+@property (retain) NSMutableArray *sectionNames;
 
 -(id)objectForCellAtIndex:(NSIndexPath *)index;
 

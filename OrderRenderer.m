@@ -8,10 +8,6 @@
 
 #import "Utilities.h"
 #import "OrderRenderer.h"
-#import "MenuCell.h"
-#import "ItemMenuCell.h"
-#import "ItemOrderCell.h"
-#import "ComboOrderCell.h"
 #import "GeneralPurposeViewCell.h"
 #import "GeneralPurposeViewCellData.h"
 #import "Menu.h"
@@ -55,7 +51,6 @@
         
         listData = [NSMutableArray arrayWithArray:data];
         sectionNames = [NSMutableArray arrayWithArray:sections];
-        context = CELL_CONTEXT_ORDER;
         
         [self orderChanged:nil];
     }

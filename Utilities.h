@@ -29,6 +29,16 @@ typedef enum LogLevel {
 
 +(void)logLevel:(LogLevel)level message:(NSString*)message;
 
-+(NSString*)uuid;
++(NSString*) uuid;
+
++(UIFont *) fravicHeadingFont;
+
++(UIFont *) fravicTextFont;
+
++(UIColor *) fravicDarkRedColor;
+
++(UIColor *) fravicDarkPinkColor;
+
++(UIColor *) fravicLightPinkColor;
 
 @end

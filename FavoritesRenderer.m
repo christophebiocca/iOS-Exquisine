@@ -11,7 +11,6 @@
 #import "GeneralPurposeViewCellData.h"
 #import "OrderRenderer.h"
 #import "Utilities.h"
-#import "OrderCell.h"
 
 @implementation FavoritesRenderer
 

@@ -10,7 +10,7 @@
 
 extern NSString* VIEW_CELL_NEEDS_REDRAW;
 
-@interface GeneralPurposeViewCellData : CustomViewCell
+@interface GeneralPurposeViewCellData : NSObject
 {
     NSString *title;
     UIFont *titleFont;

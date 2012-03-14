@@ -9,7 +9,6 @@
 #import "ItemRenderer.h"
 #import "Item.h"
 #import "Option.h"
-#import "ChoiceCell.h"
 #import "Utilities.h"
 #import "GeneralPurposeViewCell.h"
 #import "GeneralPurposeViewCellData.h"

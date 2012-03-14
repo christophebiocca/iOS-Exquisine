@@ -10,33 +10,21 @@
 
 #import <UIKit/UIKit.h>
 
-typedef enum CellStyle {
-    CELL_STYLE_PLAIN = 0,
-    CELL_STYLE_FANCY = 1
-} CellStyle;
-
-typedef enum CellContext {
-    CELL_CONTEXT_ORDER = 0,
-    CELL_CONTEXT_MENU = 1,
-    CELL_CONTEXT_RECEIPT = 2,
-    CELL_CONTEXT_COMBO = 3
-} CellContext;
-@class MenuComponent;
-
 @interface CustomViewCell : UITableViewCell
    
-+(CustomViewCell *) customViewCellFromData:(id)data AndContext:(CellContext)context;
++(CustomViewCell *) customViewCellFromData:(id)data;
 
--(id)init;
++(NSString *) cellIdentifierForData:(id)data;
 
-+(NSString*)cellIdentifier;
++(BOOL) canDisplayData:(id)data;
 
-+(UITableViewCellStyle)cellStyle;
++(NSString*) cellIdentifier;
 
-+(NSString *)cellIdentifierForData:(id)data AndContext:(CellContext)context;
++(UITableViewCellStyle) cellStyle;
 
--(void)setStyle:(CellStyle)style;
 
--(void)setData:(id)data;
+-(id) init;
+
+-(void) setData:(id)data;
 
 @end

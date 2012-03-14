@@ -28,11 +28,24 @@
     return self;
 }
 
++(BOOL)canDisplayData:(id)data
+{
+    return [data isKindOfClass:[GeneralPurposeViewCellData class]];
+}
+
 -(void)setData:(GeneralPurposeViewCellData *) theCellData
 {
-    cellData = theCellData;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCell) name:VIEW_CELL_NEEDS_REDRAW object:theCellData];
-    [self updateCell];
+    
+    if ([theCellData isKindOfClass:[GeneralPurposeViewCellData class]]) 
+    {
+        cellData = theCellData;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCell) name:VIEW_CELL_NEEDS_REDRAW object:theCellData];
+        [self updateCell];
+    }
+    else
+    {
+        CLLog(LOG_LEVEL_ERROR, @"An incorrect data type was sent to GeneralPurposeViewCell's setData:");
+    }
 }
 
 -(void)updateCell

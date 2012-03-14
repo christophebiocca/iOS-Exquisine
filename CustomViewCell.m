@@ -7,60 +7,47 @@
 //
 
 #import "CustomViewCell.h"
-#import "MenuCompositeCell.h"
-#import "GeneralPurposeViewCell.h"
-#import "GeneralPurposeViewCellData.h"
-#import "IntegerInputCell.h"
-#import "IntegerInputCellData.h"
-#import "MenuComponent.h"
+#import "Utilities.h"
 
 @implementation CustomViewCell
 
-+(CustomViewCell *)customViewCellFromData:(id)data AndContext:(CellContext)context
++(CustomViewCell *)customViewCellFromData:(id)data
 {
-    
-    if ([data isKindOfClass:[MenuComponent class]]) {
-        return [MenuCompositeCell customViewCellWithMenuComponent:data AndContext:context];
-    }
-    if ([data isKindOfClass:[NSDictionary class]]) {
-        return [MenuCompositeCell customViewCellWithMenuComponent:[data objectForKey:@"data"]AndContext:[[data objectForKey:@"context"] intValue]];
-    }
-    if ([data isKindOfClass:[GeneralPurposeViewCellData class]]) {
-        return [GeneralPurposeViewCell customViewCellWithGeneralData:data];
-    }
-    if ([data isKindOfClass:[IntegerInputCellData class]]) {
-        IntegerInputCell *returnCell = [[IntegerInputCell alloc] init];
-        [returnCell setData:data];
-        return returnCell;
+    for (Class eachSubclass in [CustomViewCell subclasses]) {
+        if ([eachSubclass canDisplayData:data]) {
+            CustomViewCell *returnCell = [[eachSubclass alloc] init];
+            [returnCell setData:data];
+            return returnCell;
+        }
     }
     
     CLLog(LOG_LEVEL_WARNING, @"An unknown data type was passed to customViewCellFromData.");
     return nil;
 }
 
-+(NSString *)cellIdentifierForData:(id)data AndContext:(CellContext)context
++(NSString *)cellIdentifierForData:(id)data
 {
-    
-    if ([data isKindOfClass:[MenuComponent class]]) {
-        return [MenuCompositeCell cellIdentifierWithMenuComponent:data AndContext:context];
-    }
-    if ([data isKindOfClass:[GeneralPurposeViewCellData class]]) {
-        return [GeneralPurposeViewCell cellIdentifier];
-    }
-    if ([data isKindOfClass:[NSDictionary class]]) {
-        return [MenuCompositeCell cellIdentifier];
-    }
-    if ([data isKindOfClass:[IntegerInputCellData class]]) {
-        return [IntegerInputCell cellIdentifier];
+    for (Class eachSubclass in [CustomViewCell subclasses]) {
+        if ([eachSubclass canDisplayData:data]) {
+            return [eachSubclass cellIdentifier];
+        }
     }
     
     CLLog(LOG_LEVEL_WARNING, @"An unknown data type was passed to cellIdentifierForData.");
     return nil;
 }
 
--(void) setData:(id) data
++(BOOL)canDisplayData:(id)data
 {
-  
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                   reason:[NSString stringWithFormat:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)]
+                                 userInfo:nil];
+}
+
++(NSString*)cellIdentifier{
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                   reason:[NSString stringWithFormat:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)]
+                                 userInfo:nil];
 }
 
 - (id)init
@@ -83,13 +70,11 @@
     return self;
 }
 
--(void)setStyle:(CellStyle)style
+-(void) setData:(id) data
 {
-    
-}
-
-+(NSString*)cellIdentifier{
-    return @"CustomCell";
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                   reason:[NSString stringWithFormat:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)]
+                                 userInfo:nil];
 }
 
 +(UITableViewCellStyle)cellStyle

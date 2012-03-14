@@ -347,7 +347,6 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
     for (ItemGroup *anItemGroup in listOfItemGroups) {
         NSMutableDictionary *newDict = [[NSMutableDictionary alloc] init];
         [newDict setValue:[anItemGroup satisfyingItem] forKey:@"data"];
-        [newDict setValue:[NSNumber numberWithInt:CELL_CONTEXT_COMBO] forKey:@"context"];
         [listOutput addObject:newDict];
     }
     return listOutput;

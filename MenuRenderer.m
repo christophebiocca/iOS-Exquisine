@@ -9,8 +9,6 @@
 #import "MenuRenderer.h"
 #import "Menu.h"
 #import "Item.h"
-#import "MenuCell.h"
-#import "ItemMenuCell.h"
 #import "Combo.h"
 
 @implementation MenuRenderer
@@ -38,7 +36,6 @@
         
         listData = [NSArray arrayWithArray:data];
         sectionNames = [NSArray arrayWithArray:sections];
-        context = CELL_CONTEXT_MENU;
         
     }
     

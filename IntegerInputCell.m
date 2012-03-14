@@ -64,6 +64,11 @@
                                      21)];
 }
 
++(BOOL)canDisplayData:(id)data
+{
+    return [data isKindOfClass:[IntegerInputCellData class]];
+}
+
 -(void)setData:(id)data
 {
     if ([data isKindOfClass:[IntegerInputCellData class]]) 

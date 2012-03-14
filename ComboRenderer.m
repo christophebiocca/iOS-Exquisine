@@ -11,7 +11,6 @@
 #import "Combo.h"
 #import "ItemRenderer.h"
 #import "ItemGroup.h"
-#import "ItemGroupCell.h"
 #import "IntegerInputCellData.h"
 
 @implementation ComboRenderer

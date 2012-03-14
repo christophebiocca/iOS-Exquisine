@@ -10,8 +10,9 @@
 #import "MasterView.h"
 #import "LoadingView.h"
 #import "LocationTabViewController.h"
-#import "OrderViewController.h"
+#import "OrderTabViewController.h"
 #import "FavoritesViewController.h"
+#import "OrderManager.h"
 #import "AppData.h"
 
 @implementation MasterViewController
@@ -84,7 +85,7 @@
     
     [locationTabViewController setTitle:@"Location"];
     
-    OrderViewController *orderTabViewController = [[OrderViewController alloc] initializeWithOrderManager:[appData theOrderManager]];
+    OrderTabViewController *orderTabViewController = [[OrderTabViewController alloc] initWithOrder:[[appData theOrderManager] thisOrder]];
     
     [orderTabViewController setTitle:@"Order"];
     
