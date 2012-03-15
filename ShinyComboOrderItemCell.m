@@ -43,6 +43,8 @@
         [[self contentView] setBackgroundColor:[Utilities fravicLightPinkColor]];
     }
     
+    [self setIndentationLevel:3];
+    
     [[self textLabel] setText:[[itemCellDict objectForKey:@"orderComboItem"] name]];
     [[self textLabel] setFont:[Utilities fravicTextFont]];
     
