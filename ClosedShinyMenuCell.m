@@ -6,10 +6,10 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "ShinyMenuCell.h"
+#import "ClosedShinyMenuCell.h"
 #import "Menu.h"
 
-@implementation ShinyMenuCell
+@implementation ClosedShinyMenuCell
 
 -(id)init
 {

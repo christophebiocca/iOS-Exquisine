@@ -83,7 +83,7 @@
             }
             if ([object isKindOfClass:[Menu class]]) {
                 NSMutableDictionary *newDictionary = [[NSMutableDictionary alloc] init];
-                [newDictionary setObject:object forKey:@"menu"];
+                [newDictionary setObject:object forKey:@"openMenu"];
                 [menuSectionContents addObject:newDictionary];
             }
         }

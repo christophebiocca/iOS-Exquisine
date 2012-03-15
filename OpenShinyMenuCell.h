@@ -1,5 +1,5 @@
 //
-//  ShinyMenuCell.h
+//  OpenShinyMenuCell.h
 //  AvocadoTest1
 //
 //  Created by Jake on 12-03-15.
@@ -9,12 +9,11 @@
 #import "CustomViewCell.h"
 @class Menu;
 
-@interface ShinyMenuCell : CustomViewCell
+@interface OpenShinyMenuCell : CustomViewCell
 {
     Menu *theMenu;
-    UIImageView *menuColapsedImage;
+    UIImageView *menuExpandedImage;
     UILabel *menuNameLabel;
-    UILabel *numberOfItemsLabel;
 }
 
 -(void) updateCell;
