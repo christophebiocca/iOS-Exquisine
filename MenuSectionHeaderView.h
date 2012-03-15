@@ -11,6 +11,7 @@
 @interface MenuSectionHeaderView : UIView
 {
     UIImageView *menuHeaderImage;
+    UILabel *menuLabel;
 }
 
 @end

@@ -7,8 +7,15 @@
 //
 
 #import "CustomViewCell.h"
+@class Item;
 
 @interface ShinyMenuItemCell : CustomViewCell
+{
+    Item *theItem;
+    UIImageView *itemImage;
+    UILabel *itemNameLabel;
+    UILabel *itemPriceLabel;
+}
 
 -(void) updateCell;
 

@@ -18,9 +18,9 @@
         [self setFrame:[footerImage frame]];
         [self addSubview:footerImage];
         
-        placeLabel = [[UILabel alloc] initWithFrame:CGRectMake(102, 7, 60, 30)];
+        placeLabel = [[UILabel alloc] initWithFrame:CGRectMake(102, 30, 60, 30)];
         
-        orderLabel = [[UILabel alloc] initWithFrame:CGRectMake(170, 7, 60, 30)];
+        orderLabel = [[UILabel alloc] initWithFrame:CGRectMake(170, 30, 60, 30)];
         
         [placeLabel setFont:[Utilities fravicHeadingFont]];
         [placeLabel setTextColor:[Utilities fravicDarkRedColor]];

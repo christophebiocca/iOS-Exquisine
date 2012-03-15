@@ -18,7 +18,7 @@
         menuExpandedImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ExpandedMenuDropdown.png"]];
         [self addSubview:menuExpandedImage];
         
-        menuNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(93, 17, 120, 21)];
+        menuNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(93, 27, 120, 21)];
         [menuNameLabel setFont:[Utilities fravicHeadingFont]];
         [menuNameLabel setTextAlignment:UITextAlignmentCenter];
         [menuNameLabel setTextColor:[Utilities fravicDarkRedColor]];

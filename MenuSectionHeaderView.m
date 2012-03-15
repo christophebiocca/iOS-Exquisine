@@ -17,7 +17,15 @@
     if (self) {
         menuHeaderImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ListHeader.png"]];
         [self setFrame:[menuHeaderImage frame]];
+        menuLabel = [[UILabel alloc] init];
+        [menuLabel setText:@"Menu"];
+        [menuLabel setFrame:CGRectMake(46, 28, 196, 21)];
+        [menuLabel setFont:[Utilities fravicHeadingFont]];
+        [menuLabel setTextAlignment:UITextAlignmentLeft];
+        [menuLabel setTextColor:[Utilities fravicDarkRedColor]];
+        [menuLabel setBackgroundColor:[UIColor clearColor]];
         
+        [self addSubview:menuLabel];
         [self addSubview:menuHeaderImage];
         [self sendSubviewToBack:menuHeaderImage];
         

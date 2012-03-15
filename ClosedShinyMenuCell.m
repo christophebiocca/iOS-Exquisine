@@ -47,14 +47,14 @@
 +(NSString *) cellIdentifier
 {
     //Must return a unique string identifier for this type of cell.
-    return @"ShinyMenuCell";
+    return @"ClosedShinyMenuCell";
 }
 
 -(void) setData:(id) data
 {
     if (![[self class] canDisplayData:data])
     {
-        CLLog(LOG_LEVEL_ERROR, @"An unsupported data type was sent to ShinyMenuCell's setData:");
+        CLLog(LOG_LEVEL_ERROR, @"An unsupported data type was sent to ClosedShinyMenuCell's setData:");
         return;
     }
 
