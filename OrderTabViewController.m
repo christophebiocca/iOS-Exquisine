@@ -7,56 +7,41 @@
 //
 
 #import "OrderTabViewController.h"
-#import "Order.h"
+#import "OrderManager.h"
 #import "ShinyOrderTabRenderer.h"
 #import "OrderSectionHeaderView.h"
 #import "OrderSectionFooterView.h"
+#import "MenuSectionHeaderView.h"
 #import "OrderTabView.h"
 
 @implementation OrderTabViewController
 
--(id)initWithOrder:(Order *)anOrder
+-(id)initWithOrderManager:(OrderManager *)anOrderManager
 {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
-        theOrder = anOrder;
+        theOrderManager = anOrderManager;
         orderView = [[OrderTabView alloc] init];
-        orderRenderer = [[ShinyOrderTabRenderer alloc] initWithOrder:theOrder];
+        orderRenderer = [[ShinyOrderTabRenderer alloc] initWithOrderManager:theOrderManager];
         [[orderView orderTable] setDelegate:self];
         [[orderView orderTable] setDataSource:orderRenderer];
     }
     return self;
 }
 
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    if (section == 0) {
-        return [[OrderSectionHeaderView alloc] init];
-    }
-    return nil;
-}
-
--(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-{
-    if (section == 0) {
-        return [[OrderSectionFooterView alloc] init];
-    }
-    return nil;
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 22.0f;
-}
-
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 44.0f;
+    return 0.0f;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 44.0f;
+    return 0.0f;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [CustomViewCell cellHeightForData:[orderRenderer objectForCellAtIndex:indexPath]];
 }
 
 - (void)didReceiveMemoryWarning

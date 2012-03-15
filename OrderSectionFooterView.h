@@ -11,5 +11,7 @@
 @interface OrderSectionFooterView : UIView
 {
     UIImageView *footerImage;
+    UILabel *placeLabel;
+    UILabel *orderLabel;
 }
 @end

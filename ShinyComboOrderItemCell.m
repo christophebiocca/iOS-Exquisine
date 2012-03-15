@@ -48,8 +48,16 @@
     [[self textLabel] setText:[[itemCellDict objectForKey:@"orderComboItem"] name]];
     [[self textLabel] setFont:[Utilities fravicTextFont]];
     
+    [[self textLabel] setBackgroundColor:[UIColor clearColor]];
+    [[self detailTextLabel] setBackgroundColor:[UIColor clearColor]];
+    
     [self setNeedsLayout];
     [self setNeedsDisplay];
+}
+
++(CGFloat)cellHeightForData:(id)data
+{
+    return 22.0f;
 }
 
 @end

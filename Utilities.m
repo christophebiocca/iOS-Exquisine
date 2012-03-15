@@ -120,7 +120,7 @@
 
 +(UIFont *) fravicHeadingFont
 {
-    return [UIFont fontWithName:@"ArialHebrew-Bold" size:22];
+    return [UIFont fontWithName:@"ArialHebrew-Bold" size:18];
 }
 
 +(UIFont *) fravicTextFont

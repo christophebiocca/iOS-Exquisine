@@ -7,6 +7,7 @@
 //
 
 #import "MenuSectionHeaderView.h"
+#import "Utilities.h"
 
 @implementation MenuSectionHeaderView
 
@@ -14,7 +15,12 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        menuHeaderImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ListHeader.png"]];
+        [self setFrame:[menuHeaderImage frame]];
+        
+        [self addSubview:menuHeaderImage];
+        [self sendSubviewToBack:menuHeaderImage];
+        
     }
     return self;
 }

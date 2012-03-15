@@ -49,8 +49,16 @@
     [[self textLabel] setFont:[Utilities fravicTextFont]];
     [[self detailTextLabel] setText:[Utilities FormatToPrice:[[itemCellDict objectForKey:@"orderItem"] price]]];
     
+    [[self textLabel] setBackgroundColor:[UIColor clearColor]];
+    [[self detailTextLabel] setBackgroundColor:[UIColor clearColor]];
+    
     [self setNeedsLayout];
     [self setNeedsDisplay];
+}
+
++(CGFloat)cellHeightForData:(id)data
+{
+    return 22.0f;
 }
 
 @end

@@ -7,18 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-@class Order;
+@class OrderManager;
 @class OrderTabView;
 @class ShinyOrderTabRenderer;
 
 @interface OrderTabViewController : UIViewController <UITableViewDelegate>
 {
-    Order *theOrder;
+    OrderManager *theOrderManager;
     OrderTabView *orderView;
     ShinyOrderTabRenderer *orderRenderer;
     
 }
 
--(id) initWithOrder:(Order *) anOrder;
+-(id) initWithOrderManager:(OrderManager *) anOrderManager;
 
 @end

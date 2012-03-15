@@ -22,9 +22,13 @@
 
 +(UITableViewCellStyle) cellStyle;
 
++(CGFloat)cellHeightForData:(id)data;
+
 
 -(id) init;
 
 -(void) setData:(id)data;
+
+-(CGFloat) desiredHeight;
 
 @end

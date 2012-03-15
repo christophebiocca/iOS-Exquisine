@@ -7,13 +7,13 @@
 //
 
 #import "ListRenderer.h"
-@class Order;
+@class OrderManager;
 
 @interface ShinyOrderTabRenderer : ListRenderer
 {
-    Order *theOrder;
+    OrderManager *theOrderManager;
 }
 
--(id) initWithOrder:(Order *) anOrder;
+-(id) initWithOrderManager:(OrderManager *) anOrderManager;
 
 @end

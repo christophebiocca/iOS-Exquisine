@@ -85,7 +85,7 @@
     
     [locationTabViewController setTitle:@"Location"];
     
-    OrderTabViewController *orderTabViewController = [[OrderTabViewController alloc] initWithOrder:[[appData theOrderManager] thisOrder]];
+    OrderTabViewController *orderTabViewController = [[OrderTabViewController alloc] initWithOrderManager:[appData theOrderManager]];
     
     [orderTabViewController setTitle:@"Order"];
     

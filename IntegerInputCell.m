@@ -102,4 +102,9 @@
     [self updateCell];
 }
 
++(CGFloat)cellHeightForData:(id)data
+{
+    return 44.0f;
+}
+
 @end

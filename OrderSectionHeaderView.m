@@ -10,9 +10,9 @@
 
 @implementation OrderSectionHeaderView
 
-- (id)initWithFrame:(CGRect)frame
+- (id)init
 {
-    self = [super initWithFrame:frame];
+    self = [super initWithFrame:CGRectMake(0, 0, 320, 44)];
     if (self) {
         orderHeaderLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 26)];
         [orderHeaderLabel setBackgroundColor:[UIColor clearColor]];

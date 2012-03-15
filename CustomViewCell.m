@@ -37,6 +37,17 @@
     return nil;
 }
 
++(CGFloat)cellHeightForData:(id)data
+{
+    for (Class eachSubclass in [CustomViewCell subclasses]) {
+        if ([eachSubclass canDisplayData:data]) {
+            return [eachSubclass cellHeightForData:data];
+        }
+    }
+    CLLog(LOG_LEVEL_WARNING, @"An unknown data type was passed to cellHeightForData.");
+    return 0;
+}
+
 +(BOOL)canDisplayData:(id)data
 {
     @throw [NSException exceptionWithName:NSInternalInconsistencyException

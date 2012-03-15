@@ -19,6 +19,7 @@ NSString* JSON_API_ERROR = @"com.croutonlabs.server.json";
                         options:0 
                         error:&error];
     NSAssert(!error, @"INVALID JSON, WHAT ARE YOU? A MONKEY?");
+    //lol @Christophe
     return jsonData;
 }
 
