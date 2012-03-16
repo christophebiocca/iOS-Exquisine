@@ -145,7 +145,7 @@
     
     NSDateFormatter* formatter = [NSDateFormatter new];
     
-    [formatter setDateFormat:@"h:m a"];
+    [formatter setDateFormat:@"h:mm a"];
     
     [pickupTime setText: [NSString stringWithFormat:@"Your pita will be done at %@", [formatter stringFromDate:[theOrder pitaFinishedTime]]]];
     

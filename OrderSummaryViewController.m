@@ -120,7 +120,6 @@
 
 - (void)alertView:(UIAlertView *)alertView willDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    
     if ([alertView tag] == 2) // Order Rename
     {
         if (buttonIndex == 1)
@@ -153,7 +152,7 @@
 -(void)promptUserForRename
 {
     
-    AlertPrompt *renamePrompt = [[AlertPrompt alloc] initWithPromptTitle:@"Favorite name:" message:[theOrderManager thisOrder].name delegate:self cancelButtonTitle:@"Cancel" okButtonTitle:@"OK"];
+    AlertPrompt *renamePrompt = [[AlertPrompt alloc] initWithPromptTitle:@"Favorite name:" message:@" " delegate:self cancelButtonTitle:@"Cancel" okButtonTitle:@"OK"];
     [renamePrompt setTag:2];
     
     [renamePrompt show];

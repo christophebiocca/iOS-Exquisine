@@ -466,13 +466,6 @@
                                                delegate:nil
                                       cancelButtonTitle:@"OK"
                                       otherButtonTitles:nil] show];
-                } else {
-                    [[[UIAlertView alloc] initWithTitle:@"No internet access"
-                                                message:@"You can browse the menu, but won't"
-                      @" be able to place an order until you connect to the internet."
-                                               delegate:nil
-                                      cancelButtonTitle:@"OK"
-                                      otherButtonTitles:nil] show];
                 }
                 CLLog(LOG_LEVEL_WARNING, [NSString stringWithFormat: @"call %@ errored with %@", menuCall, error]);
             }];  
