@@ -32,13 +32,14 @@
         
         [self addSubview:itemImage];
         
-        itemNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 14, 196, 21)];
+        itemNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 12, 196, 21)];
         [itemNameLabel setFont:[Utilities fravicHeadingFont]];
         [itemNameLabel setTextAlignment:UITextAlignmentCenter];
         [itemNameLabel setTextColor:[UIColor blackColor]];
         [itemNameLabel setBackgroundColor:[UIColor clearColor]];
+        [itemNameLabel setAdjustsFontSizeToFitWidth:YES];
         
-        itemPriceLabel = [[UILabel alloc] initWithFrame:CGRectMake(206, 12, 120, 21)];
+        itemPriceLabel = [[UILabel alloc] initWithFrame:CGRectMake(206, 10, 120, 21)];
         [itemPriceLabel setFont:[Utilities fravicHeadingFont]];
         [itemPriceLabel setTextAlignment:UITextAlignmentCenter];
         [itemPriceLabel setTextColor:[Utilities fravicDarkRedColor]];

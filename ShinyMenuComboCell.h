@@ -13,8 +13,8 @@
 {
     Combo *theCombo;
     UIImageView *itemImage;
-    UILabel *itemNameLabel;
-    UILabel *itemPriceLabel;
+    UILabel *comboNameLabel;
+    UILabel *comboPriceLabel;
 }
 
 -(void) updateCell;

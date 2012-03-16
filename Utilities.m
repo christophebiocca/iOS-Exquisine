@@ -120,12 +120,12 @@
 
 +(UIFont *) fravicHeadingFont
 {
-    return [UIFont fontWithName:@"ArialHebrew-Bold" size:18];
+    return [UIFont fontWithName:@"AmericanTypewriter-Bold" size:16]; //[UIFont fontWithName:@"ArialHebrew-Bold" size:18];
 }
 
 +(UIFont *) fravicTextFont
 {
-    return [UIFont fontWithName:@"ArialHebrew" size:14];
+    return [UIFont fontWithName:@"AmericanTypewriter" size:12]; //[UIFont fontWithName:@"ArialHebrew" size:14];
 }
 
 +(UIColor *)fravicDarkRedColor

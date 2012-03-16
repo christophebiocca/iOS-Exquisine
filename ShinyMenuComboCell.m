@@ -44,20 +44,21 @@
         
         [self addSubview:itemImage];
         
-        itemNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 14, 196, 21)];
-        [itemNameLabel setFont:[Utilities fravicHeadingFont]];
-        [itemNameLabel setTextAlignment:UITextAlignmentCenter];
-        [itemNameLabel setTextColor:[UIColor blackColor]];
-        [itemNameLabel setBackgroundColor:[UIColor clearColor]];
+        comboNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 12, 196, 21)];
+        [comboNameLabel setFont:[Utilities fravicHeadingFont]];
+        [comboNameLabel setTextAlignment:UITextAlignmentCenter];
+        [comboNameLabel setTextColor:[UIColor blackColor]];
+        [comboNameLabel setBackgroundColor:[UIColor clearColor]];
+        [comboNameLabel setAdjustsFontSizeToFitWidth:YES];
         
-        itemPriceLabel = [[UILabel alloc] initWithFrame:CGRectMake(206, 12, 120, 21)];
-        [itemPriceLabel setFont:[Utilities fravicHeadingFont]];
-        [itemPriceLabel setTextAlignment:UITextAlignmentCenter];
-        [itemPriceLabel setTextColor:[Utilities fravicDarkRedColor]];
-        [itemPriceLabel setBackgroundColor:[UIColor clearColor]];
+        comboPriceLabel = [[UILabel alloc] initWithFrame:CGRectMake(206, 10, 120, 21)];
+        [comboPriceLabel setFont:[Utilities fravicHeadingFont]];
+        [comboPriceLabel setTextAlignment:UITextAlignmentCenter];
+        [comboPriceLabel setTextColor:[Utilities fravicDarkRedColor]];
+        [comboPriceLabel setBackgroundColor:[UIColor clearColor]];
         
-        [self addSubview:itemNameLabel];
-        [self addSubview:itemPriceLabel];
+        [self addSubview:comboNameLabel];
+        [self addSubview:comboPriceLabel];
     }
     
     return self;
@@ -70,8 +71,8 @@
 
 -(void) updateCell
 {
-    [itemNameLabel setText:[theCombo name]];
-    [itemPriceLabel setText:[Utilities FormatToPrice:[theCombo displayPrice]]];
+    [comboNameLabel setText:[theCombo name]];
+    [comboPriceLabel setText:[Utilities FormatToPrice:[theCombo displayPrice]]];
     //Any of the changed associated with the data input in setData should occur here.
     //If the data is prone to changing, this cell should call updateCell via an NSNotificationCenter.
     [self setNeedsLayout];
