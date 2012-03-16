@@ -12,6 +12,6 @@
 {
     UIImageView *footerImage;
     UILabel *placeLabel;
-    UILabel *orderLabel;
+    UILabel *editLabel;
 }
 @end

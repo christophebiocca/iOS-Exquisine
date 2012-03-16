@@ -73,6 +73,41 @@
         
         [tableView insertRowsAtIndexPaths:helperArray withRowAnimation:UITableViewRowAnimationTop];
     }
+    else if ([[CustomViewCell cellIdentifierForData:[orderRenderer objectForCellAtIndex:indexPath]] isEqualToString:@"OpenShinyMenuCell"])
+    {
+        Menu *theMenu = [[orderRenderer objectForCellAtIndex:indexPath] objectForKey:@"openMenu"];
+        [[[orderRenderer listData] objectAtIndex:[indexPath section]] removeObjectAtIndex:[indexPath row]];
+        
+        NSMutableDictionary *helperDict = nil;
+        
+        helperDict = [NSMutableDictionary dictionary];
+        [helperDict setObject:theMenu forKey:@"menu"];
+        
+        [[[orderRenderer listData] objectAtIndex:[indexPath section]] insertObject:helperDict atIndex:[indexPath row]];
+        
+        [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
+        NSMutableArray *helperArray = [[NSMutableArray alloc] init];
+        
+        for (int i=1; i<([[theMenu submenuList] count] + 1); i++)
+        {
+            NSIndexPath *tmpIndexPath = [NSIndexPath indexPathForRow:(indexPath.row + i) inSection:indexPath.section];
+            [helperArray addObject:tmpIndexPath];
+        }
+        
+        int i = [indexPath row] + 1;
+        
+        for (id eachItem in [theMenu submenuList]) {
+            
+            helperDict = [NSMutableDictionary dictionary];
+            
+            [helperDict setObject:eachItem forKey:@"menuItem"];
+            
+            [[[orderRenderer listData] objectAtIndex:[indexPath section]] removeObjectAtIndex:i];
+        }
+        
+        [tableView deleteRowsAtIndexPaths:helperArray withRowAnimation:UITableViewRowAnimationTop];
+    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section

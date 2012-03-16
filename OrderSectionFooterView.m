@@ -18,20 +18,20 @@
         [self setFrame:[footerImage frame]];
         [self addSubview:footerImage];
         
-        placeLabel = [[UILabel alloc] initWithFrame:CGRectMake(102, 30, 60, 30)];
+        placeLabel = [[UILabel alloc] initWithFrame:CGRectMake(104, 30, 60, 30)];
         
-        orderLabel = [[UILabel alloc] initWithFrame:CGRectMake(170, 30, 60, 30)];
+        editLabel = [[UILabel alloc] initWithFrame:CGRectMake(178, 30, 60, 30)];
         
         [placeLabel setFont:[Utilities fravicHeadingFont]];
-        [placeLabel setTextColor:[Utilities fravicDarkRedColor]];
+        [placeLabel setTextColor:[UIColor blackColor]];
         [placeLabel setBackgroundColor:[UIColor clearColor]];
         [placeLabel setText:@"Place"];
-        [orderLabel setFont:[Utilities fravicHeadingFont]];
-        [orderLabel setTextColor:[Utilities fravicDarkRedColor]];
-        [orderLabel setBackgroundColor:[UIColor clearColor]];
-        [orderLabel setText:@"Order"];
+        [editLabel setFont:[Utilities fravicHeadingFont]];
+        [editLabel setTextColor:[UIColor blackColor]];
+        [editLabel setBackgroundColor:[UIColor clearColor]];
+        [editLabel setText:@"Edit"];
         
-        [self addSubview:orderLabel];
+        [self addSubview:editLabel];
         [self addSubview:placeLabel];
     }
     return self;

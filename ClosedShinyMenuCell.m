@@ -23,7 +23,7 @@
         menuNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(93, 26, 120, 21)];
         [menuNameLabel setFont:[Utilities fravicHeadingFont]];
         [menuNameLabel setTextAlignment:UITextAlignmentCenter];
-        [menuNameLabel setTextColor:[Utilities fravicDarkRedColor]];
+        [menuNameLabel setTextColor:[UIColor blackColor]];
         [menuNameLabel setBackgroundColor:[UIColor clearColor]];
         numberOfItemsLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 50, 100, 21)];
         [numberOfItemsLabel setFont:[Utilities fravicTextFont]];

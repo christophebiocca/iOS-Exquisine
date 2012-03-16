@@ -9,6 +9,7 @@
 #import "MasterView.h"
 #import "LoadingView.h"
 #import "LocationViewController.h"
+#import "CustomTabBarController.h"
 
 @implementation MasterView
 
@@ -20,7 +21,7 @@
     if (self) {
         loadingView = [[LoadingView alloc] initWithFrame:frame];
         
-        tabController = [[UITabBarController alloc] init];
+        tabController = [[CustomTabBarController alloc] init];
         tabView = [tabController view];
         
         [self addSubview:tabView];

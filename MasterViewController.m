@@ -14,6 +14,7 @@
 #import "FavoritesViewController.h"
 #import "OrderManager.h"
 #import "AppData.h"
+#import "CustomTabBarController.h"
 
 @implementation MasterViewController
 

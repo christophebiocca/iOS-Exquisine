@@ -8,15 +8,16 @@
 
 #import <UIKit/UIKit.h>
 @class LoadingView;
+@class CustomTabBarController;
 
 @interface MasterView : UIView
 {
     LoadingView *loadingView;
-    UITabBarController *tabController;
+    CustomTabBarController *tabController;
     UIView *tabView;
 }
 
-@property (retain) UITabBarController *tabController;
+@property (retain) CustomTabBarController *tabController;
 
 -(void)dissolveLoadingView;
 

@@ -82,6 +82,11 @@
 		23718F0614EC23A300F543BD /* pfLogo_57.png in Resources */ = {isa = PBXBuildFile; fileRef = 23718F0414EC23A200F543BD /* pfLogo_57.png */; };
 		23718F0714EC23A300F543BD /* pfLogo_114.png in Resources */ = {isa = PBXBuildFile; fileRef = 23718F0514EC23A200F543BD /* pfLogo_114.png */; };
 		2375B9BE151282A5004BDC3B /* OpenShinyMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2375B9BD151282A5004BDC3B /* OpenShinyMenuCell.m */; };
+		2375B9C115129F68004BDC3B /* CustomTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2375B9C015129F68004BDC3B /* CustomTabBarController.m */; };
+		2375B9C61512B70D004BDC3B /* BlankTopbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 2375B9C21512B70D004BDC3B /* BlankTopbar.png */; };
+		2375B9C71512B70D004BDC3B /* BlankTopbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2375B9C31512B70D004BDC3B /* BlankTopbar@2x.png */; };
+		2375B9C81512B70D004BDC3B /* BlankTopbarWithShadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 2375B9C41512B70D004BDC3B /* BlankTopbarWithShadow.png */; };
+		2375B9C91512B70D004BDC3B /* BlankTopbarWithShadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2375B9C51512B70D004BDC3B /* BlankTopbarWithShadow@2x.png */; };
 		23785FB6150FD6CA0087C9F8 /* ShinyComboOrderItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23785FB5150FD6CA0087C9F8 /* ShinyComboOrderItemCell.m */; };
 		23785FB9150FD6D60087C9F8 /* ShinyOrderComboCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23785FB8150FD6D60087C9F8 /* ShinyOrderComboCell.m */; };
 		2383959B150E9ED2000DC733 /* OrderTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2383959A150E9ED2000DC733 /* OrderTabView.m */; };
@@ -329,6 +334,12 @@
 		23718F0514EC23A200F543BD /* pfLogo_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pfLogo_114.png; sourceTree = "<group>"; };
 		2375B9BC151282A5004BDC3B /* OpenShinyMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenShinyMenuCell.h; sourceTree = "<group>"; };
 		2375B9BD151282A5004BDC3B /* OpenShinyMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenShinyMenuCell.m; sourceTree = "<group>"; };
+		2375B9BF15129F68004BDC3B /* CustomTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTabBarController.h; sourceTree = "<group>"; };
+		2375B9C015129F68004BDC3B /* CustomTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTabBarController.m; sourceTree = "<group>"; };
+		2375B9C21512B70D004BDC3B /* BlankTopbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BlankTopbar.png; path = FravicArtAssets/BlankTopbar.png; sourceTree = "<group>"; };
+		2375B9C31512B70D004BDC3B /* BlankTopbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BlankTopbar@2x.png"; path = "FravicArtAssets/BlankTopbar@2x.png"; sourceTree = "<group>"; };
+		2375B9C41512B70D004BDC3B /* BlankTopbarWithShadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BlankTopbarWithShadow.png; path = FravicArtAssets/BlankTopbarWithShadow.png; sourceTree = "<group>"; };
+		2375B9C51512B70D004BDC3B /* BlankTopbarWithShadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BlankTopbarWithShadow@2x.png"; path = "FravicArtAssets/BlankTopbarWithShadow@2x.png"; sourceTree = "<group>"; };
 		23785FB4150FD6CA0087C9F8 /* ShinyComboOrderItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShinyComboOrderItemCell.h; sourceTree = "<group>"; };
 		23785FB5150FD6CA0087C9F8 /* ShinyComboOrderItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinyComboOrderItemCell.m; sourceTree = "<group>"; };
 		23785FB7150FD6D60087C9F8 /* ShinyOrderComboCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShinyOrderComboCell.h; sourceTree = "<group>"; };
@@ -831,6 +842,10 @@
 		233C46EB14FEEF620003C295 /* SampleDesignImages */ = {
 			isa = PBXGroup;
 			children = (
+				2375B9C21512B70D004BDC3B /* BlankTopbar.png */,
+				2375B9C31512B70D004BDC3B /* BlankTopbar@2x.png */,
+				2375B9C41512B70D004BDC3B /* BlankTopbarWithShadow.png */,
+				2375B9C51512B70D004BDC3B /* BlankTopbarWithShadow@2x.png */,
 				23D472CB151170B900D87E89 /* ColapsedMenuDropdown@2x.png */,
 				23D472CC151170B900D87E89 /* ExpandedItemCell@2x.png */,
 				23D472CD151170B900D87E89 /* ExpandedMenuDropdown@2x.png */,
@@ -853,6 +868,8 @@
 		233C46EE14FEF0CC0003C295 /* ShinyControllers */ = {
 			isa = PBXGroup;
 			children = (
+				2375B9BF15129F68004BDC3B /* CustomTabBarController.h */,
+				2375B9C015129F68004BDC3B /* CustomTabBarController.m */,
 				233C46FA15002A0F0003C295 /* TabBarViewControllers */,
 				233C46EF14FEF0EE0003C295 /* MasterViewController.h */,
 				233C46F014FEF0EE0003C295 /* MasterViewController.m */,
@@ -1909,6 +1926,10 @@
 				23D472D0151170B900D87E89 /* ExpandedItemCell@2x.png in Resources */,
 				23D472D1151170B900D87E89 /* ExpandedMenuDropdown@2x.png in Resources */,
 				23D472D2151170B900D87E89 /* ListHeader@2x.png in Resources */,
+				2375B9C61512B70D004BDC3B /* BlankTopbar.png in Resources */,
+				2375B9C71512B70D004BDC3B /* BlankTopbar@2x.png in Resources */,
+				2375B9C81512B70D004BDC3B /* BlankTopbarWithShadow.png in Resources */,
+				2375B9C91512B70D004BDC3B /* BlankTopbarWithShadow@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2070,6 +2091,7 @@
 				23D472DB1512585B00D87E89 /* ShinyMenuItemCell.m in Sources */,
 				23D472E115125E3A00D87E89 /* ViewCell.m in Sources */,
 				2375B9BE151282A5004BDC3B /* OpenShinyMenuCell.m in Sources */,
+				2375B9C115129F68004BDC3B /* CustomTabBarController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
