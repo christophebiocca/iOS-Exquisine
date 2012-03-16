@@ -21,6 +21,26 @@
     return [data isKindOfClass:[NSDictionary class]] && [data objectForKey:@"combo"] && [data objectForKey:@"index"];
 }
 
+-(id)init
+{
+    self = [super init];
+    if (self) {
+        
+        numberOfCombosLabel = [[UILabel alloc] initWithFrame:CGRectMake(
+                                                                       240, 
+                                                                       1, 
+                                                                       30, 
+                                                                       21)];
+        
+        [numberOfCombosLabel setFont:[UIFont fontWithName:@"AmericanTypewriter-Bold" size:13]];
+        [numberOfCombosLabel setBackgroundColor:[UIColor clearColor]];
+        
+        [self addSubview:numberOfCombosLabel];
+        
+    }
+    return self;
+}
+
 -(void)setData:(id)data
 {
     if([[self class] canDisplayData:data])
@@ -46,12 +66,16 @@
         [[self contentView] setBackgroundColor:[Utilities fravicLightPinkColor]];
     }
     
+    [numberOfCombosLabel setText:[NSString stringWithFormat:@"x%@", [(Combo *)[comboCellDict objectForKey:@"combo"] numberOfCombos]]];
+    
     [[self textLabel] setText:[[comboCellDict objectForKey:@"combo"] name]];
-    [[self detailTextLabel] setText:[Utilities FormatToPrice:[[comboCellDict objectForKey:@"item"] price]]];
-    [[self textLabel] setFont:[Utilities fravicTextFont]];
+    [[self detailTextLabel] setText:[Utilities FormatToPrice:[[comboCellDict objectForKey:@"combo"] price]]];
+    [[self textLabel] setFont:[UIFont fontWithName:@"AmericanTypewriter" size:14]];
     
     [[self textLabel] setBackgroundColor:[UIColor clearColor]];
     [[self detailTextLabel] setBackgroundColor:[UIColor clearColor]];
+    [[self detailTextLabel] setFont:[UIFont fontWithName:@"AmericanTypewriter" size:14]];
+    [[self detailTextLabel] setTextColor:[UIColor blackColor]];
     
     [self setNeedsLayout];
     [self setNeedsDisplay];

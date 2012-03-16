@@ -14,6 +14,7 @@
     //and an Item for key "item"
     
     NSDictionary *itemCellDict;
+    UILabel *numberOfItemsLabel;
 }
 
 -(void) updateCell;

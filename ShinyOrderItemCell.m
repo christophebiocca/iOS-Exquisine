@@ -8,6 +8,7 @@
 
 #import "ShinyOrderItemCell.h"
 #import "Item.h"
+#import "NSMutableNumber.h"
 #import "Utilities.h"
 
 @implementation ShinyOrderItemCell
@@ -20,6 +21,26 @@
 +(BOOL)canDisplayData:(id)data
 {
     return [data isKindOfClass:[NSDictionary class]] && [data objectForKey:@"orderItem"] && [data objectForKey:@"index"];
+}
+
+-(id)init
+{
+    self = [super init];
+    if (self) {
+        
+        numberOfItemsLabel = [[UILabel alloc] initWithFrame:CGRectMake(
+                                            240, 
+                                            1, 
+                                            30, 
+                                            21)];
+        
+        [numberOfItemsLabel setFont:[UIFont fontWithName:@"AmericanTypewriter-Bold" size:13]];
+        [numberOfItemsLabel setBackgroundColor:[UIColor clearColor]];
+        
+        [self addSubview:numberOfItemsLabel];
+        
+    }
+    return self;
 }
 
 -(void)setData:(id)data
@@ -46,11 +67,15 @@
     }
     
     [[self textLabel] setText:[[itemCellDict objectForKey:@"orderItem"] name]];
-    [[self textLabel] setFont:[Utilities fravicTextFont]];
+    [[self textLabel] setFont:[UIFont fontWithName:@"AmericanTypewriter" size:14]];
     [[self detailTextLabel] setText:[Utilities FormatToPrice:[[itemCellDict objectForKey:@"orderItem"] price]]];
+    
+    [numberOfItemsLabel setText:[NSString stringWithFormat:@"x%@", [(Item *)[itemCellDict objectForKey:@"orderItem"] numberOfItems]]];
     
     [[self textLabel] setBackgroundColor:[UIColor clearColor]];
     [[self detailTextLabel] setBackgroundColor:[UIColor clearColor]];
+    [[self detailTextLabel] setFont:[UIFont fontWithName:@"AmericanTypewriter" size:14]];
+    [[self detailTextLabel] setTextColor:[UIColor blackColor]];
     
     [self setNeedsLayout];
     [self setNeedsDisplay];

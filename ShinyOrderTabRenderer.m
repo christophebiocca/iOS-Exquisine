@@ -35,6 +35,10 @@
         [sectionNames addObject:@"Order"];
         NSMutableArray *orderSectionContents = [[NSMutableArray alloc] initWithCapacity:0];
         
+        UIView *redLineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 2)];
+        [redLineView setBackgroundColor:[Utilities fravicDarkRedColor]];
+        [orderSectionContents addObject:redLineView];
+        
         [orderSectionContents addObject:[OrderSectionHeaderView new]];
         
         for (Combo *eachCombo in [[theOrderManager thisOrder] comboList]) {

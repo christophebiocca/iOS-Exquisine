@@ -22,9 +22,10 @@
                                                   style:UITableViewStylePlain];
         [orderTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         
-        [orderTable setBackgroundColor:[Utilities fravicLightPinkColor]];
+        [orderTable setBackgroundColor:[UIColor whiteColor]];
         
-        orderToolBarImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"LocationBarImageShadow.png"]];
+        orderToolBarImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"AddItemsBar.png"]];
+        [orderToolBarImage setBackgroundColor:[UIColor clearColor]];
         
         [self addSubview:orderTable];
         [self addSubview:orderToolBarImage];

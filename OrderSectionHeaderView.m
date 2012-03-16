@@ -17,7 +17,7 @@
         orderHeaderLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 26)];
         [orderHeaderLabel setBackgroundColor:[UIColor clearColor]];
         [orderHeaderLabel setTextColor:[Utilities fravicDarkRedColor]];
-        [orderHeaderLabel setFont:[Utilities fravicHeadingFont]];
+        [orderHeaderLabel setFont:[UIFont fontWithName:@"AmericanTypewriter-Bold" size:20]];
         [orderHeaderLabel setText:@"Current Order"];
         [self setBackgroundColor:[Utilities fravicLightPinkColor]];
         

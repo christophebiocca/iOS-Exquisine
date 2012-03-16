@@ -98,6 +98,8 @@
 		238FC77914D35E6D007E175B /* Favorite Star.png in Resources */ = {isa = PBXBuildFile; fileRef = 238FC77814D35E6D007E175B /* Favorite Star.png */; };
 		2391EA7314BE3699001BDC1B /* ConfigurableTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2391EA7114BE3699001BDC1B /* ConfigurableTableViewDataSource.m */; };
 		2391EA7714BE387D001BDC1B /* CellInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2391EA7614BE387D001BDC1B /* CellInfo.m */; };
+		2394ABE91513DC440001D3D1 /* AddItemsBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 2394ABE71513DC440001D3D1 /* AddItemsBar.png */; };
+		2394ABEA1513DC440001D3D1 /* AddItemsBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2394ABE81513DC440001D3D1 /* AddItemsBar@2x.png */; };
 		23AAD98B14BF525A00F88AA8 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AAD98A14BF525A00F88AA8 /* Utilities.m */; };
 		23AAD99014BF68DC00F88AA8 /* MainPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AAD98F14BF68DC00F88AA8 /* MainPageView.m */; };
 		23AAD99314BF690F00F88AA8 /* MainPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AAD99214BF690F00F88AA8 /* MainPageViewController.m */; };
@@ -360,6 +362,8 @@
 		2391EA7114BE3699001BDC1B /* ConfigurableTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigurableTableViewDataSource.m; sourceTree = "<group>"; };
 		2391EA7514BE387D001BDC1B /* CellInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellInfo.h; sourceTree = "<group>"; };
 		2391EA7614BE387D001BDC1B /* CellInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellInfo.m; sourceTree = "<group>"; };
+		2394ABE71513DC440001D3D1 /* AddItemsBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AddItemsBar.png; path = FravicArtAssets/AddItemsBar.png; sourceTree = "<group>"; };
+		2394ABE81513DC440001D3D1 /* AddItemsBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "AddItemsBar@2x.png"; path = "FravicArtAssets/AddItemsBar@2x.png"; sourceTree = "<group>"; };
 		23AAD98914BF525A00F88AA8 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
 		23AAD98A14BF525A00F88AA8 /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
 		23AAD98E14BF68DC00F88AA8 /* MainPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageView.h; sourceTree = "<group>"; };
@@ -1123,6 +1127,8 @@
 			children = (
 				23839599150E9ED2000DC733 /* OrderTabView.h */,
 				2383959A150E9ED2000DC733 /* OrderTabView.m */,
+				2394ABE71513DC440001D3D1 /* AddItemsBar.png */,
+				2394ABE81513DC440001D3D1 /* AddItemsBar@2x.png */,
 				2383959C150EA0A3000DC733 /* OrderSectionHeaderView */,
 				2383959D150EA0BC000DC733 /* OrderSectionFooterView */,
 				2383959E150EA101000DC733 /* MenuSectionHeaderView */,
@@ -1930,6 +1936,8 @@
 				2375B9C71512B70D004BDC3B /* BlankTopbar@2x.png in Resources */,
 				2375B9C81512B70D004BDC3B /* BlankTopbarWithShadow.png in Resources */,
 				2375B9C91512B70D004BDC3B /* BlankTopbarWithShadow@2x.png in Resources */,
+				2394ABE91513DC440001D3D1 /* AddItemsBar.png in Resources */,
+				2394ABEA1513DC440001D3D1 /* AddItemsBar@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

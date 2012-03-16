@@ -14,6 +14,7 @@
     //and an Combo for key "combo"
     
     NSDictionary *comboCellDict;
+    UILabel *numberOfCombosLabel;
 }
 
 -(void) updateCell;

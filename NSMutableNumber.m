@@ -56,4 +56,10 @@ NSString *NUMBER_MODIFIED = @"NUMBER_MODIFIED";
 {
     [encoder encodeObject:theNumber forKey:@"the_number"];
 }
+
+-(NSString *)description
+{
+    return [NSString stringWithFormat:@"%@", theNumber];
+}
+
 @end

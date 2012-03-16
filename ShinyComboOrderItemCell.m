@@ -46,7 +46,7 @@
     [self setIndentationLevel:3];
     
     [[self textLabel] setText:[[itemCellDict objectForKey:@"orderComboItem"] name]];
-    [[self textLabel] setFont:[Utilities fravicTextFont]];
+    [[self textLabel] setFont:[UIFont fontWithName:@"AmericanTypewriter" size:14]];
     
     [[self textLabel] setBackgroundColor:[UIColor clearColor]];
     [[self detailTextLabel] setBackgroundColor:[UIColor clearColor]];

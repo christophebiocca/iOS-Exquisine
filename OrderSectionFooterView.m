@@ -18,15 +18,15 @@
         [self setFrame:[footerImage frame]];
         [self addSubview:footerImage];
         
-        placeLabel = [[UILabel alloc] initWithFrame:CGRectMake(104, 30, 60, 30)];
+        placeLabel = [[UILabel alloc] initWithFrame:CGRectMake(101, 27, 60, 30)];
         
-        editLabel = [[UILabel alloc] initWithFrame:CGRectMake(178, 30, 60, 30)];
+        editLabel = [[UILabel alloc] initWithFrame:CGRectMake(173, 27, 60, 30)];
         
-        [placeLabel setFont:[Utilities fravicHeadingFont]];
+        [placeLabel setFont:[UIFont fontWithName:@"AmericanTypewriter" size:20]];
         [placeLabel setTextColor:[UIColor blackColor]];
         [placeLabel setBackgroundColor:[UIColor clearColor]];
         [placeLabel setText:@"Place"];
-        [editLabel setFont:[Utilities fravicHeadingFont]];
+        [editLabel setFont:[UIFont fontWithName:@"AmericanTypewriter" size:20]];
         [editLabel setTextColor:[UIColor blackColor]];
         [editLabel setBackgroundColor:[UIColor clearColor]];
         [editLabel setText:@"Edit"];
