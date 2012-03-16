@@ -181,7 +181,7 @@ static NSDateComponents* minusOneDay;
         NSString *openTime = [formatter stringFromDate:[self nextOpen]];
         //NSString *closeTime = [formatter stringFromDate:[[self currentLocation] nextClose]];
         [formatter setDateFormat:@"EEEE"];
-        NSString *dayOfWeek = [formatter stringFromDate:[self nextClose]];
+        NSString *dayOfWeek = [formatter stringFromDate:[self nextOpen]];
         
         return [NSString stringWithFormat:@"Pita Factory opens on %@ at %@.",dayOfWeek,openTime];
         
