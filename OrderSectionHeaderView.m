@@ -15,6 +15,10 @@
     self = [super initWithFrame:CGRectMake(0, 0, 320, 44)];
     if (self) {
         orderHeaderLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 26)];
+        
+        UIView *redLineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 2)];
+        [redLineView setBackgroundColor:[Utilities fravicDarkRedColor]];
+        
         [orderHeaderLabel setBackgroundColor:[UIColor clearColor]];
         [orderHeaderLabel setTextColor:[Utilities fravicDarkRedColor]];
         [orderHeaderLabel setFont:[UIFont fontWithName:@"AmericanTypewriter-Bold" size:20]];
@@ -22,6 +26,7 @@
         [self setBackgroundColor:[Utilities fravicLightPinkColor]];
         
         [self addSubview:orderHeaderLabel];
+        [self addSubview:redLineView];
     }
     return self;
 }
