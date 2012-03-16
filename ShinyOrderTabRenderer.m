@@ -27,14 +27,46 @@
     {
         
         theOrderManager = anOrderManager;
-        int index = 0;
         
         sectionNames = [[NSMutableArray alloc] init];
         listData = [[NSMutableArray alloc] init]; 
         
         [sectionNames addObject:@"Order"];
-        NSMutableArray *orderSectionContents = [[NSMutableArray alloc] initWithCapacity:0];
+        [listData addObject:[NSArray array]];
         
+        [sectionNames addObject:@"Menu"];
+        NSMutableArray *menuSectionContents = [[NSMutableArray alloc] init];
+        
+        [menuSectionContents addObject:[MenuSectionHeaderView new]];
+        
+        for (id object in [[theOrderManager thisMenu] submenuList]) {
+            if ([object isKindOfClass:[Item class]]) {
+                NSMutableDictionary *newDictionary = [[NSMutableDictionary alloc] init];
+                [newDictionary setObject:object forKey:@"menuItem"];
+                [menuSectionContents addObject:newDictionary];
+            }
+            if ([object isKindOfClass:[Menu class]]) {
+                NSMutableDictionary *newDictionary = [[NSMutableDictionary alloc] init];
+                [newDictionary setObject:object forKey:@"menu"];
+                [menuSectionContents addObject:newDictionary];
+            }
+        }
+        
+        [listData addObject:menuSectionContents];
+        [self updateOrderSection];
+    }
+    
+    return self;
+}
+
+-(void) updateOrderSection
+{
+    int index = 0;
+    NSMutableArray *orderSectionContents = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    if ([[[theOrderManager thisOrder] itemList] count] + [[[theOrderManager thisOrder] comboList] count]) {
+        //If the order actually has anything in it.
+        //if it doesn't, then there escentially wont be an order section at all.
         [orderSectionContents addObject:[OrderSectionHeaderView new]];
         
         for (Combo *eachCombo in [[theOrderManager thisOrder] comboList]) {
@@ -67,32 +99,10 @@
         }
         
         [orderSectionContents addObject:[OrderSectionFooterView new]];
-        
-        [listData addObject:orderSectionContents];
-        
-        [sectionNames addObject:@"Menu"];
-        NSMutableArray *menuSectionContents = [[NSMutableArray alloc] init];
-        
-        [menuSectionContents addObject:[MenuSectionHeaderView new]];
-        
-        for (id object in [[theOrderManager thisMenu] submenuList]) {
-            if ([object isKindOfClass:[Item class]]) {
-                NSMutableDictionary *newDictionary = [[NSMutableDictionary alloc] init];
-                [newDictionary setObject:object forKey:@"menuItem"];
-                [menuSectionContents addObject:newDictionary];
-            }
-            if ([object isKindOfClass:[Menu class]]) {
-                NSMutableDictionary *newDictionary = [[NSMutableDictionary alloc] init];
-                [newDictionary setObject:object forKey:@"menu"];
-                [menuSectionContents addObject:newDictionary];
-            }
-        }
-        
-        [listData addObject:menuSectionContents];
     }
     
-    return self;
+    [listData replaceObjectAtIndex:0 withObject:orderSectionContents];
+    
 }
-
 
 @end

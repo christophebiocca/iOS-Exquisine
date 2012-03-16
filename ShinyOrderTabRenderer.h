@@ -16,4 +16,6 @@
 
 -(id) initWithOrderManager:(OrderManager *) anOrderManager;
 
+-(void) updateOrderSection;
+
 @end

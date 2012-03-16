@@ -13,6 +13,7 @@
 #import "OrderSectionFooterView.h"
 #import "MenuSectionHeaderView.h"
 #import "OrderTabView.h"
+#import "Order.h"
 #import "Menu.h"
 
 @implementation OrderTabViewController
@@ -24,6 +25,9 @@
         theOrderManager = anOrderManager;
         orderView = [[OrderTabView alloc] init];
         orderRenderer = [[ShinyOrderTabRenderer alloc] initWithOrderManager:theOrderManager];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateOrderSection) name:ORDER_MODIFIED object:[theOrderManager thisOrder]];
+        
         [[orderView orderTable] setDelegate:self];
         [[orderView orderTable] setDataSource:orderRenderer];
     }
@@ -143,6 +147,12 @@
 {
     [super loadView];
     [self setView:orderView];
+}
+
+-(void) updateOrderSection;
+{
+    [orderRenderer updateOrderSection];
+    [[orderView orderTable] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 @end
