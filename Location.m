@@ -142,7 +142,7 @@ static NSDateComponents* minusOneDay;
 -(NSDate*)nextOpen{
     NSDate* now = [NSDate date];
     NSDate* todayOpen = [self opensToday];
-    if(![now compare:todayOpen] == NSOrderedDescending){
+    if([now compare:todayOpen] != NSOrderedDescending){
         return todayOpen;
     } else {
         return [self opensOnDay:[[NSCalendar currentCalendar] dateByAddingComponents:oneDay 
@@ -154,7 +154,7 @@ static NSDateComponents* minusOneDay;
 -(NSDate*)nextClose{
     NSDate* now = [NSDate date];
     NSDate* todayOpen = [self opensToday];
-    if(![now compare:todayOpen] == NSOrderedDescending){
+    if([now compare:todayOpen] != NSOrderedDescending){
         return [self closesToday];
     } else {
         return [self closesOnDay:[[NSCalendar currentCalendar] dateByAddingComponents:oneDay 
