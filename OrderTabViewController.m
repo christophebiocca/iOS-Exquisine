@@ -53,7 +53,7 @@
         
         NSMutableArray *helperArray = [[NSMutableArray alloc] init];
         
-        for (int i=1; i<([[theMenu submenuList] count] + 1); i++)
+        for (int i=1; i<([[theMenu submenuList] count] + [[theMenu comboList] count] + 1); i++)
         {
             NSIndexPath *tmpIndexPath = [NSIndexPath indexPathForRow:(indexPath.row + i) inSection:indexPath.section];
             [helperArray addObject:tmpIndexPath];
@@ -66,6 +66,16 @@
             helperDict = [NSMutableDictionary dictionary];
             
             [helperDict setObject:eachItem forKey:@"menuItem"];
+            
+            [[[orderRenderer listData] objectAtIndex:[indexPath section]] insertObject:helperDict atIndex:i];
+            i++;
+        }
+        
+        for (id eachItem in [theMenu comboList]) {
+            
+            helperDict = [NSMutableDictionary dictionary];
+            
+            [helperDict setObject:eachItem forKey:@"menuCombo"];
             
             [[[orderRenderer listData] objectAtIndex:[indexPath section]] insertObject:helperDict atIndex:i];
             i++;
@@ -89,7 +99,7 @@
         
         NSMutableArray *helperArray = [[NSMutableArray alloc] init];
         
-        for (int i=1; i<([[theMenu submenuList] count] + 1); i++)
+        for (int i=1; i<([[theMenu submenuList] count] + [[theMenu comboList] count] + 1); i++)
         {
             NSIndexPath *tmpIndexPath = [NSIndexPath indexPathForRow:(indexPath.row + i) inSection:indexPath.section];
             [helperArray addObject:tmpIndexPath];
@@ -99,9 +109,10 @@
         
         for (id eachItem in [theMenu submenuList]) {
             
-            helperDict = [NSMutableDictionary dictionary];
-            
-            [helperDict setObject:eachItem forKey:@"menuItem"];
+            [[[orderRenderer listData] objectAtIndex:[indexPath section]] removeObjectAtIndex:i];
+        }
+        
+        for (id eachItem in [theMenu comboList]) {
             
             [[[orderRenderer listData] objectAtIndex:[indexPath section]] removeObjectAtIndex:i];
         }

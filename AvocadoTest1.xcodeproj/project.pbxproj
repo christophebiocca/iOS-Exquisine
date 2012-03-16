@@ -100,6 +100,7 @@
 		2391EA7714BE387D001BDC1B /* CellInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2391EA7614BE387D001BDC1B /* CellInfo.m */; };
 		2394ABE91513DC440001D3D1 /* AddItemsBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 2394ABE71513DC440001D3D1 /* AddItemsBar.png */; };
 		2394ABEA1513DC440001D3D1 /* AddItemsBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2394ABE81513DC440001D3D1 /* AddItemsBar@2x.png */; };
+		2394ABEF1513E21C0001D3D1 /* ShinyMenuComboCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2394ABEE1513E21C0001D3D1 /* ShinyMenuComboCell.m */; };
 		23AAD98B14BF525A00F88AA8 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AAD98A14BF525A00F88AA8 /* Utilities.m */; };
 		23AAD99014BF68DC00F88AA8 /* MainPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AAD98F14BF68DC00F88AA8 /* MainPageView.m */; };
 		23AAD99314BF690F00F88AA8 /* MainPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AAD99214BF690F00F88AA8 /* MainPageViewController.m */; };
@@ -364,6 +365,8 @@
 		2391EA7614BE387D001BDC1B /* CellInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellInfo.m; sourceTree = "<group>"; };
 		2394ABE71513DC440001D3D1 /* AddItemsBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AddItemsBar.png; path = FravicArtAssets/AddItemsBar.png; sourceTree = "<group>"; };
 		2394ABE81513DC440001D3D1 /* AddItemsBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "AddItemsBar@2x.png"; path = "FravicArtAssets/AddItemsBar@2x.png"; sourceTree = "<group>"; };
+		2394ABED1513E21C0001D3D1 /* ShinyMenuComboCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShinyMenuComboCell.h; sourceTree = "<group>"; };
+		2394ABEE1513E21C0001D3D1 /* ShinyMenuComboCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinyMenuComboCell.m; sourceTree = "<group>"; };
 		23AAD98914BF525A00F88AA8 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
 		23AAD98A14BF525A00F88AA8 /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
 		23AAD98E14BF68DC00F88AA8 /* MainPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageView.h; sourceTree = "<group>"; };
@@ -1166,6 +1169,7 @@
 		238395A8150EA3C2000DC733 /* ShinyCells */ = {
 			isa = PBXGroup;
 			children = (
+				2394ABEC1513E1FA0001D3D1 /* ShinyMenuComboCell */,
 				2375B9BB15128242004BDC3B /* OpenShinyMenuCell */,
 				23D472DC15125C8600D87E89 /* ViewCell */,
 				23D472D51512580A00D87E89 /* ClosedShinyMenuCell */,
@@ -1220,6 +1224,15 @@
 				D9768A6814D73EBC00BBA467 /* Payment */,
 			);
 			name = "Model Structure";
+			sourceTree = "<group>";
+		};
+		2394ABEC1513E1FA0001D3D1 /* ShinyMenuComboCell */ = {
+			isa = PBXGroup;
+			children = (
+				2394ABED1513E21C0001D3D1 /* ShinyMenuComboCell.h */,
+				2394ABEE1513E21C0001D3D1 /* ShinyMenuComboCell.m */,
+			);
+			name = ShinyMenuComboCell;
 			sourceTree = "<group>";
 		};
 		23AAD98714BF516700F88AA8 /* Global Helpers */ = {
@@ -2100,6 +2113,7 @@
 				23D472E115125E3A00D87E89 /* ViewCell.m in Sources */,
 				2375B9BE151282A5004BDC3B /* OpenShinyMenuCell.m in Sources */,
 				2375B9C115129F68004BDC3B /* CustomTabBarController.m in Sources */,
+				2394ABEF1513E21C0001D3D1 /* ShinyMenuComboCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -70,7 +70,7 @@
 -(void) updateCell
 {
     [menuNameLabel setText:[theMenu name]];
-    [numberOfItemsLabel setText:[NSString stringWithFormat:@"%i Items", [[theMenu submenuList] count]]];
+    [numberOfItemsLabel setText:[NSString stringWithFormat:@"%i Items", ([[theMenu submenuList] count] + [[theMenu comboList] count])]];
     //Any of the changed associated with the data input in setData should occur here.
     //If the data is prone to changing, this cell should call updateCell via an NSNotificationCenter.
     [self setNeedsLayout];
