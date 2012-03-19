@@ -11,6 +11,36 @@
 
 @implementation ShinyChoiceCell
 
+-(id)init
+{
+    self = [super init];
+    
+    if (self) {
+        choiceImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ChoiceCellWithPriceSelected.png"]];
+        
+        [self addSubview:choiceImage];
+        
+        choiceNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 12, 150, 21)];
+        [choiceNameLabel setFont:[Utilities fravicHeadingFont]];
+        [choiceNameLabel setTextAlignment:UITextAlignmentCenter];
+        [choiceNameLabel setTextColor:[UIColor blackColor]];
+        [choiceNameLabel setBackgroundColor:[UIColor clearColor]];
+        [choiceNameLabel setAdjustsFontSizeToFitWidth:YES];
+        
+        choicePriceLabel = [[UILabel alloc] initWithFrame:CGRectMake(170, 10, 120, 21)];
+        [choicePriceLabel setFont:[Utilities fravicHeadingFont]];
+        [choicePriceLabel setTextAlignment:UITextAlignmentCenter];
+        [choicePriceLabel setTextColor:[Utilities fravicDarkRedColor]];
+        [choicePriceLabel setBackgroundColor:[UIColor clearColor]];
+        
+        [self addSubview:choiceImage];
+        [self addSubview:choiceNameLabel];
+        [self addSubview:choicePriceLabel];
+    }
+    
+    return self;
+}
+
 +(BOOL) canDisplayData:(id)data
 {
     //Returns true iff the data passed in is meant to be displayed by this cell.
@@ -33,17 +63,42 @@
 
     theChoice = [data objectForKey:@"choice"];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCell) name:CHOICE_CHANGED object:theChoice];
+    
     [self updateCell];
 }
 
-+(CGFloat) cellHeightForData:(id) data
++(CGFloat)cellHeightForData:(id)data
 {
-    return 44.0f;
+    return [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ChoiceCellWithoutPriceNotSelected.png"]] frame].size.height;
 }
 
 -(void) updateCell
 {
-    [[self textLabel] setText:[theChoice name]];
+    [choiceNameLabel setText:[theChoice name]];
+    
+    if ([theChoice isFree]) {
+        [choicePriceLabel setText:@""];
+        if ([theChoice selected]) {
+            [choiceImage setImage:[UIImage imageNamed:@"ChoiceCellWithoutPriceSelected.png"]];
+        }
+        else
+        {
+            [choiceImage setImage:[UIImage imageNamed:@"ChoiceCellWithoutPriceNotSelected.png"]];
+        }
+    }
+    else
+    {
+        [choicePriceLabel setText:[Utilities FormatToPrice:[theChoice price]]];
+        if ([theChoice selected]) {
+            [choiceImage setImage:[UIImage imageNamed:@"ChoiceCellWithPriceSelected.png"]];
+        }
+        else
+        {
+            [choiceImage setImage:[UIImage imageNamed:@"ChoiceCellWithPriceNotSelected.png"]];
+        }
+    }
+    
     //Any of the changed associated with the data input in setData should occur here.
     //If the data is prone to changing, this cell should call updateCell via an NSNotificationCenter.
     [self setNeedsLayout];

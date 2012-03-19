@@ -10,6 +10,7 @@
 #import "Item.h"
 #import "Option.h"
 #import "ShinyItemView.h"
+#import "Choice.h"
 #import "ShinyItemRenderer.h"
 
 @implementation ShinyItemViewController
@@ -35,24 +36,24 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    /*
-    if ([[CustomViewCell cellIdentifierForData:[orderRenderer objectForCellAtIndex:indexPath]] isEqualToString:@"ClosedShinyMenuCell"])
+    
+    if ([[CustomViewCell cellIdentifierForData:[itemRenderer objectForCellAtIndex:indexPath]] isEqualToString:@"ClosedShinyOptionCell"])
     {
-        Menu *theMenu = [[orderRenderer objectForCellAtIndex:indexPath] objectForKey:@"menu"];
-        [[[orderRenderer listData] objectAtIndex:[indexPath section]] removeObjectAtIndex:[indexPath row]];
+        Option *theOption = [[itemRenderer objectForCellAtIndex:indexPath] objectForKey:@"closedOption"];
+        [[[itemRenderer listData] objectAtIndex:[indexPath section]] removeObjectAtIndex:[indexPath row]];
         
         NSMutableDictionary *helperDict = nil;
         
         helperDict = [NSMutableDictionary dictionary];
-        [helperDict setObject:theMenu forKey:@"openMenu"];
+        [helperDict setObject:theOption forKey:@"openOption"];
         
-        [[[orderRenderer listData] objectAtIndex:[indexPath section]] insertObject:helperDict atIndex:[indexPath row]];
+        [[[itemRenderer listData] objectAtIndex:[indexPath section]] insertObject:helperDict atIndex:[indexPath row]];
         
         [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
         
         NSMutableArray *helperArray = [[NSMutableArray alloc] init];
         
-        for (int i=1; i<([[theMenu submenuList] count] + [[theMenu comboList] count] + 1); i++)
+        for (int i=1; i<[[theOption choiceList] count] + 1; i++)
         {
             NSIndexPath *tmpIndexPath = [NSIndexPath indexPathForRow:(indexPath.row + i) inSection:indexPath.section];
             [helperArray addObject:tmpIndexPath];
@@ -60,45 +61,35 @@
         
         int i = [indexPath row] + 1;
         
-        for (id eachItem in [theMenu submenuList]) {
+        for (Choice *eachChoice in [theOption choiceList]) {
             
             helperDict = [NSMutableDictionary dictionary];
             
-            [helperDict setObject:eachItem forKey:@"menuItem"];
+            [helperDict setObject:eachChoice forKey:@"choice"];
             
-            [[[orderRenderer listData] objectAtIndex:[indexPath section]] insertObject:helperDict atIndex:i];
-            i++;
-        }
-        
-        for (id eachItem in [theMenu comboList]) {
-            
-            helperDict = [NSMutableDictionary dictionary];
-            
-            [helperDict setObject:eachItem forKey:@"menuCombo"];
-            
-            [[[orderRenderer listData] objectAtIndex:[indexPath section]] insertObject:helperDict atIndex:i];
+            [[[itemRenderer listData] objectAtIndex:[indexPath section]] insertObject:helperDict atIndex:i];
             i++;
         }
         
         [tableView insertRowsAtIndexPaths:helperArray withRowAnimation:UITableViewRowAnimationTop];
     }
-    else if ([[CustomViewCell cellIdentifierForData:[orderRenderer objectForCellAtIndex:indexPath]] isEqualToString:@"OpenShinyMenuCell"])
+    else if ([[CustomViewCell cellIdentifierForData:[itemRenderer objectForCellAtIndex:indexPath]] isEqualToString:@"OpenShinyOptionCell"])
     {
-        Menu *theMenu = [[orderRenderer objectForCellAtIndex:indexPath] objectForKey:@"openMenu"];
-        [[[orderRenderer listData] objectAtIndex:[indexPath section]] removeObjectAtIndex:[indexPath row]];
+        Option *theOption = [[itemRenderer objectForCellAtIndex:indexPath] objectForKey:@"openOption"];
+        [[[itemRenderer listData] objectAtIndex:[indexPath section]] removeObjectAtIndex:[indexPath row]];
         
         NSMutableDictionary *helperDict = nil;
         
         helperDict = [NSMutableDictionary dictionary];
-        [helperDict setObject:theMenu forKey:@"menu"];
+        [helperDict setObject:theOption forKey:@"closedOption"];
         
-        [[[orderRenderer listData] objectAtIndex:[indexPath section]] insertObject:helperDict atIndex:[indexPath row]];
+        [[[itemRenderer listData] objectAtIndex:[indexPath section]] insertObject:helperDict atIndex:[indexPath row]];
         
         [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
         
         NSMutableArray *helperArray = [[NSMutableArray alloc] init];
         
-        for (int i=1; i<([[theMenu submenuList] count] + [[theMenu comboList] count] + 1); i++)
+        for (int i=1; i<([[theOption choiceList] count] + 1); i++)
         {
             NSIndexPath *tmpIndexPath = [NSIndexPath indexPathForRow:(indexPath.row + i) inSection:indexPath.section];
             [helperArray addObject:tmpIndexPath];
@@ -106,22 +97,18 @@
         
         int i = [indexPath row] + 1;
         
-        for (id eachItem in [theMenu submenuList]) {
+        for (Choice *eachChoice in [theOption choiceList]) {
             
-            [[[orderRenderer listData] objectAtIndex:[indexPath section]] removeObjectAtIndex:i];
-        }
-        
-        for (id eachItem in [theMenu comboList]) {
-            
-            [[[orderRenderer listData] objectAtIndex:[indexPath section]] removeObjectAtIndex:i];
+            [[[itemRenderer listData] objectAtIndex:[indexPath section]] removeObjectAtIndex:i];
         }
         
         [tableView deleteRowsAtIndexPaths:helperArray withRowAnimation:UITableViewRowAnimationTop];
     }
-    else if ([[CustomViewCell cellIdentifierForData:[orderRenderer objectForCellAtIndex:indexPath]] isEqualToString:@"ShinyMenuItemCell"])
+    else if ([[CustomViewCell cellIdentifierForData:[itemRenderer objectForCellAtIndex:indexPath]] isEqualToString:@"ShinyChoiceCell"])
     {
-        
-    }*/
+        Choice *theChoice = [[itemRenderer objectForCellAtIndex:indexPath] objectForKey:@"choice"];
+        [theChoice toggleSelected];
+    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section

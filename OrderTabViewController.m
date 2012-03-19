@@ -15,6 +15,7 @@
 #import "ShinyItemViewController.h"
 #import "OrderTabView.h"
 #import "Order.h"
+#import "Item.h"
 #import "Menu.h"
 
 @implementation OrderTabViewController
@@ -132,7 +133,7 @@
     else if ([[CustomViewCell cellIdentifierForData:[orderRenderer objectForCellAtIndex:indexPath]] isEqualToString:@"ShinyMenuItemCell"])
     {
         Item *theItem = [[orderRenderer objectForCellAtIndex:indexPath] objectForKey:@"menuItem"];
-        ShinyItemViewController *newController = [[ShinyItemViewController alloc] initWithItem:theItem];
+        ShinyItemViewController *newController = [[ShinyItemViewController alloc] initWithItem:[theItem copy]];
         
         [[self navigationController] pushViewController:newController animated:YES];
     }

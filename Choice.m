@@ -118,6 +118,11 @@ NSString* CHOICE_CHANGED = @"CroutonLabs/ChoiceChanged";
     
 }
 
+-(BOOL)isFree
+{
+    return isFree||[basePrice isEqualToNumber:[NSNumber numberWithInt:0]];
+}
+
 -(void)setIsFreeUnsafe:(BOOL)free
 {
     isFree = free;

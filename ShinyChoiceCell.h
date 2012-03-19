@@ -12,6 +12,9 @@
 @interface ShinyChoiceCell : CustomViewCell
 {
     Choice *theChoice;
+    UIImageView *choiceImage;
+    UILabel *choiceNameLabel;
+    UILabel *choicePriceLabel;
 }
 
 -(void) updateCell;
