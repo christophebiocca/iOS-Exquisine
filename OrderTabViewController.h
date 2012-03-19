@@ -13,7 +13,6 @@
 
 @interface OrderTabViewController : UIViewController <UITableViewDelegate>
 {
-    NSArray *tempArray;
     OrderManager *theOrderManager;
     OrderTabView *orderView;
     ShinyOrderTabRenderer *orderRenderer;

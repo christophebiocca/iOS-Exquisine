@@ -88,13 +88,16 @@
     
     OrderTabViewController *orderTabViewController = [[OrderTabViewController alloc] initWithOrderManager:[appData theOrderManager]];
     
-    [orderTabViewController setTitle:@"Order"];
+    UINavigationController *orderTabNavigationController = [[UINavigationController alloc] initWithRootViewController:orderTabViewController];
+    [orderTabNavigationController setHidesBottomBarWhenPushed:YES];
+    
+    [orderTabNavigationController setTitle:@"Order"];
     
     FavoritesViewController *favoritesTabViewController = [[FavoritesViewController alloc] initWithFavoritesListAndMenu:[appData favoriteOrders] :[appData theMenu]];
     
     [favoritesTabViewController setTitle:@"Favorites"];
     
-    [[masterView tabController] setViewControllers:[NSArray arrayWithObjects:locationTabViewController,orderTabViewController,favoritesTabViewController,nil]];
+    [[masterView tabController] setViewControllers:[NSArray arrayWithObjects:locationTabViewController,orderTabNavigationController,favoritesTabViewController,nil]];
     
     [[[masterView tabController] view] setNeedsLayout];
     [[[masterView tabController] view] setNeedsDisplay];

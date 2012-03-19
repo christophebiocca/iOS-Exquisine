@@ -1,43 +1,31 @@
 //
-//  OrderTabViewController.m
+//  ShinyItemViewController.m
 //  AvocadoTest1
 //
-//  Created by Jake on 12-03-13.
+//  Created by Jake on 12-03-19.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "OrderTabViewController.h"
-#import "OrderManager.h"
-#import "ShinyOrderTabRenderer.h"
-#import "OrderSectionHeaderView.h"
-#import "OrderSectionFooterView.h"
-#import "MenuSectionHeaderView.h"
 #import "ShinyItemViewController.h"
-#import "OrderTabView.h"
-#import "Order.h"
-#import "Menu.h"
+#import "Item.h"
+#import "Option.h"
+#import "ShinyItemView.h"
+#import "ShinyItemRenderer.h"
 
-@implementation OrderTabViewController
+@implementation ShinyItemViewController
 
--(id)initWithOrderManager:(OrderManager *)anOrderManager
+-(id)initWithItem:(Item *)anItem
 {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
-        theOrderManager = anOrderManager;
-        orderView = [[OrderTabView alloc] init];
-        orderRenderer = [[ShinyOrderTabRenderer alloc] initWithOrderManager:theOrderManager];
+        theItem = anItem;
+        itemView = [[ShinyItemView alloc] init];
+        itemRenderer = [[ShinyItemRenderer alloc] initWithItem:theItem];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateOrderSection) name:ORDER_MODIFIED object:[theOrderManager thisOrder]];
-        
-        [[orderView orderTable] setDelegate:self];
-        [[orderView orderTable] setDataSource:orderRenderer];
+        [[itemView itemTable] setDelegate:self];
+        [[itemView itemTable] setDataSource:itemRenderer];
     }
     return self;
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-    [[[self navigationController] navigationBar] setHidden:YES];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -47,6 +35,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    /*
     if ([[CustomViewCell cellIdentifierForData:[orderRenderer objectForCellAtIndex:indexPath]] isEqualToString:@"ClosedShinyMenuCell"])
     {
         Menu *theMenu = [[orderRenderer objectForCellAtIndex:indexPath] objectForKey:@"menu"];
@@ -131,11 +120,8 @@
     }
     else if ([[CustomViewCell cellIdentifierForData:[orderRenderer objectForCellAtIndex:indexPath]] isEqualToString:@"ShinyMenuItemCell"])
     {
-        Item *theItem = [[orderRenderer objectForCellAtIndex:indexPath] objectForKey:@"menuItem"];
-        ShinyItemViewController *newController = [[ShinyItemViewController alloc] initWithItem:theItem];
         
-        [[self navigationController] pushViewController:newController animated:YES];
-    }
+    }*/
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -145,7 +131,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [CustomViewCell cellHeightForData:[orderRenderer objectForCellAtIndex:indexPath]];
+    return [CustomViewCell cellHeightForData:[itemRenderer objectForCellAtIndex:indexPath]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -159,18 +145,12 @@
 -(void)loadView
 {
     [super loadView];
-    [self setView:orderView];
-}
-
--(void) updateOrderSection;
-{
-    [orderRenderer updateOrderSection];
-    [[orderView orderTable] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self setView:itemView];
 }
 
 -(void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObject:self];
+    //[[NSNotificationCenter defaultCenter] removeObject:self];
 }
 
 @end
