@@ -135,6 +135,11 @@
     [self setView:itemView];
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [[[self navigationController] navigationBar] setBackgroundImage:[UIImage imageNamed:@"CustomizeTopBar.png"] forBarMetrics:UIBarMetricsDefault];
+}
+
 -(void)dealloc
 {
     //[[NSNotificationCenter defaultCenter] removeObject:self];

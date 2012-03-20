@@ -11,7 +11,6 @@
 @interface OrderTabView : UIView
 {
     UITableView *orderTable;
-    UIImageView *orderToolBarImage;
 }
 
 @property (retain) UITableView *orderTable;

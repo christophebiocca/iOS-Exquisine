@@ -24,24 +24,14 @@
         
         [orderTable setBackgroundColor:[UIColor whiteColor]];
         
-        orderToolBarImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"AddItemsBar.png"]];
-        [orderToolBarImage setBackgroundColor:[UIColor clearColor]];
-        
         [self addSubview:orderTable];
-        [self addSubview:orderToolBarImage];
     }
     return self;
 }
 
 -(void)layoutSubviews
 {
-    [orderTable setFrame:CGRectMake(0, 44, 320, [self frame].size.height - 44)];
-    
-    [orderToolBarImage setFrame:CGRectMake(
-                                           [self frame].origin.x, 
-                                           [self frame].origin.y, 
-                                           [self frame].size.width, 
-                                           47)];
+    [orderTable setFrame:[self frame]];
 }
 
 @end

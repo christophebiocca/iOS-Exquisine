@@ -22,11 +22,7 @@
         
         [itemTable setBackgroundColor:[UIColor whiteColor]];
         
-        itemBarImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"CustomizeTopBar.png"]];
-        [itemBarImageView setBackgroundColor:[UIColor clearColor]];
-        
         [self addSubview:itemTable];
-        [self addSubview:itemBarImageView];
     }
     return self;
 
@@ -34,13 +30,7 @@
 
 -(void)layoutSubviews
 {
-    [itemTable setFrame:CGRectMake(0, 44, 320, [self frame].size.height - 44)];
-    
-    [itemBarImageView setFrame:CGRectMake(
-                                           [self frame].origin.x, 
-                                           [self frame].origin.y, 
-                                           [self frame].size.width, 
-                                           47)];
+    [itemTable setFrame:[self frame]];
 }
 
 @end

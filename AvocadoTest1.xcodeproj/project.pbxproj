@@ -890,6 +890,8 @@
 		233C46EB14FEEF620003C295 /* SampleDesignImages */ = {
 			isa = PBXGroup;
 			children = (
+				2394ABE71513DC440001D3D1 /* AddItemsBar.png */,
+				2394ABE81513DC440001D3D1 /* AddItemsBar@2x.png */,
 				2398714E1517FA070021EE55 /* ChoiceCellWithoutPriceNotSelected.png */,
 				2398714F1517FA070021EE55 /* ChoiceCellWithoutPriceNotSelected@2x.png */,
 				239871501517FA070021EE55 /* ChoiceCellWithoutPriceSelected.png */,
@@ -1183,8 +1185,6 @@
 				2398712C1517BEA50021EE55 /* ShinyItemView */,
 				23839599150E9ED2000DC733 /* OrderTabView.h */,
 				2383959A150E9ED2000DC733 /* OrderTabView.m */,
-				2394ABE71513DC440001D3D1 /* AddItemsBar.png */,
-				2394ABE81513DC440001D3D1 /* AddItemsBar@2x.png */,
 				2383959C150EA0A3000DC733 /* OrderSectionHeaderView */,
 				2383959D150EA0BC000DC733 /* OrderSectionFooterView */,
 				2383959E150EA101000DC733 /* MenuSectionHeaderView */,

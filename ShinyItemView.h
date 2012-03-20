@@ -11,7 +11,6 @@
 @interface ShinyItemView : UIView
 {
     UITableView *itemTable;
-    UIImageView *itemBarImageView;
 }
 
 @property (retain) UITableView *itemTable;

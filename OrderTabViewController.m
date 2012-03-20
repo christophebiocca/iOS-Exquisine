@@ -38,7 +38,8 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [[[self navigationController] navigationBar] setHidden:YES];
+    //[[[self navigationController] navigationBar] setHidden:YES];
+    [[[self navigationController] navigationBar] setBackgroundImage:[UIImage imageNamed:@"AddItemsBar.png"] forBarMetrics:UIBarMetricsDefault];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
