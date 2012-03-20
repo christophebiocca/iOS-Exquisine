@@ -21,6 +21,8 @@
 		231D25FB14FC2D5100F736F0 /* SettingsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 231D25FA14FC2D5100F736F0 /* SettingsView.m */; };
 		231D25FF14FC2E0800F736F0 /* SettingsRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 231D25FE14FC2E0800F736F0 /* SettingsRenderer.m */; };
 		231D260214FC307100F736F0 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 231D260114FC307100F736F0 /* SettingsViewController.m */; };
+		231F15B3151908E30070D00F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 231F15B2151908E30070D00F /* AVFoundation.framework */; };
+		231F15B615190B650070D00F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 231F15B515190B650070D00F /* AudioToolbox.framework */; };
 		2329BB2E14D9A8DD008E505F /* pfLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2329BB2D14D9A8DD008E505F /* pfLogo@2x.png */; };
 		232C30BC1511270D00B77ECD /* NSObject+SubclassEnumeration.m in Sources */ = {isa = PBXBuildFile; fileRef = 232C30BB1511270D00B77ECD /* NSObject+SubclassEnumeration.m */; };
 		232C30CB151162CB00B77ECD /* ColapsedMenuDropdown.png in Resources */ = {isa = PBXBuildFile; fileRef = 232C30C6151162CA00B77ECD /* ColapsedMenuDropdown.png */; };
@@ -95,6 +97,7 @@
 		238395A7150EA16A000DC733 /* MenuSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 238395A6150EA16A000DC733 /* MenuSectionHeaderView.m */; };
 		238395AC150EA67F000DC733 /* ShinyOrderItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 238395AB150EA67F000DC733 /* ShinyOrderItemCell.m */; };
 		238476F314D7577C00DE9270 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 238476F214D7577C00DE9270 /* SystemConfiguration.framework */; };
+		238BAFBC1518F7E70094A7FA /* bottle_pop_3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 238BAFBB1518F7E70094A7FA /* bottle_pop_3.wav */; };
 		238FC77914D35E6D007E175B /* Favorite Star.png in Resources */ = {isa = PBXBuildFile; fileRef = 238FC77814D35E6D007E175B /* Favorite Star.png */; };
 		2391EA7314BE3699001BDC1B /* ConfigurableTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2391EA7114BE3699001BDC1B /* ConfigurableTableViewDataSource.m */; };
 		2391EA7714BE387D001BDC1B /* CellInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2391EA7614BE387D001BDC1B /* CellInfo.m */; };
@@ -165,6 +168,7 @@
 		23E339B4150FEB0700E7BD68 /* ShinyOrderTabRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 23E339B3150FEB0700E7BD68 /* ShinyOrderTabRenderer.m */; };
 		23E339B8150FF37900E7BD68 /* OrderTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23E339B7150FF37900E7BD68 /* OrderTabViewController.m */; };
 		23E7D87C14C9BA88006D6C13 /* behindButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 23E7D87B14C9BA88006D6C13 /* behindButton.png */; };
+		23F5AFB515193B8D00B8E066 /* pop.wav in Resources */ = {isa = PBXBuildFile; fileRef = 23F5AFB415193B8D00B8E066 /* pop.wav */; };
 		23FAB38B150560F900606816 /* IntegerInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23FAB38A150560F900606816 /* IntegerInputCell.m */; };
 		23FAB38E1505615300606816 /* IntegerInputCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 23FAB38D1505615300606816 /* IntegerInputCellData.m */; };
 		23FAB39615056AE800606816 /* NSMutableNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 23FAB39515056AE800606816 /* NSMutableNumber.m */; };
@@ -251,6 +255,8 @@
 		231D25FE14FC2E0800F736F0 /* SettingsRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsRenderer.m; sourceTree = "<group>"; };
 		231D260014FC307100F736F0 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		231D260114FC307100F736F0 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		231F15B2151908E30070D00F /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		231F15B515190B650070D00F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		2329BB2D14D9A8DD008E505F /* pfLogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pfLogo@2x.png"; sourceTree = "<group>"; };
 		232C30BA1511270D00B77ECD /* NSObject+SubclassEnumeration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SubclassEnumeration.h"; sourceTree = "<group>"; };
 		232C30BB1511270D00B77ECD /* NSObject+SubclassEnumeration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SubclassEnumeration.m"; sourceTree = "<group>"; };
@@ -375,6 +381,7 @@
 		238395AA150EA67F000DC733 /* ShinyOrderItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShinyOrderItemCell.h; sourceTree = "<group>"; };
 		238395AB150EA67F000DC733 /* ShinyOrderItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinyOrderItemCell.m; sourceTree = "<group>"; };
 		238476F214D7577C00DE9270 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		238BAFBB1518F7E70094A7FA /* bottle_pop_3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bottle_pop_3.wav; sourceTree = "<group>"; };
 		238FC77814D35E6D007E175B /* Favorite Star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Favorite Star.png"; sourceTree = "<group>"; };
 		2391EA7014BE3699001BDC1B /* ConfigurableTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurableTableViewDataSource.h; sourceTree = "<group>"; };
 		2391EA7114BE3699001BDC1B /* ConfigurableTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigurableTableViewDataSource.m; sourceTree = "<group>"; };
@@ -492,6 +499,7 @@
 		23E339B6150FF37900E7BD68 /* OrderTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderTabViewController.h; sourceTree = "<group>"; };
 		23E339B7150FF37900E7BD68 /* OrderTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderTabViewController.m; sourceTree = "<group>"; };
 		23E7D87B14C9BA88006D6C13 /* behindButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = behindButton.png; sourceTree = "<group>"; };
+		23F5AFB415193B8D00B8E066 /* pop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pop.wav; sourceTree = "<group>"; };
 		23FAB389150560F900606816 /* IntegerInputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntegerInputCell.h; sourceTree = "<group>"; };
 		23FAB38A150560F900606816 /* IntegerInputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntegerInputCell.m; sourceTree = "<group>"; };
 		23FAB38C1505615300606816 /* IntegerInputCellData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntegerInputCellData.h; sourceTree = "<group>"; };
@@ -582,6 +590,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				231F15B615190B650070D00F /* AudioToolbox.framework in Frameworks */,
+				231F15B3151908E30070D00F /* AVFoundation.framework in Frameworks */,
 				236C53F314F5776F006A58BB /* CoreLocation.framework in Frameworks */,
 				23E021E814F41B9500099E1E /* MapKit.framework in Frameworks */,
 				38CFAE9B14D9C70B000A679D /* libsqlite3.dylib in Frameworks */,
@@ -1024,6 +1034,7 @@
 				23AAD98714BF516700F88AA8 /* Global Helpers */,
 				2391EA7814BE3D44001BDC1B /* Model Structure */,
 				238FC77A14D364E5007E175B /* Cells */,
+				238BAFBA1518F7A00094A7FA /* Sounds */,
 				23DA7A5A14C63071008281DD /* Views */,
 				38D4132C14D3321C00031B60 /* Images */,
 				233D143A14FD835800297F5D /* ListRenderers */,
@@ -1045,6 +1056,8 @@
 		23658CBF14BDFB15002C0996 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				231F15B515190B650070D00F /* AudioToolbox.framework */,
+				231F15B2151908E30070D00F /* AVFoundation.framework */,
 				236C53F214F5776F006A58BB /* CoreLocation.framework */,
 				23E021E714F41B9500099E1E /* MapKit.framework */,
 				D95B786614D2558800FC0F29 /* Security.framework */,
@@ -1244,6 +1257,15 @@
 				238395AB150EA67F000DC733 /* ShinyOrderItemCell.m */,
 			);
 			name = ShinyOrderItemCell;
+			sourceTree = "<group>";
+		};
+		238BAFBA1518F7A00094A7FA /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				23F5AFB415193B8D00B8E066 /* pop.wav */,
+				238BAFBB1518F7E70094A7FA /* bottle_pop_3.wav */,
+			);
+			name = Sounds;
 			sourceTree = "<group>";
 		};
 		238FC77A14D364E5007E175B /* Cells */ = {
@@ -2005,7 +2027,7 @@
 		23658CB314BDFB15002C0996 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 			};
 			buildConfigurationList = 23658CB614BDFB15002C0996 /* Build configuration list for PBXProject "AvocadoTest1" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -2082,6 +2104,8 @@
 				2398715B1517FA070021EE55 /* ChoiceCellWithPriceNotSelected@2x.png in Resources */,
 				2398715C1517FA070021EE55 /* ChoiceCellWithPriceSelected.png in Resources */,
 				2398715D1517FA070021EE55 /* ChoiceCellWithPriceSelected@2x.png in Resources */,
+				238BAFBC1518F7E70094A7FA /* bottle_pop_3.wav in Resources */,
+				23F5AFB515193B8D00B8E066 /* pop.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

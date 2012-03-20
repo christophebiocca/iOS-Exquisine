@@ -41,4 +41,6 @@ typedef enum LogLevel {
 
 +(UIColor *) fravicLightPinkColor;
 
++(void) playSound : (NSString *) fName;
+
 @end

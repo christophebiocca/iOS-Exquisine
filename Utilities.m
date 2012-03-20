@@ -8,6 +8,7 @@
 
 #import "Utilities.h"
 #import "LocalyticsSession.h"
+#import <AudioToolbox/AudioToolbox.h>
 
 @implementation Utilities
 
@@ -24,7 +25,6 @@
 
 +(NSString *)FormatToDate:(NSDate *) theDate
 {
-    
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"hh:mm a, EEE, MMM dd, yyyy"];
     
@@ -118,6 +118,25 @@
     return uuidString;
 }
 
++(void)playSound:(NSString *)fName
+{
+    SystemSoundID aSoundID;
+    
+    NSString *filePathString = [[NSBundle mainBundle] 
+                            pathForResource:fName ofType:@"wav"];   
+    OSStatus error = 
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)[NSURL fileURLWithPath:filePathString], &aSoundID);
+    if (!error == kAudioServicesNoError) { // success
+        CLLog(LOG_LEVEL_ERROR, @"A sound file did not load properly.");
+    }
+    
+    /* Play */
+    AudioServicesPlaySystemSound(aSoundID);
+    
+    /* Dispose */
+    //AudioServicesDisposeSystemSoundID(aSoundID);
+}
+
 +(UIFont *) fravicHeadingFont
 {
     return [UIFont fontWithName:@"AmericanTypewriter-Bold" size:16]; //[UIFont fontWithName:@"ArialHebrew-Bold" size:18];
@@ -142,5 +161,6 @@
 {
     return [UIColor colorWithRed:(251.0/255.0) green:(228.0/255.0) blue:(228.0/255.0) alpha:1.0];
 }
+
 
 @end

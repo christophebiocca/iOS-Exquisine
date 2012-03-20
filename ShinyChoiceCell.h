@@ -17,6 +17,10 @@
     UILabel *choicePriceLabel;
 }
 
+-(void) choiceChanged;
+
 -(void) updateCell;
+
+-(void) pulseView;
 
 @end

@@ -12,6 +12,7 @@
 #import "ShinyItemView.h"
 #import "Choice.h"
 #import "ShinyItemRenderer.h"
+#import "ShinyChoiceCell.h"
 
 @implementation ShinyItemViewController
 
@@ -108,6 +109,7 @@
     {
         Choice *theChoice = [[itemRenderer objectForCellAtIndex:indexPath] objectForKey:@"choice"];
         [theChoice toggleSelected];
+        [(ShinyChoiceCell *)[tableView cellForRowAtIndexPath:indexPath] pulseView];
     }
 }
 

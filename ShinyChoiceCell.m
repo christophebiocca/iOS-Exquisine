@@ -11,6 +11,8 @@
 
 @implementation ShinyChoiceCell
 
+static float pulseTime = 1.0;
+
 -(id)init
 {
     self = [super init];
@@ -63,7 +65,7 @@
 
     theChoice = [data objectForKey:@"choice"];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCell) name:CHOICE_CHANGED object:theChoice];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(choiceChanged) name:CHOICE_CHANGED object:theChoice];
     
     [self updateCell];
 }
@@ -71,6 +73,37 @@
 +(CGFloat)cellHeightForData:(id)data
 {
     return [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ChoiceCellWithoutPriceNotSelected.png"]] frame].size.height;
+}
+
+-(void)fadePulse:(UIView *)aView
+{
+    
+    [UIView beginAnimations: @"out" context:nil];
+    [UIView setAnimationDuration:(pulseTime/2)];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+    aView.alpha = 0.0;
+    [UIView commitAnimations];
+    [self performSelector:@selector(fadeBackIn:) withObject:aView afterDelay:(pulseTime/2 + 0.001)];
+}
+
+-(void)fadeBackIn:(UIView *) aView
+{
+    aView.alpha = 0.3;
+    [UIView beginAnimations: @"in" context:nil];
+    [UIView setAnimationDuration:pulseTime];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+    aView.alpha = 1.0;
+    [UIView commitAnimations];
+}
+
+-(void)pulseView
+{
+    [self fadeBackIn:choiceImage];
+}
+
+-(void)choiceChanged
+{
+    [self updateCell];
 }
 
 -(void) updateCell
