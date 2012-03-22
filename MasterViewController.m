@@ -19,6 +19,7 @@
 @implementation MasterViewController
 
 @synthesize masterView;
+@synthesize appData;
 
 
 - (id)initWithFrame:(CGRect)frame

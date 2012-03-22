@@ -33,17 +33,13 @@ NSString* harddiskFileFolder = @"~/Library/Application Support/PitaFactoryFiles/
 @synthesize ordersHistory;
 @synthesize favoriteOrders;
 
-+(void)initialize
-{
-    harddiskFileFolder = [harddiskFileFolder stringByExpandingTildeInPath];
-}
-
 -(id)init
 {
     self = [super init];
     if (self) {
         
         initialized = NO;
+        harddiskFileFolder = [harddiskFileFolder stringByExpandingTildeInPath];
         if ([self loadDataFromDisk]) {
             initialized = YES;
             [[NSNotificationCenter defaultCenter] postNotificationName:INITIALIZED_SUCCESS object:self];
@@ -62,7 +58,7 @@ NSString* harddiskFileFolder = @"~/Library/Application Support/PitaFactoryFiles/
         [networkChecker startNotifier];
         
         [self initializeFromServer];
-        [self performSelector:@selector(assessInitFailure) withObject:nil afterDelay:5];
+        [self performSelector:@selector(assessInitFailure) withObject:nil afterDelay:10];
         
     }
     return self;

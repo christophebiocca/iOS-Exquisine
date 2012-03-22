@@ -46,6 +46,7 @@ extern NSString* SERVER_INIT_FAILURE;
 -(BOOL) initializeFromData:(NSDictionary *)data;
 
 -(void) saveDataToDisk;
+
 -(NSDictionary *) recompactDataForStorage;
 
 -(void) initializeFromServer;

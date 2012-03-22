@@ -12,6 +12,7 @@
 #import "LocalyticsSession.h"
 #import "MasterView.h"
 #import "MasterViewController.h"
+#import "AppData.h"
 
 @implementation AppDelegate
 
@@ -58,7 +59,7 @@
 {
     [[LocalyticsSession sharedLocalyticsSession] resume];
     [[LocalyticsSession sharedLocalyticsSession] upload];
-    
+    [[page appData] saveDataToDisk];
     //[page saveDataToDisk];
     /*
      Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
