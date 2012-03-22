@@ -33,7 +33,7 @@ NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
 @synthesize creationDate;
 @synthesize mostRecentSubmitDate;
 @synthesize successInfo;
-@synthesize pitaFinishedTime;
+@synthesize orderFinishedTime;
 
 -(id)init
 {
@@ -141,7 +141,7 @@ NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
     }
 }
 
-//We don't need a pita finished time recovery because we weren't recording
+//We don't need an order finished time recovery because we weren't recording
 //it in the last version. Oops!
 
 -(void) successInfoRecovery:(NSCoder *)decoder
@@ -206,7 +206,7 @@ NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
     creationDate = [anOrder.creationDate copy];
     mostRecentSubmitDate = [anOrder.mostRecentSubmitDate copy];
 
-    anOrder->pitaFinishedTime = pitaFinishedTime;    
+    anOrder->orderFinishedTime = orderFinishedTime;    
     return anOrder;
 }
 
@@ -366,11 +366,11 @@ NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
     
     UILocalNotification *notification= [[UILocalNotification alloc] init];
     
-    [notification setAlertBody:@"Your pita is ready for pickup"];
+    [notification setAlertBody:@"Your order is ready for pickup"];
     
     [notification setUserInfo:[NSDictionary dictionaryWithObjectsAndKeys:orderIdentifier,@"order", nil]];
     
-    [notification setFireDate:pitaFinishedTime];
+    [notification setFireDate:orderFinishedTime];
     
     [notification setApplicationIconBadgeNumber:1];
     
@@ -434,7 +434,7 @@ NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
     }
     
     return [NSDictionary dictionaryWithObjectsAndKeys:
-            [NSNumber numberWithDouble:[pitaFinishedTime timeIntervalSince1970]], @"completion_time",
+            [NSNumber numberWithDouble:[orderFinishedTime timeIntervalSince1970]], @"completion_time",
             orderitems, @"items",
             ordercombos, @"combos",
             nil];

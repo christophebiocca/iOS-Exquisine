@@ -38,6 +38,8 @@
         orderStatus = [[UILabel alloc] init];
         openIndicator = [[IndicatorView alloc] init];
         storeHours = [[UILabel alloc] init];
+        [storeHours setBackgroundColor:[UIColor clearColor]];
+        [storeHours setTextColor:[UIColor whiteColor]];
         
         logo = [UIImage imageNamed:@"pfLogo"];
         logoView = [[UIImageView alloc] initWithImage:logo];
@@ -62,7 +64,6 @@
         
         [orderStatus setText:@"Order status: No pending orders"];
         
-        
         [self addSubview:storeHours];
         [self addSubview:openIndicator];
         [self addSubview:createOrderButton];
@@ -79,13 +80,13 @@
 
 -(void)layoutSubviews
 {
-    [self setBackgroundColor:[UIColor whiteColor]];
+    [self setBackgroundColor:[UIColor blackColor]];
     [createOrderButton setFrame:CGRectMake(20, 213, 280, 37)];
     [favoriteOrderButton setFrame:CGRectMake(20, 258, 280, 37)];
     [settingsButton setFrame:CGRectMake(20, 348, 280, 37)];
     [pendingOrderButton setFrame:CGRectMake(20, 303, 280, 37)];
     [orderStatus setFrame:CGRectMake(20, 243, 280, 37)];
-    [logoView setFrame:CGRectMake(75, 24 ,170, 170)];
+    [logoView setFrame:CGRectMake((320 - [logoView frame].size.width)/2, 10 ,[logoView frame].size.width, [logoView frame].size.height)];
     [storeHours setFrame:CGRectMake(20, 382, 280, 37)];
 }
 

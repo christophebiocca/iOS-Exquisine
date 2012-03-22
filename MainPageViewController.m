@@ -37,13 +37,13 @@
     self = [super initWithNibName:nil bundle:nil];
     
     if (self) {
-        [[self navigationItem] setTitle:@"Pita Factory"];
+        [[self navigationItem] setTitle:@"Mon Ami"];
         //this wont yet check make sure that the prod server is actually up, just that the hostname resolves.
         //=/
         
         harddiskFileName = @"MainPageViewControllerInfo.plist";
         
-        harddiskFileFolder = @"~/Library/Application Support/PitaFactoryFiles/";
+        harddiskFileFolder = @"~/Library/Application Support/MonAmiFiles/";
         harddiskFileFolder = [harddiskFileFolder stringByExpandingTildeInPath];
         
         networkChecker = [Reachability reachabilityWithHostname:(@"croutonlabs.com")];
@@ -503,7 +503,7 @@
 {
     for (Order *eachOrder in ordersHistory) 
     {
-        if ([[eachOrder pitaFinishedTime] compare:[NSDate dateWithTimeIntervalSinceNow:0]] == NSOrderedAscending)
+        if ([[eachOrder orderFinishedTime] compare:[NSDate dateWithTimeIntervalSinceNow:0]] == NSOrderedAscending)
         {
             [eachOrder setComplete];
         }
@@ -537,9 +537,9 @@
 
 -(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification 
 {
-    UIAlertView * pitaIsReady = [[UIAlertView alloc] initWithTitle:@"Notice" message:@"Your pita is ready!" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+    UIAlertView * orderIsReady = [[UIAlertView alloc] initWithTitle:@"Notice" message:@"Your order is ready!" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles: nil];
     
-    [pitaIsReady show];
+    [orderIsReady show];
     
     NSString *thisOrderIdentifier = [[notification userInfo] objectForKey:@"order"];
     if ( thisOrderIdentifier ) {

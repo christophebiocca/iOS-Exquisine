@@ -236,21 +236,6 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
     return YES;
 }
 
--(NSDecimalNumber *)savingsMagnitude
-{
-    NSDecimalNumber *tally = [[NSDecimalNumber alloc] initWithInt:0];
-    
-    //This actually makes the assumption that each item in the item group costs the same price. This
-    //may not be true in all cases, but I think it is for pita factory.
-    for (ItemGroup *anItemGroup in listOfItemGroups) {
-        [tally decimalNumberByAdding:[[[anItemGroup listOfItems] objectAtIndex:0] price]];
-    }
-    
-    [tally decimalNumberBySubtracting:[self price]];
-    
-    return tally;
-}
-
 -(void)addItem:(Item *)anItem
 {
     for (ItemGroup *eachItemGroup in listOfItemGroups) {

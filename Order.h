@@ -44,7 +44,7 @@ extern NSString* ORDER_MODIFIED;
     
     NSDate *mostRecentSubmitDate;
     
-    NSDate *pitaFinishedTime;
+    NSDate *orderFinishedTime;
     
     PaymentSuccessInfo *successInfo;
     
@@ -57,7 +57,7 @@ extern NSString* ORDER_MODIFIED;
 @property (retain) NSString *orderIdentifier;
 @property (readonly) NSDate *creationDate;
 @property (readonly) NSDate *mostRecentSubmitDate;
-@property (retain) NSDate *pitaFinishedTime;
+@property (retain) NSDate *orderFinishedTime;
 @property (readonly) PaymentSuccessInfo *successInfo;
 @property(readonly)NSDecimalNumber* subtotalPrice;
 @property(readonly)NSDecimalNumber* taxPrice;

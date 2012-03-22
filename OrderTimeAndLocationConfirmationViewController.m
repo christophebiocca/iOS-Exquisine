@@ -73,15 +73,15 @@
    
     if (![[[[orderTimeAndLocationConfirmationView locationView] locationState] selectedLocation] wouldBeOpenAt:[NSDate dateWithTimeIntervalSinceNow:(pickerMinute * 60 + pickerHour * 3600)]])
     {
-        UIAlertView *tryAgain = [[UIAlertView alloc] initWithTitle: @"Oops" message:@"The restaurant would be closed at the time you requested your pita to be done." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+        UIAlertView *tryAgain = [[UIAlertView alloc] initWithTitle: @"Oops" message:@"The restaurant would be closed at the time you requested your order to be done." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
         
-        [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Tried to order a pita set to be completed after closing time."];
+        [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Tried to place an order set to be completed after closing time."];
         
         [tryAgain show];
         return;
     }
     
-    [theOrder setPitaFinishedTime:[NSDate dateWithTimeIntervalSinceNow:(pickerMinute * 60 + pickerHour * 3600)]];
+    [theOrder setOrderFinishedTime:[NSDate dateWithTimeIntervalSinceNow:(pickerMinute * 60 + pickerHour * 3600)]];
     doneBlock();
 }
 

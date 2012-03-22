@@ -147,7 +147,7 @@
     
     [formatter setDateFormat:@"h:mm a"];
     
-    [pickupTime setText: [NSString stringWithFormat:@"Your pita will be done at %@", [formatter stringFromDate:[theOrder pitaFinishedTime]]]];
+    [pickupTime setText: [NSString stringWithFormat:@"Your order will be done at %@", [formatter stringFromDate:[theOrder orderFinishedTime]]]];
     
     [signoff setText:@"Enjoy!"];
     

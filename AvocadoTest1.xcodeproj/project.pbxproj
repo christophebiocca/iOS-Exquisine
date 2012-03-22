@@ -242,7 +242,7 @@
 		2361B90D1506B86C007270CC /* ComboItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComboItemViewController.m; sourceTree = "<group>"; };
 		2361B90F1506BEEA007270CC /* OrderComboViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderComboViewController.h; sourceTree = "<group>"; };
 		2361B9101506BEEA007270CC /* OrderComboViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderComboViewController.m; sourceTree = "<group>"; };
-		23658CBC14BDFB15002C0996 /* Pita Factory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pita Factory.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		23658CBC14BDFB15002C0996 /* Mon Ami Pizza.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mon Ami Pizza.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		23658CC014BDFB15002C0996 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		23658CC214BDFB15002C0996 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		23658CC414BDFB15002C0996 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -801,7 +801,7 @@
 		23658CBD14BDFB15002C0996 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				23658CBC14BDFB15002C0996 /* Pita Factory.app */,
+				23658CBC14BDFB15002C0996 /* Mon Ami Pizza.app */,
 				23658CE014BDFB15002C0996 /* AvocadoTest1Tests.octest */,
 			);
 			name = Products;
@@ -1589,7 +1589,7 @@
 			);
 			name = AvocadoTest1;
 			productName = AvocadoTest1;
-			productReference = 23658CBC14BDFB15002C0996 /* Pita Factory.app */;
+			productReference = 23658CBC14BDFB15002C0996 /* Mon Ami Pizza.app */;
 			productType = "com.apple.product-type.application";
 		};
 		23658CDF14BDFB15002C0996 /* AvocadoTest1Tests */ = {
@@ -1876,7 +1876,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				PRODUCT_NAME = "Pita Factory";
+				PRODUCT_NAME = "Mon Ami Pizza";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1897,7 +1897,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PRODUCT_NAME = "Pita Factory";
+				PRODUCT_NAME = "Mon Ami Pizza";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;

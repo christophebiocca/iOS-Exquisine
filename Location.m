@@ -183,7 +183,7 @@ static NSDateComponents* minusOneDay;
         [formatter setDateFormat:@"EEEE"];
         NSString *dayOfWeek = [formatter stringFromDate:[self nextOpen]];
         
-        return [NSString stringWithFormat:@"Pita Factory opens on %@ at %@.",dayOfWeek,openTime];
+        return [NSString stringWithFormat:@"Mon Ami opens on %@ at %@.",dayOfWeek,openTime];
         
     }
 }
@@ -205,7 +205,7 @@ static NSDateComponents* minusOneDay;
 }
 
 - (NSString *)title{
-	return @"Pita Factory";
+	return @"Mon Ami";
 }
 
 -(id)copyWithZone:(NSZone *)zone

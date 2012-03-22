@@ -18,7 +18,7 @@
 #ifndef RESTAURANT_ID
 // Ultimately, this is something the automated builder changes 
 // to point at the restaurant we're making the app for.
-#define RESTAURANT_ID 1
+#define RESTAURANT_ID 2
 #endif
 
 //Make this 1 if you want the info logs to display at debug time.

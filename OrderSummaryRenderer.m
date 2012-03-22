@@ -130,7 +130,7 @@
         
         newCellData = [[GeneralPurposeViewCellData alloc] init];
         [newCellData setTitle:@"Order pickup time:"];
-        [newCellData setDescription:[Utilities FormatToDate:[anOrder pitaFinishedTime]]];
+        [newCellData setDescription:[Utilities FormatToDate:[anOrder orderFinishedTime]]];
         [newCellData setTitleFont:titleFont];
         [newCellData setDescriptionFont:descFont];
         [displayList addObject:newCellData];
