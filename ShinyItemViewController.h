@@ -11,6 +11,7 @@
 @class ShinyItemView;
 @class ShinyItemRenderer;
 
+extern NSString* ITEM_DONE_BUTTON_HIT;
 
 @interface ShinyItemViewController : UIViewController <UITableViewDelegate>
 {
@@ -19,6 +20,8 @@
     ShinyItemRenderer *itemRenderer;
     
 }
+
+@property (retain) Item *theItem;
 
 -(id) initWithItem:(Item *) anItem;
 

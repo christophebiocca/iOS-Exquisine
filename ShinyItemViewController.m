@@ -14,7 +14,11 @@
 #import "ShinyItemRenderer.h"
 #import "ShinyChoiceCell.h"
 
+NSString* ITEM_DONE_BUTTON_HIT = @"CroutonLabs/ItemDoneButtonHit";
+
 @implementation ShinyItemViewController
+
+@synthesize theItem;
 
 -(id)initWithItem:(Item *)anItem
 {
@@ -26,6 +30,7 @@
         
         [[itemView itemTable] setDelegate:self];
         [[itemView itemTable] setDataSource:itemRenderer];
+        
     }
     return self;
 }
@@ -134,8 +139,32 @@
 -(void)loadView
 {
     [super loadView];
+    [[self navigationItem] setHidesBackButton:YES];
+    
+    //Set this as the back button
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(backButtonHit)];
+    [backButton setTintColor:[Utilities fravicDarkRedColor]];
+    
+    [[self navigationItem] setLeftBarButtonItem:backButton];
+    
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonHit)];
+    
+    [[self navigationItem] setRightBarButtonItem:doneButton];
+    
     [self setView:itemView];
 }
+
+-(void) backButtonHit
+{
+    [[self navigationController] popViewControllerAnimated:YES];
+}
+
+-(void) doneButtonHit
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:ITEM_DONE_BUTTON_HIT object:self];
+    [[self navigationController] popViewControllerAnimated:YES];
+}
+
 
 -(void)viewWillAppear:(BOOL)animated
 {

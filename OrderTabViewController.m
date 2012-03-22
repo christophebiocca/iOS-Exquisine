@@ -38,7 +38,6 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    //[[[self navigationController] navigationBar] setHidden:YES];
     [[[self navigationController] navigationBar] setBackgroundImage:[UIImage imageNamed:@"AddItemsBar.png"] forBarMetrics:UIBarMetricsDefault];
 }
 
@@ -136,6 +135,8 @@
         Item *theItem = [[orderRenderer objectForCellAtIndex:indexPath] objectForKey:@"menuItem"];
         ShinyItemViewController *newController = [[ShinyItemViewController alloc] initWithItem:[theItem copy]];
         
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addItem:) name:ITEM_DONE_BUTTON_HIT object:newController];
+        
         [[self navigationController] pushViewController:newController animated:YES];
     }
 }
@@ -162,6 +163,12 @@
 {
     [super loadView];
     [self setView:orderView];
+}
+
+-(void) addItem:(NSNotification *) notification
+{
+    [[theOrderManager thisOrder] addItem:[(ShinyItemViewController *)[notification object] theItem]];
+    [[orderView orderTable] scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
 
 -(void) updateOrderSection;

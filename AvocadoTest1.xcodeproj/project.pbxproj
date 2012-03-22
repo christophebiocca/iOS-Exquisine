@@ -97,7 +97,6 @@
 		238395A7150EA16A000DC733 /* MenuSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 238395A6150EA16A000DC733 /* MenuSectionHeaderView.m */; };
 		238395AC150EA67F000DC733 /* ShinyOrderItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 238395AB150EA67F000DC733 /* ShinyOrderItemCell.m */; };
 		238476F314D7577C00DE9270 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 238476F214D7577C00DE9270 /* SystemConfiguration.framework */; };
-		238BAFBC1518F7E70094A7FA /* bottle_pop_3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 238BAFBB1518F7E70094A7FA /* bottle_pop_3.wav */; };
 		238FC77914D35E6D007E175B /* Favorite Star.png in Resources */ = {isa = PBXBuildFile; fileRef = 238FC77814D35E6D007E175B /* Favorite Star.png */; };
 		2391EA7314BE3699001BDC1B /* ConfigurableTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2391EA7114BE3699001BDC1B /* ConfigurableTableViewDataSource.m */; };
 		2391EA7714BE387D001BDC1B /* CellInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2391EA7614BE387D001BDC1B /* CellInfo.m */; };
@@ -381,7 +380,6 @@
 		238395AA150EA67F000DC733 /* ShinyOrderItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShinyOrderItemCell.h; sourceTree = "<group>"; };
 		238395AB150EA67F000DC733 /* ShinyOrderItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinyOrderItemCell.m; sourceTree = "<group>"; };
 		238476F214D7577C00DE9270 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		238BAFBB1518F7E70094A7FA /* bottle_pop_3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bottle_pop_3.wav; sourceTree = "<group>"; };
 		238FC77814D35E6D007E175B /* Favorite Star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Favorite Star.png"; sourceTree = "<group>"; };
 		2391EA7014BE3699001BDC1B /* ConfigurableTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurableTableViewDataSource.h; sourceTree = "<group>"; };
 		2391EA7114BE3699001BDC1B /* ConfigurableTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigurableTableViewDataSource.m; sourceTree = "<group>"; };
@@ -1263,7 +1261,6 @@
 			isa = PBXGroup;
 			children = (
 				23F5AFB415193B8D00B8E066 /* pop.wav */,
-				238BAFBB1518F7E70094A7FA /* bottle_pop_3.wav */,
 			);
 			name = Sounds;
 			sourceTree = "<group>";
@@ -2104,7 +2101,6 @@
 				2398715B1517FA070021EE55 /* ChoiceCellWithPriceNotSelected@2x.png in Resources */,
 				2398715C1517FA070021EE55 /* ChoiceCellWithPriceSelected.png in Resources */,
 				2398715D1517FA070021EE55 /* ChoiceCellWithPriceSelected@2x.png in Resources */,
-				238BAFBC1518F7E70094A7FA /* bottle_pop_3.wav in Resources */,
 				23F5AFB515193B8D00B8E066 /* pop.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
