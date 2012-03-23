@@ -19,6 +19,7 @@ NSString* VIEW_CELL_NEEDS_REDRAW = @"CroutonLabs/ViewCellNeedsRedraw";
 @synthesize indent;
 @synthesize cellColour;
 @synthesize disclosureArrow;
+@synthesize height;
 
 -(id)init
 {
@@ -31,6 +32,9 @@ NSString* VIEW_CELL_NEEDS_REDRAW = @"CroutonLabs/ViewCellNeedsRedraw";
         description = @"";
         indent = 0;
         cellColour = [UIColor whiteColor];
+        height = 44.0f;
+        titleFont = [UIFont fontWithName:@"AmericanTypewriter" size:14];
+        descriptionFont = [UIFont fontWithName:@"AmericanTypewriter" size:14];
     }
     
     return self;
@@ -75,6 +79,12 @@ NSString* VIEW_CELL_NEEDS_REDRAW = @"CroutonLabs/ViewCellNeedsRedraw";
 -(void)setDisclosureArrow:(BOOL) boolValue
 {
     disclosureArrow = boolValue;
+    [[NSNotificationCenter defaultCenter] postNotificationName:VIEW_CELL_NEEDS_REDRAW object:self];
+}
+
+-(void)setHeight:(CGFloat)theHeight
+{
+    height = theHeight;
     [[NSNotificationCenter defaultCenter] postNotificationName:VIEW_CELL_NEEDS_REDRAW object:self];
 }
 

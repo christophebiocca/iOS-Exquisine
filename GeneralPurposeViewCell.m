@@ -24,7 +24,6 @@
     if (self) {
         [self setData:theData];
     }
-    
     return self;
 }
 
@@ -35,6 +34,10 @@
 
 -(void)setData:(GeneralPurposeViewCellData *) theCellData
 {
+    [[self textLabel] setBackgroundColor:[UIColor clearColor]];
+    [[self detailTextLabel] setBackgroundColor:[UIColor clearColor]];
+    [[self textLabel] setTextColor:[UIColor blackColor]];
+    [[self detailTextLabel] setTextColor:[UIColor blackColor]];
     
     if ([theCellData isKindOfClass:[GeneralPurposeViewCellData class]]) 
     {
@@ -52,7 +55,7 @@
 {
     [[self textLabel] setText:[cellData title]];
     [self setIndentationLevel:([cellData indent] * 3)];
-    [self setBackgroundColor:[cellData cellColour]];
+    [[self contentView] setBackgroundColor:[cellData cellColour]];
     
     if ([cellData titleFont]) {
         [[self textLabel] setFont:[cellData titleFont]];
@@ -77,7 +80,7 @@
 
 +(CGFloat)cellHeightForData:(id)data
 {
-    return 44.0f;
+    return [data height];
 }
 
 @end

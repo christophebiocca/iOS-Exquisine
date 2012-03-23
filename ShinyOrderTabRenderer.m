@@ -10,6 +10,7 @@
 #import "OrderSectionFooterView.h"
 #import "OrderSectionHeaderView.h"
 #import "MenuSectionHeaderView.h"
+#import "GeneralPurposeViewCellData.h"
 #import "ItemGroup.h"
 #import "OrderManager.h"
 #import "Order.h"
@@ -97,6 +98,20 @@
             [orderSectionContents addObject:anotherDictionary];
             index++;
         }
+        
+        GeneralPurposeViewCellData *subtotalCell = [[GeneralPurposeViewCellData alloc] init];
+        [subtotalCell setTitle:@"Subtotal:"];
+        [subtotalCell setHeight:22.0f];
+        
+        if (index%2) 
+            [subtotalCell setCellColour:[Utilities fravicDarkPinkColor]];
+        else 
+            [subtotalCell setCellColour:[Utilities fravicLightPinkColor]];
+        
+        [subtotalCell setDescription:[Utilities FormatToPrice:[[theOrderManager thisOrder] subtotalPrice]]];
+        [orderSectionContents addObject:subtotalCell];
+        index++;
+        
         
         OrderSectionFooterView *footerView = [[OrderSectionFooterView alloc] init];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(editButtonPressed) name:EDIT_BUTTON_PRESSED object:footerView];

@@ -19,6 +19,7 @@ extern NSString* VIEW_CELL_NEEDS_REDRAW;
     NSInteger indent;
     UIColor *cellColour;
     BOOL disclosureArrow;
+    CGFloat height;
 }
 
 @property (nonatomic) BOOL disclosureArrow;
@@ -28,5 +29,6 @@ extern NSString* VIEW_CELL_NEEDS_REDRAW;
 @property (nonatomic, retain) UIFont *descriptionFont;
 @property (nonatomic) NSInteger indent;
 @property (nonatomic, retain) UIColor *cellColour;
+@property (nonatomic) CGFloat height;
 
 @end
