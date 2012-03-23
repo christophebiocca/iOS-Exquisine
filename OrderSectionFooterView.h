@@ -8,10 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+extern NSString *EDIT_BUTTON_PRESSED;
+extern NSString *PLACE_BUTTON_PRESSED;
+
 @interface OrderSectionFooterView : UIView
 {
     UIImageView *footerImage;
-    UILabel *placeLabel;
-    UILabel *editLabel;
+    UIButton *placeLabel;
+    UIButton *editLabel;
+    
 }
+
+@property (retain) UIButton *placeLabel;
+@property (retain) UIButton *editLabel;
+
 @end

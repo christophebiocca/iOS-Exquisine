@@ -29,6 +29,8 @@
         orderRenderer = [[ShinyOrderTabRenderer alloc] initWithOrderManager:theOrderManager];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateOrderSection) name:ORDER_MODIFIED object:[theOrderManager thisOrder]];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(editButtonPressed) name:EDIT_BUTTON_PRESSED object:orderRenderer];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(placeButtonPressed) name:PLACE_BUTTON_PRESSED object:orderRenderer];
         
         [[orderView orderTable] setDelegate:self];
         [[orderView orderTable] setDataSource:orderRenderer];
@@ -177,9 +179,14 @@
     [[orderView orderTable] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
--(void)dealloc
+-(void) placeButtonPressed
 {
-    [[NSNotificationCenter defaultCenter] removeObject:self];
+    //Stuff here to do the placing of the order
+}
+
+-(void) editButtonPressed
+{
+    //stuff here to make the order editable
 }
 
 @end

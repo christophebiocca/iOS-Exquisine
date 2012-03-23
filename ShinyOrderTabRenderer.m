@@ -98,11 +98,24 @@
             index++;
         }
         
-        [orderSectionContents addObject:[OrderSectionFooterView new]];
+        OrderSectionFooterView *footerView = [[OrderSectionFooterView alloc] init];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(editButtonPressed) name:EDIT_BUTTON_PRESSED object:footerView];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(placeButtonPressed) name:PLACE_BUTTON_PRESSED object:footerView];
+        [orderSectionContents addObject:footerView];
     }
     
     [listData replaceObjectAtIndex:0 withObject:orderSectionContents];
     
+}
+
+-(void) editButtonPressed
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:EDIT_BUTTON_PRESSED object:self];
+}
+
+-(void) placeButtonPressed
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:PLACE_BUTTON_PRESSED object:self];
 }
 
 @end
