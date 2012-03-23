@@ -138,6 +138,12 @@
     {
         Item *theItem = [[orderRenderer objectForCellAtIndex:indexPath] objectForKey:@"menuItem"];
         ShinyItemViewController *newController = [[ShinyItemViewController alloc] initWithItem:[theItem copy]];
+         
+        if (([[theItem options] count] == 0) && [[theItem desc] isEqualToString:@""] ) {
+            [[theOrderManager thisOrder] addItem:theItem];
+            [tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            return;
+        }
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addItem:) name:ITEM_DONE_BUTTON_HIT object:newController];
         

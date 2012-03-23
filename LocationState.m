@@ -29,4 +29,15 @@
     return self;
 }
 
+-(void)setLocations:(NSArray *)someLocations
+{
+    if (selectedLocation)
+    {
+        if ([locations indexOfObject:selectedLocation] < [someLocations count]) {
+            selectedLocation = [someLocations objectAtIndex:[locations indexOfObject:selectedLocation]];
+        }
+    }
+    locations = someLocations;
+}
+
 @end

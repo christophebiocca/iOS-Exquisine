@@ -237,7 +237,7 @@ NSString* harddiskFileFolder = @"~/Library/Application Support/PitaFactoryFiles/
                                         {
                                             locationState = [[LocationState alloc] initWithLocations:[call locations]];
                                         }
-                                        if (theMenu) {
+                                        if (theMenu && !initialized) {
                                             initialized = YES;
                                             [[NSNotificationCenter defaultCenter] postNotificationName:INITIALIZED_SUCCESS object:self];
                                         }

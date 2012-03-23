@@ -19,6 +19,8 @@
 @property (retain) MasterView *masterView;
 @property (retain) AppData *appData;
 
-- (id)initWithFrame:(CGRect)frame;
+- (id) initWithFrame:(CGRect)frame;
+
+- (void) reloadData;
 
 @end

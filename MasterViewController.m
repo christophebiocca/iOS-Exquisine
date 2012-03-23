@@ -104,7 +104,8 @@
     
     [[[masterView tabController] view] setNeedsLayout];
     [[[masterView tabController] view] setNeedsDisplay];
-    [masterView dissolveLoadingView];
+    //This is here because if the app also hits the server successfully, it'll reload some stuff.
+    [masterView performSelector:@selector(dissolveLoadingView) withObject:nil afterDelay:2];
 }
 
 -(void) initializationFailure
@@ -113,6 +114,13 @@
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops" message:@"You must have an internet connection the first time you run this app" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles: nil];
     [masterView dissolveProgressIndicator];
     [alert show];
+}
+
+-(void)reloadData
+{
+    [masterView putUpLoadingView];
+    [appData initializeFromServer];
+    [masterView performSelector:@selector(dissolveLoadingView) withObject:nil afterDelay:2];
 }
 
 @end

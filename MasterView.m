@@ -55,4 +55,10 @@
     [UIView commitAnimations];
 }
 
+-(void)putUpLoadingView
+{
+    [loadingView setAlpha:1.0f];
+    [self sendSubviewToBack:tabView];
+}
+
 @end

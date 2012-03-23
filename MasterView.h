@@ -25,4 +25,6 @@
 -(void)dissolveProgressIndicator;
 
 -(void)fadeOut:(UIView*)viewToDissolve withDuration:(NSTimeInterval)duration   andWait:(NSTimeInterval)wait;
+
+-(void)putUpLoadingView;
 @end

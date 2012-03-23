@@ -98,6 +98,7 @@
 		238395AC150EA67F000DC733 /* ShinyOrderItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 238395AB150EA67F000DC733 /* ShinyOrderItemCell.m */; };
 		238476F314D7577C00DE9270 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 238476F214D7577C00DE9270 /* SystemConfiguration.framework */; };
 		238923A0151D2F44001FBCCB /* splashScreen@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2389239F151D2F44001FBCCB /* splashScreen@2x.jpg */; };
+		238923A2151D3D25001FBCCB /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 238923A1151D3D25001FBCCB /* Default.png */; };
 		238FC77914D35E6D007E175B /* Favorite Star.png in Resources */ = {isa = PBXBuildFile; fileRef = 238FC77814D35E6D007E175B /* Favorite Star.png */; };
 		2391EA7314BE3699001BDC1B /* ConfigurableTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2391EA7114BE3699001BDC1B /* ConfigurableTableViewDataSource.m */; };
 		2391EA7714BE387D001BDC1B /* CellInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2391EA7614BE387D001BDC1B /* CellInfo.m */; };
@@ -198,7 +199,6 @@
 		D95B787414D2BE4B00FC0F29 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = D95B787314D2BE4B00FC0F29 /* Location.m */; };
 		D95B787714D2C4F800FC0F29 /* GetLocations.m in Sources */ = {isa = PBXBuildFile; fileRef = D95B787614D2C4F800FC0F29 /* GetLocations.m */; };
 		D95B788014D318A300FC0F29 /* checkRelease.rb in Resources */ = {isa = PBXBuildFile; fileRef = D95B787F14D318A300FC0F29 /* checkRelease.rb */; };
-		D969488014ECDB570035AB9E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D969487F14ECDB570035AB9E /* Default.png */; };
 		D9768A6514D73EB300BBA467 /* PaymentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D9768A6214D73EB300BBA467 /* PaymentInfo.m */; };
 		D9768A6614D73EB300BBA467 /* PaymentInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9768A6414D73EB300BBA467 /* PaymentInfoViewController.m */; };
 		D9768A7E14D74AAD00BBA467 /* PaymentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9768A7D14D74AAD00BBA467 /* PaymentView.m */; };
@@ -382,6 +382,7 @@
 		238395AB150EA67F000DC733 /* ShinyOrderItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinyOrderItemCell.m; sourceTree = "<group>"; };
 		238476F214D7577C00DE9270 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		2389239F151D2F44001FBCCB /* splashScreen@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "splashScreen@2x.jpg"; path = "FravicArtAssets/splashScreen@2x.jpg"; sourceTree = "<group>"; };
+		238923A1151D3D25001FBCCB /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		238FC77814D35E6D007E175B /* Favorite Star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Favorite Star.png"; sourceTree = "<group>"; };
 		2391EA7014BE3699001BDC1B /* ConfigurableTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurableTableViewDataSource.h; sourceTree = "<group>"; };
 		2391EA7114BE3699001BDC1B /* ConfigurableTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigurableTableViewDataSource.m; sourceTree = "<group>"; };
@@ -555,7 +556,6 @@
 		D95B787514D2C4F700FC0F29 /* GetLocations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetLocations.h; sourceTree = "<group>"; };
 		D95B787614D2C4F800FC0F29 /* GetLocations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetLocations.m; sourceTree = "<group>"; };
 		D95B787F14D318A300FC0F29 /* checkRelease.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; name = checkRelease.rb; path = ../checkRelease.rb; sourceTree = "<group>"; };
-		D969487F14ECDB570035AB9E /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		D9768A6114D73EB300BBA467 /* PaymentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentInfo.h; sourceTree = "<group>"; };
 		D9768A6214D73EB300BBA467 /* PaymentInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentInfo.m; sourceTree = "<group>"; };
 		D9768A6314D73EB300BBA467 /* PaymentInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentInfoViewController.h; sourceTree = "<group>"; };
@@ -1829,7 +1829,7 @@
 			isa = PBXGroup;
 			children = (
 				233C46EB14FEEF620003C295 /* SampleDesignImages */,
-				D969487F14ECDB570035AB9E /* Default.png */,
+				238923A1151D3D25001FBCCB /* Default.png */,
 				D9CB5FD514ECDB8B00FC5071 /* Default@2x.png */,
 				D9D5A3A914ECCD0B003B0B11 /* pfLogo_29.png */,
 				D9D5A3AA14ECCD0B003B0B11 /* pfLogo_58.png */,
@@ -2071,7 +2071,6 @@
 				23718F0714EC23A300F543BD /* pfLogo_114.png in Resources */,
 				D9D5A3AB14ECCD0B003B0B11 /* pfLogo_29.png in Resources */,
 				D9D5A3AC14ECCD0B003B0B11 /* pfLogo_58.png in Resources */,
-				D969488014ECDB570035AB9E /* Default.png in Resources */,
 				D9CB5FD614ECDB8B00FC5071 /* Default@2x.png in Resources */,
 				233C46ED14FEEF7D0003C295 /* splashScreen.jpg in Resources */,
 				233C46F8150029E60003C295 /* LocationBarImage.jpg in Resources */,
@@ -2106,6 +2105,7 @@
 				2398715D1517FA070021EE55 /* ChoiceCellWithPriceSelected@2x.png in Resources */,
 				23F5AFB515193B8D00B8E066 /* pop.wav in Resources */,
 				238923A0151D2F44001FBCCB /* splashScreen@2x.jpg in Resources */,
+				238923A2151D3D25001FBCCB /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

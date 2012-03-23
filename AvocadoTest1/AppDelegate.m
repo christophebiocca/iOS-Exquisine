@@ -70,7 +70,7 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // WE NEED OUR COOKIES, AT ALL TIMES
-    //[[page appData] initializeFromServer];
+    [page reloadData];
     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
     /*
     [page initiateMenuRefresh];

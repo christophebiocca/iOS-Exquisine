@@ -19,6 +19,6 @@
 -initWithLocations:(NSArray *) someLocations;
 
 @property (retain) Location *selectedLocation;
-@property (retain) NSArray *locations;
+@property (nonatomic, retain) NSArray *locations;
 
 @end
