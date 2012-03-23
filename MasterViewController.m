@@ -31,6 +31,7 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(initializationSuccess) name:INITIALIZED_SUCCESS object:appData];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(initializationFailure) name:INITIALIZED_FAILURE object:appData];
         appData = [appData init];
+        [[[masterView loadingView] progressLabel] setText:@"Contacting Server..."];
     }
     return self;
 }
@@ -83,6 +84,7 @@
 
 -(void) initializationSuccess
 {
+    [[[masterView loadingView] progressLabel] setText:@"Initialization Complete"];
     LocationTabViewController *locationTabViewController = [[LocationTabViewController alloc] initWithLocationState:[appData locationState]];
     
     [locationTabViewController setTitle:@"Location"];
@@ -107,6 +109,7 @@
 
 -(void) initializationFailure
 {
+    [[[masterView loadingView] progressLabel] setText:@"No connectivity detected"];
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops" message:@"You must have an internet connection the first time you run this app" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles: nil];
     [masterView dissolveProgressIndicator];
     [alert show];

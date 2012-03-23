@@ -13,6 +13,7 @@
 
 @implementation MasterView
 
+@synthesize loadingView;
 @synthesize tabController;
 
 - (id)initWithFrame:(CGRect)frame

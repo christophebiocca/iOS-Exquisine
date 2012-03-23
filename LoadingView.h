@@ -15,6 +15,7 @@
     UILabel *progressLabel;
 }
 
+@property (retain) UILabel *progressLabel;
 @property (retain) UIActivityIndicatorView *indicatorView;
 
 @end

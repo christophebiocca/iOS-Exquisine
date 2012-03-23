@@ -17,6 +17,7 @@
     UIView *tabView;
 }
 
+@property (retain) LoadingView *loadingView;
 @property (retain) CustomTabBarController *tabController;
 
 -(void)dissolveLoadingView;

@@ -10,6 +10,7 @@
 
 @implementation LoadingView
 
+@synthesize progressLabel;
 @synthesize indicatorView;
 
 - (id)initWithFrame:(CGRect)frame
@@ -17,14 +18,14 @@
     self = [super initWithFrame:frame];
     if (self) {
         splashImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"splashScreen.jpg"]];
-        indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         [indicatorView startAnimating];
         progressLabel = [[UILabel alloc] init];
         [progressLabel setBackgroundColor:[UIColor clearColor]];
         [progressLabel setTextAlignment:UITextAlignmentCenter];
         [progressLabel setAdjustsFontSizeToFitWidth:YES];
-        [progressLabel setTextColor:[UIColor whiteColor]];
-        [progressLabel setText:@"There would be some loading text here"];
+        [progressLabel setTextColor:[UIColor blackColor]];
+        [progressLabel setText:@"Initializing..."];
         
         [self addSubview:splashImage];
         [self addSubview:indicatorView];
