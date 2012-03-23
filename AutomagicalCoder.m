@@ -25,6 +25,8 @@
         harddiskDataVersion = VERSION_1_0_0;
     if ([versionString isEqualToString:@"1.1.0"])
         harddiskDataVersion = VERSION_1_1_0;
+    if ([versionString isEqualToString:@"2.0.0"])
+        harddiskDataVersion = VERSION_2_0_0;
     
     //Check to make sure that a version was actually identified (just as a sanity check)
     if (harddiskDataVersion == VERSION_0_0_0) {

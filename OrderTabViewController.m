@@ -95,6 +95,8 @@
         }
         
         [tableView insertRowsAtIndexPaths:helperArray withRowAnimation:UITableViewRowAnimationTop];
+        [tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[indexPath row] inSection:[indexPath section]] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+        
     }
     else if ([[CustomViewCell cellIdentifierForData:[orderRenderer objectForCellAtIndex:indexPath]] isEqualToString:@"OpenShinyMenuCell"])
     {
