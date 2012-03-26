@@ -24,7 +24,6 @@
         [sectionNames addObject:@"Number of combos"];
         IntegerInputCellData *inputCellData = [[IntegerInputCellData alloc] init];
         [inputCellData setNumber:[aCombo numberOfCombos]];
-        [inputCellData setNumberPrompt:@"Number of combos"];
         [inputCellData setLowerBound:[NSNumber numberWithInt:1]];
         [inputCellData setUpperBound:[NSNumber numberWithInt:100]];
         [listData addObject:[NSArray arrayWithObject:inputCellData]];

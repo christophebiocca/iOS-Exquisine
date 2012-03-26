@@ -1,14 +1,14 @@
 //
-//  ItemSectionHeaderView.m
+//  NumberOfItemsSectionHeaderView.m
 //  AvocadoTest1
 //
-//  Created by Jake on 12-03-19.
+//  Created by Jake on 12-03-26.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "ItemSectionHeaderView.h"
+#import "NumberOfItemsSectionHeaderView.h"
 
-@implementation ItemSectionHeaderView
+@implementation NumberOfItemsSectionHeaderView
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -17,7 +17,7 @@
         headerImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ListHeader.png"]];
         [self setFrame:[headerImage frame]];
         itemLabel = [[UILabel alloc] init];
-        [itemLabel setText:@"Options"];
+        [itemLabel setText:@"Item Quantity"];
         [itemLabel setFrame:CGRectMake(46, 28, 196, 21)];
         [itemLabel setFont:[Utilities fravicHeadingFont]];
         [itemLabel setTextAlignment:UITextAlignmentLeft];

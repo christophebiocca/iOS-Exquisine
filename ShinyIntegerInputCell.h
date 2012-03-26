@@ -9,7 +9,7 @@
 #import "CustomViewCell.h"
 @class IntegerInputCellData;
 
-@interface IntegerInputCell : CustomViewCell
+@interface ShinyIntegerInputCell : CustomViewCell
 {
     IntegerInputCellData *integerCellData;
     UILabel *numberLabel;

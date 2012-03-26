@@ -6,12 +6,12 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "IntegerInputCell.h"
+#import "ShinyIntegerInputCell.h"
 #import "IntegerInputCellData.h"
 #import "NSMutableNumber.h"
 #import <QuartzCore/QuartzCore.h>
 
-@implementation IntegerInputCell
+@implementation ShinyIntegerInputCell
 
 -(id)init
 {
@@ -22,6 +22,8 @@
         integerCellData = [[IntegerInputCellData alloc] init];
         numberLabel = [[UILabel alloc] init];
         [numberLabel setBackgroundColor:[UIColor clearColor]];
+        [numberLabel setFont:[UIFont fontWithName:@"AmericanTypewriter-Bold" size:13]];
+        
         plusButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [plusButton setTitle:@"+" forState:UIControlStateNormal];
         [plusButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -88,7 +90,7 @@
 
 -(void) updateCell
 {
-    [numberLabel setText:[NSString stringWithFormat:@"%@: %i",[integerCellData numberPrompt],[[integerCellData number] intValue]]];
+    [numberLabel setText:[NSString stringWithFormat:@"%i",[[integerCellData number] intValue]]];
     [self setNeedsDisplay];
     [self setNeedsLayout];
 }

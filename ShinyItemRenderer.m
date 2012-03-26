@@ -7,7 +7,9 @@
 //
 
 #import "ShinyItemRenderer.h"
-#import "ItemSectionHeaderView.h"
+#import "OptionSectionHeaderView.h"
+#import "NumberOfItemsSectionHeaderView.h"
+#import "IntegerInputCellData.h"
 #import "Option.h"
 #import "Item.h"
 
@@ -25,25 +27,37 @@
         sectionNames = [[NSMutableArray alloc] init];
         listData = [[NSMutableArray alloc] init];
         
-        [sectionNames addObject:@"Items"];
-        NSMutableArray *menuSectionContents = [[NSMutableArray alloc] init];
+        [sectionNames addObject:@"Item Quantity"];
+        NSMutableArray *numberOfItemsSectionContents = [[NSMutableArray alloc] init];
         
-        [menuSectionContents addObject:[ItemSectionHeaderView new]];
+        [numberOfItemsSectionContents addObject:[NumberOfItemsSectionHeaderView new]];
+        IntegerInputCellData *newCell = [[IntegerInputCellData alloc] init];
+        [newCell setNumber:[theItem numberOfItems]];
+        [newCell setLowerBound:[NSNumber numberWithInt:1]];
+        [newCell setUpperBound:[NSNumber numberWithInt:100]];
+        [numberOfItemsSectionContents addObject:newCell];
+        
+        [listData addObject:numberOfItemsSectionContents];
+        
+        [sectionNames addObject:@"Options"];
+        NSMutableArray *optionSectionContents = [[NSMutableArray alloc] init];
+        
+        [optionSectionContents addObject:[OptionSectionHeaderView new]];
         
         //Starts with all of the options in the open position.
         for (Option *eachOption in [theItem options]) {
             NSMutableDictionary *newDictionary = [[NSMutableDictionary alloc] init];
             [newDictionary setObject:eachOption forKey:@"openOption"];
-            [menuSectionContents addObject:newDictionary];
+            [optionSectionContents addObject:newDictionary];
             for (Choice *eachChoice in [eachOption choiceList])
             {
                 newDictionary = [[NSMutableDictionary alloc] init];
                 [newDictionary setObject:eachChoice forKey:@"choice"];
-                [menuSectionContents addObject:newDictionary];
+                [optionSectionContents addObject:newDictionary];
             }
         }
         
-        [listData addObject:menuSectionContents];
+        [listData addObject:optionSectionContents];
     }
     
     return self;

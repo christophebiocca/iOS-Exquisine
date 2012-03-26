@@ -14,7 +14,6 @@
 @synthesize number;
 @synthesize lowerBound;
 @synthesize upperBound;
-@synthesize numberPrompt;
 
 -(void)plus
 {

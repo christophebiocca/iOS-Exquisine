@@ -14,13 +14,11 @@
     NSMutableNumber *number;
     NSNumber *lowerBound;
     NSNumber *upperBound;
-    NSString *numberPrompt;
 }
 
 @property (retain) NSMutableNumber *number;
 @property (retain) NSNumber *lowerBound;
 @property (retain) NSNumber *upperBound;
-@property (retain) NSString *numberPrompt;
 
 -(void) plus;
 -(void) minus;

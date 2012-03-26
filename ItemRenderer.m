@@ -35,7 +35,6 @@
     [sectionNames addObject:@"Number of Items"];
     IntegerInputCellData *inputCellData = [[IntegerInputCellData alloc] init];
     [inputCellData setNumber:[anItem numberOfItems]];
-    [inputCellData setNumberPrompt:@"Number of items"];
     [inputCellData setLowerBound:[NSNumber numberWithInt:1]];
     [inputCellData setUpperBound:[NSNumber numberWithInt:100]];
     
