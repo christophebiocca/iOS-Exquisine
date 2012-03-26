@@ -13,6 +13,7 @@
 #import "OrderSectionFooterView.h"
 #import "MenuSectionHeaderView.h"
 #import "ShinyItemViewController.h"
+#import "ShinyOrderItemViewController.h"
 #import "OrderTabView.h"
 #import "Order.h"
 #import "Item.h"
@@ -54,6 +55,7 @@
     [toolbarText setText:@"Your Order"];
     
     [[self navigationItem] setTitleView:toolbarText];
+    [self updateOrderSection];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -150,15 +152,20 @@
     else if ([[CustomViewCell cellIdentifierForData:[orderRenderer objectForCellAtIndex:indexPath]] isEqualToString:@"ShinyMenuItemCell"])
     {
         Item *theItem = [[orderRenderer objectForCellAtIndex:indexPath] objectForKey:@"menuItem"];
+        
         ShinyItemViewController *newController = [[ShinyItemViewController alloc] initWithItem:[theItem copy]];
-         
-        if (([[theItem options] count] == 0) && [[theItem desc] isEqualToString:@""] ) {
-            [[theOrderManager thisOrder] addItem:theItem];
-            [tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
-            return;
-        }
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addItem:) name:ITEM_DONE_BUTTON_HIT object:newController];
+        
+        [[self navigationController] pushViewController:newController animated:YES];
+    }
+    else if ([[CustomViewCell cellIdentifierForData:[orderRenderer objectForCellAtIndex:indexPath]] isEqualToString:@"ShinyOrderItemCell"])
+    {
+        Item *theItem = [[orderRenderer objectForCellAtIndex:indexPath] objectForKey:@"orderItem"];
+        
+        ShinyOrderItemViewController *newController = [[ShinyOrderItemViewController alloc] initWithItem:theItem];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteItem:) name:ITEM_DELETE_BUTTON_HIT object:newController];
         
         [[self navigationController] pushViewController:newController animated:YES];
     }
@@ -182,6 +189,7 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+
 -(void)loadView
 {
     [super loadView];
@@ -193,6 +201,13 @@
     [[theOrderManager thisOrder] addItem:[(ShinyItemViewController *)[notification object] theItem]];
     [[orderView orderTable] scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
+
+-(void) deleteItem:(NSNotification *) notification
+{
+    [[theOrderManager thisOrder] removeItem:[(ShinyOrderItemViewController *)[notification object] theItem]];
+    [self updateOrderSection];
+}
+
 
 -(void) updateOrderSection;
 {

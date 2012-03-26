@@ -126,6 +126,11 @@
 		23AAD99014BF68DC00F88AA8 /* MainPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AAD98F14BF68DC00F88AA8 /* MainPageView.m */; };
 		23AAD99314BF690F00F88AA8 /* MainPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AAD99214BF690F00F88AA8 /* MainPageViewController.m */; };
 		23BA38081521131600743BBF /* NumberOfItemsSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23BA38071521131600743BBF /* NumberOfItemsSectionHeaderView.m */; };
+		23BA380C15211B3F00743BBF /* ShinyFullButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23BA380B15211B3F00743BBF /* ShinyFullButtonCell.m */; };
+		23BA380F1521210100743BBF /* DeleteButtonImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 23BA380D1521210100743BBF /* DeleteButtonImage.png */; };
+		23BA38101521210100743BBF /* DeleteButtonImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 23BA380E1521210100743BBF /* DeleteButtonImage@2x.png */; };
+		23BA3814152122A200743BBF /* ShinyOrderItemRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 23BA3813152122A200743BBF /* ShinyOrderItemRenderer.m */; };
+		23BA3818152123A400743BBF /* ShinyOrderItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23BA3817152123A400743BBF /* ShinyOrderItemViewController.m */; };
 		23C26A0A14C0F00600DD53DF /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C26A0914C0F00600DD53DF /* Menu.m */; };
 		23C26A2014C4D5A700DD53DF /* MenuComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C26A1F14C4D5A600DD53DF /* MenuComponent.m */; };
 		23C26A2314C4D6FA00DD53DF /* VisualizableData.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C26A2214C4D6FA00DD53DF /* VisualizableData.m */; };
@@ -425,6 +430,14 @@
 		23AAD99214BF690F00F88AA8 /* MainPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageViewController.m; sourceTree = "<group>"; };
 		23BA38061521131600743BBF /* NumberOfItemsSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberOfItemsSectionHeaderView.h; sourceTree = "<group>"; };
 		23BA38071521131600743BBF /* NumberOfItemsSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberOfItemsSectionHeaderView.m; sourceTree = "<group>"; };
+		23BA380A15211B3F00743BBF /* ShinyFullButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShinyFullButtonCell.h; sourceTree = "<group>"; };
+		23BA380B15211B3F00743BBF /* ShinyFullButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinyFullButtonCell.m; sourceTree = "<group>"; };
+		23BA380D1521210100743BBF /* DeleteButtonImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DeleteButtonImage.png; path = FravicArtAssets/DeleteButtonImage.png; sourceTree = "<group>"; };
+		23BA380E1521210100743BBF /* DeleteButtonImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "DeleteButtonImage@2x.png"; path = "FravicArtAssets/DeleteButtonImage@2x.png"; sourceTree = "<group>"; };
+		23BA3812152122A200743BBF /* ShinyOrderItemRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShinyOrderItemRenderer.h; sourceTree = "<group>"; };
+		23BA3813152122A200743BBF /* ShinyOrderItemRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinyOrderItemRenderer.m; sourceTree = "<group>"; };
+		23BA3816152123A400743BBF /* ShinyOrderItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShinyOrderItemViewController.h; sourceTree = "<group>"; };
+		23BA3817152123A400743BBF /* ShinyOrderItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinyOrderItemViewController.m; sourceTree = "<group>"; };
 		23C26A0814C0F00600DD53DF /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Menu.h; sourceTree = "<group>"; };
 		23C26A0914C0F00600DD53DF /* Menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Menu.m; sourceTree = "<group>"; };
 		23C26A1E14C4D5A600DD53DF /* MenuComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuComponent.h; sourceTree = "<group>"; };
@@ -1163,6 +1176,7 @@
 		23785FBA150FD8040087C9F8 /* ShinyRenderers */ = {
 			isa = PBXGroup;
 			children = (
+				23BA38111521227E00743BBF /* ShinyOrderItemRenderer */,
 				239871351517C9A80021EE55 /* ShinyItemRenderer */,
 				23E339B0150FD9B100E7BD68 /* ShinyOrderTabRenderer */,
 			);
@@ -1238,6 +1252,7 @@
 		238395A8150EA3C2000DC733 /* ShinyCells */ = {
 			isa = PBXGroup;
 			children = (
+				23BA380915211B1600743BBF /* ShinyFullButtonCell */,
 				23FAB388150560C800606816 /* ShinyIntegerInputCell */,
 				239871401517D0680021EE55 /* ShinyChoiceCell */,
 				2398713F1517D0590021EE55 /* ClosedShinyOptionCell */,
@@ -1415,6 +1430,33 @@
 				23BA38071521131600743BBF /* NumberOfItemsSectionHeaderView.m */,
 			);
 			name = NumberOfItemsSectionHeaderView;
+			sourceTree = "<group>";
+		};
+		23BA380915211B1600743BBF /* ShinyFullButtonCell */ = {
+			isa = PBXGroup;
+			children = (
+				23BA380A15211B3F00743BBF /* ShinyFullButtonCell.h */,
+				23BA380B15211B3F00743BBF /* ShinyFullButtonCell.m */,
+			);
+			name = ShinyFullButtonCell;
+			sourceTree = "<group>";
+		};
+		23BA38111521227E00743BBF /* ShinyOrderItemRenderer */ = {
+			isa = PBXGroup;
+			children = (
+				23BA3812152122A200743BBF /* ShinyOrderItemRenderer.h */,
+				23BA3813152122A200743BBF /* ShinyOrderItemRenderer.m */,
+			);
+			name = ShinyOrderItemRenderer;
+			sourceTree = "<group>";
+		};
+		23BA38151521238000743BBF /* ShinyOrderItemViewController */ = {
+			isa = PBXGroup;
+			children = (
+				23BA3816152123A400743BBF /* ShinyOrderItemViewController.h */,
+				23BA3817152123A400743BBF /* ShinyOrderItemViewController.m */,
+			);
+			name = ShinyOrderItemViewController;
 			sourceTree = "<group>";
 		};
 		23C26A0B14C4752F00DD53DF /* MenuPage */ = {
@@ -1795,6 +1837,7 @@
 		23E339B5150FF33700E7BD68 /* OrderTabViewController */ = {
 			isa = PBXGroup;
 			children = (
+				23BA38151521238000743BBF /* ShinyOrderItemViewController */,
 				239871311517C6D90021EE55 /* ShinyItemViewController */,
 				23E339B6150FF37900E7BD68 /* OrderTabViewController.h */,
 				23E339B7150FF37900E7BD68 /* OrderTabViewController.m */,
@@ -1841,6 +1884,8 @@
 		38D4132C14D3321C00031B60 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				23BA380D1521210100743BBF /* DeleteButtonImage.png */,
+				23BA380E1521210100743BBF /* DeleteButtonImage@2x.png */,
 				233C46EB14FEEF620003C295 /* SampleDesignImages */,
 				238923A1151D3D25001FBCCB /* Default.png */,
 				D9CB5FD514ECDB8B00FC5071 /* Default@2x.png */,
@@ -2119,6 +2164,8 @@
 				23F5AFB515193B8D00B8E066 /* pop.wav in Resources */,
 				238923A0151D2F44001FBCCB /* splashScreen@2x.jpg in Resources */,
 				238923A2151D3D25001FBCCB /* Default.png in Resources */,
+				23BA380F1521210100743BBF /* DeleteButtonImage.png in Resources */,
+				23BA38101521210100743BBF /* DeleteButtonImage@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2290,6 +2337,9 @@
 				239871461517D0A10021EE55 /* ShinyChoiceCell.m in Sources */,
 				2398714D1517E3F40021EE55 /* ClosedShinyOptionCell.m in Sources */,
 				23BA38081521131600743BBF /* NumberOfItemsSectionHeaderView.m in Sources */,
+				23BA380C15211B3F00743BBF /* ShinyFullButtonCell.m in Sources */,
+				23BA3814152122A200743BBF /* ShinyOrderItemRenderer.m in Sources */,
+				23BA3818152123A400743BBF /* ShinyOrderItemViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
