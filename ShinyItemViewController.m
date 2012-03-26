@@ -168,7 +168,21 @@ NSString* ITEM_DONE_BUTTON_HIT = @"CroutonLabs/ItemDoneButtonHit";
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [[[self navigationController] navigationBar] setBackgroundImage:[UIImage imageNamed:@"CustomizeTopBar.png"] forBarMetrics:UIBarMetricsDefault];
+    [[[self navigationController] navigationBar] setBackgroundImage:[UIImage imageNamed:@"BlankTopbarWithShadow.png"] forBarMetrics:UIBarMetricsDefault];
+    UILabel *toolbarText = [[UILabel alloc] initWithFrame:CGRectMake(
+                                                                     ([[[self navigationController] navigationBar] frame ].size.width - 300) / 2,
+                                                                     (44 - 30) / 2, 
+                                                                     300, 
+                                                                     30)];
+    [toolbarText setFont:[UIFont fontWithName:@"Optima-ExtraBlack" size:22]];
+    [toolbarText setTextColor:[UIColor whiteColor]];
+    [toolbarText setBackgroundColor:[UIColor clearColor]];
+    [toolbarText setTextAlignment:UITextAlignmentCenter];
+    
+    [toolbarText setText:[theItem name]];
+    [toolbarText setAdjustsFontSizeToFitWidth:YES];
+    
+    [[self navigationItem] setTitleView:toolbarText];
 }
 
 -(void)dealloc

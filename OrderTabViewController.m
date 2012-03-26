@@ -40,7 +40,20 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [[[self navigationController] navigationBar] setBackgroundImage:[UIImage imageNamed:@"AddItemsBar.png"] forBarMetrics:UIBarMetricsDefault];
+    [[[self navigationController] navigationBar] setBackgroundImage:[UIImage imageNamed:@"BlankTopbarWithShadow.png"] forBarMetrics:UIBarMetricsDefault];
+    UILabel *toolbarText = [[UILabel alloc] initWithFrame:CGRectMake(
+                                                            ([[[self navigationController] navigationBar] frame ].size.width - 300) / 2,
+                                                            (44 - 30) / 2, 
+                                                            300, 
+                                                            30)];
+    [toolbarText setFont:[UIFont fontWithName:@"Optima-ExtraBlack" size:22]];
+    [toolbarText setTextColor:[UIColor whiteColor]];
+    [toolbarText setBackgroundColor:[UIColor clearColor]];
+    [toolbarText setTextAlignment:UITextAlignmentCenter];
+    
+    [toolbarText setText:@"Your Order"];
+    
+    [[self navigationItem] setTitleView:toolbarText];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -194,7 +207,7 @@
 
 -(void) editButtonPressed
 {
-    //stuff here to make the order editable
+    [[orderView orderTable] setEditing:YES animated:YES];
 }
 
 @end

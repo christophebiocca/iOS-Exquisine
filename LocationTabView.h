@@ -16,6 +16,7 @@
     UIImageView *locationToolBarImage;
     UIView *whiteBar;
     UILabel *whiteBarLabel;
+    UILabel *toolbarText;
 }
 
 - (id)initWithLocationState:(LocationState *) locationState AndFrame:(CGRect)frame;

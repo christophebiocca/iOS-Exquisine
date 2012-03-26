@@ -23,6 +23,16 @@
         int labelWidth = 300;
         int labelHeight = 30;
         
+        toolbarText = [[UILabel alloc] initWithFrame:CGRectMake(
+                                    (frame.size.width - labelWidth) / 2,
+                                    (locationBarOpacityHeight - labelHeight) / 2, 
+                                    labelWidth, 
+                                    labelHeight)];
+        [toolbarText setFont:[UIFont fontWithName:@"Optima-ExtraBlack" size:22]];
+        [toolbarText setTextColor:[UIColor whiteColor]];
+        [toolbarText setBackgroundColor:[UIColor clearColor]];
+        [toolbarText setTextAlignment:UITextAlignmentCenter];
+        
         locationMapView = [[LocationMapView alloc] initWithLocationState:locationState AndFrame:CGRectMake(
                                     frame.origin.x, 
                                     frame.origin.y + locationBarOpacityHeight, 
@@ -45,13 +55,12 @@
         
         
         [whiteBarLabel setBackgroundColor:[UIColor clearColor]];
-        [whiteBarLabel setText:@"Tap a location to order from"];
         [whiteBarLabel setTextAlignment:UITextAlignmentCenter];
         [whiteBarLabel setAdjustsFontSizeToFitWidth:YES];
         [whiteBarLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Medium" size:16.0f]];
         [whiteBarLabel setTextColor:[UIColor colorWithRed:0.5f green:0.03f blue:0.03f alpha:1.0f]];
         
-        locationToolBarImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"LocationBarImageShadow.png"]];
+        locationToolBarImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"BlankTopbarWithShadow.png"]];
         
         [locationToolBarImage setFrame:CGRectMake(
                                     frame.origin.x, 
@@ -59,10 +68,15 @@
                                     frame.size.width, 
                                     locationBarHeight)];
         
+        
+        [whiteBarLabel setText:@"Tap a location to order from"];
+        [toolbarText setText:@"Locations"];
+        
         [self addSubview:locationMapView];
         [self addSubview:whiteBar];
         [self addSubview:whiteBarLabel];
         [self addSubview:locationToolBarImage];
+        [self addSubview:toolbarText];
         
     }
     return self;

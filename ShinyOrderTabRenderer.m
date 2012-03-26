@@ -11,6 +11,8 @@
 #import "OrderSectionHeaderView.h"
 #import "MenuSectionHeaderView.h"
 #import "GeneralPurposeViewCellData.h"
+#import "ShinyOrderItemCell.h"
+#import "ShinyOrderComboCell.h"
 #import "ItemGroup.h"
 #import "OrderManager.h"
 #import "Order.h"
@@ -121,6 +123,15 @@
     
     [listData replaceObjectAtIndex:0 withObject:orderSectionContents];
     
+}
+
+-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    id theCellData = [self objectForCellAtIndex:indexPath];
+    if ([ShinyOrderItemCell canDisplayData:theCellData] || [ShinyOrderComboCell canDisplayData:theCellData]) {
+        return YES;
+    }
+    return NO;
 }
 
 -(void) editButtonPressed
