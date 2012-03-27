@@ -116,7 +116,6 @@
         
         
         OrderSectionFooterView *footerView = [[OrderSectionFooterView alloc] init];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(editButtonPressed) name:EDIT_BUTTON_PRESSED object:footerView];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(placeButtonPressed) name:PLACE_BUTTON_PRESSED object:footerView];
         [orderSectionContents addObject:footerView];
     }
@@ -132,11 +131,6 @@
         return YES;
     }
     return NO;
-}
-
--(void) editButtonPressed
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:EDIT_BUTTON_PRESSED object:self];
 }
 
 -(void) placeButtonPressed

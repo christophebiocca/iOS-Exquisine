@@ -11,6 +11,8 @@
 @class OrderTabView;
 @class ShinyOrderTabRenderer;
 
+extern NSString *ORDER_PLACEMENT_REQUESTED;
+
 @interface OrderTabViewController : UIViewController <UITableViewDelegate>
 {
     OrderManager *theOrderManager;

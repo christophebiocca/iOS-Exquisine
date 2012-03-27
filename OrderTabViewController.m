@@ -19,6 +19,8 @@
 #import "Item.h"
 #import "Menu.h"
 
+NSString *ORDER_PLACEMENT_REQUESTED = @"CroutonLabs/OrderPlacementRequested";
+
 @implementation OrderTabViewController
 
 -(id)initWithOrderManager:(OrderManager *)anOrderManager
@@ -30,7 +32,6 @@
         orderRenderer = [[ShinyOrderTabRenderer alloc] initWithOrderManager:theOrderManager];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateOrderSection) name:ORDER_MODIFIED object:[theOrderManager thisOrder]];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(editButtonPressed) name:EDIT_BUTTON_PRESSED object:orderRenderer];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(placeButtonPressed) name:PLACE_BUTTON_PRESSED object:orderRenderer];
         
         [[orderView orderTable] setDelegate:self];
@@ -198,8 +199,13 @@
 
 -(void) addItem:(NSNotification *) notification
 {
+    if (([[[theOrderManager thisOrder] itemList] count] + [[[theOrderManager thisOrder] comboList] count]) == 0) {
+        [[orderView orderTable] scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }
+    else {
+        [[orderView orderTable] scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }
     [[theOrderManager thisOrder] addItem:[(ShinyItemViewController *)[notification object] theItem]];
-    [[orderView orderTable] scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
 
 -(void) deleteItem:(NSNotification *) notification
@@ -217,12 +223,7 @@
 
 -(void) placeButtonPressed
 {
-    //Stuff here to do the placing of the order
-}
-
--(void) editButtonPressed
-{
-    [[orderView orderTable] setEditing:YES animated:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ORDER_PLACEMENT_REQUESTED object:theOrderManager];
 }
 
 @end

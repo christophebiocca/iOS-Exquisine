@@ -12,7 +12,9 @@
 #import "LocationTabViewController.h"
 #import "OrderTabViewController.h"
 #import "FavoritesViewController.h"
+#import "Order.h"
 #import "OrderManager.h"
+#import "PaymentStack.h"
 #import "AppData.h"
 #import "CustomTabBarController.h"
 
@@ -91,6 +93,8 @@
     
     OrderTabViewController *orderTabViewController = [[OrderTabViewController alloc] initWithOrderManager:[appData theOrderManager]];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(placeOrder:) name:ORDER_PLACEMENT_REQUESTED object:[appData theOrderManager]];
+    
     UINavigationController *orderTabNavigationController = [[UINavigationController alloc] initWithRootViewController:orderTabViewController];
     [orderTabNavigationController setHidesBottomBarWhenPushed:YES];
     
@@ -121,6 +125,35 @@
     [masterView putUpLoadingView];
     [appData initializeFromServer];
     [masterView performSelector:@selector(dissolveLoadingView) withObject:nil afterDelay:2];
+}
+
+-(void) placeOrder:(NSNotification *) aNotification
+{
+    if ([[aNotification object] isKindOfClass:[OrderManager class]]) {
+        
+        PaymentStack* paymentStack = 
+        [[PaymentStack alloc] initWithOrder:[[aNotification object] thisOrder] locationState:[appData locationState]
+                               successBlock:^{
+                                   //Push the current order on the history list
+                                   [[appData ordersHistory] addObject:[[aNotification object] thisOrder]];
+                                   if ([[[aNotification object] thisOrder] isEffectivelyEqual:[[appData theOrderManager] thisOrder]])
+                                   {
+                                       //Allocate a new order
+                                       [[appData theOrderManager] setOrder:[[Order alloc] init]];
+                                   }
+                               }
+                            completionBlock:^{
+                                [self dismissModalViewControllerAnimated:YES];
+                            } 
+                          cancellationBlock:^{
+                              [self dismissModalViewControllerAnimated:YES];
+                          }];
+        modalController = [paymentStack navigationController];
+        [self presentModalViewController:modalController animated:YES];
+    }
+    else {
+        CLLog(LOG_LEVEL_ERROR, @"An object not of type OrderManager was sent to MasterViewController's placeOrder:  omgwtfhax. That is all.");
+    }
 }
 
 @end
