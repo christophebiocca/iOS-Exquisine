@@ -29,8 +29,8 @@
     if (self) {
         
         numberOfItemsLabel = [[UILabel alloc] initWithFrame:CGRectMake(
-                                            240, 
-                                            1, 
+                                            234, 
+                                            6, 
                                             30, 
                                             21)];
         
@@ -83,7 +83,7 @@
 
 +(CGFloat)cellHeightForData:(id)data
 {
-    return 22.0f;
+    return 33.0f;
 }
 
 @end

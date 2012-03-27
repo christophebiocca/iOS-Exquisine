@@ -26,6 +26,7 @@ NSString* harddiskFileFolder = @"~/Library/Application Support/PitaFactoryFiles/
 @implementation AppData
 
 @synthesize initialized;
+@synthesize networkChecker;
 @synthesize theMenu;
 @synthesize currentOrder;
 @synthesize theOrderManager;
@@ -263,6 +264,15 @@ NSString* harddiskFileFolder = @"~/Library/Application Support/PitaFactoryFiles/
     if (!initialized) {
         [[NSNotificationCenter defaultCenter] postNotificationName:INITIALIZED_FAILURE object:self];
     }
+}
+
+-(BOOL) anyLocationIsOpen
+{
+    for (Location *eachLocation in [locationState locations]) {
+        if ([eachLocation storeState] == Open)
+            return YES;
+    }
+    return NO;
 }
 
 @end

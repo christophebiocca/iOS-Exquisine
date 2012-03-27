@@ -12,9 +12,6 @@
 
 @interface MasterViewController : UIViewController
 {
-    //Yep, it's a hack, but iOS wants do dealloc my shit
-    //behind my back. Let's dance iOS, let's dance.
-    __block UINavigationController* modalController;
     MasterView *masterView;
     AppData *appData;
 }

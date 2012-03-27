@@ -33,6 +33,7 @@ extern NSString* SERVER_INIT_FAILURE;
 }
 
 @property (readonly) BOOL initialized;
+@property (retain) Reachability *networkChecker;
 @property (retain) Menu *theMenu;
 @property (retain) Order *currentOrder;
 @property (retain) OrderManager *theOrderManager;
@@ -64,5 +65,7 @@ extern NSString* SERVER_INIT_FAILURE;
 -(Order *)dereferenceOrderIdentifier:(NSString *) orderIdentifier;
 
 -(NSInteger)numberOfFavorites;
+
+-(BOOL) anyLocationIsOpen;
 
 @end
