@@ -12,8 +12,8 @@
 @interface ClosedShinyOptionCell : CustomViewCell
 {
     Option *theOption;
-    UIImageView *menuColapsedImage;
-    UILabel *menuNameLabel;
+    UIImageView *optionColapsedImage;
+    UILabel *optionNameLabel;
     UILabel *numberOfItemsLabel;
 }
 

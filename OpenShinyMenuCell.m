@@ -23,6 +23,7 @@
         [menuNameLabel setTextAlignment:UITextAlignmentCenter];
         [menuNameLabel setTextColor:[Utilities fravicDarkRedColor]];
         [menuNameLabel setBackgroundColor:[UIColor clearColor]];
+        [menuNameLabel setAdjustsFontSizeToFitWidth:YES];
         
         [self addSubview:menuNameLabel];
     }

@@ -23,6 +23,7 @@
         [optionNameLabel setTextAlignment:UITextAlignmentCenter];
         [optionNameLabel setTextColor:[Utilities fravicDarkRedColor]];
         [optionNameLabel setBackgroundColor:[UIColor clearColor]];
+        [optionNameLabel setAdjustsFontSizeToFitWidth:YES];
         
         [self addSubview:optionNameLabel];
     }

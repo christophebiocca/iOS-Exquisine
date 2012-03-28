@@ -257,7 +257,7 @@
                             
                             [self dismissViewControllerAnimated:YES 
                                                      completion:^{
-                                                         NSLog(@"Success.");
+                                                         NSLog(@"Cancellation.");
                                                      }];
                         }
                       cancellationBlock:^{

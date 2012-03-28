@@ -28,9 +28,15 @@ NSString* ITEM_DELETE_BUTTON_HIT = @"CroutonLabs/ItemDeleteButtonHit";
         itemView = [[ShinyItemView alloc] init];
         itemRenderer = [[ShinyOrderItemRenderer alloc] initWithItem:theItem];
         
-        //This is pretty hackish and will have to change if the delete button moves. 
+        //This is pretty hackish and will have to change if any other buttons get added 
         //I should fix this at some point.
-        [[[[itemRenderer listData] objectAtIndex:0] objectAtIndex:0] addTarget:self action:@selector(deleteButtonHit) forControlEvents:UIControlEventTouchUpInside];
+        for (NSArray *eachArray in [itemRenderer listData]) {
+            for (id eachThing in eachArray) {
+                if ([eachThing isKindOfClass:[UIButton class]]) {
+                    [eachThing addTarget:self action:@selector(deleteButtonHit) forControlEvents:UIControlEventTouchUpInside];
+                }
+            }
+        }
         
         [[itemView itemTable] setDelegate:self];
         [[itemView itemTable] setDataSource:itemRenderer];

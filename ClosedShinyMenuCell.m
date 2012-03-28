@@ -25,6 +25,7 @@
         [menuNameLabel setTextAlignment:UITextAlignmentCenter];
         [menuNameLabel setTextColor:[UIColor blackColor]];
         [menuNameLabel setBackgroundColor:[UIColor clearColor]];
+        [menuNameLabel setAdjustsFontSizeToFitWidth:YES];
         numberOfItemsLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 50, 100, 21)];
         [numberOfItemsLabel setFont:[Utilities fravicTextFont]];
         [numberOfItemsLabel setTextColor:[Utilities fravicDarkRedColor]];

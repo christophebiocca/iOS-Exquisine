@@ -91,6 +91,8 @@
 		2375B9C91512B70D004BDC3B /* BlankTopbarWithShadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2375B9C51512B70D004BDC3B /* BlankTopbarWithShadow@2x.png */; };
 		23785FB6150FD6CA0087C9F8 /* ShinyComboOrderItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23785FB5150FD6CA0087C9F8 /* ShinyComboOrderItemCell.m */; };
 		23785FB9150FD6D60087C9F8 /* ShinyOrderComboCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23785FB8150FD6D60087C9F8 /* ShinyOrderComboCell.m */; };
+		238020ED1523748F005B5232 /* NumberInputCell.png in Resources */ = {isa = PBXBuildFile; fileRef = 238020EB1523748F005B5232 /* NumberInputCell.png */; };
+		238020EE1523748F005B5232 /* NumberInputCell@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 238020EC1523748F005B5232 /* NumberInputCell@2x.png */; };
 		2383959B150E9ED2000DC733 /* OrderTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2383959A150E9ED2000DC733 /* OrderTabView.m */; };
 		238395A1150EA13D000DC733 /* OrderSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 238395A0150EA13D000DC733 /* OrderSectionHeaderView.m */; };
 		238395A4150EA15B000DC733 /* OrderSectionFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 238395A3150EA15B000DC733 /* OrderSectionFooterView.m */; };
@@ -376,6 +378,8 @@
 		23785FB5150FD6CA0087C9F8 /* ShinyComboOrderItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinyComboOrderItemCell.m; sourceTree = "<group>"; };
 		23785FB7150FD6D60087C9F8 /* ShinyOrderComboCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShinyOrderComboCell.h; sourceTree = "<group>"; };
 		23785FB8150FD6D60087C9F8 /* ShinyOrderComboCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinyOrderComboCell.m; sourceTree = "<group>"; };
+		238020EB1523748F005B5232 /* NumberInputCell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NumberInputCell.png; path = FravicArtAssets/NumberInputCell.png; sourceTree = "<group>"; };
+		238020EC1523748F005B5232 /* NumberInputCell@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NumberInputCell@2x.png"; path = "FravicArtAssets/NumberInputCell@2x.png"; sourceTree = "<group>"; };
 		23839599150E9ED2000DC733 /* OrderTabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderTabView.h; sourceTree = "<group>"; };
 		2383959A150E9ED2000DC733 /* OrderTabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderTabView.m; sourceTree = "<group>"; };
 		2383959F150EA13D000DC733 /* OrderSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderSectionHeaderView.h; sourceTree = "<group>"; };
@@ -915,6 +919,8 @@
 		233C46EB14FEEF620003C295 /* SampleDesignImages */ = {
 			isa = PBXGroup;
 			children = (
+				238020EB1523748F005B5232 /* NumberInputCell.png */,
+				238020EC1523748F005B5232 /* NumberInputCell@2x.png */,
 				2389239F151D2F44001FBCCB /* splashScreen@2x.jpg */,
 				2394ABE71513DC440001D3D1 /* AddItemsBar.png */,
 				2394ABE81513DC440001D3D1 /* AddItemsBar@2x.png */,
@@ -2166,6 +2172,8 @@
 				238923A2151D3D25001FBCCB /* Default.png in Resources */,
 				23BA380F1521210100743BBF /* DeleteButtonImage.png in Resources */,
 				23BA38101521210100743BBF /* DeleteButtonImage@2x.png in Resources */,
+				238020ED1523748F005B5232 /* NumberInputCell.png in Resources */,
+				238020EE1523748F005B5232 /* NumberInputCell@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

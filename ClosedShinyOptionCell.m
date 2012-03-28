@@ -16,22 +16,23 @@
     self = [super init];
     
     if (self) {
-        menuColapsedImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ColapsedMenuDropdown.png"]];
+        optionColapsedImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ColapsedMenuDropdown.png"]];
         
-        [self addSubview:menuColapsedImage];
+        [self addSubview:optionColapsedImage];
         
-        menuNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(93, 26, 120, 21)];
-        [menuNameLabel setFont:[Utilities fravicHeadingFont]];
-        [menuNameLabel setTextAlignment:UITextAlignmentCenter];
-        [menuNameLabel setTextColor:[UIColor blackColor]];
-        [menuNameLabel setBackgroundColor:[UIColor clearColor]];
+        optionNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(93, 26, 120, 21)];
+        [optionNameLabel setFont:[Utilities fravicHeadingFont]];
+        [optionNameLabel setTextAlignment:UITextAlignmentCenter];
+        [optionNameLabel setTextColor:[UIColor blackColor]];
+        [optionNameLabel setBackgroundColor:[UIColor clearColor]];
+        [optionNameLabel setAdjustsFontSizeToFitWidth:YES];
         numberOfItemsLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 50, 100, 21)];
         [numberOfItemsLabel setFont:[Utilities fravicTextFont]];
         [numberOfItemsLabel setTextColor:[Utilities fravicDarkRedColor]];
         [numberOfItemsLabel setBackgroundColor:[UIColor clearColor]];
         [numberOfItemsLabel setTextAlignment:UITextAlignmentRight];
         
-        [self addSubview:menuNameLabel];
+        [self addSubview:optionNameLabel];
         [self addSubview:numberOfItemsLabel];
     }
     
@@ -69,7 +70,7 @@
 
 -(void) updateCell
 {
-    [menuNameLabel setText:[theOption name]];
+    [optionNameLabel setText:[theOption name]];
     [numberOfItemsLabel setText:[NSString stringWithFormat:@"%i Choices", [[theOption choiceList] count]]];    
     //Any of the changed associated with the data input in setData should occur here.
     //If the data is prone to changing, this cell should call updateCell via an NSNotificationCenter.

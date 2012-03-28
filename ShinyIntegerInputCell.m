@@ -19,22 +19,24 @@
     
     if(self)
     {
+        theImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NumberInputCell.png"]];
+        
         integerCellData = [[IntegerInputCellData alloc] init];
         numberLabel = [[UILabel alloc] init];
         [numberLabel setBackgroundColor:[UIColor clearColor]];
         [numberLabel setFont:[UIFont fontWithName:@"AmericanTypewriter-Bold" size:13]];
         
         plusButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [plusButton setTitle:@"+" forState:UIControlStateNormal];
+        [plusButton setTitle:@" " forState:UIControlStateNormal];
         [plusButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         minusButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [minusButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [minusButton setTitle:@"-" forState:UIControlStateNormal];
-        
+        [minusButton setTitle:@" " forState:UIControlStateNormal];
         
         [plusButton addTarget:self action:@selector(plusPushed) forControlEvents:UIControlEventTouchUpInside];
         [minusButton addTarget:self action:@selector(minusPushed) forControlEvents:UIControlEventTouchUpInside];
         
+        [self addSubview:theImage];
         [self addSubview:numberLabel];
         [self addSubview:plusButton];
         [self addSubview:minusButton];
@@ -53,17 +55,17 @@
 -(void)layoutSubviews
 {
     [minusButton setFrame:CGRectMake(
-                                    20, 
-                                    [self frame].size.height/2 - 15, 
-                                    30, 
-                                    30)];
+                                    10, 
+                                    [self frame].size.height/2 - 22, 
+                                    40, 
+                                    40)];
     [plusButton setFrame:CGRectMake(
-                                     65, 
-                                     [self frame].size.height/2 - 15, 
-                                     30, 
-                                     30)];
+                                     270, 
+                                     [self frame].size.height/2 - 22, 
+                                     40, 
+                                     40)];
     [numberLabel setFrame:CGRectMake(
-                                     125, 
+                                     156, 
                                      [self frame].size.height/2 - 10, 
                                      180, 
                                      21)];
@@ -109,7 +111,8 @@
 
 +(CGFloat)cellHeightForData:(id)data
 {
-    return 44.0f;
+    //This should be programatic. Trying to get it done quickly.
+    return 70.0f;
 }
 
 @end

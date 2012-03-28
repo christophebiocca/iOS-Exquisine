@@ -12,6 +12,7 @@
 @interface ShinyIntegerInputCell : CustomViewCell
 {
     IntegerInputCellData *integerCellData;
+    UIImageView *theImage;
     UILabel *numberLabel;
     UIButton *plusButton;
     UIButton *minusButton;
