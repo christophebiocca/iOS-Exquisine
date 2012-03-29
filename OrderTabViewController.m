@@ -31,9 +31,6 @@ NSString *ORDER_PLACEMENT_REQUESTED = @"CroutonLabs/OrderPlacementRequested";
         orderView = [[OrderTabView alloc] init];
         orderRenderer = [[ShinyOrderTabRenderer alloc] initWithOrderManager:theOrderManager];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateOrderSection) name:ORDER_MODIFIED object:[theOrderManager thisOrder]];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(placeButtonPressed) name:PLACE_BUTTON_PRESSED object:orderRenderer];
-        
         [[orderView orderTable] setDelegate:self];
         [[orderView orderTable] setDataSource:orderRenderer];
     }
@@ -55,7 +52,13 @@ NSString *ORDER_PLACEMENT_REQUESTED = @"CroutonLabs/OrderPlacementRequested";
     
     [toolbarText setText:@"Your Order"];
     
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateOrderSection) name:ORDER_MODIFIED object:[theOrderManager thisOrder]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(placeButtonPressed) name:PLACE_BUTTON_PRESSED object:orderRenderer];
+    
     [[self navigationItem] setTitleView:toolbarText];
+    
     [self updateOrderSection];
 }
 
@@ -157,6 +160,8 @@ NSString *ORDER_PLACEMENT_REQUESTED = @"CroutonLabs/OrderPlacementRequested";
         ShinyItemViewController *newController = [[ShinyItemViewController alloc] initWithItem:[theItem copy]];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addItem:) name:ITEM_DONE_BUTTON_HIT object:newController];
+        
+        NSLog(@"%@",newController);
         
         [[self navigationController] pushViewController:newController animated:YES];
     }
