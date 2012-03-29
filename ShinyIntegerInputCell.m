@@ -112,7 +112,7 @@
 +(CGFloat)cellHeightForData:(id)data
 {
     //This should be programatic. Trying to get it done quickly.
-    return 70.0f;
+    return [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NumberInputCell.png"]]frame].size.height;
 }
 
 @end
