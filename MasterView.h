@@ -14,6 +14,7 @@
 {
     LoadingView *loadingView;
     CustomTabBarController *tabController;
+    UIView *viewToPush;
     UIView *tabView;
 }
 
@@ -27,4 +28,9 @@
 -(void)fadeOut:(UIView*)viewToDissolve withDuration:(NSTimeInterval)duration   andWait:(NSTimeInterval)wait;
 
 -(void)putUpLoadingView;
+
+-(void)pushView:(UIView *)aView;
+
+-(void)dismissView;
+
 @end

@@ -255,18 +255,13 @@
  
  */
                             
-                            [self dismissViewControllerAnimated:YES 
-                                                     completion:^{
-                                                         NSLog(@"Cancellation.");
-                                                     }];
+                            
+                            [masterView dismissView];
                         }
                       cancellationBlock:^{
-                          [self dismissViewControllerAnimated:YES 
-                                                   completion:^{
-                                                       NSLog(@"Cancellation.");
-                                                   }];
+                          [masterView dismissView];
                       }];
-    [self presentModalViewController:[paymentStack navigationController] animated:YES];
+    [masterView pushView:[[paymentStack navigationController] view]];
 }
 
 @end
