@@ -32,8 +32,8 @@ typedef enum StoreState
 @property (retain,readonly) NSString *primaryKey;
 
 -(StoreState)storeState;
--(NSDate*)opensOnDay:(NSDate*)date;
--(NSDate*)closesOnDay:(NSDate*)date;
+-(NSDate*)nextOpenAfterThisTime:(NSDate*)date;
+-(NSDate*)nextClosedAfterThisTime:(NSDate*)date;
 -(NSDate*)opensToday;
 -(NSDate*)closesToday;
 -(NSDate*)nextOpen;

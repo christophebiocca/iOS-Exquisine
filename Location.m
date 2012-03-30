@@ -83,19 +83,38 @@ static NSDateComponents* minusOneDay;
     return [storeHours objectAtIndex:[components weekday] - [[NSCalendar currentCalendar] firstWeekday]];
 }
 
--(NSDate*)opensOnDay:(NSDate*)date{
-    return [Location mergeComponents:[[self hoursForDay:date] opens] withDate:date];
+-(NSDate*)nextOpenAfterThisTime:(NSDate*)date
+{
+    NSDate *nextOpen = [Location mergeComponents:[[self hoursForDay:date] opens] withDate:date];
+    NSDate *dayIterator = date;
+    
+    while ([date compare:nextOpen] != NSOrderedAscending) 
+    {
+        dayIterator = [[NSCalendar currentCalendar] dateByAddingComponents:oneDay 
+                                                                    toDate:dayIterator 
+                                                                   options:0];
+        
+        nextOpen = [Location mergeComponents:[[self hoursForDay:date] opens] withDate:dayIterator];
+    }
+    
+    return nextOpen;
 }
 
--(NSDate*)closesOnDay:(NSDate*)date{
-    NSDate* closes = [Location mergeComponents:[[self hoursForDay:date] closes] withDate:date];
-    if([closes compare:[self opensOnDay:date]] == NSOrderedAscending){
-        NSDate* nextDay = [[NSCalendar currentCalendar] dateByAddingComponents:oneDay 
-                                                                        toDate:date 
-                                                                       options:0];
-        closes = [Location mergeComponents:[[self hoursForDay:date] closes] withDate:nextDay];
+-(NSDate*)nextClosedAfterThisTime:(NSDate*)date
+{
+    NSDate *nextClosed = [Location mergeComponents:[[self hoursForDay:date] closes] withDate:date];
+    NSDate *dayIterator = date;
+    
+    while ([date compare:nextClosed] != NSOrderedAscending) 
+    {
+        dayIterator = [[NSCalendar currentCalendar] dateByAddingComponents:oneDay 
+                                                                    toDate:dayIterator 
+                                                                   options:0];
+        
+        nextClosed = [Location mergeComponents:[[self hoursForDay:date] closes] withDate:dayIterator];
     }
-    return closes;
+    
+    return nextClosed;
 }
 
 -(NSDate*)opensToday{
@@ -103,11 +122,11 @@ static NSDateComponents* minusOneDay;
     NSDate* yesterday = [[NSCalendar currentCalendar] dateByAddingComponents:minusOneDay 
                                                                       toDate:now 
                                                                      options:0];
-    NSDate* yesterdayClose = [self closesOnDay:yesterday];
+    NSDate* yesterdayClose = [self nextClosedAfterThisTime:yesterday];
     if([yesterdayClose compare:now] == NSOrderedAscending){
-        return [self opensOnDay:now];
+        return [self nextOpenAfterThisTime:now];
     } else {
-        return [self opensOnDay:yesterday];
+        return [self nextOpenAfterThisTime:yesterday];
     }
 }
 
@@ -116,9 +135,9 @@ static NSDateComponents* minusOneDay;
     NSDate* yesterday = [[NSCalendar currentCalendar] dateByAddingComponents:minusOneDay 
                                                                       toDate:now 
                                                                      options:0];
-    NSDate* yesterdayClose = [self closesOnDay:yesterday];
+    NSDate* yesterdayClose = [self nextClosedAfterThisTime:yesterday];
     if([yesterdayClose compare:now] == NSOrderedAscending){
-        return [self closesOnDay:now];
+        return [self nextClosedAfterThisTime:now];
     } else {
         return yesterdayClose;
     }
@@ -126,17 +145,18 @@ static NSDateComponents* minusOneDay;
 
 -(StoreState)storeState{
     NSDate* now = [NSDate date];
-    if([now compare:[self opensToday]] == NSOrderedAscending){
-        return Closed;
-    }
-    NSDate* close = [self closesToday];
-    if([now compare:close] == NSOrderedDescending){
-        return Closed;
-    }
+    NSDate* close = [self nextClosedAfterThisTime:now];
+    NSDate* open = [self nextOpenAfterThisTime:now];
     if([close timeIntervalSinceDate:now] < lastCall){
         return Closing;
     }
-    return Open;
+    
+    if([close compare:open] == NSOrderedAscending)
+    {
+        return Open;
+    }
+    
+    return Closed;
 }
 
 -(NSDate*)nextOpen{
@@ -145,7 +165,7 @@ static NSDateComponents* minusOneDay;
     if([now compare:todayOpen] != NSOrderedDescending){
         return todayOpen;
     } else {
-        return [self opensOnDay:[[NSCalendar currentCalendar] dateByAddingComponents:oneDay 
+        return [self nextOpenAfterThisTime:[[NSCalendar currentCalendar] dateByAddingComponents:oneDay 
                                                                               toDate:now 
                                                                              options:0]];
     }
@@ -157,7 +177,7 @@ static NSDateComponents* minusOneDay;
     if([now compare:todayOpen] != NSOrderedDescending){
         return [self closesToday];
     } else {
-        return [self closesOnDay:[[NSCalendar currentCalendar] dateByAddingComponents:oneDay 
+        return [self nextClosedAfterThisTime:[[NSCalendar currentCalendar] dateByAddingComponents:oneDay 
                                                                                toDate:now 
                                                                               options:0]];
     }
@@ -190,12 +210,13 @@ static NSDateComponents* minusOneDay;
 
 -(BOOL)wouldBeOpenAt:(NSDate *)thisTime
 {
-    //If the store opens before this time
-    if ([thisTime compare:[self opensOnDay:thisTime]] == NSOrderedDescending) {
-        //If the store closes after this time
-        if ([thisTime compare:[self closesOnDay:thisTime]] == NSOrderedAscending) {
-            return YES;
-        }
+    
+    NSDate *helperOpen = [self nextOpenAfterThisTime:thisTime];
+    NSDate *helperClosed = [self nextClosedAfterThisTime:thisTime];
+    
+    
+    if ([helperClosed compare:helperOpen] == NSOrderedAscending) {
+        return YES;
     }
     return NO;
 }
