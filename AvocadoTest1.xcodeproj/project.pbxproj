@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		230254531526466C00593749 /* ShinyComboView.m in Sources */ = {isa = PBXBuildFile; fileRef = 230254521526466C00593749 /* ShinyComboView.m */; };
+		2302545715264ABA00593749 /* ShinyComboRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2302545615264ABA00593749 /* ShinyComboRenderer.m */; };
+		2302545C15264BBE00593749 /* NumberOfCombosView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2302545B15264BBE00593749 /* NumberOfCombosView.m */; };
+		2302546015264C9E00593749 /* ItemGroupSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2302545F15264C9E00593749 /* ItemGroupSectionHeaderView.m */; };
+		230254641526554A00593749 /* ExpandableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 230254631526554A00593749 /* ExpandableCell.m */; };
+		2302547715265CDC00593749 /* ExpandableCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2302547615265CDC00593749 /* ExpandableCellData.m */; };
+		2302547C1526746500593749 /* ExpandableOptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2302547B1526746500593749 /* ExpandableOptionCell.m */; };
 		23082F5614D88513003964CE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 23082F5414D88513003964CE /* Reachability.m */; };
 		23082F5C14D8968F003964CE /* ComboViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23082F5B14D8968F003964CE /* ComboViewController.m */; };
 		23082F6114D897D1003964CE /* ComboView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23082F6014D897D1003964CE /* ComboView.m */; };
@@ -235,6 +242,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		230254511526466C00593749 /* ShinyComboView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShinyComboView.h; sourceTree = "<group>"; };
+		230254521526466C00593749 /* ShinyComboView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinyComboView.m; sourceTree = "<group>"; };
+		2302545515264ABA00593749 /* ShinyComboRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShinyComboRenderer.h; sourceTree = "<group>"; };
+		2302545615264ABA00593749 /* ShinyComboRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinyComboRenderer.m; sourceTree = "<group>"; };
+		2302545A15264BBE00593749 /* NumberOfCombosView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberOfCombosView.h; sourceTree = "<group>"; };
+		2302545B15264BBE00593749 /* NumberOfCombosView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumberOfCombosView.m; sourceTree = "<group>"; };
+		2302545E15264C9E00593749 /* ItemGroupSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemGroupSectionHeaderView.h; sourceTree = "<group>"; };
+		2302545F15264C9E00593749 /* ItemGroupSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemGroupSectionHeaderView.m; sourceTree = "<group>"; };
+		230254621526554A00593749 /* ExpandableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpandableCell.h; sourceTree = "<group>"; };
+		230254631526554A00593749 /* ExpandableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpandableCell.m; sourceTree = "<group>"; };
+		2302547515265CDC00593749 /* ExpandableCellData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpandableCellData.h; sourceTree = "<group>"; };
+		2302547615265CDC00593749 /* ExpandableCellData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpandableCellData.m; sourceTree = "<group>"; };
+		2302547A1526746500593749 /* ExpandableOptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpandableOptionCell.h; sourceTree = "<group>"; };
+		2302547B1526746500593749 /* ExpandableOptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpandableOptionCell.m; sourceTree = "<group>"; };
 		23082F5314D88513003964CE /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		23082F5414D88513003964CE /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		23082F5A14D8968F003964CE /* ComboViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComboViewController.h; sourceTree = "<group>"; };
@@ -639,6 +660,64 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2302544F1526464600593749 /* ShinyComboView */ = {
+			isa = PBXGroup;
+			children = (
+				2302545D15264C7E00593749 /* ItemGroupSectionHeaderView */,
+				2302545915264B9C00593749 /* NumberOfCombosView */,
+				230254511526466C00593749 /* ShinyComboView.h */,
+				230254521526466C00593749 /* ShinyComboView.m */,
+			);
+			name = ShinyComboView;
+			sourceTree = "<group>";
+		};
+		2302545415264A9600593749 /* ShinyComboRenderer */ = {
+			isa = PBXGroup;
+			children = (
+				2302545515264ABA00593749 /* ShinyComboRenderer.h */,
+				2302545615264ABA00593749 /* ShinyComboRenderer.m */,
+			);
+			name = ShinyComboRenderer;
+			sourceTree = "<group>";
+		};
+		2302545915264B9C00593749 /* NumberOfCombosView */ = {
+			isa = PBXGroup;
+			children = (
+				2302545A15264BBE00593749 /* NumberOfCombosView.h */,
+				2302545B15264BBE00593749 /* NumberOfCombosView.m */,
+			);
+			name = NumberOfCombosView;
+			sourceTree = "<group>";
+		};
+		2302545D15264C7E00593749 /* ItemGroupSectionHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				2302545E15264C9E00593749 /* ItemGroupSectionHeaderView.h */,
+				2302545F15264C9E00593749 /* ItemGroupSectionHeaderView.m */,
+			);
+			name = ItemGroupSectionHeaderView;
+			sourceTree = "<group>";
+		};
+		230254611526504A00593749 /* ExpandableCell */ = {
+			isa = PBXGroup;
+			children = (
+				230254621526554A00593749 /* ExpandableCell.h */,
+				230254631526554A00593749 /* ExpandableCell.m */,
+				2302547515265CDC00593749 /* ExpandableCellData.h */,
+				2302547615265CDC00593749 /* ExpandableCellData.m */,
+			);
+			name = ExpandableCell;
+			sourceTree = "<group>";
+		};
+		230254791526744000593749 /* ExpandableOptionCell */ = {
+			isa = PBXGroup;
+			children = (
+				2302547A1526746500593749 /* ExpandableOptionCell.h */,
+				2302547B1526746500593749 /* ExpandableOptionCell.m */,
+			);
+			name = ExpandableOptionCell;
+			sourceTree = "<group>";
+		};
 		23082F4F14D884F1003964CE /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -1182,6 +1261,7 @@
 		23785FBA150FD8040087C9F8 /* ShinyRenderers */ = {
 			isa = PBXGroup;
 			children = (
+				2302545415264A9600593749 /* ShinyComboRenderer */,
 				23BA38111521227E00743BBF /* ShinyOrderItemRenderer */,
 				239871351517C9A80021EE55 /* ShinyItemRenderer */,
 				23E339B0150FD9B100E7BD68 /* ShinyOrderTabRenderer */,
@@ -1218,6 +1298,7 @@
 		23839597150E9EA5000DC733 /* OrderTabView */ = {
 			isa = PBXGroup;
 			children = (
+				2302544F1526464600593749 /* ShinyComboView */,
 				2398712C1517BEA50021EE55 /* ShinyItemView */,
 				23839599150E9ED2000DC733 /* OrderTabView.h */,
 				2383959A150E9ED2000DC733 /* OrderTabView.m */,
@@ -1258,6 +1339,8 @@
 		238395A8150EA3C2000DC733 /* ShinyCells */ = {
 			isa = PBXGroup;
 			children = (
+				230254611526504A00593749 /* ExpandableCell */,
+				230254791526744000593749 /* ExpandableOptionCell */,
 				23BA380915211B1600743BBF /* ShinyFullButtonCell */,
 				23FAB388150560C800606816 /* ShinyIntegerInputCell */,
 				239871401517D0680021EE55 /* ShinyChoiceCell */,
@@ -2348,6 +2431,13 @@
 				23BA380C15211B3F00743BBF /* ShinyFullButtonCell.m in Sources */,
 				23BA3814152122A200743BBF /* ShinyOrderItemRenderer.m in Sources */,
 				23BA3818152123A400743BBF /* ShinyOrderItemViewController.m in Sources */,
+				230254531526466C00593749 /* ShinyComboView.m in Sources */,
+				2302545715264ABA00593749 /* ShinyComboRenderer.m in Sources */,
+				2302545C15264BBE00593749 /* NumberOfCombosView.m in Sources */,
+				2302546015264C9E00593749 /* ItemGroupSectionHeaderView.m in Sources */,
+				230254641526554A00593749 /* ExpandableCell.m in Sources */,
+				2302547715265CDC00593749 /* ExpandableCellData.m in Sources */,
+				2302547C1526746500593749 /* ExpandableOptionCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

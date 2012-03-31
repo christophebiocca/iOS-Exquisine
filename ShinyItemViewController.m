@@ -13,6 +13,8 @@
 #import "Choice.h"
 #import "ShinyItemRenderer.h"
 #import "ShinyChoiceCell.h"
+#import "ExpandableCell.h"
+
 
 NSString* ITEM_DONE_BUTTON_HIT = @"CroutonLabs/ItemDoneButtonHit";
 
@@ -115,6 +117,9 @@ NSString* ITEM_DONE_BUTTON_HIT = @"CroutonLabs/ItemDoneButtonHit";
         Choice *theChoice = [[itemRenderer objectForCellAtIndex:indexPath] objectForKey:@"choice"];
         [theChoice toggleSelected];
         [(ShinyChoiceCell *)[tableView cellForRowAtIndexPath:indexPath] pulseView];
+    }
+    else if ([[CustomViewCell cellIdentifierForData:[itemRenderer objectForCellAtIndex:indexPath]] isEqualToString:@"ExpandableOptionCell"]) {
+        [(ExpandableCell *)[tableView cellForRowAtIndexPath:indexPath] toggleOpen:indexPath :tableView]; 
     }
 }
 

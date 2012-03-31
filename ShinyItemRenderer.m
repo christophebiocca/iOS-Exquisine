@@ -9,6 +9,7 @@
 #import "ShinyItemRenderer.h"
 #import "OptionSectionHeaderView.h"
 #import "NumberOfItemsSectionHeaderView.h"
+#import "ExpandableCellData.h"
 #import "IntegerInputCellData.h"
 #import "Option.h"
 #import "Item.h"
@@ -45,17 +46,8 @@
             
             [optionSectionContents addObject:[OptionSectionHeaderView new]];
             
-            //Starts with all of the options in the open position.
             for (Option *eachOption in [theItem options]) {
-                NSMutableDictionary *newDictionary = [[NSMutableDictionary alloc] init];
-                [newDictionary setObject:eachOption forKey:@"openOption"];
-                [optionSectionContents addObject:newDictionary];
-                for (Choice *eachChoice in [eachOption choiceList])
-                {
-                    newDictionary = [[NSMutableDictionary alloc] init];
-                    [newDictionary setObject:eachChoice forKey:@"choice"];
-                    [optionSectionContents addObject:newDictionary];
-                }
+                [optionSectionContents addObject:[[ExpandableCellData alloc] initWithPrimaryItem:eachOption AndRenderer:self]];
             }
             
             [listData addObject:optionSectionContents];
