@@ -14,6 +14,7 @@
 		230254641526554A00593749 /* ExpandableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 230254631526554A00593749 /* ExpandableCell.m */; };
 		2302547715265CDC00593749 /* ExpandableCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2302547615265CDC00593749 /* ExpandableCellData.m */; };
 		2302547C1526746500593749 /* ExpandableOptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2302547B1526746500593749 /* ExpandableOptionCell.m */; };
+		23025480152BBA5100593749 /* ExpandableMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2302547F152BBA5100593749 /* ExpandableMenuCell.m */; };
 		23082F5614D88513003964CE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 23082F5414D88513003964CE /* Reachability.m */; };
 		23082F5C14D8968F003964CE /* ComboViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23082F5B14D8968F003964CE /* ComboViewController.m */; };
 		23082F6114D897D1003964CE /* ComboView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23082F6014D897D1003964CE /* ComboView.m */; };
@@ -118,11 +119,9 @@
 		239871341517C7070021EE55 /* ShinyItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 239871331517C7070021EE55 /* ShinyItemViewController.m */; };
 		239871381517C9D30021EE55 /* ShinyItemRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 239871371517C9D30021EE55 /* ShinyItemRenderer.m */; };
 		2398713D1517CB1A0021EE55 /* OptionSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2398713C1517CB1A0021EE55 /* OptionSectionHeaderView.m */; };
-		239871431517D0920021EE55 /* OpenShinyOptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 239871421517D0920021EE55 /* OpenShinyOptionCell.m */; };
 		239871461517D0A10021EE55 /* ShinyChoiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 239871451517D0A10021EE55 /* ShinyChoiceCell.m */; };
 		239871491517D8A50021EE55 /* CustomizeTopBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 239871471517D8A50021EE55 /* CustomizeTopBar.png */; };
 		2398714A1517D8A50021EE55 /* CustomizeTopBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 239871481517D8A50021EE55 /* CustomizeTopBar@2x.png */; };
-		2398714D1517E3F40021EE55 /* ClosedShinyOptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2398714C1517E3F40021EE55 /* ClosedShinyOptionCell.m */; };
 		239871561517FA070021EE55 /* ChoiceCellWithoutPriceNotSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 2398714E1517FA070021EE55 /* ChoiceCellWithoutPriceNotSelected.png */; };
 		239871571517FA070021EE55 /* ChoiceCellWithoutPriceNotSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2398714F1517FA070021EE55 /* ChoiceCellWithoutPriceNotSelected@2x.png */; };
 		239871581517FA070021EE55 /* ChoiceCellWithoutPriceSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 239871501517FA070021EE55 /* ChoiceCellWithoutPriceSelected.png */; };
@@ -256,6 +255,8 @@
 		2302547615265CDC00593749 /* ExpandableCellData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpandableCellData.m; sourceTree = "<group>"; };
 		2302547A1526746500593749 /* ExpandableOptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpandableOptionCell.h; sourceTree = "<group>"; };
 		2302547B1526746500593749 /* ExpandableOptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpandableOptionCell.m; sourceTree = "<group>"; };
+		2302547E152BBA5100593749 /* ExpandableMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpandableMenuCell.h; sourceTree = "<group>"; };
+		2302547F152BBA5100593749 /* ExpandableMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpandableMenuCell.m; sourceTree = "<group>"; };
 		23082F5314D88513003964CE /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		23082F5414D88513003964CE /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		23082F5A14D8968F003964CE /* ComboViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComboViewController.h; sourceTree = "<group>"; };
@@ -431,14 +432,10 @@
 		239871371517C9D30021EE55 /* ShinyItemRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinyItemRenderer.m; sourceTree = "<group>"; };
 		2398713B1517CB1A0021EE55 /* OptionSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionSectionHeaderView.h; sourceTree = "<group>"; };
 		2398713C1517CB1A0021EE55 /* OptionSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionSectionHeaderView.m; sourceTree = "<group>"; };
-		239871411517D0920021EE55 /* OpenShinyOptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenShinyOptionCell.h; sourceTree = "<group>"; };
-		239871421517D0920021EE55 /* OpenShinyOptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenShinyOptionCell.m; sourceTree = "<group>"; };
 		239871441517D0A10021EE55 /* ShinyChoiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShinyChoiceCell.h; sourceTree = "<group>"; };
 		239871451517D0A10021EE55 /* ShinyChoiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinyChoiceCell.m; sourceTree = "<group>"; };
 		239871471517D8A50021EE55 /* CustomizeTopBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CustomizeTopBar.png; path = FravicArtAssets/CustomizeTopBar.png; sourceTree = "<group>"; };
 		239871481517D8A50021EE55 /* CustomizeTopBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "CustomizeTopBar@2x.png"; path = "FravicArtAssets/CustomizeTopBar@2x.png"; sourceTree = "<group>"; };
-		2398714B1517E3F40021EE55 /* ClosedShinyOptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClosedShinyOptionCell.h; sourceTree = "<group>"; };
-		2398714C1517E3F40021EE55 /* ClosedShinyOptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClosedShinyOptionCell.m; sourceTree = "<group>"; };
 		2398714E1517FA070021EE55 /* ChoiceCellWithoutPriceNotSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ChoiceCellWithoutPriceNotSelected.png; path = FravicArtAssets/ChoiceCellWithoutPriceNotSelected.png; sourceTree = "<group>"; };
 		2398714F1517FA070021EE55 /* ChoiceCellWithoutPriceNotSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ChoiceCellWithoutPriceNotSelected@2x.png"; path = "FravicArtAssets/ChoiceCellWithoutPriceNotSelected@2x.png"; sourceTree = "<group>"; };
 		239871501517FA070021EE55 /* ChoiceCellWithoutPriceSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ChoiceCellWithoutPriceSelected.png; path = FravicArtAssets/ChoiceCellWithoutPriceSelected.png; sourceTree = "<group>"; };
@@ -716,6 +713,15 @@
 				2302547B1526746500593749 /* ExpandableOptionCell.m */,
 			);
 			name = ExpandableOptionCell;
+			sourceTree = "<group>";
+		};
+		2302547D152BBA2400593749 /* ExpandableMenuCell */ = {
+			isa = PBXGroup;
+			children = (
+				2302547E152BBA5100593749 /* ExpandableMenuCell.h */,
+				2302547F152BBA5100593749 /* ExpandableMenuCell.m */,
+			);
+			name = ExpandableMenuCell;
 			sourceTree = "<group>";
 		};
 		23082F4F14D884F1003964CE /* Network */ = {
@@ -1340,12 +1346,11 @@
 			isa = PBXGroup;
 			children = (
 				230254611526504A00593749 /* ExpandableCell */,
+				2302547D152BBA2400593749 /* ExpandableMenuCell */,
 				230254791526744000593749 /* ExpandableOptionCell */,
 				23BA380915211B1600743BBF /* ShinyFullButtonCell */,
 				23FAB388150560C800606816 /* ShinyIntegerInputCell */,
 				239871401517D0680021EE55 /* ShinyChoiceCell */,
-				2398713F1517D0590021EE55 /* ClosedShinyOptionCell */,
-				2398713E1517D03B0021EE55 /* OpenShinyOptionCell */,
 				2394ABEC1513E1FA0001D3D1 /* ShinyMenuComboCell */,
 				2375B9BB15128242004BDC3B /* OpenShinyMenuCell */,
 				23D472DC15125C8600D87E89 /* ViewCell */,
@@ -1456,24 +1461,6 @@
 				2398713C1517CB1A0021EE55 /* OptionSectionHeaderView.m */,
 			);
 			name = OptionSectionHeaderView;
-			sourceTree = "<group>";
-		};
-		2398713E1517D03B0021EE55 /* OpenShinyOptionCell */ = {
-			isa = PBXGroup;
-			children = (
-				239871411517D0920021EE55 /* OpenShinyOptionCell.h */,
-				239871421517D0920021EE55 /* OpenShinyOptionCell.m */,
-			);
-			name = OpenShinyOptionCell;
-			sourceTree = "<group>";
-		};
-		2398713F1517D0590021EE55 /* ClosedShinyOptionCell */ = {
-			isa = PBXGroup;
-			children = (
-				2398714B1517E3F40021EE55 /* ClosedShinyOptionCell.h */,
-				2398714C1517E3F40021EE55 /* ClosedShinyOptionCell.m */,
-			);
-			name = ClosedShinyOptionCell;
 			sourceTree = "<group>";
 		};
 		239871401517D0680021EE55 /* ShinyChoiceCell */ = {
@@ -2424,9 +2411,7 @@
 				239871341517C7070021EE55 /* ShinyItemViewController.m in Sources */,
 				239871381517C9D30021EE55 /* ShinyItemRenderer.m in Sources */,
 				2398713D1517CB1A0021EE55 /* OptionSectionHeaderView.m in Sources */,
-				239871431517D0920021EE55 /* OpenShinyOptionCell.m in Sources */,
 				239871461517D0A10021EE55 /* ShinyChoiceCell.m in Sources */,
-				2398714D1517E3F40021EE55 /* ClosedShinyOptionCell.m in Sources */,
 				23BA38081521131600743BBF /* NumberOfItemsSectionHeaderView.m in Sources */,
 				23BA380C15211B3F00743BBF /* ShinyFullButtonCell.m in Sources */,
 				23BA3814152122A200743BBF /* ShinyOrderItemRenderer.m in Sources */,
@@ -2438,6 +2423,7 @@
 				230254641526554A00593749 /* ExpandableCell.m in Sources */,
 				2302547715265CDC00593749 /* ExpandableCellData.m in Sources */,
 				2302547C1526746500593749 /* ExpandableOptionCell.m in Sources */,
+				23025480152BBA5100593749 /* ExpandableMenuCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

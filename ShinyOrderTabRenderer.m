@@ -11,6 +11,7 @@
 #import "OrderSectionHeaderView.h"
 #import "MenuSectionHeaderView.h"
 #import "GeneralPurposeViewCellData.h"
+#import "ExpandableCellData.h"
 #import "ShinyOrderItemCell.h"
 #import "ShinyOrderComboCell.h"
 #import "ItemGroup.h"
@@ -49,9 +50,7 @@
                 [menuSectionContents addObject:newDictionary];
             }
             if ([object isKindOfClass:[Menu class]]) {
-                NSMutableDictionary *newDictionary = [[NSMutableDictionary alloc] init];
-                [newDictionary setObject:object forKey:@"menu"];
-                [menuSectionContents addObject:newDictionary];
+                [menuSectionContents addObject:[[ExpandableCellData alloc] initWithPrimaryItem:object AndRenderer:self]];
             }
         }
         
