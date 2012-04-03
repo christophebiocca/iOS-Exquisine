@@ -16,7 +16,6 @@
 
     NSMutableArray *submenuList;
     NSMutableArray *comboList;
-    
 }
 
 @property (retain,readonly) NSMutableArray *submenuList;

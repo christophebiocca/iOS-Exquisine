@@ -34,6 +34,7 @@
                         NSMutableArray* subclassList = [classMap objectForKey:superClass];
                         if(!subclassList){
                             subclassList = [NSMutableArray array];
+                            
                             [classMap setObject:subclassList forKey:superClass];
                         }
                         [subclassList addObject:current[0]];
@@ -45,6 +46,10 @@
             initialized = YES;
         }
     }
+    //This just ensures that regardless of platform, the list will appear in the same order every time.
+    NSSortDescriptor *aDescriptor = [[NSSortDescriptor alloc] initWithKey:@"description" ascending:YES];
+    
+    [[classMap objectForKey:thisClass] sortUsingDescriptors:[NSArray arrayWithObject:aDescriptor]];
     
     return [classMap objectForKey:thisClass];
 }

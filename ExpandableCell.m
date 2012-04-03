@@ -20,7 +20,7 @@
         colapsedImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ColapsedMenuDropdown.png"]];
         expandedImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ExpandedMenuDropdown.png"]];
         
-        nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(93, 26, 120, 21)];
+        nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(93, 24, 120, 21)];
         [nameLabel setFont:[Utilities fravicHeadingFont]];
         [nameLabel setTextAlignment:UITextAlignmentCenter];
         [nameLabel setTextColor:[UIColor blackColor]];

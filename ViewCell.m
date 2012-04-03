@@ -13,7 +13,13 @@
 +(BOOL) canDisplayData:(id)data
 {
     //Returns true iff the data passed in is meant to be displayed by this cell.
+    
+    if ([data isKindOfClass:[UIButton class]]) {
+        return NO;
+    }
+    
     return [data isKindOfClass:[UIView class]];
+    
 }
 
 +(NSString *) cellIdentifier

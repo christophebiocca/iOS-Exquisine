@@ -18,8 +18,10 @@
 {
     self = [super init];
     
-    submenuList = [[NSMutableArray alloc] initWithCapacity:0];
-    comboList = [[NSMutableArray alloc] initWithCapacity:0];    
+    if (self) {
+        submenuList = [[NSMutableArray alloc] initWithCapacity:0];
+        comboList = [[NSMutableArray alloc] initWithCapacity:0];  
+    }  
     
     return self;
 }

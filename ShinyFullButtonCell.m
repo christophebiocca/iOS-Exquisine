@@ -10,7 +10,12 @@
 
 @implementation ShinyFullButtonCell
 
-static float cellBorderSize = 10.0f;
+static float cellBorderSize;
+
++(void)initialize
+{
+    cellBorderSize = 10.0f;
+}
 
 +(BOOL) canDisplayData:(id)data
 {
@@ -46,6 +51,7 @@ static float cellBorderSize = 10.0f;
 
 -(void) updateCell
 {
+    
     [theButton setFrame:CGRectMake((320 - [theButton frame].size.width)/2, 
                                   cellBorderSize, 
                                   [theButton frame].size.width, 
