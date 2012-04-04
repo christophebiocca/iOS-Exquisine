@@ -9,7 +9,7 @@
 #import "ListRenderer.h"
 @class Item;
 
-@interface ShinyItemRenderer : ListRenderer
+@interface ShinyMenuItemRenderer : ListRenderer
 {
     Item *theItem;
 }

@@ -12,9 +12,10 @@
 #import "OrderSectionHeaderView.h"
 #import "OrderSectionFooterView.h"
 #import "MenuSectionHeaderView.h"
-#import "ShinyItemViewController.h"
+#import "ShinyMenuItemViewController.h"
 #import "ExpandableCell.h"
 #import "ShinyOrderItemViewController.h"
+#import "ShinyMenuComboViewController.h"
 #import "OrderTabView.h"
 #import "Order.h"
 #import "Item.h"
@@ -78,7 +79,7 @@ NSString *ORDER_PLACEMENT_REQUESTED = @"CroutonLabs/OrderPlacementRequested";
     {
         Item *theItem = [[orderRenderer objectForCellAtIndex:indexPath] objectForKey:@"menuItem"];
         
-        ShinyItemViewController *newController = [[ShinyItemViewController alloc] initWithItem:[theItem copy]];
+        ShinyMenuItemViewController *newController = [[ShinyMenuItemViewController alloc] initWithItem:[theItem copy]];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addItem:) name:ITEM_DONE_BUTTON_HIT object:newController];
         
@@ -93,6 +94,16 @@ NSString *ORDER_PLACEMENT_REQUESTED = @"CroutonLabs/OrderPlacementRequested";
         ShinyOrderItemViewController *newController = [[ShinyOrderItemViewController alloc] initWithItem:theItem];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteItem:) name:ITEM_DELETE_BUTTON_HIT object:newController];
+        
+        [[self navigationController] pushViewController:newController animated:YES];
+    }
+    else if ([[CustomViewCell cellIdentifierForData:[orderRenderer objectForCellAtIndex:indexPath]] isEqualToString:@"ShinyMenuComboCell"])
+    {
+        Combo *theCombo = [[orderRenderer objectForCellAtIndex:indexPath] objectForKey:@"menuCombo"];
+        
+        ShinyMenuComboViewController *newController = [[ShinyMenuComboViewController alloc] initWithCombo:theCombo];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addCombo:) name:COMBO_DONE_BUTTON_HIT object:newController];
         
         [[self navigationController] pushViewController:newController animated:YES];
     }
@@ -131,7 +142,7 @@ NSString *ORDER_PLACEMENT_REQUESTED = @"CroutonLabs/OrderPlacementRequested";
     else {
         [[orderView orderTable] scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
     }
-    [[theOrderManager thisOrder] addItem:[(ShinyItemViewController *)[notification object] theItem]];
+    [[theOrderManager thisOrder] addItem:[(ShinyMenuItemViewController *)[notification object] theItem]];
 }
 
 -(void) deleteItem:(NSNotification *) notification
@@ -140,6 +151,16 @@ NSString *ORDER_PLACEMENT_REQUESTED = @"CroutonLabs/OrderPlacementRequested";
     [self updateOrderSection];
 }
 
+-(void) addCombo:(NSNotification *) notification
+{
+    if (([[[theOrderManager thisOrder] itemList] count] + [[[theOrderManager thisOrder] comboList] count]) == 0) {
+        [[orderView orderTable] scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }
+    else {
+        [[orderView orderTable] scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }
+    [[theOrderManager thisOrder] addCombo:[(ShinyMenuComboViewController *)[notification object] theCombo]];
+}
 
 -(void) updateOrderSection;
 {

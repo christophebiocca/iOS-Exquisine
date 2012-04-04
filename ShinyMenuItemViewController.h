@@ -9,15 +9,15 @@
 #import <UIKit/UIKit.h>
 @class Item;
 @class ShinyItemView;
-@class ShinyItemRenderer;
+@class ShinyMenuItemRenderer;
 
 extern NSString* ITEM_DONE_BUTTON_HIT;
 
-@interface ShinyItemViewController : UIViewController <UITableViewDelegate>
+@interface ShinyMenuItemViewController : UIViewController <UITableViewDelegate>
 {
     Item *theItem;
     ShinyItemView *itemView;
-    ShinyItemRenderer *itemRenderer;
+    ShinyMenuItemRenderer *itemRenderer;
     
 }
 

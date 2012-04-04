@@ -6,19 +6,19 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "ShinyItemViewController.h"
+#import "ShinyMenuItemViewController.h"
 #import "Item.h"
 #import "Option.h"
 #import "ShinyItemView.h"
 #import "Choice.h"
-#import "ShinyItemRenderer.h"
+#import "ShinyMenuItemRenderer.h"
 #import "ShinyChoiceCell.h"
 #import "ExpandableCell.h"
 
 
 NSString* ITEM_DONE_BUTTON_HIT = @"CroutonLabs/ItemDoneButtonHit";
 
-@implementation ShinyItemViewController
+@implementation ShinyMenuItemViewController
 
 @synthesize theItem;
 
@@ -28,7 +28,7 @@ NSString* ITEM_DONE_BUTTON_HIT = @"CroutonLabs/ItemDoneButtonHit";
     if (self) {
         theItem = anItem;
         itemView = [[ShinyItemView alloc] init];
-        itemRenderer = [[ShinyItemRenderer alloc] initWithItem:theItem];
+        itemRenderer = [[ShinyMenuItemRenderer alloc] initWithItem:theItem];
         
         [[itemView itemTable] setDelegate:self];
         [[itemView itemTable] setDataSource:itemRenderer];
@@ -45,81 +45,15 @@ NSString* ITEM_DONE_BUTTON_HIT = @"CroutonLabs/ItemDoneButtonHit";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    if ([[CustomViewCell cellIdentifierForData:[itemRenderer objectForCellAtIndex:indexPath]] isEqualToString:@"ClosedShinyOptionCell"])
+    if ([[tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[ExpandableCell class]])
     {
-        Option *theOption = [[itemRenderer objectForCellAtIndex:indexPath] objectForKey:@"closedOption"];
-        [[[itemRenderer listData] objectAtIndex:[indexPath section]] removeObjectAtIndex:[indexPath row]];
-        
-        NSMutableDictionary *helperDict = nil;
-        
-        helperDict = [NSMutableDictionary dictionary];
-        [helperDict setObject:theOption forKey:@"openOption"];
-        
-        [[[itemRenderer listData] objectAtIndex:[indexPath section]] insertObject:helperDict atIndex:[indexPath row]];
-        
-        [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        
-        NSMutableArray *helperArray = [[NSMutableArray alloc] init];
-        
-        for (int i=1; i<[[theOption choiceList] count] + 1; i++)
-        {
-            NSIndexPath *tmpIndexPath = [NSIndexPath indexPathForRow:(indexPath.row + i) inSection:indexPath.section];
-            [helperArray addObject:tmpIndexPath];
-        }
-        
-        int i = [indexPath row] + 1;
-        
-        for (Choice *eachChoice in [theOption choiceList]) {
-            
-            helperDict = [NSMutableDictionary dictionary];
-            
-            [helperDict setObject:eachChoice forKey:@"choice"];
-            
-            [[[itemRenderer listData] objectAtIndex:[indexPath section]] insertObject:helperDict atIndex:i];
-            i++;
-        }
-        
-        [tableView insertRowsAtIndexPaths:helperArray withRowAnimation:UITableViewRowAnimationTop];
-    }
-    else if ([[CustomViewCell cellIdentifierForData:[itemRenderer objectForCellAtIndex:indexPath]] isEqualToString:@"OpenShinyOptionCell"])
-    {
-        Option *theOption = [[itemRenderer objectForCellAtIndex:indexPath] objectForKey:@"openOption"];
-        [[[itemRenderer listData] objectAtIndex:[indexPath section]] removeObjectAtIndex:[indexPath row]];
-        
-        NSMutableDictionary *helperDict = nil;
-        
-        helperDict = [NSMutableDictionary dictionary];
-        [helperDict setObject:theOption forKey:@"closedOption"];
-        
-        [[[itemRenderer listData] objectAtIndex:[indexPath section]] insertObject:helperDict atIndex:[indexPath row]];
-        
-        [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        
-        NSMutableArray *helperArray = [[NSMutableArray alloc] init];
-        
-        for (int i=1; i<([[theOption choiceList] count] + 1); i++)
-        {
-            NSIndexPath *tmpIndexPath = [NSIndexPath indexPathForRow:(indexPath.row + i) inSection:indexPath.section];
-            [helperArray addObject:tmpIndexPath];
-        }
-        
-        int i = [indexPath row] + 1;
-        
-        for (Choice *eachChoice in [theOption choiceList]) {
-            
-            [[[itemRenderer listData] objectAtIndex:[indexPath section]] removeObjectAtIndex:i];
-        }
-        
-        [tableView deleteRowsAtIndexPaths:helperArray withRowAnimation:UITableViewRowAnimationTop];
+        [(ExpandableCell *)[tableView cellForRowAtIndexPath:indexPath] toggleOpen:indexPath :tableView];
     }
     else if ([[CustomViewCell cellIdentifierForData:[itemRenderer objectForCellAtIndex:indexPath]] isEqualToString:@"ShinyChoiceCell"])
     {
         Choice *theChoice = [[itemRenderer objectForCellAtIndex:indexPath] objectForKey:@"choice"];
         [theChoice toggleSelected];
         [(ShinyChoiceCell *)[tableView cellForRowAtIndexPath:indexPath] pulseView];
-    }
-    else if ([[CustomViewCell cellIdentifierForData:[itemRenderer objectForCellAtIndex:indexPath]] isEqualToString:@"ExpandableOptionCell"]) {
-        [(ExpandableCell *)[tableView cellForRowAtIndexPath:indexPath] toggleOpen:indexPath :tableView]; 
     }
 }
 

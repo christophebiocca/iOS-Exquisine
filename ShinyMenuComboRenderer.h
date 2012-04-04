@@ -9,7 +9,7 @@
 #import "ListRenderer.h"
 @class Combo;
 
-@interface ShinyComboRenderer : ListRenderer
+@interface ShinyMenuComboRenderer : ListRenderer
 {
     Combo *theCombo;
 }

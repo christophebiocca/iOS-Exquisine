@@ -6,14 +6,15 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "ShinyComboRenderer.h"
+#import "ShinyMenuComboRenderer.h"
+#import "ExpandableCellData.h"
 #import "Combo.h"
 #import "IntegerInputCellData.h"
 #import "ItemGroupSectionHeaderView.h"
 #import "NumberOfCombosView.h"
 #import "ItemGroup.h"
 
-@implementation ShinyComboRenderer
+@implementation ShinyMenuComboRenderer
 
 
 -(id)initWithCombo:(Combo *)aCombo
@@ -47,9 +48,7 @@
             
             //Starts with all of the options in the open position.
             for (ItemGroup *eachItemGroup in [theCombo listOfItemGroups]) {
-                NSMutableDictionary *newDictionary = [[NSMutableDictionary alloc] init];
-                [newDictionary setObject:eachItemGroup forKey:@"closedItemGroup"];
-                [itemGroupSectionContents addObject:newDictionary];
+                [itemGroupSectionContents addObject:[[ExpandableCellData alloc] initWithPrimaryItem:eachItemGroup AndRenderer:self]];
             }
             
             [listData addObject:itemGroupSectionContents];

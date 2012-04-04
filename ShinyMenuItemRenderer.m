@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "ShinyItemRenderer.h"
+#import "ShinyMenuItemRenderer.h"
 #import "OptionSectionHeaderView.h"
 #import "NumberOfItemsSectionHeaderView.h"
 #import "ExpandableCellData.h"
@@ -14,7 +14,7 @@
 #import "Option.h"
 #import "Item.h"
 
-@implementation ShinyItemRenderer
+@implementation ShinyMenuItemRenderer
 
 -(id)initWithItem:(Item *)anItem
 {
