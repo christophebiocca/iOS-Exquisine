@@ -11,6 +11,7 @@
 @class Item;
 @class Order;
 @class Combo;
+@class OrderManager;
 
 @interface Menu : MenuComponent<NSCoding>{
 
@@ -45,6 +46,8 @@
 -(void) addSubmenu:(Menu *) aSubmenu;
 
 -(void) addCombo: (Combo *) aCombo;
+
+-(void) placeOrder:(OrderManager *) anOrderManager;
 
 //Housekeeping Methods
 
