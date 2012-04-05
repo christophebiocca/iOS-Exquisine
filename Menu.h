@@ -40,6 +40,8 @@
 -(NSArray *) recursiveComboList;
 
 //Mutation Methods
+-(void) addItem:(Item *) anItem;
+
 -(void) addSubmenu:(Menu *) aSubmenu;
 
 -(void) addCombo: (Combo *) aCombo;

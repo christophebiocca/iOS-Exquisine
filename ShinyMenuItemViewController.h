@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class Item;
 @class ShinyItemView;
-@class ShinyMenuItemRenderer;
+@class ListRenderer;
 
 extern NSString* ITEM_DONE_BUTTON_HIT;
 
@@ -17,7 +17,7 @@ extern NSString* ITEM_DONE_BUTTON_HIT;
 {
     Item *theItem;
     ShinyItemView *itemView;
-    ShinyMenuItemRenderer *itemRenderer;
+    ListRenderer *itemRenderer;
     
 }
 

@@ -24,6 +24,8 @@ extern NSString* ITEM_GROUP_MODIFIED;
     
     NSMutableArray *listOfItems;
     Item *satisfyingItem;
+    NSMutableArray *satisfyingMenus;
+    
     id<ItemGroupPricingStrategy> strategy;
     
     // Temporary, cached values
@@ -32,6 +34,7 @@ extern NSString* ITEM_GROUP_MODIFIED;
 
 @property (retain,readonly) NSMutableArray *listOfItems;
 @property (retain,readonly) NSSet *itemIds;
+@property (retain,readonly) NSMutableArray *satisfyingMenus;
 @property (retain,nonatomic) Item *satisfyingItem;
 @property (readonly) BOOL satisfied;
 

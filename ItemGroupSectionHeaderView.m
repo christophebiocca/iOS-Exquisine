@@ -17,7 +17,7 @@
         headerImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ListHeader.png"]];
         [self setFrame:[headerImage frame]];
         headerLabel = [[UILabel alloc] init];
-        [headerLabel setText:@"Combo Components"];
+        [headerLabel setText:@"Components"];
         [headerLabel setFrame:CGRectMake(46, 28, 196, 21)];
         [headerLabel setFont:[Utilities fravicHeadingFont]];
         [headerLabel setTextAlignment:UITextAlignmentLeft];

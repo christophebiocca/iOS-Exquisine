@@ -19,12 +19,19 @@ NSString* ITEM_GROUP_MODIFIED = @"CroutonLabs/ItemGroupModified";
 
 @synthesize listOfItems;
 @synthesize satisfyingItem;
+@synthesize satisfyingMenus;
 
 -(ItemGroup *)init
 {
     self = [super init];
     
     listOfItems = [[NSMutableArray alloc] initWithCapacity:0];
+    satisfyingMenus = [[NSMutableArray alloc] initWithCapacity:0];
+    //This menu will contain all of the items that satisfy an item group that are not
+    //accounted for in the other explicitly added menus.
+    Menu *otherMenu = [[Menu alloc] init];
+    [otherMenu setName:@"Other"];
+    [satisfyingMenus addObject:otherMenu];
     
     return self;
 }
@@ -34,6 +41,10 @@ NSString* ITEM_GROUP_MODIFIED = @"CroutonLabs/ItemGroupModified";
     self = [super initFromData:inputData];
     
     listOfItems = [[NSMutableArray alloc] initWithCapacity:0];
+    satisfyingMenus = [[NSMutableArray alloc] initWithCapacity:0];
+    Menu *otherMenu = [[Menu alloc] init];
+    [otherMenu setName:@"Other"];
+    [satisfyingMenus addObject:otherMenu];
     
     strategy = [ItemGroupPricingStrategy pricingStrategyFromData:[inputData objectForKey:@"pricing_strategy"]];
         
@@ -50,7 +61,7 @@ NSString* ITEM_GROUP_MODIFIED = @"CroutonLabs/ItemGroupModified";
         NSInteger intItemPK = [itemPK intValue];
         Item *itemToAdd = [parentMenu dereferenceItemPK:intItemPK];
         if (itemToAdd) {
-            [listOfItems addObject:itemToAdd];
+            [self addItem:itemToAdd];
         }
         else
         {
@@ -63,7 +74,7 @@ NSString* ITEM_GROUP_MODIFIED = @"CroutonLabs/ItemGroupModified";
     {
         Menu *menuForPK = [parentMenu dereferenceMenuPK:[menuPK intValue]];
         if (menuForPK) {
-            [listOfItems addObjectsFromArray:[menuForPK flatItemList]];
+            [self addMenu:menuForPK];
         }
         else
         {
@@ -124,6 +135,8 @@ NSString* ITEM_GROUP_MODIFIED = @"CroutonLabs/ItemGroupModified";
     
     anItemGroup->strategy = strategy;
     
+    anItemGroup->satisfyingMenus = [[NSMutableArray alloc] initWithArray:satisfyingMenus];
+    
     return anItemGroup;
     
 }
@@ -160,19 +173,31 @@ NSString* ITEM_GROUP_MODIFIED = @"CroutonLabs/ItemGroupModified";
 
 -(void)addItem:(Item *)anItem
 {
+    BOOL itemInMenus = NO;
+    for (Menu *eachMenu in satisfyingMenus) {
+        if ([[eachMenu flatItemList] containsObject:anItem]) {
+            itemInMenus = YES;
+        }
+    }
+    if (!itemInMenus) {
+        //Add the item to the "other" menu.
+        [[satisfyingMenus objectAtIndex:0] addItem:anItem];
+    }
     [listOfItems addObject:anItem];
     itemIds = nil;
 }
 
 -(void) addListOfItems:(NSArray *)items
 {
-    [listOfItems addObjectsFromArray:items];
-    itemIds = nil;
+    for (Item *eachItem in items) {
+        [self addItem:eachItem];
+    }
 }
 
 -(void)addMenu:(Menu *)aMenu
 {
-    [listOfItems addObjectsFromArray:[aMenu flatItemList]];
+    [satisfyingMenus addObject:aMenu];
+    [self addListOfItems:[aMenu flatItemList]];
     itemIds = nil;
 }
 

@@ -46,10 +46,7 @@
             
             [itemGroupSectionContents addObject:[ItemGroupSectionHeaderView new]];
             
-            //Starts with all of the options in the open position.
-            for (ItemGroup *eachItemGroup in [theCombo listOfItemGroups]) {
-                [itemGroupSectionContents addObject:[[ExpandableCellData alloc] initWithPrimaryItem:eachItemGroup AndRenderer:self]];
-            }
+            [itemGroupSectionContents addObjectsFromArray:[theCombo listOfItemGroups]];
             
             [listData addObject:itemGroupSectionContents];
         }

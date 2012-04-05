@@ -196,6 +196,11 @@
     return outputList;
 }
 
+-(void)addItem:(Item *)anItem
+{
+    [submenuList addObject:anItem];
+}
+
 -(void)addSubmenu:(Menu *)aSubmenu
 {
     [submenuList addObject:aSubmenu];

@@ -1,37 +1,33 @@
 //
-//  ShinyComboViewController.m
+//  ShinyItemGroupViewController.m
 //  AvocadoTest1
 //
-//  Created by Jake on 12-04-04.
+//  Created by Jake on 12-04-05.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "ShinyMenuComboViewController.h"
-#import "ShinyMenuComboRenderer.h"
-#import "ShinyComboView.h"
-#import "ShinyMenuItemViewController.h"
 #import "ShinyItemGroupViewController.h"
-#import "Combo.h"
+#import "ShinyItemGroupRenderer.h"
+#import "ShinyItemGroupView.h"
+#import "ShinyComboItemViewController.h"
 #import "ExpandableCell.h"
-#import "ItemGroup.h"
 #import "Item.h"
+#import "ItemGroup.h"
 
-NSString *COMBO_DONE_BUTTON_HIT = @"CroutonLabs/ComboDoneButtonHit";
+@implementation ShinyItemGroupViewController
 
-@implementation ShinyMenuComboViewController
+@synthesize theItemGroup;
 
-@synthesize theCombo;
-
--(id)initWithCombo:(Combo *)aCombo
+-(id)initWithItemGroup:(ItemGroup *)anItemGroup
 {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
-        theCombo = aCombo;
-        comboView = [[ShinyComboView alloc] init];
-        comboRenderer = [[ShinyMenuComboRenderer alloc] initWithCombo:theCombo];
+        theItemGroup = anItemGroup;
+        itemGroupView = [[ShinyItemGroupView alloc] init];
+        itemGroupRenderer = [[ShinyItemGroupRenderer alloc] initWithItemGroup:theItemGroup];
         
-        [[comboView comboTable] setDelegate:self];
-        [[comboView comboTable] setDataSource:comboRenderer];
+        [[itemGroupView itemGroupTable] setDelegate:self];
+        [[itemGroupView itemGroupTable] setDataSource:itemGroupRenderer];
         
     }
     return self;
@@ -44,28 +40,26 @@ NSString *COMBO_DONE_BUTTON_HIT = @"CroutonLabs/ComboDoneButtonHit";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
-    if ([[CustomViewCell cellIdentifierForData:[comboRenderer objectForCellAtIndex:indexPath]] isEqualToString:@"ShinyItemGroupCell"])
+    
+    if ([[CustomViewCell cellIdentifierForData:[itemGroupRenderer objectForCellAtIndex:indexPath]] isEqualToString:@"ShinyMenuItemCell"])
     {
-        ItemGroup *theItemGroup = [comboRenderer objectForCellAtIndex:indexPath];        
-        
-        if ([[theItemGroup listOfItems] count] == 1) {
-            Item *theItem = [[theItemGroup listOfItems] objectAtIndex:0];
-            if (([[theItem options] count] > 0)||![[theItem desc] isEqualToString:@""]) 
-            {
-                ShinyMenuItemViewController *newController = [[ShinyMenuItemViewController alloc] initWithItem:theItem];
-                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addItemButtonHit:) name:ITEM_DONE_BUTTON_HIT object:newController];
-                [[self navigationController] pushViewController:newController animated:YES];
-                return;
-            }
-            else {
-                return;
-            }
-        }
-        else {
-            ShinyItemGroupViewController *newController = [[ShinyItemGroupViewController alloc] initWithItemGroup:theItemGroup];
+        Item *theItem = [[itemGroupRenderer objectForCellAtIndex:indexPath] objectForKey:@"menuItem"];        
+        if (([[theItem options] count] > 0)||![[theItem desc] isEqualToString:@""]) 
+        {
+            ShinyComboItemViewController *newController = [[ShinyComboItemViewController alloc] initWithItem:theItem];
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addItemButtonHit:) name:ITEM_DONE_BUTTON_HIT object:newController];
             [[self navigationController] pushViewController:newController animated:YES];
+            return;
         }
+        else 
+        {
+            [theItemGroup setSatisfyingItem:theItem];
+            [[self navigationController] popViewControllerAnimated:YES];
+        }    
+    }
+    else if ([[tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[ExpandableCell class]])
+    {
+        [(ExpandableCell *)[tableView cellForRowAtIndexPath:indexPath] toggleOpen:indexPath :tableView];
     }
 }
 
@@ -76,7 +70,7 @@ NSString *COMBO_DONE_BUTTON_HIT = @"CroutonLabs/ComboDoneButtonHit";
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [CustomViewCell cellHeightForData:[comboRenderer objectForCellAtIndex:indexPath]];
+    return [CustomViewCell cellHeightForData:[itemGroupRenderer objectForCellAtIndex:indexPath]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -98,29 +92,34 @@ NSString *COMBO_DONE_BUTTON_HIT = @"CroutonLabs/ComboDoneButtonHit";
     
     [[self navigationItem] setLeftBarButtonItem:backButton];
     
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonHit)];
     
-    [[self navigationItem] setRightBarButtonItem:doneButton];
+    UIBarButtonItem *fillerButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:nil];
+    [fillerButton setCustomView:[[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 21)]];
+    [[self navigationItem] setRightBarButtonItem:fillerButton];
     
-    [self setView:comboView];
+    [self setView:itemGroupView];
 }
 
 -(void) addItemButtonHit:(NSNotification *) aNotification
 {
-    [theCombo addItem:[(ShinyMenuItemViewController *)[aNotification object] theItem]];
+    [theItemGroup setSatisfyingItem:[(ShinyMenuItemViewController *)[aNotification object] theItem]];
+    NSMutableArray *newControllerStack = [[NSMutableArray alloc] initWithCapacity:0];
+    for (UIViewController *eachController in [[self navigationController] viewControllers]) {
+        if (eachController == self) {
+            break;
+        }
+        else {
+            [newControllerStack addObject:eachController];
+        }
+    }
+    [[self navigationController] setViewControllers:newControllerStack animated:YES];
+    
 }
 
 -(void) backButtonHit
 {
     [[self navigationController] popViewControllerAnimated:YES];
 }
-
--(void) doneButtonHit
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:COMBO_DONE_BUTTON_HIT object:self];
-    [[self navigationController] popViewControllerAnimated:YES];
-}
-
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -135,17 +134,11 @@ NSString *COMBO_DONE_BUTTON_HIT = @"CroutonLabs/ComboDoneButtonHit";
     [toolbarText setBackgroundColor:[UIColor clearColor]];
     [toolbarText setTextAlignment:UITextAlignmentCenter];
     
-    [toolbarText setText:[theCombo name]];
+    [toolbarText setText:[theItemGroup name]];
     [toolbarText setAdjustsFontSizeToFitWidth:YES];
     
     [[self navigationItem] setTitleView:toolbarText];
-    
-    if ([theCombo satisfied]) {
-        [[[self navigationItem] rightBarButtonItem] setEnabled:YES];
-    }
-    else{
-        [[[self navigationItem] rightBarButtonItem] setEnabled:NO];
-    }
+
 }
 
 -(void)dealloc
