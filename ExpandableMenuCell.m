@@ -30,27 +30,6 @@
     [nameLabel setText:[[expandableData primaryItem] name]];
     [numberOfItemsLabel setText:[NSString stringWithFormat:@"Items: %i", ([[[expandableData primaryItem] submenuList] count] + [[[expandableData primaryItem] comboList] count])]];
     
-    //This is bad form, but it will initialize the expandableData 
-    //into the appropriate state if need be.
-    if ([[expandableData expansionContents] count] == 0) {
-        for (id eachItem in [[expandableData primaryItem] submenuList])
-        {
-            if ([eachItem isKindOfClass:[Item class]]) {
-                NSMutableDictionary *newDictionary;
-                newDictionary = [[NSMutableDictionary alloc] init];
-                [newDictionary setObject:eachItem forKey:@"menuItem"];
-                [[expandableData expansionContents] addObject:newDictionary];
-            }
-        
-        } 
-        for (Combo *eachCombo in [[expandableData primaryItem] comboList]) {
-            NSMutableDictionary *newDictionary;
-            newDictionary = [[NSMutableDictionary alloc] init];
-            [newDictionary setObject:eachCombo forKey:@"menuCombo"];
-            [[expandableData expansionContents] addObject:newDictionary];
-        }
-    }
-    
     [self setNeedsLayout];
     [self setNeedsDisplay];
 }

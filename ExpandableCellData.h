@@ -20,7 +20,7 @@
 -(id) initWithPrimaryItem:(id)aThing AndRenderer:(ListRenderer *)aRenderer;
 
 @property BOOL isOpen;
-@property (retain) id primaryItem;
+@property (retain, nonatomic) id primaryItem;
 @property (retain) NSMutableArray *expansionContents;
 @property (retain) ListRenderer *renderer;
 

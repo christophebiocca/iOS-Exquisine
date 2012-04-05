@@ -31,7 +31,11 @@
             [optionSectionContents addObject:[OptionSectionHeaderView new]];
             
             for (Option *eachOption in [theItem options]) {
-                [optionSectionContents addObject:[[ExpandableCellData alloc] initWithPrimaryItem:eachOption AndRenderer:self]];
+                ExpandableCellData *optionCellData = [[ExpandableCellData alloc] initWithPrimaryItem:eachOption AndRenderer:self];
+                [optionSectionContents addObject:optionCellData];
+                [optionSectionContents addObjectsFromArray:[optionCellData expansionContents]];
+                [optionCellData setIsOpen:YES];
+                
             }
             
             [listData addObject:optionSectionContents];

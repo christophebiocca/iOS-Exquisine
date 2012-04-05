@@ -28,18 +28,6 @@
     [nameLabel setText:[[expandableData primaryItem] name]];
     [numberOfItemsLabel setText:[NSString stringWithFormat:@"Choices: %i", [[[expandableData primaryItem] choiceList] count]]];
     
-    //This is bad form, but it will initialize the expandableData 
-    //into the appropriate state if need be.
-    if ([[expandableData expansionContents] count] == 0) {
-        for (Choice *eachChoice in [[expandableData primaryItem] choiceList])
-        {
-            NSMutableDictionary *newDictionary;
-            newDictionary = [[NSMutableDictionary alloc] init];
-            [newDictionary setObject:eachChoice forKey:@"choice"];
-            [[expandableData expansionContents] addObject:newDictionary];
-        } 
-    }
-    
     [self setNeedsLayout];
     [self setNeedsDisplay];
 }
