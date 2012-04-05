@@ -278,8 +278,25 @@ NSString* OPTION_INVALID_DESELECTION = @"CroutonLabs/OptionInvalidDeselection";
     }
     
     if ([[self selectedChoices] count] >= numberOfFreeChoices) {
+        NSMutableArray* picked = [NSMutableArray arrayWithArray:[self selectedChoices]];
         for (Choice *aChoice in choiceList) {
-            [aChoice setIsFree:NO];
+            if(![picked containsObject:aChoice]){
+                [aChoice setIsFree:NO];
+            }
+        }
+        [picked sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            Choice *c1 = obj1, *c2 = obj2;
+            NSComparisonResult compare = [c2 comparePrice:c1];
+            if(compare != NSOrderedSame) return compare;
+            return ([c2 isFree] ? 1 : 0) - ([c1 isFree] ? 1 : 0);
+        }];
+        int j = 0;
+        for (Choice *aChoice in picked) {
+            if (j >= numberOfFreeChoices) 
+                [aChoice setIsFree:NO];
+            else
+                [aChoice setIsFree:YES];
+            j++;
         }
     }
     else
@@ -287,15 +304,6 @@ NSString* OPTION_INVALID_DESELECTION = @"CroutonLabs/OptionInvalidDeselection";
         for (Choice *aChoice in choiceList) {
             [aChoice setIsFree:YES];
         }
-    }
-    
-    int j = 0;
-    for (Choice *aChoice in [self selectedChoices]) {
-        if (j >= numberOfFreeChoices) 
-            [aChoice setIsFree:NO];
-        else
-            [aChoice setIsFree:YES];
-        j++;
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:OPTION_MODIFIED object:self];
