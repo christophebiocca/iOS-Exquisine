@@ -1,52 +1,49 @@
 //
-//  ShinyOrderItemRenderer.m
+//  ShinyOrderComboRenderer.m
 //  AvocadoTest1
 //
-//  Created by Jake on 12-03-19.
+//  Created by Jake on 12-04-05.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "ShinyOrderItemRenderer.h"
-#import "OptionSectionHeaderView.h"
-#import "NumberOfItemsSectionHeaderView.h"
+#import "ShinyOrderComboRenderer.h"
+#import "NumberOfCombosView.h"
 #import "IntegerInputCellData.h"
-#import "ExpandableCellData.h"
-#import "Option.h"
-#import "Item.h"
+#import "Combo.h"
+#import "ItemGroupSectionHeaderView.h"
 
-@implementation ShinyOrderItemRenderer
-
--(id)initWithItem:(Item *)anItem
+@implementation ShinyOrderComboRenderer
+-(id)initWithCombo:(Combo *)aCombo
 {
     self = [super init];
     
     if(self)
     {
-        
-        theItem = anItem;
+        theCombo = aCombo;
         
         sectionNames = [[NSMutableArray alloc] init];
         listData = [[NSMutableArray alloc] init];
         
-        [sectionNames addObject:@"Item Quantity"];
-        NSMutableArray *numberOfItemsSectionContents = [[NSMutableArray alloc] init];
+        [sectionNames addObject:@"Combo Quantity"];
+        NSMutableArray *numberOfCombosSectionContents = [[NSMutableArray alloc] init];
         
-        [numberOfItemsSectionContents addObject:[NumberOfItemsSectionHeaderView new]];
+        [numberOfCombosSectionContents addObject:[NumberOfCombosView new]];
         IntegerInputCellData *newCell = [[IntegerInputCellData alloc] init];
-        [newCell setNumber:[theItem numberOfItems]];
+        [newCell setNumber:[theCombo numberOfCombos]];
         [newCell setLowerBound:[NSNumber numberWithInt:1]];
         [newCell setUpperBound:[NSNumber numberWithInt:100]];
-        [numberOfItemsSectionContents addObject:newCell];
+        [numberOfCombosSectionContents addObject:newCell];
         
-        [listData addObject:numberOfItemsSectionContents];
+        [listData addObject:numberOfCombosSectionContents];
         
-        [sectionNames addObject:@"Options"];
-        NSMutableArray *optionSectionContents = [[NSMutableArray alloc] init];
+        [sectionNames addObject:@"Item Groups"];
+        NSMutableArray *itemGroupSectionContents = [[NSMutableArray alloc] init];
         
-        [optionSectionContents addObject:[OptionSectionHeaderView new]];
-        
-        for (Option *eachOption in [theItem options]) {
-            [optionSectionContents addObject:[[ExpandableCellData alloc] initWithPrimaryItem:eachOption AndRenderer:self]];
+        if ([[theCombo listOfItemGroups] count] != 0) {
+            
+            [itemGroupSectionContents addObject:[ItemGroupSectionHeaderView new]];
+            
+            [itemGroupSectionContents addObjectsFromArray:[theCombo listOfItemGroups]];
         }
         
         //It's a bit hackish they we're adding the button in here in stead of in it's own section
@@ -62,16 +59,16 @@
         deleteButton.titleLabel.shadowColor = [UIColor lightGrayColor];
         deleteButton.titleLabel.shadowOffset = CGSizeMake(0, -1);
         
-        [deleteButton setTitle:@"Delete Item" forState:UIControlStateNormal];
+        [deleteButton setTitle:@"Delete Combo" forState:UIControlStateNormal];
         
         [deleteButton setFrame:CGRectMake(0, 0, 300, 42)];
         
-        [optionSectionContents addObject:deleteButton];
+        [itemGroupSectionContents addObject:deleteButton];
         
-        [listData addObject:optionSectionContents];
+        [listData addObject:itemGroupSectionContents];
+        
     }
     
     return self;
 }
-
 @end

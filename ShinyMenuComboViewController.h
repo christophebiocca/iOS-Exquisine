@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class Combo;
 @class ShinyComboView;
-@class ShinyMenuComboRenderer;
+@class ListRenderer;
 
 extern NSString* COMBO_DONE_BUTTON_HIT;
 
@@ -17,7 +17,7 @@ extern NSString* COMBO_DONE_BUTTON_HIT;
 {
     Combo *theCombo;
     ShinyComboView *comboView;
-    ShinyMenuComboRenderer *comboRenderer;
+    ListRenderer *comboRenderer;
     
 }
 

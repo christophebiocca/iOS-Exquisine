@@ -16,6 +16,8 @@
 #import "ExpandableCell.h"
 #import "ShinyOrderItemViewController.h"
 #import "ShinyMenuComboViewController.h"
+#import "ShinyComboItemViewController.h"
+#import "ShinyOrderComboViewController.h"
 #import "OrderTabView.h"
 #import "Order.h"
 #import "Item.h"
@@ -97,6 +99,14 @@ NSString *ORDER_PLACEMENT_REQUESTED = @"CroutonLabs/OrderPlacementRequested";
         
         [[self navigationController] pushViewController:newController animated:YES];
     }
+    else if ([[CustomViewCell cellIdentifierForData:[orderRenderer objectForCellAtIndex:indexPath]] isEqualToString:@"ShinyComboOrderItemCell"])
+    {
+        Item *theItem = [[orderRenderer objectForCellAtIndex:indexPath] objectForKey:@"orderComboItem"];
+        
+        ShinyComboItemViewController *newController = [[ShinyComboItemViewController alloc] initWithItem:theItem];
+        
+        [[self navigationController] pushViewController:newController animated:YES];
+    }
     else if ([[CustomViewCell cellIdentifierForData:[orderRenderer objectForCellAtIndex:indexPath]] isEqualToString:@"ShinyMenuComboCell"])
     {
         Combo *theCombo = [[orderRenderer objectForCellAtIndex:indexPath] objectForKey:@"menuCombo"];
@@ -104,6 +114,15 @@ NSString *ORDER_PLACEMENT_REQUESTED = @"CroutonLabs/OrderPlacementRequested";
         ShinyMenuComboViewController *newController = [[ShinyMenuComboViewController alloc] initWithCombo:theCombo];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addCombo:) name:COMBO_DONE_BUTTON_HIT object:newController];
+        
+        [[self navigationController] pushViewController:newController animated:YES];
+    }
+    else if ([[CustomViewCell cellIdentifierForData:[orderRenderer objectForCellAtIndex:indexPath]] isEqualToString:@"ShinyOrderComboCell"])
+    {
+        Combo *theCombo = [[orderRenderer objectForCellAtIndex:indexPath] objectForKey:@"combo"];
+        
+        ShinyOrderComboViewController *newController = [[ShinyOrderComboViewController alloc] initWithCombo:theCombo];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteCombo:) name:COMBO_DELETE_BUTTON_HIT object:newController];
         
         [[self navigationController] pushViewController:newController animated:YES];
     }
@@ -148,6 +167,12 @@ NSString *ORDER_PLACEMENT_REQUESTED = @"CroutonLabs/OrderPlacementRequested";
 -(void) deleteItem:(NSNotification *) notification
 {
     [[theOrderManager thisOrder] removeItem:[(ShinyOrderItemViewController *)[notification object] theItem]];
+    [self updateOrderSection];
+}
+
+-(void) deleteCombo:(NSNotification *) notification
+{
+    [[theOrderManager thisOrder] removeCombo:[(ShinyOrderComboViewController *)[notification object] theCombo]];
     [self updateOrderSection];
 }
 
