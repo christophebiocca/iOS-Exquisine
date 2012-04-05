@@ -57,7 +57,7 @@
 
 +(CGFloat)cellHeightForData:(id)data
 {
-    return 22.0f;
+    return 33.0f;
 }
 
 @end

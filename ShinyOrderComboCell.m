@@ -27,10 +27,10 @@
     if (self) {
         
         numberOfCombosLabel = [[UILabel alloc] initWithFrame:CGRectMake(
-                                                                       240, 
-                                                                       1, 
-                                                                       30, 
-                                                                       21)];
+                                                                        234, 
+                                                                        6, 
+                                                                        30, 
+                                                                        21)];
         
         [numberOfCombosLabel setFont:[UIFont fontWithName:@"AmericanTypewriter-Bold" size:13]];
         [numberOfCombosLabel setBackgroundColor:[UIColor clearColor]];
@@ -83,6 +83,6 @@
 
 +(CGFloat)cellHeightForData:(id)data
 {
-    return 22.0f;
+    return 33.0f;
 }
 @end
