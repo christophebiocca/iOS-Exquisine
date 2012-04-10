@@ -102,7 +102,7 @@
     
     [orderTabNavigationController setTitle:@"Order"];
     
-    FavoritesViewController *favoritesTabViewController = [[FavoritesViewController alloc] initWithFavoritesListAndMenu:[[AppData appData] favoriteOrders] :[[AppData appData] theMenu]];
+    FavoritesViewController *favoritesTabViewController = [[FavoritesViewController alloc] initWithFavoritesListAndMenu:[[NSMutableArray alloc] init] :[[AppData appData] theMenu]];
     
     [favoritesTabViewController setTitle:@"Favorites"];
     

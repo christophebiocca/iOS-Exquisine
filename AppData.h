@@ -31,6 +31,7 @@ extern NSString* SERVER_INIT_FAILURE;
     NSMutableArray *ordersHistory;
     NSMutableArray *favoriteItems;
     NSMutableArray *favoriteCombos;
+    Menu *favoritesMenu;
     
     BOOL initialized;
 }
@@ -42,7 +43,7 @@ extern NSString* SERVER_INIT_FAILURE;
 @property (retain) OrderManager *theOrderManager;
 @property (retain) LocationState *locationState;
 @property (retain) NSMutableArray *ordersHistory;
-@property (retain) NSMutableArray *favoriteOrders;
+@property (retain) Menu *favoritesMenu;
 
 +(AppData *)appData;
 

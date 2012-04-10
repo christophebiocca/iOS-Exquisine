@@ -49,7 +49,7 @@ static AppData* appData = nil;
 @synthesize theOrderManager;
 @synthesize locationState;
 @synthesize ordersHistory;
-@synthesize favoriteOrders;
+@synthesize favoritesMenu;
 
 -(id)init
 {
@@ -69,8 +69,13 @@ static AppData* appData = nil;
             [theOrderManager setOrder:currentOrder];
             
             ordersHistory = [[NSMutableArray alloc] initWithCapacity:0];
-            favoriteOrders = [[NSMutableArray alloc] initWithCapacity:0];
+            favoriteItems = [[NSMutableArray alloc] initWithCapacity:0];
+            favoriteCombos = [[NSMutableArray alloc] initWithCapacity:0];
         }
+        
+        favoritesMenu = [[Menu alloc] init];
+        [favoritesMenu setSubmenuList:favoriteItems];
+        [favoritesMenu setComboList:favoriteCombos];
         
         networkChecker = [Reachability reachabilityWithHostname:(@"croutonlabs.com")];
         [networkChecker startNotifier];
@@ -116,7 +121,7 @@ static AppData* appData = nil;
     if ([data valueForKey:@"favorite_orders"]) {
         favoriteItems = [[NSMutableArray alloc] initWithCapacity:0];
         favoriteCombos = [[NSMutableArray alloc] initWithCapacity:0];
-        for (Order *eachOrder in favoriteOrders) {
+        for (Order *eachOrder in [data valueForKey:@"favorite_orders"]) {
             [favoriteItems addObjectsFromArray:[eachOrder itemList]];
             [favoriteCombos addObjectsFromArray:[eachOrder comboList]];
         }
