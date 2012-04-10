@@ -19,6 +19,7 @@
 #import "ShinyComboItemViewController.h"
 #import "ShinyOrderComboViewController.h"
 #import "OrderTabView.h"
+#import "AppData.h"
 #import "Order.h"
 #import "Item.h"
 #import "Menu.h"
@@ -56,14 +57,15 @@ NSString *ORDER_PLACEMENT_REQUESTED = @"CroutonLabs/OrderPlacementRequested";
     
     [toolbarText setText:@"Your Order"];
     
+    //We're initing it again so that anything that has changed is accounted for.
+    [orderRenderer initWithOrderManager:theOrderManager];
+    [[orderView orderTable] reloadData];
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateOrderSection) name:ORDER_MODIFIED object:[theOrderManager thisOrder]];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(placeButtonPressed) name:PLACE_BUTTON_PRESSED object:orderRenderer];
     
     [[self navigationItem] setTitleView:toolbarText];
-    
-    [self updateOrderSection];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -81,7 +83,18 @@ NSString *ORDER_PLACEMENT_REQUESTED = @"CroutonLabs/OrderPlacementRequested";
     {
         Item *theItem = [[orderRenderer objectForCellAtIndex:indexPath] objectForKey:@"menuItem"];
         
-        ShinyMenuItemViewController *newController = [[ShinyMenuItemViewController alloc] initWithItem:[theItem copy]];
+        ShinyMenuItemViewController *newController;
+        
+        //We need to make sure that this item isn't a favorites list item
+        if ([[[[AppData appData] favoritesMenu] submenuList] containsObject:theItem]) {
+            //if it is, we shouldn't copy it when we make the view controller
+            newController = [[ShinyMenuItemViewController alloc] initWithItem:theItem];
+        }
+        else
+        {
+        
+            newController = [[ShinyMenuItemViewController alloc] initWithItem:[theItem copy]];
+        }
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addItem:) name:ITEM_DONE_BUTTON_HIT object:newController];
         
@@ -167,13 +180,11 @@ NSString *ORDER_PLACEMENT_REQUESTED = @"CroutonLabs/OrderPlacementRequested";
 -(void) deleteItem:(NSNotification *) notification
 {
     [[theOrderManager thisOrder] removeItem:[(ShinyOrderItemViewController *)[notification object] theItem]];
-    [self updateOrderSection];
 }
 
 -(void) deleteCombo:(NSNotification *) notification
 {
     [[theOrderManager thisOrder] removeCombo:[(ShinyOrderComboViewController *)[notification object] theCombo]];
-    [self updateOrderSection];
 }
 
 -(void) addCombo:(NSNotification *) notification
@@ -185,12 +196,6 @@ NSString *ORDER_PLACEMENT_REQUESTED = @"CroutonLabs/OrderPlacementRequested";
         [[orderView orderTable] scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
     }
     [[theOrderManager thisOrder] addCombo:[(ShinyMenuComboViewController *)[notification object] theCombo]];
-}
-
--(void) updateOrderSection;
-{
-    [orderRenderer updateOrderSection];
-    [[orderView orderTable] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 -(void) placeButtonPressed

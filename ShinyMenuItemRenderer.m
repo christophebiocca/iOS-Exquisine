@@ -40,11 +40,16 @@
         
         [listData addObject:numberOfItemsSectionContents];
         
+        [sectionNames addObject:@"Options"];
+        NSMutableArray *optionSectionContents = [[NSMutableArray alloc] init];
+        [optionSectionContents addObject:[OptionSectionHeaderView new]];
+        
+        NSMutableDictionary *favoriteCell = [[NSMutableDictionary alloc] init];
+        [favoriteCell setValue:theItem forKey:@"favoriteCellItem"];
+        [optionSectionContents addObject:favoriteCell];
+        
         if ([[theItem options] count] != 0) {
-            [sectionNames addObject:@"Options"];
-            NSMutableArray *optionSectionContents = [[NSMutableArray alloc] init];
             
-            [optionSectionContents addObject:[OptionSectionHeaderView new]];
             
             for (Option *eachOption in [theItem options]) {
                 ExpandableCellData *optionCellData = [[ExpandableCellData alloc] initWithPrimaryItem:eachOption AndRenderer:self];
@@ -52,9 +57,9 @@
                 [optionSectionContents addObjectsFromArray:[optionCellData expansionContents]];
                 [optionCellData setIsOpen:YES];
             }
-            
-            [listData addObject:optionSectionContents];
         }
+        
+        [listData addObject:optionSectionContents];
         
     }
     

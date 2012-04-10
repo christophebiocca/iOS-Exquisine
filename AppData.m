@@ -76,6 +76,7 @@ static AppData* appData = nil;
         favoritesMenu = [[Menu alloc] init];
         [favoritesMenu setSubmenuList:favoriteItems];
         [favoritesMenu setComboList:favoriteCombos];
+        [favoritesMenu setName:@"Favorites"];
         
         networkChecker = [Reachability reachabilityWithHostname:(@"croutonlabs.com")];
         [networkChecker startNotifier];
@@ -323,6 +324,44 @@ static AppData* appData = nil;
 {
     if (![self isFavoriteCombo:inputCombo]) {
         [favoriteCombos addObject:[inputCombo copy]];
+    }
+}
+
+-(void)unsetFavoriteItem:(Item *)inputItem
+{
+    for (Item *eachItem in [favoriteItems copy]) {
+        if ([eachItem isEffectivelyEqual:inputItem]) {
+            [favoriteItems removeObject:eachItem];
+        }
+    }
+}
+
+-(void)unsetFavoriteCombo:(Combo *)inputCombo
+{
+    for (Combo *eachCombo in [favoriteCombos copy]) {
+        if ([eachCombo isEffectivelyEqual:inputCombo]) {
+            [favoriteCombos removeObject:eachCombo];
+        }
+    }
+}
+
+-(void)toggleFavoriteItem:(Item *)inputItem
+{
+    if ([self isFavoriteItem:inputItem]) {
+        [self unsetFavoriteItem:inputItem];
+    }
+    else {
+        [self setFavoriteItem:inputItem];
+    }
+}
+
+-(void)toggleFavoriteCombo:(Combo *)inputCombo
+{
+    if ([self isFavoriteCombo:inputCombo]) {
+        [self unsetFavoriteCombo:inputCombo];
+    }
+    else {
+        [self setFavoriteCombo:inputCombo];
     }
 }
 

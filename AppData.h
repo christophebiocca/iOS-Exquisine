@@ -75,4 +75,14 @@ extern NSString* SERVER_INIT_FAILURE;
 
 -(void) setFavoriteCombo:(Combo *) inputCombo;
 
+-(void) unsetFavoriteItem:(Item *) inputItem;
+
+-(void) unsetFavoriteCombo:(Combo *) inputCombo;
+
+-(void) toggleFavoriteItem:(Item *) inputItem;
+
+-(void) toggleFavoriteCombo:(Combo *) inputCombo;
+
+
+
 @end

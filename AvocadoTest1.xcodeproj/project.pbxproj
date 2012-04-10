@@ -195,6 +195,12 @@
 		23E339B4150FEB0700E7BD68 /* ShinyOrderTabRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 23E339B3150FEB0700E7BD68 /* ShinyOrderTabRenderer.m */; };
 		23E339B8150FF37900E7BD68 /* OrderTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23E339B7150FF37900E7BD68 /* OrderTabViewController.m */; };
 		23E7D87C14C9BA88006D6C13 /* behindButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 23E7D87B14C9BA88006D6C13 /* behindButton.png */; };
+		23EF63701534B20300FAF555 /* ShinyItemFavoriteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23EF636F1534B20300FAF555 /* ShinyItemFavoriteCell.m */; };
+		23EF63751534BECD00FAF555 /* FavoriteCellEmpty.png in Resources */ = {isa = PBXBuildFile; fileRef = 23EF63711534BECD00FAF555 /* FavoriteCellEmpty.png */; };
+		23EF63761534BECD00FAF555 /* FavoriteCellEmpty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 23EF63721534BECD00FAF555 /* FavoriteCellEmpty@2x.png */; };
+		23EF63771534BECD00FAF555 /* FavoriteCellSolid.png in Resources */ = {isa = PBXBuildFile; fileRef = 23EF63731534BECD00FAF555 /* FavoriteCellSolid.png */; };
+		23EF63781534BECD00FAF555 /* FavoriteCellSolid@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 23EF63741534BECD00FAF555 /* FavoriteCellSolid@2x.png */; };
+		23EF637B1534C08F00FAF555 /* ShinyComboFavoriteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23EF637A1534C08F00FAF555 /* ShinyComboFavoriteCell.m */; };
 		23F5AFB515193B8D00B8E066 /* pop.wav in Resources */ = {isa = PBXBuildFile; fileRef = 23F5AFB415193B8D00B8E066 /* pop.wav */; };
 		23FAB38B150560F900606816 /* ShinyIntegerInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23FAB38A150560F900606816 /* ShinyIntegerInputCell.m */; };
 		23FAB38E1505615300606816 /* IntegerInputCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 23FAB38D1505615300606816 /* IntegerInputCellData.m */; };
@@ -570,6 +576,14 @@
 		23E339B6150FF37900E7BD68 /* OrderTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderTabViewController.h; sourceTree = "<group>"; };
 		23E339B7150FF37900E7BD68 /* OrderTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderTabViewController.m; sourceTree = "<group>"; };
 		23E7D87B14C9BA88006D6C13 /* behindButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = behindButton.png; sourceTree = "<group>"; };
+		23EF636E1534B20300FAF555 /* ShinyItemFavoriteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShinyItemFavoriteCell.h; sourceTree = "<group>"; };
+		23EF636F1534B20300FAF555 /* ShinyItemFavoriteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinyItemFavoriteCell.m; sourceTree = "<group>"; };
+		23EF63711534BECD00FAF555 /* FavoriteCellEmpty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FavoriteCellEmpty.png; path = FravicArtAssets/FavoriteCellEmpty.png; sourceTree = "<group>"; };
+		23EF63721534BECD00FAF555 /* FavoriteCellEmpty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "FavoriteCellEmpty@2x.png"; path = "FravicArtAssets/FavoriteCellEmpty@2x.png"; sourceTree = "<group>"; };
+		23EF63731534BECD00FAF555 /* FavoriteCellSolid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FavoriteCellSolid.png; path = FravicArtAssets/FavoriteCellSolid.png; sourceTree = "<group>"; };
+		23EF63741534BECD00FAF555 /* FavoriteCellSolid@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "FavoriteCellSolid@2x.png"; path = "FravicArtAssets/FavoriteCellSolid@2x.png"; sourceTree = "<group>"; };
+		23EF63791534C08F00FAF555 /* ShinyComboFavoriteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; path = ShinyComboFavoriteCell.h; sourceTree = "<group>"; };
+		23EF637A1534C08F00FAF555 /* ShinyComboFavoriteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinyComboFavoriteCell.m; sourceTree = "<group>"; };
 		23F5AFB415193B8D00B8E066 /* pop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pop.wav; sourceTree = "<group>"; };
 		23FAB389150560F900606816 /* ShinyIntegerInputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShinyIntegerInputCell.h; sourceTree = "<group>"; };
 		23FAB38A150560F900606816 /* ShinyIntegerInputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinyIntegerInputCell.m; sourceTree = "<group>"; };
@@ -1126,6 +1140,10 @@
 		233C46EB14FEEF620003C295 /* SampleDesignImages */ = {
 			isa = PBXGroup;
 			children = (
+				23EF63711534BECD00FAF555 /* FavoriteCellEmpty.png */,
+				23EF63721534BECD00FAF555 /* FavoriteCellEmpty@2x.png */,
+				23EF63731534BECD00FAF555 /* FavoriteCellSolid.png */,
+				23EF63741534BECD00FAF555 /* FavoriteCellSolid@2x.png */,
 				23025498152D049100593749 /* ItemGroupNotSatisfied.png */,
 				23025499152D049100593749 /* ItemGroupNotSatisfied@2x.png */,
 				2302549A152D049100593749 /* ItemGroupSatisfied.png */,
@@ -1467,6 +1485,8 @@
 		238395A8150EA3C2000DC733 /* ShinyCells */ = {
 			isa = PBXGroup;
 			children = (
+				23EF636D1534B1BB00FAF555 /* ShinyItemFavoriteCell */,
+				23EF636B1534B1AD00FAF555 /* ShinyComboFavoriteCell */,
 				23025494152D03AF00593749 /* ShinyItemGroupCell */,
 				230254611526504A00593749 /* ExpandableCell */,
 				2302547D152BBA2400593749 /* ExpandableMenuCell */,
@@ -2037,6 +2057,24 @@
 			name = OrderTabViewController;
 			sourceTree = "<group>";
 		};
+		23EF636B1534B1AD00FAF555 /* ShinyComboFavoriteCell */ = {
+			isa = PBXGroup;
+			children = (
+				23EF63791534C08F00FAF555 /* ShinyComboFavoriteCell.h */,
+				23EF637A1534C08F00FAF555 /* ShinyComboFavoriteCell.m */,
+			);
+			name = ShinyComboFavoriteCell;
+			sourceTree = "<group>";
+		};
+		23EF636D1534B1BB00FAF555 /* ShinyItemFavoriteCell */ = {
+			isa = PBXGroup;
+			children = (
+				23EF636E1534B20300FAF555 /* ShinyItemFavoriteCell.h */,
+				23EF636F1534B20300FAF555 /* ShinyItemFavoriteCell.m */,
+			);
+			name = ShinyItemFavoriteCell;
+			sourceTree = "<group>";
+		};
 		23FAB387150560B100606816 /* GeneralPurposeCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -2364,6 +2402,10 @@
 				2302549D152D049100593749 /* ItemGroupNotSatisfied@2x.png in Resources */,
 				2302549E152D049100593749 /* ItemGroupSatisfied.png in Resources */,
 				2302549F152D049100593749 /* ItemGroupSatisfied@2x.png in Resources */,
+				23EF63751534BECD00FAF555 /* FavoriteCellEmpty.png in Resources */,
+				23EF63761534BECD00FAF555 /* FavoriteCellEmpty@2x.png in Resources */,
+				23EF63771534BECD00FAF555 /* FavoriteCellSolid.png in Resources */,
+				23EF63781534BECD00FAF555 /* FavoriteCellSolid@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2552,6 +2594,8 @@
 				230254BB152E39DB00593749 /* ShinyComboItemViewController.m in Sources */,
 				230254CA152E515000593749 /* ShinyOrderComboRenderer.m in Sources */,
 				230254CD152E526E00593749 /* ShinyOrderComboViewController.m in Sources */,
+				23EF63701534B20300FAF555 /* ShinyItemFavoriteCell.m in Sources */,
+				23EF637B1534C08F00FAF555 /* ShinyComboFavoriteCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

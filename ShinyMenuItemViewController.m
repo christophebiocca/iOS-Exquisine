@@ -11,7 +11,10 @@
 #import "Option.h"
 #import "ShinyItemView.h"
 #import "Choice.h"
+#import "Menu.h"
+#import "AppData.h"
 #import "ShinyMenuItemRenderer.h"
+#import "ShinyItemFavoriteCell.h"
 #import "ShinyChoiceCell.h"
 #import "ExpandableCell.h"
 
@@ -55,6 +58,18 @@ NSString* ITEM_DONE_BUTTON_HIT = @"CroutonLabs/ItemDoneButtonHit";
         [theChoice toggleSelected];
         [(ShinyChoiceCell *)[tableView cellForRowAtIndexPath:indexPath] pulseView];
     }
+    else if ([[CustomViewCell cellIdentifierForData:[itemRenderer objectForCellAtIndex:indexPath]] isEqualToString:@"ShinyItemFavoriteCell"])
+    {
+        //If this actually is the favorite item
+        if ([[[[AppData appData] favoritesMenu] submenuList] containsObject:theItem]) {
+            [(ShinyItemFavoriteCell *)[tableView cellForRowAtIndexPath:indexPath] wasClicked];
+            [[self navigationController] popViewControllerAnimated:YES];
+        }
+        else {
+            [(ShinyItemFavoriteCell *)[tableView cellForRowAtIndexPath:indexPath] wasClicked];
+        }
+        
+    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -81,12 +96,13 @@ NSString* ITEM_DONE_BUTTON_HIT = @"CroutonLabs/ItemDoneButtonHit";
     [[self navigationItem] setHidesBackButton:YES];
     
     //Set this as the back button
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(backButtonHit)];
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backButtonHit)];
+                                    
     [backButton setTintColor:[Utilities fravicDarkRedColor]];
     
     [[self navigationItem] setLeftBarButtonItem:backButton];
     
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonHit)];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Add" style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonHit)];
     
     [[self navigationItem] setRightBarButtonItem:doneButton];
     

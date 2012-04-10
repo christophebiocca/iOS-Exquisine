@@ -13,9 +13,6 @@
 
 @implementation ShinyItemGroupCell
 
-
-static float pulseTime = 1.0;
-
 -(id)init
 {
     self = [super init];

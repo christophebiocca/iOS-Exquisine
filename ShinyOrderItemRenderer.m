@@ -45,15 +45,14 @@
         
         [optionSectionContents addObject:[OptionSectionHeaderView new]];
         
-        for (Option *eachOption in [theItem options]) {
-            ExpandableCellData *optionCellData = [[ExpandableCellData alloc] initWithPrimaryItem:eachOption AndRenderer:self];
-            [optionSectionContents addObject:optionCellData];
-            [optionSectionContents addObjectsFromArray:[optionCellData expansionContents]];
-            [optionCellData setIsOpen:YES];
-        }
         
         //It's a bit hackish they we're adding the button in here in stead of in it's own section
         //but I don't think it will cause problems.
+        
+        NSMutableDictionary *favoriteCell = [[NSMutableDictionary alloc] init];
+        [favoriteCell setValue:theItem forKey:@"favoriteCellItem"];
+        [optionSectionContents addObject:favoriteCell];
+        
         UIButton *deleteButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [deleteButton setBackgroundImage:[[UIImage imageNamed:@"DeleteButtonImage.png"]
                                           stretchableImageWithLeftCapWidth:8.0f
@@ -70,6 +69,14 @@
         [deleteButton setFrame:CGRectMake(0, 0, 300, 42)];
         
         [optionSectionContents addObject:deleteButton];
+        
+        for (Option *eachOption in [theItem options]) {
+            ExpandableCellData *optionCellData = [[ExpandableCellData alloc] initWithPrimaryItem:eachOption AndRenderer:self];
+            [optionSectionContents addObject:optionCellData];
+            [optionSectionContents addObjectsFromArray:[optionCellData expansionContents]];
+            [optionCellData setIsOpen:YES];
+        }
+        
         
         [listData addObject:optionSectionContents];
     }

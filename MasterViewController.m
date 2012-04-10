@@ -207,6 +207,7 @@
                                {
                                    //Allocate a new order
                                    [anOrderManager setOrder:[[Order alloc] init]];
+                                   [self viewWillAppear:YES];
                                }
                            }
                         completionBlock:^{

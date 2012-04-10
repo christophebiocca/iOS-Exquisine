@@ -14,6 +14,7 @@
 #import "Choice.h"
 #import "ShinyOrderItemRenderer.h"
 #import "ShinyChoiceCell.h"
+#import "ShinyItemFavoriteCell.h"
 
 NSString* ITEM_DELETE_BUTTON_HIT = @"CroutonLabs/ItemDeleteButtonHit";
 
@@ -64,6 +65,10 @@ NSString* ITEM_DELETE_BUTTON_HIT = @"CroutonLabs/ItemDeleteButtonHit";
         [theChoice toggleSelected];
         [(ShinyChoiceCell *)[tableView cellForRowAtIndexPath:indexPath] pulseView];
     }
+    else if ([[CustomViewCell cellIdentifierForData:[itemRenderer objectForCellAtIndex:indexPath]] isEqualToString:@"ShinyItemFavoriteCell"])
+    {
+        [(ShinyItemFavoriteCell *)[tableView cellForRowAtIndexPath:indexPath] wasClicked];
+    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -90,12 +95,12 @@ NSString* ITEM_DELETE_BUTTON_HIT = @"CroutonLabs/ItemDeleteButtonHit";
     [[self navigationItem] setHidesBackButton:YES];
     
     //Set this as the back button
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(backButtonHit)];
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backButtonHit)];
     [backButton setTintColor:[Utilities fravicDarkRedColor]];
     
     [[self navigationItem] setLeftBarButtonItem:backButton];
     
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonHit)];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Add" style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonHit)];
     
     [[self navigationItem] setRightBarButtonItem:doneButton];
     

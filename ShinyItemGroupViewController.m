@@ -87,7 +87,7 @@
     [[self navigationItem] setHidesBackButton:YES];
     
     //Set this as the back button
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(backButtonHit)];
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backButtonHit)];
     [backButton setTintColor:[Utilities fravicDarkRedColor]];
     
     [[self navigationItem] setLeftBarButtonItem:backButton];

@@ -40,16 +40,19 @@
         
         [listData addObject:numberOfCombosSectionContents];
         
-        if ([[theCombo listOfItemGroups] count] != 0) {
-            [sectionNames addObject:@"Item Groups"];
-            NSMutableArray *itemGroupSectionContents = [[NSMutableArray alloc] init];
-            
-            [itemGroupSectionContents addObject:[ItemGroupSectionHeaderView new]];
-            
-            [itemGroupSectionContents addObjectsFromArray:[theCombo listOfItemGroups]];
-            
-            [listData addObject:itemGroupSectionContents];
-        }
+        
+        [sectionNames addObject:@"Item Groups"];
+        NSMutableArray *itemGroupSectionContents = [[NSMutableArray alloc] init];
+        
+        [itemGroupSectionContents addObject:[ItemGroupSectionHeaderView new]];
+        
+        NSMutableDictionary *favoriteCell = [[NSMutableDictionary alloc] init];
+        [favoriteCell setValue:theCombo forKey:@"favoriteCellCombo"];
+        [itemGroupSectionContents addObject:favoriteCell];
+   
+        [itemGroupSectionContents addObjectsFromArray:[theCombo listOfItemGroups]];
+        
+        [listData addObject:itemGroupSectionContents];
         
     }
     

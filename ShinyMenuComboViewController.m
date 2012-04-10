@@ -11,6 +11,7 @@
 #import "ShinyComboView.h"
 #import "ShinyMenuItemViewController.h"
 #import "ShinyItemGroupViewController.h"
+#import "ShinyComboFavoriteCell.h"
 #import "Combo.h"
 #import "ExpandableCell.h"
 #import "ItemGroup.h"
@@ -67,6 +68,10 @@ NSString *COMBO_DONE_BUTTON_HIT = @"CroutonLabs/ComboDoneButtonHit";
             [[self navigationController] pushViewController:newController animated:YES];
         }
     }
+    else if ([[CustomViewCell cellIdentifierForData:[comboRenderer objectForCellAtIndex:indexPath]] isEqualToString:@"ShinyComboFavoriteCell"])
+    {
+        [(ShinyComboFavoriteCell *)[tableView cellForRowAtIndexPath:indexPath] wasClicked];
+    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -93,13 +98,12 @@ NSString *COMBO_DONE_BUTTON_HIT = @"CroutonLabs/ComboDoneButtonHit";
     [[self navigationItem] setHidesBackButton:YES];
     
     //Set this as the back button
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(backButtonHit)];
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backButtonHit)];
     [backButton setTintColor:[Utilities fravicDarkRedColor]];
     
     [[self navigationItem] setLeftBarButtonItem:backButton];
     
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonHit)];
-    
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Add" style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonHit)];
     [[self navigationItem] setRightBarButtonItem:doneButton];
     
     [self setView:comboView];

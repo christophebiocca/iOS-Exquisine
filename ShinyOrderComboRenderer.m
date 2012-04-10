@@ -43,8 +43,11 @@
             
             [itemGroupSectionContents addObject:[ItemGroupSectionHeaderView new]];
             
-            [itemGroupSectionContents addObjectsFromArray:[theCombo listOfItemGroups]];
         }
+        
+        NSMutableDictionary *favoriteCell = [[NSMutableDictionary alloc] init];
+        [favoriteCell setValue:theCombo forKey:@"favoriteCellCombo"];
+        [itemGroupSectionContents addObject:favoriteCell];
         
         //It's a bit hackish they we're adding the button in here in stead of in it's own section
         //but I don't think it will cause problems.
@@ -65,6 +68,10 @@
         
         [itemGroupSectionContents addObject:deleteButton];
         
+        if ([[theCombo listOfItemGroups] count] != 0) {
+            [itemGroupSectionContents addObjectsFromArray:[theCombo listOfItemGroups]];
+        }
+
         [listData addObject:itemGroupSectionContents];
         
     }

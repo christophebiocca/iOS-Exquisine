@@ -24,22 +24,24 @@
         sectionNames = [[NSMutableArray alloc] init];
         listData = [[NSMutableArray alloc] init];
         
-        if ([[theItem options] count] != 0) {
-            [sectionNames addObject:@"Options"];
-            NSMutableArray *optionSectionContents = [[NSMutableArray alloc] init];
+        [sectionNames addObject:@"Options"];
+        NSMutableArray *optionSectionContents = [[NSMutableArray alloc] init];
+        
+        [optionSectionContents addObject:[OptionSectionHeaderView new]];
+        
+        NSMutableDictionary *favoriteCell = [[NSMutableDictionary alloc] init];
+        [favoriteCell setValue:theItem forKey:@"favoriteCellItem"];
+        [optionSectionContents addObject:favoriteCell];
+      
+        for (Option *eachOption in [theItem options]) {
+            ExpandableCellData *optionCellData = [[ExpandableCellData alloc] initWithPrimaryItem:eachOption AndRenderer:self];
+            [optionSectionContents addObject:optionCellData];
+            [optionSectionContents addObjectsFromArray:[optionCellData expansionContents]];
+            [optionCellData setIsOpen:YES];
             
-            [optionSectionContents addObject:[OptionSectionHeaderView new]];
-            
-            for (Option *eachOption in [theItem options]) {
-                ExpandableCellData *optionCellData = [[ExpandableCellData alloc] initWithPrimaryItem:eachOption AndRenderer:self];
-                [optionSectionContents addObject:optionCellData];
-                [optionSectionContents addObjectsFromArray:[optionCellData expansionContents]];
-                [optionCellData setIsOpen:YES];
-                
-            }
-            
-            [listData addObject:optionSectionContents];
-        }
+        }  
+        
+        [listData addObject:optionSectionContents];
         
     }
     
