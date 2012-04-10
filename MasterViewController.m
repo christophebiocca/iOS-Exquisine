@@ -94,6 +94,7 @@
     LocationTabViewController *locationTabViewController = [[LocationTabViewController alloc] initWithLocationState:[[AppData appData] locationState]];
     
     [locationTabViewController setTitle:@"Location"];
+    [[locationTabViewController tabBarItem] setImage:[UIImage imageNamed:@"LocationIcon"]];
     
     OrderTabViewController *orderTabViewController = [[OrderTabViewController alloc] initWithOrderManager:[[AppData appData] theOrderManager]];
     
@@ -101,10 +102,12 @@
     [orderTabNavigationController setHidesBottomBarWhenPushed:YES];
     
     [orderTabNavigationController setTitle:@"Order"];
+    [[orderTabNavigationController tabBarItem] setImage:[UIImage imageNamed:@"ForkAndKnife.png"]];
     
     FavoritesViewController *favoritesTabViewController = [[FavoritesViewController alloc] initWithFavoritesListAndMenu:[[NSMutableArray alloc] init] :[[AppData appData] theMenu]];
     
-    [favoritesTabViewController setTitle:@"Favorites"];
+    [favoritesTabViewController setTitle:@"Settings"];
+    [[favoritesTabViewController tabBarItem] setImage:[UIImage imageNamed:@"SettingsIcon.png"]];
     
     [[masterView tabController] setViewControllers:[NSArray arrayWithObjects:locationTabViewController,orderTabNavigationController,favoritesTabViewController,nil]];
     
