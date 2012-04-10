@@ -261,6 +261,7 @@ NSString* COMBO_MODIFIED = @"CroutonLabs/ComboModified";
             return;
         }
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:COMBO_MODIFIED object:self];
 }
 
 -(void)removeItem:(Item *)anItem

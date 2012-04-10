@@ -15,6 +15,8 @@
 #import "Combo.h"
 #import "ExpandableCell.h"
 #import "ItemGroup.h"
+#import "AppData.h"
+#import "Menu.h"
 #import "Item.h"
 
 NSString *COMBO_DONE_BUTTON_HIT = @"CroutonLabs/ComboDoneButtonHit";
@@ -70,7 +72,14 @@ NSString *COMBO_DONE_BUTTON_HIT = @"CroutonLabs/ComboDoneButtonHit";
     }
     else if ([[CustomViewCell cellIdentifierForData:[comboRenderer objectForCellAtIndex:indexPath]] isEqualToString:@"ShinyComboFavoriteCell"])
     {
-        [(ShinyComboFavoriteCell *)[tableView cellForRowAtIndexPath:indexPath] wasClicked];
+        if ([[[[AppData appData] favoritesMenu] comboList] containsObject:theCombo] ) {
+            [(ShinyComboFavoriteCell *)[tableView cellForRowAtIndexPath:indexPath] wasClicked];
+            [[self navigationController] popViewControllerAnimated:YES];
+        }
+        else {
+            
+            [(ShinyComboFavoriteCell *)[tableView cellForRowAtIndexPath:indexPath] wasClicked];
+        }
     }
 }
 

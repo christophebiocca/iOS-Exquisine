@@ -20,6 +20,7 @@
 #import "ShinyOrderComboViewController.h"
 #import "OrderTabView.h"
 #import "AppData.h"
+#import "Combo.h"
 #import "Order.h"
 #import "Item.h"
 #import "Menu.h"
@@ -124,7 +125,16 @@ NSString *ORDER_PLACEMENT_REQUESTED = @"CroutonLabs/OrderPlacementRequested";
     {
         Combo *theCombo = [[orderRenderer objectForCellAtIndex:indexPath] objectForKey:@"menuCombo"];
         
-        ShinyMenuComboViewController *newController = [[ShinyMenuComboViewController alloc] initWithCombo:theCombo];
+        ShinyMenuComboViewController *newController;
+        
+        if ([[[[AppData appData] favoritesMenu] comboList] containsObject:theCombo]) {
+            newController = [[ShinyMenuComboViewController alloc] initWithCombo:theCombo];
+        }
+        else {
+            newController = [[ShinyMenuComboViewController alloc] initWithCombo:[theCombo copy]];
+        }
+        
+        
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addCombo:) name:COMBO_DONE_BUTTON_HIT object:newController];
         
