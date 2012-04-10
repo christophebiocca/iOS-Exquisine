@@ -19,6 +19,7 @@
 #import "Order.h"
 #import "Combo.h"
 #import "Item.h"
+#import "AppData.h"
 #import "Menu.h"
 
 @implementation ShinyOrderTabRenderer
@@ -42,6 +43,10 @@
         NSMutableArray *menuSectionContents = [[NSMutableArray alloc] init];
         
         [menuSectionContents addObject:[MenuSectionHeaderView new]];
+        
+        if ([[[[AppData appData] favoritesMenu] submenuList] count] + [[[[AppData appData] favoritesMenu] comboList] count]) {
+            [menuSectionContents addObject:[[ExpandableCellData alloc] initWithPrimaryItem:[[AppData appData] favoritesMenu] AndRenderer:self]];
+        }
         
         for (id object in [[theOrderManager thisMenu] submenuList]) {
             if ([object isKindOfClass:[Item class]]) {
