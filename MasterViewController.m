@@ -22,7 +22,6 @@
 @implementation MasterViewController
 
 @synthesize masterView;
-@synthesize appData;
 
 
 - (id)initWithFrame:(CGRect)frame
@@ -30,11 +29,14 @@
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
         masterView = [[MasterView alloc] initWithFrame:frame];
-        appData = [AppData alloc];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(initializationSuccess) name:INITIALIZED_SUCCESS object:appData];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(initializationFailure) name:INITIALIZED_FAILURE object:appData];
-        appData = [appData init];
-         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showOrderConfirmation:) name:ORDER_PLACEMENT_REQUESTED object:[appData theOrderManager]];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(initializationSuccess) name:INITIALIZED_SUCCESS object:[AppData appData]];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(initializationFailure) name:INITIALIZED_FAILURE object:[AppData appData]];
+        
+        //Yeah.. I was annoyed by the warning
+        id stopWarningMe = [[AppData appData] init];
+        stopWarningMe = @"No, really. Cut that out.";
+        
+         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showOrderConfirmation:) name:ORDER_PLACEMENT_REQUESTED object:[[AppData appData] theOrderManager]];
         [[[masterView loadingView] progressLabel] setText:@"Contacting Server..."];
     }
     return self;
@@ -89,18 +91,18 @@
 -(void) initializationSuccess
 {
     [[[masterView loadingView] progressLabel] setText:@"Initialization Complete"];
-    LocationTabViewController *locationTabViewController = [[LocationTabViewController alloc] initWithLocationState:[appData locationState]];
+    LocationTabViewController *locationTabViewController = [[LocationTabViewController alloc] initWithLocationState:[[AppData appData] locationState]];
     
     [locationTabViewController setTitle:@"Location"];
     
-    OrderTabViewController *orderTabViewController = [[OrderTabViewController alloc] initWithOrderManager:[appData theOrderManager]];
+    OrderTabViewController *orderTabViewController = [[OrderTabViewController alloc] initWithOrderManager:[[AppData appData] theOrderManager]];
     
     UINavigationController *orderTabNavigationController = [[UINavigationController alloc] initWithRootViewController:orderTabViewController];
     [orderTabNavigationController setHidesBottomBarWhenPushed:YES];
     
     [orderTabNavigationController setTitle:@"Order"];
     
-    FavoritesViewController *favoritesTabViewController = [[FavoritesViewController alloc] initWithFavoritesListAndMenu:[appData favoriteOrders] :[appData theMenu]];
+    FavoritesViewController *favoritesTabViewController = [[FavoritesViewController alloc] initWithFavoritesListAndMenu:[[AppData appData] favoriteOrders] :[[AppData appData] theMenu]];
     
     [favoritesTabViewController setTitle:@"Favorites"];
     
@@ -123,7 +125,7 @@
 -(void)reloadData
 {
     [masterView putUpLoadingView];
-    [appData initializeFromServer];
+    [[AppData appData] initializeFromServer];
     [masterView performSelector:@selector(dissolveLoadingView) withObject:nil afterDelay:2];
 }
 
@@ -136,7 +138,7 @@
         return;
     }
     
-    if ([aNotification object] != [appData theOrderManager]) {
+    if ([aNotification object] != [[AppData appData] theOrderManager]) {
         CLLog(LOG_LEVEL_ERROR, @"We're trying to submit an order with an orderManager that does not belong to appData. That's bad, and it won't work. Commencing operation run around like a chicken with its head cut off.");
         return;
     }
@@ -152,7 +154,7 @@
         return;
     }
     
-    if(![appData anyLocationIsOpen])
+    if(![[AppData appData] anyLocationIsOpen])
     {
         UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Oops" message:@"None of the restaurants are open right now. You'll have to wait until they are." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
         
@@ -163,7 +165,7 @@
         return;
     }
     
-    if([[appData networkChecker] isReachable])
+    if([[[AppData appData] networkChecker] isReachable])
     {
         UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Process Purchase?" message:[NSString stringWithFormat: @"Order confirmation:\nSubtotal: %@\nHST: %@\nGrand Total: %@\n\nIs this okay?", [Utilities FormatToPrice:[[[aNotification object] thisOrder] subtotalPrice]],[Utilities FormatToPrice:[[[aNotification object] thisOrder] taxPrice]],[Utilities FormatToPrice:[[[aNotification object] thisOrder] totalPrice]]] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil];
         
@@ -186,8 +188,8 @@
         {
             [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Placed order"];
             
-            [self placeOrder:[appData theOrderManager]];
-            [[[appData theOrderManager] thisOrder] setStatus:@"Transmitting"];
+            [self placeOrder:[[AppData appData] theOrderManager]];
+            [[[[AppData appData] theOrderManager] thisOrder] setStatus:@"Transmitting"];
         }
         if (buttonIndex == 2)
             [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Canceled placing an order"];
@@ -197,10 +199,10 @@
 -(void) placeOrder:(OrderManager *) anOrderManager
 {
     PaymentStack* paymentStack = 
-    [[PaymentStack alloc] initWithOrder:[anOrderManager thisOrder] locationState:[appData locationState]
+    [[PaymentStack alloc] initWithOrder:[anOrderManager thisOrder] locationState:[[AppData appData] locationState]
                            successBlock:^{
                                //Push the current order on the history list
-                               [[appData ordersHistory] addObject:[anOrderManager thisOrder]];
+                               [[[AppData appData] ordersHistory] addObject:[anOrderManager thisOrder]];
                                if ([[anOrderManager thisOrder] isEffectivelyEqual:[anOrderManager thisOrder]])
                                {
                                    //Allocate a new order

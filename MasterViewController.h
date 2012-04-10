@@ -13,11 +13,9 @@
 @interface MasterViewController : UIViewController
 {
     MasterView *masterView;
-    AppData *appData;
 }
 
 @property (retain) MasterView *masterView;
-@property (retain) AppData *appData;
 
 - (id) initWithFrame:(CGRect)frame;
 

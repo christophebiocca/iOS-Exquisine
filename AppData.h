@@ -12,6 +12,8 @@
 @class OrderManager;
 @class LocationState;
 @class Reachability;
+@class Item;
+@class Combo;
 
 extern NSString* INITIALIZED_SUCCESS;
 extern NSString* INITIALIZED_FAILURE;
@@ -27,7 +29,8 @@ extern NSString* SERVER_INIT_FAILURE;
     LocationState *locationState;
     
     NSMutableArray *ordersHistory;
-    NSMutableArray *favoriteOrders;
+    NSMutableArray *favoriteItems;
+    NSMutableArray *favoriteCombos;
     
     BOOL initialized;
 }
@@ -41,6 +44,7 @@ extern NSString* SERVER_INIT_FAILURE;
 @property (retain) NSMutableArray *ordersHistory;
 @property (retain) NSMutableArray *favoriteOrders;
 
++(AppData *)appData;
 
 -(BOOL) loadDataFromDisk;
 
@@ -58,14 +62,16 @@ extern NSString* SERVER_INIT_FAILURE;
 
 -(void) getLocation;
 
--(void) doFavoriteConsistancyCheck;
-
--(NSArray *) allKnownOrders;
-
 -(Order *)dereferenceOrderIdentifier:(NSString *) orderIdentifier;
 
--(NSInteger)numberOfFavorites;
-
 -(BOOL) anyLocationIsOpen;
+
+-(BOOL) isFavoriteItem:(Item *) inputItem;
+
+-(BOOL) isFavoriteCombo:(Combo *) inputCombo;
+
+-(void) setFavoriteItem:(Item *) inputItem;
+
+-(void) setFavoriteCombo:(Combo *) inputCombo;
 
 @end

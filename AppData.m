@@ -14,6 +14,8 @@
 #import "GetMenu.h"
 #import "Reachability.h"
 #import "Location.h"
+#import "Item.h"
+#import "Combo.h"
 #import "GetLocations.h"
 
 NSString* INITIALIZED_SUCCESS = @"INITIALIZED_SUCCESS";
@@ -24,6 +26,21 @@ NSString* harddiskFileName = @"MainPageViewControllerInfo.plist";
 NSString* harddiskFileFolder = @"~/Library/Application Support/PitaFactoryFiles/";
 
 @implementation AppData
+
+
+static AppData* appData = nil;
+
++(AppData*)appData
+{
+	@synchronized([AppData class])
+	{
+		if (!appData)
+			appData = [self alloc];
+        
+		return appData;
+	}
+	return nil;
+}
 
 @synthesize initialized;
 @synthesize networkChecker;
@@ -57,7 +74,6 @@ NSString* harddiskFileFolder = @"~/Library/Application Support/PitaFactoryFiles/
         
         networkChecker = [Reachability reachabilityWithHostname:(@"croutonlabs.com")];
         [networkChecker startNotifier];
-        
         [self initializeFromServer];
         [self performSelector:@selector(assessInitFailure) withObject:nil afterDelay:10];
         
@@ -94,9 +110,24 @@ NSString* harddiskFileFolder = @"~/Library/Application Support/PitaFactoryFiles/
     locationState = [data valueForKey:@"locationState"];
     
     ordersHistory = [data valueForKey:@"order_history"];
-    favoriteOrders = [data valueForKey:@"favorite_orders"];
     
-    if (!(theMenu && currentOrder && theOrderManager && locationState && favoriteOrders)) {
+    //Favorite orders is now obsolete, but we need to load the items and combos
+    //that had been favorited into the new favorites archetecture.
+    if ([data valueForKey:@"favorite_orders"]) {
+        favoriteItems = [[NSMutableArray alloc] initWithCapacity:0];
+        favoriteCombos = [[NSMutableArray alloc] initWithCapacity:0];
+        for (Order *eachOrder in favoriteOrders) {
+            [favoriteItems addObjectsFromArray:[eachOrder itemList]];
+            [favoriteCombos addObjectsFromArray:[eachOrder comboList]];
+        }
+    }
+    else 
+    {
+        favoriteItems = [data valueForKey:@"favorite_items"];
+        favoriteCombos = [data valueForKey:@"favorite_combos"];
+    }
+    
+    if (!(theMenu && currentOrder && theOrderManager && locationState && favoriteCombos && favoriteItems)) {
         CLLog(LOG_LEVEL_ERROR, @"initializeFromData failed");
         return NO;
     }
@@ -129,7 +160,8 @@ NSString* harddiskFileFolder = @"~/Library/Application Support/PitaFactoryFiles/
     [storageDict setValue: locationState forKey:@"locationState"];
     
     [storageDict setValue: ordersHistory forKey:@"order_history"];
-    [storageDict setValue: favoriteOrders forKey:@"favorite_orders"];
+    [storageDict setValue: favoriteItems forKey:@"favorite_items"];
+    [storageDict setValue: favoriteCombos forKey:@"favorite_combos"];
     
     return storageDict;
 }
@@ -138,26 +170,6 @@ NSString* harddiskFileFolder = @"~/Library/Application Support/PitaFactoryFiles/
 {
     [self initiateMenuRefresh];
     [self getLocation];
-}
-
-
--(NSInteger)numberOfFavorites
-{
-    return [favoriteOrders count];
-}
-
--(void)doFavoriteConsistancyCheck
-{
-    for (Order *eachOrder in [self allKnownOrders]) {
-        [eachOrder setFavorite:NO];
-        for (Order *favOrder in favoriteOrders) {
-            if([eachOrder isEffectivelyEqual:favOrder])
-            {
-                [eachOrder setFavorite:YES];
-                break;
-            }
-        }
-    }
 }
 
 -(NSArray *)allKnownOrders 
@@ -273,6 +285,40 @@ NSString* harddiskFileFolder = @"~/Library/Application Support/PitaFactoryFiles/
             return YES;
     }
     return NO;
+}
+
+-(BOOL)isFavoriteItem:(Item *)inputItem
+{
+    for (Item *eachItem in favoriteItems) {
+        if ([inputItem isEffectivelyEqual:eachItem]) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+-(BOOL)isFavoriteCombo:(Combo *)inputCombo
+{
+    for (Combo *eachCombo in favoriteCombos) {
+        if ([eachCombo isEffectivelyEqual:inputCombo]) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+-(void)setFavoriteItem:(Item *)inputItem
+{
+    if (![self isFavoriteItem:inputItem]) {
+        [favoriteItems addObject:[inputItem copy]];
+    }
+}
+
+-(void)setFavoriteCombo:(Combo *)inputCombo
+{
+    if (![self isFavoriteCombo:inputCombo]) {
+        [favoriteCombos addObject:[inputCombo copy]];
+    }
 }
 
 @end
