@@ -64,9 +64,16 @@ NSString *ORDER_PLACEMENT_REQUESTED = @"CroutonLabs/OrderPlacementRequested";
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshView) name:ORDER_MANAGER_NEEDS_REDRAW object:theOrderManager];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(placeButtonPressed) name:PLACE_BUTTON_PRESSED object:orderRenderer];
     
     [[self navigationItem] setTitleView:toolbarText];
+}
+
+-(void) refreshView
+{
+    [self viewWillAppear:YES];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
