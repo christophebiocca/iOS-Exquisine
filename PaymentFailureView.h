@@ -9,12 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface PaymentFailureView : UIView{
-    UIToolbar* bar;
-    UIBarButtonItem* cancel;
     UILabel* error;
 }
-
-@property(retain, readonly)UIBarButtonItem* cancel;
 
 -(void)setErrorMessage:(NSString*)message;
 

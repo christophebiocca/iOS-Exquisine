@@ -10,28 +10,24 @@
 
 @implementation PaymentConfirmationView
 
-@synthesize confirm, change, cancel;
+@synthesize accept, change;
 
 - (id)initWithCCDigits:(NSString *)ccDigits
 {
     self = [super initWithFrame:CGRectZero];
     if (self) {
         [self setBackgroundColor:[UIColor whiteColor]];
-        confirm = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:nil action:nil];
-        [confirm setTitle:@"Confirm"];
-        cancel = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:nil action:nil];
-        bar = [[UIToolbar alloc] initWithFrame:CGRectZero];
-        [bar setItems:[NSArray arrayWithObjects:cancel, 
-                       [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace 
-                                                                     target:nil action:nil],
-                       confirm, nil]];
-        [self addSubview:bar];
         notificationMessage = [[UILabel alloc] initWithFrame:CGRectZero];
         [notificationMessage setLineBreakMode:UILineBreakModeWordWrap];
         [notificationMessage setNumberOfLines:0];
         [self addSubview:notificationMessage];
+        accept = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [accept setTitle:@"Use this card" forState:UIControlStateNormal];
+        [[accept titleLabel] setLineBreakMode:UILineBreakModeWordWrap];
+        [[accept titleLabel] setAdjustsFontSizeToFitWidth:YES];
+        [self addSubview:accept];
         change = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [change setTitle:@"Click here to change your payment information." forState:UIControlStateNormal];
+        [change setTitle:@"Change my payment information" forState:UIControlStateNormal];
         [[change titleLabel] setLineBreakMode:UILineBreakModeWordWrap];
         [[change titleLabel] setAdjustsFontSizeToFitWidth:YES];
         [self addSubview:change];
@@ -42,25 +38,19 @@
 }
 
 -(void)setCCDigits:(NSString *)ccDigits{
-    [notificationMessage setText:[NSString stringWithFormat:@"We will charge your credit card ending in %@.", ccDigits]];
+    [notificationMessage setText:[NSString stringWithFormat:@"Charge this card?\nCredit card: ************%@.", ccDigits]];
 }
 
 #define PADDING 12
-#define TOOLBAR_HEIGHT 44
+#define BUTTON_HEIGHT 50
 
 -(void)layoutSubviews{
     CGSize lims = [self frame].size;
-    [bar setFrame:(CGRect){
-        .size = {
-            .width = lims.width,
-            .height = TOOLBAR_HEIGHT
-        }
-    }];
     
     CGRect notifFrame = (CGRect){
         .origin = {
             .x = PADDING,
-            .y = TOOLBAR_HEIGHT + PADDING
+            .y = PADDING
         },
         .size = [[notificationMessage text] sizeWithFont:[notificationMessage font] 
                                        constrainedToSize:(CGSize){.width=lims.width - 2*PADDING, .height=9999} 
@@ -69,14 +59,25 @@
     
     [notificationMessage setFrame:notifFrame];
     
-    [change setFrame:(CGRect){
+    [accept setFrame:(CGRect){
         .origin = {
             .x = PADDING,
-            .y = TOOLBAR_HEIGHT + 2*PADDING + notifFrame.size.height
+            .y = 2*PADDING + notifFrame.size.height
         },
         .size = {
             .width = lims.width - 2*PADDING,
-            .height = 50
+            .height = BUTTON_HEIGHT
+        }
+    }];
+    
+    [change setFrame:(CGRect){
+        .origin = {
+            .x = PADDING,
+            .y = 3*PADDING + notifFrame.size.height + BUTTON_HEIGHT
+        },
+        .size = {
+            .width = lims.width - 2*PADDING,
+            .height = BUTTON_HEIGHT
         }
     }];
 }

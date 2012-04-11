@@ -6,17 +6,14 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "PaymentViewDelegate.h"
-
 @class PaymentInfo;
 @class PaymentView;
 @class PaymentError;
 @class Order;
 
-@interface PaymentInfoViewController : UIViewController<PaymentViewDelegate>{
+@interface PaymentInfoViewController : UIViewController<UITextFieldDelegate>{
     PaymentView* paymentView;
     PaymentInfo* info;
-    BOOL navigationBarWasHidden;
     
     void(^completionBlock)(PaymentInfo*);
     void(^cancelledBlock)();

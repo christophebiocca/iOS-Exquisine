@@ -12,20 +12,12 @@
 
 @implementation PaymentCompletedView
 
-@synthesize done;
-
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
         [self setBackgroundColor:[UIColor whiteColor]];
-        
-        bar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, 44)];
-        done = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:nil action:nil];
-        UIBarButtonItem* space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-        [bar setItems:[NSArray arrayWithObjects:space, done, nil]];
-        [self addSubview:bar];
         
         authCode = [[UILabel alloc] init];
         messageText = [[UILabel alloc] init];
@@ -53,22 +45,15 @@
     return self;
 }
 
-#define TOOLBAR_HEIGHT 44
 #define PADDING 6
 #define LABELHEIGHT 30
 
 -(void)layoutSubviews{
     CGSize lims = [self frame].size;
-    [bar setFrame:(CGRect){
-        .size = {
-            .width = lims.width,
-            .height = TOOLBAR_HEIGHT
-        }
-    }];
     [messageText setFrame:(CGRect){
         .origin = {
             .x = PADDING,
-            .y = TOOLBAR_HEIGHT + PADDING + (PADDING + LABELHEIGHT) * 0
+            .y = PADDING + (PADDING + LABELHEIGHT) * 0
         },
         .size = {
             .width = lims.width - 2*PADDING,
@@ -78,7 +63,7 @@
     [authCode setFrame:(CGRect){
         .origin = {
             .x = PADDING,
-            .y = TOOLBAR_HEIGHT + PADDING + (PADDING + LABELHEIGHT) * 1
+            .y = PADDING + (PADDING + LABELHEIGHT) * 1
         },
         .size = {
             .width = lims.width - 2*PADDING,
@@ -88,7 +73,7 @@
     [trnAmount setFrame:(CGRect){
         .origin = {
             .x = PADDING,
-            .y = TOOLBAR_HEIGHT + PADDING + (PADDING + LABELHEIGHT) * 2
+            .y = PADDING + (PADDING + LABELHEIGHT) * 2
         },
         .size = {
             .width = lims.width - 2*PADDING,
@@ -98,7 +83,7 @@
     [trnDate setFrame:(CGRect){
         .origin = {
             .x = PADDING,
-            .y = TOOLBAR_HEIGHT + PADDING + (PADDING + LABELHEIGHT) * 3
+            .y = PADDING + (PADDING + LABELHEIGHT) * 3
         },
         .size = {
             .width = lims.width - 2*PADDING,
@@ -108,7 +93,7 @@
     [pickupTime setFrame:(CGRect){
         .origin = {
             .x = PADDING,
-            .y = TOOLBAR_HEIGHT + PADDING + (PADDING + LABELHEIGHT) * 5
+            .y = PADDING + (PADDING + LABELHEIGHT) * 5
         },
         .size = {
             .width = lims.width - 2*PADDING,
@@ -118,7 +103,7 @@
     [signoff setFrame:(CGRect){
         .origin = {
             .x = PADDING,
-            .y = TOOLBAR_HEIGHT + PADDING + (PADDING + LABELHEIGHT) * 6
+            .y = PADDING + (PADDING + LABELHEIGHT) * 6
         },
         .size = {
             .width = lims.width - 2*PADDING,

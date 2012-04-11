@@ -11,6 +11,12 @@
 
 @implementation PaymentProcessingViewController
 
+-(UINavigationItem*)navigationItem{
+    UINavigationItem* item = [[UINavigationItem alloc] initWithTitle:@"Processing"];
+    [item setHidesBackButton:YES];
+    return item;
+}
+
 -(id)init{
     if(self = [super initWithNibName:nil bundle:nil]){
     }

@@ -10,8 +10,6 @@
 @class Order;
 
 @interface PaymentCompletedView : UIView{
-    UIToolbar* bar;
-    UIBarButtonItem* done;
     UILabel* authCode;
     UILabel* messageText;
     UILabel* trnAmount;
@@ -21,7 +19,5 @@
 }
 
 -(void)setSuccessInfo:(PaymentSuccessInfo*)info AndOrderInfo:(Order *) theOrder;
-
-@property(retain, readonly)UIBarButtonItem* done;
 
 @end

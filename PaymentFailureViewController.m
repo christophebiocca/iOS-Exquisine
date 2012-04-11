@@ -14,6 +14,16 @@
 
 @synthesize cancelCallback;
 
+-(UINavigationItem*)navigationItem{
+    UINavigationItem* item = [[UINavigationItem alloc] initWithTitle:@"Error"];
+    UIBarButtonItem* cancel = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
+                                                                            target:self 
+                                                                            action:@selector(cancelled)];
+    [item setRightBarButtonItem:cancel];
+    [item setHidesBackButton:YES];
+    return item;
+}
+
 - (id)init
 {
     self = [super init];
@@ -56,8 +66,6 @@
 {
     [super viewDidLoad];
     [self setMessage];
-    [[failureView cancel] setAction:@selector(cancelled)];
-    [[failureView cancel] setTarget:self];
 }
 
 -(void)cancelled{

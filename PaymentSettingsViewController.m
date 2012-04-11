@@ -66,9 +66,8 @@
 - (void) changePaymentInfo
 {
     PaymentInfoViewController *controller = [[PaymentInfoViewController alloc] init];
-    //Yeah, this is hackish and terrible, but we can deal with it differently on fravic's branch.
-    [[[controller paymentView] remember] setHidden:YES];
-    [[[controller paymentView] rememberLabel] setHidden:YES];
+    
+    [[controller paymentView] setShowRemember:NO];
     
     [controller setCompletionBlock:^(PaymentInfo* info){
         [self sendPaymentInfo:info];

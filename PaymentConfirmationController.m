@@ -13,6 +13,15 @@
 
 @synthesize acceptBlock, changeBlock, cancelBlock, ccDigits;
 
+-(UINavigationItem*)navigationItem {
+    UIBarButtonItem* cancel = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
+                                                                            target:self
+                                                                            action:@selector(cancel)];
+    UINavigationItem* nav = [[UINavigationItem alloc] initWithTitle:@"Confirm Payment"];
+    [nav setLeftBarButtonItem:cancel];
+    return nav;
+}
+
 -(id)init{
     if(self = [super initWithNibName:nil bundle:nil]){
     }
@@ -25,13 +34,8 @@
 }
 
 -(void)viewDidLoad{
-    UIBarButtonItem* confirm = [paymentView confirm];
-    [confirm setTarget:self];
-    [confirm setAction:@selector(confirm)];
-    UIBarButtonItem* cancel = [paymentView cancel];
-    [cancel setTarget:self];
-    [cancel setAction:@selector(cancel)];
     [[paymentView change] addTarget:self action:@selector(change) forControlEvents:UIControlEventTouchUpInside];
+    [[paymentView accept] addTarget:self action:@selector(confirm) forControlEvents:UIControlEventTouchUpInside];
 }
 
 -(void)confirm{
