@@ -45,6 +45,7 @@
 -(void)showFailure:(NSError*)error;
 
 /* Animation Control */
+-(void)pushController:(UIViewController*)controller;
 -(void)afterAnimating:(void(^)())after;
 
 @end
@@ -164,10 +165,7 @@
 }
 
 -(void)checkForProfile{
-    [self afterAnimating:^{
-        [[self navigationController] setViewControllers:[NSArray arrayWithObject:[self preProcessingController]] 
-                                               animated:YES];
-    }];
+    [self pushController:[self preProcessingController]];
     [GetPaymentProfileInfo fetchInfo:^(GetPaymentProfileInfo* request){
         CLLog(LOG_LEVEL_INFO, [NSString stringWithFormat:@"Success %@", self]);
         [[self paymentConfirmationController] setCcDigits:[[request info] last4Digits]];
@@ -184,10 +182,7 @@
 
 -(void)requestConfirmation{
     PaymentConfirmationController* controller = [self paymentConfirmationController];
-    [self afterAnimating:^{
-        [[self navigationController] setViewControllers:[NSArray arrayWithObject:controller] 
-                                               animated:YES];
-    }];
+    [self pushController:controller];
     [controller setAcceptBlock:^{
         [self sendOrder:nil];
     }];
@@ -201,9 +196,7 @@
 
 -(void)requestPaymentInfo{
     PaymentInfoViewController* controller = [self paymentInfoController];
-    [self afterAnimating:^{
-        [[self navigationController] setViewControllers:[NSArray arrayWithObject:[self paymentInfoController]] animated:YES];
-    }];
+    [self pushController:controller];
     [controller setCompletionBlock:^(PaymentInfo* info){
         [self sendOrder:info];
     }];
@@ -214,13 +207,7 @@
 
 -(void)changePaymentInfo{
     PaymentInfoViewController* controller = [self paymentInfoController];
-    [self afterAnimating:^{
-        [[self navigationController] setViewControllers:[NSArray arrayWithObjects:
-                                                         [self paymentConfirmationController], 
-                                                         [self paymentInfoController], 
-                                                         nil]
-                                               animated:YES];
-    }];
+    [self pushController:controller];
     [controller setCompletionBlock:^(PaymentInfo* info){
         [self sendOrder:info];
     }];
@@ -230,10 +217,7 @@
 }
 
 -(void)sendOrder:(PaymentInfo*)info{
-    [self afterAnimating:^{
-        [[self navigationController] setViewControllers:[NSArray arrayWithObjects:[self paymentInfoController], 
-                                                         [self processingController], nil] animated:YES];
-    }];
+    [self pushController:[self processingController]];
     [PlaceOrder sendOrder:order toLocation:[self currentLocation] withPaymentInfo:info 
            paymentSuccess:^(PaymentSuccessInfo* success){
                successBlock();
@@ -259,9 +243,7 @@
 
 -(void)showSuccess{
     PaymentCompleteViewController* controller = [self completionController];
-    [self afterAnimating:^{
-        [[self navigationController] setViewControllers:[NSArray arrayWithObject:controller] animated:YES];
-    }];
+    [self pushController:controller];
     [controller setDoneCallback:^{
         completionBlock();
     }];
@@ -270,15 +252,23 @@
 -(void)showFailure:(NSError*)error{
     PaymentFailureViewController* controller = [self failureController];
     [controller setError:error];
-    [self afterAnimating:^{
-        [[self navigationController] setViewControllers:[NSArray arrayWithObject:controller] animated:YES];
-    }];
+    [self pushController:controller];
     [controller setCancelCallback:^{
         cancelledBlock();
     }];
 }
 
 #pragma mark Animation Control
+
+-(void)pushController:(UIViewController*)controller{
+    [self afterAnimating:^{
+        NSMutableArray* currentControllers = [NSMutableArray arrayWithArray:[[self navigationController] viewControllers]];
+        [currentControllers removeObjectIdenticalTo:[self preProcessingController]];
+        [currentControllers removeObjectIdenticalTo:[self processingController]];
+        [currentControllers addObject:controller];
+        [[self navigationController] setViewControllers:currentControllers animated:YES];
+    }];
+}
 
 -(void)navigationController:(UINavigationController *)navigationController 
      willShowViewController:(UIViewController *)viewController 
