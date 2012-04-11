@@ -93,25 +93,12 @@ NSString* ITEM_DONE_BUTTON_HIT = @"CroutonLabs/ItemDoneButtonHit";
 -(void)loadView
 {
     [super loadView];
-    [[self navigationItem] setHidesBackButton:YES];
-    
-    //Set this as the back button
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backButtonHit)];
-                                    
-    [backButton setTintColor:[Utilities fravicDarkRedColor]];
-    
-    [[self navigationItem] setLeftBarButtonItem:backButton];
     
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Add" style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonHit)];
     
     [[self navigationItem] setRightBarButtonItem:doneButton];
     
     [self setView:itemView];
-}
-
--(void) backButtonHit
-{
-    [[self navigationController] popViewControllerAnimated:YES];
 }
 
 -(void) doneButtonHit
