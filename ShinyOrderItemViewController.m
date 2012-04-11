@@ -30,16 +30,6 @@ NSString* ITEM_DELETE_BUTTON_HIT = @"CroutonLabs/ItemDeleteButtonHit";
         itemView = [[ShinyItemView alloc] init];
         itemRenderer = [[ShinyOrderItemRenderer alloc] initWithItem:theItem];
         
-        //This is pretty hackish and will have to change if any other buttons get added 
-        //I should fix this at some point.
-        for (NSArray *eachArray in [itemRenderer listData]) {
-            for (id eachThing in eachArray) {
-                if ([eachThing isKindOfClass:[UIButton class]]) {
-                    [eachThing addTarget:self action:@selector(deleteButtonHit) forControlEvents:UIControlEventTouchUpInside];
-                }
-            }
-        }
-        
         [[itemView itemTable] setDelegate:self];
         [[itemView itemTable] setDataSource:itemRenderer];
         
@@ -69,6 +59,12 @@ NSString* ITEM_DELETE_BUTTON_HIT = @"CroutonLabs/ItemDeleteButtonHit";
     {
         [(ShinyItemFavoriteCell *)[tableView cellForRowAtIndexPath:indexPath] wasClicked];
     }
+    else if ([[CustomViewCell cellIdentifierForData:[itemRenderer objectForCellAtIndex:indexPath]] isEqualToString:@"ShinyDeleteCell"])
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:ITEM_DELETE_BUTTON_HIT object:self];
+        [[self navigationController] popViewControllerAnimated:YES];
+    }
+    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -116,13 +112,6 @@ NSString* ITEM_DELETE_BUTTON_HIT = @"CroutonLabs/ItemDeleteButtonHit";
 {
     [[self navigationController] popViewControllerAnimated:YES];
 }
-
--(void) deleteButtonHit
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:ITEM_DELETE_BUTTON_HIT object:self];
-    [[self navigationController] popViewControllerAnimated:YES];
-}
-
 
 -(void)viewWillAppear:(BOOL)animated
 {

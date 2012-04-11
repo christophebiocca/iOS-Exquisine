@@ -28,47 +28,20 @@
         sectionNames = [[NSMutableArray alloc] init];
         listData = [[NSMutableArray alloc] init];
         
-        [sectionNames addObject:@"Item Quantity"];
-        NSMutableArray *numberOfItemsSectionContents = [[NSMutableArray alloc] init];
-        
-        [numberOfItemsSectionContents addObject:[NumberOfItemsSectionHeaderView new]];
-        IntegerInputCellData *newCell = [[IntegerInputCellData alloc] init];
-        [newCell setNumber:[theItem numberOfItems]];
-        [newCell setLowerBound:[NSNumber numberWithInt:1]];
-        [newCell setUpperBound:[NSNumber numberWithInt:100]];
-        [numberOfItemsSectionContents addObject:newCell];
-        
-        [listData addObject:numberOfItemsSectionContents];
-        
         [sectionNames addObject:@"Options"];
         NSMutableArray *optionSectionContents = [[NSMutableArray alloc] init];
         
         [optionSectionContents addObject:[OptionSectionHeaderView new]];
         
+        IntegerInputCellData *newCell = [[IntegerInputCellData alloc] init];
+        [newCell setNumber:[theItem numberOfItems]];
+        [newCell setLowerBound:[NSNumber numberWithInt:1]];
+        [newCell setUpperBound:[NSNumber numberWithInt:100]];
+        [optionSectionContents addObject:newCell];
         
-        //It's a bit hackish they we're adding the button in here in stead of in it's own section
-        //but I don't think it will cause problems.
+        [optionSectionContents addObject:[NSDictionary dictionaryWithObject:theItem forKey:@"favoriteCellItem"]];
         
-        NSMutableDictionary *favoriteCell = [[NSMutableDictionary alloc] init];
-        [favoriteCell setValue:theItem forKey:@"favoriteCellItem"];
-        [optionSectionContents addObject:favoriteCell];
-        
-        UIButton *deleteButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [deleteButton setBackgroundImage:[[UIImage imageNamed:@"DeleteButtonImage.png"]
-                                          stretchableImageWithLeftCapWidth:8.0f
-                                          topCapHeight:0.0f]
-                                forState:UIControlStateNormal];
-        
-        [deleteButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        deleteButton.titleLabel.font = [UIFont boldSystemFontOfSize:20];
-        deleteButton.titleLabel.shadowColor = [UIColor lightGrayColor];
-        deleteButton.titleLabel.shadowOffset = CGSizeMake(0, -1);
-        
-        [deleteButton setTitle:@"Delete Item" forState:UIControlStateNormal];
-        
-        [deleteButton setFrame:CGRectMake(0, 0, 300, 42)];
-        
-        [optionSectionContents addObject:deleteButton];
+        [optionSectionContents addObject:[NSDictionary dictionaryWithObject:@"Delete Item" forKey:@"deleteTitle"]];
         
         for (Option *eachOption in [theItem options]) {
             ExpandableCellData *optionCellData = [[ExpandableCellData alloc] initWithPrimaryItem:eachOption AndRenderer:self];

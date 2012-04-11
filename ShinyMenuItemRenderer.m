@@ -28,21 +28,15 @@
         sectionNames = [[NSMutableArray alloc] init];
         listData = [[NSMutableArray alloc] init];
         
-        [sectionNames addObject:@"Item Quantity"];
-        NSMutableArray *numberOfItemsSectionContents = [[NSMutableArray alloc] init];
+        [sectionNames addObject:@"Options"];
+        NSMutableArray *optionSectionContents = [[NSMutableArray alloc] init];
+        [optionSectionContents addObject:[OptionSectionHeaderView new]];
         
-        [numberOfItemsSectionContents addObject:[NumberOfItemsSectionHeaderView new]];
         IntegerInputCellData *newCell = [[IntegerInputCellData alloc] init];
         [newCell setNumber:[theItem numberOfItems]];
         [newCell setLowerBound:[NSNumber numberWithInt:1]];
         [newCell setUpperBound:[NSNumber numberWithInt:100]];
-        [numberOfItemsSectionContents addObject:newCell];
-        
-        [listData addObject:numberOfItemsSectionContents];
-        
-        [sectionNames addObject:@"Options"];
-        NSMutableArray *optionSectionContents = [[NSMutableArray alloc] init];
-        [optionSectionContents addObject:[OptionSectionHeaderView new]];
+        [optionSectionContents addObject:newCell];
         
         NSMutableDictionary *favoriteCell = [[NSMutableDictionary alloc] init];
         [favoriteCell setValue:theItem forKey:@"favoriteCellItem"];

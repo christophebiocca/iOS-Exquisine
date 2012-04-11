@@ -28,23 +28,16 @@
         sectionNames = [[NSMutableArray alloc] init];
         listData = [[NSMutableArray alloc] init];
         
-        [sectionNames addObject:@"Combo Quantity"];
-        NSMutableArray *numberOfCombosSectionContents = [[NSMutableArray alloc] init];
-        
-        [numberOfCombosSectionContents addObject:[NumberOfCombosView new]];
-        IntegerInputCellData *newCell = [[IntegerInputCellData alloc] init];
-        [newCell setNumber:[theCombo numberOfCombos]];
-        [newCell setLowerBound:[NSNumber numberWithInt:1]];
-        [newCell setUpperBound:[NSNumber numberWithInt:100]];
-        [numberOfCombosSectionContents addObject:newCell];
-        
-        [listData addObject:numberOfCombosSectionContents];
-        
-        
         [sectionNames addObject:@"Item Groups"];
         NSMutableArray *itemGroupSectionContents = [[NSMutableArray alloc] init];
         
         [itemGroupSectionContents addObject:[ItemGroupSectionHeaderView new]];
+        
+        IntegerInputCellData *newCell = [[IntegerInputCellData alloc] init];
+        [newCell setNumber:[theCombo numberOfCombos]];
+        [newCell setLowerBound:[NSNumber numberWithInt:1]];
+        [newCell setUpperBound:[NSNumber numberWithInt:100]];
+        [itemGroupSectionContents addObject:newCell];
         
         NSMutableDictionary *favoriteCell = [[NSMutableDictionary alloc] init];
         [favoriteCell setValue:theCombo forKey:@"favoriteCellCombo"];

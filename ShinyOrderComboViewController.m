@@ -22,21 +22,22 @@ NSString* COMBO_DELETE_BUTTON_HIT = @"CroutonLabs/ComboDeleteButtonHit";
         comboView = [[ShinyComboView alloc] init];
         comboRenderer = [[ShinyOrderComboRenderer alloc] initWithCombo:theCombo];
         
-        //This is pretty hackish and will have to change if any other buttons get added 
-        //I should fix this at some point.
-        for (NSArray *eachArray in [comboRenderer listData]) {
-            for (id eachThing in eachArray) {
-                if ([eachThing isKindOfClass:[UIButton class]]) {
-                    [eachThing addTarget:self action:@selector(deleteButtonHit) forControlEvents:UIControlEventTouchUpInside];
-                }
-            }
-        }
-        
         [[comboView comboTable] setDelegate:self];
         [[comboView comboTable] setDataSource:comboRenderer];
         
     }
     return self;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [super tableView:tableView didSelectRowAtIndexPath:indexPath];
+    
+    if ([[CustomViewCell cellIdentifierForData:[comboRenderer objectForCellAtIndex:indexPath]] isEqualToString:@"ShinyDeleteCell"])
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:COMBO_DELETE_BUTTON_HIT object:self];
+        [[self navigationController] popViewControllerAnimated:YES];
+    }
 }
 
 -(void) deleteButtonHit
