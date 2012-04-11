@@ -27,14 +27,14 @@
         [[accept titleLabel] setLineBreakMode:UILineBreakModeWordWrap];
         [[accept titleLabel] setAdjustsFontSizeToFitWidth:YES];
         [[accept titleLabel] setFont:[Utilities fravicTextFont]];
-        [[accept titleLabel] setTextColor:[Utilities fravicDarkRedColor]];
+        [accept setTitleColor:[Utilities fravicDarkRedColor] forState:UIControlStateNormal];
         [self addSubview:accept];
         change = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [change setTitle:@"Change my payment information" forState:UIControlStateNormal];
         [[change titleLabel] setLineBreakMode:UILineBreakModeWordWrap];
         [[change titleLabel] setAdjustsFontSizeToFitWidth:YES];
         [[change titleLabel] setFont:[Utilities fravicTextFont]];
-        [[change titleLabel] setTextColor:[Utilities fravicDarkRedColor]];
+        [change setTitleColor:[Utilities fravicDarkRedColor] forState:UIControlStateNormal];
         [self addSubview:change];
         
         [self setCCDigits:ccDigits];
