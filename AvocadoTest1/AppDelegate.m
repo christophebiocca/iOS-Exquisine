@@ -44,6 +44,9 @@
         [page application:application didFinishLaunchingWithOptions:launchOptions];
     }*/
     
+    // One line fix.
+    [[UIBarButtonItem appearance] setTintColor:[Utilities fravicDarkRedColor]];
+    
     return YES;
 }
 							
