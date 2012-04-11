@@ -33,6 +33,7 @@
 @property(retain, readonly)PaymentCompleteViewController* completionController;
 @property(retain, readonly)PaymentConfirmationController* paymentConfirmationController;
 @property(retain, readonly)PaymentFailureViewController* failureController;
+@property(retain, readonly)OrderTimeAndLocationConfirmationViewController* locationConfirmationController;
 
 /* Stack states */
 -(void)checkForProfile;
@@ -81,7 +82,7 @@
 
 -(UINavigationController*)navigationController{
     if(!navigationController){
-        navigationController = [[FancyNavigationController alloc] initWithRootViewController:[self preProcessingController]];
+        navigationController = [[FancyNavigationController alloc] initWithRootViewController:[self locationConfirmationController]];
         [navigationController setDelegate:self];
     }
     return navigationController;
