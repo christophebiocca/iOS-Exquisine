@@ -10,7 +10,7 @@
 
 @implementation PaymentConfirmationView
 
-@synthesize change;
+@synthesize accept, change;
 
 - (id)initWithCCDigits:(NSString *)ccDigits
 {
@@ -21,8 +21,13 @@
         [notificationMessage setLineBreakMode:UILineBreakModeWordWrap];
         [notificationMessage setNumberOfLines:0];
         [self addSubview:notificationMessage];
+        accept = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [accept setTitle:@"Use this card" forState:UIControlStateNormal];
+        [[accept titleLabel] setLineBreakMode:UILineBreakModeWordWrap];
+        [[accept titleLabel] setAdjustsFontSizeToFitWidth:YES];
+        [self addSubview:accept];
         change = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [change setTitle:@"Click here to change your payment information." forState:UIControlStateNormal];
+        [change setTitle:@"Change my payment information" forState:UIControlStateNormal];
         [[change titleLabel] setLineBreakMode:UILineBreakModeWordWrap];
         [[change titleLabel] setAdjustsFontSizeToFitWidth:YES];
         [self addSubview:change];
@@ -37,6 +42,7 @@
 }
 
 #define PADDING 12
+#define BUTTON_HEIGHT 50
 
 -(void)layoutSubviews{
     CGSize lims = [self frame].size;
@@ -53,14 +59,25 @@
     
     [notificationMessage setFrame:notifFrame];
     
-    [change setFrame:(CGRect){
+    [accept setFrame:(CGRect){
         .origin = {
             .x = PADDING,
             .y = 2*PADDING + notifFrame.size.height
         },
         .size = {
             .width = lims.width - 2*PADDING,
-            .height = 50
+            .height = BUTTON_HEIGHT
+        }
+    }];
+    
+    [change setFrame:(CGRect){
+        .origin = {
+            .x = PADDING,
+            .y = 3*PADDING + notifFrame.size.height + BUTTON_HEIGHT
+        },
+        .size = {
+            .width = lims.width - 2*PADDING,
+            .height = BUTTON_HEIGHT
         }
     }];
 }

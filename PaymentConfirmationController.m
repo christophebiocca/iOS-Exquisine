@@ -17,12 +17,8 @@
     UIBarButtonItem* cancel = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
                                                                             target:self
                                                                             action:@selector(cancel)];
-    UIBarButtonItem* confirm = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
-                                                                             target:self 
-                                                                             action:@selector(confirm)];
     UINavigationItem* nav = [[UINavigationItem alloc] initWithTitle:@"Confirm Payment"];
     [nav setLeftBarButtonItem:cancel];
-    [nav setRightBarButtonItem:confirm];
     return nav;
 }
 
@@ -39,6 +35,7 @@
 
 -(void)viewDidLoad{
     [[paymentView change] addTarget:self action:@selector(change) forControlEvents:UIControlEventTouchUpInside];
+    [[paymentView accept] addTarget:self action:@selector(confirm) forControlEvents:UIControlEventTouchUpInside];
 }
 
 -(void)confirm{

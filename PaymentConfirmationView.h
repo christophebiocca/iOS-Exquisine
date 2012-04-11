@@ -11,11 +11,13 @@
 @interface PaymentConfirmationView : UIView{
     UILabel* notificationMessage;
     
+    UIButton* accept;
     UIButton* change;
 }
 
 -(id)initWithCCDigits:(NSString*)ccDigits;
 
+@property(retain, readonly)UIButton* accept;
 @property(retain, readonly)UIButton* change;
 
 -(void)setCCDigits:(NSString*)ccDigits;
