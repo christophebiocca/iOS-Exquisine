@@ -25,6 +25,7 @@
     
     UILabel* rememberLabel;
     UISwitch* remember;
+    BOOL showRemember;
 
     UILabel* expirationLabel;
     UILabel* expirationErrorLabel;
@@ -40,6 +41,7 @@
 @property (retain) UITextField *expirationMonth;
 @property (retain) UITextField *expirationYear;
 @property (retain) UILabel *expirationErrorLabel;
+@property (nonatomic, assign) BOOL showRemember;
 
 -(void)setErrorMessage:(NSString*)message onErrorLabel:(UILabel*)label;
 -(void)setErrorMessage:(NSString*)message;

@@ -17,7 +17,7 @@
 
 @synthesize cardholderNameField, cardholderNameErrorLabel;
 @synthesize cardnumberField, cardnumberErrorLabel;
-@synthesize remember;
+@synthesize remember, showRemember;
 @synthesize expirationMonth, expirationYear, expirationErrorLabel;
 
 typedef enum PickerSections{
@@ -91,6 +91,7 @@ static UIColor* errorLabelColor;
 
         remember = [[UISwitch alloc] initWithFrame:CGRectZero];
         [self addSubview:remember];
+        showRemember = YES;
 
         expirationLabel = [PaymentView nameLabel:@"Expiry Date"];
         [self addSubview:expirationLabel];
@@ -186,24 +187,39 @@ static UIColor* errorLabelColor;
     height = layoutWidget(height, cardnumberField, TextFieldHeight,
                           InterFieldPadding, adjustedWidth);
 
-    [rememberLabel sizeToFit];
-    NSInteger leftWidth = MAX([rememberLabel frame].size.width,
-                              [remember frame].size.width);
-    NSInteger midpoint = InterFieldPadding*2 + leftWidth;
-    NSInteger rightWidth = frame.size.width - InterFieldPadding - midpoint;
-    NSInteger leftHeight = layoutLabels(height, rememberLabel, nil,
+    NSInteger leftWidth;
+    NSInteger rightHeight;
+    NSInteger rightWidth;
+    NSInteger midpoint;
+    if(showRemember){
+        [rememberLabel sizeToFit];
+        rightWidth = MAX([rememberLabel frame].size.width,
+                                   [remember frame].size.width);
+        midpoint = frame.size.width - InterFieldPadding - rightWidth;
+        rightHeight = layoutLabels(height, rememberLabel, nil,
+                                   midpoint, rightWidth);
+    } else {
+        rightWidth = 0;
+        rightHeight = 0;
+        midpoint = frame.size.width;
+    }
+    
+    leftWidth = midpoint - 2*InterFieldPadding;
+
+    NSInteger leftHeight = layoutLabels(height, expirationLabel,expirationErrorLabel,
                                         InterFieldPadding, leftWidth);
-    NSInteger rightHeight = layoutLabels(height, expirationLabel,expirationErrorLabel,
-                                         midpoint, rightWidth);
+
     height = MAX(leftHeight, rightHeight);
-    leftHeight = layoutWidget(height, remember, [remember frame].size.height, 
-                              InterFieldPadding, leftWidth);
-    NSInteger threeQuarters = midpoint + rightWidth/2 + InterFieldPadding/2;
-    NSInteger halfRightWidth = rightWidth/2 - InterFieldPadding/2;
+    if(showRemember){
+        rightHeight = layoutWidget(height, remember, [remember frame].size.height, 
+                                   midpoint, rightWidth);
+    }
+    NSInteger oneQuarter = InterFieldPadding * 1.5 + leftWidth/2;
+    NSInteger halfLeftWidth = leftWidth/2 - InterFieldPadding/2;
     layoutWidget(height, expirationMonth, TextFieldHeight,
-                               midpoint, halfRightWidth);
+                               InterFieldPadding, halfLeftWidth);
     layoutWidget(height, expirationYear, TextFieldHeight,
-                               threeQuarters, halfRightWidth);
+                               oneQuarter, halfLeftWidth);
 }
 
 /*
@@ -226,6 +242,14 @@ static UIColor* errorLabelColor;
 -(void)setErrorMessage:(NSString*)message{
     [serverErrorMessageLabel setText:message];
     [serverErrorMessageLabel setHidden:NO];
+    [self setNeedsLayout];
+}
+
+-(void)setShowRemember:(BOOL)newShowRemember{
+    if(newShowRemember == showRemember) return;
+    showRemember = newShowRemember;
+    [remember setHidden:!showRemember];
+    [rememberLabel setHidden:!showRemember];
     [self setNeedsLayout];
 }
 
