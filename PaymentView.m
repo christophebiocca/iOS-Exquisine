@@ -231,15 +231,6 @@ static UIColor* errorLabelColor;
     layoutWidget(height, secureView, dimensions.height, InterFieldPadding, dimensions.width);
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
-
 -(void)setErrorMessage:(NSString*)message onErrorLabel:(UILabel*)label{
     if(message){
         [label setText:message];
