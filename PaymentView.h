@@ -11,14 +11,8 @@
 @class PaymentInfo;
 @protocol PaymentViewDelegate;
 
-@interface PaymentView : UIView<UITextFieldDelegate>{
-    id<PaymentViewDelegate>delegate;
-    
-    PaymentInfo* info;
-    UIToolbar* topBar;
-    UIBarButtonItem* done;
-    UIBarButtonItem* cancel;
-    
+@interface PaymentView : UIView{
+
     UILabel* serverErrorMessageLabel;
     
     UILabel* cardholderNameLabel;
@@ -38,12 +32,16 @@
     UITextField* expirationYear;
 }
 
+@property (retain) UITextField *cardholderNameField;
+@property (retain) UILabel *cardholderNameErrorLabel;
+@property (retain) UITextField *cardnumberField;
+@property (retain) UILabel *cardnumberErrorLabel;
 @property (retain) UISwitch *remember;
-@property (retain) UILabel *rememberLabel;
+@property (retain) UITextField *expirationMonth;
+@property (retain) UITextField *expirationYear;
+@property (retain) UILabel *expirationErrorLabel;
 
-@property(retain, readonly)PaymentInfo* paymentInfo;
-@property(retain, nonatomic)id<PaymentViewDelegate> delegate;
-
+-(void)setErrorMessage:(NSString*)message onErrorLabel:(UILabel*)label;
 -(void)setErrorMessage:(NSString*)message;
 
 @end

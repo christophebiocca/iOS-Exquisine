@@ -18,14 +18,12 @@
     UIPickerView *orderCompletionDurationPicker;
     LocationMapView *locationView;
     UILabel *locationPrompt;
-    UINavigationBar *navBar;
     
 }
 
 - (id)initWithLocationState:(LocationState *)locationState;
 
 @property (readonly) LocationMapView *locationView;
-@property (retain) UINavigationBar *navBar;
 @property (retain) UIPickerView *orderCompletionDurationPicker;
 
 @end

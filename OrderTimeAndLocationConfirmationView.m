@@ -14,22 +14,19 @@
 @implementation OrderTimeAndLocationConfirmationView
 
 @synthesize locationView;
-@synthesize navBar;
 @synthesize orderCompletionDurationPicker;
 
 - (id)initWithLocationState:(LocationState *)locationState
 {
     self = [super init];
     if (self) {
-        orderCompletionDurationPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 298,320, 162)];
+        orderCompletionDurationPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 254,320, 162)];
         
         [orderCompletionDurationPicker setShowsSelectionIndicator:YES];
         
-        locationView = [[LocationMapView alloc] initWithLocationState:locationState AndFrame:CGRectMake(0, 73, 320, 229)];
+        locationView = [[LocationMapView alloc] initWithLocationState:locationState AndFrame:CGRectMake(0, 29, 320, 229)];
         
         locationPrompt = [[UILabel alloc] init];
-        
-        navBar = [[UINavigationBar alloc] init];
         
         
         [locationPrompt setText:@"Choose the location and pickup time:"];
@@ -37,7 +34,6 @@
         [self addSubview:orderCompletionDurationPicker];
         [self addSubview:locationView];
         [self addSubview:locationPrompt];
-        [self addSubview:navBar];
         
         [self setBackgroundColor:[UIColor whiteColor]];
     }
@@ -46,10 +42,8 @@
 
 -(void)layoutSubviews
 {
-    
-    [navBar setFrame:CGRectMake(0, 0, 320, 44)];
-    [locationPrompt setFrame:CGRectMake(10, 48, 300, 21)];
-    
+    [locationPrompt setFrame:CGRectMake(10, 4, 300, 21)];
+
 }
 
 @end

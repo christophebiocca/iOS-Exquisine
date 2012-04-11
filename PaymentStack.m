@@ -22,6 +22,7 @@
 #import "PaymentError.h"
 
 #import "PaymentInfo.h"
+#import "FancyNavigationController.h"
 
 @interface PaymentStack(PrivateMethods)
 
@@ -80,8 +81,7 @@
 
 -(UINavigationController*)navigationController{
     if(!navigationController){
-        navigationController = [[UINavigationController alloc] initWithRootViewController:[self preProcessingController]];
-        [navigationController setNavigationBarHidden:YES];
+        navigationController = [[FancyNavigationController alloc] initWithRootViewController:[self preProcessingController]];
         [navigationController setDelegate:self];
     }
     return navigationController;

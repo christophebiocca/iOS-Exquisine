@@ -13,6 +13,16 @@
 
 @synthesize doneCallback;
 
+-(UINavigationItem*)navigationItem{
+    UINavigationItem* item = [[UINavigationItem alloc] initWithTitle:@"Order Placed"];
+    UIBarButtonItem* done = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                          target:self
+                                                                          action:@selector(done)];
+    [item setRightBarButtonItem:done];
+    [item setHidesBackButton:YES];
+    return item;
+}
+
 -(id)init
 {
     self = [super initWithNibName:nil bundle:nil];
@@ -50,8 +60,6 @@
     [super viewDidLoad];
     [paymentView setSuccessInfo:successInfo AndOrderInfo:theOrder];
     [[self navigationItem] setTitle: @"Payment complete"];
-    [[paymentView done] setTarget:self];
-    [[paymentView done] setAction:@selector(done)];
 }
 
 - (void)viewDidUnload

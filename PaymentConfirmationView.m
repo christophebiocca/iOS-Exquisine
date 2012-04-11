@@ -10,22 +10,13 @@
 
 @implementation PaymentConfirmationView
 
-@synthesize confirm, change, cancel;
+@synthesize change;
 
 - (id)initWithCCDigits:(NSString *)ccDigits
 {
     self = [super initWithFrame:CGRectZero];
     if (self) {
         [self setBackgroundColor:[UIColor whiteColor]];
-        confirm = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:nil action:nil];
-        [confirm setTitle:@"Confirm"];
-        cancel = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:nil action:nil];
-        bar = [[UIToolbar alloc] initWithFrame:CGRectZero];
-        [bar setItems:[NSArray arrayWithObjects:cancel, 
-                       [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace 
-                                                                     target:nil action:nil],
-                       confirm, nil]];
-        [self addSubview:bar];
         notificationMessage = [[UILabel alloc] initWithFrame:CGRectZero];
         [notificationMessage setLineBreakMode:UILineBreakModeWordWrap];
         [notificationMessage setNumberOfLines:0];
@@ -46,21 +37,14 @@
 }
 
 #define PADDING 12
-#define TOOLBAR_HEIGHT 44
 
 -(void)layoutSubviews{
     CGSize lims = [self frame].size;
-    [bar setFrame:(CGRect){
-        .size = {
-            .width = lims.width,
-            .height = TOOLBAR_HEIGHT
-        }
-    }];
     
     CGRect notifFrame = (CGRect){
         .origin = {
             .x = PADDING,
-            .y = TOOLBAR_HEIGHT + PADDING
+            .y = PADDING
         },
         .size = [[notificationMessage text] sizeWithFont:[notificationMessage font] 
                                        constrainedToSize:(CGSize){.width=lims.width - 2*PADDING, .height=9999} 
@@ -72,7 +56,7 @@
     [change setFrame:(CGRect){
         .origin = {
             .x = PADDING,
-            .y = TOOLBAR_HEIGHT + 2*PADDING + notifFrame.size.height
+            .y = 2*PADDING + notifFrame.size.height
         },
         .size = {
             .width = lims.width - 2*PADDING,

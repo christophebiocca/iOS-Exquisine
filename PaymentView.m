@@ -7,20 +7,18 @@
 //
 
 #import "PaymentView.h"
-#import "PaymentViewDelegate.h"
 #import "PaymentInfo.h"
 
-#define UIToolbarHeight 44
 #define TextFieldHeight 25
 #define LabelFieldPadding 2
 #define InterFieldPadding 8
 
 @implementation PaymentView
 
-@synthesize paymentInfo, delegate;
-
+@synthesize cardholderNameField, cardholderNameErrorLabel;
+@synthesize cardnumberField, cardnumberErrorLabel;
 @synthesize remember;
-@synthesize rememberLabel;
+@synthesize expirationMonth, expirationYear, expirationErrorLabel;
 
 typedef enum PickerSections{
     Month,
@@ -56,16 +54,6 @@ static UIColor* errorLabelColor;
     self = [super initWithFrame:CGRectZero];
     if (self) {
         [self setBackgroundColor:[UIColor whiteColor]];
-        done = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
-        cancel = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelled)];
-        UIBarItem* flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace 
-                                                                                 target:nil 
-                                                                                 action:nil];
-        paymentInfo = [[PaymentInfo alloc] init];
-        topBar = [[UIToolbar alloc] initWithFrame:CGRectZero];
-        [topBar setItems:[NSArray arrayWithObjects:cancel, flexibleSpace, done, nil]];
-        [self addSubview:topBar];
-        
         serverErrorMessageLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         [serverErrorMessageLabel setFont:[UIFont systemFontOfSize:16]];
         [serverErrorMessageLabel setNumberOfLines:1];
@@ -82,7 +70,6 @@ static UIColor* errorLabelColor;
         [cardholderNameField setBorderStyle:UITextBorderStyleRoundedRect];
         [cardholderNameField setClearButtonMode:UITextFieldViewModeWhileEditing];
         [cardholderNameField setPlaceholder:@"Card Holder Name"];
-        [cardholderNameField setDelegate:self];
         [self addSubview:cardholderNameField];
         
         cardnumberLabel = [PaymentView nameLabel:@"Card Number"];
@@ -96,7 +83,6 @@ static UIColor* errorLabelColor;
         [cardnumberField setKeyboardType:UIKeyboardTypeNumberPad];
         [cardnumberField setClearButtonMode:UITextFieldViewModeWhileEditing];
         [cardnumberField setPlaceholder:@"Credit Card #"];
-        [cardnumberField setDelegate:self];
         [cardnumberField setRightViewMode:UITextFieldViewModeAlways];
         [self addSubview:cardnumberField];
         
@@ -104,8 +90,6 @@ static UIColor* errorLabelColor;
         [self addSubview:rememberLabel];
 
         remember = [[UISwitch alloc] initWithFrame:CGRectZero];
-        [remember setOn:[paymentInfo remember]];
-        [remember addTarget:self action:@selector(rememberChanged:) forControlEvents:UIControlEventValueChanged];
         [self addSubview:remember];
 
         expirationLabel = [PaymentView nameLabel:@"Expiry Date"];
@@ -123,7 +107,6 @@ static UIColor* errorLabelColor;
         [expirationMonth setKeyboardType:UIKeyboardTypeNumberPad];
         [expirationMonth setClearButtonMode:UITextFieldViewModeWhileEditing];
         [expirationMonth setPlaceholder:[formatter stringFromDate:today]];
-        [expirationMonth setDelegate:self];
         [self addSubview:expirationMonth];
 
         [formatter setDateFormat:@"yyyy"];
@@ -132,7 +115,6 @@ static UIColor* errorLabelColor;
         [expirationYear setKeyboardType:UIKeyboardTypeNumberPad];
         [expirationYear setClearButtonMode:UITextFieldViewModeWhileEditing];
         [expirationYear setPlaceholder:[formatter stringFromDate:today]];
-        [expirationYear setDelegate:self];
         [self addSubview:expirationYear];
     }
     return self;
@@ -177,8 +159,6 @@ static UIColor* errorLabelColor;
     };
     
     NSInteger height = 0;
-    
-    height = layoutWidget(height, topBar, UIToolbarHeight, 0, frame.size.width);
     
     if([[serverErrorMessageLabel text] length]){
         CGSize labelSize = [[serverErrorMessageLabel text]
@@ -241,119 +221,6 @@ static UIColor* errorLabelColor;
         [self setNeedsLayout];
     }
     [label setHidden:!message];
-}
-
--(NSInteger)monthForRow:(NSInteger)row{
-    return row + 1;
-}
-
--(NSInteger)yearForRow:(NSInteger)row{
-    NSInteger currentYear = [[[NSCalendar currentCalendar] components:NSYearCalendarUnit fromDate:[NSDate new]] year];
-    return currentYear + row;
-}
-
--(void)flushCardholderName{
-    [paymentInfo setCardholderName:[cardholderNameField text]];
-    [self setErrorMessage:[paymentInfo cardholderNameError] onErrorLabel:cardholderNameErrorLabel];
-}
-
--(void)flushCardnumber{
-    [paymentInfo setCardnumber:[cardnumberField text]];
-    [self setErrorMessage:[paymentInfo cardnumberError] onErrorLabel:cardnumberErrorLabel];
-}
-
--(void)flushExpirationMonth{
-    [paymentInfo setExpirationMonth:[expirationMonth text]];
-    [self setErrorMessage:[paymentInfo expirationError] onErrorLabel:expirationErrorLabel];
-}
-
--(void)flushExpirationYear{
-    [paymentInfo setExpirationYear:[expirationYear text]];
-    [self setErrorMessage:[paymentInfo expirationError] onErrorLabel:expirationErrorLabel];
-}
-
--(void)rememberChanged:(UISwitch*)rememberSwitch{
-    [paymentInfo setRemember:[rememberSwitch isOn]];
-}
-
-#pragma mark UITextFieldDelegate    
-
--(BOOL)textFieldShouldReturn:(UITextField*)textField{
-    if(textField == cardholderNameField){
-        [self flushCardholderName];
-        [cardnumberField becomeFirstResponder];
-    } else if(textField == cardnumberField) {
-        [self flushCardnumber];
-        [expirationMonth becomeFirstResponder];
-    } else if(textField == expirationMonth) {
-        [expirationYear becomeFirstResponder];
-        [self flushExpirationMonth];
-    } else if(textField == expirationYear) {
-        [self flushExpirationYear];
-    } else {
-        NSAssert(NO, @"Got a message from a random text field!");
-    }
-    return NO;
-}
-
--(void)textFieldDidEndEditing:(UITextField*)textField{
-    if(textField == cardholderNameField){
-        [self flushCardholderName];
-    } else if(textField == cardnumberField){
-        [self flushCardnumber];
-    } else if(textField == expirationMonth){
-        [self flushExpirationMonth];
-    } else if(textField == expirationYear){
-        [self flushExpirationYear];
-    } else {
-        NSAssert(NO, @"Got a message from a random text field (%@) !", textField);
-    }
-}
-
--(void)textFieldDidBeginEditing:(UITextField*)textField{
-    if(textField == cardholderNameField){
-        [self setErrorMessage:nil onErrorLabel:cardholderNameErrorLabel];
-    } else if(textField == cardnumberField){
-        [self setErrorMessage:nil onErrorLabel:cardnumberErrorLabel];
-    } else if(textField == expirationMonth){
-        [self setErrorMessage:nil onErrorLabel:expirationErrorLabel];
-    } else if(textField == expirationYear){
-        [self setErrorMessage:nil onErrorLabel:expirationErrorLabel];
-    } else {
-        NSAssert(NO, @"Got a message from a random text field (%@) !", textField);
-    }
-}
-
--(BOOL)textField:(UITextField*)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    NSInteger finalSize = [[textField text] length] + [string length] - range.length;
-    if(textField == cardnumberField && finalSize >= 16){
-        [expirationMonth performSelectorOnMainThread:@selector(becomeFirstResponder) 
-                                          withObject:nil 
-                                       waitUntilDone:NO];
-    } else if(textField == expirationMonth && finalSize >= 2){
-        [expirationYear performSelectorOnMainThread:@selector(becomeFirstResponder) 
-                                         withObject:nil 
-                                      waitUntilDone:NO];
-    }
-    return YES;
-}
-
-#pragma mark buttons
-
--(void)done{
-    [cardholderNameField resignFirstResponder];
-    [cardnumberField resignFirstResponder];
-    [self flushCardholderName];
-    [self flushCardnumber];
-    [self flushExpirationYear];
-    [self flushExpirationMonth];
-    if(![paymentInfo anyErrors]){
-        [delegate paymentDone];
-    }
-}
-
--(void)cancelled{
-    [delegate paymentCancelled];
 }
 
 -(void)setErrorMessage:(NSString*)message{

@@ -18,6 +18,16 @@
 @synthesize doneBlock;
 @synthesize cancelledBlock;
 
+-(UINavigationItem*)navigationItem{
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel)];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
+    
+    UINavigationItem* item = [[UINavigationItem alloc] initWithTitle:@"Confirm pickup"];
+    [item setLeftBarButtonItem:cancelButton];
+    [item setRightBarButtonItem:doneButton];
+    return item;
+}
+
 -(id)initWithLocationState:(LocationState *)theLocationState AndOrder:(Order *)anOrder
 {
     self = [super init];
@@ -26,15 +36,6 @@
         orderTimeAndLocationConfirmationView = [[OrderTimeAndLocationConfirmationView alloc] initWithLocationState:theLocationState];
         
         theOrder = anOrder;
-        
-        UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel)];
-        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
-        
-        [[self navigationItem] setLeftBarButtonItem:cancelButton];
-        [[self navigationItem] setRightBarButtonItem:doneButton];
-        
-        [[orderTimeAndLocationConfirmationView navBar] pushNavigationItem:[self navigationItem] animated:NO];
-        
         
         [[orderTimeAndLocationConfirmationView orderCompletionDurationPicker] setDelegate:self];
         [[orderTimeAndLocationConfirmationView orderCompletionDurationPicker] setDataSource:self];

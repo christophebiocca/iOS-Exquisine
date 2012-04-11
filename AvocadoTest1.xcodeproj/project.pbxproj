@@ -672,7 +672,6 @@
 		D933EF1914DB568400B0BDC7 /* PaymentCompletedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentCompletedView.m; sourceTree = "<group>"; };
 		D93E9DD314FC4D53006AD608 /* DeletePaymentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeletePaymentInfo.h; sourceTree = "<group>"; };
 		D93E9DD414FC4D53006AD608 /* DeletePaymentInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeletePaymentInfo.m; sourceTree = "<group>"; };
-		D945ABC914D8D757007DCC32 /* PaymentViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentViewDelegate.h; sourceTree = "<group>"; };
 		D947368514E20042005D4409 /* ItemGroupPricingStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemGroupPricingStrategy.h; sourceTree = "<group>"; };
 		D947368614E20042005D4409 /* ItemGroupPricingStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemGroupPricingStrategy.m; sourceTree = "<group>"; };
 		D947368914E20337005D4409 /* ItemGroupTrivialPricing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemGroupTrivialPricing.h; sourceTree = "<group>"; };
@@ -2425,7 +2424,6 @@
 		D9768A7A14D74A8A00BBA467 /* OrderPlacementViews */ = {
 			isa = PBXGroup;
 			children = (
-				D945ABC914D8D757007DCC32 /* PaymentViewDelegate.h */,
 				D9768A7C14D74AAD00BBA467 /* PaymentView.h */,
 				D9768A7D14D74AAD00BBA467 /* PaymentView.m */,
 				D933EF1414DB566D00B0BDC7 /* PaymentProcessingView.h */,
