@@ -44,7 +44,7 @@ static NSRegularExpression* separator;
         [self setCardholderName:nil];
         expirationYear = -1;
         expirationMonth = -1;
-        [self setRemember:YES];
+        [self setRemember:NO];
     }
     return self;
 }

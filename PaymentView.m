@@ -90,6 +90,7 @@ static UIColor* errorLabelColor;
         [self addSubview:rememberLabel];
 
         remember = [[UISwitch alloc] initWithFrame:CGRectZero];
+        [remember setOn:NO];
         [self addSubview:remember];
         showRemember = YES;
 
