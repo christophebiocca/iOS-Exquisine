@@ -31,7 +31,7 @@
         UILabel *techSupportLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 320, 150)];
         [techSupportLabel setFont:[UIFont fontWithName:@"AmericanTypewriter" size:14]];
         [techSupportLabel setNumberOfLines:70];
-        [techSupportLabel setText:@"If you have any questions or comments,\nfeel free to call us at:\n(519) 616-6193 \nor email us at:\ndev@croutonlabs.com\n\nYou can also visit our website at:\ncroutonlabs.com"];
+        [techSupportLabel setText:@"If you have any questions or comments,\nfeel free to call us at:\n(519) 616-6193 \nor email us at:\nsupport@croutonlabs.com\n\nYou can also visit our website at:\ncroutonlabs.com"];
         [techSupportLabel setLineBreakMode:UILineBreakModeWordWrap];
         [techSupportLabel setTextAlignment:UITextAlignmentLeft];
         
