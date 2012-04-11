@@ -18,7 +18,7 @@
 @synthesize paymentView;
 
 -(UINavigationItem*)navigationItem{
-    UINavigationItem* nav = [[UINavigationItem alloc] initWithTitle:@"Payment information"];
+    UINavigationItem* nav = [[UINavigationItem alloc] initWithTitle:@"Payment Info"];
     UIBarButtonItem* done = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
                                                                           target:self 
                                                                           action:@selector(done)];
