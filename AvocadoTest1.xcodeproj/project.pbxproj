@@ -117,6 +117,12 @@
 		237468A41534F6640049EE13 /* ShinySettingsTabRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 237468A31534F6640049EE13 /* ShinySettingsTabRenderer.m */; };
 		237468A81534FA7D0049EE13 /* ShinySettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 237468A71534FA7D0049EE13 /* ShinySettingsCell.m */; };
 		237468AC153502060049EE13 /* ShinyHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 237468AB153502060049EE13 /* ShinyHeaderView.m */; };
+		237468B11535FE1C0049EE13 /* OrderHistoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 237468B01535FE1C0049EE13 /* OrderHistoryView.m */; };
+		237468B61535FF190049EE13 /* OrderHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 237468B51535FF190049EE13 /* OrderHistoryViewController.m */; };
+		237468BB1536005F0049EE13 /* OrderHistoryRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 237468BA1536005F0049EE13 /* OrderHistoryRenderer.m */; };
+		237468BF153604020049EE13 /* ShinyOrderHistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 237468BE153604020049EE13 /* ShinyOrderHistoryCell.m */; };
+		237468C11536054E0049EE13 /* OrderHistoryCell.png in Resources */ = {isa = PBXBuildFile; fileRef = 237468C01536054E0049EE13 /* OrderHistoryCell.png */; };
+		237468C3153605580049EE13 /* OrderHistoryCell@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 237468C2153605580049EE13 /* OrderHistoryCell@2x.png */; };
 		2375B9C115129F68004BDC3B /* CustomTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2375B9C015129F68004BDC3B /* CustomTabBarController.m */; };
 		2375B9C61512B70D004BDC3B /* BlankTopbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 2375B9C21512B70D004BDC3B /* BlankTopbar.png */; };
 		2375B9C71512B70D004BDC3B /* BlankTopbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2375B9C31512B70D004BDC3B /* BlankTopbar@2x.png */; };
@@ -458,6 +464,16 @@
 		237468A71534FA7D0049EE13 /* ShinySettingsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinySettingsCell.m; sourceTree = "<group>"; };
 		237468AA153502060049EE13 /* ShinyHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShinyHeaderView.h; sourceTree = "<group>"; };
 		237468AB153502060049EE13 /* ShinyHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinyHeaderView.m; sourceTree = "<group>"; };
+		237468AF1535FE1C0049EE13 /* OrderHistoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderHistoryView.h; sourceTree = "<group>"; };
+		237468B01535FE1C0049EE13 /* OrderHistoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderHistoryView.m; sourceTree = "<group>"; };
+		237468B41535FF190049EE13 /* OrderHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderHistoryViewController.h; sourceTree = "<group>"; };
+		237468B51535FF190049EE13 /* OrderHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderHistoryViewController.m; sourceTree = "<group>"; };
+		237468B91536005F0049EE13 /* OrderHistoryRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderHistoryRenderer.h; sourceTree = "<group>"; };
+		237468BA1536005F0049EE13 /* OrderHistoryRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderHistoryRenderer.m; sourceTree = "<group>"; };
+		237468BD153604020049EE13 /* ShinyOrderHistoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShinyOrderHistoryCell.h; sourceTree = "<group>"; };
+		237468BE153604020049EE13 /* ShinyOrderHistoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinyOrderHistoryCell.m; sourceTree = "<group>"; };
+		237468C01536054E0049EE13 /* OrderHistoryCell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OrderHistoryCell.png; path = FravicArtAssets/OrderHistoryCell.png; sourceTree = "<group>"; };
+		237468C2153605580049EE13 /* OrderHistoryCell@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "OrderHistoryCell@2x.png"; path = "FravicArtAssets/OrderHistoryCell@2x.png"; sourceTree = "<group>"; };
 		2375B9BF15129F68004BDC3B /* CustomTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTabBarController.h; sourceTree = "<group>"; };
 		2375B9C015129F68004BDC3B /* CustomTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTabBarController.m; sourceTree = "<group>"; };
 		2375B9C21512B70D004BDC3B /* BlankTopbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BlankTopbar.png; path = FravicArtAssets/BlankTopbar.png; sourceTree = "<group>"; };
@@ -1169,6 +1185,8 @@
 		233C46EB14FEEF620003C295 /* SampleDesignImages */ = {
 			isa = PBXGroup;
 			children = (
+				237468C2153605580049EE13 /* OrderHistoryCell@2x.png */,
+				237468C01536054E0049EE13 /* OrderHistoryCell.png */,
 				237468931534EC0B0049EE13 /* LocationIcon@2x.png */,
 				237468941534EC0B0049EE13 /* SettingsIcon.png */,
 				237468951534EC0B0049EE13 /* SettingsIcon@2x.png */,
@@ -1420,6 +1438,7 @@
 		237468991534F0170049EE13 /* SettingsTabViewController */ = {
 			isa = PBXGroup;
 			children = (
+				237468B21535FEF40049EE13 /* SubsettingViewControllers */,
 				2374689A1534F0370049EE13 /* SettingsTabViewController.h */,
 				2374689B1534F0370049EE13 /* SettingsTabViewController.m */,
 			);
@@ -1429,6 +1448,7 @@
 		2374689D1534F0560049EE13 /* SettingsTabView */ = {
 			isa = PBXGroup;
 			children = (
+				237468AD1535FDF50049EE13 /* SubSettingViews */,
 				2374689E1534F06B0049EE13 /* SettingsTabView.h */,
 				2374689F1534F06B0049EE13 /* SettingsTabView.m */,
 			);
@@ -1438,6 +1458,7 @@
 		237468A11534F6400049EE13 /* ShinySettingsTabRenderer */ = {
 			isa = PBXGroup;
 			children = (
+				237468B71535FF650049EE13 /* SubsettingRenderers */,
 				237468A21534F6640049EE13 /* ShinySettingsTabRenderer.h */,
 				237468A31534F6640049EE13 /* ShinySettingsTabRenderer.m */,
 			);
@@ -1460,6 +1481,66 @@
 				237468AB153502060049EE13 /* ShinyHeaderView.m */,
 			);
 			name = HeaderViews;
+			sourceTree = "<group>";
+		};
+		237468AD1535FDF50049EE13 /* SubSettingViews */ = {
+			isa = PBXGroup;
+			children = (
+				237468AE1535FDFF0049EE13 /* OrderHistoryView */,
+			);
+			name = SubSettingViews;
+			sourceTree = "<group>";
+		};
+		237468AE1535FDFF0049EE13 /* OrderHistoryView */ = {
+			isa = PBXGroup;
+			children = (
+				237468AF1535FE1C0049EE13 /* OrderHistoryView.h */,
+				237468B01535FE1C0049EE13 /* OrderHistoryView.m */,
+			);
+			name = OrderHistoryView;
+			sourceTree = "<group>";
+		};
+		237468B21535FEF40049EE13 /* SubsettingViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				237468B31535FF020049EE13 /* OrderHistoryViewController */,
+			);
+			name = SubsettingViewControllers;
+			sourceTree = "<group>";
+		};
+		237468B31535FF020049EE13 /* OrderHistoryViewController */ = {
+			isa = PBXGroup;
+			children = (
+				237468B41535FF190049EE13 /* OrderHistoryViewController.h */,
+				237468B51535FF190049EE13 /* OrderHistoryViewController.m */,
+			);
+			name = OrderHistoryViewController;
+			sourceTree = "<group>";
+		};
+		237468B71535FF650049EE13 /* SubsettingRenderers */ = {
+			isa = PBXGroup;
+			children = (
+				237468B81535FF6D0049EE13 /* OrderHistoryRenderer */,
+			);
+			name = SubsettingRenderers;
+			sourceTree = "<group>";
+		};
+		237468B81535FF6D0049EE13 /* OrderHistoryRenderer */ = {
+			isa = PBXGroup;
+			children = (
+				237468B91536005F0049EE13 /* OrderHistoryRenderer.h */,
+				237468BA1536005F0049EE13 /* OrderHistoryRenderer.m */,
+			);
+			name = OrderHistoryRenderer;
+			sourceTree = "<group>";
+		};
+		237468BC153603E00049EE13 /* ShinyOrderHistoryCell */ = {
+			isa = PBXGroup;
+			children = (
+				237468BD153604020049EE13 /* ShinyOrderHistoryCell.h */,
+				237468BE153604020049EE13 /* ShinyOrderHistoryCell.m */,
+			);
+			name = ShinyOrderHistoryCell;
 			sourceTree = "<group>";
 		};
 		23785FB1150FD6800087C9F8 /* ShinyComboOrderItemCell */ = {
@@ -1567,6 +1648,7 @@
 		238395A8150EA3C2000DC733 /* ShinyCells */ = {
 			isa = PBXGroup;
 			children = (
+				237468BC153603E00049EE13 /* ShinyOrderHistoryCell */,
 				237468A51534FA3F0049EE13 /* ShinySettingsCell */,
 				23EF636D1534B1BB00FAF555 /* ShinyItemFavoriteCell */,
 				23EF636B1534B1AD00FAF555 /* ShinyComboFavoriteCell */,
@@ -2495,6 +2577,8 @@
 				237468961534EC0B0049EE13 /* LocationIcon@2x.png in Resources */,
 				237468971534EC0B0049EE13 /* SettingsIcon.png in Resources */,
 				237468981534EC0B0049EE13 /* SettingsIcon@2x.png in Resources */,
+				237468C11536054E0049EE13 /* OrderHistoryCell.png in Resources */,
+				237468C3153605580049EE13 /* OrderHistoryCell@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2690,6 +2774,10 @@
 				237468A41534F6640049EE13 /* ShinySettingsTabRenderer.m in Sources */,
 				237468A81534FA7D0049EE13 /* ShinySettingsCell.m in Sources */,
 				237468AC153502060049EE13 /* ShinyHeaderView.m in Sources */,
+				237468B11535FE1C0049EE13 /* OrderHistoryView.m in Sources */,
+				237468B61535FF190049EE13 /* OrderHistoryViewController.m in Sources */,
+				237468BB1536005F0049EE13 /* OrderHistoryRenderer.m in Sources */,
+				237468BF153604020049EE13 /* ShinyOrderHistoryCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

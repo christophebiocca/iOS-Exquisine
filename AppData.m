@@ -59,6 +59,7 @@ static AppData* appData = nil;
         initialized = NO;
         harddiskFileFolder = [harddiskFileFolder stringByExpandingTildeInPath];
         if ([self loadDataFromDisk]) {
+            [self updateOrderHistory];
             initialized = YES;
             [[NSNotificationCenter defaultCenter] postNotificationName:INITIALIZED_SUCCESS object:self];
         }

@@ -118,6 +118,32 @@
         [orderSectionContents addObject:subtotalCell];
         index++;
         
+        GeneralPurposeViewCellData *hstCell = [[GeneralPurposeViewCellData alloc] init];
+        [hstCell setTitle:@"HST:"];
+        [hstCell setHeight:22.0f];
+        
+        if (index%2) 
+            [hstCell setCellColour:[Utilities fravicDarkPinkColor]];
+        else 
+            [hstCell setCellColour:[Utilities fravicLightPinkColor]];
+        
+        [hstCell setDescription:[Utilities FormatToPrice:[[theOrderManager thisOrder] taxPrice]]];
+        [orderSectionContents addObject:hstCell];
+        index++;
+        
+        GeneralPurposeViewCellData *grandTotalCell = [[GeneralPurposeViewCellData alloc] init];
+        [grandTotalCell setTitle:@"Grand Total:"];
+        [grandTotalCell setHeight:22.0f];
+        
+        if (index%2) 
+            [grandTotalCell setCellColour:[Utilities fravicDarkPinkColor]];
+        else 
+            [grandTotalCell setCellColour:[Utilities fravicLightPinkColor]];
+        
+        [grandTotalCell setDescription:[Utilities FormatToPrice:[[theOrderManager thisOrder] totalPrice]]];
+        [orderSectionContents addObject:grandTotalCell];
+        index++;
+        
         
         OrderSectionFooterView *footerView = [[OrderSectionFooterView alloc] init];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(placeButtonPressed) name:PLACE_BUTTON_PRESSED object:footerView];
