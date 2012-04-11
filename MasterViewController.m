@@ -15,6 +15,7 @@
 #import "Order.h"
 #import "OrderManager.h"
 #import "PaymentStack.h"
+#import "SettingsTabViewController.h"
 #import "AppData.h"
 #import "CustomTabBarController.h"
 #import "Reachability.h"
@@ -104,12 +105,14 @@
     [orderTabNavigationController setTitle:@"Order"];
     [[orderTabNavigationController tabBarItem] setImage:[UIImage imageNamed:@"ForkAndKnife.png"]];
     
-    FavoritesViewController *favoritesTabViewController = [[FavoritesViewController alloc] initWithFavoritesListAndMenu:[[NSMutableArray alloc] init] :[[AppData appData] theMenu]];
+    SettingsTabViewController *settingsTabViewController = [[SettingsTabViewController alloc] init];
     
-    [favoritesTabViewController setTitle:@"Settings"];
-    [[favoritesTabViewController tabBarItem] setImage:[UIImage imageNamed:@"SettingsIcon.png"]];
+    UINavigationController *settingsTabNavigationController = [[UINavigationController alloc] initWithRootViewController:settingsTabViewController];
     
-    [[masterView tabController] setViewControllers:[NSArray arrayWithObjects:locationTabViewController,orderTabNavigationController,favoritesTabViewController,nil]];
+    [settingsTabNavigationController setTitle:@"Settings"];
+    [[settingsTabNavigationController tabBarItem] setImage:[UIImage imageNamed:@"SettingsIcon.png"]];
+    
+    [[masterView tabController] setViewControllers:[NSArray arrayWithObjects:locationTabViewController,orderTabNavigationController,settingsTabNavigationController,nil]];
     
     [[[masterView tabController] view] setNeedsLayout];
     [[[masterView tabController] view] setNeedsDisplay];

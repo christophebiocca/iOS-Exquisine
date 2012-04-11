@@ -112,6 +112,11 @@
 		237468961534EC0B0049EE13 /* LocationIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 237468931534EC0B0049EE13 /* LocationIcon@2x.png */; };
 		237468971534EC0B0049EE13 /* SettingsIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 237468941534EC0B0049EE13 /* SettingsIcon.png */; };
 		237468981534EC0B0049EE13 /* SettingsIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 237468951534EC0B0049EE13 /* SettingsIcon@2x.png */; };
+		2374689C1534F0370049EE13 /* SettingsTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2374689B1534F0370049EE13 /* SettingsTabViewController.m */; };
+		237468A01534F06B0049EE13 /* SettingsTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2374689F1534F06B0049EE13 /* SettingsTabView.m */; };
+		237468A41534F6640049EE13 /* ShinySettingsTabRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 237468A31534F6640049EE13 /* ShinySettingsTabRenderer.m */; };
+		237468A81534FA7D0049EE13 /* ShinySettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 237468A71534FA7D0049EE13 /* ShinySettingsCell.m */; };
+		237468AC153502060049EE13 /* ShinyHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 237468AB153502060049EE13 /* ShinyHeaderView.m */; };
 		2375B9C115129F68004BDC3B /* CustomTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2375B9C015129F68004BDC3B /* CustomTabBarController.m */; };
 		2375B9C61512B70D004BDC3B /* BlankTopbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 2375B9C21512B70D004BDC3B /* BlankTopbar.png */; };
 		2375B9C71512B70D004BDC3B /* BlankTopbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2375B9C31512B70D004BDC3B /* BlankTopbar@2x.png */; };
@@ -443,6 +448,16 @@
 		237468931534EC0B0049EE13 /* LocationIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LocationIcon@2x.png"; path = "FravicArtAssets/LocationIcon@2x.png"; sourceTree = "<group>"; };
 		237468941534EC0B0049EE13 /* SettingsIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SettingsIcon.png; path = FravicArtAssets/SettingsIcon.png; sourceTree = "<group>"; };
 		237468951534EC0B0049EE13 /* SettingsIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "SettingsIcon@2x.png"; path = "FravicArtAssets/SettingsIcon@2x.png"; sourceTree = "<group>"; };
+		2374689A1534F0370049EE13 /* SettingsTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTabViewController.h; sourceTree = "<group>"; };
+		2374689B1534F0370049EE13 /* SettingsTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTabViewController.m; sourceTree = "<group>"; };
+		2374689E1534F06B0049EE13 /* SettingsTabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTabView.h; sourceTree = "<group>"; };
+		2374689F1534F06B0049EE13 /* SettingsTabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTabView.m; sourceTree = "<group>"; };
+		237468A21534F6640049EE13 /* ShinySettingsTabRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShinySettingsTabRenderer.h; sourceTree = "<group>"; };
+		237468A31534F6640049EE13 /* ShinySettingsTabRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinySettingsTabRenderer.m; sourceTree = "<group>"; };
+		237468A61534FA7D0049EE13 /* ShinySettingsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShinySettingsCell.h; sourceTree = "<group>"; };
+		237468A71534FA7D0049EE13 /* ShinySettingsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinySettingsCell.m; sourceTree = "<group>"; };
+		237468AA153502060049EE13 /* ShinyHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShinyHeaderView.h; sourceTree = "<group>"; };
+		237468AB153502060049EE13 /* ShinyHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinyHeaderView.m; sourceTree = "<group>"; };
 		2375B9BF15129F68004BDC3B /* CustomTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTabBarController.h; sourceTree = "<group>"; };
 		2375B9C015129F68004BDC3B /* CustomTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTabBarController.m; sourceTree = "<group>"; };
 		2375B9C21512B70D004BDC3B /* BlankTopbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BlankTopbar.png; path = FravicArtAssets/BlankTopbar.png; sourceTree = "<group>"; };
@@ -1134,6 +1149,8 @@
 		233C46E314FEE8140003C295 /* TabBarViews */ = {
 			isa = PBXGroup;
 			children = (
+				237468A9153501EB0049EE13 /* HeaderViews */,
+				2374689D1534F0560049EE13 /* SettingsTabView */,
 				23839597150E9EA5000DC733 /* OrderTabView */,
 				233C46F21500277D0003C295 /* LocationTabView */,
 			);
@@ -1228,6 +1245,7 @@
 		233C46FA15002A0F0003C295 /* TabBarViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				237468991534F0170049EE13 /* SettingsTabViewController */,
 				23E339B5150FF33700E7BD68 /* OrderTabViewController */,
 				233C46FB15002A3A0003C295 /* LocationTabViewController */,
 			);
@@ -1399,6 +1417,51 @@
 			name = PaymentSettingsViewController;
 			sourceTree = "<group>";
 		};
+		237468991534F0170049EE13 /* SettingsTabViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2374689A1534F0370049EE13 /* SettingsTabViewController.h */,
+				2374689B1534F0370049EE13 /* SettingsTabViewController.m */,
+			);
+			name = SettingsTabViewController;
+			sourceTree = "<group>";
+		};
+		2374689D1534F0560049EE13 /* SettingsTabView */ = {
+			isa = PBXGroup;
+			children = (
+				2374689E1534F06B0049EE13 /* SettingsTabView.h */,
+				2374689F1534F06B0049EE13 /* SettingsTabView.m */,
+			);
+			name = SettingsTabView;
+			sourceTree = "<group>";
+		};
+		237468A11534F6400049EE13 /* ShinySettingsTabRenderer */ = {
+			isa = PBXGroup;
+			children = (
+				237468A21534F6640049EE13 /* ShinySettingsTabRenderer.h */,
+				237468A31534F6640049EE13 /* ShinySettingsTabRenderer.m */,
+			);
+			name = ShinySettingsTabRenderer;
+			sourceTree = "<group>";
+		};
+		237468A51534FA3F0049EE13 /* ShinySettingsCell */ = {
+			isa = PBXGroup;
+			children = (
+				237468A61534FA7D0049EE13 /* ShinySettingsCell.h */,
+				237468A71534FA7D0049EE13 /* ShinySettingsCell.m */,
+			);
+			name = ShinySettingsCell;
+			sourceTree = "<group>";
+		};
+		237468A9153501EB0049EE13 /* HeaderViews */ = {
+			isa = PBXGroup;
+			children = (
+				237468AA153502060049EE13 /* ShinyHeaderView.h */,
+				237468AB153502060049EE13 /* ShinyHeaderView.m */,
+			);
+			name = HeaderViews;
+			sourceTree = "<group>";
+		};
 		23785FB1150FD6800087C9F8 /* ShinyComboOrderItemCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1420,6 +1483,7 @@
 		23785FBA150FD8040087C9F8 /* ShinyRenderers */ = {
 			isa = PBXGroup;
 			children = (
+				237468A11534F6400049EE13 /* ShinySettingsTabRenderer */,
 				230254C7152E512800593749 /* ShinyOrderComboRenderer */,
 				230254B2152E38DB00593749 /* ShinyComboItemRenderer */,
 				230254A4152E226800593749 /* ShinyItemGroupRenderer */,
@@ -1503,6 +1567,7 @@
 		238395A8150EA3C2000DC733 /* ShinyCells */ = {
 			isa = PBXGroup;
 			children = (
+				237468A51534FA3F0049EE13 /* ShinySettingsCell */,
 				23EF636D1534B1BB00FAF555 /* ShinyItemFavoriteCell */,
 				23EF636B1534B1AD00FAF555 /* ShinyComboFavoriteCell */,
 				23025494152D03AF00593749 /* ShinyItemGroupCell */,
@@ -2620,6 +2685,11 @@
 				230254CD152E526E00593749 /* ShinyOrderComboViewController.m in Sources */,
 				23EF63701534B20300FAF555 /* ShinyItemFavoriteCell.m in Sources */,
 				23EF637B1534C08F00FAF555 /* ShinyComboFavoriteCell.m in Sources */,
+				2374689C1534F0370049EE13 /* SettingsTabViewController.m in Sources */,
+				237468A01534F06B0049EE13 /* SettingsTabView.m in Sources */,
+				237468A41534F6640049EE13 /* ShinySettingsTabRenderer.m in Sources */,
+				237468A81534FA7D0049EE13 /* ShinySettingsCell.m in Sources */,
+				237468AC153502060049EE13 /* ShinyHeaderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
