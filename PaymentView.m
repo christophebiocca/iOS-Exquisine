@@ -9,9 +9,9 @@
 #import "PaymentView.h"
 #import "PaymentInfo.h"
 
-#define TextFieldHeight 25
-#define LabelFieldPadding 2
-#define InterFieldPadding 8
+#define TextFieldHeight 24
+#define LabelFieldPadding 1
+#define InterFieldPadding 3
 
 @implementation PaymentView
 
