@@ -1,28 +1,30 @@
 //
-//  OrderHistoryViewController.m
+//  ShinyOrderSummaryViewController.m
 //  AvocadoTest1
 //
 //  Created by Jake on 12-04-11.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "OrderHistoryViewController.h"
 #import "ShinyOrderSummaryViewController.h"
-#import "OrderHistoryRenderer.h"
-#import "OrderHistoryView.h"
-#import "AppData.h"
+#import "OrderSummaryPageRenderer.h"
+#import "ShinyOrderSummaryView.h"
 
-@implementation OrderHistoryViewController
+@interface ShinyOrderSummaryViewController ()
 
-- (id) init
+@end
+
+@implementation ShinyOrderSummaryViewController
+
+- (id) initWithOrder:(Order *)anOrder
 {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
-        
-        orderHistoryView = [[OrderHistoryView alloc] init];
-        orderHistoryRenderer = [[OrderHistoryRenderer alloc] init];
-        [[orderHistoryView orderHistoryTable] setDelegate:self];
-        [[orderHistoryView orderHistoryTable] setDataSource:orderHistoryRenderer];
+        theOrder = anOrder;
+        orderSummaryView = [[ShinyOrderSummaryView alloc] init];
+        orderSummaryRenderer = [[OrderSummaryPageRenderer alloc] initWithOrder:theOrder];
+        [[orderSummaryView orderSummaryTable] setDelegate:self];
+        [[orderSummaryView orderSummaryTable] setDataSource:orderSummaryRenderer];
         
     }
     return self;
@@ -30,13 +32,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [[AppData appData] updateOrderHistory];
-    
-    orderHistoryRenderer = [[OrderHistoryRenderer alloc] init];
-    [[orderHistoryView orderHistoryTable] setDelegate:self];
-    [[orderHistoryView orderHistoryTable] setDataSource:orderHistoryRenderer];
-    
-    [[orderHistoryView orderHistoryTable] reloadData];
+
     [[[self navigationController] navigationBar] setBackgroundImage:[UIImage imageNamed:@"BlankTopbarWithShadow.png"] forBarMetrics:UIBarMetricsDefault];
     
     UILabel *toolbarText = [[UILabel alloc] initWithFrame:CGRectMake(
@@ -49,7 +45,7 @@
     [toolbarText setBackgroundColor:[UIColor clearColor]];
     [toolbarText setTextAlignment:UITextAlignmentCenter];
     
-    [toolbarText setText:@"Order History"];
+    [toolbarText setText:@"Order Summary"];
     [[self navigationItem] setTitleView:toolbarText];
     
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backButtonHit)];
@@ -79,27 +75,15 @@
     return 0.0f;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if ([[CustomViewCell cellIdentifierForData:[orderHistoryRenderer objectForCellAtIndex:indexPath]] isEqualToString:@"ShinyOrderHistoryCell"])
-    {
-        Order *theOrder = [[orderHistoryRenderer objectForCellAtIndex:indexPath] objectForKey:@"historicalOrder"];
-        
-        ShinyOrderSummaryViewController *newController = [[ShinyOrderSummaryViewController alloc] initWithOrder:theOrder];
-        
-        [[self navigationController] pushViewController:newController animated:YES];
-    }
-}
-
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [CustomViewCell cellHeightForData:[orderHistoryRenderer objectForCellAtIndex:indexPath]];
+    return [CustomViewCell cellHeightForData:[orderSummaryRenderer objectForCellAtIndex:indexPath]];
 }
 
 -(void)loadView
 {
     [super loadView];
-    [self setView:orderHistoryView];
+    [self setView:orderSummaryView];
 }
 
 - (void)viewDidLoad

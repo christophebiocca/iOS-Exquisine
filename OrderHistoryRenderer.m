@@ -26,6 +26,9 @@
         
         [listOfOrdersSection addObject:[[ShinyHeaderView alloc] initWithTitle:@"Prior Orders"]];
         
+        NSArray *helper = [[AppData appData] ordersHistory];
+        
+        
         for (Order *eachOrder in [[AppData appData] ordersHistory]) {
             [listOfOrdersSection addObject:[NSDictionary dictionaryWithObject:eachOrder forKey:@"historicalOrder"]];
         }

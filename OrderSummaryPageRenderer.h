@@ -1,5 +1,5 @@
 //
-//  OrderHistoryRenderer.h
+//  OrderSummaryPageRenderer.h
 //  AvocadoTest1
 //
 //  Created by Jake on 12-04-11.
@@ -9,11 +9,11 @@
 #import "ListRenderer.h"
 @class Order;
 
-@interface OrderHistoryRenderer : ListRenderer
+@interface OrderSummaryPageRenderer : ListRenderer
 {
     Order *theOrder;
 }
 
--(id)initWithOrder: (Order *) anOrder;
+-(id) initWithOrder:(Order *) anOrder;
 
 @end

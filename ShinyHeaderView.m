@@ -23,6 +23,7 @@
         [menuLabel setTextAlignment:UITextAlignmentLeft];
         [menuLabel setTextColor:[Utilities fravicDarkRedColor]];
         [menuLabel setBackgroundColor:[UIColor clearColor]];
+        [self setBackgroundColor:[UIColor clearColor]];
         
         [self addSubview:menuLabel];
         [self addSubview:menuHeaderImage];

@@ -126,6 +126,8 @@
 		237468C6153614F90049EE13 /* DeleteButtonCell.png in Resources */ = {isa = PBXBuildFile; fileRef = 237468C4153614F90049EE13 /* DeleteButtonCell.png */; };
 		237468C7153614F90049EE13 /* DeleteButtonCell@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 237468C5153614F90049EE13 /* DeleteButtonCell@2x.png */; };
 		237468CB153615550049EE13 /* ShinyDeleteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 237468CA153615550049EE13 /* ShinyDeleteCell.m */; };
+		237468CF1536374E0049EE13 /* ShinyOrderSummaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 237468CE1536374E0049EE13 /* ShinyOrderSummaryView.m */; };
+		237468D3153639040049EE13 /* OrderSummaryPageRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 237468D2153639040049EE13 /* OrderSummaryPageRenderer.m */; };
 		2375B9C115129F68004BDC3B /* CustomTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2375B9C015129F68004BDC3B /* CustomTabBarController.m */; };
 		2375B9C61512B70D004BDC3B /* BlankTopbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 2375B9C21512B70D004BDC3B /* BlankTopbar.png */; };
 		2375B9C71512B70D004BDC3B /* BlankTopbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2375B9C31512B70D004BDC3B /* BlankTopbar@2x.png */; };
@@ -163,6 +165,7 @@
 		2398715B1517FA070021EE55 /* ChoiceCellWithPriceNotSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 239871531517FA070021EE55 /* ChoiceCellWithPriceNotSelected@2x.png */; };
 		2398715C1517FA070021EE55 /* ChoiceCellWithPriceSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 239871541517FA070021EE55 /* ChoiceCellWithPriceSelected.png */; };
 		2398715D1517FA070021EE55 /* ChoiceCellWithPriceSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 239871551517FA070021EE55 /* ChoiceCellWithPriceSelected@2x.png */; };
+		23A54FFA1536407F0054EDD0 /* ShinyOrderSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23A54FF91536407F0054EDD0 /* ShinyOrderSummaryViewController.m */; };
 		23AAD98B14BF525A00F88AA8 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AAD98A14BF525A00F88AA8 /* Utilities.m */; };
 		23AAD99014BF68DC00F88AA8 /* MainPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AAD98F14BF68DC00F88AA8 /* MainPageView.m */; };
 		23AAD99314BF690F00F88AA8 /* MainPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AAD99214BF690F00F88AA8 /* MainPageViewController.m */; };
@@ -482,6 +485,10 @@
 		237468C5153614F90049EE13 /* DeleteButtonCell@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "DeleteButtonCell@2x.png"; path = "FravicArtAssets/DeleteButtonCell@2x.png"; sourceTree = "<group>"; };
 		237468C9153615550049EE13 /* ShinyDeleteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShinyDeleteCell.h; sourceTree = "<group>"; };
 		237468CA153615550049EE13 /* ShinyDeleteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinyDeleteCell.m; sourceTree = "<group>"; };
+		237468CD1536374E0049EE13 /* ShinyOrderSummaryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShinyOrderSummaryView.h; sourceTree = "<group>"; };
+		237468CE1536374E0049EE13 /* ShinyOrderSummaryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinyOrderSummaryView.m; sourceTree = "<group>"; };
+		237468D1153639040049EE13 /* OrderSummaryPageRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderSummaryPageRenderer.h; sourceTree = "<group>"; };
+		237468D2153639040049EE13 /* OrderSummaryPageRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderSummaryPageRenderer.m; sourceTree = "<group>"; };
 		2375B9BF15129F68004BDC3B /* CustomTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTabBarController.h; sourceTree = "<group>"; };
 		2375B9C015129F68004BDC3B /* CustomTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTabBarController.m; sourceTree = "<group>"; };
 		2375B9C21512B70D004BDC3B /* BlankTopbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BlankTopbar.png; path = FravicArtAssets/BlankTopbar.png; sourceTree = "<group>"; };
@@ -535,6 +542,8 @@
 		239871531517FA070021EE55 /* ChoiceCellWithPriceNotSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ChoiceCellWithPriceNotSelected@2x.png"; path = "FravicArtAssets/ChoiceCellWithPriceNotSelected@2x.png"; sourceTree = "<group>"; };
 		239871541517FA070021EE55 /* ChoiceCellWithPriceSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ChoiceCellWithPriceSelected.png; path = FravicArtAssets/ChoiceCellWithPriceSelected.png; sourceTree = "<group>"; };
 		239871551517FA070021EE55 /* ChoiceCellWithPriceSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ChoiceCellWithPriceSelected@2x.png"; path = "FravicArtAssets/ChoiceCellWithPriceSelected@2x.png"; sourceTree = "<group>"; };
+		23A54FF81536407F0054EDD0 /* ShinyOrderSummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShinyOrderSummaryViewController.h; sourceTree = "<group>"; };
+		23A54FF91536407F0054EDD0 /* ShinyOrderSummaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinyOrderSummaryViewController.m; sourceTree = "<group>"; };
 		23AAD98914BF525A00F88AA8 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
 		23AAD98A14BF525A00F88AA8 /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
 		23AAD98E14BF68DC00F88AA8 /* MainPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageView.h; sourceTree = "<group>"; };
@@ -1505,6 +1514,7 @@
 		237468AE1535FDFF0049EE13 /* OrderHistoryView */ = {
 			isa = PBXGroup;
 			children = (
+				237468CC153637300049EE13 /* ShinyOrderSummaryView */,
 				237468AF1535FE1C0049EE13 /* OrderHistoryView.h */,
 				237468B01535FE1C0049EE13 /* OrderHistoryView.m */,
 			);
@@ -1522,6 +1532,7 @@
 		237468B31535FF020049EE13 /* OrderHistoryViewController */ = {
 			isa = PBXGroup;
 			children = (
+				23A54FF61536404E0054EDD0 /* ShinyOrderSummaryViewController */,
 				237468B41535FF190049EE13 /* OrderHistoryViewController.h */,
 				237468B51535FF190049EE13 /* OrderHistoryViewController.m */,
 			);
@@ -1539,6 +1550,7 @@
 		237468B81535FF6D0049EE13 /* OrderHistoryRenderer */ = {
 			isa = PBXGroup;
 			children = (
+				237468D0153638E90049EE13 /* OrderSummaryPageRenderer */,
 				237468B91536005F0049EE13 /* OrderHistoryRenderer.h */,
 				237468BA1536005F0049EE13 /* OrderHistoryRenderer.m */,
 			);
@@ -1561,6 +1573,24 @@
 				237468CA153615550049EE13 /* ShinyDeleteCell.m */,
 			);
 			name = ShinyDeleteCell;
+			sourceTree = "<group>";
+		};
+		237468CC153637300049EE13 /* ShinyOrderSummaryView */ = {
+			isa = PBXGroup;
+			children = (
+				237468CD1536374E0049EE13 /* ShinyOrderSummaryView.h */,
+				237468CE1536374E0049EE13 /* ShinyOrderSummaryView.m */,
+			);
+			name = ShinyOrderSummaryView;
+			sourceTree = "<group>";
+		};
+		237468D0153638E90049EE13 /* OrderSummaryPageRenderer */ = {
+			isa = PBXGroup;
+			children = (
+				237468D1153639040049EE13 /* OrderSummaryPageRenderer.h */,
+				237468D2153639040049EE13 /* OrderSummaryPageRenderer.m */,
+			);
+			name = OrderSummaryPageRenderer;
 			sourceTree = "<group>";
 		};
 		23785FB1150FD6800087C9F8 /* ShinyComboOrderItemCell */ = {
@@ -1797,6 +1827,15 @@
 				239871451517D0A10021EE55 /* ShinyChoiceCell.m */,
 			);
 			name = ShinyChoiceCell;
+			sourceTree = "<group>";
+		};
+		23A54FF61536404E0054EDD0 /* ShinyOrderSummaryViewController */ = {
+			isa = PBXGroup;
+			children = (
+				23A54FF81536407F0054EDD0 /* ShinyOrderSummaryViewController.h */,
+				23A54FF91536407F0054EDD0 /* ShinyOrderSummaryViewController.m */,
+			);
+			name = ShinyOrderSummaryViewController;
 			sourceTree = "<group>";
 		};
 		23AAD98714BF516700F88AA8 /* Global Helpers */ = {
@@ -2804,6 +2843,9 @@
 				237468BF153604020049EE13 /* ShinyOrderHistoryCell.m in Sources */,
 				237468CB153615550049EE13 /* ShinyDeleteCell.m in Sources */,
 				D9BF90FF1534E6A2003637EE /* FancyNavigationController.m in Sources */,
+				237468CF1536374E0049EE13 /* ShinyOrderSummaryView.m in Sources */,
+				237468D3153639040049EE13 /* OrderSummaryPageRenderer.m in Sources */,
+				23A54FFA1536407F0054EDD0 /* ShinyOrderSummaryViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

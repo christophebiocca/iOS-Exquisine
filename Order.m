@@ -194,7 +194,7 @@ NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
 
     }
     
-    for (Combo *aCombo in itemList) {
+    for (Combo *aCombo in comboList) {
         Combo *newCombo = [aCombo copy];
         [anOrder addCombo:newCombo];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recalculate:) name:COMBO_MODIFIED object:newCombo];
@@ -203,8 +203,8 @@ NSString* ORDER_MODIFIED = @"CroutonLabs/OrderModified";
     anOrder->status = status;
     anOrder->orderIdentifier = orderIdentifier;
     
-    creationDate = [anOrder.creationDate copy];
-    mostRecentSubmitDate = [anOrder.mostRecentSubmitDate copy];
+    anOrder->creationDate = creationDate;
+    anOrder->mostRecentSubmitDate = mostRecentSubmitDate;
 
     anOrder->pitaFinishedTime = pitaFinishedTime;    
     return anOrder;

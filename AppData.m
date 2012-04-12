@@ -12,6 +12,7 @@
 #import "OrderManager.h"
 #import "LocationState.h"
 #import "GetMenu.h"
+#import "AutomagicalCoder.h"
 #import "Reachability.h"
 #import "Location.h"
 #import "Item.h"
@@ -117,6 +118,15 @@ static AppData* appData = nil;
     locationState = [data valueForKey:@"locationState"];
     
     ordersHistory = [data valueForKey:@"order_history"];
+    
+    if (![data valueForKey:@"version"] || [[data valueForKey:@"version"] isEqualToString:@"1.1.0"]) {
+        int index = 0;
+        for (Order *eachOrder in [ordersHistory copy]) {
+            
+            [ordersHistory replaceObjectAtIndex:index withObject:[eachOrder copy]];
+            index++;
+        }
+    }
     
     //Favorite orders is now obsolete, but we need to load the items and combos
     //that had been favorited into the new favorites archetecture.
