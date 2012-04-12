@@ -12,6 +12,30 @@
 
 @synthesize accept, change;
 
++(UIButton*)buttonWithTitle:(NSString*)title{
+    UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setBackgroundImage:[UIImage imageNamed:@"ItemGroupSatisfied"] forState:UIControlStateNormal];
+    [[button titleLabel] setLineBreakMode:UILineBreakModeWordWrap];
+    [[button titleLabel] setAdjustsFontSizeToFitWidth:YES];
+    [[button titleLabel] setFont:[Utilities fravicHeadingFont]];
+    [button setTitle:title forState:UIControlStateNormal];
+    CGSize titleSize = [title sizeWithFont:[[button titleLabel] font]];
+    CGSize spaceSize = {
+        .width = 125,
+        .height = 31
+    };
+    CGFloat vOffset = (spaceSize.height - titleSize.height)/2;
+    CGFloat hOffset = (spaceSize.width - titleSize.width)/2;
+    [button setTitleEdgeInsets:(UIEdgeInsets){
+        .top = 14 + vOffset,
+        .left = 90 + hOffset,
+        .right = 105 + hOffset,
+        .bottom = 3 + vOffset
+    }];
+    [button setTitleColor:[Utilities fravicDarkRedColor] forState:UIControlStateNormal];
+    return button;
+}
+
 - (id)initWithCCDigits:(NSString *)ccDigits
 {
     self = [super initWithFrame:CGRectZero];
@@ -22,19 +46,9 @@
         [notificationMessage setNumberOfLines:0];
         [notificationMessage setFont:[Utilities fravicHeadingFont]];
         [self addSubview:notificationMessage];
-        accept = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [accept setTitle:@"Use this card" forState:UIControlStateNormal];
-        [[accept titleLabel] setLineBreakMode:UILineBreakModeWordWrap];
-        [[accept titleLabel] setAdjustsFontSizeToFitWidth:YES];
-        [[accept titleLabel] setFont:[Utilities fravicTextFont]];
-        [accept setTitleColor:[Utilities fravicDarkRedColor] forState:UIControlStateNormal];
+        accept = [PaymentConfirmationView buttonWithTitle:@"Use this card"];
         [self addSubview:accept];
-        change = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [change setTitle:@"Change my payment information" forState:UIControlStateNormal];
-        [[change titleLabel] setLineBreakMode:UILineBreakModeWordWrap];
-        [[change titleLabel] setAdjustsFontSizeToFitWidth:YES];
-        [[change titleLabel] setFont:[Utilities fravicTextFont]];
-        [change setTitleColor:[Utilities fravicDarkRedColor] forState:UIControlStateNormal];
+        change = [PaymentConfirmationView buttonWithTitle:@"Change card"];
         [self addSubview:change];
         
         [self setCCDigits:ccDigits];
@@ -43,11 +57,11 @@
 }
 
 -(void)setCCDigits:(NSString *)ccDigits{
-    [notificationMessage setText:[NSString stringWithFormat:@"Charge this card?\nCredit card: ************%@.", ccDigits]];
+    [notificationMessage setText:[NSString stringWithFormat:@"Credit card: ************%@.", ccDigits]];
 }
 
-#define PADDING 12
-#define BUTTON_HEIGHT 50
+#define PADDING 18
+#define BUTTON_HEIGHT 58
 
 -(void)layoutSubviews{
     CGSize lims = [self frame].size;
@@ -66,22 +80,22 @@
     
     [accept setFrame:(CGRect){
         .origin = {
-            .x = PADDING,
+            .x = 0,
             .y = 2*PADDING + notifFrame.size.height
         },
         .size = {
-            .width = lims.width - 2*PADDING,
+            .width = lims.width,
             .height = BUTTON_HEIGHT
         }
     }];
     
     [change setFrame:(CGRect){
         .origin = {
-            .x = PADDING,
+            .x = 0,
             .y = 3*PADDING + notifFrame.size.height + BUTTON_HEIGHT
         },
         .size = {
-            .width = lims.width - 2*PADDING,
+            .width = lims.width,
             .height = BUTTON_HEIGHT
         }
     }];
