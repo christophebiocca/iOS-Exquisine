@@ -19,6 +19,7 @@
         [error setTextColor:[UIColor colorWithRed:0.7 green:0.3 blue:0.3 alpha:1]];
         [error setLineBreakMode:UILineBreakModeWordWrap];
         [error setNumberOfLines:0];
+        [error setFont:[Utilities fravicHeadingFont]];
         [self addSubview:error];
     }
     return self;

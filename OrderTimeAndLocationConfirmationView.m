@@ -28,6 +28,7 @@
         
         locationPrompt = [[UILabel alloc] init];
         
+        [locationPrompt setFont:[Utilities fravicHeadingFont]];
         
         [locationPrompt setText:@"Choose the location and pickup time:"];
         

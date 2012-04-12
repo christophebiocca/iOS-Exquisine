@@ -36,14 +36,14 @@ static UIColor* errorLabelColor;
 
 +(UILabel*)nameLabel:(NSString*)text{
     UILabel* label = [[UILabel alloc] initWithFrame:CGRectZero];
-    [label setFont:[UIFont systemFontOfSize:15]];
+    [label setFont:[Utilities fravicTextFont]];
     [label setText:text];
     return label;
 }
 
 +(UILabel*)errorLabel{
     UILabel* errorLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    [errorLabel setFont:[UIFont systemFontOfSize:12]];
+    [errorLabel setFont:[Utilities fravicTextFont]];
     [errorLabel setTextColor:errorLabelColor];
     [errorLabel setHidden:YES];
     return errorLabel;
@@ -55,7 +55,7 @@ static UIColor* errorLabelColor;
     if (self) {
         [self setBackgroundColor:[UIColor whiteColor]];
         serverErrorMessageLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        [serverErrorMessageLabel setFont:[UIFont systemFontOfSize:16]];
+        [serverErrorMessageLabel setFont:[Utilities fravicHeadingFont]];
         [serverErrorMessageLabel setNumberOfLines:1];
         [serverErrorMessageLabel setTextColor:errorLabelColor];
         [self addSubview:serverErrorMessageLabel];

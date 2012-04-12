@@ -20,16 +20,21 @@
         notificationMessage = [[UILabel alloc] initWithFrame:CGRectZero];
         [notificationMessage setLineBreakMode:UILineBreakModeWordWrap];
         [notificationMessage setNumberOfLines:0];
+        [notificationMessage setFont:[Utilities fravicHeadingFont]];
         [self addSubview:notificationMessage];
         accept = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [accept setTitle:@"Use this card" forState:UIControlStateNormal];
         [[accept titleLabel] setLineBreakMode:UILineBreakModeWordWrap];
         [[accept titleLabel] setAdjustsFontSizeToFitWidth:YES];
+        [[accept titleLabel] setFont:[Utilities fravicTextFont]];
+        [accept setTitleColor:[Utilities fravicDarkRedColor] forState:UIControlStateNormal];
         [self addSubview:accept];
         change = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [change setTitle:@"Change my payment information" forState:UIControlStateNormal];
         [[change titleLabel] setLineBreakMode:UILineBreakModeWordWrap];
         [[change titleLabel] setAdjustsFontSizeToFitWidth:YES];
+        [[change titleLabel] setFont:[Utilities fravicTextFont]];
+        [change setTitleColor:[Utilities fravicDarkRedColor] forState:UIControlStateNormal];
         [self addSubview:change];
         
         [self setCCDigits:ccDigits];

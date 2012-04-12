@@ -24,7 +24,7 @@
         [processingText setBackgroundColor:[UIColor blackColor]];
         [processingText setTextColor:[UIColor lightGrayColor]];
         [processingText setText:@"Processing your order"];
-        [processingText setFont:[UIFont systemFontOfSize:24]];
+        [processingText setFont:[Utilities fravicHeadingFont]];
         [processingText setLineBreakMode:UILineBreakModeWordWrap];
         [processingText setNumberOfLines:0];
         [processingText setTextAlignment:UITextAlignmentCenter];

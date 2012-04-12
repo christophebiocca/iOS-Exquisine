@@ -26,7 +26,7 @@
         pickupTime = [[UILabel alloc] init];
         signoff = [[UILabel alloc] init];
         
-        UIFont *theFont = [UIFont fontWithName:@"Helvetica" size:16];
+        UIFont *theFont = [Utilities fravicTextFont];
         
         [authCode setFont:theFont];
         [messageText setFont:theFont];

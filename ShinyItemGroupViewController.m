@@ -84,14 +84,6 @@
 -(void)loadView
 {
     [super loadView];
-    [[self navigationItem] setHidesBackButton:YES];
-    
-    //Set this as the back button
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backButtonHit)];
-    [backButton setTintColor:[Utilities fravicDarkRedColor]];
-    
-    [[self navigationItem] setLeftBarButtonItem:backButton];
-    
     
     UIBarButtonItem *fillerButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:nil];
     [fillerButton setCustomView:[[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 21)]];
@@ -114,11 +106,6 @@
     }
     [[self navigationController] setViewControllers:newControllerStack animated:YES];
     
-}
-
--(void) backButtonHit
-{
-    [[self navigationController] popViewControllerAnimated:YES];
 }
 
 -(void)viewWillAppear:(BOOL)animated

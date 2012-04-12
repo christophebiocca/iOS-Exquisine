@@ -52,21 +52,10 @@
     [toolbarText setText:@"Order History"];
     [[self navigationItem] setTitleView:toolbarText];
     
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backButtonHit)];
-    [backButton setTintColor:[Utilities fravicDarkRedColor]];
-    
-    [[self navigationItem] setLeftBarButtonItem:backButton];
-    
-    
     UIBarButtonItem *fillerButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:nil];
     [fillerButton setCustomView:[[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 21)]];
     [[self navigationItem] setRightBarButtonItem:fillerButton];
     
-}
-
--(void) backButtonHit
-{
-    [[self navigationController] popViewControllerAnimated:YES];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
