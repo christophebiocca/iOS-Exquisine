@@ -66,22 +66,22 @@
     
     [accept setFrame:(CGRect){
         .origin = {
-            .x = PADDING,
+            .x = 0,
             .y = 2*PADDING + notifFrame.size.height
         },
         .size = {
-            .width = lims.width - 2*PADDING,
+            .width = lims.width,
             .height = BUTTON_HEIGHT
         }
     }];
     
     [change setFrame:(CGRect){
         .origin = {
-            .x = PADDING,
+            .x = 0,
             .y = 3*PADDING + notifFrame.size.height + BUTTON_HEIGHT
         },
         .size = {
-            .width = lims.width - 2*PADDING,
+            .width = lims.width,
             .height = BUTTON_HEIGHT
         }
     }];
