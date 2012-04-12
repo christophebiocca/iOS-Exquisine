@@ -34,7 +34,7 @@
         [self addSubview:notificationMessage];
         accept = [PaymentConfirmationView buttonWithTitle:@"Use this card"];
         [self addSubview:accept];
-        change = [PaymentConfirmationView buttonWithTitle:@"Change my payment information"];
+        change = [PaymentConfirmationView buttonWithTitle:@"Change card"];
         [self addSubview:change];
         
         [self setCCDigits:ccDigits];
