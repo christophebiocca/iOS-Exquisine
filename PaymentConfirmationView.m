@@ -12,6 +12,16 @@
 
 @synthesize accept, change;
 
++(UIButton*)buttonWithTitle:(NSString*)title{
+    UIButton* button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [[button titleLabel] setLineBreakMode:UILineBreakModeWordWrap];
+    [[button titleLabel] setAdjustsFontSizeToFitWidth:YES];
+    [[button titleLabel] setFont:[Utilities fravicTextFont]];
+    [button setTitle:title forState:UIControlStateNormal];
+    [button setTitleColor:[Utilities fravicDarkRedColor] forState:UIControlStateNormal];
+    return button;
+}
+
 - (id)initWithCCDigits:(NSString *)ccDigits
 {
     self = [super initWithFrame:CGRectZero];
@@ -22,19 +32,9 @@
         [notificationMessage setNumberOfLines:0];
         [notificationMessage setFont:[Utilities fravicHeadingFont]];
         [self addSubview:notificationMessage];
-        accept = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [accept setTitle:@"Use this card" forState:UIControlStateNormal];
-        [[accept titleLabel] setLineBreakMode:UILineBreakModeWordWrap];
-        [[accept titleLabel] setAdjustsFontSizeToFitWidth:YES];
-        [[accept titleLabel] setFont:[Utilities fravicTextFont]];
-        [accept setTitleColor:[Utilities fravicDarkRedColor] forState:UIControlStateNormal];
+        accept = [PaymentConfirmationView buttonWithTitle:@"Use this card"];
         [self addSubview:accept];
-        change = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [change setTitle:@"Change my payment information" forState:UIControlStateNormal];
-        [[change titleLabel] setLineBreakMode:UILineBreakModeWordWrap];
-        [[change titleLabel] setAdjustsFontSizeToFitWidth:YES];
-        [[change titleLabel] setFont:[Utilities fravicTextFont]];
-        [change setTitleColor:[Utilities fravicDarkRedColor] forState:UIControlStateNormal];
+        change = [PaymentConfirmationView buttonWithTitle:@"Change my payment information"];
         [self addSubview:change];
         
         [self setCCDigits:ccDigits];
