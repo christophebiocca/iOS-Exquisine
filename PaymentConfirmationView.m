@@ -16,7 +16,7 @@
     UIButton* button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [[button titleLabel] setLineBreakMode:UILineBreakModeWordWrap];
     [[button titleLabel] setAdjustsFontSizeToFitWidth:YES];
-    [[button titleLabel] setFont:[Utilities fravicTextFont]];
+    [[button titleLabel] setFont:[Utilities fravicHeadingFont]];
     [button setTitle:title forState:UIControlStateNormal];
     [button setTitleColor:[Utilities fravicDarkRedColor] forState:UIControlStateNormal];
     return button;
