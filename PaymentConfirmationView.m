@@ -46,8 +46,8 @@
     [notificationMessage setText:[NSString stringWithFormat:@"Charge this card?\nCredit card: ************%@.", ccDigits]];
 }
 
-#define PADDING 12
-#define BUTTON_HEIGHT 50
+#define PADDING 18
+#define BUTTON_HEIGHT 58
 
 -(void)layoutSubviews{
     CGSize lims = [self frame].size;
