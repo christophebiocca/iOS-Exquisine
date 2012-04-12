@@ -13,11 +13,25 @@
 @synthesize accept, change;
 
 +(UIButton*)buttonWithTitle:(NSString*)title{
-    UIButton* button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setBackgroundImage:[UIImage imageNamed:@"ItemGroupSatisfied"] forState:UIControlStateNormal];
     [[button titleLabel] setLineBreakMode:UILineBreakModeWordWrap];
     [[button titleLabel] setAdjustsFontSizeToFitWidth:YES];
     [[button titleLabel] setFont:[Utilities fravicHeadingFont]];
     [button setTitle:title forState:UIControlStateNormal];
+    CGSize titleSize = [title sizeWithFont:[[button titleLabel] font]];
+    CGSize spaceSize = {
+        .width = 125,
+        .height = 31
+    };
+    CGFloat vOffset = (spaceSize.height - titleSize.height)/2;
+    CGFloat hOffset = (spaceSize.width - titleSize.width)/2;
+    [button setTitleEdgeInsets:(UIEdgeInsets){
+        .top = 14 + vOffset,
+        .left = 90 + hOffset,
+        .right = 105 + hOffset,
+        .bottom = 3 + vOffset
+    }];
     [button setTitleColor:[Utilities fravicDarkRedColor] forState:UIControlStateNormal];
     return button;
 }
