@@ -57,7 +57,7 @@
 }
 
 -(void)setCCDigits:(NSString *)ccDigits{
-    [notificationMessage setText:[NSString stringWithFormat:@"Charge this card?\nCredit card: ************%@.", ccDigits]];
+    [notificationMessage setText:[NSString stringWithFormat:@"Credit card: ************%@.", ccDigits]];
 }
 
 #define PADDING 18
