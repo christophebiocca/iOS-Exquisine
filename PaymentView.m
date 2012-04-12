@@ -160,7 +160,7 @@ static UIColor* errorLabelColor;
         return height;
     };
     
-    NSInteger height = 0;
+    NSInteger height = InterFieldPadding;
     
     if([[serverErrorMessageLabel text] length]){
         CGSize labelSize = [[serverErrorMessageLabel text]
