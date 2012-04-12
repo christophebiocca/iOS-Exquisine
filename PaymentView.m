@@ -118,6 +118,9 @@ static UIColor* errorLabelColor;
         [expirationYear setClearButtonMode:UITextFieldViewModeWhileEditing];
         [expirationYear setPlaceholder:[formatter stringFromDate:today]];
         [self addSubview:expirationYear];
+        
+        secureView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"payments"]];
+        [self addSubview:secureView];
     }
     return self;
 }
@@ -217,10 +220,15 @@ static UIColor* errorLabelColor;
     }
     NSInteger oneQuarter = InterFieldPadding * 1.5 + leftWidth/2;
     NSInteger halfLeftWidth = leftWidth/2 - InterFieldPadding/2;
-    layoutWidget(height, expirationMonth, TextFieldHeight,
+    NSInteger left1Height = layoutWidget(height, expirationMonth, TextFieldHeight,
                                InterFieldPadding, halfLeftWidth);
-    layoutWidget(height, expirationYear, TextFieldHeight,
+    NSInteger left2Height = layoutWidget(height, expirationYear, TextFieldHeight,
                                oneQuarter, halfLeftWidth);
+    leftHeight = MAX(left1Height, left2Height);
+    height = MAX(leftHeight, rightHeight);
+    [secureView sizeToFit];
+    CGSize dimensions = [secureView frame].size;
+    layoutWidget(height, secureView, dimensions.height, InterFieldPadding, dimensions.width);
 }
 
 /*
