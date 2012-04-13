@@ -103,7 +103,13 @@
 }
 
 -(void)flushExpirationYear{
-    [info setExpirationYear:[[paymentView expirationYear] text]];
+    if ([[[paymentView expirationYear] text] length] == 2) {
+        [info setExpirationYear:[NSString stringWithFormat:@"20%@",[[paymentView expirationYear] text]]];
+    }
+    else {
+        [info setExpirationYear:[[paymentView expirationYear] text]];
+    }
+    
     [paymentView setErrorMessage:[info expirationError]
                     onErrorLabel:[paymentView expirationErrorLabel]];
 }

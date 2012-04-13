@@ -212,7 +212,11 @@
         [self sendOrder:info];
     }];
     [controller setCancelledBlock:^{
-        cancelledBlock();
+        //I'm aware of how bad this looks, but it's to work around an iOS bug.
+        
+        NSMutableArray *newControllers = [NSMutableArray arrayWithArray:[navigationController viewControllers]];
+        [newControllers removeObject:[newControllers lastObject]];
+        [navigationController setViewControllers:newControllers animated:YES];
     }];
 }
 
