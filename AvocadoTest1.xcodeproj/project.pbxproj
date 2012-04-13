@@ -178,6 +178,8 @@
 		23C26A0A14C0F00600DD53DF /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C26A0914C0F00600DD53DF /* Menu.m */; };
 		23C26A2014C4D5A700DD53DF /* MenuComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C26A1F14C4D5A600DD53DF /* MenuComponent.m */; };
 		23C26A2314C4D6FA00DD53DF /* VisualizableData.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C26A2214C4D6FA00DD53DF /* VisualizableData.m */; };
+		23C8A2AF1538BAEA001B5612 /* ShinyTelephoneNumberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C8A2AE1538BAEA001B5612 /* ShinyTelephoneNumberCell.m */; };
+		23C8A2B31538C4DB001B5612 /* ShinyEmailAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23C8A2B21538C4DB001B5612 /* ShinyEmailAddressCell.m */; };
 		23D003CE15095B7D001964D4 /* AutomagicalCoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D003CD15095B7D001964D4 /* AutomagicalCoder.m */; };
 		23D1DCB014F6D66E00CFD279 /* LocationMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D1DCAF14F6D66E00CFD279 /* LocationMapView.m */; };
 		23D1DCB414F6D6DF00CFD279 /* LocationState.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D1DCB314F6D6DF00CFD279 /* LocationState.m */; };
@@ -574,6 +576,10 @@
 		23C26A1F14C4D5A600DD53DF /* MenuComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuComponent.m; sourceTree = "<group>"; };
 		23C26A2114C4D6FA00DD53DF /* VisualizableData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisualizableData.h; sourceTree = "<group>"; };
 		23C26A2214C4D6FA00DD53DF /* VisualizableData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisualizableData.m; sourceTree = "<group>"; };
+		23C8A2AD1538BAEA001B5612 /* ShinyTelephoneNumberCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShinyTelephoneNumberCell.h; sourceTree = "<group>"; };
+		23C8A2AE1538BAEA001B5612 /* ShinyTelephoneNumberCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinyTelephoneNumberCell.m; sourceTree = "<group>"; };
+		23C8A2B11538C4DB001B5612 /* ShinyEmailAddressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShinyEmailAddressCell.h; sourceTree = "<group>"; };
+		23C8A2B21538C4DB001B5612 /* ShinyEmailAddressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinyEmailAddressCell.m; sourceTree = "<group>"; };
 		23C9EFE714E2F9C4000E8C2A /* ItemManagementDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemManagementDelegate.h; sourceTree = "<group>"; };
 		23D003CC15095B7D001964D4 /* AutomagicalCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutomagicalCoder.h; sourceTree = "<group>"; };
 		23D003CD15095B7D001964D4 /* AutomagicalCoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutomagicalCoder.m; sourceTree = "<group>"; };
@@ -1723,6 +1729,8 @@
 		238395A8150EA3C2000DC733 /* ShinyCells */ = {
 			isa = PBXGroup;
 			children = (
+				23C8A2B01538C4C8001B5612 /* ShinyEmailAddressCell */,
+				23C8A2AC1538BABE001B5612 /* ShinyTelephoneNumberCell */,
 				23E9C8D11537792000330661 /* ShinyPaymentInfoCell */,
 				237468C8153615350049EE13 /* ShinyDeleteCell */,
 				237468BC153603E00049EE13 /* ShinyOrderHistoryCell */,
@@ -1941,6 +1949,24 @@
 				23C26A2214C4D6FA00DD53DF /* VisualizableData.m */,
 			);
 			name = VisualizableDataTypes;
+			sourceTree = "<group>";
+		};
+		23C8A2AC1538BABE001B5612 /* ShinyTelephoneNumberCell */ = {
+			isa = PBXGroup;
+			children = (
+				23C8A2AD1538BAEA001B5612 /* ShinyTelephoneNumberCell.h */,
+				23C8A2AE1538BAEA001B5612 /* ShinyTelephoneNumberCell.m */,
+			);
+			name = ShinyTelephoneNumberCell;
+			sourceTree = "<group>";
+		};
+		23C8A2B01538C4C8001B5612 /* ShinyEmailAddressCell */ = {
+			isa = PBXGroup;
+			children = (
+				23C8A2B11538C4DB001B5612 /* ShinyEmailAddressCell.h */,
+				23C8A2B21538C4DB001B5612 /* ShinyEmailAddressCell.m */,
+			);
+			name = ShinyEmailAddressCell;
 			sourceTree = "<group>";
 		};
 		23D1DCB514F7153900CFD279 /* SpecializedTypes */ = {
@@ -2920,6 +2946,8 @@
 				23E9C8D0153772B000330661 /* ShinyPaymentProfileRenderer.m in Sources */,
 				23E9C8D41537794000330661 /* ShinyPaymentViewCell.m in Sources */,
 				23E9C8DB15377C4D00330661 /* ShinyPaymentProfileViewController.m in Sources */,
+				23C8A2AF1538BAEA001B5612 /* ShinyTelephoneNumberCell.m in Sources */,
+				23C8A2B31538C4DB001B5612 /* ShinyEmailAddressCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

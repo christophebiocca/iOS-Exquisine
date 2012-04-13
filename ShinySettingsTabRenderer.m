@@ -28,14 +28,22 @@
         [listOfSettingsSectionContents addObject:[NSDictionary dictionaryWithObject:@"Order History" forKey:@"settingTitle"]];
         
         [listOfSettingsSectionContents addObject:[[ShinyHeaderView alloc] initWithTitle:@"Support"]];
-        UILabel *techSupportLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 320, 150)];
+        UILabel *techSupportLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 320, 30)];
         [techSupportLabel setFont:[UIFont fontWithName:@"AmericanTypewriter" size:14]];
         [techSupportLabel setNumberOfLines:70];
-        [techSupportLabel setText:@"If you have any questions or comments,\nfeel free to call us at:\n(519) 616-6193 \nor email us at:\nsupport@croutonlabs.com\n\nYou can also visit our website at:\ncroutonlabs.com"];
+        [techSupportLabel setText:@"If you have any questions or comments,\nfeel free to call us at:"];
         [techSupportLabel setLineBreakMode:UILineBreakModeWordWrap];
-        [techSupportLabel setTextAlignment:UITextAlignmentLeft];
-        
         [listOfSettingsSectionContents addObject:techSupportLabel];
+        
+        [listOfSettingsSectionContents addObject:[NSDictionary dictionaryWithObject:@"519-616-6193" forKey:@"telephoneNumber"]];
+        UILabel *secondTechSupportLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 320, 9)];
+        [secondTechSupportLabel setFont:[UIFont fontWithName:@"AmericanTypewriter" size:14]];
+        [secondTechSupportLabel setNumberOfLines:70];
+        [secondTechSupportLabel setText:@"or email us at:"];
+        [secondTechSupportLabel setLineBreakMode:UILineBreakModeWordWrap];
+        [listOfSettingsSectionContents addObject:secondTechSupportLabel];
+        
+        [listOfSettingsSectionContents addObject:[NSDictionary dictionaryWithObject:@"support@croutonlabs.com" forKey:@"emailAddress"]];
         
         [listData addObject:listOfSettingsSectionContents];
         
