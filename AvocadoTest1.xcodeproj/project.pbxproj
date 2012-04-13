@@ -1547,6 +1547,7 @@
 		237468B21535FEF40049EE13 /* SubsettingViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				23E9C8C715376BB700330661 /* ShinyPaymentProfileViewController */,
 				237468B31535FF020049EE13 /* OrderHistoryViewController */,
 			);
 			name = SubsettingViewControllers;
@@ -1555,7 +1556,6 @@
 		237468B31535FF020049EE13 /* OrderHistoryViewController */ = {
 			isa = PBXGroup;
 			children = (
-				23E9C8C715376BB700330661 /* ShinyPaymentProfileViewController */,
 				23A54FF61536404E0054EDD0 /* ShinyOrderSummaryViewController */,
 				237468B41535FF190049EE13 /* OrderHistoryViewController.h */,
 				237468B51535FF190049EE13 /* OrderHistoryViewController.m */,
@@ -2710,6 +2710,8 @@
 				23E9C8D815377A6000330661 /* PaymentViewCell@2x.png in Resources */,
 				D917E97E15375D44005DE4BA /* payments@2x.png in Resources */,
 				D917E98115375E11005DE4BA /* payments.png in Resources */,
+				23E9C8D715377A6000330661 /* PaymentViewCell.png in Resources */,
+				23E9C8D815377A6000330661 /* PaymentViewCell@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

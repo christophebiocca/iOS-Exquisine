@@ -39,7 +39,7 @@
         [[paymentProfileView paymentMethodsTable] setDelegate:self];
         [[paymentProfileView paymentMethodsTable] setDataSource:paymentProfileRenderer];
         [[self navigationItem] setHidesBackButton:YES]; 
-        
+
     }
     return self;
 }
@@ -72,18 +72,31 @@
     [fillerButton setCustomView:[[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 21)]];
     [[self navigationItem] setRightBarButtonItem:fillerButton];
 
-    [[self tabBarController] setDelegate:self];
-    
+    theTabBarController = [self tabBarController];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    if (!theTabBarController) {
+        CLLog(LOG_LEVEL_ERROR,@"The tabBarController doesn't exist");
+    }
+    [theTabBarController setDelegate:self];
 }
 
 -(void)viewDidDisappear:(BOOL)animated
 {
-    [[self tabBarController] setDelegate:nil];
+    if (!theTabBarController) {
+        CLLog(LOG_LEVEL_ERROR,@"The tabBarController doesn't exist");
+    }
+    [theTabBarController setDelegate:nil];
 }
 
 -(void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
-    [[self tabBarController] setDelegate:nil];
+    if (!theTabBarController) {
+        CLLog(LOG_LEVEL_ERROR,@"The tabBarController doesn't exist");
+    }
+    [theTabBarController setDelegate:nil];
     [[self navigationController] popToViewController:returnController animated:NO];
 }
 
@@ -99,6 +112,10 @@
 
 -(void)backButtonHit
 {
+    if (!theTabBarController) {
+        CLLog(LOG_LEVEL_ERROR,@"The tabBarController doesn't exist");
+    }
+    [theTabBarController setDelegate:nil];
     [[self navigationController] popToViewController:returnController animated:YES];
 }
 
@@ -245,7 +262,6 @@
         }
         
         [newNavStack addObject:newController];
-        
         [[self navigationController] setViewControllers:newNavStack animated:YES];
     }];
     
@@ -272,6 +288,11 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    if (!theTabBarController) {
+        CLLog(LOG_LEVEL_ERROR,@"The tabBarController doesn't exist");
+    }
+    
+    [theTabBarController setDelegate:nil];
     // Release any retained subviews of the main view.
 }
 
@@ -317,6 +338,12 @@
 
 -(void)dealloc
 {
+    if (!theTabBarController) {
+        CLLog(LOG_LEVEL_ERROR,@"The tabBarController doesn't exist");
+    }
+    if ([theTabBarController delegate] == self) {
+        [theTabBarController setDelegate:nil];
+    }
 }
          
 @end

@@ -13,6 +13,7 @@
 
 @interface ShinyPaymentProfileViewController : UIViewController<UITableViewDelegate,UINavigationControllerDelegate,UITabBarControllerDelegate>
 {
+    UITabBarController *theTabBarController;
     PaymentProfileInfo *profileInfo;
     UIViewController *returnController;
     ShinyPaymentProfileView *paymentProfileView;
