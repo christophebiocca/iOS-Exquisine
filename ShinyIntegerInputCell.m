@@ -25,6 +25,7 @@
         numberLabel = [[UILabel alloc] init];
         [numberLabel setBackgroundColor:[UIColor clearColor]];
         [numberLabel setFont:[UIFont fontWithName:@"AmericanTypewriter-Bold" size:13]];
+        [numberLabel setTextAlignment:UITextAlignmentCenter];
         
         plusButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [plusButton setTitle:@" " forState:UIControlStateNormal];
@@ -65,7 +66,7 @@
                                      40, 
                                      40)];
     [numberLabel setFrame:CGRectMake(
-                                     156, 
+                                     70, 
                                      [self frame].size.height/2 - 10, 
                                      180, 
                                      21)];
