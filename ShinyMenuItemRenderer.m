@@ -12,6 +12,7 @@
 #import "ExpandableCellData.h"
 #import "IntegerInputCellData.h"
 #import "Option.h"
+#import "ShinyHeaderView.h"
 #import "Item.h"
 
 @implementation ShinyMenuItemRenderer
@@ -28,15 +29,22 @@
         sectionNames = [[NSMutableArray alloc] init];
         listData = [[NSMutableArray alloc] init];
         
-        [sectionNames addObject:@"Options"];
-        NSMutableArray *optionSectionContents = [[NSMutableArray alloc] init];
-        [optionSectionContents addObject:[OptionSectionHeaderView new]];
+        [sectionNames addObject:@"Number of Items"];
+        NSMutableArray *quantitySection = [[NSMutableArray alloc] init];
+        
+        [quantitySection addObject:[[ShinyHeaderView alloc] initWithTitle:@"Quantity"]];
         
         IntegerInputCellData *newCell = [[IntegerInputCellData alloc] init];
         [newCell setNumber:[theItem numberOfItems]];
         [newCell setLowerBound:[NSNumber numberWithInt:1]];
         [newCell setUpperBound:[NSNumber numberWithInt:100]];
-        [optionSectionContents addObject:newCell];
+        [quantitySection addObject:newCell];
+        
+        [listData addObject:quantitySection];
+        
+        [sectionNames addObject:@"Options"];
+        NSMutableArray *optionSectionContents = [[NSMutableArray alloc] init];
+        [optionSectionContents addObject:[OptionSectionHeaderView new]];
         
         NSMutableDictionary *favoriteCell = [[NSMutableDictionary alloc] init];
         [favoriteCell setValue:theItem forKey:@"favoriteCellItem"];

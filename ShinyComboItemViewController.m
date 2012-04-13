@@ -26,4 +26,11 @@
     return self;
 }
 
+-(void)loadView
+{
+    [super loadView];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonHit)];
+    [[self navigationItem] setRightBarButtonItem:doneButton];
+}
+
 @end

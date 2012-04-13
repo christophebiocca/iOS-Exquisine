@@ -11,6 +11,7 @@
 #import "ShinyComboView.h"
 #import "ShinyMenuItemViewController.h"
 #import "ShinyItemGroupViewController.h"
+#import "ShinyComboItemViewController.h"
 #import "ShinyComboFavoriteCell.h"
 #import "Combo.h"
 #import "ExpandableCell.h"
@@ -56,7 +57,7 @@ NSString *COMBO_DONE_BUTTON_HIT = @"CroutonLabs/ComboDoneButtonHit";
             Item *theItem = [[theItemGroup listOfItems] objectAtIndex:0];
             if (([[theItem options] count] > 0)||![[theItem desc] isEqualToString:@""]) 
             {
-                ShinyMenuItemViewController *newController = [[ShinyMenuItemViewController alloc] initWithItem:theItem];
+                ShinyComboItemViewController *newController = [[ShinyComboItemViewController alloc] initWithItem:theItem];
                 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addItemButtonHit:) name:ITEM_DONE_BUTTON_HIT object:newController];
                 [[self navigationController] pushViewController:newController animated:YES];
                 return;

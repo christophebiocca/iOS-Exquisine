@@ -40,6 +40,13 @@ NSString* COMBO_DELETE_BUTTON_HIT = @"CroutonLabs/ComboDeleteButtonHit";
     }
 }
 
+-(void)loadView
+{
+    [super loadView];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonHit)];
+    [[self navigationItem] setRightBarButtonItem:doneButton];
+}
+
 -(void) deleteButtonHit
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:COMBO_DELETE_BUTTON_HIT object:self];

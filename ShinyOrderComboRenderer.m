@@ -7,6 +7,7 @@
 //
 
 #import "ShinyOrderComboRenderer.h"
+#import "ShinyHeaderView.h"
 #import "NumberOfCombosView.h"
 #import "IntegerInputCellData.h"
 #import "Combo.h"
@@ -24,6 +25,19 @@
         sectionNames = [[NSMutableArray alloc] init];
         listData = [[NSMutableArray alloc] init];
 
+        [sectionNames addObject:@"Number of Combos"];
+        NSMutableArray *quantitySection = [[NSMutableArray alloc] init];
+        
+        [quantitySection addObject:[[ShinyHeaderView alloc] initWithTitle:@"Quantity"]];
+        
+        IntegerInputCellData *newCell = [[IntegerInputCellData alloc] init];
+        [newCell setNumber:[theCombo numberOfCombos]];
+        [newCell setLowerBound:[NSNumber numberWithInt:1]];
+        [newCell setUpperBound:[NSNumber numberWithInt:100]];
+        [quantitySection addObject:newCell];
+        
+        [listData addObject:quantitySection];
+        
         [sectionNames addObject:@"Item Groups"];
         NSMutableArray *itemGroupSectionContents = [[NSMutableArray alloc] init];
         
@@ -32,12 +46,6 @@
             [itemGroupSectionContents addObject:[ItemGroupSectionHeaderView new]];
             
         }
-        
-        IntegerInputCellData *newCell = [[IntegerInputCellData alloc] init];
-        [newCell setNumber:[theCombo numberOfCombos]];
-        [newCell setLowerBound:[NSNumber numberWithInt:1]];
-        [newCell setUpperBound:[NSNumber numberWithInt:100]];
-        [itemGroupSectionContents addObject:newCell];
         
         NSMutableDictionary *favoriteCell = [[NSMutableDictionary alloc] init];
         [favoriteCell setValue:theCombo forKey:@"favoriteCellCombo"];

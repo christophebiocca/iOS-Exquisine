@@ -10,6 +10,7 @@
 #import "OptionSectionHeaderView.h"
 #import "NumberOfItemsSectionHeaderView.h"
 #import "IntegerInputCellData.h"
+#import "ShinyHeaderView.h"
 #import "ExpandableCellData.h"
 #import "Option.h"
 #import "Item.h"
@@ -28,16 +29,24 @@
         sectionNames = [[NSMutableArray alloc] init];
         listData = [[NSMutableArray alloc] init];
         
-        [sectionNames addObject:@"Options"];
-        NSMutableArray *optionSectionContents = [[NSMutableArray alloc] init];
+        [sectionNames addObject:@"Number of Items"];
+        NSMutableArray *quantitySection = [[NSMutableArray alloc] init];
         
-        [optionSectionContents addObject:[OptionSectionHeaderView new]];
+        [quantitySection addObject:[[ShinyHeaderView alloc] initWithTitle:@"Quantity"]];
         
         IntegerInputCellData *newCell = [[IntegerInputCellData alloc] init];
         [newCell setNumber:[theItem numberOfItems]];
         [newCell setLowerBound:[NSNumber numberWithInt:1]];
         [newCell setUpperBound:[NSNumber numberWithInt:100]];
-        [optionSectionContents addObject:newCell];
+        [quantitySection addObject:newCell];
+        
+        [listData addObject:quantitySection];
+        
+        
+        [sectionNames addObject:@"Options"];
+        NSMutableArray *optionSectionContents = [[NSMutableArray alloc] init];
+        
+        [optionSectionContents addObject:[OptionSectionHeaderView new]];
         
         [optionSectionContents addObject:[NSDictionary dictionaryWithObject:theItem forKey:@"favoriteCellItem"]];
         
