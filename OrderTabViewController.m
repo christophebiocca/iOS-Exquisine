@@ -59,7 +59,7 @@ NSString *ORDER_PLACEMENT_REQUESTED = @"CroutonLabs/OrderPlacementRequested";
     [toolbarText setText:@"Your Order"];
     
     //We're initing it again so that anything that has changed is accounted for.
-    [orderRenderer initWithOrderManager:theOrderManager];
+    (void)[orderRenderer initWithOrderManager:theOrderManager];
     [[orderView orderTable] reloadData];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -67,6 +67,10 @@ NSString *ORDER_PLACEMENT_REQUESTED = @"CroutonLabs/OrderPlacementRequested";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshView) name:ORDER_MANAGER_NEEDS_REDRAW object:theOrderManager];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(placeButtonPressed) name:PLACE_BUTTON_PRESSED object:orderRenderer];
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:ITEM_DELETE_BUTTON_HIT object:nil queue:nil usingBlock:^(NSNotification *note){
+        [self deleteItem:note];
+    }];
     
     [[self navigationItem] setTitleView:toolbarText];
 }
@@ -115,8 +119,6 @@ NSString *ORDER_PLACEMENT_REQUESTED = @"CroutonLabs/OrderPlacementRequested";
         Item *theItem = [[orderRenderer objectForCellAtIndex:indexPath] objectForKey:@"orderItem"];
         
         ShinyOrderItemViewController *newController = [[ShinyOrderItemViewController alloc] initWithItem:theItem];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteItem:) name:ITEM_DELETE_BUTTON_HIT object:newController];
         
         [[self navigationController] pushViewController:newController animated:YES];
     }

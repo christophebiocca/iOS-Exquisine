@@ -94,8 +94,6 @@
 -(void) updateCell
 {
     [numberLabel setText:[NSString stringWithFormat:@"%i",[[integerCellData number] intValue]]];
-    [self setNeedsDisplay];
-    [self setNeedsLayout];
 }
 
 -(void)plusPushed
