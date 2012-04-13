@@ -34,6 +34,7 @@
 {
     if (self = [super initWithNibName:nil bundle:nil]) {
         info = [[PaymentInfo alloc] init];
+        paymentView = [[PaymentView alloc] init];
     }
     return self;
 }
@@ -51,7 +52,6 @@
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView
 {
-    paymentView = [[PaymentView alloc] init];
     [self setView:paymentView];
 }
 
