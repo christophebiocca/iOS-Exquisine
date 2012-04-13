@@ -9,9 +9,9 @@
 #import "PaymentView.h"
 #import "PaymentInfo.h"
 
-#define TextFieldHeight 25
-#define LabelFieldPadding 2
-#define InterFieldPadding 8
+#define TextFieldHeight 24
+#define LabelFieldPadding 1
+#define InterFieldPadding 3
 
 @implementation PaymentView
 
@@ -118,6 +118,9 @@ static UIColor* errorLabelColor;
         [expirationYear setClearButtonMode:UITextFieldViewModeWhileEditing];
         [expirationYear setPlaceholder:[formatter stringFromDate:today]];
         [self addSubview:expirationYear];
+        
+        secureView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"payments"]];
+        [self addSubview:secureView];
     }
     return self;
 }
@@ -160,7 +163,7 @@ static UIColor* errorLabelColor;
         return height;
     };
     
-    NSInteger height = 0;
+    NSInteger height = InterFieldPadding;
     
     if([[serverErrorMessageLabel text] length]){
         CGSize labelSize = [[serverErrorMessageLabel text]
@@ -217,20 +220,16 @@ static UIColor* errorLabelColor;
     }
     NSInteger oneQuarter = InterFieldPadding * 1.5 + leftWidth/2;
     NSInteger halfLeftWidth = leftWidth/2 - InterFieldPadding/2;
-    layoutWidget(height, expirationMonth, TextFieldHeight,
+    NSInteger left1Height = layoutWidget(height, expirationMonth, TextFieldHeight,
                                InterFieldPadding, halfLeftWidth);
-    layoutWidget(height, expirationYear, TextFieldHeight,
+    NSInteger left2Height = layoutWidget(height, expirationYear, TextFieldHeight,
                                oneQuarter, halfLeftWidth);
+    leftHeight = MAX(left1Height, left2Height);
+    height = MAX(leftHeight, rightHeight);
+    [secureView sizeToFit];
+    CGSize dimensions = [secureView frame].size;
+    layoutWidget(height, secureView, dimensions.height, InterFieldPadding, dimensions.width);
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 -(void)setErrorMessage:(NSString*)message onErrorLabel:(UILabel*)label{
     if(message){

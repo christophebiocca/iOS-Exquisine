@@ -31,6 +31,8 @@
     UILabel* expirationErrorLabel;
     UITextField* expirationMonth;
     UITextField* expirationYear;
+    
+    UIImageView* secureView;
 }
 
 @property (retain) UITextField *cardholderNameField;
