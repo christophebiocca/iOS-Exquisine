@@ -23,7 +23,7 @@
         processingText = [[UILabel alloc] initWithFrame:CGRectZero];
         [processingText setBackgroundColor:[UIColor blackColor]];
         [processingText setTextColor:[UIColor lightGrayColor]];
-        [processingText setText:@"Processing your order"];
+        [processingText setText:@"Processing"];
         [processingText setFont:[Utilities fravicHeadingFont]];
         [processingText setLineBreakMode:UILineBreakModeWordWrap];
         [processingText setNumberOfLines:0];

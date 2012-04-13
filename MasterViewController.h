@@ -10,7 +10,7 @@
 @class MasterView;
 @class AppData;
 
-@interface MasterViewController : UIViewController
+@interface MasterViewController : UIViewController<UIAlertViewDelegate>
 {
     MasterView *masterView;
 }

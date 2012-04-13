@@ -20,6 +20,7 @@
 #import "DeletePaymentInfo.h"
 #import "PaymentProfileInfo.h"
 #import "PaymentError.h"
+#import "Order.h"
 
 #import "PaymentInfo.h"
 #import "FancyNavigationController.h"
@@ -184,7 +185,11 @@
     PaymentConfirmationController* controller = [self paymentConfirmationController];
     [self pushController:controller];
     [controller setAcceptBlock:^{
-        [self sendOrder:nil];
+        UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Process Purchase?" message:[NSString stringWithFormat: @"Order confirmation:\nSubtotal: %@\nHST: %@\nGrand Total: %@\n\nIs this okay?", [Utilities FormatToPrice:[order subtotalPrice]],[Utilities FormatToPrice:[order taxPrice]],[Utilities FormatToPrice:[order totalPrice]]] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil];
+        
+        [areYouSure setTag:1];
+        
+        [areYouSure show];
     }];
     [controller setCancelBlock:^{
         cancelledBlock();
@@ -198,7 +203,12 @@
     PaymentInfoViewController* controller = [self paymentInfoController];
     [self pushController:controller];
     [controller setCompletionBlock:^(PaymentInfo* info){
-        [self sendOrder:info];
+        paymentInfo = info;
+        UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Process Purchase?" message:[NSString stringWithFormat: @"Order confirmation:\nSubtotal: %@\nHST: %@\nGrand Total: %@\n\nIs this okay?", [Utilities FormatToPrice:[order subtotalPrice]],[Utilities FormatToPrice:[order taxPrice]],[Utilities FormatToPrice:[order totalPrice]]] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil];
+        
+        [areYouSure setTag:2];
+        
+        [areYouSure show];
     }];
     [controller setCancelledBlock:^{
         cancelledBlock();
@@ -209,7 +219,12 @@
     PaymentInfoViewController* controller = [self paymentInfoController];
     [self pushController:controller];
     [controller setCompletionBlock:^(PaymentInfo* info){
-        [self sendOrder:info];
+        paymentInfo = info;
+        UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Process Purchase?" message:[NSString stringWithFormat: @"Order confirmation:\nSubtotal: %@\nHST: %@\nGrand Total: %@\n\nIs this okay?", [Utilities FormatToPrice:[order subtotalPrice]],[Utilities FormatToPrice:[order taxPrice]],[Utilities FormatToPrice:[order totalPrice]]] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil];
+        
+        [areYouSure setTag:2];
+        
+        [areYouSure show];
     }];
     [controller setCancelledBlock:^{
         //I'm aware of how bad this looks, but it's to work around an iOS bug.
@@ -310,6 +325,19 @@
 -(Location *)currentLocation
 {
     return [locationState selectedLocation];
+}
+
+-(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        if([alertView tag] == 1)
+        {
+            [self sendOrder:nil];
+        }
+        if ([alertView tag] == 2) {
+            [self sendOrder:paymentInfo];
+        }
+    }
 }
 
 @end

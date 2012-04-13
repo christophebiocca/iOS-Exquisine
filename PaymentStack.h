@@ -11,6 +11,7 @@
 @class Order;
 @class Location;
 @class LocationState;
+@class PaymentInfo;
 @class OrderTimeAndLocationConfirmationViewController;
 @class PaymentInfoViewController;
 @class PaymentConfirmationController;
@@ -18,9 +19,10 @@
 @class PaymentCompleteViewController;
 @class PaymentFailureViewController;
 
-@interface PaymentStack : NSObject<UINavigationControllerDelegate>{
+@interface PaymentStack : NSObject<UINavigationControllerDelegate, UIAlertViewDelegate>{
     Order* order;
     LocationState *locationState;
+    PaymentInfo *paymentInfo;
     
     UINavigationController* navigationController;
     OrderTimeAndLocationConfirmationViewController *locationConfirmationController;

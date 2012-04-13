@@ -171,11 +171,11 @@
     
     if([[[AppData appData] networkChecker] isReachable])
     {
-        UIAlertView *areYouSure = [[UIAlertView alloc] initWithTitle: @"Process Purchase?" message:[NSString stringWithFormat: @"Order confirmation:\nSubtotal: %@\nHST: %@\nGrand Total: %@\n\nIs this okay?", [Utilities FormatToPrice:[[[aNotification object] thisOrder] subtotalPrice]],[Utilities FormatToPrice:[[[aNotification object] thisOrder] taxPrice]],[Utilities FormatToPrice:[[[aNotification object] thisOrder] totalPrice]]] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil];
+        [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Placed order"];
         
-        [areYouSure setTag:1];
+        [self placeOrder:[[AppData appData] theOrderManager]];
+        [[[[AppData appData] theOrderManager] thisOrder] setStatus:@"Transmitting"];
         
-        [areYouSure show];
         return;
     }
     
@@ -188,13 +188,6 @@
 {
     if ([alertView tag] == 1) // Order Placement
     {
-        if (buttonIndex == 1)
-        {
-            [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Placed order"];
-            
-            [self placeOrder:[[AppData appData] theOrderManager]];
-            [[[[AppData appData] theOrderManager] thisOrder] setStatus:@"Transmitting"];
-        }
         if (buttonIndex == 2)
             [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Canceled placing an order"];
     }

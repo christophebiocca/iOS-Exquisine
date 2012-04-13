@@ -63,12 +63,27 @@
 
 -(void)pushView:(UIView *)aView
 {
+    [aView setFrame:CGRectMake(320, 0, [aView frame].size.width, [aView frame].size.height)];
     [self addSubview:aView];
     viewToPush = aView;
+    
+    [UIView beginAnimations: @"Pop on" context:nil];
+    
+    // wait for time before begin
+    [UIView setAnimationDelay:0];
+    
+    // druation of animation
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+    [UIView setAnimationDuration:0.2];
+    [viewToPush setFrame:CGRectMake(0, 0, [viewToPush frame].size.width, [viewToPush frame].size.height)];
+    [tabView setFrame:CGRectMake(-320, 0, [viewToPush frame].size.width, [viewToPush frame].size.height)];
+    [UIView commitAnimations];
 }
 
 -(void)dismissView
 {
+    [tabView setFrame:CGRectMake(320, 0, [viewToPush frame].size.width, [viewToPush frame].size.height)];
+    
     [UIView beginAnimations: @"Pop off" context:nil];
     
     // wait for time before begin
@@ -77,6 +92,7 @@
     // druation of animation
     [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
     [UIView setAnimationDuration:0.2];
+    [tabView setFrame:CGRectMake(0, 0, [viewToPush frame].size.width, [viewToPush frame].size.height)];
     [viewToPush setFrame:CGRectMake(-320, 0, [viewToPush frame].size.width, [viewToPush frame].size.height)];
     [UIView commitAnimations];
     
