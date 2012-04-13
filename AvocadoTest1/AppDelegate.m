@@ -87,6 +87,10 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
+   
+    if ([UIApplication sharedApplication].applicationIconBadgeNumber) {
+        [UIApplication sharedApplication].applicationIconBadgeNumber=0;
+    }
     if (![[AppData appData] initialized]) {
         [[AppData appData] initializeFromServer];
     }
@@ -108,8 +112,7 @@
 
 -(void) application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
 {
-    //The main page view controller should always be handling local notifications.
-    //[page application:application didReceiveLocalNotification:notification];
+    [UIApplication sharedApplication].applicationIconBadgeNumber=0;
 }
 
 @end
