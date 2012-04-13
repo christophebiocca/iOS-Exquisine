@@ -11,7 +11,6 @@
 #import "LoadingView.h"
 #import "LocationTabViewController.h"
 #import "OrderTabViewController.h"
-#import "FavoritesViewController.h"
 #import "Order.h"
 #import "OrderManager.h"
 #import "PaymentStack.h"
@@ -92,7 +91,7 @@
     [[[masterView loadingView] progressLabel] setText:@"Initialization Complete"];
     LocationTabViewController *locationTabViewController = [[LocationTabViewController alloc] initWithLocationState:[[AppData appData] locationState]];
     
-    [locationTabViewController setTitle:@"Location"];
+    [locationTabViewController setTitle:@"Locations"];
     [[locationTabViewController tabBarItem] setImage:[UIImage imageNamed:@"LocationIcon"]];
     
     OrderTabViewController *orderTabViewController = [[OrderTabViewController alloc] initWithOrderManager:[[AppData appData] theOrderManager]];

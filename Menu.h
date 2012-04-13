@@ -47,8 +47,6 @@
 
 -(void) addCombo: (Combo *) aCombo;
 
--(void) placeOrder:(OrderManager *) anOrderManager;
-
 //Housekeeping Methods
 
 //Comparitor and Descriptor Methods

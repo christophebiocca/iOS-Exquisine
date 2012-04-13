@@ -29,6 +29,4 @@
 
 -(void) setData:(id)data;
 
--(CGFloat) desiredHeight;
-
 @end

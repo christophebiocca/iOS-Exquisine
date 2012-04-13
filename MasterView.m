@@ -8,7 +8,6 @@
 
 #import "MasterView.h"
 #import "LoadingView.h"
-#import "LocationViewController.h"
 #import "CustomTabBarController.h"
 
 @implementation MasterView
