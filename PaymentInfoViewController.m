@@ -61,6 +61,7 @@
     [super viewDidLoad];
     [[paymentView cardholderNameField] setDelegate:self];
     [[paymentView cardnumberField] setDelegate:self];
+    [[paymentView remember] setOn:[info remember]];
     [[paymentView remember] addTarget:self action:@selector(rememberChanged:) 
                      forControlEvents:UIControlEventValueChanged];
     [[paymentView expirationMonth] setDelegate:self];
