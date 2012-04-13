@@ -78,7 +78,7 @@
     {
         NSString *theTitle = [[settingsTabRenderer objectForCellAtIndex:indexPath] objectForKey:@"settingTitle"];
         
-        if ([theTitle isEqualToString:@"Payment"]) {
+        if ([theTitle isEqualToString:@"Credit Card"]) {
             PaymentProcessingViewController *processingViewController = [[PaymentProcessingViewController alloc] init];
             
             [GetPaymentProfileInfo 

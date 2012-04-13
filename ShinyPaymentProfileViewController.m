@@ -66,8 +66,6 @@
     
     [[self navigationItem] setLeftBarButtonItem:backButton];
     
-    [[self navigationController] setTitle:@"Payment Method"];
-    
     UIBarButtonItem *fillerButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:nil];
     [fillerButton setCustomView:[[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 21)]];
     [[self navigationItem] setRightBarButtonItem:fillerButton];

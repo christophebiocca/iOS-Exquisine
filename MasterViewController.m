@@ -33,9 +33,7 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(initializationSuccess) name:INITIALIZED_SUCCESS object:[AppData appData]];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(initializationFailure) name:INITIALIZED_FAILURE object:[AppData appData]];
         
-        //Yeah.. I was annoyed by the warning
-        id stopWarningMe = [[AppData appData] init];
-        stopWarningMe = @"No, really. Cut that out.";
+        (void)[[AppData appData] init];
         
          [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showOrderConfirmation:) name:ORDER_PLACEMENT_REQUESTED object:[[AppData appData] theOrderManager]];
         [[[masterView loadingView] progressLabel] setText:@"Contacting Server..."];
@@ -112,7 +110,7 @@
     [settingsTabNavigationController setTitle:@"Settings"];
     [[settingsTabNavigationController tabBarItem] setImage:[UIImage imageNamed:@"SettingsIcon.png"]];
     
-    [[masterView tabController] setViewControllers:[NSArray arrayWithObjects:locationTabViewController,orderTabNavigationController,settingsTabNavigationController,nil]];
+    [[masterView tabController] setViewControllers:[NSArray arrayWithObjects:orderTabNavigationController,locationTabViewController,settingsTabNavigationController,nil]];
     
     [[[masterView tabController] view] setNeedsLayout];
     [[[masterView tabController] view] setNeedsDisplay];
