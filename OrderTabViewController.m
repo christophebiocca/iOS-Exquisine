@@ -72,6 +72,10 @@ NSString *ORDER_PLACEMENT_REQUESTED = @"CroutonLabs/OrderPlacementRequested";
         [self deleteItem:note];
     }];
     
+    [[NSNotificationCenter defaultCenter] addObserverForName:COMBO_DELETE_BUTTON_HIT object:nil queue:nil usingBlock:^(NSNotification *note){
+        [self deleteCombo:note];
+    }];
+    
     [[self navigationItem] setTitleView:toolbarText];
 }
 
@@ -154,7 +158,6 @@ NSString *ORDER_PLACEMENT_REQUESTED = @"CroutonLabs/OrderPlacementRequested";
         Combo *theCombo = [[orderRenderer objectForCellAtIndex:indexPath] objectForKey:@"combo"];
         
         ShinyOrderComboViewController *newController = [[ShinyOrderComboViewController alloc] initWithCombo:theCombo];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteCombo:) name:COMBO_DELETE_BUTTON_HIT object:newController];
         
         [[self navigationController] pushViewController:newController animated:YES];
     }
