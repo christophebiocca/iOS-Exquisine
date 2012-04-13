@@ -10,10 +10,15 @@
 @class SettingsTabView;
 @class ShinySettingsTabRenderer;
 
-@interface SettingsTabViewController : UIViewController<UITableViewDelegate>
+@interface SettingsTabViewController : UIViewController<UITableViewDelegate,UINavigationControllerDelegate>
 {
     SettingsTabView *settingsTabView;
     ShinySettingsTabRenderer *settingsTabRenderer;
+    
+    /* Animation Management */
+    BOOL animating;
+    NSMutableArray* postAnimation;
+    id<UINavigationControllerDelegate> oldDelegate;
 }
 
 @end

@@ -14,6 +14,6 @@
     Order *theOrder;
 }
 
--(id)initWithOrder: (Order *) anOrder;
+-(id)init;
 
 @end

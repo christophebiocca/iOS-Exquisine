@@ -218,6 +218,12 @@
 		23E339B4150FEB0700E7BD68 /* ShinyOrderTabRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 23E339B3150FEB0700E7BD68 /* ShinyOrderTabRenderer.m */; };
 		23E339B8150FF37900E7BD68 /* OrderTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23E339B7150FF37900E7BD68 /* OrderTabViewController.m */; };
 		23E7D87C14C9BA88006D6C13 /* behindButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 23E7D87B14C9BA88006D6C13 /* behindButton.png */; };
+		23E9C8CC15376C7D00330661 /* ShinyPaymentProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23E9C8CB15376C7D00330661 /* ShinyPaymentProfileView.m */; };
+		23E9C8D0153772B000330661 /* ShinyPaymentProfileRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 23E9C8CF153772B000330661 /* ShinyPaymentProfileRenderer.m */; };
+		23E9C8D41537794000330661 /* ShinyPaymentViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23E9C8D31537794000330661 /* ShinyPaymentViewCell.m */; };
+		23E9C8D715377A6000330661 /* PaymentViewCell.png in Resources */ = {isa = PBXBuildFile; fileRef = 23E9C8D515377A6000330661 /* PaymentViewCell.png */; };
+		23E9C8D815377A6000330661 /* PaymentViewCell@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 23E9C8D615377A6000330661 /* PaymentViewCell@2x.png */; };
+		23E9C8DB15377C4D00330661 /* ShinyPaymentProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23E9C8DA15377C4D00330661 /* ShinyPaymentProfileViewController.m */; };
 		23EF63701534B20300FAF555 /* ShinyItemFavoriteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23EF636F1534B20300FAF555 /* ShinyItemFavoriteCell.m */; };
 		23EF63751534BECD00FAF555 /* FavoriteCellEmpty.png in Resources */ = {isa = PBXBuildFile; fileRef = 23EF63711534BECD00FAF555 /* FavoriteCellEmpty.png */; };
 		23EF63761534BECD00FAF555 /* FavoriteCellEmpty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 23EF63721534BECD00FAF555 /* FavoriteCellEmpty@2x.png */; };
@@ -638,6 +644,16 @@
 		23E339B6150FF37900E7BD68 /* OrderTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderTabViewController.h; sourceTree = "<group>"; };
 		23E339B7150FF37900E7BD68 /* OrderTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderTabViewController.m; sourceTree = "<group>"; };
 		23E7D87B14C9BA88006D6C13 /* behindButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = behindButton.png; sourceTree = "<group>"; };
+		23E9C8CA15376C7D00330661 /* ShinyPaymentProfileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShinyPaymentProfileView.h; sourceTree = "<group>"; };
+		23E9C8CB15376C7D00330661 /* ShinyPaymentProfileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinyPaymentProfileView.m; sourceTree = "<group>"; };
+		23E9C8CE153772B000330661 /* ShinyPaymentProfileRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShinyPaymentProfileRenderer.h; sourceTree = "<group>"; };
+		23E9C8CF153772B000330661 /* ShinyPaymentProfileRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinyPaymentProfileRenderer.m; sourceTree = "<group>"; };
+		23E9C8D21537794000330661 /* ShinyPaymentViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShinyPaymentViewCell.h; sourceTree = "<group>"; };
+		23E9C8D31537794000330661 /* ShinyPaymentViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinyPaymentViewCell.m; sourceTree = "<group>"; };
+		23E9C8D515377A6000330661 /* PaymentViewCell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PaymentViewCell.png; path = FravicArtAssets/PaymentViewCell.png; sourceTree = "<group>"; };
+		23E9C8D615377A6000330661 /* PaymentViewCell@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PaymentViewCell@2x.png"; path = "FravicArtAssets/PaymentViewCell@2x.png"; sourceTree = "<group>"; };
+		23E9C8D915377C4D00330661 /* ShinyPaymentProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShinyPaymentProfileViewController.h; sourceTree = "<group>"; };
+		23E9C8DA15377C4D00330661 /* ShinyPaymentProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinyPaymentProfileViewController.m; sourceTree = "<group>"; };
 		23EF636E1534B20300FAF555 /* ShinyItemFavoriteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShinyItemFavoriteCell.h; sourceTree = "<group>"; };
 		23EF636F1534B20300FAF555 /* ShinyItemFavoriteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinyItemFavoriteCell.m; sourceTree = "<group>"; };
 		23EF63711534BECD00FAF555 /* FavoriteCellEmpty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FavoriteCellEmpty.png; path = FravicArtAssets/FavoriteCellEmpty.png; sourceTree = "<group>"; };
@@ -1207,6 +1223,8 @@
 		233C46EB14FEEF620003C295 /* SampleDesignImages */ = {
 			isa = PBXGroup;
 			children = (
+				23E9C8D515377A6000330661 /* PaymentViewCell.png */,
+				23E9C8D615377A6000330661 /* PaymentViewCell@2x.png */,
 				237468C4153614F90049EE13 /* DeleteButtonCell.png */,
 				237468C5153614F90049EE13 /* DeleteButtonCell@2x.png */,
 				237468C2153605580049EE13 /* OrderHistoryCell@2x.png */,
@@ -1510,6 +1528,7 @@
 		237468AD1535FDF50049EE13 /* SubSettingViews */ = {
 			isa = PBXGroup;
 			children = (
+				23E9C8C915376C1000330661 /* ShinyPaymentProfileView */,
 				237468AE1535FDFF0049EE13 /* OrderHistoryView */,
 			);
 			name = SubSettingViews;
@@ -1536,6 +1555,7 @@
 		237468B31535FF020049EE13 /* OrderHistoryViewController */ = {
 			isa = PBXGroup;
 			children = (
+				23E9C8C715376BB700330661 /* ShinyPaymentProfileViewController */,
 				23A54FF61536404E0054EDD0 /* ShinyOrderSummaryViewController */,
 				237468B41535FF190049EE13 /* OrderHistoryViewController.h */,
 				237468B51535FF190049EE13 /* OrderHistoryViewController.m */,
@@ -1546,6 +1566,7 @@
 		237468B71535FF650049EE13 /* SubsettingRenderers */ = {
 			isa = PBXGroup;
 			children = (
+				23E9C8CD1537728700330661 /* ShinyPaymentProfileRenderer */,
 				237468B81535FF6D0049EE13 /* OrderHistoryRenderer */,
 			);
 			name = SubsettingRenderers;
@@ -1702,6 +1723,7 @@
 		238395A8150EA3C2000DC733 /* ShinyCells */ = {
 			isa = PBXGroup;
 			children = (
+				23E9C8D11537792000330661 /* ShinyPaymentInfoCell */,
 				237468C8153615350049EE13 /* ShinyDeleteCell */,
 				237468BC153603E00049EE13 /* ShinyOrderHistoryCell */,
 				237468A51534FA3F0049EE13 /* ShinySettingsCell */,
@@ -2288,6 +2310,42 @@
 			name = OrderTabViewController;
 			sourceTree = "<group>";
 		};
+		23E9C8C715376BB700330661 /* ShinyPaymentProfileViewController */ = {
+			isa = PBXGroup;
+			children = (
+				23E9C8D915377C4D00330661 /* ShinyPaymentProfileViewController.h */,
+				23E9C8DA15377C4D00330661 /* ShinyPaymentProfileViewController.m */,
+			);
+			name = ShinyPaymentProfileViewController;
+			sourceTree = "<group>";
+		};
+		23E9C8C915376C1000330661 /* ShinyPaymentProfileView */ = {
+			isa = PBXGroup;
+			children = (
+				23E9C8CA15376C7D00330661 /* ShinyPaymentProfileView.h */,
+				23E9C8CB15376C7D00330661 /* ShinyPaymentProfileView.m */,
+			);
+			name = ShinyPaymentProfileView;
+			sourceTree = "<group>";
+		};
+		23E9C8CD1537728700330661 /* ShinyPaymentProfileRenderer */ = {
+			isa = PBXGroup;
+			children = (
+				23E9C8CE153772B000330661 /* ShinyPaymentProfileRenderer.h */,
+				23E9C8CF153772B000330661 /* ShinyPaymentProfileRenderer.m */,
+			);
+			name = ShinyPaymentProfileRenderer;
+			sourceTree = "<group>";
+		};
+		23E9C8D11537792000330661 /* ShinyPaymentInfoCell */ = {
+			isa = PBXGroup;
+			children = (
+				23E9C8D21537794000330661 /* ShinyPaymentViewCell.h */,
+				23E9C8D31537794000330661 /* ShinyPaymentViewCell.m */,
+			);
+			name = ShinyPaymentInfoCell;
+			sourceTree = "<group>";
+		};
 		23EF636B1534B1AD00FAF555 /* ShinyComboFavoriteCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -2650,6 +2708,8 @@
 				237468C7153614F90049EE13 /* DeleteButtonCell@2x.png in Resources */,
 				D917E97E15375D44005DE4BA /* payments@2x.png in Resources */,
 				D917E98115375E11005DE4BA /* payments.png in Resources */,
+				23E9C8D715377A6000330661 /* PaymentViewCell.png in Resources */,
+				23E9C8D815377A6000330661 /* PaymentViewCell@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2854,6 +2914,10 @@
 				237468CF1536374E0049EE13 /* ShinyOrderSummaryView.m in Sources */,
 				237468D3153639040049EE13 /* OrderSummaryPageRenderer.m in Sources */,
 				23A54FFA1536407F0054EDD0 /* ShinyOrderSummaryViewController.m in Sources */,
+				23E9C8CC15376C7D00330661 /* ShinyPaymentProfileView.m in Sources */,
+				23E9C8D0153772B000330661 /* ShinyPaymentProfileRenderer.m in Sources */,
+				23E9C8D41537794000330661 /* ShinyPaymentViewCell.m in Sources */,
+				23E9C8DB15377C4D00330661 /* ShinyPaymentProfileViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

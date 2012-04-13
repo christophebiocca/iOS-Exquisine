@@ -207,8 +207,6 @@
     PaymentStack* paymentStack = 
     [[PaymentStack alloc] initWithOrder:[anOrderManager thisOrder] locationState:[[AppData appData] locationState]
                            successBlock:^{
-                               NSArray *helper = [[AppData appData] ordersHistory];
-                               NSLog(@"%@",[(Order *)[helper objectAtIndex:0] status]);
                                //Push the current order on the history list
                                [[[AppData appData] ordersHistory] addObject:[[anOrderManager thisOrder] copy]];
                                if ([[anOrderManager thisOrder] isEffectivelyEqual:[anOrderManager thisOrder]])

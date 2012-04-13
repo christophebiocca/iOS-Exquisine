@@ -24,7 +24,7 @@
         NSMutableArray *listOfSettingsSectionContents = [[NSMutableArray alloc] init];
         
         [listOfSettingsSectionContents addObject:[[ShinyHeaderView alloc] initWithTitle:@"Settings"]];
-        [listOfSettingsSectionContents addObject:[NSDictionary dictionaryWithObject:@"Credit Card" forKey:@"settingTitle"]];
+        [listOfSettingsSectionContents addObject:[NSDictionary dictionaryWithObject:@"Payment" forKey:@"settingTitle"]];
         [listOfSettingsSectionContents addObject:[NSDictionary dictionaryWithObject:@"Order History" forKey:@"settingTitle"]];
         
         [listOfSettingsSectionContents addObject:[[ShinyHeaderView alloc] initWithTitle:@"Support"]];
