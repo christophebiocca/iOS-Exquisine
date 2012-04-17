@@ -190,6 +190,7 @@
         if (buttonIndex == 2)
             [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"Canceled placing an order"];
     }
+    
 }
 
 -(void) placeOrder:(OrderManager *) anOrderManager
