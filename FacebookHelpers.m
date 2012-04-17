@@ -73,4 +73,25 @@ static FacebookHelpers *facebookHelpers;
 }
 
 
+-(void)fbDidLogout
+{
+    
+}
+
+-(void)fbDidNotLogin:(BOOL)cancelled
+{
+    
+}
+
+- (void)fbDidExtendToken:(NSString*)accessToken
+               expiresAt:(NSDate*)expiresAt
+{
+    
+}
+
+- (void)fbSessionInvalidated
+{
+    
+}
+
 @end
