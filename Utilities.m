@@ -147,6 +147,11 @@
     return [UIFont fontWithName:@"AmericanTypewriter" size:12]; //[UIFont fontWithName:@"ArialHebrew" size:14];
 }
 
++(UIFont *) fravicLargeTextFont
+{
+    return [UIFont fontWithName:@"AmericanTypewriter" size:16]; //[UIFont fontWithName:@"ArialHebrew" size:14];
+}
+
 +(UIColor *)fravicDarkRedColor
 {
     return [UIColor colorWithRed:(134.0f/255.0f) green:(7.0f/255.0f) blue:(6.0f/255.0f) alpha:1];

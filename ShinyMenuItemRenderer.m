@@ -29,6 +29,35 @@
         sectionNames = [[NSMutableArray alloc] init];
         listData = [[NSMutableArray alloc] init];
         
+        if (![[theItem desc] isEqualToString:@""]) {
+            NSMutableArray *descSection = [[NSMutableArray alloc] init];
+            [sectionNames addObject:@"Description"];
+            
+            [descSection addObject:[[ShinyHeaderView alloc] initWithTitle:@"Description"]];
+            
+            //Add a spacer
+            [descSection addObject:[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 10)]];
+            
+            UILabel *descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 200, 200)];
+            [descriptionLabel setFont:[Utilities fravicLargeTextFont]];
+            [descriptionLabel setLineBreakMode:UILineBreakModeWordWrap];
+            [descriptionLabel setNumberOfLines:0];
+            
+            CGSize maximumLabelSize = CGSizeMake(296,9999);
+            
+            CGSize expectedLabelSize = [[theItem desc] sizeWithFont:descriptionLabel.font 
+                                              constrainedToSize:maximumLabelSize 
+                                                  lineBreakMode:descriptionLabel.lineBreakMode]; 
+            //adjust the label the the new height.
+            CGRect newFrame = descriptionLabel.frame;
+            newFrame.size.height = expectedLabelSize.height;
+            descriptionLabel.frame = newFrame;
+            [descriptionLabel setText:[theItem desc]];
+            [descSection addObject:descriptionLabel];
+            
+            [listData addObject:descSection];
+        }
+        
         [sectionNames addObject:@"Number of Items"];
         NSMutableArray *quantitySection = [[NSMutableArray alloc] init];
         

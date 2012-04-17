@@ -35,6 +35,8 @@ typedef enum LogLevel {
 
 +(UIFont *) fravicTextFont;
 
++(UIFont *) fravicLargeTextFont;
+
 +(UIColor *) fravicDarkRedColor;
 
 +(UIColor *) fravicDarkPinkColor;
