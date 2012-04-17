@@ -12,6 +12,8 @@
 
 @implementation PaymentCompletedView
 
+@synthesize postToFacebookButton;
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -25,6 +27,7 @@
         trnDate = [[UILabel alloc] init];
         pickupTime = [[UILabel alloc] init];
         signoff = [[UILabel alloc] init];
+        postToFacebookButton = [UIButton buttonWithType:UIButtonTypeCustom];
         
         UIFont *theFont = [Utilities fravicTextFont];
         
@@ -34,6 +37,7 @@
         [trnDate setFont:theFont];
         [pickupTime setFont:theFont];
         [signoff setFont:theFont];
+        [postToFacebookButton setImage:[UIImage imageNamed:@"Facebook-Share-Button.png"] forState:UIControlStateNormal];
         
         [self addSubview:authCode];
         [self addSubview:messageText];
@@ -41,6 +45,7 @@
         [self addSubview:trnDate];
         [self addSubview:pickupTime];
         [self addSubview:signoff];
+        [self addSubview:postToFacebookButton];
     }
     return self;
 }
@@ -108,6 +113,16 @@
         .size = {
             .width = lims.width - 2*PADDING,
             .height = LABELHEIGHT
+        }
+    }];
+    [postToFacebookButton setFrame:(CGRect){
+        .origin = {
+            .x = PADDING,
+            .y = PADDING + (PADDING + LABELHEIGHT) * 6 + 50
+        },
+        .size = {
+            .width = [UIImage imageNamed:@"Facebook-Share-Button.png"].size.width,
+            .height = [UIImage imageNamed:@"Facebook-Share-Button.png"].size.height
         }
     }];
 }

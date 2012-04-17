@@ -16,7 +16,10 @@
     UILabel* trnDate;
     UILabel* pickupTime;
     UILabel* signoff;
+    UIButton* postToFacebookButton;
 }
+
+@property (retain) UIButton *postToFacebookButton;
 
 -(void)setSuccessInfo:(PaymentSuccessInfo*)info AndOrderInfo:(Order *) theOrder;
 

@@ -34,7 +34,13 @@ static FacebookHelpers *facebookHelpers;
     {
         facebook = [[Facebook alloc] initWithAppId:@"24287653320" andDelegate:self];
         permissions = [NSArray arrayWithObjects:@"publish_stream", nil];
+        
+#ifdef DEBUG
+        message = @"I'm testing the pita factory app!";
+#else
         message = @"I just ordered a pita!";
+#endif
+        
     }
     
     return self;
@@ -50,7 +56,7 @@ static FacebookHelpers *facebookHelpers;
     }
     
     if (![facebook isSessionValid]) {
-        [facebook authorize:nil];
+        [facebook authorize:permissions];
     }
     
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
@@ -69,7 +75,6 @@ static FacebookHelpers *facebookHelpers;
     [defaults setObject:[facebook accessToken] forKey:@"FBAccessTokenKey"];
     [defaults setObject:[facebook expirationDate] forKey:@"FBExpirationDateKey"];
     [defaults synchronize];
-    [facebook authorize:permissions];
 }
 
 

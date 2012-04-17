@@ -18,6 +18,7 @@
     UIBarButtonItem* done = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                           target:self
                                                                           action:@selector(done)];
+    
     [item setRightBarButtonItem:done];
     [item setHidesBackButton:YES];
     return item;
@@ -45,6 +46,7 @@
 - (void)loadView
 {
     paymentView = [[PaymentCompletedView alloc] init];
+    [[paymentView postToFacebookButton] addTarget:self action:@selector(postToFacebook) forControlEvents:UIControlEventTouchUpInside];
     [self setView:paymentView];
 }
 
@@ -73,6 +75,12 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+-(void) postToFacebook
+{
+    [[FacebookHelpers facebookHelpers] postToFacebook];
+    [[[UIAlertView alloc] initWithTitle:@"Facebook" message:@"Wall post successful" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
 }
 
 -(void)done{
