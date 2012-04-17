@@ -108,6 +108,11 @@
     [[LocalyticsSession sharedLocalyticsSession] upload];
 }
 
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [[[FacebookHelpers facebookHelpers] facebook] handleOpenURL:url]; 
+}
+
 -(void) application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
 {
     [UIApplication sharedApplication].applicationIconBadgeNumber=0;
