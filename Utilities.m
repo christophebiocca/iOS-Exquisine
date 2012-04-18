@@ -62,6 +62,7 @@
 
 +(void)logLevel:(LogLevel)level message:(NSString *)message
 {
+    
     #if INFO && DEBUG
     switch (level) {
         case LOG_LEVEL_INFO:
@@ -104,8 +105,8 @@
         case LOG_LEVEL_ERROR:
             [[LocalyticsSession sharedLocalyticsSession] tagEvent:@"ERROR encountered:" attributes:[NSDictionary dictionaryWithObject:message forKey:@"message"]];
             break;
-            
         default:
+            NSLog(@"%@",message);
             break;
     }
     #endif

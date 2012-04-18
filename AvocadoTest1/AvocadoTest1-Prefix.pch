@@ -33,6 +33,7 @@
 #define CLLog(level, ...) CLLog##level(__VA_ARGS__)
 #define CLLogLOG_LEVEL_ERROR(...)[Utilities logLevel:LOG_LEVEL_ERROR message:__VA_ARGS__]
 #define CLLogLOG_LEVEL_WARNING(...)[Utilities logLevel:LOG_LEVEL_WARNING message:__VA_ARGS__]
-#define CLLogLOG_LEVEL_INFO(...)
-#define CLLogLOG_LEVEL_DEBUG(...)
+#define CLLogLOG_LEVEL_INFO(...)[Utilities logLevel:LOG_LEVEL_WARNING message:__VA_ARGS__]
+#define CLLogLOG_LEVEL_DEBUG(...)[Utilities logLevel:LOG_LEVEL_WARNING message:__VA_ARGS__]
+
 #endif

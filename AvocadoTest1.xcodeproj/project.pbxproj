@@ -54,6 +54,8 @@
 		232D7A1214C8B4FC00DD5911 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 232D7A1114C8B4FC00DD5911 /* QuartzCore.framework */; };
 		2336F342153F5AEB008C6573 /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2336F335153F5AEB008C6573 /* FBDialog.bundle */; };
 		2336F343153F5AEB008C6573 /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2336F33B153F5AEB008C6573 /* libfacebook_ios_sdk.a */; };
+		2336F350153F7DAD008C6573 /* PaymentViewCell.png in Resources */ = {isa = PBXBuildFile; fileRef = 2336F34E153F7DAD008C6573 /* PaymentViewCell.png */; };
+		2336F351153F7DAD008C6573 /* PaymentViewCell@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2336F34F153F7DAD008C6573 /* PaymentViewCell@2x.png */; };
 		233C46DD14FEC9CC0003C295 /* AppData.m in Sources */ = {isa = PBXBuildFile; fileRef = 233C46DC14FEC9CC0003C295 /* AppData.m */; };
 		233C46E714FEE8630003C295 /* MasterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 233C46E614FEE8630003C295 /* MasterView.m */; };
 		233C46EA14FEE9350003C295 /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 233C46E914FEE9350003C295 /* LoadingView.m */; };
@@ -340,6 +342,8 @@
 		2336F33F153F5AEB008C6573 /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
 		2336F340153F5AEB008C6573 /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
 		2336F341153F5AEB008C6573 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
+		2336F34E153F7DAD008C6573 /* PaymentViewCell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PaymentViewCell.png; path = FravicArtAssets/PaymentViewCell.png; sourceTree = "<group>"; };
+		2336F34F153F7DAD008C6573 /* PaymentViewCell@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PaymentViewCell@2x.png"; path = "FravicArtAssets/PaymentViewCell@2x.png"; sourceTree = "<group>"; };
 		233C46DB14FEC9CC0003C295 /* AppData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppData.h; sourceTree = "<group>"; };
 		233C46DC14FEC9CC0003C295 /* AppData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppData.m; sourceTree = "<group>"; };
 		233C46E514FEE8630003C295 /* MasterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterView.h; sourceTree = "<group>"; };
@@ -550,8 +554,6 @@
 		23E9C8CF153772B000330661 /* ShinyPaymentProfileRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinyPaymentProfileRenderer.m; sourceTree = "<group>"; };
 		23E9C8D21537794000330661 /* ShinyPaymentViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShinyPaymentViewCell.h; sourceTree = "<group>"; };
 		23E9C8D31537794000330661 /* ShinyPaymentViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinyPaymentViewCell.m; sourceTree = "<group>"; };
-		23E9C8D515377A6000330661 /* PaymentViewCell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PaymentViewCell.png; path = FravicArtAssets/PaymentViewCell.png; sourceTree = "<group>"; };
-		23E9C8D615377A6000330661 /* PaymentViewCell@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PaymentViewCell@2x.png"; path = "FravicArtAssets/PaymentViewCell@2x.png"; sourceTree = "<group>"; };
 		23E9C8D915377C4D00330661 /* ShinyPaymentProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShinyPaymentProfileViewController.h; sourceTree = "<group>"; };
 		23E9C8DA15377C4D00330661 /* ShinyPaymentProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinyPaymentProfileViewController.m; sourceTree = "<group>"; };
 		23EF636E1534B20300FAF555 /* ShinyItemFavoriteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShinyItemFavoriteCell.h; sourceTree = "<group>"; };
@@ -996,8 +998,8 @@
 		233C46EB14FEEF620003C295 /* SampleDesignImages */ = {
 			isa = PBXGroup;
 			children = (
-				23E9C8D515377A6000330661 /* PaymentViewCell.png */,
-				23E9C8D615377A6000330661 /* PaymentViewCell@2x.png */,
+				2336F34E153F7DAD008C6573 /* PaymentViewCell.png */,
+				2336F34F153F7DAD008C6573 /* PaymentViewCell@2x.png */,
 				237468C4153614F90049EE13 /* DeleteButtonCell.png */,
 				237468C5153614F90049EE13 /* DeleteButtonCell@2x.png */,
 				237468C2153605580049EE13 /* OrderHistoryCell@2x.png */,
@@ -1464,9 +1466,9 @@
 				23E9C8D11537792000330661 /* ShinyPaymentInfoCell */,
 				237468C8153615350049EE13 /* ShinyDeleteCell */,
 				237468BC153603E00049EE13 /* ShinyOrderHistoryCell */,
+				23EF636B1534B1AD00FAF555 /* ShinyComboFavoriteCell */,
 				237468A51534FA3F0049EE13 /* ShinySettingsCell */,
 				23EF636D1534B1BB00FAF555 /* ShinyItemFavoriteCell */,
-				23EF636B1534B1AD00FAF555 /* ShinyComboFavoriteCell */,
 				23025494152D03AF00593749 /* ShinyItemGroupCell */,
 				230254611526504A00593749 /* ExpandableCell */,
 				2302547D152BBA2400593749 /* ExpandableMenuCell */,
@@ -2280,6 +2282,8 @@
 				23D016CA153E096500518DF6 /* Facebook-Share-Button.png in Resources */,
 				23D016CC153E159E00518DF6 /* Facebook-Share-Button@2x.png in Resources */,
 				2336F342153F5AEB008C6573 /* FBDialog.bundle in Resources */,
+				2336F350153F7DAD008C6573 /* PaymentViewCell.png in Resources */,
+				2336F351153F7DAD008C6573 /* PaymentViewCell@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

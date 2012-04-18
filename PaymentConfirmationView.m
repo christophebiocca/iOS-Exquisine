@@ -33,6 +33,9 @@
         .bottom = 3 + vOffset
     }];
     [button setTitleColor:[Utilities fravicDarkRedColor] forState:UIControlStateNormal];
+    
+    [button setAdjustsImageWhenHighlighted:NO];
+    
     return button;
 }
 
