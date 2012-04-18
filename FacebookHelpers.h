@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-@class Facebook;
 
 @interface FacebookHelpers : NSObject <FBSessionDelegate, FBRequestDelegate>
 {
