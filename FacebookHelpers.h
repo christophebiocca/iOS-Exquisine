@@ -8,11 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface FacebookHelpers : NSObject <FBSessionDelegate, FBRequestDelegate>
+@interface FacebookHelpers : NSObject <FBSessionDelegate, FBRequestDelegate, FBDialogDelegate>
 {
     Facebook *facebook;
-    NSArray *permissions;
-    NSString *message;
 }
 
 @property (retain) Facebook *facebook;

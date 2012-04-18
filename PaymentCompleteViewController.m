@@ -80,7 +80,6 @@
 -(void) postToFacebook
 {
     [[FacebookHelpers facebookHelpers] postToFacebook];
-    [[[UIAlertView alloc] initWithTitle:@"Facebook" message:@"Wall post successful" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
 }
 
 -(void)done{

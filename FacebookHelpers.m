@@ -32,14 +32,8 @@ static FacebookHelpers *facebookHelpers;
     
     if (self) 
     {
-        facebook = [[Facebook alloc] initWithAppId:@"24287653320" andDelegate:self];
-        permissions = [NSArray arrayWithObjects:@"publish_stream", nil];
         
-#ifdef DEBUG
-        message = @"I'm testing the pita factory app!";
-#else
-        message = @"I just ordered a pita!";
-#endif
+        facebook = [[Facebook alloc] initWithAppId:@"24287653320" andDelegate:self];
         
     }
     
@@ -48,33 +42,33 @@ static FacebookHelpers *facebookHelpers;
 
 -(void)postToFacebook
 {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([defaults objectForKey:@"FBAccessTokenKey"] 
-        && [defaults objectForKey:@"FBExpirationDateKey"]) {
-        facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
-        facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
-    }
+    NSString *appID = @"24287653320";
     
-    if (![facebook isSessionValid]) {
-        [facebook authorize:permissions];
-    }
+    NSString *primaryLink = @"http://itunes.apple.com/us/app/pita-factory/id503487275?ls=1&mt=8";
     
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                   @"Pita Factory", @"name",
-                                   @"http://itunes.apple.com/us/app/pita-factory/id503487275?ls=1&mt=8", @"link",
-                                   @"Om nom nom", @"caption",
-                                   @"Order Pitas through your phone and never get out a piece of plastic again!", @"description",
-                                   message, @"message",              
-                                   nil];
+    NSString *appName = @"Pita Factory";
+    
+    NSString *caption = @"Om nom nom";
+    
+    NSString *description = @"Order Pitas through your phone and never get out a piece of plastic again!";
+    
+    NSString *actionJSON = @"{\"name\" : \"Download\", \"link\": \"http://itunes.apple.com/us/app/pita-factory/id503487275?ls=1&mt=8\"}";
 
-    [facebook requestWithGraphPath:@"me/feed" andParams:params andHttpMethod:@"POST" andDelegate:self];
+    NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                   appID, @"app_id",
+                                   primaryLink, @"link",
+                                   appName, @"name",
+                                   caption, @"caption",
+                                   description, @"description",
+                                   actionJSON, @"actions",
+                                   nil];
+    
+    [facebook dialog:@"feed" andParams:params andDelegate:self];
 }
 
+
 - (void)fbDidLogin {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:[facebook accessToken] forKey:@"FBAccessTokenKey"];
-    [defaults setObject:[facebook expirationDate] forKey:@"FBExpirationDateKey"];
-    [defaults synchronize];
+
 }
 
 
