@@ -1609,6 +1609,30 @@
 			name = LocationView;
 			sourceTree = "<group>";
 		};
+		23D016C7153E090500518DF6 /* 3rd party logos */ = {
+			isa = PBXGroup;
+			children = (
+				D917E98015375E10005DE4BA /* payments.png */,
+				D917E97D15375D44005DE4BA /* payments@2x.png */,
+			);
+			name = "3rd party logos";
+			sourceTree = "<group>";
+		};
+		23D016C8153E091700518DF6 /* Restaurant logos */ = {
+			isa = PBXGroup;
+			children = (
+				238923A1151D3D25001FBCCB /* Default.png */,
+				D9CB5FD514ECDB8B00FC5071 /* Default@2x.png */,
+				D9D5A3A914ECCD0B003B0B11 /* pfLogo_29.png */,
+				D9D5A3AA14ECCD0B003B0B11 /* pfLogo_58.png */,
+				23718F0414EC23A200F543BD /* pfLogo_57.png */,
+				23718F0514EC23A200F543BD /* pfLogo_114.png */,
+				2329BB2D14D9A8DD008E505F /* pfLogo@2x.png */,
+				38D4132E14D3324200031B60 /* pfLogo.png */,
+			);
+			name = "Restaurant logos";
+			sourceTree = "<group>";
+		};
 		23D1DCB514F7153900CFD279 /* SpecializedTypes */ = {
 			isa = PBXGroup;
 			children = (
@@ -1914,17 +1938,9 @@
 		38D4132C14D3321C00031B60 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				D917E98015375E10005DE4BA /* payments.png */,
-				D917E97D15375D44005DE4BA /* payments@2x.png */,
+				23D016C8153E091700518DF6 /* Restaurant logos */,
+				23D016C7153E090500518DF6 /* 3rd party logos */,
 				233C46EB14FEEF620003C295 /* SampleDesignImages */,
-				238923A1151D3D25001FBCCB /* Default.png */,
-				D9CB5FD514ECDB8B00FC5071 /* Default@2x.png */,
-				D9D5A3A914ECCD0B003B0B11 /* pfLogo_29.png */,
-				D9D5A3AA14ECCD0B003B0B11 /* pfLogo_58.png */,
-				23718F0414EC23A200F543BD /* pfLogo_57.png */,
-				23718F0514EC23A200F543BD /* pfLogo_114.png */,
-				2329BB2D14D9A8DD008E505F /* pfLogo@2x.png */,
-				38D4132E14D3324200031B60 /* pfLogo.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
