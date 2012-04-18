@@ -63,11 +63,11 @@ NSString* OPTION_INVALID_DESELECTION = @"CroutonLabs/OptionInvalidDeselection";
         case VERSION_1_0_1:
             choiceList = [decoder decodeObjectForKey:@"choice_list"];
         case VERSION_1_1_0:
+            break;
+        default:
             for (Choice *newChoice in choiceList) {
                 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recalculate:) name:CHOICE_SELECTED_CHANGED object:newChoice];
             }
-            break;
-        default:
             break;
     }
 }

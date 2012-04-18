@@ -79,9 +79,28 @@ NSString* ITEM_MODIFIED = @"CroutonLabs/ItemModified";
         case VERSION_1_0_1:
             numberOfItems = [[NSMutableNumber alloc] initWithNumber:[NSNumber numberWithInt:1]];
         case VERSION_1_1_0:
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(numberAltered) name:NUMBER_MODIFIED object:numberOfItems];
             break;
         default:
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(numberAltered) name:NUMBER_MODIFIED object:numberOfItems];
+            break;
+    }
+}
+
+-(void) optionsRecovery
+{
+    switch (harddiskDataVersion) {
+        case VERSION_0_0_0:
+            //fall through to next
+        case VERSION_1_0_0:
+            //fall through to next
+        case VERSION_1_0_1:
+            //fall through to next
+        case VERSION_1_1_0:
+            break;
+        default:
+            for (Option *eachOption in options) {
+                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(optionAltered) name:OPTION_MODIFIED object:eachOption];
+            }
             break;
     }
 }
