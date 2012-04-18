@@ -39,6 +39,14 @@ NSString *ORDER_PLACEMENT_REQUESTED = @"CroutonLabs/OrderPlacementRequested";
         
         [[orderView orderTable] setDelegate:self];
         [[orderView orderTable] setDataSource:orderRenderer];
+        
+        [[NSNotificationCenter defaultCenter] addObserverForName:ITEM_DELETE_BUTTON_HIT object:nil queue:nil usingBlock:^(NSNotification *note){
+            [self deleteItem:note];
+        }];
+        
+        [[NSNotificationCenter defaultCenter] addObserverForName:COMBO_DELETE_BUTTON_HIT object:nil queue:nil usingBlock:^(NSNotification *note){
+            [self deleteCombo:note];
+        }];
     }
     return self;
 }
@@ -67,14 +75,6 @@ NSString *ORDER_PLACEMENT_REQUESTED = @"CroutonLabs/OrderPlacementRequested";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshView) name:ORDER_MANAGER_NEEDS_REDRAW object:theOrderManager];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(placeButtonPressed) name:PLACE_BUTTON_PRESSED object:orderRenderer];
-    
-    [[NSNotificationCenter defaultCenter] addObserverForName:ITEM_DELETE_BUTTON_HIT object:nil queue:nil usingBlock:^(NSNotification *note){
-        [self deleteItem:note];
-    }];
-    
-    [[NSNotificationCenter defaultCenter] addObserverForName:COMBO_DELETE_BUTTON_HIT object:nil queue:nil usingBlock:^(NSNotification *note){
-        [self deleteCombo:note];
-    }];
     
     [[self navigationItem] setTitleView:toolbarText];
 }
