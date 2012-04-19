@@ -1439,11 +1439,11 @@
 				23FAB388150560C800606816 /* ShinyIntegerInputCell */,
 				239871401517D0680021EE55 /* ShinyChoiceCell */,
 				2394ABEC1513E1FA0001D3D1 /* ShinyMenuComboCell */,
-				23D472DC15125C8600D87E89 /* ViewCell */,
 				23D472D4151257F500D87E89 /* ShinyMenuItemCell */,
 				23785FB3150FD6AB0087C9F8 /* ShinyOrderComboCell */,
 				23785FB1150FD6800087C9F8 /* ShinyComboOrderItemCell */,
 				238395A9150EA5C2000DC733 /* ShinyOrderItemCell */,
+				23D472DC15125C8600D87E89 /* ViewCell */,
 			);
 			name = ShinyCells;
 			sourceTree = "<group>";

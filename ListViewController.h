@@ -18,4 +18,22 @@
     ListRenderer *renderer;
 }
 
+//Every time a cell type is added, it should go here.
+//(assuming its something that you need to know if it gets
+//clicked on)
+
+-(void)ShinyPaymentViewCellHandler:(NSIndexPath *) indexPath;
+-(void)ShinyDeleteCellHandler:(NSIndexPath *) indexPath;
+-(void)ShinyOrderHistoryCellHandler:(NSIndexPath *) indexPath;
+-(void)ShinyComboFavoriteCellHandler:(NSIndexPath *) indexPath;
+-(void)ShinySettingsCellHandler:(NSIndexPath *) indexPath;
+-(void)ShinyItemFavoriteCellHandler:(NSIndexPath *) indexPath;
+-(void)ShinyItemGroupCellHandler:(NSIndexPath *) indexPath;
+-(void)ShinyChoiceCellHandler:(NSIndexPath *) indexPath;
+-(void)ShinyMenuComboCellHandler:(NSIndexPath *) indexPath;
+-(void)ShinyMenuItemCellHandler:(NSIndexPath *) indexPath;
+-(void)ShinyOrderComboCellHandler:(NSIndexPath *) indexPath;
+-(void)ShinyComboOrderItemCellHandler:(NSIndexPath *) indexPath;
+-(void)ShinyOrderItemCellHandler:(NSIndexPath *)indexPath;
+
 @end
