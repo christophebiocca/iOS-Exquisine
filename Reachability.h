@@ -41,8 +41,8 @@ typedef enum
 {
 	// Apple NetworkStatus Compatible Names.
 	NotReachable     = 0,
-	ReachableViaWiFi = 2,
-	ReachableViaWWAN = 1
+	ReachableViaWWAN = 1,
+	ReachableViaWiFi = 2
 } NetworkStatus;
 
 @class Reachability;

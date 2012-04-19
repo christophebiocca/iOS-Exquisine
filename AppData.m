@@ -19,6 +19,7 @@
 #import "Combo.h"
 #import "GetLocations.h"
 
+NSString* INITIALIZING_FROM_SERVER = @"INITIALIZING_FROM_SERVER";
 NSString* INITIALIZED_SUCCESS = @"INITIALIZED_SUCCESS";
 NSString* INITIALIZED_FAILURE = @"INITIALIZED_FAILURE";
 NSString* SERVER_INIT_FAILURE = @"SERVER_INIT_FAILURE";
@@ -37,13 +38,14 @@ static AppData* appData = nil;
 	{
 		if (!appData)
 			appData = [self alloc];
-        
+    
 		return appData;
 	}
 	return nil;
 }
 
 @synthesize initialized;
+@synthesize initializing;
 @synthesize networkChecker;
 @synthesize theMenu;
 @synthesize currentOrder;
@@ -58,11 +60,13 @@ static AppData* appData = nil;
     if (self) {
         
         initialized = NO;
+        initializing = YES;
         harddiskFileFolder = [harddiskFileFolder stringByExpandingTildeInPath];
         if ([self loadDataFromDisk]) {
             [self updateOrderHistory];
             initialized = YES;
             [[NSNotificationCenter defaultCenter] postNotificationName:INITIALIZED_SUCCESS object:self];
+            initializing = NO;
         }
         else
         {
@@ -83,7 +87,6 @@ static AppData* appData = nil;
         networkChecker = [Reachability reachabilityWithHostname:(@"croutonlabs.com")];
         [networkChecker startNotifier];
         [self initializeFromServer];
-        [self performSelector:@selector(assessInitFailure) withObject:nil afterDelay:10];
         
     }
     return self;
@@ -148,6 +151,7 @@ static AppData* appData = nil;
         CLLog(LOG_LEVEL_ERROR, @"initializeFromData failed");
         return NO;
     }
+    initializing = NO;
     return YES;
     
     //Some notification stuff will have to be set up so that views know what to do and when
@@ -185,6 +189,9 @@ static AppData* appData = nil;
 
 -(void)initializeFromServer
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName:INITIALIZING_FROM_SERVER object:self];
+    [self performSelector:@selector(assessInitFailure) withObject:nil afterDelay:10];
+
     [self initiateMenuRefresh];
     [self getLocation];
 }
@@ -222,7 +229,8 @@ static AppData* appData = nil;
                               [theOrderManager setMenu:theMenu];
                               if (locationState)
                               {
-                                  initialized = true;
+                                  initialized = YES;
+                                  initializing = NO;
                                   [[NSNotificationCenter defaultCenter] postNotificationName:INITIALIZED_SUCCESS object:self];
                               }
                           }
@@ -269,6 +277,7 @@ static AppData* appData = nil;
                                         }
                                         if (theMenu && !initialized) {
                                             initialized = YES;
+                                            initializing = NO;
                                             [[NSNotificationCenter defaultCenter] postNotificationName:INITIALIZED_SUCCESS object:self];
                                         }
                                     }
@@ -292,6 +301,7 @@ static AppData* appData = nil;
 {
     if (!initialized) {
         [[NSNotificationCenter defaultCenter] postNotificationName:INITIALIZED_FAILURE object:self];
+        initializing = NO;
     }
 }
 

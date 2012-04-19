@@ -89,7 +89,8 @@
     if ([UIApplication sharedApplication].applicationIconBadgeNumber) {
         [UIApplication sharedApplication].applicationIconBadgeNumber=0;
     }
-    if (![[AppData appData] initialized]) {
+    
+    if ((![[AppData appData] initialized]) && (![[AppData appData] initializing])) {
         [[AppData appData] initializeFromServer];
     }
     /*

@@ -15,6 +15,7 @@
 @class Item;
 @class Combo;
 
+extern NSString* INITIALIZING_FROM_SERVER;
 extern NSString* INITIALIZED_SUCCESS;
 extern NSString* INITIALIZED_FAILURE;
 extern NSString* SERVER_INIT_FAILURE;
@@ -34,8 +35,10 @@ extern NSString* SERVER_INIT_FAILURE;
     Menu *favoritesMenu;
     
     BOOL initialized;
+    BOOL initializing;
 }
 
+@property (readonly) BOOL initializing;
 @property (readonly) BOOL initialized;
 @property (retain) Reachability *networkChecker;
 @property (retain) Menu *theMenu;

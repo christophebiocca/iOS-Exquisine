@@ -31,11 +31,11 @@
         masterView = [[MasterView alloc] initWithFrame:frame];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(initializationSuccess) name:INITIALIZED_SUCCESS object:[AppData appData]];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(initializationFailure) name:INITIALIZED_FAILURE object:[AppData appData]];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displaySpinner) name:INITIALIZING_FROM_SERVER object:[AppData appData]];
         
         (void)[[AppData appData] init];
         
          [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showOrderConfirmation:) name:ORDER_PLACEMENT_REQUESTED object:[[AppData appData] theOrderManager]];
-        [[[masterView loadingView] progressLabel] setText:@"Contacting Server..."];
     }
     return self;
 }
@@ -262,6 +262,12 @@
                           [masterView dismissView];
                       }];
     [masterView pushView:[[paymentStack navigationController] view]];
+}
+
+-(void)displaySpinner
+{
+    [[[masterView loadingView] progressLabel] setText:@"Contacting Server..."];
+    [masterView undissolveProgressIndicator];
 }
 
 @end

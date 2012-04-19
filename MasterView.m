@@ -41,6 +41,11 @@
     [self fadeOut:[loadingView indicatorView] withDuration:1 andWait:0];
 }
 
+-(void)undissolveProgressIndicator
+{
+    [self fadeIn:[loadingView indicatorView] withDuration:1 andWait:0];
+}
+
 -(void)fadeOut:(UIView*)viewToDissolve withDuration:(NSTimeInterval)duration   andWait:(NSTimeInterval)wait
 {
     [UIView beginAnimations: @"Fade Out" context:nil];
@@ -51,6 +56,19 @@
     // druation of animation
     [UIView setAnimationDuration:duration];
     viewToDissolve.alpha = 0.0;
+    [UIView commitAnimations];
+}
+
+-(void)fadeIn:(UIView*)viewToDissolve withDuration:(NSTimeInterval)duration   andWait:(NSTimeInterval)wait
+{
+    [UIView beginAnimations: @"Fade In" context:nil];
+    
+    // wait for time before begin
+    [UIView setAnimationDelay:wait];
+    
+    // druation of animation
+    [UIView setAnimationDuration:duration];
+    viewToDissolve.alpha = 1.0;
     [UIView commitAnimations];
 }
 
