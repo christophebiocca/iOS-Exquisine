@@ -177,7 +177,10 @@ static NSURL* serverURL;
         attemptCounter = 0;
         request = [therequest copy];
         successblock = [theSuccessBlock copy];
-        errorblock = [theErrorBlock copy];
+        errorblock = ^(APICall *call, NSError *err){
+            theErrorBlock(call, err);
+            CLLog(LOG_LEVEL_WARNING, [NSString stringWithFormat:@"There was an error in an API call:\n%@", err]);
+        };
     }
     return self;
 }
