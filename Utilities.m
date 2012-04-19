@@ -60,22 +60,21 @@
     return nil;
 }
 
-+(void)logLevel:(LogLevel)level message:(NSString *)message
++(void)logLevel:(LogLevel)level context:(NSString *)context message:(NSString *)message
 {
-    
     #if INFO && DEBUG
     switch (level) {
         case LOG_LEVEL_INFO:
-            NSLog(@"INFO: %@",message);
+            NSLog(@"INFO: %@:%@",context ,message);
             break;
         case LOG_LEVEL_DEBUG:
-            NSLog(@"DEBUG: %@",message);
+            NSLog(@"DEBUG: %@:%@",context ,message);
             break;
         case LOG_LEVEL_WARNING:
-            NSLog(@"WARNING: %@",message);
+            NSLog(@"WARNING: %@:%@",context ,message);
             break;
         case LOG_LEVEL_ERROR:
-            NSLog(@"ERROR: %@",message);
+            NSLog(@"ERROR: %@:%@",context ,message);
             break;
             
         default:
@@ -85,13 +84,13 @@
     
     switch (level) {
         case LOG_LEVEL_DEBUG:
-            NSLog(@"DEBUG: %@",message);
+            NSLog(@"DEBUG: %@:%@",context ,message);
             break;
         case LOG_LEVEL_WARNING:
-            NSLog(@"WARNING: %@",message);
+            NSLog(@"WARNING: %@:%@",context ,message);
             break;
         case LOG_LEVEL_ERROR:
-            NSLog(@"ERROR: %@",message);
+            NSLog(@"ERROR: %@:%@",context ,message);
             break;
             
         default:

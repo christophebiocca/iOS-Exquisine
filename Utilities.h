@@ -27,7 +27,7 @@ typedef enum LogLevel {
 
 +(id)MemberOfCompositeListAtIndex:(NSMutableArray *)compositeList:(NSInteger) anInt;
 
-+(void)logLevel:(LogLevel)level message:(NSString*)message;
++(void)logLevel:(LogLevel)level context:(NSString *)context message:(NSString *)message;
 
 +(NSString*) uuid;
 

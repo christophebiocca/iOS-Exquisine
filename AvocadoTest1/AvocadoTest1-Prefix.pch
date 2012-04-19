@@ -28,12 +28,12 @@
 #define INFO 0
 
 #ifdef DEBUG
-#define CLLog(level, ...) [Utilities logLevel:level message:__VA_ARGS__]
+#define CLLog(level, ...) [Utilities logLevel:level context:[NSString stringWithFormat:@"[%s:%s:%d]",__FILE__ ,__PRETTY_FUNCTION__ ,__LINE__]  message:__VA_ARGS__]
 #else
 #define CLLog(level, ...) CLLog##level(__VA_ARGS__)
-#define CLLogLOG_LEVEL_ERROR(...)[Utilities logLevel:LOG_LEVEL_ERROR message:__VA_ARGS__]
-#define CLLogLOG_LEVEL_WARNING(...)[Utilities logLevel:LOG_LEVEL_WARNING message:__VA_ARGS__]
-#define CLLogLOG_LEVEL_INFO(...)[Utilities logLevel:LOG_LEVEL_WARNING message:__VA_ARGS__]
-#define CLLogLOG_LEVEL_DEBUG(...)[Utilities logLevel:LOG_LEVEL_WARNING message:__VA_ARGS__]
+#define CLLogLOG_LEVEL_ERROR(...)[Utilities logLevel:LOG_LEVEL_ERROR context:[NSString stringWithFormat:@"[%s:%s:%d]",__FILE__ ,__PRETTY_FUNCTION__ ,__LINE__] message:__VA_ARGS__]
+#define CLLogLOG_LEVEL_WARNING(...)[Utilities logLevel:LOG_LEVEL_WARNING context:[NSString stringWithFormat:@"[%s:%s:%d]",__FILE__ ,__PRETTY_FUNCTION__ ,__LINE__] message:__VA_ARGS__]
+#define CLLogLOG_LEVEL_INFO(...)[Utilities logLevel:LOG_LEVEL_WARNING context:[NSString stringWithFormat:@"[%s:%s:%d]",__FILE__ ,__PRETTY_FUNCTION__ ,__LINE__] message:__VA_ARGS__]
+#define CLLogLOG_LEVEL_DEBUG(...)[Utilities logLevel:LOG_LEVEL_WARNING context:[NSString stringWithFormat:@"[%s:%s:%d]",__FILE__ ,__PRETTY_FUNCTION__ ,__LINE__] message:__VA_ARGS__]
 
 #endif
