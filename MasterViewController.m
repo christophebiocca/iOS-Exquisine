@@ -40,44 +40,11 @@
     return self;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
-#pragma mark - View lifecycle
-
-
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView
 {
     [super loadView];
     [self setView:masterView];
     
-}
-
--(void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-}
-
-
-/*
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
-*/
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -208,54 +175,7 @@
                                }
                            }
                         completionBlock:^{
-/*
- 
- IF YOU TRY TO CHANGE THIS LINE
- 
- ++++++++++++++++//++++++++++//++/+++++++++++++++//+/+++++/+++++////+++++/++///++/+++++++++++++++++++
- ++++++++++++++++++++++++/+++++++/++/+++/+++//++++///+++++++///+++///+/+++/+//++//+//+//++++//+++++++
- +++++++++++/++++++++//////++////++++////+++++++++++++///////+/++++++/////+++///++++++///++++++++++++
- +++++++++/++++++oss/:::::://////+++++/+/+ooo++sdddhyo+////+//+++/+++//+++++///+++++++/+//+///+/+++++
- +++++++++++++osyys/::::::::::::::///+yhmNNNNNNmNNNNNNmyyo++++osso::::::::///////+++///+//+++++++/+++
- +++++++++ossyyyyy/::::::::::::::::::ymNNNNNNNNNNNNNNNNNNNyyyyyyyyso+//::::::::::::://////++++/+//+++
- +++++ossyyyyyyyys:::///:::::::::::sdmNNNNNNNNNNNNNNNNNNNNdyyyyyyyyyyyyysoo+/::::::::::::::://////+++
- //++ooossssyyyyyysssys/::::::::::/smNNNNNNNNNNNNNmmNNNNNNNNdyyyyyyyyyyyyyyyys+:::::::::::::::::::::/
- :----::::::::::///+++/::::::::::::+mmmmmmdhhmdmddddddddmmmmmddyyyyyyyyyyyso+/:::::::::::::::::::::::
- :------------------------------/oohhhhhhhhdddddddhhhhhhhhhhdmNmyyhyyyso+/:::://++//:::::::::::::::::
- :------------------------------::+ydmds/+o/::::+oooyyhhdmmdyoyNNdNmo+::-----::/+ossssso++///::::::::
- :---------------------------------hNm+:-.```.`..````.:::/mdosdNNNNN/------------::/osyyyyysssso++///
- :---------------------------------mNm:--````:`..:````.--/NmmNNNNNNNs----------------:oyyyyyyyyyyysss
- ::--------------------------------mmN:--.....--/.````---hmohNNNNNNNy:----------------+yyyyyyyyyyyyyy
- so+//:://////:::------------------o/h/-------:-+:------/o/-:/sdNNNdyo+:------------:osyyyyyyyyyyyyyy
- ---..................................:/:---:/+++::---:/:.-----ydddddyo+----------:+syyyyyyyyyyyyyyyy
- `````````````````````````````````````:+/////+hdh//:::/:```--:/yddddddyo:.........-::////+++++ooooooo
- `````````````````````````````````.:oo+oys+////++///os++++sysssshddddddyo:```````````````````````....
- `````````````````````````--```-:/odddyoohddhysssyhddsosdddddddddddddddds/```````````````````````````
- `````````````````````.:+hhm+`/ooshdddddhyyhhddddhhhyhhdddddddddddddddddh+```````````````````````````
- ````````````````````-oNhmNmNodshdddddddddddddddddddhyhhddddh:+yhdddddddd/```````````````````````````
- ````````````````````smmNmNNNNNNmdddddddddddddmddddddyydddddy```-::oyhyo:````````````````````````````
- ````````````````````.omNNNNNNNNmddddhyhhhyyyyhhdyhyhyhydddds```````..```````````````````````````````
- ``````````````````````-smNNNNNNyddddyysyyhhssyyhydyyshoddddo````````````````````````````````````````
- ````````````````````````-ymNNmhyddddddhhhddhhdhdhdhhhhhdddd/````````````````````````````````````````
- ````````.`````````````````+hhhdddddddddddddddmddddddddddddd-````````````````````````````````````````
- ```````odo````````.oh-````.+yhhosddddddddddddmddddddddddddh`````````````````````````````````````````
- ```````yMM-```````:MMo```````.``/ddddddddddddmdddddddddddds`````````````````````````````````````````
- ```````yMM-```````-NMy``````````.dddddhyyddddmddddhhdddddd/`````````````````````````````````````````
- ```````mMM.````````dMN-``````````ydhyyyhdddddmdddddyyyhddd.`````````````````````````````````````````
- ```````sMM-````````hMN.``````````+dhdddddddddmdddddddhysh/``````````````````````````````````````````
- ```````:NMh:``````:mMd.``````````.sddddddddddmdddddddddd:```````````````````````````````````````````
- ``````.::d:```````-+d/:.```````````ydddddddddmdddddddddd-```````````````````````````````````````````
- `````````oo````````/y``````````````ydddddddddddddddddddd:```````````````````````````````````````````
- `````````:h````````/s``````````````hdddddddddddddddddddd:```````````````````````````````````````````
- ``````````m.```````+s``````````````ddddddddddddddddddddd-```````````````````````````````````````````
- ``````````y/```````+o``````````````dmmmmddddddddddddmmmm-```````````````````````````````````````````
- ``````````/s```````o+``````````````ddddmdddddddddddmmddm.``````````````````````````````````-::--:--:
- 
- YOU'RE GONNA HAVE A BAD TIME.
- 
- */
-                            
-                            
+
                             [masterView dismissView];
                         }
                       cancellationBlock:^{

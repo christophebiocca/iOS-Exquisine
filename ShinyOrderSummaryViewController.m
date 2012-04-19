@@ -10,10 +10,6 @@
 #import "OrderSummaryPageRenderer.h"
 #import "ShinyOrderSummaryView.h"
 
-@interface ShinyOrderSummaryViewController ()
-
-@end
-
 @implementation ShinyOrderSummaryViewController
 
 - (id) initWithOrder:(Order *)anOrder
@@ -85,19 +81,6 @@
     [super loadView];
     [self setView:orderSummaryView];
 }
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-}
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);

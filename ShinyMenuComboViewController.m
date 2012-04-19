@@ -94,14 +94,6 @@ NSString *COMBO_DONE_BUTTON_HIT = @"CroutonLabs/ComboDoneButtonHit";
     return [CustomViewCell cellHeightForData:[comboRenderer objectForCellAtIndex:indexPath]];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
 -(void)loadView
 {
     [super loadView];
@@ -148,11 +140,6 @@ NSString *COMBO_DONE_BUTTON_HIT = @"CroutonLabs/ComboDoneButtonHit";
     else{
         [[[self navigationItem] rightBarButtonItem] setEnabled:NO];
     }
-}
-
--(void)dealloc
-{
-    //[[NSNotificationCenter defaultCenter] removeObject:self];
 }
 
 @end

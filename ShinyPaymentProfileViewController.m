@@ -277,12 +277,6 @@
     [self setView:paymentProfileView];
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
-}
-
 - (void)viewDidUnload
 {
     [super viewDidUnload];

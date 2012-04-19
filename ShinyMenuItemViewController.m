@@ -82,14 +82,6 @@ NSString* ITEM_DONE_BUTTON_HIT = @"CroutonLabs/ItemDoneButtonHit";
     return [CustomViewCell cellHeightForData:[itemRenderer objectForCellAtIndex:indexPath]];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
 -(void)loadView
 {
     [super loadView];
@@ -126,10 +118,4 @@ NSString* ITEM_DONE_BUTTON_HIT = @"CroutonLabs/ItemDoneButtonHit";
     
     [[self navigationItem] setTitleView:toolbarText];
 }
-
--(void)dealloc
-{
-    //[[NSNotificationCenter defaultCenter] removeObject:self];
-}
-
 @end
