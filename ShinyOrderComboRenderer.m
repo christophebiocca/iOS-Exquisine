@@ -8,10 +8,8 @@
 
 #import "ShinyOrderComboRenderer.h"
 #import "ShinyHeaderView.h"
-#import "NumberOfCombosView.h"
 #import "IntegerInputCellData.h"
 #import "Combo.h"
-#import "ItemGroupSectionHeaderView.h"
 
 @implementation ShinyOrderComboRenderer
 -(id)initWithCombo:(Combo *)aCombo
@@ -43,7 +41,7 @@
         
         if ([[theCombo listOfItemGroups] count] != 0) {
             
-            [itemGroupSectionContents addObject:[ItemGroupSectionHeaderView new]];
+            [itemGroupSectionContents addObject:[[ShinyHeaderView alloc] initWithTitle:@"Components"]];
             
         }
         

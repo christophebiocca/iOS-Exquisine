@@ -7,8 +7,6 @@
 //
 
 #import "ShinyOrderItemRenderer.h"
-#import "OptionSectionHeaderView.h"
-#import "NumberOfItemsSectionHeaderView.h"
 #import "IntegerInputCellData.h"
 #import "ShinyHeaderView.h"
 #import "ExpandableCellData.h"
@@ -75,7 +73,7 @@
         [sectionNames addObject:@"Options"];
         NSMutableArray *optionSectionContents = [[NSMutableArray alloc] init];
         
-        [optionSectionContents addObject:[OptionSectionHeaderView new]];
+        [optionSectionContents addObject:[[ShinyHeaderView alloc] initWithTitle:@"Options"]];
         
         [optionSectionContents addObject:[NSDictionary dictionaryWithObject:theItem forKey:@"favoriteCellItem"]];
         

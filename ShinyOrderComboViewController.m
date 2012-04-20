@@ -8,7 +8,6 @@
 
 #import "ShinyOrderComboViewController.h"
 #import "ShinyOrderComboRenderer.h"
-#import "ShinyComboView.h"
 
 NSString* COMBO_DELETE_BUTTON_HIT = @"CroutonLabs/ComboDeleteButtonHit";
 

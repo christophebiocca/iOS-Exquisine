@@ -7,7 +7,6 @@
 //
 
 #import "ShinyPaymentProfileViewController.h"
-#import "ShinyPaymentProfileView.h"
 #import "ShinyPaymentProfileRenderer.h"
 #import "PaymentProfileInfo.h"
 #import "DeletePaymentInfo.h"

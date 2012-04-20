@@ -10,7 +10,6 @@
 #import "ExpandableCell.h"
 #import "Item.h"
 #import "Option.h"
-#import "ShinyItemView.h"
 #import "Choice.h"
 #import "ShinyOrderItemRenderer.h"
 #import "ShinyChoiceCell.h"

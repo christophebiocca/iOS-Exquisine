@@ -7,7 +7,6 @@
 //
 
 #import "SettingsTabViewController.h"
-#import "SettingsTabView.h"
 #import "ShinySettingsTabRenderer.h"
 #import "OrderHistoryViewController.h"
 #import "GetPaymentProfileInfo.h"

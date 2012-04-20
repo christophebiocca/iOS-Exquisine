@@ -7,7 +7,6 @@
 //
 
 #import "ShinyComboItemViewController.h"
-#import "ShinyItemView.h"
 #import "ShinyComboItemRenderer.h"
 
 @implementation ShinyComboItemViewController

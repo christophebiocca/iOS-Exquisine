@@ -8,7 +8,6 @@
 
 #import "ShinyOrderSummaryViewController.h"
 #import "OrderSummaryPageRenderer.h"
-#import "ShinyOrderSummaryView.h"
 
 @implementation ShinyOrderSummaryViewController
 

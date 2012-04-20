@@ -8,7 +8,6 @@
 
 #import "ShinyItemGroupViewController.h"
 #import "ShinyItemGroupRenderer.h"
-#import "ShinyItemGroupView.h"
 #import "ShinyComboItemViewController.h"
 #import "ExpandableCell.h"
 #import "Item.h"

@@ -9,7 +9,6 @@
 #import "OrderHistoryViewController.h"
 #import "ShinyOrderSummaryViewController.h"
 #import "OrderHistoryRenderer.h"
-#import "OrderHistoryView.h"
 #import "AppData.h"
 
 @implementation OrderHistoryViewController

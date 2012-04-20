@@ -10,8 +10,6 @@
 #import "ExpandableCellData.h"
 #import "Combo.h"
 #import "IntegerInputCellData.h"
-#import "ItemGroupSectionHeaderView.h"
-#import "NumberOfCombosView.h"
 #import "ShinyHeaderView.h"
 #import "ItemGroup.h"
 
@@ -46,7 +44,7 @@
         [sectionNames addObject:@"Item Groups"];
         NSMutableArray *itemGroupSectionContents = [[NSMutableArray alloc] init];
         
-        [itemGroupSectionContents addObject:[ItemGroupSectionHeaderView new]];
+        [itemGroupSectionContents addObject:[[ShinyHeaderView alloc] initWithTitle:@"Components"]];
         
         NSMutableDictionary *favoriteCell = [[NSMutableDictionary alloc] init];
         [favoriteCell setValue:theCombo forKey:@"favoriteCellCombo"];

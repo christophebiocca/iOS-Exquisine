@@ -8,7 +8,6 @@
 
 #import "ShinyMenuComboViewController.h"
 #import "ShinyMenuComboRenderer.h"
-#import "ShinyComboView.h"
 #import "ShinyMenuItemViewController.h"
 #import "ShinyItemGroupViewController.h"
 #import "ShinyComboItemViewController.h"

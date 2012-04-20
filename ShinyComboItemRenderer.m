@@ -7,7 +7,6 @@
 //
 
 #import "ShinyComboItemRenderer.h"
-#import "OptionSectionHeaderView.h"
 #import "ShinyHeaderView.h"
 #import "ExpandableCellData.h"
 #import "Item.h"
@@ -57,7 +56,7 @@
         [sectionNames addObject:@"Options"];
         NSMutableArray *optionSectionContents = [[NSMutableArray alloc] init];
         
-        [optionSectionContents addObject:[OptionSectionHeaderView new]];
+        [optionSectionContents addObject:[[ShinyHeaderView alloc] initWithTitle:@"Options"]];
         
         NSMutableDictionary *favoriteCell = [[NSMutableDictionary alloc] init];
         [favoriteCell setValue:theItem forKey:@"favoriteCellItem"];
