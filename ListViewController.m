@@ -123,24 +123,7 @@
 
 -(void)ShinyItemGroupCellHandler:(NSIndexPath *)indexPath
 {
-    ItemGroup *theItemGroup = [renderer objectForCellAtIndex:indexPath];        
     
-    if ([[theItemGroup listOfItems] count] == 1) {
-        Item *theItem = [[theItemGroup listOfItems] objectAtIndex:0];
-        if (([[theItem options] count] > 0)||![[theItem desc] isEqualToString:@""]) 
-        {
-            ShinyComboItemViewController *newController = [[ShinyComboItemViewController alloc] initWithItem:theItem];
-            [[self navigationController] pushViewController:newController animated:YES];
-            return;
-        }
-        else {
-            return;
-        }
-    }
-    else {
-        ShinyItemGroupViewController *newController = [[ShinyItemGroupViewController alloc] initWithItemGroup:theItemGroup];
-        [[self navigationController] pushViewController:newController animated:YES];
-    }
 }
 
 -(void)ShinyItemFavoriteCellHandler:(NSIndexPath *)indexPath

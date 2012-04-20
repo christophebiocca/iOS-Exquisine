@@ -7,15 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-@class ShinyOrderSummaryView;
-@class OrderSummaryPageRenderer;
+#import "ListViewController.h"
 @class Order;
 
-@interface ShinyOrderSummaryViewController : UIViewController<UITableViewDelegate>
+@interface ShinyOrderSummaryViewController : ListViewController
 {
     Order *theOrder;
-    ShinyOrderSummaryView *orderSummaryView;
-    OrderSummaryPageRenderer *orderSummaryRenderer;
 }
 
 -(id)initWithOrder:(Order *) anOrder;

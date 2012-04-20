@@ -28,7 +28,7 @@ NSString *COMBO_DONE_BUTTON_HIT = @"CroutonLabs/ComboDoneButtonHit";
 
 -(id)initWithCombo:(Combo *)aCombo
 {
-    self = [super initWithNibName:nil bundle:nil];
+    self = [super init];
     if (self) 
     {
         theCombo = aCombo;
@@ -44,6 +44,29 @@ NSString *COMBO_DONE_BUTTON_HIT = @"CroutonLabs/ComboDoneButtonHit";
         [[self navigationController] popViewControllerAnimated:YES];
     }
     [super ShinyComboFavoriteCellHandler:indexPath];
+}
+
+-(void)ShinyItemGroupCellHandler:(NSIndexPath *)indexPath
+{
+    ItemGroup *theItemGroup = [renderer objectForCellAtIndex:indexPath];        
+    
+    if ([[theItemGroup listOfItems] count] == 1) {
+        Item *theItem = [[theItemGroup listOfItems] objectAtIndex:0];
+        if (([[theItem options] count] > 0)||![[theItem desc] isEqualToString:@""]) 
+        {
+            ShinyComboItemViewController *newController = [[ShinyComboItemViewController alloc] initWithItem:theItem];
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addItemButtonHit:) name:ITEM_DONE_BUTTON_HIT object:newController];
+            [[self navigationController] pushViewController:newController animated:YES];
+            return;
+        }
+        else {
+            return;
+        }
+    }
+    else {
+        ShinyItemGroupViewController *newController = [[ShinyItemGroupViewController alloc] initWithItemGroup:theItemGroup];
+        [[self navigationController] pushViewController:newController animated:YES];
+    }
 }
 
 -(void)loadView

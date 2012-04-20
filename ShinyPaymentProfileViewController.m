@@ -30,37 +30,24 @@
 
 - (id) initWithPaymentInfo:(PaymentProfileInfo *) paymentInfo AndReturnController:(UIViewController *) aController
 {
-    self = [super initWithNibName:nil bundle:nil];
-    if (self) {
+    self = [super init];
+    if (self) 
+    {
         profileInfo = paymentInfo;
         returnController = aController;
-        paymentProfileView = [[ShinyPaymentProfileView alloc] init];
-        paymentProfileRenderer = [[ShinyPaymentProfileRenderer alloc] initWithPaymentInfo:paymentInfo];
-        [[paymentProfileView paymentMethodsTable] setDelegate:self];
-        [[paymentProfileView paymentMethodsTable] setDataSource:paymentProfileRenderer];
+        renderer = [[ShinyPaymentProfileRenderer alloc] initWithPaymentInfo:paymentInfo];
+        [theTableView setDataSource:renderer];
         [[self navigationItem] setHidesBackButton:YES]; 
 
     }
     return self;
 }
 
--(void)viewWillAppear:(BOOL)animated
+-(void)viewDidAppear:(BOOL)animated
 {
-    [[[self navigationController] navigationBar] setBackgroundImage:[UIImage imageNamed:@"BlankTopbarWithShadow.png"] forBarMetrics:UIBarMetricsDefault];
-    
-    UILabel *toolbarText = [[UILabel alloc] initWithFrame:CGRectMake(
-                                                                     ([[[self navigationController] navigationBar] frame ].size.width - 300) / 2,
-                                                                     (44 - 30) / 2, 
-                                                                     300, 
-                                                                     30)];
-    [toolbarText setFont:[UIFont fontWithName:@"Optima-ExtraBlack" size:22]];
-    [toolbarText setTextColor:[UIColor whiteColor]];
-    [toolbarText setBackgroundColor:[UIColor clearColor]];
-    [toolbarText setTextAlignment:UITextAlignmentCenter];
-    
-    [toolbarText setText:@"Payment Method"];
-    [[self navigationItem] setTitleView:toolbarText];   
-    
+    [super viewDidAppear:animated];
+    [(UILabel *)[[self navigationItem] titleView] setText:@"Payment Method"];
+        
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backButtonHit)];
     [backButton setTintColor:[Utilities fravicDarkRedColor]];
     
@@ -71,10 +58,7 @@
     [[self navigationItem] setRightBarButtonItem:fillerButton];
 
     theTabBarController = [self tabBarController];
-}
-
--(void)viewDidAppear:(BOOL)animated
-{
+    
     if (!theTabBarController) {
         CLLog(LOG_LEVEL_ERROR,@"The tabBarController doesn't exist");
     }
@@ -98,16 +82,6 @@
     [[self navigationController] popToViewController:returnController animated:NO];
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 0.0f;
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
-    return 0.0f;
-}
-
 -(void)backButtonHit
 {
     if (!theTabBarController) {
@@ -117,59 +91,56 @@
     [[self navigationController] popToViewController:returnController animated:YES];
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+-(void)ShinyDeleteCellHandler:(NSIndexPath *)indexPath
 {
-    
-    if ([[CustomViewCell cellIdentifierForData:[paymentProfileRenderer objectForCellAtIndex:indexPath]] isEqualToString:@"ShinyDeleteCell"])
-    {
-        [DeletePaymentInfo deletePaymentInfo:^(APICall *theAPICall)
-         {
-             ShinyPaymentProfileViewController *newController = [[ShinyPaymentProfileViewController alloc] initWithPaymentInfo:nil AndReturnController:returnController];
+    [DeletePaymentInfo deletePaymentInfo:^(APICall *theAPICall)
+     {
+         ShinyPaymentProfileViewController *newController = [[ShinyPaymentProfileViewController alloc] initWithPaymentInfo:nil AndReturnController:returnController];
+         
+         [self afterAnimating:^{
+             NSMutableArray *newNavStack = [[NSMutableArray alloc] initWithArray:[[self navigationController] viewControllers]];
              
-             [self afterAnimating:^{
-                 NSMutableArray *newNavStack = [[NSMutableArray alloc] initWithArray:[[self navigationController] viewControllers]];
-                 
-                 while (![[newNavStack lastObject] isEqual: returnController]) {
-                     [newNavStack removeObject:[newNavStack lastObject]];
-                 }
-                 
-                 [newNavStack addObject:newController];
-                 
-                 [[self navigationController] setViewControllers:newNavStack animated:YES];
-             }];
-         }
-                                     failure:^(APICall *theAPICall, NSError *anError) 
-         {
-             UIAlertView *oops = [[UIAlertView alloc] initWithTitle:@"Oops" message:@"Your credit card info could not be deleted because the server cannot be accessed at the moment. Please try again later." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+             while (![[newNavStack lastObject] isEqual: returnController]) {
+                 [newNavStack removeObject:[newNavStack lastObject]];
+             }
              
-             [oops show];
+             [newNavStack addObject:newController];
              
-             [self afterAnimating:^{
-                 ShinyPaymentProfileViewController *newController = [[ShinyPaymentProfileViewController alloc] initWithPaymentInfo:profileInfo AndReturnController:returnController];
-                 
-                 NSMutableArray *newNavStack = [[NSMutableArray alloc] initWithArray:[[self navigationController] viewControllers]];
-                 
-                 while (![[newNavStack lastObject] isEqual: returnController]) {
-                     [newNavStack removeObject:[newNavStack lastObject]];
-                 }
-                 
-                 [newNavStack addObject:newController];
-                 
-                 [[self navigationController] setViewControllers:newNavStack animated:YES];
-             }];
+             [[self navigationController] setViewControllers:newNavStack animated:YES];
          }];
-        
-        [[self navigationController] pushViewController:[PaymentProcessingViewController new] animated:YES];
-    }
-    else if ([[CustomViewCell cellIdentifierForData:[paymentProfileRenderer objectForCellAtIndex:indexPath]] isEqualToString:@"ShinySettingsCell"])
-    {
-        [self changePaymentInfo];
-    }
-    else if ([[CustomViewCell cellIdentifierForData:[paymentProfileRenderer objectForCellAtIndex:indexPath]] isEqualToString:@"ShinyPaymentViewCell"])
-    {
-        [self changePaymentInfo];
-    }
-        
+     }
+                                 failure:^(APICall *theAPICall, NSError *anError) 
+     {
+         UIAlertView *oops = [[UIAlertView alloc] initWithTitle:@"Oops" message:@"Your credit card info could not be deleted because the server cannot be accessed at the moment. Please try again later." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles: nil];
+         
+         [oops show];
+         
+         [self afterAnimating:^{
+             ShinyPaymentProfileViewController *newController = [[ShinyPaymentProfileViewController alloc] initWithPaymentInfo:profileInfo AndReturnController:returnController];
+             
+             NSMutableArray *newNavStack = [[NSMutableArray alloc] initWithArray:[[self navigationController] viewControllers]];
+             
+             while (![[newNavStack lastObject] isEqual: returnController]) {
+                 [newNavStack removeObject:[newNavStack lastObject]];
+             }
+             
+             [newNavStack addObject:newController];
+             
+             [[self navigationController] setViewControllers:newNavStack animated:YES];
+         }];
+     }];
+    
+    [[self navigationController] pushViewController:[PaymentProcessingViewController new] animated:YES];
+}
+
+-(void)ShinySettingsCellHandler:(NSIndexPath *)indexPath
+{
+    [self changePaymentInfo];
+}
+
+-(void)ShinyPaymentViewCellHandler:(NSIndexPath *)indexPath
+{
+    [self changePaymentInfo];
 }
 
 -(void)sendPaymentInfo:(PaymentInfo *)paymentInfo
@@ -266,17 +237,6 @@
     [[self navigationController] pushViewController:controller animated:YES];
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return [CustomViewCell cellHeightForData:[paymentProfileRenderer objectForCellAtIndex:indexPath]];
-}
-
--(void)loadView
-{
-    [super loadView];
-    [self setView:paymentProfileView];
-}
-
 - (void)viewDidUnload
 {
     [super viewDidUnload];
@@ -286,11 +246,6 @@
     
     [theTabBarController setDelegate:nil];
     // Release any retained subviews of the main view.
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 //This is really bad. We need a class to manage this. Copy pasting code is terrible.

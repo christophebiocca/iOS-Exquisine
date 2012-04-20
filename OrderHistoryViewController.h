@@ -7,13 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-@class OrderHistoryRenderer;
-@class OrderHistoryView;
+#import "ListViewController.h"
 
-@interface OrderHistoryViewController : UIViewController<UITableViewDelegate>
-{
-    OrderHistoryView *orderHistoryView;
-    OrderHistoryRenderer *orderHistoryRenderer;
-}
+@interface OrderHistoryViewController : ListViewController
 
 @end

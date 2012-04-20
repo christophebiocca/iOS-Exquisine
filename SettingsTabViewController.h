@@ -7,14 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ListViewController.h"
 @class SettingsTabView;
 @class ShinySettingsTabRenderer;
 
-@interface SettingsTabViewController : UIViewController<UITableViewDelegate,UINavigationControllerDelegate>
+@interface SettingsTabViewController : ListViewController<UINavigationControllerDelegate>
 {
-    SettingsTabView *settingsTabView;
-    ShinySettingsTabRenderer *settingsTabRenderer;
-    
     /* Animation Management */
     BOOL animating;
     NSMutableArray* postAnimation;

@@ -16,7 +16,7 @@ NSString* COMBO_DELETE_BUTTON_HIT = @"CroutonLabs/ComboDeleteButtonHit";
 
 -(id)initWithCombo:(Combo *)aCombo
 {
-    self = [super initWithNibName:nil bundle:nil];
+    self = [super init];
     if (self) 
     {
         theCombo = aCombo;

@@ -7,17 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ListViewController.h"
 @class PaymentProfileInfo;
-@class ShinyPaymentProfileView;
-@class ShinyPaymentProfileRenderer;
 
-@interface ShinyPaymentProfileViewController : UIViewController<UITableViewDelegate,UINavigationControllerDelegate,UITabBarControllerDelegate>
+@interface ShinyPaymentProfileViewController : ListViewController<UINavigationControllerDelegate,UITabBarControllerDelegate>
 {
     UITabBarController *theTabBarController;
     PaymentProfileInfo *profileInfo;
     UIViewController *returnController;
-    ShinyPaymentProfileView *paymentProfileView;
-    ShinyPaymentProfileRenderer *paymentProfileRenderer;
     
     /* Animation Management */
     BOOL animating;
