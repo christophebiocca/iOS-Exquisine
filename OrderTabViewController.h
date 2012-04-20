@@ -7,18 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ListViewController.h"
 @class OrderManager;
-@class OrderTabView;
-@class ShinyOrderTabRenderer;
 
 extern NSString *ORDER_PLACEMENT_REQUESTED;
 
-@interface OrderTabViewController : UIViewController <UITableViewDelegate>
+@interface OrderTabViewController : ListViewController
 {
     OrderManager *theOrderManager;
-    OrderTabView *orderView;
-    ShinyOrderTabRenderer *orderRenderer;
-    
 }
 
 -(id) initWithOrderManager:(OrderManager *) anOrderManager;

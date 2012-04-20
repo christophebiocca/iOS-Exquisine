@@ -33,13 +33,15 @@
     self = [super initWithNibName:nil bundle:nil];
     if (self) 
     {
-        theTableView = [[UITableView alloc] init];
+        theTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 460) style:UITableViewStylePlain];
+        [theTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+        [theTableView setBackgroundColor:[UIColor whiteColor]];
         [theTableView setDelegate:self];
     }
     return self;
 }
 
--(void)viewWillAppear:(BOOL)animated
+-(void)viewDidAppear:(BOOL)animated
 {
     [[[self navigationController] navigationBar] setBackgroundImage:[UIImage imageNamed:@"BlankTopbarWithShadow.png"] forBarMetrics:UIBarMetricsDefault];
     UILabel *toolbarText = [[UILabel alloc] initWithFrame:CGRectMake(
@@ -51,6 +53,8 @@
     [toolbarText setTextColor:[UIColor whiteColor]];
     [toolbarText setBackgroundColor:[UIColor clearColor]];
     [toolbarText setTextAlignment:UITextAlignmentCenter];
+    
+    [[self navigationItem] setTitleView:toolbarText];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -83,30 +87,12 @@
 
 -(void)ShinyMenuItemCellHandler:(NSIndexPath *) indexPath
 {
-    Item *theItem = [[renderer objectForCellAtIndex:indexPath] objectForKey:@"menuItem"];
-    
-    ShinyMenuItemViewController *newController;
-    
-    //We need to make sure that this item isn't a favorites list item
-    if ([[[[AppData appData] favoritesMenu] submenuList] containsObject:theItem]) {
-        //if it is, we shouldn't copy it when we make the view controller
-        newController = [[ShinyMenuItemViewController alloc] initWithItem:theItem];
-    }
-    else
-    {
-        newController = [[ShinyMenuItemViewController alloc] initWithItem:[theItem copy]];
-    }
-    
-    [[self navigationController] pushViewController:newController animated:YES];
+    //Override in the subclass.
 }
 
 -(void)ShinyOrderItemCellHandler:(NSIndexPath *)indexPath
 {
-    Item *theItem = [[renderer objectForCellAtIndex:indexPath] objectForKey:@"orderItem"];
-    
-    ShinyOrderItemViewController *newController = [[ShinyOrderItemViewController alloc] initWithItem:theItem];
-    
-    [[self navigationController] pushViewController:newController animated:YES];
+    //Override in the subclass.
 }
 
 -(void)ShinyComboOrderItemCellHandler:(NSIndexPath *) indexPath
@@ -120,27 +106,12 @@
 
 -(void)ShinyMenuComboCellHandler:(NSIndexPath *) indexPath
 {
-    Combo *theCombo = [[renderer objectForCellAtIndex:indexPath] objectForKey:@"menuCombo"];
-    
-    ShinyMenuComboViewController *newController;
-    
-    if ([[[[AppData appData] favoritesMenu] comboList] containsObject:theCombo]) {
-        newController = [[ShinyMenuComboViewController alloc] initWithCombo:theCombo];
-    }
-    else {
-        newController = [[ShinyMenuComboViewController alloc] initWithCombo:[theCombo copy]];
-    }
-    
-    [[self navigationController] pushViewController:newController animated:YES];
+    //Override in subclass
 }
 
 -(void)ShinyOrderComboCellHandler:(NSIndexPath *) indexPath
 {
-    Combo *theCombo = [[renderer objectForCellAtIndex:indexPath] objectForKey:@"combo"];
-    
-    ShinyOrderComboViewController *newController = [[ShinyOrderComboViewController alloc] initWithCombo:theCombo];
-    
-    [[self navigationController] pushViewController:newController animated:YES];
+    //Override in subclass
 }
 
 -(void)ShinyChoiceCellHandler:(NSIndexPath *)indexPath
@@ -215,6 +186,11 @@
 {
     [super loadView];
     [self setView:theTableView];
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

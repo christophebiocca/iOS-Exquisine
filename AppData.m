@@ -153,10 +153,6 @@ static AppData* appData = nil;
     }
     initializing = NO;
     return YES;
-    
-    //Some notification stuff will have to be set up so that views know what to do and when
-    //to update.
-    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCreateButtonState) name:ORDER_MANAGER_NEEDS_REDRAW object:theOrderManager];
 }
 
 
