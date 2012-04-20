@@ -227,7 +227,7 @@ static UIColor* errorLabelColor;
     height = MAX(leftHeight, rightHeight);
     [secureView sizeToFit];
     CGSize dimensions = [secureView frame].size;
-    layoutWidget(height, secureView, dimensions.height, InterFieldPadding, dimensions.width);
+    layoutWidget(height, secureView, dimensions.height, (320 - dimensions.width)/2 , dimensions.width);
 }
 
 -(void)setErrorMessage:(NSString*)message onErrorLabel:(UILabel*)label{
