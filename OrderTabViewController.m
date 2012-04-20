@@ -53,11 +53,13 @@ NSString *ORDER_PLACEMENT_REQUESTED = @"CroutonLabs/OrderPlacementRequested";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshView) name:ORDER_MANAGER_NEEDS_REDRAW object:theOrderManager];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(placeButtonPressed) name:PLACE_BUTTON_PRESSED object:renderer];
-    
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
     //We're initing it again so that anything that has changed is accounted for.
     (void)[(ShinyOrderTabRenderer *)renderer initWithOrderManager:theOrderManager];
     [theTableView reloadData];
-    
 }
 
 
@@ -116,9 +118,9 @@ NSString *ORDER_PLACEMENT_REQUESTED = @"CroutonLabs/OrderPlacementRequested";
     [[self navigationController] pushViewController:newController animated:YES];
 }
 
-
 -(void) refreshView
 {
+    [self viewWillAppear:YES];
     [self viewDidAppear:YES];
 }
 

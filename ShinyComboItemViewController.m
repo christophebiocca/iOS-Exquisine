@@ -9,18 +9,17 @@
 #import "ShinyComboItemViewController.h"
 #import "ShinyItemView.h"
 #import "ShinyComboItemRenderer.h"
+
 @implementation ShinyComboItemViewController
 
 -(id)initWithItem:(Item *)anItem
 {
-    self = [super initWithNibName:nil bundle:nil];
-    if (self) {
+    self = [super init];
+    if (self) 
+    {
         theItem = anItem;
-        itemView = [[ShinyItemView alloc] init];
-        itemRenderer = [[ShinyComboItemRenderer alloc] initWithItem:theItem];
-        
-        [[itemView itemTable] setDelegate:self];
-        [[itemView itemTable] setDataSource:itemRenderer];
+        renderer = [[ShinyComboItemRenderer alloc] initWithItem:theItem];
+        [theTableView setDataSource:renderer];
         
     }
     return self;

@@ -7,21 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-@class ShinyItemGroupView;
-@class ShinyItemGroupRenderer;
+#import "ListViewController.h"
 @class ItemGroup;
 
-@interface ShinyItemGroupViewController : UIViewController<UITableViewDelegate>
+@interface ShinyItemGroupViewController : ListViewController
 {
     ItemGroup *theItemGroup;
-    ShinyItemGroupView *itemGroupView;
-    ShinyItemGroupRenderer *itemGroupRenderer;
-    
 }
 
 @property (retain) ItemGroup *theItemGroup;
 
 -(id) initWithItemGroup:(ItemGroup *) anItemGroup;
-
 
 @end

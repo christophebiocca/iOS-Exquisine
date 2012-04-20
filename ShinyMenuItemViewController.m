@@ -27,59 +27,23 @@ NSString* ITEM_DONE_BUTTON_HIT = @"CroutonLabs/ItemDoneButtonHit";
 
 -(id)initWithItem:(Item *)anItem
 {
-    self = [super initWithNibName:nil bundle:nil];
-    if (self) {
+    self = [super init];
+    if (self) 
+    {
         theItem = anItem;
-        itemView = [[ShinyItemView alloc] init];
-        itemRenderer = [[ShinyMenuItemRenderer alloc] initWithItem:theItem];
-        
-        [[itemView itemTable] setDelegate:self];
-        [[itemView itemTable] setDataSource:itemRenderer];
+        renderer = [[ShinyMenuItemRenderer alloc] initWithItem:theItem];
+        [theTableView setDataSource:renderer];
         
     }
     return self;
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+-(void)ShinyItemFavoriteCellHandler:(NSIndexPath *)indexPath
 {
-    return 0.0f;
-}
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    if ([[tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[ExpandableCell class]])
-    {
-        [(ExpandableCell *)[tableView cellForRowAtIndexPath:indexPath] toggleOpen:indexPath :tableView];
+    if ([[[[AppData appData] favoritesMenu] submenuList] containsObject:theItem]) {
+        [[self navigationController] popViewControllerAnimated:YES];
     }
-    else if ([[CustomViewCell cellIdentifierForData:[itemRenderer objectForCellAtIndex:indexPath]] isEqualToString:@"ShinyChoiceCell"])
-    {
-        Choice *theChoice = [[itemRenderer objectForCellAtIndex:indexPath] objectForKey:@"choice"];
-        [theChoice toggleSelected];
-        [(ShinyChoiceCell *)[tableView cellForRowAtIndexPath:indexPath] pulseView];
-    }
-    else if ([[CustomViewCell cellIdentifierForData:[itemRenderer objectForCellAtIndex:indexPath]] isEqualToString:@"ShinyItemFavoriteCell"])
-    {
-        //If this actually is the favorite item
-        if ([[[[AppData appData] favoritesMenu] submenuList] containsObject:theItem]) {
-            [(ShinyItemFavoriteCell *)[tableView cellForRowAtIndexPath:indexPath] wasClicked];
-            [[self navigationController] popViewControllerAnimated:YES];
-        }
-        else {
-            [(ShinyItemFavoriteCell *)[tableView cellForRowAtIndexPath:indexPath] wasClicked];
-        }
-        
-    }
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 0.0f;
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return [CustomViewCell cellHeightForData:[itemRenderer objectForCellAtIndex:indexPath]];
+    [super ShinyItemFavoriteCellHandler:indexPath];
 }
 
 -(void)loadView
@@ -89,8 +53,6 @@ NSString* ITEM_DONE_BUTTON_HIT = @"CroutonLabs/ItemDoneButtonHit";
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Add" style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonHit)];
     
     [[self navigationItem] setRightBarButtonItem:doneButton];
-    
-    [self setView:itemView];
 }
 
 -(void) doneButtonHit
@@ -99,23 +61,11 @@ NSString* ITEM_DONE_BUTTON_HIT = @"CroutonLabs/ItemDoneButtonHit";
     [[self navigationController] popViewControllerAnimated:YES];
 }
 
-
--(void)viewWillAppear:(BOOL)animated
+-(void)viewDidAppear:(BOOL)animated
 {
-    [[[self navigationController] navigationBar] setBackgroundImage:[UIImage imageNamed:@"BlankTopbarWithShadow.png"] forBarMetrics:UIBarMetricsDefault];
-    UILabel *toolbarText = [[UILabel alloc] initWithFrame:CGRectMake(
-                                                                     ([[[self navigationController] navigationBar] frame ].size.width - 300) / 2,
-                                                                     (44 - 30) / 2, 
-                                                                     300, 
-                                                                     30)];
-    [toolbarText setFont:[UIFont fontWithName:@"Optima-ExtraBlack" size:22]];
-    [toolbarText setTextColor:[UIColor whiteColor]];
-    [toolbarText setBackgroundColor:[UIColor clearColor]];
-    [toolbarText setTextAlignment:UITextAlignmentCenter];
+    [super viewDidAppear:animated];
     
-    [toolbarText setText:[theItem name]];
-    [toolbarText setAdjustsFontSizeToFitWidth:YES];
-    
-    [[self navigationItem] setTitleView:toolbarText];
+    [(UILabel *)[[self navigationItem] titleView] setText:[theItem name]];
 }
+
 @end

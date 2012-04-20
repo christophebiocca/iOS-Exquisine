@@ -7,18 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ListViewController.h"
 @class Item;
-@class ShinyItemView;
-@class ListRenderer;
 
 extern NSString* ITEM_DONE_BUTTON_HIT;
 
-@interface ShinyMenuItemViewController : UIViewController <UITableViewDelegate>
+@interface ShinyMenuItemViewController : ListViewController
 {
     Item *theItem;
-    ShinyItemView *itemView;
-    ListRenderer *itemRenderer;
-    
 }
 
 @property (retain) Item *theItem;

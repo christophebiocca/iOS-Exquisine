@@ -17,27 +17,19 @@ NSString* COMBO_DELETE_BUTTON_HIT = @"CroutonLabs/ComboDeleteButtonHit";
 -(id)initWithCombo:(Combo *)aCombo
 {
     self = [super initWithNibName:nil bundle:nil];
-    if (self) {
+    if (self) 
+    {
         theCombo = aCombo;
-        comboView = [[ShinyComboView alloc] init];
-        comboRenderer = [[ShinyOrderComboRenderer alloc] initWithCombo:theCombo];
-        
-        [[comboView comboTable] setDelegate:self];
-        [[comboView comboTable] setDataSource:comboRenderer];
-        
+        renderer = [[ShinyOrderComboRenderer alloc] initWithCombo:theCombo];
+        [theTableView setDataSource:renderer];
     }
     return self;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+-(void)ShinyDeleteCellHandler:(NSIndexPath *)indexPath
 {
-    [super tableView:tableView didSelectRowAtIndexPath:indexPath];
-    
-    if ([[CustomViewCell cellIdentifierForData:[comboRenderer objectForCellAtIndex:indexPath]] isEqualToString:@"ShinyDeleteCell"])
-    {
-        [[NSNotificationCenter defaultCenter] postNotificationName:COMBO_DELETE_BUTTON_HIT object:self];
-        [[self navigationController] popViewControllerAnimated:YES];
-    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:COMBO_DELETE_BUTTON_HIT object:self];
+    [[self navigationController] popViewControllerAnimated:YES];
 }
 
 -(void)loadView
@@ -45,12 +37,6 @@ NSString* COMBO_DELETE_BUTTON_HIT = @"CroutonLabs/ComboDeleteButtonHit";
     [super loadView];
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonHit)];
     [[self navigationItem] setRightBarButtonItem:doneButton];
-}
-
--(void) deleteButtonHit
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:COMBO_DELETE_BUTTON_HIT object:self];
-    [[self navigationController] popViewControllerAnimated:YES];
 }
 
 @end

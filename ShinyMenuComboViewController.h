@@ -7,18 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ListViewController.h"
 @class Combo;
-@class ShinyComboView;
-@class ListRenderer;
 
 extern NSString* COMBO_DONE_BUTTON_HIT;
 
-@interface ShinyMenuComboViewController : UIViewController<UITableViewDelegate>
+@interface ShinyMenuComboViewController : ListViewController
 {
     Combo *theCombo;
-    ShinyComboView *comboView;
-    ListRenderer *comboRenderer;
-    
 }
 
 @property (retain) Combo *theCombo;

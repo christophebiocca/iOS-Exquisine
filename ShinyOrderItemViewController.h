@@ -7,22 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ShinyMenuItemViewController.h"
 @class Item;
-@class ShinyItemView;
-@class ShinyOrderItemRenderer;
 
 extern NSString* ITEM_DELETE_BUTTON_HIT;
 
-@interface ShinyOrderItemViewController : UIViewController <UITableViewDelegate>
-{
-    Item *theItem;
-    ShinyItemView *itemView;
-    ShinyOrderItemRenderer *itemRenderer;
-    
-}
-
-@property (retain) Item *theItem;
-
--(id) initWithItem:(Item *) anItem;
+@interface ShinyOrderItemViewController : ShinyMenuItemViewController
 
 @end

@@ -20,68 +20,39 @@
 
 -(id)initWithItemGroup:(ItemGroup *)anItemGroup
 {
-    self = [super initWithNibName:nil bundle:nil];
-    if (self) {
+    self = [super init];
+    if (self) 
+    {
         theItemGroup = anItemGroup;
-        itemGroupView = [[ShinyItemGroupView alloc] init];
-        itemGroupRenderer = [[ShinyItemGroupRenderer alloc] initWithItemGroup:theItemGroup];
-        
-        [[itemGroupView itemGroupTable] setDelegate:self];
-        [[itemGroupView itemGroupTable] setDataSource:itemGroupRenderer];
-        
+        renderer = [[ShinyItemGroupRenderer alloc] initWithItemGroup:theItemGroup];
+        [theTableView setDataSource:renderer];
     }
     return self;
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+-(void)ShinyMenuItemCellHandler:(NSIndexPath *)indexPath
 {
-    return 0.0f;
-}
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    if ([[CustomViewCell cellIdentifierForData:[itemGroupRenderer objectForCellAtIndex:indexPath]] isEqualToString:@"ShinyMenuItemCell"])
+    Item *theItem = [[renderer objectForCellAtIndex:indexPath] objectForKey:@"menuItem"];        
+    if (([[theItem options] count] > 0)||![[theItem desc] isEqualToString:@""]) 
     {
-        Item *theItem = [[itemGroupRenderer objectForCellAtIndex:indexPath] objectForKey:@"menuItem"];        
-        if (([[theItem options] count] > 0)||![[theItem desc] isEqualToString:@""]) 
-        {
-            ShinyComboItemViewController *newController = [[ShinyComboItemViewController alloc] initWithItem:theItem];
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addItemButtonHit:) name:ITEM_DONE_BUTTON_HIT object:newController];
-            [[self navigationController] pushViewController:newController animated:YES];
-            return;
-        }
-        else 
-        {
-            [theItemGroup setSatisfyingItem:theItem];
-            [[self navigationController] popViewControllerAnimated:YES];
-        }    
+        ShinyComboItemViewController *newController = [[ShinyComboItemViewController alloc] initWithItem:theItem];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addItemButtonHit:) name:ITEM_DONE_BUTTON_HIT object:newController];
+        [[self navigationController] pushViewController:newController animated:YES];
+        return;
     }
-    else if ([[tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[ExpandableCell class]])
+    else 
     {
-        [(ExpandableCell *)[tableView cellForRowAtIndexPath:indexPath] toggleOpen:indexPath :tableView];
-    }
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 0.0f;
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return [CustomViewCell cellHeightForData:[itemGroupRenderer objectForCellAtIndex:indexPath]];
+        [theItemGroup setSatisfyingItem:theItem];
+        [[self navigationController] popViewControllerAnimated:YES];
+    }    
 }
 
 -(void)loadView
 {
     [super loadView];
-    
     UIBarButtonItem *fillerButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:nil];
     [fillerButton setCustomView:[[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 21)]];
     [[self navigationItem] setRightBarButtonItem:fillerButton];
-    
-    [self setView:itemGroupView];
 }
 
 -(void) addItemButtonHit:(NSNotification *) aNotification
@@ -102,22 +73,9 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [[[self navigationController] navigationBar] setBackgroundImage:[UIImage imageNamed:@"BlankTopbarWithShadow.png"] forBarMetrics:UIBarMetricsDefault];
-    UILabel *toolbarText = [[UILabel alloc] initWithFrame:CGRectMake(
-                                                                     ([[[self navigationController] navigationBar] frame ].size.width - 300) / 2,
-                                                                     (44 - 30) / 2, 
-                                                                     300, 
-                                                                     30)];
-    [toolbarText setFont:[UIFont fontWithName:@"Optima-ExtraBlack" size:22]];
-    [toolbarText setTextColor:[UIColor whiteColor]];
-    [toolbarText setBackgroundColor:[UIColor clearColor]];
-    [toolbarText setTextAlignment:UITextAlignmentCenter];
+    [super viewDidAppear:animated];
     
-    [toolbarText setText:[theItemGroup name]];
-    [toolbarText setAdjustsFontSizeToFitWidth:YES];
-    
-    [[self navigationItem] setTitleView:toolbarText];
-
+    [(UILabel *)[[self navigationItem] titleView] setText:[theItemGroup name]];
 }
 
 @end
