@@ -119,6 +119,9 @@
 		238395A7150EA16A000DC733 /* MenuSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 238395A6150EA16A000DC733 /* MenuSectionHeaderView.m */; };
 		238395AC150EA67F000DC733 /* ShinyOrderItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 238395AB150EA67F000DC733 /* ShinyOrderItemCell.m */; };
 		238476F314D7577C00DE9270 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 238476F214D7577C00DE9270 /* SystemConfiguration.framework */; };
+		238826551545FE2800C68CEA /* RedeemPromo.m in Sources */ = {isa = PBXBuildFile; fileRef = 238826541545FE2800C68CEA /* RedeemPromo.m */; };
+		238826581545FE3F00C68CEA /* promoCodes.m in Sources */ = {isa = PBXBuildFile; fileRef = 238826571545FE3F00C68CEA /* promoCodes.m */; };
+		2388265C15461E8F00C68CEA /* ConsumablePromo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2388265B15461E8F00C68CEA /* ConsumablePromo.m */; };
 		238923A0151D2F44001FBCCB /* splashScreen@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2389239F151D2F44001FBCCB /* splashScreen@2x.jpg */; };
 		238923A2151D3D25001FBCCB /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 238923A1151D3D25001FBCCB /* Default.png */; };
 		2394ABE91513DC440001D3D1 /* AddItemsBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 2394ABE71513DC440001D3D1 /* AddItemsBar.png */; };
@@ -419,6 +422,12 @@
 		238395AA150EA67F000DC733 /* ShinyOrderItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShinyOrderItemCell.h; sourceTree = "<group>"; };
 		238395AB150EA67F000DC733 /* ShinyOrderItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinyOrderItemCell.m; sourceTree = "<group>"; };
 		238476F214D7577C00DE9270 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		238826531545FE2800C68CEA /* RedeemPromo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedeemPromo.h; sourceTree = "<group>"; };
+		238826541545FE2800C68CEA /* RedeemPromo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedeemPromo.m; sourceTree = "<group>"; };
+		238826561545FE3F00C68CEA /* promoCodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = promoCodes.h; sourceTree = "<group>"; };
+		238826571545FE3F00C68CEA /* promoCodes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = promoCodes.m; sourceTree = "<group>"; };
+		2388265A15461E8F00C68CEA /* ConsumablePromo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsumablePromo.h; sourceTree = "<group>"; };
+		2388265B15461E8F00C68CEA /* ConsumablePromo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsumablePromo.m; sourceTree = "<group>"; };
 		2389239F151D2F44001FBCCB /* splashScreen@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "splashScreen@2x.jpg"; path = "FravicArtAssets/splashScreen@2x.jpg"; sourceTree = "<group>"; };
 		238923A1151D3D25001FBCCB /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		2394ABE71513DC440001D3D1 /* AddItemsBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AddItemsBar.png; path = FravicArtAssets/AddItemsBar.png; sourceTree = "<group>"; };
@@ -1326,6 +1335,26 @@
 			name = ShinyOrderItemCell;
 			sourceTree = "<group>";
 		};
+		238826511545FAC300C68CEA /* PromoCodes */ = {
+			isa = PBXGroup;
+			children = (
+				238826531545FE2800C68CEA /* RedeemPromo.h */,
+				238826541545FE2800C68CEA /* RedeemPromo.m */,
+				238826561545FE3F00C68CEA /* promoCodes.h */,
+				238826571545FE3F00C68CEA /* promoCodes.m */,
+			);
+			name = PromoCodes;
+			sourceTree = "<group>";
+		};
+		2388265915461E6600C68CEA /* Promos */ = {
+			isa = PBXGroup;
+			children = (
+				2388265A15461E8F00C68CEA /* ConsumablePromo.h */,
+				2388265B15461E8F00C68CEA /* ConsumablePromo.m */,
+			);
+			name = Promos;
+			sourceTree = "<group>";
+		};
 		238FC77A14D364E5007E175B /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -1346,6 +1375,7 @@
 				23D003CD15095B7D001964D4 /* AutomagicalCoder.m */,
 				237EC00B14BE5842009D9268 /* MenuComposites */,
 				D95B787114D2BE3400FC0F29 /* Location */,
+				2388265915461E6600C68CEA /* Promos */,
 				D9768A6814D73EBC00BBA467 /* Payment */,
 			);
 			name = "Model Structure";
@@ -1609,6 +1639,7 @@
 		23DA7A8814C73D52008281DD /* API */ = {
 			isa = PBXGroup;
 			children = (
+				238826511545FAC300C68CEA /* PromoCodes */,
 				D9B0F6BF14E075A900CA3B13 /* Payment */,
 				D95B786214D252D600FC0F29 /* Credentials */,
 				23DA7A8D14C740B3008281DD /* APICallDelegate.h */,
@@ -2183,6 +2214,9 @@
 				23C8A2BA1538E7D8001B5612 /* LocationMapView.m in Sources */,
 				236E9E32153CE572002E2D91 /* FacebookHelpers.m in Sources */,
 				23F512961540BAD4000BD20B /* ListViewController.m in Sources */,
+				238826551545FE2800C68CEA /* RedeemPromo.m in Sources */,
+				238826581545FE3F00C68CEA /* promoCodes.m in Sources */,
+				2388265C15461E8F00C68CEA /* ConsumablePromo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
