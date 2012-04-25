@@ -13,6 +13,10 @@
 #import "ShinyHeaderView.h"
 #import "Item.h"
 
+
+#import "PotentialPromo.h"
+#import "ActivePromo.h"
+
 @implementation ShinyMenuItemRenderer
 
 -(id)initWithItem:(Item *)anItem
@@ -89,7 +93,6 @@
         }
         
         [listData addObject:optionSectionContents];
-        
     }
     
     return self;
