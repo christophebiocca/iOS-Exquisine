@@ -7,12 +7,15 @@
 //
 
 #import "CustomViewCell.h"
+@class PotentialPromo;
 
 @interface PotentialPromoCell : CustomViewCell
 {
-    NSDictionary *settingsInfo;
+    PotentialPromo *thePromo;
     UIImageView *cellImage;
-    UILabel *settingsLabel;
+    UILabel *nameLabel;
+    UILabel *descriptionLabel;
+    UILabel *qualificationLabel;
 }
 
 -(void) updateCell;

@@ -13,4 +13,6 @@
     NSString *qualificationStipulation;
 }
 
+@property (retain) NSString *qualificationStipulation;
+
 @end

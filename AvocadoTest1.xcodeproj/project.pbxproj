@@ -120,6 +120,10 @@
 		2388266215488A7D00C68CEA /* ActivePromo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2388266115488A7D00C68CEA /* ActivePromo.m */; };
 		2388266515488B1100C68CEA /* PotentialPromo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2388266415488B1100C68CEA /* PotentialPromo.m */; };
 		2388266E15488DCB00C68CEA /* PotentialPromoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2388266D15488DCB00C68CEA /* PotentialPromoCell.m */; };
+		23882678154890E500C68CEA /* ActivePromoCell.png in Resources */ = {isa = PBXBuildFile; fileRef = 23882676154890E500C68CEA /* ActivePromoCell.png */; };
+		23882679154890E500C68CEA /* ActivePromoCell@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 23882677154890E500C68CEA /* ActivePromoCell@2x.png */; };
+		2388267C154890F100C68CEA /* PotentialPromoCell.png in Resources */ = {isa = PBXBuildFile; fileRef = 2388267A154890F100C68CEA /* PotentialPromoCell.png */; };
+		2388267D154890F100C68CEA /* PotentialPromoCell@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2388267B154890F100C68CEA /* PotentialPromoCell@2x.png */; };
 		238923A0151D2F44001FBCCB /* splashScreen@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2389239F151D2F44001FBCCB /* splashScreen@2x.jpg */; };
 		238923A2151D3D25001FBCCB /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 238923A1151D3D25001FBCCB /* Default.png */; };
 		2394ABEF1513E21C0001D3D1 /* ShinyMenuComboCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2394ABEE1513E21C0001D3D1 /* ShinyMenuComboCell.m */; };
@@ -424,6 +428,10 @@
 		2388266415488B1100C68CEA /* PotentialPromo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PotentialPromo.m; sourceTree = "<group>"; };
 		2388266C15488DCB00C68CEA /* PotentialPromoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PotentialPromoCell.h; sourceTree = "<group>"; };
 		2388266D15488DCB00C68CEA /* PotentialPromoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PotentialPromoCell.m; sourceTree = "<group>"; };
+		23882676154890E500C68CEA /* ActivePromoCell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ActivePromoCell.png; path = FravicArtAssets/ActivePromoCell.png; sourceTree = "<group>"; };
+		23882677154890E500C68CEA /* ActivePromoCell@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ActivePromoCell@2x.png"; path = "FravicArtAssets/ActivePromoCell@2x.png"; sourceTree = "<group>"; };
+		2388267A154890F100C68CEA /* PotentialPromoCell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PotentialPromoCell.png; path = FravicArtAssets/PotentialPromoCell.png; sourceTree = "<group>"; };
+		2388267B154890F100C68CEA /* PotentialPromoCell@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PotentialPromoCell@2x.png"; path = "FravicArtAssets/PotentialPromoCell@2x.png"; sourceTree = "<group>"; };
 		2389239F151D2F44001FBCCB /* splashScreen@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "splashScreen@2x.jpg"; path = "FravicArtAssets/splashScreen@2x.jpg"; sourceTree = "<group>"; };
 		238923A1151D3D25001FBCCB /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		2394ABED1513E21C0001D3D1 /* ShinyMenuComboCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShinyMenuComboCell.h; sourceTree = "<group>"; };
@@ -874,8 +882,8 @@
 		233C46EB14FEEF620003C295 /* SampleDesignImages */ = {
 			isa = PBXGroup;
 			children = (
+				23882675154890CD00C68CEA /* PromoImages */,
 				2388267415488FD000C68CEA /* TopBarImages */,
-				2388267315488F7500C68CEA /* SplashScreen */,
 				2388267215488F3E00C68CEA /* Icons */,
 				2388267115488EFB00C68CEA /* UtilityCellImages */,
 				2388267015488EE100C68CEA /* SettingsCellImages */,
@@ -1443,6 +1451,17 @@
 			name = TopBarImages;
 			sourceTree = "<group>";
 		};
+		23882675154890CD00C68CEA /* PromoImages */ = {
+			isa = PBXGroup;
+			children = (
+				2388267A154890F100C68CEA /* PotentialPromoCell.png */,
+				2388267B154890F100C68CEA /* PotentialPromoCell@2x.png */,
+				23882676154890E500C68CEA /* ActivePromoCell.png */,
+				23882677154890E500C68CEA /* ActivePromoCell@2x.png */,
+			);
+			name = PromoImages;
+			sourceTree = "<group>";
+		};
 		238FC77A14D364E5007E175B /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -1593,6 +1612,7 @@
 		23D016C8153E091700518DF6 /* Restaurant logos */ = {
 			isa = PBXGroup;
 			children = (
+				2388267315488F7500C68CEA /* SplashScreen */,
 				238923A1151D3D25001FBCCB /* Default.png */,
 				D9CB5FD514ECDB8B00FC5071 /* Default@2x.png */,
 				D9D5A3A914ECCD0B003B0B11 /* pfLogo_29.png */,
@@ -2132,6 +2152,10 @@
 				2336F342153F5AEB008C6573 /* FBDialog.bundle in Resources */,
 				2336F350153F7DAD008C6573 /* PaymentViewCell.png in Resources */,
 				2336F351153F7DAD008C6573 /* PaymentViewCell@2x.png in Resources */,
+				23882678154890E500C68CEA /* ActivePromoCell.png in Resources */,
+				23882679154890E500C68CEA /* ActivePromoCell@2x.png in Resources */,
+				2388267C154890F100C68CEA /* PotentialPromoCell.png in Resources */,
+				2388267D154890F100C68CEA /* PotentialPromoCell@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

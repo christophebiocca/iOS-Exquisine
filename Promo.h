@@ -14,4 +14,7 @@
     NSString *description;
 }
 
+@property (retain) NSString *name;
+@property (retain) NSString *description;
+
 @end

@@ -10,4 +10,8 @@
 
 @implementation PromoCode
 
+@synthesize name;
+@synthesize theCode;
+@synthesize wallText;
+
 @end

@@ -10,4 +10,6 @@
 
 @implementation PotentialPromo
 
+@synthesize qualificationStipulation;
+
 @end

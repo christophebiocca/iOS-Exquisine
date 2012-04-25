@@ -10,4 +10,7 @@
 
 @implementation Promo
 
+@synthesize name;
+@synthesize description;
+
 @end

@@ -25,4 +25,8 @@
     NSString *wallText;
 }
 
+@property (retain) NSString *name;
+@property (retain) NSString *theCode;
+@property (retain) NSString *wallText;
+
 @end

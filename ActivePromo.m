@@ -10,4 +10,6 @@
 
 @implementation ActivePromo
 
+@synthesize promoPrice;
+
 @end

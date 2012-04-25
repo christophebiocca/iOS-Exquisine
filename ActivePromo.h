@@ -16,4 +16,6 @@
     NSDecimalNumber *promoPrice;
 }
 
+@property (retain) NSDecimalNumber *promoPrice;
+
 @end
