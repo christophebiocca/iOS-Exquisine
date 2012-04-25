@@ -8,13 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ConsumablePromo : NSObject
+@interface Promo : NSObject
 {
     NSString *name;
-    NSString *promoCode;
-    NSString *wallText;
-    NSString *redemptionText;
-    NSString *stipulationText;
+    NSString *description;
 }
 
 @end

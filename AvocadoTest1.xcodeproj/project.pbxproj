@@ -121,7 +121,10 @@
 		238476F314D7577C00DE9270 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 238476F214D7577C00DE9270 /* SystemConfiguration.framework */; };
 		238826551545FE2800C68CEA /* RedeemPromo.m in Sources */ = {isa = PBXBuildFile; fileRef = 238826541545FE2800C68CEA /* RedeemPromo.m */; };
 		238826581545FE3F00C68CEA /* promoCodes.m in Sources */ = {isa = PBXBuildFile; fileRef = 238826571545FE3F00C68CEA /* promoCodes.m */; };
-		2388265C15461E8F00C68CEA /* ConsumablePromo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2388265B15461E8F00C68CEA /* ConsumablePromo.m */; };
+		2388265C15461E8F00C68CEA /* Promo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2388265B15461E8F00C68CEA /* Promo.m */; };
+		2388265F154887A000C68CEA /* PromoCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 2388265E154887A000C68CEA /* PromoCode.m */; };
+		2388266215488A7D00C68CEA /* ActivePromo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2388266115488A7D00C68CEA /* ActivePromo.m */; };
+		2388266515488B1100C68CEA /* PotentialPromo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2388266415488B1100C68CEA /* PotentialPromo.m */; };
 		238923A0151D2F44001FBCCB /* splashScreen@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2389239F151D2F44001FBCCB /* splashScreen@2x.jpg */; };
 		238923A2151D3D25001FBCCB /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 238923A1151D3D25001FBCCB /* Default.png */; };
 		2394ABE91513DC440001D3D1 /* AddItemsBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 2394ABE71513DC440001D3D1 /* AddItemsBar.png */; };
@@ -426,8 +429,14 @@
 		238826541545FE2800C68CEA /* RedeemPromo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedeemPromo.m; sourceTree = "<group>"; };
 		238826561545FE3F00C68CEA /* promoCodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = promoCodes.h; sourceTree = "<group>"; };
 		238826571545FE3F00C68CEA /* promoCodes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = promoCodes.m; sourceTree = "<group>"; };
-		2388265A15461E8F00C68CEA /* ConsumablePromo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsumablePromo.h; sourceTree = "<group>"; };
-		2388265B15461E8F00C68CEA /* ConsumablePromo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsumablePromo.m; sourceTree = "<group>"; };
+		2388265A15461E8F00C68CEA /* Promo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Promo.h; sourceTree = "<group>"; };
+		2388265B15461E8F00C68CEA /* Promo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Promo.m; sourceTree = "<group>"; };
+		2388265D154887A000C68CEA /* PromoCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PromoCode.h; sourceTree = "<group>"; };
+		2388265E154887A000C68CEA /* PromoCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PromoCode.m; sourceTree = "<group>"; };
+		2388266015488A7D00C68CEA /* ActivePromo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivePromo.h; sourceTree = "<group>"; };
+		2388266115488A7D00C68CEA /* ActivePromo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivePromo.m; sourceTree = "<group>"; };
+		2388266315488B1100C68CEA /* PotentialPromo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PotentialPromo.h; sourceTree = "<group>"; };
+		2388266415488B1100C68CEA /* PotentialPromo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PotentialPromo.m; sourceTree = "<group>"; };
 		2389239F151D2F44001FBCCB /* splashScreen@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "splashScreen@2x.jpg"; path = "FravicArtAssets/splashScreen@2x.jpg"; sourceTree = "<group>"; };
 		238923A1151D3D25001FBCCB /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		2394ABE71513DC440001D3D1 /* AddItemsBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AddItemsBar.png; path = FravicArtAssets/AddItemsBar.png; sourceTree = "<group>"; };
@@ -1349,8 +1358,14 @@
 		2388265915461E6600C68CEA /* Promos */ = {
 			isa = PBXGroup;
 			children = (
-				2388265A15461E8F00C68CEA /* ConsumablePromo.h */,
-				2388265B15461E8F00C68CEA /* ConsumablePromo.m */,
+				2388265A15461E8F00C68CEA /* Promo.h */,
+				2388265B15461E8F00C68CEA /* Promo.m */,
+				2388265D154887A000C68CEA /* PromoCode.h */,
+				2388265E154887A000C68CEA /* PromoCode.m */,
+				2388266015488A7D00C68CEA /* ActivePromo.h */,
+				2388266115488A7D00C68CEA /* ActivePromo.m */,
+				2388266315488B1100C68CEA /* PotentialPromo.h */,
+				2388266415488B1100C68CEA /* PotentialPromo.m */,
 			);
 			name = Promos;
 			sourceTree = "<group>";
@@ -2216,7 +2231,10 @@
 				23F512961540BAD4000BD20B /* ListViewController.m in Sources */,
 				238826551545FE2800C68CEA /* RedeemPromo.m in Sources */,
 				238826581545FE3F00C68CEA /* promoCodes.m in Sources */,
-				2388265C15461E8F00C68CEA /* ConsumablePromo.m in Sources */,
+				2388265C15461E8F00C68CEA /* Promo.m in Sources */,
+				2388265F154887A000C68CEA /* PromoCode.m in Sources */,
+				2388266215488A7D00C68CEA /* ActivePromo.m in Sources */,
+				2388266515488B1100C68CEA /* PotentialPromo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

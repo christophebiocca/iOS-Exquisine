@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "ConsumablePromo.h"
+#import "Promo.h"
 
-@implementation ConsumablePromo
+@implementation Promo
 
 @end
