@@ -7,11 +7,24 @@
 //
 
 #import "PaymentConfirmationController.h"
-#import "PaymentConfirmationView.h"
+#import "PaymentConfirmationRenderer.h"
 
 @implementation PaymentConfirmationController
 
-@synthesize acceptBlock, changeBlock, cancelBlock, ccDigits;
+@synthesize acceptBlock, changeBlock, cancelBlock;
+
+-(id)initWithPaymentInfo:(PaymentProfileInfo *)profile andOrder:(Order *)anOrder
+{
+    self = [super init];
+    if (self)
+    {
+        theOrder = anOrder;
+        paymentProfile = profile;
+        renderer = [[PaymentConfirmationRenderer alloc] init];
+        [theTableView setDataSource:renderer];
+    }
+    return self;
+}
 
 -(UINavigationItem*)navigationItem {
     UIBarButtonItem* cancel = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel 
@@ -22,20 +35,26 @@
     return nav;
 }
 
--(id)init{
-    if(self = [super initWithNibName:nil bundle:nil]){
+-(void)setPaymentInfo:(PaymentProfileInfo *)payment
+{
+    paymentProfile = payment;
+    (void)[(PaymentConfirmationRenderer *)renderer initWithPaymentInfo:paymentProfile andOrder:theOrder];
+    [theTableView reloadData];
+}
+
+-(void)ShinyPaymentViewCellHandler:(NSIndexPath *)indexPath
+{
+    [self confirm];
+}
+
+-(void)ShinySettingsCellHandler:(NSIndexPath *)indexPath
+{
+    if ([[[renderer objectForCellAtIndex:indexPath] objectForKey:@"settingTitle"] isEqualToString:@"Different Card"]) {
+        [self change];
     }
-    return self;
-}
-
--(void)loadView{
-    paymentView = [[PaymentConfirmationView alloc] initWithCCDigits:ccDigits];
-    [self setView:paymentView];
-}
-
--(void)viewDidLoad{
-    [[paymentView change] addTarget:self action:@selector(change) forControlEvents:UIControlEventTouchUpInside];
-    [[paymentView accept] addTarget:self action:@selector(confirm) forControlEvents:UIControlEventTouchUpInside];
+    else if ([[[renderer objectForCellAtIndex:indexPath] objectForKey:@"settingTitle"] isEqualToString:@"Input Promo Code"]) {
+        [[[UIAlertView alloc] initWithTitle:@"A promo code?" message:@"Why, certianly sir." delegate:self cancelButtonTitle:@"blarg" otherButtonTitles:nil] show];
+    }
 }
 
 -(void)confirm{
@@ -48,11 +67,6 @@
 
 -(void)change{
     changeBlock();
-}
-
--(void)setCcDigits:(NSString*)digits{
-    ccDigits = digits;
-    [paymentView setCCDigits:digits];
 }
 
 @end

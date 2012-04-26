@@ -99,7 +99,7 @@
 
 -(PaymentConfirmationController*)paymentConfirmationController{
     if(!paymentConfirmationController){
-        paymentConfirmationController = [[PaymentConfirmationController alloc] init];
+        paymentConfirmationController = [[PaymentConfirmationController alloc] initWithPaymentInfo:nil andOrder:order];
     }
     return paymentConfirmationController;
 }
@@ -169,7 +169,7 @@
     [self pushController:[self preProcessingController]];
     [GetPaymentProfileInfo fetchInfo:^(GetPaymentProfileInfo* request){
         CLLog(LOG_LEVEL_INFO, [NSString stringWithFormat:@"Success %@", self]);
-        [[self paymentConfirmationController] setCcDigits:[[request info] last4Digits]];
+        [[self paymentConfirmationController] setPaymentInfo:[request info]];
         [self requestConfirmation];
     } failure:^(GetPaymentProfileInfo* info, NSError* error){
         if([[error domain] isEqualToString:JSON_API_ERROR] && 

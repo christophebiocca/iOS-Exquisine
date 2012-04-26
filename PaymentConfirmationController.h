@@ -6,20 +6,26 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-@class PaymentConfirmationView;
+#import "ListViewController.h"
 
-@interface PaymentConfirmationController : UIViewController{
-    PaymentConfirmationView* paymentView;
-    
+@class PaymentConfirmationView;
+@class PaymentProfileInfo;
+@class Order;
+
+@interface PaymentConfirmationController : ListViewController
+{
+    Order *theOrder;
+    PaymentProfileInfo *paymentProfile;
     NSString* ccDigits;
     void (^acceptBlock)();
     void (^changeBlock)();
     void (^cancelBlock)();
 }
 
--(id)init;
+-(void)setPaymentInfo:(PaymentProfileInfo *)payment;
 
-@property(retain, nonatomic)NSString* ccDigits;
+-(id)initWithPaymentInfo:(PaymentProfileInfo *)profile andOrder:(Order *)anOrder;
+
 @property(copy, nonatomic)void (^acceptBlock)();
 @property(copy, nonatomic)void (^changeBlock)();
 @property(copy, nonatomic)void (^cancelBlock)();

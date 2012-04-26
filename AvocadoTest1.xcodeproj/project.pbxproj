@@ -126,6 +126,7 @@
 		238826901548A0F900C68CEA /* ActivePromoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2388268F1548A0F900C68CEA /* ActivePromoCell.m */; };
 		238826941548A88800C68CEA /* splashScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 238826921548A88800C68CEA /* splashScreen.png */; };
 		238826951548A88800C68CEA /* splashScreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 238826931548A88800C68CEA /* splashScreen@2x.png */; };
+		2388269C1548BA8900C68CEA /* PaymentConfirmationRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2388269B1548BA8900C68CEA /* PaymentConfirmationRenderer.m */; };
 		238923A2151D3D25001FBCCB /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 238923A1151D3D25001FBCCB /* Default.png */; };
 		2394ABEF1513E21C0001D3D1 /* ShinyMenuComboCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2394ABEE1513E21C0001D3D1 /* ShinyMenuComboCell.m */; };
 		239871381517C9D30021EE55 /* ShinyMenuItemRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 239871371517C9D30021EE55 /* ShinyMenuItemRenderer.m */; };
@@ -211,7 +212,6 @@
 		D9768A6614D73EB300BBA467 /* PaymentInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9768A6414D73EB300BBA467 /* PaymentInfoViewController.m */; };
 		D9768A7E14D74AAD00BBA467 /* PaymentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9768A7D14D74AAD00BBA467 /* PaymentView.m */; };
 		D9AA88C714E4B08400491139 /* PaymentConfirmationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AA88C614E4B08400491139 /* PaymentConfirmationController.m */; };
-		D9AA88CB14E4B34200491139 /* PaymentConfirmationView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AA88CA14E4B34200491139 /* PaymentConfirmationView.m */; };
 		D9AF662614D22C0A00632EA8 /* JSONAPICall.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AF662514D22C0A00632EA8 /* JSONAPICall.m */; };
 		D9B0F6BD14E075A000CA3B13 /* GetPaymentProfileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B0F6BC14E075A000CA3B13 /* GetPaymentProfileInfo.m */; };
 		D9B0F6C214E075E400CA3B13 /* PaymentProfileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B0F6C114E075E400CA3B13 /* PaymentProfileInfo.m */; };
@@ -436,6 +436,8 @@
 		2388268F1548A0F900C68CEA /* ActivePromoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivePromoCell.m; sourceTree = "<group>"; };
 		238826921548A88800C68CEA /* splashScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = splashScreen.png; path = FravicArtAssets/splashScreen.png; sourceTree = "<group>"; };
 		238826931548A88800C68CEA /* splashScreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "splashScreen@2x.png"; path = "FravicArtAssets/splashScreen@2x.png"; sourceTree = "<group>"; };
+		2388269A1548BA8900C68CEA /* PaymentConfirmationRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentConfirmationRenderer.h; sourceTree = "<group>"; };
+		2388269B1548BA8900C68CEA /* PaymentConfirmationRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentConfirmationRenderer.m; sourceTree = "<group>"; };
 		238923A1151D3D25001FBCCB /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		2394ABED1513E21C0001D3D1 /* ShinyMenuComboCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShinyMenuComboCell.h; sourceTree = "<group>"; };
 		2394ABEE1513E21C0001D3D1 /* ShinyMenuComboCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShinyMenuComboCell.m; sourceTree = "<group>"; };
@@ -582,8 +584,6 @@
 		D9768A7D14D74AAD00BBA467 /* PaymentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentView.m; sourceTree = "<group>"; };
 		D9AA88C514E4B08400491139 /* PaymentConfirmationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentConfirmationController.h; sourceTree = "<group>"; };
 		D9AA88C614E4B08400491139 /* PaymentConfirmationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentConfirmationController.m; sourceTree = "<group>"; };
-		D9AA88C914E4B34200491139 /* PaymentConfirmationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentConfirmationView.h; sourceTree = "<group>"; };
-		D9AA88CA14E4B34200491139 /* PaymentConfirmationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentConfirmationView.m; sourceTree = "<group>"; };
 		D9AF662414D22C0A00632EA8 /* JSONAPICall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONAPICall.h; sourceTree = "<group>"; };
 		D9AF662514D22C0A00632EA8 /* JSONAPICall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONAPICall.m; sourceTree = "<group>"; };
 		D9AF662714D2308B00632EA8 /* APICallProtectedMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APICallProtectedMethods.h; sourceTree = "<group>"; };
@@ -950,14 +950,9 @@
 			children = (
 				23DA7A3E14C60284008281DD /* ListRenderer.h */,
 				23DA7A3F14C60284008281DD /* ListRenderer.m */,
+				238826981548B9EC00C68CEA /* MenuComposites */,
+				238826971548B9E300C68CEA /* PaymentStack */,
 				237468A11534F6400049EE13 /* ShinySettingsTabRenderer */,
-				230254C7152E512800593749 /* ShinyOrderComboRenderer */,
-				230254B2152E38DB00593749 /* ShinyComboItemRenderer */,
-				230254A4152E226800593749 /* ShinyItemGroupRenderer */,
-				2302545415264A9600593749 /* ShinyMenuComboRenderer */,
-				23BA38111521227E00743BBF /* ShinyOrderItemRenderer */,
-				239871351517C9A80021EE55 /* ShinyItemRenderer */,
-				23E339B0150FD9B100E7BD68 /* ShinyOrderTabRenderer */,
 			);
 			name = ListRenderers;
 			sourceTree = "<group>";
@@ -1465,6 +1460,37 @@
 				23882677154890E500C68CEA /* ActivePromoCell@2x.png */,
 			);
 			name = PromoImages;
+			sourceTree = "<group>";
+		};
+		238826971548B9E300C68CEA /* PaymentStack */ = {
+			isa = PBXGroup;
+			children = (
+				238826991548BA6A00C68CEA /* PaymentConfirmationRenderer */,
+			);
+			name = PaymentStack;
+			sourceTree = "<group>";
+		};
+		238826981548B9EC00C68CEA /* MenuComposites */ = {
+			isa = PBXGroup;
+			children = (
+				230254C7152E512800593749 /* ShinyOrderComboRenderer */,
+				230254B2152E38DB00593749 /* ShinyComboItemRenderer */,
+				230254A4152E226800593749 /* ShinyItemGroupRenderer */,
+				2302545415264A9600593749 /* ShinyMenuComboRenderer */,
+				23BA38111521227E00743BBF /* ShinyOrderItemRenderer */,
+				239871351517C9A80021EE55 /* ShinyItemRenderer */,
+				23E339B0150FD9B100E7BD68 /* ShinyOrderTabRenderer */,
+			);
+			name = MenuComposites;
+			sourceTree = "<group>";
+		};
+		238826991548BA6A00C68CEA /* PaymentConfirmationRenderer */ = {
+			isa = PBXGroup;
+			children = (
+				2388269A1548BA8900C68CEA /* PaymentConfirmationRenderer.h */,
+				2388269B1548BA8900C68CEA /* PaymentConfirmationRenderer.m */,
+			);
+			name = PaymentConfirmationRenderer;
 			sourceTree = "<group>";
 		};
 		238FC77A14D364E5007E175B /* Cells */ = {
@@ -2000,8 +2026,6 @@
 				D933EF1514DB566D00B0BDC7 /* PaymentProcessingView.m */,
 				D933EF1814DB568400B0BDC7 /* PaymentCompletedView.h */,
 				D933EF1914DB568400B0BDC7 /* PaymentCompletedView.m */,
-				D9AA88C914E4B34200491139 /* PaymentConfirmationView.h */,
-				D9AA88CA14E4B34200491139 /* PaymentConfirmationView.m */,
 				D9B9D3A014EA4B8800D6B0BC /* PaymentFailureView.h */,
 				D9B9D3A114EA4B8800D6B0BC /* PaymentFailureView.m */,
 				236C53FC14F59C5A006A58BB /* OrderTimeAndLocationConfirmationView.h */,
@@ -2241,7 +2265,6 @@
 				D947368B14E20337005D4409 /* ItemGroupTrivialPricing.m in Sources */,
 				D947368F14E20E15005D4409 /* ComboPricingStrategy.m in Sources */,
 				D9AA88C714E4B08400491139 /* PaymentConfirmationController.m in Sources */,
-				D9AA88CB14E4B34200491139 /* PaymentConfirmationView.m in Sources */,
 				D9B9D39E14EA4B7300D6B0BC /* PaymentFailureViewController.m in Sources */,
 				D9B9D3A214EA4B8800D6B0BC /* PaymentFailureView.m in Sources */,
 				2368B52D14EDB6D900D880D3 /* CustomViewCell.m in Sources */,
@@ -2327,6 +2350,7 @@
 				2388266515488B1100C68CEA /* PotentialPromo.m in Sources */,
 				2388266E15488DCB00C68CEA /* PotentialPromoCell.m in Sources */,
 				238826901548A0F900C68CEA /* ActivePromoCell.m in Sources */,
+				2388269C1548BA8900C68CEA /* PaymentConfirmationRenderer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
